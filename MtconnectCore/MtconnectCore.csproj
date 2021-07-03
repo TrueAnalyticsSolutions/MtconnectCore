@@ -33,7 +33,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="\\LIGHTWORKSNAS\Work\True Analytics Solutions\logos\2020\TAMS-Icon-Blue_x256.png">
+    <None Include="TAMS-Icon-Blue_x256.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
