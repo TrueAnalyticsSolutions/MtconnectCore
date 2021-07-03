@@ -2,10 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon>tams_icon_black_x32.ico</ApplicationIcon>
+    <Copyright>True Analytics Manufacturing Solutions, LLC</Copyright>
+    <PackageIcon>TAMS-Icon-Blue_x256.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageTags>Mtconnect;TAMS;</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Standard\" />
+    <Folder Include="Standard\Contracts\Enums\Assets\Attributes\" />
+    <Folder Include="Standard\Contracts\Enums\Assets\Elements\" />
+    <Folder Include="Standard\Contracts\Enums\Attributes\" />
+    <Folder Include="Standard\Contracts\Enums\Error\Elements\" />
+    <Folder Include="Standard\Documents\Assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="\\LIGHTWORKSNAS\Work\True Analytics Solutions\logos\2020\TAMS-Icon-Blue_x256.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
