@@ -11,7 +11,7 @@ namespace MtconnectCore.Standard.Contracts
 {
     public static partial class HttpHelper
     {
-        public static async Task<XmlDocument> QueryAsync(Uri uri, RequestTypes mtconnectRequestType)
+        public static async Task<XmlDocument> QueryAsync(Uri uri)
         {
             XmlDocument response = null;
             try
@@ -46,7 +46,7 @@ namespace MtconnectCore.Standard.Contracts
                 reqstr += "?" + string.Join("&", query.Select(o => $"{o.Key}={o.Value}").ToArray());
             }
             Uri uri = new Uri(reqstr);
-            return await QueryAsync(uri, mtconnectRequestType);
+            return await QueryAsync(uri);
         }
 
         public static async Task<Stream> QueryIntervalAsync(Uri uri, int interval)

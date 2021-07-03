@@ -29,12 +29,12 @@ namespace MtconnectCore
     /// </summary>
     public static class AgentConnector
     {
-        public static async Task<IMtconnectDocument> QueryAsync(string protocol, string ip, int port, RequestTypes mtconnectRequestType, Dictionary<string, string> parameters = null)
+        public static async Task<IMtconnectDocument> QueryAsync(Uri uri)
         {
-            XmlDocument xDoc = await HttpHelper.QueryAsync(protocol, ip, port.ToString(), mtconnectRequestType, parameters);
+            XmlDocument xDoc = await HttpHelper.QueryAsync(uri);
             if (xDoc == null)
             {
-                MtconnectProbeFailure connectionFailure = new MtconnectProbeFailure($"Failure to fetch MTConnect {mtconnectRequestType} from {protocol}://{ip}:{port}");
+                MtconnectProbeFailure connectionFailure = new MtconnectProbeFailure($"Failure to fetch MTConnect Document from {uri}");
                 Logger.Error(connectionFailure);
                 throw connectionFailure;
             }
@@ -46,6 +46,17 @@ namespace MtconnectCore
             Exception exception = new Exception("Failed to parse Xml into a MTConnect Document");
             Logger.Error(exception);
             throw exception;
+        }
+
+        public static async Task<IMtconnectDocument> QueryAsync(string protocol, string ip, int port, RequestTypes mtconnectRequestType, Dictionary<string, string> parameters = null)
+        {
+            string reqstr = $"{protocol}://{ip}:{port}/{mtconnectRequestType.ToString().ToLower()}";
+            if (parameters?.Any() == true)
+            {
+                reqstr += "?" + string.Join("&", parameters.Select(o => $"{o.Key}={o.Value}"));
+            }
+            Uri uri = new Uri(reqstr);
+            return await QueryAsync(uri);
         }
 
         /// <summary>
@@ -81,13 +92,23 @@ namespace MtconnectCore
 
         public static async Task QueryStreamAsync(Uri uri, int interval, MtconnectIntervalStreamCallback callback, CancellationToken cancelToken)
         {
+            if (!uri.Query.ToLower().Contains("interval")) {
+                uri = new Uri($"{uri}{(string.IsNullOrEmpty(uri.Query) ? "?" : "&")}interval={interval}");
+            }
             System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
 
             using (System.Net.WebResponse res = req.GetResponse())
             using (Stream responseStream = res.GetResponseStream())
             {
                 // Set timeout to 150% of expected stream interval
-                responseStream.ReadTimeout = (int)Math.Ceiling(interval * 1.5);
+                try
+                {
+                    responseStream.ReadTimeout = (int)Math.Ceiling(interval * 1.5);
+                }
+                catch (InvalidOperationException ioException)
+                {
+                    // Do nothing
+                }
 
                 byte[] data = new byte[4096];
 
