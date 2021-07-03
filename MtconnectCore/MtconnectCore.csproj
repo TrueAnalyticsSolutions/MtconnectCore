@@ -7,6 +7,17 @@
     <PackageIcon>TAMS-Icon-Blue_x256.png</PackageIcon>
     <PackageIconUrl />
     <PackageTags>Mtconnect;TAMS;</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://mtconnectcore.dev</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>True Analytics Manufacturing Solutions, LLC</Company>
+    <Product>Revolution DIY</Product>
+    <Authors>John Murphy; Trais McAllister;</Authors>
+    <Description>Provides methods for communicating with MTConnect Agents as well as parsing the XML into DTOs modeled off the MTConnect standard.</Description>
+    <RepositoryUrl>https://github.com/TrueAnalyticsSolutions/MtconnectCore</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>This is the initial release after migrating from TAMS' proprietary source code.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="\\LIGHTWORKSNAS\Work\True Analytics Solutions\logos\2020\TAMS-Icon-Blue_x256.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
