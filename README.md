@@ -1,5 +1,8 @@
 # MtconnectCore for .NET
 
+[![Package](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/main.yml/badge.svg)](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/main.yml)
+
+
 This is an open source implementation of [True Analytics Manufacturing Solution](https://github.com/TrueAnalyticsSolutions)'s MTConnect library using .NET Core.
 
 This library is meant to mirror the MTConnect specification and provides easy methods and classes to implement MTConnect as close to the standard as possible.
