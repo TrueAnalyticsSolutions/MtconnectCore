@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>MtconnectCore Documentation</title>
+    <base href="/" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="css/loader.css" rel="stylesheet" />
+    <link href="css/input-group-midtext.min.css" rel="stylesheet" />
+    <link href="MtconnectCoreDocumentation.styles.css" rel="stylesheet" />
+    <link href="manifest.json" rel="manifest" />
+    <link rel="apple-touch-icon" sizes="256x256" href="TAMS-Icon-Blue_x256.png" />
+    <link rel="stylesheet" href="libs/highlight/styles/vs.min.css">
+</head>
+
+<body>
+    <app>
+        <header></header>
+        <main class="container">
+            <div class="loader"></div>
+        </main>
+    </app>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script id="hljs" src="libs/highlight/highlight.min.js"></script>
+    <script id="hljscsharp" src="libs/highlight/languages/csharp.min.js"></script>
+    <script>
+        window['Highlight'] = {
+            highlightInlineCode: function () {
+                document.querySelectorAll('.inline-code').forEach(el => {
+                    hljs.highlightElement(el);
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
