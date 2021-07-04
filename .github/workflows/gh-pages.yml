@@ -16,7 +16,7 @@ jobs:
           dotnet-version: 5.0.102
           
       - name: Publish .NET Core Project
-        run: dotnet publish MtconnectCore/MtconnectCoreDocumentation.csproj -c Release -o release --nologo
+        run: dotnet publish MtconnectCoreDocumentation/MtconnectCoreDocumentation.csproj -c Release -o release --nologo
         
       # changes the base-tag in index.html from '/' to 'BlazorGitHubPagesDemo' to match GitHub Pages repository subdirectory
       #- name: Change base-tag in index.html from / to MtconnectCoreDocumentation
