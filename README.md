@@ -1,7 +1,6 @@
 # MtconnectCore for .NET
 
 [![Package](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/main.yml/badge.svg)](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/main.yml)
-
 [![Documentation](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/gh-pages.yml)
 
 
