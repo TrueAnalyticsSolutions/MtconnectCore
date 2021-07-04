@@ -17,7 +17,9 @@
     <Description>Provides methods for communicating with MTConnect Agents as well as parsing the XML into DTOs modeled off the MTConnect standard.</Description>
     <RepositoryUrl>https://github.com/TrueAnalyticsSolutions/MtconnectCore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>This is the initial release after migrating from TAMS' proprietary source code.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed AgentConnector in favor of HTTP Client factory pattern in MtconnectAgentService.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
