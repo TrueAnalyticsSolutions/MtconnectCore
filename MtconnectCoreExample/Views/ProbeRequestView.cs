@@ -21,20 +21,21 @@ namespace MtconnectCoreExample.Views
 
         public override void Send()
         {
-            IMtconnectDocument rawStreamDocument = AgentConnector.QueryAsync(Source.ToUri()).Result;
-            if (rawStreamDocument.Type == DocumentTypes.Devices)
+            using (MtconnectAgentService mtcService = new MtconnectAgentService(Source.ToUri()))
             {
-                DevicesDocument streamResult = (DevicesDocument)rawStreamDocument;
+                DevicesDocument mtcDocument = mtcService.Probe().Result;
+                if (mtcDocument is DevicesDocument)
+                {
+                    Consoul.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mtcDocument), ConsoleColor.DarkGray);
 
-                Consoul.Write(Newtonsoft.Json.JsonConvert.SerializeObject(streamResult), ConsoleColor.DarkGray);
-
-                Consoul.Write("Done!", ConsoleColor.Green);
-                Consoul.Wait();
-            }
-            else
-            {
-                Consoul.Write($"Unexpected document type", ConsoleColor.Red);
-                Consoul.Wait();
+                    Consoul.Write("Done!", ConsoleColor.Green);
+                    Consoul.Wait();
+                }
+                else
+                {
+                    Consoul.Write($"Unexpected document type", ConsoleColor.Red);
+                    Consoul.Wait();
+                }
             }
         }
     }

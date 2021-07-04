@@ -9,7 +9,7 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
-    public partial class StreamsDocument : MtconnectDocument<StreamsDocumentHeader, Device>
+    public partial class StreamsDocument : ResponseDocument<StreamsDocumentHeader, Device>
     {
         public override DocumentTypes Type => DocumentTypes.Streams;
 

@@ -1,0 +1,563 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MtconnectCore</name>
+    </assembly>
+    <members>
+        <member name="T:MtconnectCore.Logging.InternalLogger">
+            <summary>
+            An internal implementation of <see cref="T:MtconnectCore.Logging.IMtconnectCoreLogger"/> that is used when no other loggers are specified
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Logging.MtconnectCoreLogger.InternalLogLevel">
+            <summary>
+            Sets the minimum logging level when no <see cref="T:MtconnectCore.Logging.IMtconnectCoreLogger"/> is provided.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Logging.MtconnectCoreLogger.Logger">
+            <summary>
+            Reference to the logger used within the MtconnectCore library.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Logging.MtconnectCoreLogger.RegisterLogger(MtconnectCore.Logging.IMtconnectCoreLogger)">
+            <summary>
+            Sets the logger to be used throughout the MtconnectCore library.
+            </summary>
+            <param name="logger">Reference to the implemented logger. See <see cref="T:MtconnectCore.Logging.IMtconnectCoreLogger"/></param>
+        </member>
+        <member name="T:MtconnectCore.MtconnectIntervalStreamCallback">
+            <summary>
+            An asynchronous callback method to call when an interval request receives a complete MTConnect Response Document.
+            </summary>
+            <param name="document">A MTConnect Response Document in its generic form. This is because the document responding document could be a <see cref="T:MtconnectCore.Standard.Documents.Error.ErrorDocument"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="T:MtconnectCore.MtconnectAgentService">
+            <summary>
+            A HTTP service that standardizes the requests that can be made to a MTConnect Agent according to the MTConnect specification.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.TryParse(System.Xml.XmlDocument,MtconnectCore.Standard.Documents.IResponseDocument@)">
+            <summary>
+            Tries to parse a <see cref="T:System.Xml.XmlDocument"/> into the appropriate <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/> based on the MTConnect standard.
+            </summary>
+            <param name="xDoc">The available <see cref="T:System.Xml.XmlDocument"/> to be parsed</param>
+            <param name="document">Output of the appropriately formated <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/> type. Note that this document could result in a <see cref="!:MtconnectErrorDocument"/>.</param>
+            <returns>Flag for whether or not the <see cref="T:System.Xml.XmlDocument"/> could be identified as an implemented <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/>.</returns>
+        </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.Probe(System.String)">
+            <summary>
+            Sends a Probe Request to the MTConnect Agent. See Part 1 Section 8.3.1 of MTConnect specification.
+            </summary>
+            <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.1.1 of MTConnect specification.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.Current(System.String,MtconnectCore.Standard.CurrentRequestQuery)">
+            <summary>
+            Sends a Current Request to the MTConnect Agent. See Part 1 Section 8.3.2 of MTConnect specification.
+            </summary>
+            <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.2.1 of MTConnect specification.</param>
+            <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.2.2 of MTConnect specification.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.CurrentInterval(MtconnectCore.MtconnectIntervalStreamCallback,System.Threading.CancellationToken,System.String,MtconnectCore.Standard.CurrentRequestQuery)">
+            <summary>
+            Sends a Current Request in the form of a HTTP Data Streaming request or Publish/Subscribe. See Part 1 Section 8.3.6 of MTConnect specification.
+            </summary>
+            <param name="callback">An asynchronous callback method to call when an interval request receives a complete MTConnect document.</param>
+            <param name="cancelToken">A token for cancelling the loop that keeps the HTTP Data Stream open.</param>
+            <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.2.1 of MTConnect specification.</param>
+            <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.2.2 of MTConnect specification.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.Sample(System.String,MtconnectCore.Standard.SampleRequestQuery)">
+            <summary>
+            Sends a Sample Request to the MTConnect Agent. See Part 1 Section 8.3.3 of MTConnect specification.
+            </summary>
+            <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.3.1 of MTConnect specification.</param>
+            <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.3.2 of MTConnect specification.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.SampleInterval(MtconnectCore.MtconnectIntervalStreamCallback,System.Threading.CancellationToken,System.String,MtconnectCore.Standard.SampleRequestQuery)">
+            <summary>
+            Sends a Sample Request in the form of a HTTP Data Streaming request or Publish/Subscribe. See Part 1 Section 8.3.6 of MTConnect specification.
+            </summary>
+            <param name="callback">An asynchronous callback method to call when an interval request receives a complete MTConnect document.</param>
+            <param name="cancelToken">A token for cancelling the loop that keeps the HTTP Data Stream open.</param>
+            <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.3.1 of MTConnect specification.</param>
+            <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.3.2 of MTConnect specification.</param>
+            <returns></returns>
+        </member>
+        <member name="P:MtconnectCore.Standard.AssetRequestQuery.Type">
+            <summary>
+            Defines the type of MTConnect Asset to be returned in the MTConnectAssets Response Document. See Part 1 Section 8.3.4.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.AssetRequestQuery.Removed">
+            <summary>
+            If the value of the removed parameter in the query is true, then Asset Documents for Assets that have been marked as removed from a piece of equipment will be included in the Response Document. If the value of the removed parameter in the query is false, then Asset Documents for Assets that have been marked as removed from a piece of equipment will not be included in the Response Document. See Part 1 Section 8.3.4.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.AssetRequestQuery.Count">
+            <summary>
+            Defines the maximum number of Asset Documents to return in an MTConnectAssets Response Document. See Part 1 Section 8.3.4.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Error.ErrorCodes">
+            <summary>
+            Reference Part 1, Section 9.1.2.3 of the MTConnect Standard for a list of appropriate values for the errorCode attribute
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors">
+            <summary>
+            An enumeration of available methods of parsing MTConnect node names from a MTConnect document
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.CurrentRequestQuery.Path">
+            <summary>
+            An XPath that defines specific information or a set of information to be included in an MTConnectStreams Response Document. See Part 1 Section 8.3.2.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.CurrentRequestQuery.At">
+            <summary>
+            Requests that the MTConnect Response Documents MUST include the current value for all Data Entities relative to the time that a specific sequence number was recorded. See Part 1 Section 8.3.2.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.CurrentRequestQuery.Interval">
+            <summary>
+            The Agent MUST continuously publish Response Documents when the query parameters include interval using the value as the period between adjacent publications. See Part 1 Section 8.3.2.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Error.Error">
+            <summary>
+            Represents the Error element of the MTConnect Standard. See Part 1, Section 9.1.2 of the MTConnect Standard
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.IResponseDocument">
+            <summary>
+            Structural interface for a MTConnect Response Document. See Part 1 Section 6 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.IResponseDocumentHeader">
+            <summary>
+            Structural interface for a MTConnect Response Document Header. See Part 1 Section 6.5 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.ResponseDocument`2">
+            <summary>
+            Structural interface for a MTConnect Response Document. See Part 1 Section 6 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.ResponseDocumentHeader">
+            <summary>
+            Structural interface for a MTConnect Response Document Header. See Part 1 Section 6.5 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Component.ComponentId">
+            <summary>
+            Collected from the componentId attribute. Refer to Part 3 Streams - 4.3.2
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Name">
+            <summary>
+            Collected from the name attribute. Refer to Part 3 Streams - 4.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Component.NativeName">
+            <summary>
+            Collected from the nativeName attribute. Refer to Part 3 Streams - 4.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Component.ComponentReference">
+            <summary>
+            Collected from the component attribute. Refer to Part 3 Streams - 4.3.2
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Uuid">
+            <summary>
+            Collected from the uuid attribute. Refer to Part 3 Streams - 4.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Samples">
+            <summary>
+            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Events">
+            <summary>
+            Collected from Event elements. Refer to Part 3 Streams - 4.3.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Conditions">
+            <summary>
+            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Name">
+            <summary>
+            Collected from the name attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Type">
+            <summary>
+            Collected from the type attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.NativeCode">
+            <summary>
+            Collected from the nativeCode attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.NativeSeverity">
+            <summary>
+            Collected from the nativeSeverity attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Qualifier">
+            <summary>
+            Collected from the qualifier attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Statistic">
+            <summary>
+            Collected from the statistic attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.SubType">
+            <summary>
+            Collected from the subType attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.CompositionId">
+            <summary>
+            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Language">
+            <summary>
+            Collected from the xs:lang attribute. Refer to Part 3 Streams - 5.8.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Value">
+            <summary>
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.8.4
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.TagName">
+            <summary>
+            Reference to the name of the element. Refer to Part 3 Streams - 5.8
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.DataItemId">
+            <summary>
+            Collected from the dataItemId attribute. Refer to Part 3 Streams - 5.3.2, 5.5.2, 5.8.3
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.Timestamp">
+            <summary>
+            Collected from the timestamp attribute. Refer to Part 3 Streams - 5.3.2, 5.5.2, 5.8.3
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.Sequence">
+            <summary>
+            Collected from the sequence attribute. Refer to Part 3 Streams - 5.3.2, 5.5.2, 5.8.3
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Name">
+            <summary>
+            Collected from the name attribute. Refer to Part 3 Streams - 4.2.2
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Uuid">
+            <summary>
+            Collected from the uuid attribute. Refer to Part 3 Streams - 4.2.2
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Components">
+            <summary>
+            Collected from ComponentStream elements. Refer to Part 3 Streams - 4.2.3
+            
+            Occurance: 0..*
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.SubType">
+            <summary>
+            Collected from the subType attribute. Refer to Part 3 Streams - 5.5.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.Name">
+            <summary>
+            Collected from the name attribute. Refer to Part 3 Streams - 5.5.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.ResetTriggered">
+            <summary>
+            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.5.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.CompositionId">
+            <summary>
+            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.5.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.Value">
+            <summary>
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.TagName">
+            <summary>
+            Reference to the name of the element. Refer to Part 3 Streams - 5.5
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SubType">
+            <summary>
+            Collected from the subType attribute. Refer to Part 3 Streams - 5.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Name">
+            <summary>
+            Collected from the name attribute. Refer to Part 3 Streams - 5.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SampleRate">
+            <summary>
+            Collected from the sampleRate attribute. Refer to Part 3 Streams - 5.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Statistic">
+            <summary>
+            Collected from the statistic attribute. Refer to Part 3 Streams - 5.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Duration">
+            <summary>
+            Collected from the duration attribute. Refer to Part 3 Streams - 5.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.ResetTriggered">
+            <summary>
+            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.CompositionId">
+            <summary>
+            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.3.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Value">
+            <summary>
+            Collected from the textcontent of the Sample element. Refer to Part 3 Streams - 5.3.3
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.TagName">
+            <summary>
+            Reference to the name of the element. Refer to Part 3 Streams - 5.3
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.SubType">
+            <summary>
+            Collected from the subType attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.Name">
+            <summary>
+            Collected from the name attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.CompositionId">
+            <summary>
+            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.ResetTriggered">
+            <summary>
+            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.Count">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.Key">
+            <summary>
+            Collected from the key attribute. Refer to Part 3 Streams - 5.6.3.3
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.Removed">
+            <summary>
+            Collected from the removed attribute. Refer to Part 3 Streams - 5.6.3.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.Value">
+            <summary>
+            Collected from the textcontent of the Entry element. Refer to Part 3 Streams - 5.6.3.3
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetCell.Key">
+            <summary>
+            Collected from the key attribute. Refer to Part 3 Streams - 5.6.5.3.5
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetCell.Value">
+            <summary>
+            Collected from the textcontent of the Cell element. Refer to Part 3 Streams - 5.6.5.3.6
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.SubType">
+            <summary>
+            Collected from the subType attribute. Refer to Part 3 Streams - 5.6.5.1
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.Name">
+            <summary>
+            Collected from the name attribute. Refer to Part 3 Streams - 5.6.5.1
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.CompositionId">
+            <summary>
+            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.6.5.1
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.ResetTriggered">
+            <summary>
+            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.6.5.1
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.Count">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.5.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTableEntry.Key">
+            <summary>
+            Collected from the key attribute. Refer to Part 3 Streams - 5.6.5.3.3
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTableEntry.Removed">
+            <summary>
+            Collected from the removed attribute. Refer to Part 3 Streams - 5.6.5.3.3
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.SampleRequestQuery.Path">
+            <summary>
+            An XPath that defines specific information or a set of information to be included in an MTConnectStreams Response Document. See Part 1 Section 8.3.3.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.SampleRequestQuery.From">
+            <summary>
+            The from parameter designates the sequence number of the first observation in the buffer the Agent MUST consider publishing in the Response Document. See Part 1 Section 8.3.3.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.SampleRequestQuery.Interval">
+            <summary>
+            The Agent MUST continuously publish Response Documents when the query parameters include interval using the value as the minimum period between adjacent publications. See Part 1 Section 8.3.3.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.SampleRequestQuery.Count">
+            <summary>
+            The count parameter designates the maximum number of observations the Agent MUST publish in the Response Document. See Part 1 Section 8.3.3.2 of MTConnect specification.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.SampleRequestQuery.Heartbeat">
+            <summary>
+            Sets the time period for the heartbeat function in an Agent. The value for heartbeat represents the amount of time after a Response Document has been published until a new Response Document MUST be published, even when no new data is available. See Part 1 Section 8.3.3.2 of MTConnect specification.
+            </summary>
+        </member>
+    </members>
+</doc>

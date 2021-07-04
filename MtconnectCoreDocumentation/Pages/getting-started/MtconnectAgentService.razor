@@ -1,0 +1,223 @@
+﻿@page "/getting-started/mtconnectagentservice"
+
+<div class="container">
+    <h1><code>MtconnectAgentService</code></h1>
+    <p>The <code>MtconnectAgentService</code> contains multiple methods for requesting information from a MTConnect&reg; Agent. Each request yields a <em>Response Document</em> as outlined in the MTConnect&reg; specification. The <code>Probe</code>, <code>Current</code>, and <code>Sample</code> requests are all basic HTTP requests, however the <code>CurrentInterval</code> and <code>SampleInterval</code> requests are somewhat unique in that they are asynchronous tasks that keep the connection to the MTConnect Agent alive until the specified <code>CancellationToken</code> is cancelled.</p>
+    <h3><code>Probe</code></h3>
+    <div class="ml-3">
+        <p>Sends a <em>Probe Request</em> to the MTConnect&reg; Agent in an attempt to receive a <em>MTConnectDevices</em> <em>Response Document</em>.</p>
+        <dl class="row">
+            <dt class="col-sm-3">Returns</dt>
+            <dd class="col-sm-9"><code>IResponseDocument</code>, which is a generic form of the <em>Response Documents</em> outlined in Part 1 Section 5.2.1 of the MTConnect&reg; specification. The expectation is a <code>DevicesDocument</code>. Also see Part 1 Section 8.3.1 of the MTConnect&reg; specification.</dd>
+        </dl>
+        <h6><strong>Example</strong></h6>
+        <div class="code-well">
+<pre>
+    <code class="language-csharp">
+using(var service = new MtconnectService())
+{
+    var responseDocument = await service.Probe();
+    if (responseDocument is ErrorDocument)
+    {
+        // Maybe throw the errors returned by the MTConnect Agent
+    }
+}
+    </code>
+</pre>
+        </div>
+    </div>
+    <h3><code>Current</code></h3>
+    <div class="ml-3">
+        <p>Sends a <em>Current Request</em> to the MTConnect&reg; Agent in an attempt to receive a <em>MTConnectStreams</em> <em>Response Document</em>.</p>
+        <dl class="row">
+            <dt class="col-sm-3">Returns</dt>
+            <dd class="col-sm-9"><code>IResponseDocument</code>, which is a generic form of the <em>Response Documents</em> outlined in Part 1 Section 5.2.1 of the MTConnect&reg; specification. The expectation is a <code>StreamsDocument</code>. Also see Part 1 Section 8.3.2 of the MTConnect&reg; specification.</dd>
+        </dl>
+        <h6><strong>Example</strong></h6>
+        <div class="code-well">
+<pre>
+    <code class="language-csharp">
+using(var service = new MtconnectService())
+{
+    var responseDocument = await service.Current();
+    if (responseDocument is ErrorDocument)
+    {
+        // Maybe throw the errors returned by the MTConnect Agent
+    }
+}
+    </code>
+</pre>
+        </div>
+    </div>
+    <h3><code>Sample</code></h3>
+    <div class="ml-3">
+        <p>Sends a <em>Sample Request</em> to the MTConnect&reg; Agent in an attempt to receive a <em>MTConnectStreams</em> <em>Response Document</em>.</p>
+        <dl class="row">
+            <dt class="col-sm-3">Returns</dt>
+            <dd class="col-sm-9"><code>IResponseDocument</code>, which is a generic form of the <em>Response Documents</em> outlined in Part 1 Section 5.2.1 of the MTConnect&reg; specification. The expectation is a <code>StreamsDocument</code>. Also see Part 1 Section 8.3.3 of the MTConnect&reg; specification.</dd>
+        </dl>
+        <h6><strong>Example</strong></h6>
+        <div class="code-well">
+<pre>
+    <code class="language-csharp">
+using(var service = new MtconnectService())
+{
+    var responseDocument = await service.Sample();
+    if (responseDocument is ErrorDocument)
+    {
+        // Maybe throw the errors returned by the MTConnect Agent
+    }
+}
+    </code>
+</pre>
+        </div>
+    </div>
+    <h3><code>CurrentInterval</code></h3>
+    <div class="ml-3">
+        <p>Sends a <em>Current Request</em> to the MTConnect&reg; Agent in an attempt to receive a <em>MTConnectStreams</em> <em>Response Document</em>. However, this <em>Current Request</em> includes the <em>interval</em> parameter and the HTTP request is kept open for continuous streaming of the <em>MTConnectStreams</em> <em>Response Document</em></p>
+        <dl class="row">
+            <dt class="col-sm-3">Returns</dt>
+            <dd class="col-sm-9"><code>IResponseDocument</code>, which is a generic form of the <em>Response Documents</em> outlined in Part 1 Section 5.2.1 of the MTConnect&reg; specification. The expectation is a <code>StreamsDocument</code>. Also see Part 1 Section 8.3.2 of the MTConnect&reg; specification.</dd>
+        </dl>
+        <h6><strong>Example</strong></h6>
+        <p class="alert alert-light small">Here we are using the <a href="https://consoul.dev" target="_blank">Consoul</a> library to format the console.</p>
+        <div class="code-well">
+<pre>
+            <code class="language-csharp">
+bool canLoop = true;
+
+MtconnectIntervalStreamCallback callback = async (document) => {
+    Console.Clear();
+    Consoul.Write($"Press any key to stop...", ConsoleColor.DarkGray);
+    if (document is ErrorDocument)
+    {
+        ErrorDocument errorDoc = document as ErrorDocument;
+        foreach (var item in errorDoc.Items)
+        {
+            Consoul.Write($"[{item.ErrorCode}] {item.Value}", ConsoleColor.Red);
+        }
+    }
+    else if (document is StreamsDocument)
+    {
+        StreamsDocument streamDoc = document as StreamsDocument;
+        Consoul.Write($"{streamDoc.Header.CreationTime}\t- NextSequence={streamDoc.Header.NextSequence} from {uri}", ConsoleColor.White);
+    } else {
+        Consoul.Write($"Unhandled document type: {document.Type}");
+    }
+};
+
+using (CancellationTokenSource token = new CancellationTokenSource())
+{
+    Task waitForKeyTask = Task.Run(() => {
+        Console.Clear();
+        Consoul.Write($"Press any key to stop...", ConsoleColor.DarkGray);
+        while (canLoop && !token.IsCancellationRequested)
+        {
+            if (Console.KeyAvailable)
+            {
+                canLoop = false;
+            }
+            System.Threading.Thread.Sleep(Interval);
+        }
+        token.Cancel();
+    });
+
+    using (MtconnectAgentService mtcService = new MtconnectAgentService(uri)) {
+        mtcService.CurrentInterval(
+                callback,
+                token.Token,
+                query: new MtconnectCore.Standard.CurrentRequestQuery()
+                {
+                    Interval = Interval
+                }
+            )
+            .ContinueWith(
+                (task) =>
+                {
+                    Consoul.Write($"An error occurred while requesting interval document.");
+                    token.Cancel();
+                },
+                TaskContinuationOptions.OnlyOnFaulted
+            );
+        waitForKeyTask.Wait();
+    }
+}
+    </code>
+</pre>
+        </div>
+    </div>
+    <h3><code>SampleInterval</code></h3>
+    <div class="ml-3">
+        <p>Sends a <em>Sample Request</em> to the MTConnect&reg; Agent in an attempt to receive a <em>MTConnectStreams</em> <em>Response Document</em>. However, this <em>Sample Request</em> includes the <em>interval</em> parameter and the HTTP request is kept open for continuous streaming of the <em>MTConnectStreams</em> <em>Response Document</em></p>
+        <dl class="row">
+            <dt class="col-sm-3">Returns</dt>
+            <dd class="col-sm-9"><code>IResponseDocument</code>, which is a generic form of the <em>Response Documents</em> outlined in Part 1 Section 5.2.1 of the MTConnect&reg; specification. The expectation is a <code>StreamsDocument</code>. Also see Part 1 Section 8.3.3 of the MTConnect&reg; specification.</dd>
+        </dl>
+        <h6><strong>Example</strong></h6>
+        <p class="alert alert-light small">Here we are using the <a href="https://consoul.dev" target="_blank">Consoul</a> library to format the console.</p>
+        <div class="code-well">
+<pre>
+            <code class="language-csharp">
+bool canLoop = true;
+
+MtconnectIntervalStreamCallback callback = async (document) => {
+    Console.Clear();
+    Consoul.Write($"Press any key to stop...", ConsoleColor.DarkGray);
+    if (document is ErrorDocument)
+    {
+        ErrorDocument errorDoc = document as ErrorDocument;
+        foreach (var item in errorDoc.Items)
+        {
+            Consoul.Write($"[{item.ErrorCode}] {item.Value}", ConsoleColor.Red);
+        }
+    }
+    else if (document is StreamsDocument)
+    {
+        StreamsDocument streamDoc = document as StreamsDocument;
+        Consoul.Write($"{streamDoc.Header.CreationTime}\t- NextSequence={streamDoc.Header.NextSequence} from {uri}", ConsoleColor.White);
+    } else {
+        Consoul.Write($"Unhandled document type: {document.Type}");
+    }
+};
+
+using (CancellationTokenSource token = new CancellationTokenSource())
+{
+    Task waitForKeyTask = Task.Run(() => {
+        Console.Clear();
+        Consoul.Write($"Press any key to stop...", ConsoleColor.DarkGray);
+        while (canLoop && !token.IsCancellationRequested)
+        {
+            if (Console.KeyAvailable)
+            {
+                canLoop = false;
+            }
+            System.Threading.Thread.Sleep(Interval);
+        }
+        token.Cancel();
+    });
+
+    using (MtconnectAgentService mtcService = new MtconnectAgentService(uri)) {
+        mtcService.SampleInterval(
+                callback,
+                token.Token,
+                query: new MtconnectCore.Standard.SampleRequestQuery()
+                {
+                    Interval = Interval
+                }
+            )
+            .ContinueWith(
+                (task) =>
+                {
+                    Consoul.Write($"An error occurred while requesting interval document.");
+                    token.Cancel();
+                },
+                TaskContinuationOptions.OnlyOnFaulted
+            );
+        waitForKeyTask.Wait();
+    }
+}
+    </code>
+</pre>
+        </div>
+    </div>
+</div>

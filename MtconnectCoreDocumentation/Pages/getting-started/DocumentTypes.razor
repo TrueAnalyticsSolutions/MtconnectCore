@@ -1,0 +1,40 @@
+﻿@page "/getting-started/document-types"
+
+<div class="container">
+    <h1><em>Response Document</em> Types</h1>
+    <p>There are several <em>Response Document</em> types defined in the MTConenct&reg; specification, most of which have relative classes defined in <code>MtconnectCore</code>.</p>
+    <p class="alert alert-light" role="alert">While not all <em>Response Documents</em> may be supported by <code>MtconnectCore</code>, the <code>IResponseDocument</code> interface may be able to parse the XML document enough to refer to the <code>IResponseDocument.Type</code> to reference the root node name of the document.</p>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><em>Response Document</em></th>
+                    <th>Supported?</th>
+                    <th>Member</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><em>MTConnectDevices</em></td>
+                    <td><span class="oi oi-check" /></td>
+                    <td><code>DevicesDocument</code></td>
+                </tr>
+                <tr>
+                    <td><em>MTConnectStreams</em></td>
+                    <td><span class="oi oi-check" /></td>
+                    <td><code>StreamsDocument</code></td>
+                </tr>
+                <tr>
+                    <td><em>MTConnectAssets</em></td>
+                    <td><span class="oi oi-x" /></td>
+                    <td><code>&mdash;</code></td>
+                </tr>
+                <tr>
+                    <td><em>MTConnectError</em></td>
+                    <td><span class="oi oi-check" /></td>
+                    <td><code>ErrorDocument</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

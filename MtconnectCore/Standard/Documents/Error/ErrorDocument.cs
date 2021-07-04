@@ -6,7 +6,7 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Error
 {
-    public class ErrorDocument : MtconnectDocument<ErrorDocumentHeader, Error>
+    public class ErrorDocument : ResponseDocument<ErrorDocumentHeader, Error>
     {
         public override DocumentTypes Type => DocumentTypes.Errors;
 

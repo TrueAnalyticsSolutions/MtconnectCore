@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Error
 {
-    public class ErrorDocumentHeader : MtconnectDocumentHeader
+    public class ErrorDocumentHeader : ResponseDocumentHeader
     {
         [MtconnectNodeAttribute(HeaderAttributes.TEST_INDICATOR)]
         public bool TestIndicator { get; set; }

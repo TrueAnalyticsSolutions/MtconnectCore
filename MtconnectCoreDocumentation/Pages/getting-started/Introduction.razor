@@ -1,0 +1,52 @@
+﻿@page "/getting-started/introduction"
+
+<div class="container">
+    <h1>Introduction</h1>
+
+    <p>The <code>MtconnectCore</code> library provides an object-oriented structure around the <a href="https://mtconnect.org/" target="_blank">MTConnect&reg;</a> specification.</p>
+    <p>There are interactive examples available in the <a href="https://github.com/TrueAnalyticsSolutions/MtconnectCore/tree/master/MtconnectCoreExample"><code>MtconnectCoreExample</code></a> project in the repository, but here is an example of how to make a simple <code>probe</code> request to a MTConnect&reg; Agent.</p>
+    <div class="code-well">
+<pre>
+        <code class="language-csharp">
+using System;
+using MtconnectCore;
+using MtconnectCore.Standard.Contracts.Enums;
+using MtconnectCore.Standard.Documents.Devices;
+        
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        // Credit to Mazak for providing demo MTConnect Agents:
+        // http://mtconnect.mazakcorp.com/
+
+        // Let's use this demo MTConnect Agent located at the following address
+        Uri uri = new Uri("http://66.42.196.108:5609/");
+
+        // Initialize the Agent service that allows to easily send requests to the MTConnect Agent according to the MTConnect specification.
+        using (MtconnectAgentService mtcService = new MtconnectAgentService(uri))
+        {
+            // We'll send a PROBE request to the MTConnect Agent. Note that these requests are asynchronously and we're getting the result here synchronously.
+            DevicesDocument mtcDocument = mtcService.Probe().Result;
+
+            // Verify the Response Document is what we think it is...
+            if (mtcDocument is DevicesDocument)
+            {
+                // Here, we're using the Consoul library to cleanly display the Response Document as a stringified JSON in the Console window.
+                Consoul.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mtcDocument), ConsoleColor.DarkGray);
+
+                Consoul.Write("Done!", ConsoleColor.Green);
+                Consoul.Wait();
+            }
+            else
+            {
+                Consoul.Write($"Unexpected document type", ConsoleColor.Red);
+                Consoul.Wait();
+            }
+        }
+    }
+}
+    </code>
+</pre>
+    </div>
+</div>

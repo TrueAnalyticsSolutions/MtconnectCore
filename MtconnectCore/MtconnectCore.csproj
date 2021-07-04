@@ -20,6 +20,10 @@
     <PackageReleaseNotes>This is the initial release after migrating from TAMS' proprietary source code.</PackageReleaseNotes>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\LightWorks\Source\Repos\MtconnectCore\MtconnectCore\MtconnectCore.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="Standard\Contracts\Enums\Assets\Attributes\" />
     <Folder Include="Standard\Contracts\Enums\Assets\Elements\" />

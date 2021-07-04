@@ -32,14 +32,6 @@ namespace MtconnectCoreExample.Views
             Source.Host = Consoul.Input("Enter the host of the request (ie. 123.45.678.9:80 or somenamedserver:80):", ConsoleColor.Yellow);
         }
 
-        internal string _setQueryMessage() => "Query: " + (string.IsNullOrEmpty(Source.Query) ? "NA" : Source.Query);
-        internal ConsoleColor _setQueryColor() => string.IsNullOrEmpty(Source.Query) ? ConsoleColor.Yellow : ConsoleColor.Green;
-        [DynamicViewOption(nameof(_setQueryMessage), nameof(_setQueryColor))]
-        public void SetQuery()
-        {
-            Source.Query = Consoul.Input("Enter additional query parameter(s) and delimit using ampersand (&) (ie. some=parameter&another=parameter):", ConsoleColor.Yellow);
-        }
-
         internal string _sendMessage() => "Send (" + (Source.IsValid() ? "Ready" : "Not Ready") + ")";
         internal ConsoleColor _sendColor() => Source.IsValid() ? ConsoleColor.Green : ConsoleColor.Red;
         [DynamicViewOption(nameof(_sendMessage), nameof(_sendColor))]

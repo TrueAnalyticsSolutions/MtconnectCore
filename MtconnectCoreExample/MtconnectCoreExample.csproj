@@ -3,6 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>John Murphy; Trais McAllister;</Authors>
+    <Company>True Analytics Manufacturing Solutions, LLC</Company>
+    <Product>Revolution DIY</Product>
+    <Description>An example application to showcase the capabilities of the MtconnectCore library.</Description>
+    <Copyright>True Analytics Manufacturing Solutions, LLC</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

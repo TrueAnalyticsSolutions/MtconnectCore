@@ -75,13 +75,18 @@ namespace MtconnectCoreExample.Views
                     }
                     token.Cancel();
                 });
-                AgentConnector.QueryStreamAsync(uri, Interval, callback, token.Token)
-                .ContinueWith((task) =>
-                {
-                    Consoul.Write($"An error occurred while requesting interval document.");
-                    token.Cancel();
-                }, TaskContinuationOptions.OnlyOnFaulted);
-                waitForKeyTask.Wait();
+
+                using (MtconnectAgentService mtcService = new MtconnectAgentService(uri)) {
+                    mtcService.CurrentInterval(callback, token.Token, query: new MtconnectCore.Standard.CurrentRequestQuery()
+                    {
+                        Interval = Interval
+                    }).ContinueWith((task) =>
+                    {
+                        Consoul.Write($"An error occurred while requesting interval document.");
+                        token.Cancel();
+                    }, TaskContinuationOptions.OnlyOnFaulted);
+                    waitForKeyTask.Wait();
+                }
             }
 
             Consoul.Write("Done!", ConsoleColor.Green);

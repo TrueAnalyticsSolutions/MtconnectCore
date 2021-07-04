@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
-    public partial class StreamsDocumentHeader : MtconnectDocumentHeader
+    public partial class StreamsDocumentHeader : ResponseDocumentHeader
     {
         [MtconnectNodeAttribute(HeaderAttributes.BUFFER_SIZE)]
         public int BufferSize { get; set; }

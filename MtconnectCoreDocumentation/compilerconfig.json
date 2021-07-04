@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/input-group-midtext.css",
+    "inputFile": "wwwroot/css/input-group-midtext.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/loader.css",
+    "inputFile": "wwwroot/css/loader.scss"
+  }
+]

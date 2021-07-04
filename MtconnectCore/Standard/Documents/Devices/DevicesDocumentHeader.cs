@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
-    public class DevicesDocumentHeader : MtconnectDocumentHeader
+    public class DevicesDocumentHeader : ResponseDocumentHeader
     {
         [MtconnectNodeAttribute(HeaderAttributes.BUFFER_SIZE)]
         public int BufferSize { get; set; }

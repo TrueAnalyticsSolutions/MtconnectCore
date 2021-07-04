@@ -3,12 +3,12 @@ using System;
 
 namespace MtconnectCore.Standard.Contracts.Errors
 {
-    public partial class MtconnectDocumentTypeMismatch<THeader, TItem> : Exception where THeader : IMtconnectDocumentHeader where TItem : MtconnectNode
+    public partial class MtconnectDocumentTypeMismatch<THeader, TItem> : Exception where THeader : IResponseDocumentHeader where TItem : MtconnectNode
     {
         public string ExpectedType { get; set; }
         public string ReceivedType { get; set; }
 
-        public MtconnectDocumentTypeMismatch(MtconnectDocument<THeader, TItem> document)
+        public MtconnectDocumentTypeMismatch(ResponseDocument<THeader, TItem> document)
         {
             ExpectedType = document.Type.ToString();
             ReceivedType = document.DocumentElementName;

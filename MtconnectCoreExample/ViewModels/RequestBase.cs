@@ -12,11 +12,9 @@ namespace MtconnectCoreExample.ViewModels
 
         public string Directory { get; set; }
 
-        public string Query { get; set; }
-
         public RequestBase() { }
 
-        public override string ToString() => $"{Protocol}://{Host}/{Directory.ToLower()}" + (string.IsNullOrEmpty(Query) ? string.Empty : $"?{Query}");
+        public override string ToString() => $"{Protocol}://{Host}/";
 
         public Uri ToUri() => new Uri(ToString());
 

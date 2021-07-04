@@ -8,7 +8,7 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
-    public class DevicesDocument : MtconnectDocument<DevicesDocumentHeader, Device>
+    public class DevicesDocument : ResponseDocument<DevicesDocumentHeader, Device>
     {
         public override DocumentTypes Type => DocumentTypes.Devices;
 
