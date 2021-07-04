@@ -1993,11 +1993,11 @@
       "url": "_framework\/System.IO.Pipelines.dll"
     },
     {
-      "hash": "sha256-7Sl53+Jjb0KnOt\/0jl96LLySqQyOgoqPEvrEQEkNr\/4=",
+      "hash": "sha256-MxbJPJLH3TGM9V5WmWFUKyVDP5JUaHC2JUfryh+IM28=",
       "url": "_framework\/MtconnectCore.dll"
     },
     {
-      "hash": "sha256-wuUG2dCWYm7rhm4g0c5TP8BwETYuReDXH2IhCnBt8Lk=",
+      "hash": "sha256-c9DVoY9Qa0WpeaOpmOLdBZ4wjTPU\/gHX+x5Ro3ojv34=",
       "url": "_framework\/MtconnectCoreDocumentation.dll"
     },
     {
@@ -2133,7 +2133,7 @@
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
-      "hash": "sha256-FcrqXg5a9oGuabxSyoTqIHlSdO2rjfwGAurgmbOb3+A=",
+      "hash": "sha256-FzVB8T3R0Ny\/PdQ9zG2kGyP6cTs6q+4ph3bmgyEuC+8=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -2141,5 +2141,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "9F7aGDxl"
+  "version": "4TOGO\/Oj"
 };
