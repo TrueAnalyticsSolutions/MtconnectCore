@@ -3,6 +3,8 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Errors;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
@@ -32,9 +34,9 @@ namespace MtconnectCore.Standard.Documents.Streams
         {
             Logger.Verbose("Reading Device {XnodeKey}", xNode.TryGetAttribute(DeviceAttributes.NAME));
             device = new Device(xNode, nsmgr);
-            if (!device.IsValid())
+            if (!device.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
             {
-                Logger.Warn($"[Invalid Stream] Device is not formatted properly, refer to Part 3 Section 4.2.2 of MTConnect Standard.");
+                Logger.Warn($"[Invalid Stream] Device:\r\n{ExceptionHelper.ToString(validationExceptions)}");
                 return false;
             }
             _items.Add(device);

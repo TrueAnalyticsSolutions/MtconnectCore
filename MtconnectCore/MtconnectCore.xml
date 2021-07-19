@@ -103,15 +103,1430 @@
             Defines the maximum number of Asset Documents to return in an MTConnectAssets Response Document. See Part 1 Section 8.3.4.2 of MTConnect specification.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute">
+            <summary>
+            An attribute used as a shortcut to deserialize a MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.Name">
+            <summary>
+            Reference to the name of the node (element or attribute) name. Supports both <see cref="T:System.String"/> and <see cref="T:System.Enum"/> references.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.XmlNamespace">
+            <summary>
+            Reference to the XML namespace used in the MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.#ctor(System.Object)">
+            <summary>
+            Initializes a <see cref="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute"/> for automatic processing of a MTConnect node's XML attribute.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.GetName(MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors)">
+            <summary>
+            Gets a formatted version of the <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.Name"/> based on the provided <paramref name="processor"/>.
+            </summary>
+            <param name="processor">Reference to the function used ot format the <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.Name"/>.</param>
+            <returns>Formatted version of the <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.Name"/>.</returns>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeElementAttribute">
+            <inheritdoc cref="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeElementAttribute.#ctor(System.Object)">
+            <summary>
+            Initializes a <see cref="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeElementAttribute"/> for automatic processing of a MTConnect node's XML inner text.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.EnumHelper.Contains``1(System.String)">
+            <summary>
+            Compares the provided <paramref name="value"/> against the enum values.
+            </summary>
+            <typeparam name="TEnum">Reference to an enum to compare against.</typeparam>
+            <param name="value">Value to compare against the enum.</param>
+            <returns>Flag for whether or not the <paramref name="value"/> was found in the enum.</returns>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes">
+            <summary>
+            Channel represents each sensing element connected to a sensor unit.
+            </summary>
+            <remarks>See Part 2 Section 9.1.3.1.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes.NUMBER">
+            <summary>
+            A unique identifier that will only refer to a specific sensing element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes.NAME">
+            <summary>
+            The name of the sensing element.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes">
+            <summary>
+            Attributes of the Component element
+            </summary>
+            <remarks>See Part 2 Section 4.4.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.ID">
+            <summary>
+            The unique identifier for this element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.NATIVE_NAME">
+            <summary>
+            The common name normally associated with a specific physical or logical part of a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.SAMPLE_INTERVAL">
+            <summary>
+            An optional attribute that is an indication provided by a piece of equipment describing the interval in milliseconds between the completion of the reading of the data associated with the Component element until the beginning of the next sampling of that data. This indication is reported as the number of milliseconds between data captures.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.SAMPLE_RATE">
+            <summary>
+            DEPRECATED in MTConnect Version 1.2. Replaced by <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.SAMPLE_INTERVAL"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.UUID">
+            <summary>
+            A unique identifier for this XML element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.NAME">
+            <summary>
+            The name of the Component element.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes">
+            <summary>
+            Attributes of the DESCRIPTION element of a COMPONENT
+            </summary>
+            <remarks>See Part 2 Section 4.4.3.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes.MANUFACTURER">
+            <summary>
+            The name of the manufacturer of the physical or logical part of a piece of equipment represented by the Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes.MODEL">
+            <summary>
+            The model description of the physical part or logical function of a piece of equipment represented by the Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes.SERIAL_NUMBER">
+            <summary>
+            The serial number associated with the physical part or logical function of a piece of equipment represented by the Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes.STATION">
+            <summary>
+            The station where the physical part or logical function of a piece of equipment represented by the Component element is located when it is part of a manufacturing unit or cell with multiple stations.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRefAttributes">
+            <summary>
+            Attributes implemented from and extending that of the abstract Reference element in the context of a Component in the MTConnect Response document.
+            </summary>
+            <remarks>See Part 2 Section 4.8.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRefAttributes.ID_REF">
+            <summary>
+            A pointer to the id attribute of the Component that contains the information to be associated with this XML element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRefAttributes.NAME">
+            <summary>
+            The optional name of the ComponentRef. Only informative.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes">
+            <summary>
+            ComponentRelationship describes the association between two components within a piece of equipment that function independently but together perform a capability or service within a piece of equipment.
+            </summary>
+            <remarks>See Part 2 Section 9.2.1.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.ID">
+            <summary>
+            The unique identifier for this ComponentRelationship.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.NAME">
+            <summary>
+            The name associated with this ComponentRelationship. name is provided as an additional human readable identifier for this ComponentRelationship.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.TYPE">
+            <summary>
+            Defines the authority that this component element has relative to the associated component element.
+            </summary>
+            <remarks>The value provided for <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.TYPE"/> MUST be one of the following values:
+            <list type="bullet">
+            <item>PARENT: This component functions as a parent in the relationship with the associated component element.</item>
+            <item>CHILD: This component functions as a child in the relationship with the associated component element.</item>
+            <item>CHILD: This component functions as a child in the relationship with the associated component element.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.CRITICALITY">
+            <summary>
+            Defines whether the services or functions provided by the associated component element is required for the operation of this piece of equipment.
+            </summary>
+            <remarks>The value provided for <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.ID_REF"/> MUST be one of the following values:
+            <list type="bullet">
+            <item>CRITICAL: The services or functions provided by the associated component element is required for the operation of this piece of equipment.</item>
+            <item>NONCRITICAL: The services or functions provided by the associated component element is not required for the operation of this piece of equipment.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.ID_REF">
+            <summary>
+            A reference to the associated component element. The value provided for idRef MUST be the value provided for the id attribute of the associated Component element.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes">
+            <summary>
+            Attributes for the Composition element in the MTConnect Response document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes.ID">
+            <summary>
+            The unique identifier for this element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes.UUID">
+            <summary>
+            A unique identifier for this XML element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes.NAME">
+            <summary>
+            The name of the Composition element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes.TYPE">
+            <summary>
+            The type of Composition element.
+            <example>
+            <list type="bullet">
+            <item>MOTOR</item>
+            <item>FILTER</item>
+            <item>PUMP</item>
+            <item>AMPLIFIER</item>
+            </list>
+            </example>
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes">
+            <summary>
+            Attributes for the CompositionDescription element in the MTConnect specification.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes.MANUFACTURER">
+            <summary>
+            The name of the manufacturer of the physical part of a piece of equipment represented by the Composition element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes.MODEL">
+            <summary>
+            The model description of the physical part of a piece of equipment represented by the Composition element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes.SERIAL_NUMBER">
+            <summary>
+            The serial number associated with the physical part of a piece of equipment represented by the Composition element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes.STATION">
+            <summary>
+            The station where the physical part of a piece of equipment represented by the Composition element is located when it is part of a manufacturing unit or cell with multiple stations.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes">
+            <summary>
+            Attributes of the CoordinateSystem element
+            </summary>
+            <remarks>See Part 2 Section 9.4.1.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.ID">
+            <summary>
+            The unique identifier for this element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.NAME">
+            <summary>
+            The name of the coordinate system.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.NATIVE_NAME">
+            <summary>
+            The manufacturer’s name or users name for the coordinate system.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.PARENT_ID_REF">
+            <summary>
+            A pointer to the id attribute of the parent CoordinateSystem.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.TYPE">
+            <summary>
+            The type of coordinate system. See <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes"/>.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes">
+            <summary>
+            Available options for CoordinateSystem types.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.WORLD">
+            <summary>
+            stationary coordinate system referenced to earth, which is independent of the robot motion. Ref:ISO 9787:2013 For non-robotic devices, stationary coordinate system referenced to earth, which is independent of the motion of a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.BASE">
+            <summary>
+            coordinate system referenced to the base mounting surface. Ref:ISO 9787:2013 A base mounting surface is a connection surface between the arm and its supporting structure.Ref:ISO 9787:2013 For non-robotic devices, it is the connection surface between the device and its supporting structure.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.OBJECT">
+            <summary>
+            coordinate system referenced to the object. Ref:ISO 9787:2013
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.TASK">
+            <summary>
+            coordinate system referenced to the site of the task. ef:ISO 9787:2013
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.MECHANICAL_INTERFACE">
+            <summary>
+            coordinate system referenced to the site of the task. Ref:ISO 9787:2013
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.TOOL">
+            <summary>
+            coordinate system referenced to the tool or to the end effector attached to the mechanical interface. Ref:ISO 9787:2013
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.MOBILE_PLATFORM">
+            <summary>
+            coordinate system referenced to one of the components of a mobile platform. Ref:ISO 8373:2012
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.MACHINE">
+            <summary>
+            coordinate system referenced to the home position and orientation of the primary axes of a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes.CAMERA">
+            <summary>
+            coordinate system referenced to the sensor which monitors the site of the task. Ref:ISO 9787:2013
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes">
+            <summary>
+            Attributes for a <see cref="T:MtconnectCore.Standard.Documents.Devices.DataItem"/> element in the MTConnectDevices Response Document.
+            </summary>
+            <remarks>See Part 2 Section 7.2.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.ID">
+            <summary>
+            The unique identifier for this element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.NAME">
+            <summary>
+            The name of the data item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.TYPE">
+            <summary>
+            The type of data being measured. Examples of types are:
+            <list type="bullet">
+            <item>POSITION</item>
+            <item>VELOCITY</item>
+            <item>ANGLE</item>
+            <item>BLOCK</item>
+            <item>ROTARY_VELOCITY</item>
+            </list>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.CATEGORY">
+            <summary>
+            Specifies the kind of information provided by a data item. The available options are:
+            <list type="bullet">
+            <item>SAMPLE</item>
+            <item>EVENT</item>
+            <item>CONDITION</item>
+            </list>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.UNITS">
+            <summary>
+            The unit of measurement for the reported value of the data item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SUB_TYPE">
+            <summary>
+            A sub-categorization of the data item type. For example, the subType of POSITION can be ACTUAL or COMMANDED.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.NATIVE_UNITS">
+            <summary>
+            The native units of measurement for the reported value of the data item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.STATISTIC">
+            <summary>
+            Describes the type of statistical calculation performed on a series of data samples to provide the reported data value. Examples of statistic are:
+            <list type="bullet">
+            <item>AVERAGE</item>
+            <item>MINIMUM</item>
+            <item>MAXIMUM</item>
+            <item>ROOT_MEAN_SQUARE</item>
+            <item>RANGE</item>
+            <item>MEDIAN</item>
+            <item>MODE</item>
+            <item>STANDARD_DEVIATION</item>
+            </list>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.REPRESENTATION">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or as a single value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.NATIVE_SCALE">
+            <summary>
+            The nativeUnits may not be scaled to directly represent the original measured value. nativeScale MAY be used to convert the reported value to represent the original measured value. As an example, the <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.NATIVE_UNITS"/> may be reported as GALLON/MINUTE. TH emeasured value may actually be in 1000 GALLON/MINUTE. The value of the reported data mAY be divided by the nativeScale to convert the reported value to its original measured value and units.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SIGNIFICANT_DIGITS">
+            <summary>
+            The number of significant digits in the reported value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.COORDINATE_SYSTEM">
+            <summary>
+            For measured values relative to a coordinate system like POSITION, the coordinate system being used may be reported. The available values for coordinateSystem are:
+            <list type="bullet">
+            <item>WORK</item>
+            <item>MACHINE</item>
+            </list>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.COMPOSITION_ID">
+            <summary>
+            The identifier attribute of the <see cref="T:MtconnectCore.Standard.Documents.Devices.Composition"/> element that the reported data is most closely associated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SAMPLE_RATE">
+            <summary>
+            The rate at which successive samples of a data item are recorded by a piece of equipment. <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SAMPLE_RATE"/> is expressed in terms of samples per second. If the <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SAMPLE_RATE"/> is smaller than one, the number can be represented as a floating point number. For example a rate 1 per 10 seconds would be 0.1.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.DISCRETE">
+            <summary>
+            An indication signifying whether each value reported for the Data Entity is significant and whether duplicate values are to be suppressed. <c>true</c> indicates that each update to the Data Entity’s value is significant and duplicate values MUST NOT be suppressed. <c>false</c> indicates that duplicated values MUST be suppressed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.COORDINATE_SYSTEM_ID_REF">
+            <summary>
+            The associated <see cref="T:MtconnectCore.Standard.Documents.Devices.CoordinateSystem"/> context for the <see cref="T:MtconnectCore.Standard.Documents.Devices.DataItem"/>.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemRefAttributes">
+            <summary>
+            Attributes implemented from and extending that of the abstract Reference element in the context of a DataItem in the MTConnect Response document.
+            </summary>
+            <remarks>See Part 2 Section 4.8.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemRefAttributes.ID_REF">
+            <summary>
+            A pointer to the id attribute of the DataItem that contains the information to be associated with this XML element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemRefAttributes.NAME">
+            <summary>
+            The optional name of the DataItemRef. Only informative.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes">
+            <summary>
+            DeviceRelationship describes the association between two pieces of equipment that function independently but together perform a manufacturing operation.
+            </summary>
+            <remarks>See Part 2 Section 9.2.1.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.ID">
+            <summary>
+            The unique identifier for this DeviceRelationship.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.NAME">
+            <summary>
+            The name associated with this DeviceRelationship.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.TYPE">
+            <summary>
+            Defines the authority that this piece of equipment has relative to the associated piece of equipment.
+            </summary>
+            <remarks>The value provided for <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.TYPE"/> MUST be one of the following values:
+            <list type="bullet">
+            <item>PARENT: This piece of equipment functions as a parent in the relationship with the associated piece of equipment.</item>
+            <item>CHILD: This piece of equipment functions as a child in the relationship with the associated piece of equipment.</item>
+            <item>PEER: This piece of equipment functions as a peer which provides equal functionality and capabilities in the relationship with the associated piece of equipment.</item>
+            </list></remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.CRITICALITY">
+            <summary>
+            Defines whether the services or functions provided by the associated piece of equipment is required for the operation of this piece of equipment.
+            </summary>
+            <remarks>The value provided for <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.CRITICALITY"/> MUST be one of the following values:
+            <list type="bullet">
+            <item>CRITICAL: The services or functions provided by the associated piece of equipment is required for the operation of this piece of equipment.</item>
+            <item>NONCRITICAL: The services or functions provided by the associated piece of equipment is not required for the operation of this piece of equipment.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.DEVICE_UUID_REF">
+            <summary>
+            A reference to the associated piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.ROLE">
+            <summary>
+            Defines the services or capabilities that the referenced piece of equipment provides relative to this piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.HREF">
+            <summary>
+            A URI identifying the Agent that is publishing information for the associated piece of equipment. <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.HREF"/> MUST also include the <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.DEVICE_UUID_REF"/> for that specific piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.KEY">
+            <summary>
+            The unique identification of the Entry in the Definition. The description applies to all Entry observations having this key.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.UNITS">
+            <summary>
+            Same as DataItem units. See Section 7.2.2.5 - units Attribute for DataItem. Only valid for representation of DATA_SET.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.TYPE">
+            <summary>
+            Same as DataItem type. See Section 8 - Listing of Data Items.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.SUB_TYPE">
+            <summary>
+            Same as DataItem subType. See Section 8 - Listing of Data Items.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.FilterAttributes">
+            <summary>
+            Attributes available for the <see cref="T:MtconnectCore.Standard.Documents.Devices.Filter"/> element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.FilterAttributes.TYPE">
+            <summary>
+            Sets the type of the <see cref="T:MtconnectCore.Standard.Documents.Devices.Filter"/> element.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ReferenceAttributes">
+            <summary>
+            Attributes available in the abstract Reference element in the MTConnect Response document.
+            </summary>
+            <remarks>See Part 2 Section 4.8 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ReferenceAttributes.ID_REF">
+            <summary>
+            A pointer to the id attribute of the implemented Reference target that contains the information to be associated with this XML element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ReferenceAttributes.NAME">
+            <summary>
+            The optional name of the implemented Reference target. Only informative.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes">
+            <summary>
+            Attributes of the abstract Relationship element
+            </summary>
+            <remarks>See Part 2 Section 9.2.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.ID">
+            <summary>
+            The unique identifier for a Relationship element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.NAME">
+            <summary>
+            The name of an element or a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.TYPE">
+            <summary>
+            The type of either a structural element or a dataitem being measured.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.CRITICALITY">
+            <summary>
+            Criticality
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SourceAttributes">
+            <summary>
+            Attributes for the <see cref="T:MtconnectCore.Standard.Documents.Devices.Source"/> element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SourceAttributes.COMPONENT_ID">
+            <summary>
+            The identifier attribute of the Component element that represents the physical part of a piece of equipment where the data represented by the DataItem element originated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SourceAttributes.COMPOSITION_ID">
+            <summary>
+            The identifier attribute of the Composition element that represents the physical part of a piece of equipment where the data represented by the DataItem element originated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SourceAttributes.DATA_ITEM_ID">
+            <summary>
+            The identifier attribute of the DataItem that represents the originally measured value of the data referenced by this data item.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes">
+            <summary>
+            Attributes of the Specification element
+            </summary>
+            <remarks>See Part 2 Section 9.3.1.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.TYPE">
+            <summary>
+            Same as <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.TYPE"/>. <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.TYPE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.SUB_TYPE">
+            <summary>
+            Same as <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SUB_TYPE"/>. <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SUB_TYPE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.DATA_ITEM_ID_REF">
+            <summary>
+            A reference to the id attribute of the DataItem associated with this element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.UNITS">
+            <summary>
+            Same as <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.UNITS"/>. <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.UNITS"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.COMPOSITION_ID_REF">
+            <summary>
+            A reference to the id attribute of the Composition associated with this element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.NAME">
+            <summary>
+            The name provides additional meaning and differentiates between Specifications. A name MUST exist when two Specifications have the same <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.TYPE"/> and <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.SUB_TYPE"/> within a Component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.COORDINATE_SYSTEM_ID_REF">
+            <summary>
+            References the CoordinateSystem for geometric Specification elements.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes">
+            <remarks>See Part 2 Section 5.4 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.LOADER">
+            <remarks>See Part 2 Section 5.4.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.WASTE_DISPOSAL">
+            <remarks>See Part 2 Section 5.4.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.TOOLING_DELIVERY">
+            <remarks>See Part 2 Section 5.4.3 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.BAR_FEEDER">
+            <remarks>See Part 2 Section 5.4.4 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.ENVIRONMENTAL">
+            <remarks>See Part 2 Section 5.4.5 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.SENSOR">
+            <remarks>See Part 2 Section 5.4.6 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.DEPOSITION">
+            <remarks>See Part 2 Section 5.4.7 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.AxesLowerLevelComponentTypes">
+            <remarks>See Part 2 Section 5.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AxesLowerLevelComponentTypes.ROTARY">
+            <remarks>See Part 2 Section 5.1.4 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AxesLowerLevelComponentTypes.LINEAR">
+            <remarks>See Part 2 Section 5.1.5 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes">
+            <summary>
+            Available options for the <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Category"/>
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes">
+            <summary>
+            Available types of sub-parts of a <see cref="T:MtconnectCore.Standard.Documents.Devices.Component"/>.
+            </summary>
+            <remarks>See Part 2 Section 6 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ControllerLowerLevelComponentTypes">
+            <remarks>See Part 2 Section 5.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ControllerLowerLevelComponentTypes.PATH">
+            <remarks>See Part 2 Section 5.2.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes">
+            <summary>
+            Available options for a coordinateSystem attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.CoordinateSystem"/>
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DeviceRelationshipRoleTypes">
+            <summary>
+            Available options for a <see cref="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.Role"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DeviceRelationshipRoleTypes.SYSTEM">
+            <summary>
+            The associated piece of equipment performs the functions of a System for this piece of equipment. In MTConnect, System provides utility type services to support the operation of a piece of equipment and these services are required for the operation of a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DeviceRelationshipRoleTypes.AUXILIARY">
+            <summary>
+            The associated piece of equipment performs the functions as an Auxiliary for this piece of equipment. In MTConnect, Auxiliary extends the capabilities of a piece of equipment, but is not required for the equipment to function.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements">
+            <summary>
+            Channel represents each sensing element connected to a sensor unit.
+            </summary>
+            <remarks>See Part 2 Section 9.1.3.1.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements.DESCRIPTION">
+            <summary>
+            An XML element that can contain any descriptive content. The CDATA of Description MAY include any additional descriptive information the implementer chooses to include regarding a sensor element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements.CALIBRATION_DATE">
+            <summary>
+            Date upon which the sensor unit was last calibrated to the sensor element. The data value for CalibrationDate is provided in the CDATA for this element and MUST be represented in the W3C ISO 8601 format.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements.NEXT_CALIBRATION_DATE">
+            <summary>
+            Date upon which the sensor element is next scheduled to be calibrated with the sensor unit. The data value for NextCalibrationDate is provided in the CDATA for this element and MUST be represented in the W3C ISO 8601 format.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements.CALIBRATION_INITIALS">
+            <summary>
+            The initials of the person verifying the validity of the calibration data. The data value for CalibrationInitials is provided in the CDATA for this element and MAY be any numeric or text content.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements">
+            <summary>
+            Configuration contains technical information about a component describing its physical layout, functional characteristics, and relationships with other components within a piece of equipment.
+            </summary>
+            <remarks>See Part 2 Section 9 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.COORDINATE_SYSTEMS">
+            <summary>
+            CoordinateSystems aggregates CoordinateSystem configurations for a Component.
+            </summary>
+            <remarks>See Part 2 Section 9.4 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.COORDINATE_SYSTEM">
+            <summary>
+            A CoordinateSystem is a reference system that associates a unique set of n parameters with each point in an n-dimensional space. Ref: ISO 10303-218:2004
+            </summary>
+            <remarks>See Part 2 Section 9.4.1 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.RELATIONSHIPS">
+            <summary>
+            Relationships is an XML container that organizes information defining the associ ation between pieces of equipment that function independently but together perform a manufacturing operation. Relationships may also define the association between components within a piece of equipment.
+            </summary>
+            <remarks>See Part 2 Section 9.2 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.DEVICE_RELATIONSHIP">
+            <summary>
+            DeviceRelationship describes the association between two pieces of equipment that function independently but together perform a manufacturing operation.
+            </summary>
+            <remarks>See Part 2 Section 9.2.1.1 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.COMPONENT_RELATIONSHIP">
+            <summary>
+            ComponentRelationship describes the association between two components within a piece of equipment that function independently but together perform a capability or service within a piece of equipment.
+            </summary>
+            <remarks>See Part 2 Section 9.2.1.2 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.SENSOR_CONFIGURATION">
+            <summary>
+            An element that can contain descriptive content defining the configuration information for Sensor.
+            </summary>
+            <remarks>See Part 2 Section 9.1.3 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.SPECIFICATIONS">
+            <summary>
+            Specifications is an XML container in the Configuration of a Component that contains one or more Specification elements describing the design characteristics for a piece of equipment.
+            </summary>
+            <remarks>See Part 2 Section 9.3 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.SPECIFICATION">
+            <summary>
+            Specification elements define information describing the design characteristics for a piece of equipment.
+            </summary>
+            <remarks>See Part 2 Section 9.3.1 of the MTConnect specification</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements">
+            <summary>
+            Elements contained within the Component element in the MTConnect Response document.
+            </summary>
+            <remarks>See Part 2 Section 4.4.3 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.DESCRIPTION">
+            <summary>
+            An element that can contain any descriptive content.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.CONFIGURATION">
+            <summary>
+            An XML element that contains technical information about a piece of equipment describing its physical layout or functional characteristics.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.DATA_ITEMS">
+            <summary>
+            A container for the Data Entities (See <see cref="T:MtconnectCore.Standard.Documents.Devices.DataItem"/>) associated with this Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.DATA_ITEM">
+            <summary>
+            See <see cref="T:MtconnectCore.Standard.Documents.Devices.DataItem"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.COMPONENTS">
+            <summary>
+            A container for Lower Level Component XML elements associated with this parent Component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.COMPONENT">
+            <summary>
+            See <see cref="T:MtconnectCore.Standard.Documents.Devices.Component"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.COMPOSITIONS">
+            <summary>
+            A container for the Composition elements (See <see cref="T:MtconnectCore.Standard.Documents.Devices.Composition"/>) associated with this Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.COMPOSITION">
+            <summary>
+            See <see cref="T:MtconnectCore.Standard.Documents.Devices.Composition"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.REFERENCES">
+            <summary>
+            A container for the Reference elements associated with this Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.REFERENCE">
+            <summary>
+            See <see cref="T:MtconnectCore.Standard.Documents.Devices.Reference"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.COMPONENT_REF">
+            <summary>
+            A ComponentRef element as an implementation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.DATA_ITEM_REF">
+            <summary>
+            A DataItemRef element as an implementation.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CompositionElements">
+            <summary>
+            Elements for the Composition element in the MTConnect specification.
+            </summary>
+            <remarks>See Part 2 Section 4.6.3 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CompositionElements.DESCRIPTION">
+            <summary>
+            Description can contain any descriptive content for this Composition element.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CoordinateSystemElements">
+            <summary>
+            Elements for the CoordinateSystem element in the MTConnect Response Document.
+            </summary>
+            <remarks>See Part 2 Section 9.4.1.2 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CoordinateSystemElements.ORIGIN">
+            <summary>
+            The coordinates of the origin position of a coordinate system. The coordinate MUST be in MILLIMETER_3D.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CoordinateSystemElements.TRANSFORMATION">
+            <summary>
+            The process of transforming to the origin position of the coordinate system from a parent coordinate system using Translation and Rotation.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements">
+            <summary>
+            Available elements for the <see cref="T:MtconnectCore.Standard.Documents.Devices.DataItem"/> element
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.SOURCE">
+            <summary>
+            Source is an optional XML element that identifies the Component, DataItem, or Composition representing the area of the piece of equipment from which a measured value originates. Additionally, Source MAY provide information relating to the identity of a measured value. This information is reported as CDATA for Source. (example, a PLC tag)
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.CONSTRAINTS">
+            <summary>
+            Constraints is an optional container that provides a set of expected values that can be reported for this DataItem. Constraints are used by a software application to evaluate the validity of the reported data.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.FILTERS">
+            <summary>
+            An optional container for the Filter elements associated with this DataItem element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.INITIAL_VALUE">
+            <summary>
+            InitialValue is an optional XML element that defines the starting value for a data item as well as the value to be set for the data item after a reset event. Only one InitialValue element may be defined for a data item. The value will be constant and cannot change. If no InitialValue element is defined for a data item that is periodically reset, then the starting value for the data item MUST be a value of 0.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.RESET_TRIGGER">
+            <summary>
+            ResetTrigger is an optional XML element that identifies the type of event that may cause a reset to occur. It is additional information regarding the meaning of the data that establishes an understanding of the time frame that the data represents so that the data may be correctly understood by a client software application.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.DEFINITION">
+            <summary>
+            The Definition defines the meaning of Entry and Cell elements associated with the DataItem when the representation is either DATA_SET or TABLE.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements">
+            <summary>
+            An element that can contain descriptive content defining the configuration information for Sensor. For Sensor, the valid configuration is SensorConfiguration which provides data from a subset of items commonly found in a transducer electronic data sheet for sensors and actuators called TEDS. TEDS formats are defined in IEEE 1451.0 and 1451.4 transducer interface standards (ref 15 and 16, respectively). MTConnect does not support all of the data represented in the TEDS data, nor does it duplicate the function of the TEDS data sheets.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.FIRMWARE_VERSION">
+            <summary>
+            Version number for the sensor unit as specified by the manufacturer.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.CALIBRATION_DATE">
+            <summary>
+            Date upon which the sensor unit was last calibrated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.NEXT_CALIBRATION_DATE">
+            <summary>
+            Date upon which the sensor unit is next scheduled to be calibrated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.CALIBRATION_INITIALS">
+            <summary>
+            The initials of the person verifying the validity of the calibration data.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.CHANNELS">
+            <summary>
+            When Sensor represents multiple sensing elements, each sensing element is represented by a Channel for the Sensor.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.CHANNEL">
+            <summary>
+            Channel represents each sensing element connected to a sensor unit.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SpecificationElements">
+            <summary>
+            Elements within the Specification element in the MTConnect Response document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SpecificationElements.MAXIMUM">
+            <summary>
+            A numeric upper limit constraint. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SpecificationElements.MINIMUM">
+            <summary>
+            A numeric lower limit constraint.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SpecificationElements.NOMINAL">
+            <summary>
+            The numeric target or expected value. 
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.TransformationElements">
+            <summary>
+            Elements for a Transformation element in the MTConnect Response Document.
+            </summary>
+            <remarks>See Part 2 Section 9.4.1.2.1 of the MTConnect specification</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.TransformationElements.TRANSLATION">
+            <summary>
+            Translations along X, Y, and Z axes are expressed as x, y, and z respectively within a 3-dimensional vector.
+            The values MUST be given in MILLIMETER_3D.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.TransformationElements.ROTATION">
+            <summary>
+            Rotations about X, Y, and Z axes are expressed in A, B, and C respectively within a 3-dimensional vector. The values MUST be given in DEGREE_3D. Positive A, B, and C are in the directions to advance right-hand screws in the positive X, Y, and Z directions, respectively. Ref:ISO 9787:2013
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.InterfacesLowerLevelComponentTypes">
+            <remarks>See Part 2 Section 5.6 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipCriticalityTypes">
+            <summary>
+            Available options for a <see cref="P:MtconnectCore.Standard.Documents.Devices.Relationship.Criticality"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipCriticalityTypes.CRITICAL">
+            <summary>
+            The services or functions provided by the associated piece of equipment is required for the operation of this piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipCriticalityTypes.NONCRITICAL">
+            <summary>
+            The services or functions provided by the associated piece of equipment is not required for the operation of this piece of equipment.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipTypes">
+            <summary>
+            Available options for a <see cref="P:MtconnectCore.Standard.Documents.Devices.Relationship.Type"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipTypes.PARENT">
+            <summary>
+            This piece of equipment functions as a parent in the relationship with the associated piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipTypes.CHILD">
+            <summary>
+            This piece of equipment functions as a child in the relationship with the associated piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipTypes.PEER">
+            <summary>
+            This piece of equipment functions as a peer which provides equal functionality and capabilities in the relationship with the associated piece of equipment.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes">
+            <remarks>See Part 2 Section 5.5 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes.MATERIALS">
+            <remarks>See Part 2 Section 5.5.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes.STOCK">
+            <remarks>See Part 2 Section 5.5.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes.PERSONNEL">
+            <remarks>See Part 2 Section 5.5.3 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes">
+            <remarks>See Part 2 Section 5.3 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.HYDRAULIC">
+            <remarks>See Part 2 Section 5.3.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.PNEUMATIC">
+            <remarks>See Part 2 Section 5.3.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.COOLANT">
+            <remarks>See Part 2 Section 5.3.3 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.LUBRICANT">
+            <remarks>See Part 2 Section 5.3.4 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.ELECTRIC">
+            <remarks>See Part 2 Section 5.3.5 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.ENCLOSURE">
+            <remarks>See Part 2 Section 5.3.6 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.PROTECTIVE">
+            <remarks>See Part 2 Section 5.3.7 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.PROCESS_POWER">
+            <remarks>See Part 2 Section 5.3.8 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.FEEDER">
+            <remarks>See Part 2 Section 5.3.9 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.DIELECTRIC">
+            <remarks>See Part 2 Section 5.3.10 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.END_EFFECTOR">
+            <remarks>See Part 2 Section 5.3.11 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.WORK_ENVELOPE">
+            <remarks>See Part 2 Section 5.3.12 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes">
+            <summary>
+            Top Level Component elements are used to group the Structural Elements representing the most significant physical or logical functions of a piece of equipment. The Top Level Component elements provided in an MTConnectDevices document SHOULD be restricted to those defined in Table 16. However, these Top Level Component elements MAY also be used as Lower Level Component elements; as required.
+            </summary>
+            <remarks>See Part 2 Section 5 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.AXES">
+            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.AxesLowerLevelComponentTypes" />
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.CONTROLLER">
+            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.ControllerLowerLevelComponentTypes" />
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.SYSTEMS">
+            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes" />
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.AUXILIARIES">
+            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes" />
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.RESOURCES">
+            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes" />
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.INTERFACES">
+            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.InterfacesLowerLevelComponentTypes" />
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.DocumentTypes">
+            <summary>
+            Types of supported MTConnect Response Documents.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Devices">
+            <summary>
+            Represents a MTConnectDevices Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Streams">
+            <summary>
+            Represents a MTConnectStreams Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Assets">
+            <summary>
+            Represents a MTConnectAssets Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Errors">
+            <summary>
+            Represents a MTConnectErrors Response Document.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Error.ErrorCodes">
             <summary>
             Reference Part 1, Section 9.1.2.3 of the MTConnect Standard for a list of appropriate values for the errorCode attribute
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.HeaderAttributes">
+            <summary>
+            Attributes available for the base MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.HeaderAttributes.VERSION">
+            <summary>
+            The major, minor, and revision number of the MTConnect Standard that defines the semantic data model that represents the content of the Response Document. It also includes the revision number of the schema associated with that specific semantic data model.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.HeaderAttributes.CREATION_TIME">
+            <summary>
+            Represents the time that an Agent published the Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.HeaderAttributes.SENDER">
+            <summary>
+            An identification defining where the Agent that published the Response Document is installed or hosted.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.HeaderAttributes.INSTANCE_ID">
+            <summary>
+            A number indicating a specific instantiation of the buffer associated with the Agent that published the Response Document.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors">
             <summary>
             An enumeration of available methods of parsing MTConnect node names from a MTConnect document
             </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors.CamelCase">
+            <summary>
+            Processes a XML node name to a camel case string.
+            <example>camelCase</example>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors.PascalCase">
+            <summary>
+            Processes a XML node name to a pascal case string.
+            <example>PascalCase</example>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors.SnakeCase">
+            <summary>
+            Processes a XML node name to a snake case string.
+            <example>snake_case</example>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors.Lower">
+            <summary>
+            Processes a XML node name to a lower case string.
+            <example>lower case</example>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors.Upper">
+            <summary>
+            Processes a XML node name to a upper case string.
+            <example>UPPER CASE</example>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectNodeNameProcessors.None">
+            <summary>
+            Performs no string operations on the XML node name.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions">
+            <summary>
+            Options for supported MTConnect Standard versions.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_0_1">
+            <summary>
+            Version 1.0.1
+            </summary>
+            <remarks>Prepared on: October 2, 2009</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_1_0">
+            <summary>
+            Version 1.1.0
+            </summary>
+            <remarks>Prepared on: April 30, 2010</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_2_0">
+            <summary>
+            Version 1.2.0
+            </summary>
+            <remarks>Prepared on: February 17, 2012</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_3_0">
+            <summary>
+            Version 1.3.0
+            </summary>
+            <remarks>Prepared on: September 30, 2014</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_3_1">
+            <summary>
+            Version 1.3.1
+            </summary>
+            <remarks>Prepared on: June 11, 2015</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_4_0">
+            <summary>
+            Version 1.4.0
+            </summary>
+            <remarks>Prepared on: March 31, 2018</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_4_1">
+            <summary>
+            Version 1.4.1
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_0">
+            <summary>
+            Version 1.5.0
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_1">
+            <summary>
+            Version 1.5.1
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_0">
+            <summary>
+            Version 1.6.0
+            </summary>
+            <remarks>Prepared on: July 15, 2020</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_1">
+            <summary>
+            Version 1.6.1
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_7_0">
+            <summary>
+            Version 1.7.0
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
+            <summary>
+            Logical choices XML node types.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.NodeTypes.Attribute">
+            <summary>
+            A XML attribute node.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.NodeTypes.Element">
+            <summary>
+            A XML element node.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.RequestTypes">
+            <summary>
+            Options for request paths against a MTConnect Agent.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.RequestTypes.PROBE">
+            <summary>
+            An Agent responds to a Probe Request with an MTConnectDevices Response Document that contains the Equipment Metadata for pieces of equipment that are requested and currently represented in the Agent.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.RequestTypes.CURRENT">
+            <summary>
+            An Agent responds to a Current Request with an MTConnectStreams Response Document that contains the current value of Data Entities associated with each piece of Streaming Data available from the Agent, subject to any filtering defined in the Request.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.RequestTypes.SAMPLE">
+            <summary>
+            An Agent responds to a Sample Request with an MTConnectStreams Response Document that contains a set of values for Data Entities currently available for Streaming Data from the Agent, subject to any filtering defined in the Request.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.RequestTypes.ASSET">
+            <summary>
+            An Agent responds to an Asset Request with an MTConnectAssets Response Document that contains information for MTConnect Assets from the Agent, subject to any filtering defined in the Request.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentErrorException">
+            <summary>
+            An exception containing a specific Error from a MTConnect Errors Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentErrorException.ErrorCode">
+            <inheritdoc cref="P:MtconnectCore.Standard.Documents.Error.Error.ErrorCode"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentErrorException.#ctor(MtconnectCore.Standard.Documents.Error.Error)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Errors.InvalidMtconnectVersionException">
+            <summary>
+            An exception raised when the MTConnect version is unrecognized from a Response Document.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.InvalidMtconnectVersionException.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.InvalidMtconnectVersionException.#ctor(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentTypeMismatchException`2">
+            <summary>
+            An exception raised when the MTConnect Document Type received from the Agent request conflicted with what was expected.
+            </summary>
+            <typeparam name="THeader">Reference to the type of <see cref="T:MtconnectCore.Standard.Documents.IResponseDocumentHeader"/>.</typeparam>
+            <typeparam name="TItem">Reference to the root element in the <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/>.</typeparam>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentTypeMismatchException`2.ExpectedType">
+            <summary>
+            The expected MTConnect Response Document type. See also, <seealso cref="P:MtconnectCore.Standard.Documents.IResponseDocument.Type"/>.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentTypeMismatchException`2.ReceivedType">
+            <summary>
+            The actual document type that was received from the MTConnect Agent.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentTypeMismatchException`2.#ctor(MtconnectCore.Standard.Documents.ResponseDocument{`0,`1})">
+            <summary>
+            Initializes a <see cref="T:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentTypeMismatchException`2"/> from the response document.
+            </summary>
+            <param name="document"></param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentTypeMismatchException`2.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Errors.MtconnectProbeFailure">
+            <summary>
+            Represents errors received during a MTConnect probe request.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectProbeFailure.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectProbeFailure.#ctor(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Errors.MtconnectStreamFailure">
+            <summary>
+            Represents errors received during a MTConnect current or sample request.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectStreamFailure.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectStreamFailure.#ctor(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException">
+            <summary>
+            An exception that represents any validation error on XML nodes within a MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.Severity">
+            <summary>
+            Severity of the validation error that occurred.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.#ctor(MtconnectCore.Standard.Contracts.Enums.ValidationSeverity,System.String)">
+            <summary>
+            Initializes a MTConnect validation exception with a specific severity and message.
+            </summary>
+            <param name="severity">Sets the severity level of the error.</param>
+            <param name="message">Sets the message of the validation error.</param>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.IMtconnectNode">
+            <summary>
+            An interface that represents a single MTConnect Response Document XML element.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.IMtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <summary>
+            Validates the format of the MTConnect XML element.
+            </summary>
+            <returns>Flag for whether or not the MTConnect XML element is considered valid.</returns>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.MtconnectNode">
+            <summary>
+            Represents the most basic form of a MTConnect Response Document XML node. Used for parsing a MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor">
+            <summary>
+            Initializes a blank <see cref="T:MtconnectCore.Standard.Contracts.IMtconnectNode"/> entity.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)">
+            <summary>
+            Initializes a <see cref="T:MtconnectCore.Standard.Contracts.IMtconnectNode"/> entity from a MTConnect Response Document.
+            </summary>
+            <param name="xNode">Reference to a <see cref="T:System.Xml.XmlNode"/> as part of a larger MTConnect Response Document.</param>
+            <param name="nsmgr">Reference to the </param>
+            <param name="defaultNamespace"></param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.CurrentRequestQuery.Path">
             <summary>
@@ -128,10 +1543,740 @@
             The Agent MUST continuously publish Response Documents when the query parameters include interval using the value as the period between adjacent publications. See Part 1 Section 8.3.2.2 of MTConnect specification.
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Key">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.KEY"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Units">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.UNITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.SubType">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.SUB_TYPE"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CellDefinition.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CellDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CellDefinition.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.Channel">
+            <summary>
+            Channel represents each sensing element connected to a sensor unit.
+            </summary>
+            <remarks>See Part 2 Section 9.1.3.1.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Channel.Number">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes.NUMBER"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Channel.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Channel.Description">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements.DESCRIPTION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Channel.CalibrationDate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements.CALIBRATION_DATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Channel.NextCalibrationDate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements.NEXT_CALIBRATION_DATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Channel.CalibrationInitials">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ChannelElements.CALIBRATION_INITIALS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Channel.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Channel.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Channel.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.Component">
+            <summary>
+            Channel represents each sensing element connected to a sensor unit.
+            </summary>
+            <remarks>See Part 2 Section 4.4 of the MTConnect specification.</remarks>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.NativeName">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.NATIVE_NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.SampleInterval">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.SAMPLE_INTERVAL"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.SampleRate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.SAMPLE_RATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Uuid">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.UUID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.TagName">
+            <summary>
+            Explicit reference to the XML tag name. This can be more reliable than referencing <see cref="P:MtconnectCore.Standard.Documents.Devices.Component.Name"/>
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Description">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.DESCRIPTION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Configuration">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.CONFIGURATION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Size">
+            <summary>
+            Cumulative number of sub-components, including the size of all sub-components.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.SubComponents">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.COMPONENTS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.DataItems">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.DATA_ITEMS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Compositions">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.COMPOSITIONS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.References">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.REFERENCES"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Component.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Component.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Component.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)"/>
+            <remarks>See Part 2 Section 4.4.1 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration">
+            <summary>
+            An XML element that contains technical information about a piece of equipment describing its physical layout or functional characteristics.
+            </summary>
+            <remarks>See Part 2 Section 4.4.3.2 of the MTConnect specification</remarks>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.CoordinateSystems">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.COORDINATE_SYSTEMS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.Relationships">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.RELATIONSHIPS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.SensorConfiguration">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.SENSOR_CONFIGURATION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.Specifications">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.SPECIFICATIONS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.ComponentDescription">
+            <summary>
+            An element that can contain any descriptive content.
+            </summary>
+            <remarks>See Part 2 Section 4.4.3.1 of the MTConnect specification</remarks>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentDescription.Content">
+            <summary>
+            The content of the description can be text or XML elements. This is the inner text of the XML element.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentDescription.Manufacturer">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes.MANUFACTURER"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentDescription.Model">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes.MODEL"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentDescription.SerialNumber">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes.SERIAL_NUMBER"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentDescription.Station">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes.STATION"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentDescription.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.ComponentRef">
+            <summary>
+            ComponentRef XML element is a pointer to all of the information associated with another Structural Element defined elsewhere in the XML document for a piece of equipment. ComponentRef allows all of the information (Lower Level Components and all Data Entities) that is associated with the other Structural Element to be directly associated with this XML element.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentRef.IdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRefAttributes.ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentRef.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRefAttributes.NAME"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRef.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRef.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.Criticality">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.CRITICALITY"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.IdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.ID_REF"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.Composition">
+            <summary>
+            Composition XML elements are used to describe the lowest level physical building blocks of a piece of equipment contained within a Component.
+            </summary>
+            <remarks>See Part 2 Section 4.6 of the MTConnect specification.</remarks>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Composition.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Composition.Uuid">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes.UUID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Composition.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Composition.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Composition.Description">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CompositionElements.DESCRIPTION"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Composition.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Composition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Composition.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)"/>
+            <remarks>See Part 2 Section 4.6.2 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.CompositionDescription">
+            <summary>
+            Description can contain any descriptive content for this Composition element.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CompositionDescription.Manufacturer">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes.MANUFACTURER"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CompositionDescription.Model">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes.MODEL"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CompositionDescription.SerialNumber">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes.SERIAL_NUMBER"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CompositionDescription.Station">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CompositionDescriptionAttributes.STATION"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CompositionDescription.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CompositionDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.CoordinateSystem">
+            <summary>
+            A CoordinateSystem is a reference system that associates a unique set of n parameters with each point in an n-dimensional space. Ref: ISO 10303-218:2004
+            </summary>
+            <remarks>See Part 2 Section 9.4.1 of the MTConnect specification</remarks>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.NativeName">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.NATIVE_NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.ParentIdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.PARENT_ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.Origin">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CoordinateSystemElements.ORIGIN"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.Transformation">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CoordinateSystemElements.TRANSFORMATION"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <remarks>See Part 2 Section 9.4.1.1 of MTConnect Standard</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.DataItem">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Category">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.CATEGORY"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Units">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.UNITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.SubType">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SUB_TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.NativeUnits">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.NATIVE_UNITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.NativeScale">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.NATIVE_SCALE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Statistic">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.STATISTIC"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Representation">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.REPRESENTATION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.SignificantDigits">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SIGNIFICANT_DIGITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.CoordinateSystem">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.COORDINATE_SYSTEM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.CoordinateSystemIdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.COORDINATE_SYSTEM_ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.CompositionId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.COMPOSITION_ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Discrete">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.DISCRETE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.SampleRate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SAMPLE_RATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Constraints">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.CONSTRAINTS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Filters">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.FILTERS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <remarks>See Part 2 Section 6.2.1 of MTConnect Standard</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.DataItemConstraint">
+            <summary>
+            Constraints are used by a software application to evaluate the validity of the data reported.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.Value">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ConstraintElements.VALUE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.Maximum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ConstraintElements.MAXIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.Minimum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ConstraintElements.MINIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.Nominal">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ConstraintElements.NOMINAL"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.Filter">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ConstraintElements.FILTER"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemDefinition.Description">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemDefinitionElements.DESCRIPTION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemDefinition.EntryDefinitions">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemDefinitionElements.ENTRY_DEFINITIONS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemDefinition.CellDefinitions">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemDefinitionElements.CELL_DEFINITIONS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemDefinition.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.DataItemRef">
+            <summary>
+            DataItemRef XML element is a pointer to a Data Entity associated with another Structural Element defined elsewhere in the XML document for a piece of equipment. DataItemRef allows the data associated with a data item defined in another Structural Element to be directly associated with this XML element.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemRef.IdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemRefAttributes.ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItemRef.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemRefAttributes.NAME"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemRef.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemRef.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Uuid">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.UUID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.SampleInterval">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.SAMPLE_INTERVAL"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.NativeName">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.NATIVE_NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.SampleRate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.SAMPLE_RATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Iso841Class">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.ISO_841_CLASS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Device.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Device.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.Criticality">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.CRITICALITY"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.DeviceUuidRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.DEVICE_UUID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.Role">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.ROLE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.Href">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes.HREF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.XlinkType">
+            <summary>
+            Type of <see cref="P:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.Href"/> fixed value locator.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocument.#ctor(System.Xml.XmlDocument)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.BufferSize">
+            <summary>
+            A value representing the maximum number of Data Entities that MAY be retained in the Agent that published the Response Document at any point in time.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.TestIndicator">
+            <summary>
+            A flag indicating that the Agent that published the Response Document is operating in a test mode.The contents of the Response Document may not be valid and SHOULD be used for testing and simulation purposes only.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.AssetBufferSize">
+            <summary>
+            A value representing the maximum number of Asset Documents that can be stored in the Agent that published the Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.AssetCount">
+            <summary>
+            A number representing the current number of Asset Documents that are currently stored in the Agent as of the creationTime that the Agent published the Response Document.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.EntryDefinition.Key">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.KEY"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.EntryDefinition.Units">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.UNITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.EntryDefinition.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.EntryDefinition.SubType">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.SUB_TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.EntryDefinition.CellDefinitions">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.EntryDefinitionElements.CELL_DEFINITIONS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.EntryDefinition.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.EntryDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.EntryDefinition.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.Filter">
+            <summary>
+            Filter provides a means to control when an Agent records updated information for a data item. Currently, there are two types of Filter elements defined in the MTConnect Standard - MINIMUM_DELTA and PERIOD.More Filter types may be added in the future.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Filter.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.FilterAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Filter.Value">
+            <summary>
+            Inner content (CDATA) of the Filter element.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Filter.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Filter.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Filter.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.Reference">
+            <summary>
+            Reference is a pointer to information that is associated with another Structural Element defined elsewhere in the XML document for a piece of equipment.That information may be data from the other element or the entire structure of that element.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Reference.IdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ReferenceAttributes.ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Reference.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ReferenceAttributes.NAME"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Reference.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Reference.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Reference.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Relationship.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Relationship.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Relationship.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Relationship.Criticality">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.CRITICALITY"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Relationship.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Relationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Relationship.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)"/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.SensorConfiguration">
+            <summary>
+            SensorConfiguration contains configuration information about a Sensor.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.FirmwareVersion">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.FIRMWARE_VERSION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.CalibrationDate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.CALIBRATION_DATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.NextCalibrationDate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.NEXT_CALIBRATION_DATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.CalibrationInitials">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.CALIBRATION_INITIALS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.Channels">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.CHANNELS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Source.ComponentId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SourceAttributes.COMPONENT_ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Source.CompositionId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SourceAttributes.COMPOSITION_ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Source.DataItemId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SourceAttributes.DATA_ITEM_ID"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Source.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Source.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.Specification">
+            <summary>
+            Specification elements define information describing the design characteristics for a piece of equipment.
+            </summary>
+            <remarks>See Part 2 Section 9.3.1 of the MTConnect specification</remarks>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.SubType">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.SUB_TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.DataItemIdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.DATA_ITEM_ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.CompositionIdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.COMPOSITION_ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.CoordinateSystemIdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SpecificationAttributes.COORDINATE_SYSTEM_ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.Minimum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SpecificationElements.MINIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.Nominal">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SpecificationElements.NOMINAL"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Specification.Maximum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SpecificationElements.MAXIMUM"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Specification.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Specification.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Specification.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.Transformation">
+            <inheritdoc cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.TransformationElements"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Transformation.Translation">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.TransformationElements.TRANSLATION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Transformation.Rotation">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.TransformationElements.ROTATION"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Transformation.#ctor">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Transformation.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        </member>
         <member name="T:MtconnectCore.Standard.Documents.Error.Error">
             <summary>
             Represents the Error element of the MTConnect Standard. See Part 1, Section 9.1.2 of the MTConnect Standard
             </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Error.ErrorDocument.Type">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Error.ErrorDocument.DefaultNamespace">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Error.ErrorDocument.DataElementName">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Error.ErrorDocument.Header">
+            <inheritdoc cref="P:MtconnectCore.Standard.Documents.Error.ErrorDocument._header"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocument.#ctor(System.Xml.XmlDocument)">
+            <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.IResponseDocument">
             <summary>
@@ -143,6 +2288,32 @@
             Structural interface for a MTConnect Response Document Header. See Part 1 Section 6.5 of MTConnect specification.
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocumentHeader.CreationTime">
+            <summary>
+            Represents the time that a MTConnect Agent published the Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocumentHeader.Sender">
+            <summary>
+            An identification defining where the Agent that published the Response Document is installed or hosted.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocumentHeader.AgentVersion">
+            <summary>
+            The major, minor, and revision number of the MTConnect Standard that defines the semantic data model that represents the content of the Response Document. It also includes the revision number of the schema associated with that specific semantic data model.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocumentHeader.InstanceId">
+            <summary>
+            A number indicating a specific instantiation of the buffer associated with the Agent that published the Response Document.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.IResponseDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <summary>
+            An overridable method for validating the entity model. It is recommended to validate sometime after parsing a MTConnect Response Document.
+            </summary>
+            <returns>Flag for whether the entity is valid.</returns>
+        </member>
         <member name="T:MtconnectCore.Standard.Documents.ResponseDocument`2">
             <summary>
             Structural interface for a MTConnect Response Document. See Part 1 Section 6 of MTConnect specification.
@@ -152,6 +2323,34 @@
             <summary>
             Structural interface for a MTConnect Response Document Header. See Part 1 Section 6.5 of MTConnect specification.
             </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocumentHeader.CreationTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocumentHeader.Sender">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocumentHeader.AgentVersion">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocumentHeader.InstanceId">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.#ctor">
+            <summary>
+            Initializes a blank MTConnect Response Document Header.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)">
+            <summary>
+            Initializes a MTConnect Response Document Header from a source XML node.
+            </summary>
+            <param name="xNode">A source XML node from the MTConnect Response Document.</param>
+            <param name="nsmgr">Reference to the namespace manager.</param>
+            <param name="defaultNamespace">Reference to the namespace primarily used for this node.</param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.ComponentId">
             <summary>
@@ -208,6 +2407,15 @@
             
             Occurance: 0..1
             </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Component.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Component.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Component.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Name">
             <summary>
@@ -282,6 +2490,12 @@
             Reference to the name of the element. Refer to Part 3 Streams - 5.8
             </summary>
         </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Condition.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Condition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.DataItemId">
             <summary>
             Collected from the dataItemId attribute. Refer to Part 3 Streams - 5.3.2, 5.5.2, 5.8.3
@@ -303,6 +2517,15 @@
             Occurance: 1
             </summary>
         </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Name">
             <summary>
             Collected from the name attribute. Refer to Part 3 Streams - 4.2.2
@@ -323,6 +2546,15 @@
             
             Occurance: 0..*
             </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Device.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Device.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Event.SubType">
             <summary>
@@ -361,6 +2593,12 @@
             <summary>
             Reference to the name of the element. Refer to Part 3 Streams - 5.5
             </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SubType">
             <summary>
@@ -420,6 +2658,18 @@
             <summary>
             Reference to the name of the element. Refer to Part 3 Streams - 5.3
             </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.SubType">
             <summary>

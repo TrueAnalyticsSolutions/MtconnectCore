@@ -1,7 +1,9 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
 
@@ -76,17 +78,19 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectNodeElements("Condition/*", nameof(TryAddCondition), XmlNamespace = "m")]
         public ICollection<Condition> Conditions => _conditions;
 
+        /// <inheritdoc/>
         public Component() { }
 
+        /// <inheritdoc/>
         public Component(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, "m") { }
 
         public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample)
         {
             Logger.Verbose("Reading Sample {XnodeKey}", xNode.TryGetAttribute(SampleAttributes.DATA_ITEM_ID));
             sample = new Sample(xNode, nsmgr);
-            if (!sample.IsValid())
+            if (!sample.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
             {
-                Logger.Warn($"[Invalid Stream] Sample {sample.DataItemId} is not formatted properly, refer to Part 3 Section 5.2 of MTConnect Standard.");
+                Logger.Warn($"[Invalid Stream] Sample {sample.DataItemId} of Component '{Name}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
                 return false;
             }
             _samples.Add(sample);
@@ -97,9 +101,9 @@ namespace MtconnectCore.Standard.Documents.Streams
         {
             Logger.Verbose("Reading Event {XnodeKey}", xNode.TryGetAttribute(EventAttributes.DATA_ITEM_ID));
             @event = new Event(xNode, nsmgr);
-            if (!@event.IsValid())
+            if (!@event.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
             {
-                Logger.Warn($"[Invalid Stream] Event {@event.DataItemId} is not formatted properly, refer to Part 3 Section 5.3 of MTConnect Standard.");
+                Logger.Warn($"[Invalid Stream] Event {@event.DataItemId} of Component '{Name}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
                 return false;
             }
             _events.Add(@event);
@@ -110,18 +114,36 @@ namespace MtconnectCore.Standard.Documents.Streams
         {
             Logger.Verbose("Reading Condition {XnodeKey}", xNode.TryGetAttribute(ConditionAttributes.DATA_ITEM_ID));
             condition = new Condition(xNode, nsmgr);
-            if (!condition.IsValid())
+            if (!condition.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
             {
-                Logger.Warn($"[Invalid Stream] Condition {condition.DataItemId} is not formatted properly, refer to Part 3 Section 5.8 of MTConnect Standard.");
+                Logger.Warn($"[Invalid Stream] Condition {condition.DataItemId} of Component '{Name}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
                 return false;
             }
             _conditions.Add(condition);
             return true;
         }
 
-        public override bool IsValid()
+        /// <inheritdoc/>
+        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            return !string.IsNullOrEmpty(ComponentId) && !string.IsNullOrEmpty(ComponentReference);
+            const string documentationAttributes = "See Part 1 Section 4.3.1 of the MTConnect standard.";
+            validationErrors = new List<MtconnectValidationException>();
+
+            if (string.IsNullOrEmpty(ComponentId))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    Contracts.Enums.ValidationSeverity.ERROR,
+                    $"Component MUST include a 'componentId' attribute. {documentationAttributes}"));
+            }
+
+            if (string.IsNullOrEmpty(ComponentReference))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    Contracts.Enums.ValidationSeverity.ERROR,
+                    $"Component MUST include a 'component' attribute. {documentationAttributes}"));
+            }
+
+            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
         }
     }
 }

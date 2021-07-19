@@ -39,31 +39,31 @@ namespace MtconnectCore.Standard.Documents
             Source = xDoc;
 
             DocumentElementName = Source.DocumentElement.LocalName;
-            MtconnectDocumentTypeMismatch<THeader, TItem> typeError;
+            MtconnectDocumentTypeMismatchException<THeader, TItem> typeError;
             switch (DocumentElementName)
             {
                 case "MTConnectStreams":
                     if (Type != DocumentTypes.Streams)
                     {
-                        Logger.Error(new MtconnectDocumentTypeMismatch<THeader, TItem>(this));
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
                     }
                     break;
                 case "MTConnectError":
                     if (Type != DocumentTypes.Errors)
                     {
-                        Logger.Error(new MtconnectDocumentTypeMismatch<THeader, TItem>(this));
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
                     }
                     break;
                 case "MTConnectAssets":
                     if (Type != DocumentTypes.Assets)
                     {
-                        Logger.Error(new MtconnectDocumentTypeMismatch<THeader, TItem>(this));
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
                     }
                     break;
                 case "MTConnectDevices":
                     if (Type != DocumentTypes.Devices)
                     {
-                        Logger.Error(new MtconnectDocumentTypeMismatch<THeader, TItem>(this));
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
                     }
                     break;
                 default:
@@ -92,9 +92,9 @@ namespace MtconnectCore.Standard.Documents
             if (ctor != null)
             {
                 header = (THeader)ctor.Invoke(new object[] { xNode, nsmgr });
-                if (!header.IsValid())
+                if (!header.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
                 {
-                    Logger.Warn($"[Invalid Stream] Header is not formatted properly, refer to Part 1 Section 6.5 of MTConnect Standard.");
+                    Logger.Warn($"[Invalid Stream] Header:\r\n{ExceptionHelper.ToString(validationExceptions)}");
                     return false;
                 }
                 _header = header;

@@ -48,8 +48,10 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// </summary>
         public string TagName { get; set; }
 
+        /// <inheritdoc/>
         public Event() : base() { }
 
+        /// <inheritdoc/>
         public Event(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr)
         {
             Value = xNode.InnerText;

@@ -19,8 +19,10 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectNodeAttribute(HeaderAttributes.NEXT_SEQUENCE)]
         public int NextSequence { get; set; }
 
+        /// <inheritdoc/>
         public StreamsDocumentHeader() : base() { }
 
+        /// <inheritdoc/>
         public StreamsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE) { }
     }
 }

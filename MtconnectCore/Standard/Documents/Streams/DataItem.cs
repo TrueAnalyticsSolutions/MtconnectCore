@@ -1,7 +1,10 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Errors;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -32,15 +35,40 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectNodeAttribute(SampleAttributes.SEQUENCE)]
         public int Sequence { get; set; }
 
+        /// <inheritdoc/>
         public DataItem() { }
 
+        /// <inheritdoc/>
         public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE) { }
 
-        public override bool IsValid()
+        /// <inheritdoc/>
+        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            return !string.IsNullOrEmpty(DataItemId)
-                && Timestamp != null
-                && Sequence > 0;
+            const string documentationAttributes = "See Part 1 Section 5 of the MTConnect standard.";
+            validationErrors = new List<MtconnectValidationException>();
+
+            if (string.IsNullOrEmpty(DataItemId))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    Contracts.Enums.ValidationSeverity.ERROR,
+                    $"Data entity MUST include a 'dataItemId' attribute. {documentationAttributes}"));
+            }
+
+            if (Timestamp == null)
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    Contracts.Enums.ValidationSeverity.ERROR,
+                    $"Data entity MUST include a 'timestamp' attribute. {documentationAttributes}"));
+            }
+
+            if (Sequence == default(int))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    Contracts.Enums.ValidationSeverity.ERROR,
+                    $"Data entity MUST include a 'sequence' attribute. {documentationAttributes}"));
+            }
+
+            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
         }
     }
 }

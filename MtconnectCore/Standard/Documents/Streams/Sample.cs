@@ -72,8 +72,10 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// </summary>
         public string TagName { get; set; }
 
+        /// <inheritdoc/>
         public Sample() : base() { }
 
+        /// <inheritdoc/>
         public Sample(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr)
         {
             Value = xNode.InnerText;

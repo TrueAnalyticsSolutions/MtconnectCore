@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Errors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +10,22 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Contracts
 {
+    /// <summary>
+    /// Represents the most basic form of a MTConnect Response Document XML node. Used for parsing a MTConnect Response Document.
+    /// </summary>
     public abstract class MtconnectNode : IMtconnectNode
     {
+        /// <summary>
+        /// Initializes a blank <see cref="IMtconnectNode"/> entity.
+        /// </summary>
         public MtconnectNode() { }
 
+        /// <summary>
+        /// Initializes a <see cref="IMtconnectNode"/> entity from a MTConnect Response Document.
+        /// </summary>
+        /// <param name="xNode">Reference to a <see cref="XmlNode"/> as part of a larger MTConnect Response Document.</param>
+        /// <param name="nsmgr">Reference to the </param>
+        /// <param name="defaultNamespace"></param>
         public MtconnectNode(XmlNode xNode, XmlNamespaceManager nsmgr, string defaultNamespace)
         {
             Type thisType = this.GetType();
@@ -71,7 +84,6 @@ namespace MtconnectCore.Standard.Contracts
                     if (tryAddMethod == null)
                     {
                         throw new MissingMethodException($"Cannot find method '{elemsAttr.TryAddMethod}'");
-                        continue;
                     }
 
                     XmlNodeList xElems;// = xNode.HasChildNodes ? xNode.SelectNodes(elemsAttr.GetName(), nsmgr, "m") : null;
@@ -128,8 +140,10 @@ namespace MtconnectCore.Standard.Contracts
             }
         }
 
-        public virtual bool IsValid()
+        /// <inheritdoc/>
+        public virtual bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            validationErrors = new List<MtconnectValidationException>();
             return true;
         }
     }

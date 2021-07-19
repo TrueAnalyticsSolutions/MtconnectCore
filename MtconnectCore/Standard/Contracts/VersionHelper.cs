@@ -62,7 +62,7 @@ namespace MtconnectCore.Standard.Contracts
 
         public static MtconnectVersions GetVersionFromHeader(XmlDocument xDoc)
         {
-            InvalidMtconnectVersion invalidVersionError;
+            InvalidMtconnectVersionException invalidVersionError;
             // Try to get the MTConnect Version and set the appropriate namespace table
             XmlNode xHeader = xDoc?.ChildNodes[1]?.ChildNodes[0];
             if (xHeader != null)
@@ -73,11 +73,11 @@ namespace MtconnectCore.Standard.Contracts
                 {
                     return mtconnectVersion.Value;
                 }
-                invalidVersionError = new InvalidMtconnectVersion($"Could not determine appropriate MTConnect Version from '{strMtconnectVersion}'.");
+                invalidVersionError = new InvalidMtconnectVersionException($"Could not determine appropriate MTConnect Version from '{strMtconnectVersion}'.");
                 Logger.Error(invalidVersionError);
                 throw invalidVersionError;
             }
-            invalidVersionError = new InvalidMtconnectVersion("Could not find Header to determine MTConnect Version.");
+            invalidVersionError = new InvalidMtconnectVersionException("Could not find Header to determine MTConnect Version.");
             Logger.Error(invalidVersionError);
             throw invalidVersionError;
         }

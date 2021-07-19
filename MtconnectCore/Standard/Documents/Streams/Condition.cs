@@ -90,8 +90,10 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// </summary>
         public ConditionElements TagName { get; set; }
 
+        /// <inheritdoc/>
         public Condition() : base() { }
 
+        /// <inheritdoc/>
         public Condition(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr)
         {
             Value = xNode.InnerText;

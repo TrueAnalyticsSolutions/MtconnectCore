@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Contracts
 {
-    public static partial class XmlHelper
+    internal static partial class XmlHelper
     {
         private class EmptyNodeList : XmlNodeList
         {
