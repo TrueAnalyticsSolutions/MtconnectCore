@@ -56,13 +56,13 @@ public class Program
     </div>
     <p>Parsed Document (in JSON)</p>
     <div>
-        @(ExampleDocument != null ? Newtonsoft.Json.JsonConvert.SerializeObject(ExampleDocument) : "No Content")
+        @(ExampleDocument)
     </div>
 </div>
 
 @code {
 
-    private MtconnectCore.Standard.Documents.IResponseDocument ExampleDocument;
+    private string ExampleDocument = "No Content";
 
     private async Task LoadFile(InputFileChangeEventArgs e) {
         using(var ms = new System.IO.MemoryStream()) {
@@ -71,8 +71,15 @@ public class Program
                 var exampleUpload = new System.Xml.XmlDocument();
                 string contents = await reader.ReadToEndAsync();
                 exampleUpload.LoadXml(contents);
-                var mtcDoc = new MtconnectCore.Standard.Documents.Devices.DevicesDocument(exampleUpload);
-                ExampleDocument = mtcDoc;
+                try
+                {
+                    var mtcDoc = new MtconnectCore.Standard.Documents.Devices.DevicesDocument(exampleUpload);
+                    ExampleDocument = Newtonsoft.Json.JsonConvert.SerializeObject(mtcDoc, Newtonsoft.Json.Formatting.Indented);
+                }
+                catch (Exception ex)
+                {
+                    ExampleDocument = ex.Message;
+                }
             }
         }
     }
