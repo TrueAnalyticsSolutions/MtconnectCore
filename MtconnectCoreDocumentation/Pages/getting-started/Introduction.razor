@@ -51,17 +51,22 @@ public class Program
     </div>
     <h3>Test Parsing</h3>
     <div>
-        <label>Upload a Devices XML document:</label>
+        <label>Upload a MTConnect Response Document:</label>
         <InputFile OnChange="@LoadFile" />
     </div>
     <p>Parsed Document (in JSON)</p>
     <div>
-        @(ExampleDocument)
+    <p><strong>Document Type:</strong> @(ResponseDocumentType)</p>
+    <pre>
+        <code>
+            @(ExampleDocument)
+        </code>
+    </pre>
     </div>
 </div>
 
 @code {
-
+    private string ResponseDocumentType = "";
     private string ExampleDocument = "No Content";
 
     private async Task LoadFile(InputFileChangeEventArgs e) {
@@ -71,13 +76,20 @@ public class Program
                 var exampleUpload = new System.Xml.XmlDocument();
                 string contents = await reader.ReadToEndAsync();
                 exampleUpload.LoadXml(contents);
+                var service = new MtconnectCore.MtconnectAgentService(null);
                 try
                 {
-                    var mtcDoc = new MtconnectCore.Standard.Documents.Devices.DevicesDocument(exampleUpload);
-                    ExampleDocument = Newtonsoft.Json.JsonConvert.SerializeObject(mtcDoc, Newtonsoft.Json.Formatting.Indented);
+                    if (service.TryParse(exampleUpload, out MtconnectCore.Standard.Documents.IResponseDocument mtcDoc))
+                    {
+                        ResponseDocumentType = mtcDoc.Type.ToString();
+                        ExampleDocument = Newtonsoft.Json.JsonConvert.SerializeObject(mtcDoc, Newtonsoft.Json.Formatting.Indented);
+                    } else {
+                        ExampleDocument = "Couldn't parse document into MTConnect Response Document.";
+                    }
                 }
                 catch (Exception ex)
                 {
+                    ResponseDocumentType = "Invalid";
                     ExampleDocument = ex.Message;
                 }
             }
