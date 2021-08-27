@@ -1933,7 +1933,7 @@
       "url": "_framework\/Microsoft.AspNetCore.Components.dll"
     },
     {
-      "hash": "sha256-+1sSaKqHl\/rAdOc7FF4dT25Gqkb5\/BJyEGuYsgGnstc=",
+      "hash": "sha256-Wa6J95aExR0PJ1bBA2Ntn8gaJLAPdxCN1VGhxCuOiJc=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.dll"
     },
     {
@@ -1993,11 +1993,11 @@
       "url": "_framework\/System.IO.Pipelines.dll"
     },
     {
-      "hash": "sha256-7h5EwQp4O3FAKA7Bpuv4D+Q2TsCo+3Qt65+G+De\/DvI=",
+      "hash": "sha256-MY20QUcuTwS4+jWSHQaiwy6lKmnVOyNdrK8kHt3njuI=",
       "url": "_framework\/MtconnectCore.dll"
     },
     {
-      "hash": "sha256-ZYQ7vjwur+4y\/MpMg9p1BeYV4Ho4lgfF7g86otD2i2M=",
+      "hash": "sha256-RykC+uBqN5XWzdN5NF62ICEaUoJ0lgCG31XH2lPQ3uU=",
       "url": "_framework\/MtconnectCoreDocumentation.dll"
     },
     {
@@ -2129,11 +2129,11 @@
       "url": "_framework\/System.Text.RegularExpressions.dll"
     },
     {
-      "hash": "sha256-rxNW9ktX8HTmm37NpA45lyH5mMHl5b2QZQcExNc2vTE=",
+      "hash": "sha256-TmP3UnJLgFJ0qlFUELolL4ZMd0NxJLtoQpEpKhPzZwM=",
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
-      "hash": "sha256-yx8wN\/nPqaTvoga2d0Zc+TlCFepR+lU\/3tfDf9EHj5g=",
+      "hash": "sha256-nanty6Fn1Jhbi3F+HLFnz6mCUEkY5PkEK4cLvrRjQxM=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -2141,5 +2141,5 @@
       "url": "_framework\/blazor.webassembly.js"
     }
   ],
-  "version": "Hp4VTyC+"
+  "version": "FGkHkm+H"
 };
