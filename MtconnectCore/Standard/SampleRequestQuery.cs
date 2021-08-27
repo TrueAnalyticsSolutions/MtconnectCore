@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MtconnectCore.Standard
 {
-    public class SampleRequestQuery : RequestQuery
+    public class SampleRequestQuery : IRequestQuery
     {
         /// <summary>
         /// An XPath that defines specific information or a set of information to be included in an MTConnectStreams Response Document. See Part 1 Section 8.3.3.2 of MTConnect specification.
@@ -32,6 +32,7 @@ namespace MtconnectCore.Standard
 
         public SampleRequestQuery() { }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             List<string> parameters = new List<string>();
@@ -54,7 +55,8 @@ namespace MtconnectCore.Standard
             return string.Join('&', parameters.ToArray());
         }
 
-        public override bool Validate(out Exception exception)
+        /// <inheritdoc/>
+        public bool Validate(out Exception exception)
         {
             exception = null;
             // No viable validation for Path parameter

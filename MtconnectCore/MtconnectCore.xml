@@ -103,6 +103,12 @@
             Defines the maximum number of Asset Documents to return in an MTConnectAssets Response Document. See Part 1 Section 8.3.4.2 of MTConnect specification.
             </summary>
         </member>
+        <member name="M:MtconnectCore.Standard.AssetRequestQuery.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.AssetRequestQuery.Validate(System.Exception@)">
+            <inheritdoc/>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute">
             <summary>
             An attribute used as a shortcut to deserialize a MTConnect Response Document.
@@ -1543,6 +1549,12 @@
             The Agent MUST continuously publish Response Documents when the query parameters include interval using the value as the period between adjacent publications. See Part 1 Section 8.3.2.2 of MTConnect specification.
             </summary>
         </member>
+        <member name="M:MtconnectCore.Standard.CurrentRequestQuery.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.CurrentRequestQuery.Validate(System.Exception@)">
+            <inheritdoc/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Key">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.KEY"/>
         </member>
@@ -2784,6 +2796,24 @@
             Occurance: 0..1
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.IRequestQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.IRequestQuery.Validate(System.Exception@)">
+            <summary>
+            Determines whether the address and query parameters are formatted according to the MTConnect standard.
+            </summary>
+            <param name="exception">Catches an exception</param>
+            <returns>Flag for whether or not the query, as a whole, is formatted correctly.</returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.IRequestQuery.ToString">
+            <summary>
+            Builds the URI for the request
+            </summary>
+            <returns>String representing the URI</returns>
+        </member>
         <member name="P:MtconnectCore.Standard.SampleRequestQuery.Path">
             <summary>
             An XPath that defines specific information or a set of information to be included in an MTConnectStreams Response Document. See Part 1 Section 8.3.3.2 of MTConnect specification.
@@ -2808,6 +2838,12 @@
             <summary>
             Sets the time period for the heartbeat function in an Agent. The value for heartbeat represents the amount of time after a Response Document has been published until a new Response Document MUST be published, even when no new data is available. See Part 1 Section 8.3.3.2 of MTConnect specification.
             </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.SampleRequestQuery.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.SampleRequestQuery.Validate(System.Exception@)">
+            <inheritdoc/>
         </member>
     </members>
 </doc>

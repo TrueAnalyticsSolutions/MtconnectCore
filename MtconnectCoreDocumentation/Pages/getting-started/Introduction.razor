@@ -49,4 +49,31 @@ public class Program
     </code>
 </pre>
     </div>
+    <h3>Test Parsing</h3>
+    <div>
+        <label>Upload a Devices XML document:</label>
+        <InputFile OnChange="@LoadFile" />
+    </div>
+    <p>Parsed Document (in JSON)</p>
+    <div>
+        @(ExampleDocument != null ? Newtonsoft.Json.JsonConvert.SerializeObject(ExampleDocument) : "No Content")
+    </div>
 </div>
+
+@code {
+
+    private MtconnectCore.Standard.Documents.IResponseDocument ExampleDocument;
+
+    private async Task LoadFile(InputFileChangeEventArgs e) {
+        using(var ms = new System.IO.MemoryStream()) {
+            using (var reader = new System.IO.StreamReader(e.File.OpenReadStream()))
+            {
+                var exampleUpload = new System.Xml.XmlDocument();
+                string contents = await reader.ReadToEndAsync();
+                exampleUpload.LoadXml(contents);
+                var mtcDoc = new MtconnectCore.Standard.Documents.Devices.DevicesDocument(exampleUpload);
+                ExampleDocument = mtcDoc;
+            }
+        }
+    }
+}

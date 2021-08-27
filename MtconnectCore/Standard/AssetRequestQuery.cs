@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MtconnectCore.Standard
 {
-    public class AssetRequestQuery : RequestQuery
+    public class AssetRequestQuery : IRequestQuery
     {
         /// <summary>
         /// Defines the type of MTConnect Asset to be returned in the MTConnectAssets Response Document. See Part 1 Section 8.3.4.2 of MTConnect specification.
@@ -22,6 +22,7 @@ namespace MtconnectCore.Standard
 
         public AssetRequestQuery() { }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             List<string> parameters = new List<string>();
@@ -40,7 +41,8 @@ namespace MtconnectCore.Standard
             return string.Join('&', parameters.ToArray());
         }
 
-        public override bool Validate(out Exception exception)
+        /// <inheritdoc/>
+        public bool Validate(out Exception exception)
         {
             exception = null;
             // No viable validation for Type parameter
