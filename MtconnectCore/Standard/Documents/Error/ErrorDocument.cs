@@ -8,6 +8,7 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Error
 {
+    /// <inheritdoc />
     public class ErrorDocument : ResponseDocument<ErrorDocumentHeader, Error>
     {
         /// <inheritdoc/>
@@ -29,6 +30,7 @@ namespace MtconnectCore.Standard.Documents.Error
             _header = new ErrorDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager);
         }
 
+        /// <inheritdoc />
         public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Error item)
         {
             Logger.Verbose("Reading Error {XnodeKey}", xNode.TryGetAttribute(ErrorAttributes.ERROR_CODE));

@@ -23,19 +23,9 @@ namespace MtconnectCoreExample.Views
         {
             using (MtconnectAgentService mtcService = new MtconnectAgentService(Source.ToUri()))
             {
-                DevicesDocument mtcDocument = mtcService.Probe().Result;
-                if (mtcDocument is DevicesDocument)
-                {
-                    Consoul.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mtcDocument), ConsoleColor.DarkGray);
-
-                    Consoul.Write("Done!", ConsoleColor.Green);
-                    Consoul.Wait();
-                }
-                else
-                {
-                    Consoul.Write($"Unexpected document type", ConsoleColor.Red);
-                    Consoul.Wait();
-                }
+                IResponseDocument mtcDocument = mtcService.Probe().Result;
+                mtcDocument.DisplayDocumentAndValidate<DevicesDocument>();
+                Consoul.Wait();
             }
         }
     }

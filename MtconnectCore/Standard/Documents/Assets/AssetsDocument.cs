@@ -10,15 +10,21 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Assets
 {
-    public class AssetsDocument : ResponseDocument<AssetsDocumentHeader, Asset> {
+    /// <inheritdoc />
+    public class AssetsDocument : ResponseDocument<AssetsDocumentHeader, Asset>
+    {
+        /// <inheritdoc />
         public override DocumentTypes Type => DocumentTypes.Assets;
 
+        /// <inheritdoc />
         public override string DefaultNamespace => "m";
 
+        /// <inheritdoc />
         public override string DataElementName => AssetsElements.ASSETS.ToPascalCase();
 
         [MtconnectNodeElements(AssetsElements.HEADER, nameof(TrySetHeader), XmlNamespace = "m")]
         internal override AssetsDocumentHeader _header { get; set; }
+        /// <inheritdoc />
         public AssetsDocumentHeader Header => (AssetsDocumentHeader)_header;
 
         /// <inheritdoc />
@@ -27,6 +33,7 @@ namespace MtconnectCore.Standard.Documents.Assets
             _header = new AssetsDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager);
         }
 
+        /// <inheritdoc />
         public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Asset item) {
             Logger.Verbose("Reading Assets");
             switch (xNode.LocalName)

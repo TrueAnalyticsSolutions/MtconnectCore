@@ -154,6 +154,31 @@
             <param name="value">Value to compare against the enum.</param>
             <returns>Flag for whether or not the <paramref name="value"/> was found in the enum.</returns>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.INDICES">
+            <summary>
+            The number or numbers representing the individual cutting item or items on the tool.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.ITEM_ID">
+            <summary>
+            The manufacturer identifier of this cutting item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.GRADE">
+            <summary>
+            The material composition for this cutting item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.MANUFACTURERS">
+            <summary>
+            The manufacturers of the cutting item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemsAttributes.COUNT">
+            <summary>
+            The number of cutting items.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolAttributes.ASSET_ID">
             <summary>
             The unique identifier of the instance of this tool. The unique identifier of the instance of this tool. This will be the same as the toolId and serialNumber in most cases. The assetId SHOULD be the combination of the toolId and serialNumber as in toolId.serialNumber or an equivalent implementation dependent identification scheme.
@@ -189,6 +214,31 @@
             Format – EXPRESS, XML, TEXT, or UNDEFINED. Default: XML
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.TYPE">
+            <summary>
+            The type of tool life being accumulated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.COUNT_DIRECTION">
+            <summary>
+            Indicates if the tool life counts from zero to maximum or maximum to zero, The values MUST be one of UP or DOWN.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.WARNING">
+            <summary>
+            The point at which a tool life warning will be raised.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.LIMIT">
+            <summary>
+            The end of life limit for this tool. If the countDirection is DOWN, the point at which this tool should be expired, usually zero. If the countDirection is UP, this is the upper limit for which this tool should be expired.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.INITIAL">
+            <summary>
+            The initial life of the tool when it is new.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.LocationAttributes.TYPE">
             <summary>
             The type of location being identified.
@@ -202,6 +252,256 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.LocationAttributes.NEGATIVE_OVERLAP">
             <summary>
             The number of location at lower index values from this location.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.SIGNIFICANT_DIGITS">
+            <summary>
+            The number of significant digits in the reported value. This is used by applications to determine accuracy of values. This MAY be specified for all numeric values.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.UNITS">
+            <summary>
+            The units for the measurements. MTConnect defines all the units for each measurement, so this is mainly for documentation sake. See MTConnect Part 2 – Components and Data Items section 4.1.5: units for the full list. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.NATIVE_UNITS">
+            <summary>
+            The units the measurement was originally recorded in. This is only necessary if they differ from units. See MTConnect Part 2 – Components and Data Items section 4.1.8: nativeUnits for the full list. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.CODE">
+            <summary>
+            A shop specific code for this measurement. ISO 13399 codes MAY be used to for these codes as well.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.MAXIMUM">
+            <summary>
+            The maximum value for this measurement. Exceeding this value would indicate the tool is not usable.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.MINIMUM">
+            <summary>
+            The minimum value for this measurement. Exceeding this value would indicate the tool is not usable.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.NOMINAL">
+            <summary>
+            The as advertised value for this measurement.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.MAXIMUM">
+            <summary>
+            The upper bound for the tool’s target spindle speed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.MINIMUM">
+            <summary>
+            The lower bound for the tools spindle speed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.NOMINAL">
+            <summary>
+            The nominal speed the tool is designed to operate at.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ReconditionCountAttributes.MAXIMUM_COUNT">
+            <summary>
+            The maximum number of times this tool may be reconditioned.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.TYPE">
+            <summary>
+            The type of tool life being accumulated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.COUNT_DIRECTION">
+            <summary>
+            Indicates if the tool life counts from zero to maximum or maximum to zero.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.WARNING">
+            <summary>
+            The point at which a tool life warning will be raised.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.LIMIT">
+            <summary>
+            The end of life limit for this tool. If the countDirection is DOWN, the point at which this tool should be expired, usually zero. If the countDirection is UP, this is the upper limit for which this tool should be expired. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.INITIAL">
+            <summary>
+            The initial life of the tool when it is new. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.CUTTING_REFERENCE_POINT">
+            <summary>
+            The theoretical sharp point of the cutting tool from which the major functional dimensions are taken. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.CUTTING_EDGE_LENGTH">
+            <summary>
+            The theoretical length of the cutting edge of a cutting item over sharp corners.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.DRIVE_ANGLE">
+            <summary>
+            Angle between the driving mechanism locator on a tool item and the main cutting edge
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.FLANGE_DIAMETER">
+            <summary>
+            The dimension between two parallel tangents on the outside edge of a flange.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.FUNCTIONAL_WIDTH">
+            <summary>
+            The distance between the cutting reference point and the rear backing surface of a turning tool or the axis of a boring bar. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.INCRIBED_CIRCLE_DIAMETER">
+            <summary>
+            The diameter of a circle to which all edges of a equilateral and round regular insert are tangential.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.POINT_ANGLE">
+            <summary>
+            The angle between the major cutting edge and the same cutting edge rotated by 180 degrees about the tool axis.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.TOOL_CUTTING_EDGE_ANGLE">
+            <summary>
+            The angle between the tool cutting edge plane and the tool feed plane measured in a plane parallel the xy-plane. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.TOOL_LEAD_ANGLE">
+            <summary>
+            The angle between the tool cutting edge plane and a plane perpendicular to the tool feed plane measured in a plane parallel the xy-plane. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.TOOL_ORIENTATION">
+            <summary>
+            The angle of the tool with respect to the workpiece for a given process. The value is application specific. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.WIPER_EDGE_LENGTH">
+            <summary>
+            The measure of the length of a wiper edge of a cutting item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.STEP_DIAMETER_LENGTH">
+            <summary>
+            The length of a portion of a stepped tool that is related to a corresponding cutting diameter measured from the cutting reference point of that cutting diameter to the point on the next cutting edge at which the diameter starts to change. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.STEP_INCLUDED_ANGLE">
+            <summary>
+            The angle between a major edge on a step of a stepped tool and the same cutting edge rotated 180 degrees about its tool axis. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.CUTTING_DIAMETER">
+            <summary>
+            The nominal radius of a rounded corner measured in the XY-plane. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.CUTTING_HEIGHT">
+            <summary>
+            The nominal radius of a rounded corner measured in the XY-plane. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.CORNER_RADIUS">
+            <summary>
+            The nominal radius of a rounded corner measured in the X Y-plane.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.WEIGHT">
+            <summary>
+            The total weight of the cutting tool in grams. The force exerted by the mass of the cutting tool. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.FUNCTIONAL_LENGTH">
+            <summary>
+            The distance from the gauge plane or from the end of the shank of the cutting tool, if a gauge plane does not exist, to the cutting reference point determined by the main function of the tool. This measurement will be with reference to the Cutting Tool and MUST NOT exist without a cutting tool. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.CHAMFER_FLAT_LENGTH">
+            <summary>
+            The flat length of a chamfer.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.CHAMFER_WIDTH">
+            <summary>
+            The width of the chamfer.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.INSERT_WIDTH">
+            <summary>
+            W1 is used for the insert width when an inscribed circle diameter is not practical.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.BODY_DIAMETER_MAX">
+            <summary>
+            The largest diameter of the body of a tool item. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.BODY_LENGTH_MAX">
+            <summary>
+            The distance measured along the X axis from that point of the item closest to the workpiece, including the cutting item for a tool item but excluding a protruding locking mechanism for an adaptive item, to either the front of the flange on a flanged body or the beginning of the connection interface feature on the machine side for cylindrical or prismatic shanks.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.DEPTH_OF_CUT_MAX">
+            <summary>
+            The maximum engagement of the cutting edge or edges with the workpiece measured perpendicular to the feed motion.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.CUTTING_DIAMETER_MAX">
+            <summary>
+            The maximum diameter of a circle on which the defined point Pk of each of the master inserts is located on a tool item. The normal of the machined peripheral surface points towards the axis of the cutting tool.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.FLANGE_DIAMETER_MAX">
+            <summary>
+            The dimension between two parallel tangents on the outside edge of a flange.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.OVERALL_TOOL_LENGTH">
+            <summary>
+            The largest length dimension of the cutting tool including the master insert where applicable. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.SHANK_DIAMETER">
+            <summary>
+            The dimension of the diameter of a cylindrical portion of a tool item or an adaptive item that can participate in a connection. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.SHANK_HEIGHT">
+            <summary>
+            The dimension of the height of the shank.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.SHANK_LENGTH">
+            <summary>
+            The dimension of the length of the shank. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.USABLE_LENGTH_MAX">
+            <summary>
+            Maximum length of a cutting tool that can be used in a particular cutting operation including the non-cutting portions of the tool. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.PROTRUDING_LENGTH">
+            <summary>
+            The dimension from the yz-plane to the furthest point of the tool item or adaptive item measured in the -X direction. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.WEIGHT">
+            <summary>
+            The total weight of the cutting tool in grams. The force exerted by the mass of the cutting tool. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolMeasurementSubTypes.FUNCTIONAL_LENGTH">
+            <summary>
+            The distance from the gauge plane or from the end of the shank to the furthest point on the tool, if a gauge plane does not exist, to the cutting reference point determined by the main function of the tool. The CuttingTool functional length will be the length of the entire tool, not a single cutting item. Each CuttingItem can have an independent FunctionalLength represented in its measurements.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolStatusTypes.NEW">
@@ -262,6 +562,26 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingToolStatusTypes.UNKNOWN">
             <summary>
             The cutting tool is an indeterminate state. This is the default value. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingItemElements.DESCRIPTION">
+            <summary>
+            A free-form description of the cutting item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingItemElements.LOCUS">
+            <summary>
+            A free form description of the location on the cutting tool.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingItemElements.ITEM_LIFE">
+            <summary>
+            The life of this cutting item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingItemElements.MEASUREMENTS">
+            <summary>
+            A collection of measurements relating to this cutting item.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolElements.DESCRIPTION">
@@ -334,6 +654,31 @@
             An optional set of individual cutting items.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ItemLifeCountDirectionTypes.DOWN">
+            <summary>
+            The tool life counts down from the maximum to zero.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ItemLifeCountDirectionTypes.UP">
+            <summary>
+            The tool life counts up from zero to the maximum. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ItemLifeTypes.MINUTES">
+            <summary>
+            The tool life measured in minutes. All units for minimum, maximum,  and warningLevel MUST be provided in minutes. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ItemLifeTypes.PART_COUNT">
+            <summary>
+            The tool life measured in parts. All units for minimum, maximum, and warningLevel MUST be provided supplied as the number of parts.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ItemLifeTypes.WEAR">
+            <summary>
+            The tool life measured in tool wear. Wear MUST be provided in millimeters as an offset to nominal. All units for minimum, maximum, and warningLevel MUST be given as millimeter offsets as well. The standard will only consider dimensional wear at this time.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.LocationTypes.POT">
             <summary>
             The number of the pot in the tool handling system.
@@ -347,6 +692,31 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.LocationTypes.CRIB">
             <summary>
             The location with regard to a tool crib. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ToolLifeCountDirectionTypes.DOWN">
+            <summary>
+            The tool life counts down from the maximum to zero.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ToolLifeCountDirectionTypes.UP">
+            <summary>
+            The tool life counts up from zero to the maximum. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ToolLifeTypes.MINUTES">
+            <summary>
+            The tool life measured in minutes. All units for minimum, maximum,  and warningLevel MUST be provided in minutes. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ToolLifeTypes.PART_COUNT">
+            <summary>
+            The tool life measured in parts. All units for minimum, maximum, and warningLevel MUST be provided supplied as the number of parts.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ToolLifeTypes.WEAR">
+            <summary>
+            The tool life measured in tool wear. Wear MUST be provided in millimeters as an offset to nominal. All units for minimum, maximum, and warningLevel MUST be given as millimeter offsets as well. The standard will only consider dimensional wear at this time.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes">
@@ -1713,6 +2083,11 @@
             Represents the most basic form of a MTConnect Response Document XML node. Used for parsing a MTConnect Response Document.
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNode.SourceNode">
+            <summary>
+            Reference to the Source XmlNode.
+            </summary>
+        </member>
         <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor">
             <summary>
             Initializes a blank <see cref="T:MtconnectCore.Standard.Contracts.IMtconnectNode"/> entity.
@@ -1759,98 +2134,25 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc />
         </member>
-        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription">
-            <summary>
-            An element that can contain any descriptive content.
-            </summary>
-            <remarks>See Part 4 Section 6.1.3 of the MTConnect specification</remarks>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.Content">
-            <summary>
-            The content of the description can be text or XML elements. This is the inner text of the XML element.
-            </summary>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.#ctor">
-            <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc/>
-        </member>
-        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition">
+        <member name="T:MtconnectCore.Standard.Documents.Assets.AssetsDocument">
             <inheritdoc />
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.Format">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolDefinitionAttributes.FORMAT"/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.Content">
-            <summary>
-            The content of the description can be text or XML elements. This is the outer XML of the XML element.
-            </summary>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.#ctor">
-            <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc/>
-        </member>
-        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle">
+        <member name="P:MtconnectCore.Standard.Documents.Assets.AssetsDocument.Type">
             <inheritdoc />
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.CutterStatus">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.CUTTER_STATUS"/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.Location">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.LOCATION"/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ProgramToolGroup">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.PROGRAM_TOOL_GROUP"/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ProgramToolNumber">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.PROGRAM_TOOL_NUMBER"/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.#ctor">
+        <member name="P:MtconnectCore.Standard.Documents.Assets.AssetsDocument.DefaultNamespace">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="P:MtconnectCore.Standard.Documents.Assets.AssetsDocument.DataElementName">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc />
-        </member>
-        <member name="T:MtconnectCore.Standard.Documents.Assets.CutterStatus">
-            <inheritdoc />
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.#ctor">
-            <inheritdoc />
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc />
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc />
-        </member>
-        <member name="T:MtconnectCore.Standard.Documents.Assets.Location">
-            <inheritdoc />
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.Location.Type">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.LocationAttributes.TYPE"/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.Location.PositiveOverlap">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.LocationAttributes.POSITIVE_OVERLAP"/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.Location.NegativeOverlap">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.LocationAttributes.NEGATIVE_OVERLAP"/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.#ctor">
-            <inheritdoc />
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc />
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="P:MtconnectCore.Standard.Documents.Assets.AssetsDocument.Header">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocument.#ctor(System.Xml.XmlDocument)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocument.TryAddItem(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Documents.Assets.Asset@)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader">
@@ -1873,6 +2175,69 @@
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.CutterStatus">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingItem">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingItem.Indices">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.INDICES"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingItem.ItemId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.ITEM_ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingItem.Manufacturers">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.MANUFACTURERS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingItem.Grade">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.GRADE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingItem.Description">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingItemElements.DESCRIPTION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingItem.Locus">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingItemElements.LOCUS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItem.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingItems">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingItems.Count">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemsAttributes.COUNT"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItems.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItems.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
             <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingTool.AssetId">
@@ -1910,6 +2275,238 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingTool.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.Format">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolDefinitionAttributes.FORMAT"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.Content">
+            <summary>
+            The content of the description can be text or XML elements. This is the outer XML of the XML element.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription">
+            <summary>
+            An element that can contain any descriptive content.
+            </summary>
+            <remarks>See Part 4 Section 6.1.3 of the MTConnect specification</remarks>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.Content">
+            <summary>
+            The content of the description can be text or XML elements. This is the inner text of the XML element.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.CutterStatus">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.CUTTER_STATUS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.Location">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.LOCATION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ReconditionCount">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.RECONDITION_COUNT"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ToolLife">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.TOOL_LIFE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ProgramToolGroup">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.PROGRAM_TOOL_GROUP"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ProgramToolNumber">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.PROGRAM_TOOL_NUMBER"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ProcessSpindleSpeed">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.PROCESS_SPINDLE_SPEED"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ProcessFeedRate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.PROCESS_FEED_RATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.ConnectionCodeMachineSide">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.CONNECTION_CODE_MACHINE_SIDE"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.ItemLife">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ItemLife.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ItemLife.CountDirection">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.COUNT_DIRECTION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ItemLife.Limit">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.LIMIT"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ItemLife.Initial">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.INITIAL"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.Location">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Location.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.LocationAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Location.PositiveOverlap">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.LocationAttributes.POSITIVE_OVERLAP"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Location.NegativeOverlap">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.LocationAttributes.NEGATIVE_OVERLAP"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.Measurement">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Measurement.Code">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.CODE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Measurement.Maximum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.MAXIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Measurement.Minimum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.MINIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Measurement.Nominal">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.NOMINAL"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Measurement.SignificantDigits">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.SIGNIFICANT_DIGITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Measurement.Units">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.UNITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Measurement.NativeUnits">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.MeasurementAttributes.NATIVE_UNITS"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Measurement.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Measurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate.Maximum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.MAXIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate.Minimum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.MINIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate.Nominal">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.NOMINAL"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed.Maximum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.MAXIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed.Minimum">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.MINIMUM"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed.Nominal">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ProcessSpindleSpeedAttributes.NOMINAL"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.ReconditionCount">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ReconditionCount.MaximumCount">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ReconditionCountAttributes.MAXIMUM_COUNT"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ReconditionCount.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ReconditionCount.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Assets.ToolLife">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ToolLife.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ToolLife.CountDirection">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.COUNT_DIRECTION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ToolLife.Limit">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.LIMIT"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ToolLife.Initial">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.INITIAL"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Key">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.KEY"/>
@@ -2403,8 +3000,26 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc/>
         </member>
+        <member name="T:MtconnectCore.Standard.Documents.Devices.DevicesDocument">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocument.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocument.DefaultNamespace">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocument.DataElementName">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocument.Header">
+            <inheritdoc />
+        </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocument.#ctor(System.Xml.XmlDocument)">
             <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocument.TryAddItem(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Documents.Devices.Device@)">
+            <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader">
             <inheritdoc/>
@@ -2631,6 +3246,9 @@
             Represents the Error element of the MTConnect Standard. See Part 1, Section 9.1.2 of the MTConnect Standard
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Documents.Error.ErrorDocument">
+            <inheritdoc />
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Error.ErrorDocument.Type">
             <inheritdoc/>
         </member>
@@ -2645,6 +3263,18 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocument.#ctor(System.Xml.XmlDocument)">
             <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocument.TryAddItem(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Documents.Error.Error@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Error.ErrorDocumentHeader">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocumentHeader.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+            <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.IResponseDocument">
             <summary>
@@ -2686,6 +3316,88 @@
             <summary>
             Structural interface for a MTConnect Response Document. See Part 1 Section 6 of MTConnect specification.
             </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Items">
+            <summary>
+            Collection of <see cref="!:&lt;TItem&gt;"/> contained within a MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Type">
+            <summary>
+            Reference to the type of MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.DefaultNamespace">
+            <summary>
+            Reference to the default XML namespace that this type of MTConnect Response Document uses.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2._header">
+            <summary>
+            Internal reference to the <see cref="!:&lt;THeader&gt;"/>.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.DocumentElementName">
+            <summary>
+            Reference to the root MTConnect Response Document XML element name.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.DataElementName">
+            <summary>
+            Reference to the XML element name that contains node to be processed into <see cref="!:&lt;TItem&gt;"/>s.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.NamespaceManager">
+            <summary>
+            Global XML namespace manager for the source document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Source">
+            <summary>
+            Reference to the source MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.DocumentVersion">
+            <summary>
+            Reference to the version of MTConnect applied to the Response Document.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.#ctor(System.Xml.XmlDocument)">
+            <summary>
+            Constructs a new Response Document using a source <see cref="T:System.Xml.XmlDocument"/> from an MTConnect Agent.
+            </summary>
+            <param name="xDoc">The source MTConnect Response Document.</param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.TrySetHeader(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,`0@)">
+            <summary>
+            Safely tries to set the internal <see cref="!:&lt;THeader&gt;"/> from the source MTConnect Response Document.
+            </summary>
+            <param name="xNode">Reference to the <c>&lt;Header&gt;</c> node.</param>
+            <param name="nsmgr">Reference to a global XML namespace manager.</param>
+            <param name="header">Outputs the set <see cref="!:&lt;THeader&gt;"/>.</param>
+            <returns>Flag for whether or not the header was successfully parsed from the MTConnect Response Document into a <see cref="!:&lt;THeader&gt;"/>.</returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.TryAddItem(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,`1@)">
+            <summary>
+            Safely tries to add a <see cref="!:&lt;TItem&gt;"/> into the internal collection.
+            </summary>
+            <param name="xNode">Reference to the XML element representing an instance of <see cref="!:&lt;TItem&gt;"/>.</param>
+            <param name="nsmgr">Reference to a global XML namespace manager.</param>
+            <param name="item">Outputs the set <see cref="!:&lt;TItem&gt;"/>.</param>
+            <returns>Flag for whether or not the item was successfully parsed from the MTConnect Response Document and added to <see cref="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Items"/>.</returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.GetDocumentVersion">
+            <summary>
+            Gets the version of MTConnect that has been applied to the source MTConnect Response Document.
+            </summary>
+            <returns>The MTConnect Version applied to this MTConnect Response Document.</returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <summary>
+            Safely tries to validate the <see cref="!:&lt;THeader&gt;"/> and all <see cref="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Items"/> in this MTConnect Response Document according to the version of MTConnect.
+            </summary>
+            <param name="validationErrors">Outputs a collection of validation errors. Note that this collection may contain errors, warnings, and messages.</param>
+            <returns>Flag for whether or not any of the validation errors were of the <see cref="F:MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR"/> severity.</returns>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.ResponseDocumentHeader">
             <summary>
@@ -3032,6 +3744,30 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
             <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Streams.StreamsDocument">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.StreamsDocument.Type">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.StreamsDocument.DefaultNamespace">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.StreamsDocument.DataElementName">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.StreamsDocument.Header">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocument.#ctor(System.Xml.XmlDocument)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocument.TryAddItem(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Documents.Streams.Device@)">
+            <inheritdoc />
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader">
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor">
             <inheritdoc/>

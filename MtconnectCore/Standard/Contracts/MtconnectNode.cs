@@ -16,6 +16,11 @@ namespace MtconnectCore.Standard.Contracts
     public abstract class MtconnectNode : IMtconnectNode
     {
         /// <summary>
+        /// Reference to the Source XmlNode.
+        /// </summary>
+        internal XmlNode SourceNode { get; set; }
+
+        /// <summary>
         /// Initializes a blank <see cref="IMtconnectNode"/> entity.
         /// </summary>
         public MtconnectNode() { }
@@ -28,6 +33,8 @@ namespace MtconnectCore.Standard.Contracts
         /// <param name="defaultNamespace"></param>
         public MtconnectNode(XmlNode xNode, XmlNamespaceManager nsmgr, string defaultNamespace)
         {
+            SourceNode = xNode;
+
             Type thisType = this.GetType();
             PropertyInfo[] properties = thisType.GetProperties();
             Type nodeAttribute = typeof(MtconnectNodeAttributeAttribute);
@@ -39,11 +46,11 @@ namespace MtconnectCore.Standard.Contracts
                     string strAttributeValue;
                     if (!string.IsNullOrEmpty(attrAttr.XmlNamespace))
                     {
-                        strAttributeValue = xNode.TryGetAttribute(attrAttr.GetName(MtconnectNodeNameProcessors.CamelCase), attrAttr.XmlNamespace);
+                        strAttributeValue = SourceNode.TryGetAttribute(attrAttr.GetName(MtconnectNodeNameProcessors.CamelCase), attrAttr.XmlNamespace);
                     }
                     else
                     {
-                        strAttributeValue = xNode.TryGetAttribute(attrAttr.GetName(MtconnectNodeNameProcessors.CamelCase));
+                        strAttributeValue = SourceNode.TryGetAttribute(attrAttr.GetName(MtconnectNodeNameProcessors.CamelCase));
                     }
                     if (!string.IsNullOrEmpty(strAttributeValue))
                     {
@@ -61,11 +68,11 @@ namespace MtconnectCore.Standard.Contracts
                     string strElementValue;
                     if (!string.IsNullOrEmpty(elemAttr.XmlNamespace))
                     {
-                        strElementValue = xNode.SelectSingleNode(elemAttr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, elemAttr.XmlNamespace)?.InnerText;
+                        strElementValue = SourceNode.SelectSingleNode(elemAttr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, elemAttr.XmlNamespace)?.InnerText;
                     }
                     else
                     {
-                        strElementValue = xNode.SelectSingleNode(elemAttr.GetName(MtconnectNodeNameProcessors.PascalCase))?.InnerText;
+                        strElementValue = SourceNode.SelectSingleNode(elemAttr.GetName(MtconnectNodeNameProcessors.PascalCase))?.InnerText;
                     }
                     if (!string.IsNullOrEmpty(strElementValue))
                     {
@@ -89,11 +96,15 @@ namespace MtconnectCore.Standard.Contracts
                     XmlNodeList xElems;// = xNode.HasChildNodes ? xNode.SelectNodes(elemsAttr.GetName(), nsmgr, "m") : null;
                     if (!string.IsNullOrEmpty(elemsAttr.XmlNamespace))
                     {
-                        xElems = xNode.SelectNodes(elemsAttr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, defaultNamespace);
+                        xElems = SourceNode.SelectNodes(elemsAttr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, elemsAttr.XmlNamespace);
+                    }
+                    else if (!string.IsNullOrEmpty(defaultNamespace))
+                    {
+                        xElems = SourceNode.SelectNodes(elemsAttr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, defaultNamespace);
                     }
                     else
                     {
-                        xElems = xNode.SelectNodes(elemsAttr.GetName(MtconnectNodeNameProcessors.PascalCase));
+                        xElems = SourceNode.SelectNodes(elemsAttr.GetName(MtconnectNodeNameProcessors.PascalCase));
                     }
 
                     if (xElems?.Count > 0)

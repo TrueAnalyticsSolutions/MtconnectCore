@@ -25,32 +25,9 @@ namespace MtconnectCoreExample.Views
             using (MtconnectAgentService mtcService = new MtconnectAgentService(Source.ToUri()))
             {
                 IResponseDocument mtcDocument = mtcService.Asset().Result;
-                if (mtcDocument is AssetsDocument)
-                {
-                    Consoul.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mtcDocument), ConsoleColor.DarkGray);
 
-                    if ((mtcDocument as AssetsDocument).TryValidate(out ICollection<MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException> validationErrors) == false) {
-                        foreach (var error in validationErrors)
-                        {
-                            if (error.Severity == ValidationSeverity.ERROR)
-                            {
-                                Consoul.Write(error.ToString(), ConsoleColor.Red);
-                            } else
-                            {
-                                Consoul.Write(error.ToString(), ConsoleColor.Yellow);
-                            }
-                        }
-                    }
-
-                    Consoul.Write("Done!", ConsoleColor.Green);
-                    Consoul.Wait();
-                }
-                else
-                {
-                    Consoul.Write($"Unexpected document type", ConsoleColor.Red);
-                    Consoul.Write($"Document Type: {mtcDocument.Type}", ConsoleColor.Gray);
-                    Consoul.Wait();
-                }
+                mtcDocument.DisplayDocumentAndValidate<AssetsDocument>();
+                Consoul.Wait();
             }
         }
     }

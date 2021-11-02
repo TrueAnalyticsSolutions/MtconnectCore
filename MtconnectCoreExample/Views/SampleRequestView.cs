@@ -23,19 +23,9 @@ namespace MtconnectCoreExample.Views
         {
             using (MtconnectAgentService mtcService = new MtconnectAgentService(Source.ToUri()))
             {
-                StreamsDocument mtcDocument = mtcService.Sample().Result;
-                if (mtcDocument is StreamsDocument)
-                {
-                    Consoul.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mtcDocument), ConsoleColor.DarkGray);
-
-                    Consoul.Write("Done!", ConsoleColor.Green);
-                    Consoul.Wait();
-                }
-                else
-                {
-                    Consoul.Write($"Unexpected document type", ConsoleColor.Red);
-                    Consoul.Wait();
-                }
+                IResponseDocument mtcDocument = mtcService.Sample().Result;
+                mtcDocument.DisplayDocumentAndValidate<StreamsDocument>();
+                Consoul.Wait();
             }
         }
     }
