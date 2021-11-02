@@ -1,9 +1,9 @@
 name: Publish to Package Registries
 
 on: 
-  push:
-    tags:
-      - v*
+  release:
+    types:
+      - published
 
 jobs:
   build:
