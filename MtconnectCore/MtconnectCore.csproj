@@ -20,7 +20,7 @@
     <PackageReleaseNotes>Congruent with v1.2.0 of the MTConnect Standard</PackageReleaseNotes>
     <AssemblyVersion>1.0.1.1</AssemblyVersion>
     <FileVersion>1.0.1.1</FileVersion>
-    <Version>1.2.0.1</Version>
+    <Version>1.2.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
