@@ -1,4 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Errors;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents
@@ -17,5 +19,7 @@ namespace MtconnectCore.Standard.Documents
         XmlNamespaceManager NamespaceManager { get; set; }
 
         MtconnectVersions DocumentVersion { get; set; }
+
+        bool TryValidate(out ICollection<MtconnectValidationException> validationErrors);
     }
 }

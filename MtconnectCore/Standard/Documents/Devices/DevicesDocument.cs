@@ -10,16 +10,21 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
+    /// <inheritdoc />
     public class DevicesDocument : ResponseDocument<DevicesDocumentHeader, Device>
     {
+        /// <inheritdoc />
         public override DocumentTypes Type => DocumentTypes.Devices;
 
+        /// <inheritdoc />
         public override string DefaultNamespace => "mt";
 
+        /// <inheritdoc />
         public override string DataElementName => DevicesElements.DEVICES.ToPascalCase();
 
         [MtconnectNodeElements(DevicesElements.HEADER, nameof(TrySetHeader), XmlNamespace = "mt")]
         internal override DevicesDocumentHeader _header { get; set; }
+        /// <inheritdoc />
         public DevicesDocumentHeader Header => (DevicesDocumentHeader)_header;
 
         /// <inheritdoc/>
@@ -28,6 +33,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             _header = new DevicesDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager);
         }
 
+        /// <inheritdoc />
         public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Device device)
         {
             Logger.Verbose("Reading Device {XnodeKey}", xNode.TryGetAttribute(DeviceAttributes.ID));

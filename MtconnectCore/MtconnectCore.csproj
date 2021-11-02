@@ -17,10 +17,10 @@
     <Description>Provides methods for communicating with MTConnect Agents as well as parsing the XML into DTOs modeled off the MTConnect standard.</Description>
     <RepositoryUrl>https://github.com/TrueAnalyticsSolutions/MtconnectCore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Removed AgentConnector in favor of HTTP Client factory pattern in MtconnectAgentService.</PackageReleaseNotes>
+    <PackageReleaseNotes>Congruent with v1.2.0 of the MTConnect Standard</PackageReleaseNotes>
     <AssemblyVersion>1.0.1.1</AssemblyVersion>
     <FileVersion>1.0.1.1</FileVersion>
-    <Version>1.6.0</Version>
+    <Version>1.2.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,11 +28,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Standard\Contracts\Enums\Assets\Attributes\" />
-    <Folder Include="Standard\Contracts\Enums\Assets\Elements\" />
     <Folder Include="Standard\Contracts\Enums\Attributes\" />
     <Folder Include="Standard\Contracts\Enums\Error\Elements\" />
-    <Folder Include="Standard\Documents\Assets\" />
+    <Folder Include="Standard\Documents\Files\" />
   </ItemGroup>
 
   <ItemGroup>

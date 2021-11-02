@@ -5,6 +5,7 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
+    /// <inheritdoc />
     public partial class StreamsDocumentHeader : ResponseDocumentHeader
     {
         [MtconnectNodeAttribute(HeaderAttributes.BUFFER_SIZE)]

@@ -57,6 +57,24 @@ namespace MtconnectCore.Standard.Contracts
             return string.Empty;
         }
 
+        internal static string FromCamelCase(this string input, char delimiter = '_')
+        {
+            string[] words = System.Text.RegularExpressions.Regex.Matches(input, "(^[a-z]+|[A-Z]+(?![a-z])|[A-Z][a-z]+)")
+                .OfType<System.Text.RegularExpressions.Match>()
+                .Select(m => m.Value)
+                .ToArray();
+            return string.Join(delimiter, words);
+        }
+
+        internal static string FromPascalCase(this string input, char delimiter = '_')
+        {
+            string[] words = System.Text.RegularExpressions.Regex.Matches(input, "(^[a-z]+|[A-Z]+(?![a-z])|[A-Z][a-z]+)")
+                .OfType<System.Text.RegularExpressions.Match>()
+                .Select(m => m.Value)
+                .ToArray();
+            return string.Join(delimiter, words);
+        }
+
         internal static string WordToPascalCase(string input) => input.Length > 1 ? input.Substring(0, 1).ToUpper() + input.Substring(1).ToLower() : input.ToUpper();
 
     }

@@ -2,20 +2,21 @@
 using MtconnectCore;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Documents;
-using MtconnectCore.Standard.Documents.Streams;
+using MtconnectCore.Standard.Documents.Assets;
 using MtconnectCoreExample.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace MtconnectCoreExample.Views
 {
-    public class SampleRequestView : RequestViewBase
+    public class AssetsRequestView : RequestViewBase
     {
-        public SampleRequestView()
+        public AssetsRequestView()
         {
-            Title = (new BannerEntry("MTConnect Sample Example")).Message;
+            Title = (new BannerEntry("MTConnect Asset Example")).Message;
             Source = new RequestBase()
             {
-                Directory = RequestTypes.SAMPLE.ToString().ToLower()
+                Directory = RequestTypes.ASSET.ToString().ToLower()
             };
         }
 
@@ -23,8 +24,9 @@ namespace MtconnectCoreExample.Views
         {
             using (MtconnectAgentService mtcService = new MtconnectAgentService(Source.ToUri()))
             {
-                IResponseDocument mtcDocument = mtcService.Sample().Result;
-                mtcDocument.DisplayDocumentAndValidate<StreamsDocument>();
+                IResponseDocument mtcDocument = mtcService.Asset().Result;
+
+                mtcDocument.DisplayDocumentAndValidate<AssetsDocument>();
                 Consoul.Wait();
             }
         }

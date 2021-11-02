@@ -47,26 +47,23 @@ namespace MtconnectCore.Standard.Documents.Devices
             const string documentationAttributes = "See Part 2 Section 4.4.2 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
 
-            if (!base.TryValidate(out validationErrors))
-            {
-                return false;
-            }
+            base.TryValidate(out validationErrors);
 
-            if (BufferSize != default(uint))
+            if (BufferSize == default(uint))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"MTConnectDevices Header MUST include a 'bufferSize' attribute. {documentationAttributes}"));
             }
 
-            if (AssetBufferSize.HasValue)
+            if (!AssetBufferSize.HasValue)
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"MTConnectDevices Header MUST include a 'assetBufferSize' attribute. {documentationAttributes}"));
             }
 
-            if (AssetCount.HasValue)
+            if (!AssetCount.HasValue)
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,

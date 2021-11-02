@@ -37,5 +37,15 @@ namespace MtconnectCore.Standard.Contracts
         internal static XmlNode SelectSingleNode<TEnum>(this XmlNode xNode, TEnum elementName, XmlNamespaceManager nsmgr, string ns) where TEnum : Enum => xNode.SelectSingleNode(elementName.ToPascalCase(), nsmgr, ns);
 
         internal static XmlNode SelectSingleNode<TEnum>(this XmlNode xNode, TEnum elementName) where TEnum : Enum => xNode.SelectSingleNode(elementName.ToPascalCase());
+
+        internal static bool IsEnumName<TEnum>(this XmlNode xNode) where TEnum : struct {
+            string name = xNode.LocalName.FromCamelCase();
+            return Enum.TryParse<TEnum>(name, true, out _);
+        }
+
+        internal static bool IsEnumValue<TEnum>(this XmlNode xNode) where TEnum : struct {
+            string value = xNode.InnerText.FromCamelCase();
+            return Enum.TryParse<TEnum>(value, true, out _);
+        }
     }
 }
