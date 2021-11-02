@@ -3,6 +3,7 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -38,6 +39,7 @@ namespace MtconnectCore.Standard.Documents
         {
             Source = xDoc;
 
+            DocumentVersion = GetDocumentVersion();
             DocumentElementName = Source.DocumentElement.LocalName;
             MtconnectDocumentTypeMismatchException<THeader, TItem> typeError;
             switch (DocumentElementName)
@@ -69,9 +71,8 @@ namespace MtconnectCore.Standard.Documents
                 default:
                     break;
             }
+            NamespaceManager = VersionHelper.GetDocumentNamespaces(DocumentVersion, Source, DefaultNamespace);
 
-            DocumentVersion = GetDocumentVersion();
-            NamespaceManager = VersionHelper.GetDocumentNamespaces(DocumentVersion, Source, DefaultNamespace);// GetNamespaceManager(DocumentVersion);
 
             XmlNode xDataRoot = xDoc.DocumentElement.SelectSingleNode(DataElementName, NamespaceManager, DefaultNamespace);
             XmlNodeList xDataElements = xDataRoot.ChildNodes;
@@ -122,6 +123,30 @@ namespace MtconnectCore.Standard.Documents
                 version = VersionHelper.GetVersion(strDocVersion);
             }
             return version.GetValueOrDefault();
+        }
+
+        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+
+            foreach (var item in Items)
+            {
+                if (!item.TryValidate(out ICollection<MtconnectValidationException> itemErrors)) {
+                    foreach (var error in itemErrors)
+                    {
+                        validationErrors.Add(error);
+                    }
+                }
+            }
+
+            if (!_header.TryValidate(out ICollection<MtconnectValidationException> headerErrors)) {
+                foreach (var error in headerErrors)
+                {
+                    validationErrors.Add(error);
+                }
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

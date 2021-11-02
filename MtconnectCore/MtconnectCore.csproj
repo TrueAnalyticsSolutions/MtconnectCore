@@ -28,11 +28,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Standard\Contracts\Enums\Assets\Attributes\" />
-    <Folder Include="Standard\Contracts\Enums\Assets\Elements\" />
     <Folder Include="Standard\Contracts\Enums\Attributes\" />
     <Folder Include="Standard\Contracts\Enums\Error\Elements\" />
-    <Folder Include="Standard\Documents\Assets\" />
+    <Folder Include="Standard\Documents\Files\" />
   </ItemGroup>
 
   <ItemGroup>

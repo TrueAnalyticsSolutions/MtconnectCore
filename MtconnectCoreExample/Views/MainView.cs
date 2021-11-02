@@ -34,6 +34,13 @@ namespace MtconnectCoreExample.Views
             view.Run();
         }
 
+        [ViewOption("Test MTConnect Assets request")]
+        public void TestAssets()
+        {
+            var view = new AssetsRequestView();
+            view.Run();
+        }
+
         [ViewOption("Test MTConnect Current Interval request")]
         public void TestCurrentInterval()
         {

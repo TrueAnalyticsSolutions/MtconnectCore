@@ -1,6 +1,7 @@
 ﻿using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Standard.Documents;
+using MtcAssets = MtconnectCore.Standard.Documents.Assets;
 using MtcDevices = MtconnectCore.Standard.Documents.Devices;
 using MtcError = MtconnectCore.Standard.Documents.Error;
 using MtcStreams = MtconnectCore.Standard.Documents.Streams;
@@ -61,7 +62,7 @@ namespace MtconnectCore
                     document = new MtcError.ErrorDocument(xDoc);
                     break;
                 case "MTConnectAssets":
-                    throw new NotSupportedException($"MTConnect Assets is not supported at this time.");
+                    document = new MtcAssets.AssetsDocument(xDoc);
                     break;
                 case "MTConnectDevices":
                     document = new MtcDevices.DevicesDocument(xDoc);
@@ -346,8 +347,29 @@ namespace MtconnectCore
             await RequestInterval(request, query.Interval.Value, callback, cancelToken);
         }
 
-        public async Task<IResponseDocument> Asset() {
-            throw new NotImplementedException();
+        public async Task<IResponseDocument> Asset(string assetId = "", AssetRequestQuery query = null)
+        {
+            string request = string.Empty;
+            if (!string.IsNullOrEmpty(assetId))
+            {
+                request = $"{assetId}/";
+            }
+            request += RequestTypes.ASSET.ToString().ToLower();
+            Exception queryException = null;
+            if (query?.Validate(out queryException) == true)
+            {
+                if (string.IsNullOrEmpty(query?.Type))
+                {
+                    //throw new InvalidOperationException($"The {nameof(Asset)} request should not be made with the '{nameof(AssetRequestQuery.Type)}' query parameter included. Instead, use {nameof(SampleInterval)}.");
+                }
+                request += $"?{query}";
+            }
+            else if (queryException != null)
+            {
+                throw queryException;
+            }
+
+            return await Request<MtcAssets.AssetsDocument>(request);
         }
 
         private T[] CopyAndResize<T>(T[] sourceArray, long sourceIndex, long length)
