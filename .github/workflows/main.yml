@@ -2,8 +2,8 @@ name: Publish to Package Registries
 
 on: 
   push:
-    branches:
-      - master
+    tags:
+      - v*
 
 jobs:
   build:
