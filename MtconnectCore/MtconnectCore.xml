@@ -1903,43 +1903,6 @@
             </summary>
             <remarks>Prepared on: June 11, 2015</remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_4_0">
-            <summary>
-            Version 1.4.0
-            </summary>
-            <remarks>Prepared on: March 31, 2018</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_4_1">
-            <summary>
-            Version 1.4.1
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_0">
-            <summary>
-            Version 1.5.0
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_1">
-            <summary>
-            Version 1.5.1
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_0">
-            <summary>
-            Version 1.6.0
-            </summary>
-            <remarks>Prepared on: July 15, 2020</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_1">
-            <summary>
-            Version 1.6.1
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_7_0">
-            <summary>
-            Version 1.7.0
-            </summary>
-        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
             <summary>
             Logical choices XML node types.

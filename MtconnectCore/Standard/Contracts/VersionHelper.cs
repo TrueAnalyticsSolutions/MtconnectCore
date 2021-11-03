@@ -17,13 +17,6 @@ namespace MtconnectCore.Standard.Contracts
             { MtconnectVersions.V_1_2_0, "1.2.0" },
             { MtconnectVersions.V_1_3_0, "1.3.0" },
             { MtconnectVersions.V_1_3_1, "1.3.1" },
-            { MtconnectVersions.V_1_4_0, "1.4.0" },
-            { MtconnectVersions.V_1_4_1, "1.4.1" },
-            { MtconnectVersions.V_1_5_0, "1.5.0" },
-            { MtconnectVersions.V_1_5_1, "1.5.1" },
-            { MtconnectVersions.V_1_6_0, "1.6.0" },
-            { MtconnectVersions.V_1_6_1, "1.6.1" },
-            { MtconnectVersions.V_1_7_0, "1.7.0" }
         };
 
         private static Dictionary<MtconnectVersions, DateTime> versionReleaseDate = new Dictionary<MtconnectVersions, DateTime>() {
@@ -32,13 +25,6 @@ namespace MtconnectCore.Standard.Contracts
             { MtconnectVersions.V_1_2_0, new DateTime(2012, 02, 17) },
             { MtconnectVersions.V_1_3_0, new DateTime(2014, 09, 30) },
             { MtconnectVersions.V_1_3_1, new DateTime(2015, 06, 11) },
-            { MtconnectVersions.V_1_4_0, new DateTime(2018, 03, 31) },
-            { MtconnectVersions.V_1_4_1, new DateTime(2018, 03, 31) },
-            { MtconnectVersions.V_1_5_0, new DateTime(2019, 12, 31) },
-            { MtconnectVersions.V_1_5_1, new DateTime(2019, 12, 31) },
-            { MtconnectVersions.V_1_6_0, new DateTime(2020, 07, 15) },
-            { MtconnectVersions.V_1_6_1, new DateTime(2020, 07, 15) },
-            { MtconnectVersions.V_1_7_0, new DateTime(2021, 04, 01) } // Yet to be released
         };
 
         private static Dictionary<MtconnectVersions, MtconnectVersions?> versionMinimumVersion = new Dictionary<MtconnectVersions, MtconnectVersions?>() {
@@ -47,11 +33,6 @@ namespace MtconnectCore.Standard.Contracts
              { MtconnectVersions.V_1_2_0, null },
              { MtconnectVersions.V_1_3_0, MtconnectVersions.V_1_1_0 },
              { MtconnectVersions.V_1_3_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
-             { MtconnectVersions.V_1_4_0, MtconnectVersions.V_1_1_0 },
-             { MtconnectVersions.V_1_4_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
-             { MtconnectVersions.V_1_5_0, MtconnectVersions.V_1_1_0 },
-             { MtconnectVersions.V_1_5_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
-             { MtconnectVersions.V_1_6_0, MtconnectVersions.V_1_1_0 }
         };
 
         public static string ToName(this MtconnectVersions version) => versionNames[version];
@@ -140,38 +121,6 @@ namespace MtconnectCore.Standard.Contracts
                     nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.3");
                     // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
                     break;
-                case MtconnectVersions.V_1_4_0:
-                    nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.4");
-                    nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
-                    break;
-                case MtconnectVersions.V_1_4_1:
-                    nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.4");
-                    // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
-                    break;
-                case MtconnectVersions.V_1_5_0:
-                    nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.5");
-                    nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
-                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-                    break;
-                case MtconnectVersions.V_1_5_1:
-                    nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.5");
-                    // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
-                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-                    break;
-                case MtconnectVersions.V_1_6_0:
-                    nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.6");
-                    nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
-                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-                    break;
-                case MtconnectVersions.V_1_6_1:
-                    nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.6");
-                    // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
-                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-                    break;
-                case MtconnectVersions.V_1_7_0:
-                    nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.7");
-                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-                    break;
                 default:
                     break;
             }
@@ -216,27 +165,6 @@ namespace MtconnectCore.Standard.Contracts
                     break;
                 case MtconnectVersions.V_1_3_1:
                     nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.3");
-                    break;
-                case MtconnectVersions.V_1_4_0:
-                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.4");
-                    break;
-                case MtconnectVersions.V_1_4_1:
-                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.4");
-                    break;
-                case MtconnectVersions.V_1_5_0:
-                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.5");
-                    break;
-                case MtconnectVersions.V_1_5_1:
-                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.5");
-                    break;
-                case MtconnectVersions.V_1_6_0:
-                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.6");
-                    break;
-                case MtconnectVersions.V_1_6_1:
-                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.6");
-                    break;
-                case MtconnectVersions.V_1_7_0:
-                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.7");
                     break;
                 default:
                     break;

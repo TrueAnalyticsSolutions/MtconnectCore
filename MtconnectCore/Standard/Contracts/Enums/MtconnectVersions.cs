@@ -30,35 +30,5 @@
         /// </summary>
         /// <remarks>Prepared on: June 11, 2015</remarks>
         V_1_3_1 = 1 << 4,
-        /// <summary>
-        /// Version 1.4.0
-        /// </summary>
-        /// <remarks>Prepared on: March 31, 2018</remarks>
-        V_1_4_0 = 1 << 5,
-        /// <summary>
-        /// Version 1.4.1
-        /// </summary>
-        V_1_4_1 = 1 << 6,
-        /// <summary>
-        /// Version 1.5.0
-        /// </summary>
-        V_1_5_0 = 1 << 7,
-        /// <summary>
-        /// Version 1.5.1
-        /// </summary>
-        V_1_5_1 = 1 << 8,
-        /// <summary>
-        /// Version 1.6.0
-        /// </summary>
-        /// <remarks>Prepared on: July 15, 2020</remarks>
-        V_1_6_0 = 1 << 9,
-        /// <summary>
-        /// Version 1.6.1
-        /// </summary>
-        V_1_6_1 = 1 << 10,
-        /// <summary>
-        /// Version 1.7.0
-        /// </summary>
-        V_1_7_0 = 1 << 11
     }
 }
