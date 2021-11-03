@@ -56,9 +56,5 @@
         /// Version 1.6.1
         /// </summary>
         V_1_6_1 = 1 << 10,
-        /// <summary>
-        /// Version 1.7.0
-        /// </summary>
-        V_1_7_0 = 1 << 11
     }
 }
