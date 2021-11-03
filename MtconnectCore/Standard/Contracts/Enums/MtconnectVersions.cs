@@ -59,6 +59,7 @@
         /// <summary>
         /// Version 1.7.0
         /// </summary>
-        V_1_7_0 = 1 << 11,
+        /// <remarks>Prepared on: February 25, 2021</remarks>
+        V_1_7_0 = 1 << 11
     }
 }
