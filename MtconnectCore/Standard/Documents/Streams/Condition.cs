@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using System;
@@ -94,7 +95,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Condition() : base() { }
 
         /// <inheritdoc/>
-        public Condition(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr)
+        public Condition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Value = xNode.InnerText;
             if (Enum.TryParse<ConditionElements>(xNode.LocalName, out ConditionElements condition))

@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -25,6 +26,6 @@ namespace MtconnectCore.Standard.Documents.Devices
         public ComponentRef() : base() { }
 
         /// <inheritdoc/>
-        public ComponentRef(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr) { }
+        public ComponentRef(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
     }
 }

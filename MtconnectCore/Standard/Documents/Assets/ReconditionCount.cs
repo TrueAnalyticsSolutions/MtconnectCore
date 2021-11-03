@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public ReconditionCount() : base() { }
 
         /// <inheritdoc />
-        public ReconditionCount(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public ReconditionCount(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             if (int.TryParse(xNode.InnerText, out int value))
             {
@@ -31,7 +32,7 @@ namespace MtconnectCore.Standard.Documents.Assets
 
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
 
             if (!int.TryParse(SourceNode.InnerText, out int value))
             {

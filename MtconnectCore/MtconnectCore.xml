@@ -146,6 +146,29 @@
             </summary>
             <param name="name"></param>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectValidationMethodAttribute">
+            <summary>
+            An attribute used to flag validation methods based on the version of the standard the MTConnect Response Document should be validated against.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectValidationMethodAttribute.Version">
+            <summary>
+            Reference to the version of the MTConnect Standard that this validation method applies to.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectValidationMethodAttribute.StandardReference">
+            <summary>
+            A reference to the part and section of the MTConnect Standard that this validation method comes from. This reference should be relevant to the <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectValidationMethodAttribute.Version"/> supplied.
+            </summary>
+            <example>Part 1 Section 1.0.0</example>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Attributes.MtconnectValidationMethodAttribute.#ctor(MtconnectCore.Standard.Contracts.Enums.MtconnectVersions,System.String)">
+            <summary>
+            Initializes a <see cref="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectValidationMethodAttribute"/> for automatic processing of a MTConnect node's XML validation.
+            </summary>
+            <param name="version">Reference to the MTConnect Standard version that this validation is in reference to.</param>
+            <param name="standardReference">Reference to the part and section of the MTConnect Standard that this validation method comes from.</param>
+        </member>
         <member name="M:MtconnectCore.Standard.Contracts.EnumHelper.Contains``1(System.String)">
             <summary>
             Compares the provided <paramref name="value"/> against the enum values.
@@ -1348,6 +1371,96 @@
             Available options for the <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Category"/>
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AxesSubComponentTypes">
+            <summary>
+            Sub-components of <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AXES"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AxesSubComponentTypes.LINEAR">
+            <summary>
+            A linear axis represents travel along a straight line. The name of the linear axis SHOULD follow  the conventions of the industry.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AxesSubComponentTypes.ROTARY">
+            <summary>
+            A rotary axis revolves around a line or vector. 
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes">
+            <summary>
+            Types of <c>Component</c>s defined in the MTConnect Standard
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AXES">
+            <summary>
+            The Axes component is a container for the actual axes of which there are currently two types:  Linear and Rotary.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CONTROLLER">
+            <summary>
+            The Controller component is the Component that controls a device, executes a program,  and sends instructions to the other components of the machine. It is the brains of the machine and can be asked for its current execution state and program name.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.DOOR">
+            <summary>
+            A opening that can be closed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.ACTUATOR">
+            <summary>
+            A mechanical device for moving or controlling a mechanism or system. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SENSOR">
+            <summary>
+            Sensor is a component that may or may not be integral to a parent component or device.  When Sensor is not integral to a parent device or component – it can function as a device. Sensor data MUST be associated with its most relevant Component and MUST be represented as a DataItem for that Component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SYSTEMS">
+            <summary>
+            The Systems component is a place holder for all the system types.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ControllerSubComponentTypes">
+            <summary>
+            Sub-components of <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CONTROLLER"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ControllerSubComponentTypes.PATH">
+            <summary>
+            A Path represents the motion of a control point as it moves through space as controlled by a set  of control instructions (i.e. vector move). When Path is not defined, DataItems relative to the Path MAY be reported for the Controller.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes">
+            <summary>
+            Sub-components of <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SYSTEMS"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.HYDRAULIC">
+            <summary>
+            A component representing the hydraulics and hydraulic distribution system of a device.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.PNEUMATIC">
+            <summary>
+            A component representing the pneumatics and compressed air distribution system of a device.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.COOLANT">
+            <summary>
+            A Component representing the coolant and coolant distribution system of a device.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.LUBRICATION">
+            <summary>
+            A Component representing the lubricant and lubrication distribution system of a device. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.ELECTRIC">
+            <summary>
+            A Component representing the electrical supply for a device. 
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes">
             <summary>
             Available types of sub-parts of a <see cref="T:MtconnectCore.Standard.Documents.Devices.Component"/>.
@@ -1362,7 +1475,797 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes">
             <summary>
-            Available options for a coordinateSystem attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.CoordinateSystem"/>
+            Available options for a <c>coordinateSystem</c> attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.CoordinateSystem"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes.WORK">
+            <summary>
+            An unchangeable coordinate system that has machine zero as its origin.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes.MACHINE">
+            <summary>
+            The coordinate system that represents the working area for a particular workpiece whose origin is shifted within the MACHINE coordinate system. If the WORK coordinates are not currently defined in the device, the MACHINE coordinates will be used.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AMPERAGE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.ALTERNATING">
+            <summary>
+            The measurement of alternating current. If not  specified further in statistic, defaults to RMS Current
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.DIRECT">
+            <summary>
+            The measurement of DC current
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AngleSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ANGLE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AngleSubTypes.ACTUAL">
+            <summary>
+            The angular position as read from the physical  component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AngleSubTypes.COMMANDED">
+            <summary>
+            The angular position computed by the Controller.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AxisFeedrateSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AXIS_FEEDRATE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AxisFeedrateSubTypes.ACTUAL">
+            <summary>
+            The actual federate of a linear axis. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AxisFeedrateSubTypes.COMMANDED">
+            <summary>
+            The feedrate as specified in the program. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AxisFeedrateSubTypes.OVERRIDE">
+            <summary>
+            The operator’s overridden value. Percent of commanded.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ACCELERATION">
+            <summary>
+            Rate of Change of Velocity 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ACCUMULATED_TIME">
+            <summary>
+            The measurement of accumulated time associated with a Component
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ACTUATOR">
+            <summary>
+            An actuator related condition.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.AMPERAGE">
+            <summary>
+            A high or low condition for the electrical current. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ANGLE">
+            <summary>
+            The angular position of a Component. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ANGULAR_ACCELERATION">
+            <summary>
+            Rate of change of angular velocity.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ANGULAR_VELOCITY">
+            <summary>
+            Rate of change of angular position
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.COMMUNICATIONS">
+            <summary>
+            A communications failure indicator.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.CONCENTRATION">
+            <summary>
+            Percentage of one ingredient within a mixture of ingredients 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.CONDUCTIVITY">
+            <summary>
+            The ability of a material to conduct electricity
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.DATA_RANGE">
+            <summary>
+            Information provided is outside of expected value range 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.DIRECTION">
+            <summary>
+            The direction of motion of a Component
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.DISPLACEMENT">
+            <summary>
+            The change in position of an object
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ELECTRICAL_ENERGY">
+            <summary>
+            The measurement of electrical energy consumption by a Component
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.FILL_LEVEL">
+            <summary>
+            Represents the amount of a substance remaining compared to the planned  maximum amount of that substance
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.FLOW">
+            <summary>
+            The rate of flow of a fluid
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.FREQUENCY">
+            <summary>
+            The number of occurrences of a repeating event per unit time
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.HARDWARE">
+            <summary>
+            The hardware subsystem of the Component’s operation condition. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.LINEAR_FORCE">
+            <summary>
+            The measure of the push or pull introduced by an actuator or exerted by an object
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.LOAD">
+            <summary>
+            The measure of the percentage of the standard rating of a device
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.LOGIC_PROGRAM">
+            <summary>
+            An error occurred in the logic program or PLC (programmable logic controller).
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.MASS">
+            <summary>
+            The measurement of the mass of an object(s) or an amount of material
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.MOTION_PROGRAM">
+            <summary>
+            An error occurred in the motion program.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.PATH_FEEDRATE">
+            <summary>
+            The federate of the tool path
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.PATH_POSITION">
+            <summary>
+            The current control point of the path 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.PH">
+            <summary>
+            The measure of acidity or alkalinity 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.POSITION">
+            <summary>
+            The position of a Component. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.POWER_FACTOR">
+            <summary>
+            The ratio of real power flowing to a load to the apparent power in that AC circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.PRESSURE">
+            <summary>
+            The measurement of the force per unit area exerted by a gas or liquid. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.RESISTANCE">
+            <summary>
+            The measurement of the degree to which an object opposes an electric curren through it
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ROTARY_VELOCITY">
+            <summary>
+            The rotational speed of a rotary axis 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.SOUND_LEVEL">
+            <summary>
+            The measurement of sound pressure level
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.STRAIN">
+            <summary>
+            Indicates the amount of deformation per unit length of an object when a load i applied
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.SYSTEM">
+            <summary>
+            A condition representing something that is not the operator, program, or  hardware. This is often used for operating system issues.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.TEMPERATURE">
+            <summary>
+            Indicates the temperature of a Component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.TILT">
+            <summary>
+            The measure of angular displacement 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.TORQUE">
+            <summary>
+            The measured of the turning force exerted on an object or by an object 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.VOLT_AMPERAGE">
+            <summary>
+            The measure of the apparent power in an electrical circuit (commonly referred  as VA)
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.VOLT_AMPERAGE_REACTIVE">
+            <summary>
+            The measure of reactive power in an AC electrical power circuit (commonly  referred to as var).
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.VELOCITY">
+            <summary>
+            Indicated the velocity of a component. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.VISCOSITY">
+            <summary>
+            The measure of a fluid’s resistance to flow
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.VOLTAGE">
+            <summary>
+            The measurement of electrical potential between two points 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.WATTAGE">
+            <summary>
+            The measurement of power consumed or dissipated by an electrical circuit or device
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DIRECTION"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes.ROTARY">
+            <summary>
+            The rotational direction of a rotary device using the right hand rule convention as defined  in Appendix B. CLOCKWISE or COUNTER_CLOCKWISE
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes.LINEAR">
+            <summary>
+            The direction of motion of a linear device. POSTIVE or NEGATIVE
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTUATOR_STATE">
+            <summary>
+            The state of the Actuator - ACTIVE or INACTIVE.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTIVE_AXES">
+            <summary>
+            The set of axes associated with a Path that the Controller is controlling. If  DataItem is not provided, it will be assumed the Controller is controlling all axes.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY">
+            <summary>
+            Represents the ability of a Component to communicate. This MUST be provided fo Device and MAY be provided for any other Component. AVAILABLE or UNAVAILABLE.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AXIS_COUPLING">
+            <summary>
+            Describes the way the axes will be associated to each other. This is used in conjunction  with COUPLED_AXES to indicate the way they are interacting. The possible values are: TANDEM, SYNCHRONOUS, MASTER, and SLAVE. The coupling MUST be viewed from the perspective of the axis, therefore a MASTER coupling indicates that this axis is the master of the COUPLED_AXES.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.BLOCK">
+            <summary>
+            The block of code being executed. Block contains the entire expression for a line of  program code.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROLLER_MODE">
+            <summary>
+            The current mode of the Controller. AUTOMATIC, MANUAL,  MANUAL_DATA_INPUT, or SEMI_AUTOMATIC.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COUPLED_AXES">
+            <summary>
+            Refers to the set of associated axes. The value will be a space delimited set of axes names.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DIRECTION">
+            <summary>
+            The direction of motion. CLOCKWISE or COUNTER_CLOCKWISE. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DOOR_STATE">
+            <summary>
+            The direction of motion of a linear device. POSTIVE or NEGATIVE
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EMERGENCY_STOP">
+            <summary>
+            The current state of the emergency stop actuator. ARMED (the circuit is complete and the  device is operating) or TRIGGERED (the circuit is open and the device MUST cease operation).
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EXECUTION">
+            <summary>
+            The execution status of the Controller. READY, ACTIVE, INTERRUPTED,  FEED_HOLD, or STOPPED
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE">
+            <summary>
+            The current line of code being executed. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MESSAGE">
+            <summary>
+            An uninterpreted textual notification. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PALLET_ID">
+            <summary>
+            The identifier for the pallet currently in use for a given Path
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_COUNT">
+            <summary>
+            The current count of parts produced as represented by the Controller. MUST be  integer value. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PartCountSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_ID">
+            <summary>
+            An identifier of the current part in the device 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PATH_MODE">
+            <summary>
+            The operational mode for this Path. SYNCHRONOUS, MIRROR, or INDEPENDENT.  Default value is INDEPENDENT if not specified.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_STATE">
+            <summary>
+            The ON or OFF status of the Component. DEPRECATION WARNING: MAY be  deprecated in the future. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerStateSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM">
+            <summary>
+            The name of the program being executed 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ROTARY_MODE">
+            <summary>
+            The mode for the Rotary axis. SPINDLE, INDEX, or CONTOUR.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_ASSET_ID">
+            <summary>
+            The identifier of an individual tool asset. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_NUMBER">
+            <summary>
+            The identifier of a tool provided by the device controller.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WORKHOLDING_ID">
+            <summary>
+            The identifier for the workholding currently in use for a given Path
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineSubTypes.MAXIMUM">
+            <summary>
+            The maximum line number of the code being executed. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineSubTypes.MINIMUM">
+            <summary>
+            The minimum line number of the code being executed.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PartCountSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_COUNT"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PartCountSubTypes.ALL">
+            <summary>
+            The count of all the parts produced. If the subtype is not given, this is the default. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PartCountSubTypes.GOOD">
+            <summary>
+            Indicates the count of correct parts made. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PartCountSubTypes.BAD">
+            <summary>
+            Indicates the count of incorrect parts produced.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_FEEDRATE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateSubTypes.ACTUAL">
+            <summary>
+            The three-dimensional feedrate derived from the  Controller.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateSubTypes.COMMANDED">
+            <summary>
+            The feedrate as specified in the program
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateSubTypes.OVERRIDE">
+            <summary>
+            The operator’s overridden value. Percent of commanded.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathPositionSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_POSITION"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathPositionSubTypes.ACTUAL">
+            <summary>
+            The position of the Component as read from the  device.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathPositionSubTypes.COMMANDED">
+            <summary>
+            The position computed by the Controller.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathPositionSubTypes.TARGET">
+            <summary>
+            The target position for the movement.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathPositionSubTypes.PROBE">
+            <summary>
+            The position provided by a probe
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PositionSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.POSITION"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PositionSubTypes.ACTUAL">
+            <summary>
+            The position of the Component. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PositionSubTypes.COMMANDED">
+            <summary>
+            The position as given by the Controller.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PositionSubTypes.TARGET">
+            <summary>
+            The target position for the movement.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerStateSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_STATE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerStateSubTypes.LINE">
+            <summary>
+            The state of the high voltage line. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerStateSubTypes.CONTROL">
+            <summary>
+            The state of the low power line. 
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.RotaryVelocitySubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ROTARY_VELOCITY"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.RotaryVelocitySubTypes.ACTUAL">
+            <summary>
+            The rotational speed the rotary axis is spinning at.  ROTARY_MODE MUST be SPINDLE.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.RotaryVelocitySubTypes.COMMANDED">
+            <summary>
+            The rotational speed as specified in the program. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.RotaryVelocitySubTypes.OVERRIDE">
+            <summary>
+            The operator’s overridden value. Percent of commanded.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ACCELERATION">
+            <summary>
+            Rate of change of velocity
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ACCUMULATED_TIME">
+            <summary>
+            The measurement of accumulated time associated with a Component
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ANGULAR_ACCELERATION">
+            <summary>
+            Rate of change of angular velocity.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ANGULAR_VELOCITY">
+            <summary>
+            Rate of change of angular position.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AMPERAGE">
+            <summary>
+            The measurement of AC Current or a DC current. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ANGLE">
+            <summary>
+            The angular position of a component relative to the  parent. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AngleSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AXIS_FEEDRATE">
+            <summary>
+            The feedrate of a linear axis. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AxisFeedrateSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CLOCK_TIME">
+            <summary>
+            The reading of a timing device at a specific point in  time. Clock time MUST be reported in W3C ISO 8601 format.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CONCENTRATION">
+            <summary>
+            Percentage of one component within a mixture of  components
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CONDUCTIVITY">
+            <summary>
+            The ability of a material to conduct electricity 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DISPLACEMENT">
+            <summary>
+            The displacement as the change in position of an  object
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ELECTRICAL_ENERGY">
+            <summary>
+            The measurement of electrical energy consumption  by a component
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.FILL_LEVEL">
+            <summary>
+            The measurement of the amount of a substance  remaining compared to the planned maximum amount of that substance
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.FLOW">
+            <summary>
+            The rate of flow of a fluid
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.FREQUENCY">
+            <summary>
+            The measurement of the number of occurrences of a  repeating event per unit time
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.LINEAR_FORCE">
+            <summary>
+            The measure of the push or pull introduced by an  actuator or exerted on an object
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.LOAD">
+            <summary>
+            The measurement of the percentage of the standard  rating of a device
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.MASS">
+            <summary>
+            The measurement of the mass of an object(s) or an  amount of material
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_FEEDRATE">
+            <summary>
+            The feedrate of the tool path. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_POSITION">
+            <summary>
+            The current program control point or program  coordinate in WORK coordinates. The coordinate system will revert to MACHINE coordinates if WORK coordinates are not available. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathPositionSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PH">
+            <summary>
+            The measure of the acidity or alkalinity.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.POSITION">
+            <summary>
+            The position of the Component. Defaults to  MACHINE coordinates. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PositionSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.POWER_FACTOR">
+            <summary>
+            The measurement of the ratio of real power flowing  to a load to the apparent power in that AC circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PRESSURE">
+            <summary>
+            The force per unit area exerted by a gas or liquid
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.RESISTANCE">
+            <summary>
+            The measurement of the degree to which an object  opposes an electric current through it
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ROTARY_VELOCITY">
+            <summary>
+            The rotational speed of a rotary axis. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.RotaryVelocitySubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.SOUND_LEVEL">
+            <summary>
+            Measurement of a sound level or sound pressure level  relative to atmospheric pressure. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.STRAIN">
+            <summary>
+            Strain is the amount of deformation per unit length of an object when a load is applied.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.TEMPERATURE">
+            <summary>
+            The measurement of temperature
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.TILT">
+            <summary>
+            A measurement of angular displacement
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.TORQUE">
+            <summary>
+            The turning force exerted on an object or by an object
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLT_AMPERE">
+            <summary>
+            The measure of the apparent power in an electrical  circuit, equal to the product of root-mean-square (RMS) voltage and RMS current’ (commonly referred to as VA)
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLT_AMPERE_REACTIVE">
+            <summary>
+            The measurement of reactive power in an AC  electrical circuit (commonly referred to as var)
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VELOCITY">
+            <summary>
+            The rate of change of position. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VISCOSITY">
+            <summary>
+            A measurement of a fluid’s resistance to flow 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE">
+            <summary>
+            The measurement of electrical potential between two  points. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.WATTAGE">
+            <summary>
+            The measurement of power consumed or dissipated  by an electrical circuit or device
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.SOUND_LEVEL"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.NO_SCALE">
+            <summary>
+            No weighting factor on the frequency scale 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.A_SCALE">
+            <summary>
+            A Scale weighting factor. This is the default  weighting factor if no factor is specified
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.B_SCALE">
+            <summary>
+            B Scale weighting factor
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.C_SCALE">
+            <summary>
+            C Scale weighting factor 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.D_SCALE">
+            <summary>
+            D Scale weighting factor
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SpindleSpeedSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.SPINDLE_SPEED"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SpindleSpeedSubTypes.ACTUAL">
+            <summary>
+            The rotational speed of a rotary axis.  ROTARY_MODE MUST be SPINDLE.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SpindleSpeedSubTypes.COMMANDED">
+            <summary>
+            The rotational speed the as specified in the program. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SpindleSpeedSubTypes.OVERRIDE">
+            <summary>
+            The operator’s overridden value. Percent of commanded.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.ALTERNATING">
+            <summary>
+            The measurement of alternating voltage. If not  specified further in statistic, defaults to RMS voltage
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.DIRECT">
+            <summary>
+            The measurement of DC voltage 
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DeviceRelationshipRoleTypes">
@@ -1663,6 +2566,151 @@
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.InterfacesLowerLevelComponentTypes">
             <remarks>See Part 2 Section 5.6 of the MTConnect specification.</remarks>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes">
+            <summary>
+            Available options for a <c>nativeUnits</c> attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.NativeUnits"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.CENTIPOISE">
+            <summary>
+            A measure of Viscosity
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.DEGREE_PER_MINUTE">
+            <summary>
+            Rotational velocity in degrees per minute
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.FAHRENHEIT">
+            <summary>
+            Temperature in Fahrenheit 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.FOOT">
+            <summary>
+            Feet
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.FOOT_PER_MINUTE">
+            <summary>
+            Feet per minute 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.FOOT_PER_SECOND">
+            <summary>
+            Feet per second
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.FOOT_PER_SECOND_SQUARED">
+            <summary>
+            Acceleration in feet per second squared
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.FOOT_3D">
+            <summary>
+            A point in space identified by X, Y, and Z positions and represented by a space delimited set of numbers each expressed in feet. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.GALLON_PER_MINUTE">
+            <summary>
+            Gallons per minute. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.INCH">
+            <summary>
+            Inches
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.INCH_PER_MINUTE">
+            <summary>
+            Inches per minute
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.INCH_PER_SECOND">
+            <summary>
+            Inches per second
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.INCH_PER_SECOND_SQUARED">
+            <summary>
+            Acceleration in inches per second squared
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.INCH_3D">
+            <summary>
+            A point in space identified by X, Y, and Z positions and represented by a space delimited set of numbers each expressed in inches. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.INCH_POUND">
+            <summary>
+            A measure of torque in inch pounds.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.KILOWATT">
+            <summary>
+            A measurement in kilowatt.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.KILOWATT_HOUR">
+            <summary>
+            Kilowatt hours which is 3.6 mega joules. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.LITER">
+            <summary>
+            Measurement of volume of a fluid 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.LITER_PER_MINUTE">
+            <summary>
+            Measurement of rate of flow of a fluid
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.MILLIMETER_PER_MINUTE">
+            <summary>
+            Velocity in millimeters per minute 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.POUND">
+            <summary>
+            US pounds
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.POUND_PER_INCH_SQUARED">
+            <summary>
+            Pressure in pounds per square inch (PSI).
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.RADIAN">
+            <summary>
+            Angle in radians 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.RADIAN_PER_SECOND">
+            <summary>
+            Velocity in radians per second
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.RADIAN_PER_SECOND_SQUARED">
+            <summary>
+            Rotational acceleration in radian per second squared
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.RADIAN_PER_MINUTE">
+            <summary>
+            Velocity in radians per minute. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.REVOLUTION_PER_SECOND">
+            <summary>
+            Rotational velocity in revolution per second
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.OTHER">
+            <summary>
+            Unsupported units
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipCriticalityTypes">
             <summary>
             Available options for a <see cref="P:MtconnectCore.Standard.Documents.Devices.Relationship.Criticality"/>.
@@ -1698,6 +2746,21 @@
             This piece of equipment functions as a peer which provides equal functionality and capabilities in the relationship with the associated piece of equipment.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.RepresentationTypes">
+            <summary>
+            Available options for a <c>representation</c> attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Representation"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RepresentationTypes.VALUE">
+            <summary>
+            The measured value of a sample. If no representation is specified for a DataItem, the representation MUST be determined to be VALUE.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RepresentationTypes.TIME_SERIES">
+            <summary>
+            A series of sampled data. The data is collected for a specified number of samples and each sample is collected with a fixed period
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes">
             <remarks>See Part 2 Section 5.5 of the MTConnect specification.</remarks>
         </member>
@@ -1709,6 +2772,56 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes.PERSONNEL">
             <remarks>See Part 2 Section 5.5.3 of the MTConnect specification.</remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes">
+            <summary>
+            Available options for a <c>statistic</c> attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Statistic"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.AVERAGE">
+            <summary>
+            Mathematical Average value calculated for the DataItem during the calculation period
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.KURTOSIS">
+            <summary>
+            Mathematical Average value calculated for the DataItem during the calculation period
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.MAXIMUM">
+            <summary>
+            Maximum or peak value recorded for the DataItem during the calculation period
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.MEDIAN">
+            <summary>
+            The middle number of a series of numbers
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.MINIMUM">
+            <summary>
+            Minimum value recorded for the DataItem during the calculation period
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.MODE">
+            <summary>
+            The number in a series of numbers that occurs most often
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.RANGE">
+            <summary>
+            The number in a series of numbers that occurs most often
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.ROOT_MEAN_SQUARE">
+            <summary>
+            Mathematical Root Mean Value (RMS) value calculated for the DataItem during the calculation period
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes.STANDARD_DEVIATION">
+            <summary>
+            Statistical Standard Deviation value calculated for the DataItem during the calculation period
+            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes">
             <remarks>See Part 2 Section 5.3 of the MTConnect specification.</remarks>
@@ -1772,6 +2885,171 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.INTERFACES">
             <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.InterfacesLowerLevelComponentTypes" />
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes">
+            <summary>
+            Available options for a <c>units</c> attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Units"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.AMPERE">
+            <summary>
+            Amps
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.CELSIUS">
+            <summary>
+            Degrees Celsius
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.COUNT">
+            <summary>
+            A counted event
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.DECIBEL">
+            <summary>
+            Sound Level 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.DEGREE">
+            <summary>
+            Angle in degrees 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.DEGREE_PER_SECOND">
+            <summary>
+            Angular degrees per second
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.DEGREE_PER_SECOND_SQUARED">
+            <summary>
+            Angular acceleration in degrees per second squared
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.HERTZ">
+            <summary>
+            Frequency measured in cycles per second
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.JOULE">
+            <summary>
+            A measurement of energy.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.KILOGRAM">
+            <summary>
+            Kilograms
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.LITER">
+            <summary>
+            Liters
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.LITER_SECOND">
+            <summary>
+            Liters per second
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MICRO_RADIAN">
+            <summary>
+            Measurement of Tilt
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIMETER">
+            <summary>
+            Millimeters
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIMETER_PER_SECOND">
+            <summary>
+            Millimeters per second 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIMETER_PER_SECOND_SQUARED">
+            <summary>
+            Acceleration in millimeters per second squared 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIMETER_3D">
+            <summary>
+            A point in space identified by X, Y, and Z positions and represented by a space delimited set of numbers each expressed in millimeters.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.NEWTON">
+            <summary>
+            Force in Newtons 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.NEWTON_METER">
+            <summary>
+            Torque, a unit for force times distance. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.OHM">
+            <summary>
+            Measure of Electrical Resistance 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.PASCAL">
+            <summary>
+            Pressure in Newtons per square meter 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.PASCAL_SECOND">
+            <summary>
+            Measurement of Viscosity
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.PERCENT">
+            <summary>
+            Percentage
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.PH">
+            <summary>
+            A measure of the acidity or alkalinity of a solution 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.REVOLUTION_PER_MINUTE">
+            <summary>
+            Revolutions per minute
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.SECOND">
+            <summary>
+            A measurement of time. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.SIEMENS_PER_METER">
+            <summary>
+            A measurement of Electrical Conductivity
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.VOLT">
+            <summary>
+            Volts
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.VOLT_AMPERE">
+            <summary>
+            Volt-Ampere (VA) 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.VOLT_AMPERE_REACTIVE">
+            <summary>
+            Volt-Ampere Reactive (var)
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.WATT">
+            <summary>
+            Watts
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.WATT_SECOND">
+            <summary>
+            Measurement of electrical energy, equal to one Joule 
+            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.DocumentTypes">
             <summary>
@@ -2088,12 +3366,22 @@
             Reference to the Source XmlNode.
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNode.MtconnectVersion">
+            <summary>
+            Reference to the version of the MTConnect Standard implemented on the MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNode.InitializationErrors">
+            <summary>
+            A collection of Validation exceptions that are raised during initialization of a MTConnect node.
+            </summary>
+        </member>
         <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor">
             <summary>
             Initializes a blank <see cref="T:MtconnectCore.Standard.Contracts.IMtconnectNode"/> entity.
             </summary>
         </member>
-        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)">
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <summary>
             Initializes a <see cref="T:MtconnectCore.Standard.Contracts.IMtconnectNode"/> entity from a MTConnect Response Document.
             </summary>
@@ -2128,11 +3416,8 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.AssetsDocument">
             <inheritdoc />
@@ -2171,7 +3456,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2183,7 +3468,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2213,7 +3498,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItem.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement">
@@ -2222,7 +3507,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2237,7 +3522,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItems.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItems.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItems.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingTool.AssetId">
@@ -2270,7 +3555,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingTool.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingTool.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingTool.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingTool.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2290,7 +3575,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription">
@@ -2307,7 +3592,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle">
@@ -2343,7 +3628,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2355,7 +3640,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2379,7 +3664,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2400,7 +3685,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.Location.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.Location.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2433,7 +3718,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.Measurement.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Measurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Measurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate">
@@ -2451,7 +3736,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessFeedRate.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed">
@@ -2469,7 +3754,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ProcessSpindleSpeed.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.ReconditionCount">
@@ -2481,7 +3766,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.ReconditionCount.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.ReconditionCount.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ReconditionCount.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.ToolLife">
@@ -2502,7 +3787,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2523,7 +3808,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.CellDefinition.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.CellDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CellDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.CellDefinition.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2556,7 +3841,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.Channel.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Channel.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Channel.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Channel.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2617,12 +3902,12 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.Component.#ctor">
             <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Component.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Component.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc cref="!:MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Component.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)"/>
-            <remarks>See Part 2 Section 4.4.1 of the MTConnect specification.</remarks>
+            <remarks>Version 1.2.0 of the MTConnect specification, see Part 2 Section 3.4.1.</remarks>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration">
             <summary>
@@ -2645,8 +3930,8 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.#ctor">
             <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc cref="!:MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.ComponentDescription">
             <summary>
@@ -2674,7 +3959,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentDescription.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.ComponentRef">
@@ -2691,7 +3976,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRef.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRef.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRef.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.Id">
@@ -2710,10 +3995,10 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRelationshipAttributes.ID_REF"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentRelationship.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc/>
@@ -2742,7 +4027,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.Composition.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Composition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Composition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Composition.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2769,7 +4054,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.CompositionDescription.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.CompositionDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CompositionDescription.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.CoordinateSystem">
@@ -2800,10 +4085,10 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CoordinateSystemElements.TRANSFORMATION"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.CoordinateSystem.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <remarks>See Part 2 Section 9.4.1.1 of MTConnect Standard</remarks>
@@ -2868,7 +4153,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2897,7 +4182,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemConstraint.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2915,7 +4200,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemDefinition.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.DataItemRef">
@@ -2930,10 +4215,10 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemRefAttributes.NAME"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemRef.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemRef.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItemRef.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Uuid">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.UUID"/>
@@ -2959,7 +4244,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.Device.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Device.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -2994,7 +4279,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DeviceRelationship.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -3017,9 +4302,6 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocument.#ctor(System.Xml.XmlDocument)">
             <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocument.TryAddItem(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Documents.Devices.Device@)">
-            <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader">
             <inheritdoc/>
@@ -3047,7 +4329,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -3071,7 +4353,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.EntryDefinition.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.EntryDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.EntryDefinition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.EntryDefinition.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -3093,7 +4375,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.Filter.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Filter.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Filter.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Filter.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -3113,7 +4395,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.Reference.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Reference.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Reference.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Reference.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -3132,13 +4414,13 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.RelationshipAttributes.CRITICALITY"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Relationship.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Relationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Relationship.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Relationship.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)"/>
+            <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.SensorConfiguration">
             <summary>
@@ -3161,10 +4443,10 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SensorConfigurationElements.CHANNELS"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.SensorConfiguration.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc/>
@@ -3181,7 +4463,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.Source.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Source.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Source.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.Specification">
@@ -3218,10 +4500,10 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SpecificationElements.MAXIMUM"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Specification.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Specification.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Specification.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Specification.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc/>
@@ -3236,10 +4518,10 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.TransformationElements.ROTATION"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Transformation.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Devices.Transformation.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)"/>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Transformation.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Error.Error">
             <summary>
@@ -3273,7 +4555,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocumentHeader.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.IResponseDocument">
@@ -3421,13 +4703,14 @@
             Initializes a blank MTConnect Response Document Header.
             </summary>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String)">
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <summary>
             Initializes a MTConnect Response Document Header from a source XML node.
             </summary>
             <param name="xNode">A source XML node from the MTConnect Response Document.</param>
             <param name="nsmgr">Reference to the namespace manager.</param>
             <param name="defaultNamespace">Reference to the namespace primarily used for this node.</param>
+            <param name="version"></param>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc/>
@@ -3491,7 +4774,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Component.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.Component.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Component.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Component.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -3573,7 +4856,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Condition.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.Condition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Condition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.DataItemId">
@@ -3600,7 +4883,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -3630,7 +4913,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Device.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Device.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
@@ -3677,7 +4960,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SubType">
@@ -3742,7 +5025,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Streams.StreamsDocument">
@@ -3772,7 +5055,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager)">
+        <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.SubType">

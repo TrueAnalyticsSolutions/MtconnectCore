@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
@@ -104,65 +105,27 @@ namespace MtconnectCore.Standard.Documents.Devices
         public DataItem() : base() { }
 
         /// <inheritdoc/>
-        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
         public bool TrySetSource(XmlNode xNode, XmlNamespaceManager nsmgr, out Source source)
-        {
-            Logger.Verbose($"Reading Source");
-            source = new Source(xNode, nsmgr);
-            if (!source.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Source of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Source = source;
-            return true;
-        }
+            => base.TrySet<Source>(xNode, nsmgr, nameof(Source), out source);
 
         public bool TryAddConstraint(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItemConstraint constraint)
-        {
-            Logger.Verbose($"Reading Constraint");
-            constraint = new DataItemConstraint(xNode, nsmgr);
-            if (!constraint.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Constraint of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _constraints.Add(constraint);
-            return true;
-        }
+            => base.TryAdd<DataItemConstraint>(xNode, nsmgr, ref _constraints, out constraint);
 
         public bool TryAddFilter(XmlNode xNode, XmlNamespaceManager nsmgr, out Filter filter)
-        {
-            Logger.Verbose($"Reading Filter");
-            filter = new Filter(xNode, nsmgr);
-            if (!filter.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Filter of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _filters.Add(filter);
-            return true;
-        }
+            => base.TryAdd<Filter>(xNode, nsmgr, ref _filters, out filter);
 
         public bool TrySetDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItemDefinition dataItemDefinition)
-        {
-            Logger.Verbose($"Reading Definition");
-            dataItemDefinition = new DataItemDefinition(xNode, nsmgr);
-            if (!dataItemDefinition.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Definition of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Definition = dataItemDefinition;
-            return true;
-        }
+            => base.TrySet<DataItemDefinition>(xNode, nsmgr, nameof(Definition), out dataItemDefinition);
 
         /// <remarks>See Part 2 Section 6.2.1 of MTConnect Standard</remarks>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            base.TryValidate(out validationErrors);
+
             const string documentationAttributes = "See Part 2 Section 7.2.2 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
+
             if (string.IsNullOrEmpty(Id))
             {
                 validationErrors.Add(new MtconnectValidationException(

@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Errors;
 using System;
@@ -15,12 +16,12 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CuttingToolMeasurement() : base() { }
 
         /// <inheritdoc />
-        public CuttingToolMeasurement(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr) { }
+        public CuttingToolMeasurement(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         /// <inheritdoc />
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
 
             if (!SourceNode.IsEnumName<CuttingToolMeasurementSubTypes>())
             {

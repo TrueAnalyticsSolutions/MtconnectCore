@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
@@ -41,27 +42,18 @@ namespace MtconnectCore.Standard.Documents.Devices
         public Composition() : base() { }
 
         /// <inheritdoc/>
-        public Composition(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        public Composition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
         public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out CompositionDescription compositionDescription)
-        {
-            Logger.Verbose($"Reading CompositionDescription...");
-            compositionDescription = new CompositionDescription(xNode, nsmgr);
-            if (!compositionDescription.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] CompositionDescription of Composition '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Description = compositionDescription;
-            return true;
-        }
+            => base.TrySet<CompositionDescription>(xNode, nsmgr, nameof(Description), out compositionDescription);
 
-        /// <inheritdoc cref="MtconnectNode.TryValidate"/>
+        /// <inheritdoc />
         /// <remarks>See Part 2 Section 4.6.2 of the MTConnect specification.</remarks>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            base.TryValidate(out validationErrors);
+
             const string documentationAttributes = "See Part 2 Section 4.6.2 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
 
             if (string.IsNullOrEmpty(Id))
             {

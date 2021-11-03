@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -41,26 +42,16 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Device() { }
 
         /// <inheritdoc/>
-        public Device(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE) { }
+        public Device(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
-        public bool TryAddComponent(XmlNode xNode, XmlNamespaceManager nsmgr, out Component component)
-        {
-            Logger.Verbose("Reading Component {XnodeKey}", xNode.TryGetAttribute(ComponentAttributes.COMPONENT_ID));
-            component = new Component(xNode, nsmgr);
-            if (!component.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Stream] Component {component.ComponentId} of Device '{Name}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _components.Add(component);
-            return true;
-        }
+        public bool TryAddComponent(XmlNode xNode, XmlNamespaceManager nsmgr, out Component component) => base.TryAdd<Component>(xNode, nsmgr, ref _components, out component);
 
         /// <inheritdoc/>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            base.TryValidate(out validationErrors);
+
             const string documentationAttributes = "See Part 1 Section 4.2.1 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
 
             if (string.IsNullOrEmpty(Name))
             {

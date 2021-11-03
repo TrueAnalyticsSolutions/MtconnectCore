@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -49,7 +50,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CuttingItem() : base() { }
 
         /// <inheritdoc />
-        public CuttingItem(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public CuttingItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             Indices = TryGetIndices(nsmgr, out _);
         }
@@ -118,68 +119,9 @@ namespace MtconnectCore.Standard.Documents.Assets
         }
 
         public bool TryAddItemLife(XmlNode xNode, XmlNamespaceManager nsmgr, out ItemLife itemLife)
-        {
-            Logger.Verbose($"Reading CuttingItem ItemLife...");
-            itemLife = new ItemLife(xNode, nsmgr);
-            if (!itemLife.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] ItemLife of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _itemLives.Add(itemLife);
-            return true;
-        }
+            => base.TryAdd<ItemLife>(xNode, nsmgr, ref _itemLives, out itemLife);
 
         public bool TryAddMeasurement(XmlNode xNode, XmlNamespaceManager nsmgr, out CuttingItemMeasurement measurement)
-        {
-            Logger.Verbose($"Reading CuttingTool Measurements...");
-            measurement = new CuttingItemMeasurement(xNode, nsmgr);
-            if (!measurement.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] CuttingItemMeasurements of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _measurements.Add(measurement);
-            return true;
-        }
-
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            var allErrors = new List<MtconnectValidationException>();
-
-            if (ItemLives.Count > 0)
-            {
-                foreach (var itemLife in ItemLives)
-                {
-                    if (!itemLife.TryValidate(out ICollection<MtconnectValidationException> itemLifeErrors))
-                    {
-                        allErrors.AddRange(itemLifeErrors);
-                    }
-                }
-            }
-
-            if (Measurements?.Any() == true)
-            {
-                foreach (var measurement in Measurements)
-                {
-                    if (!measurement.TryValidate(out ICollection<MtconnectValidationException> measurementErrors))
-                    {
-                        allErrors.AddRange(measurementErrors);
-                    }
-                }
-            }
-
-            //if (TryGetIndices(nsmgr, out ICollection<MtconnectValidationException> indicesErrors) != null)
-            //{
-            //    allErrors.AddRange(indicesErrors);
-            //}
-
-            validationErrors = allErrors;
-            if (validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR))
-            {
-                return false;
-            }
-            return true;
-        }
+            => base.TryAdd<CuttingItemMeasurement>(xNode, nsmgr, ref _measurements, out measurement);
     }
 }
