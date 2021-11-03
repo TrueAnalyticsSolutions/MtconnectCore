@@ -38,7 +38,7 @@ namespace MtconnectCore.Standard.Contracts
             { MtconnectVersions.V_1_5_1, new DateTime(2019, 12, 31) },
             { MtconnectVersions.V_1_6_0, new DateTime(2020, 07, 15) },
             { MtconnectVersions.V_1_6_1, new DateTime(2020, 07, 15) },
-            { MtconnectVersions.V_1_7_0, new DateTime(2021, 04, 01) } // Yet to be released
+            { MtconnectVersions.V_1_7_0, new DateTime(2021, 02, 25) },
         };
 
         private static Dictionary<MtconnectVersions, MtconnectVersions?> versionMinimumVersion = new Dictionary<MtconnectVersions, MtconnectVersions?>() {
@@ -51,7 +51,8 @@ namespace MtconnectCore.Standard.Contracts
              { MtconnectVersions.V_1_4_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
              { MtconnectVersions.V_1_5_0, MtconnectVersions.V_1_1_0 },
              { MtconnectVersions.V_1_5_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
-             { MtconnectVersions.V_1_6_0, MtconnectVersions.V_1_1_0 }
+             { MtconnectVersions.V_1_6_0, MtconnectVersions.V_1_1_0 },
+             { MtconnectVersions.V_1_7_0, MtconnectVersions.V_1_1_0 }
         };
 
         public static string ToName(this MtconnectVersions version) => versionNames[version];
