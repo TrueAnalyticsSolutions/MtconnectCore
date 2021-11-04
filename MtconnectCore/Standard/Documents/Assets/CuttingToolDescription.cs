@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Enums;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Assets
@@ -18,7 +19,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CuttingToolDescription() : base() { }
 
         /// <inheritdoc/>
-        public CuttingToolDescription(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public CuttingToolDescription(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             Content = xNode.Value;
         }

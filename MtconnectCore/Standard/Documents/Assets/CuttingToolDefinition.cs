@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using System.Xml;
 
@@ -21,7 +22,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CuttingToolDefinition() : base() { }
 
         /// <inheritdoc/>
-        public CuttingToolDefinition(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public CuttingToolDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             Content = xNode.OuterXml;
         }

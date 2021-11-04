@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -78,88 +79,38 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElements("References/*", nameof(TryAddReference), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<Reference> References => _references;
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode()"/>
+        /// <inheritdoc />
         public Component() : base() { }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
-        public Component(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE)
+        /// <inheritdoc />
+        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version)
         {
             TagName = xNode.LocalName;
         }
 
         public bool TryAddComponent(XmlNode xNode, XmlNamespaceManager nsmgr, out Component component)
-        {
-            Logger.Verbose("Reading Component {XnodeKey}", xNode.TryGetAttribute(ComponentAttributes.ID));
-            component = new Component(xNode, nsmgr);
-            if (!component.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Component {component.TagName} of Component '{TagName}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _subComponents.Add(component);
-            return true;
-        }
+            => base.TryAdd<Component>(xNode, nsmgr, ref _subComponents, out component);
 
         public bool TryAddDataItem(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItem dataItem)
-        {
-            Logger.Verbose("Reading DataItem {XnodeKey}", xNode.TryGetAttribute(DataItemAttributes.ID));
-            dataItem = new DataItem(xNode, nsmgr);
-            if (!dataItem.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] DataItem of Component '{TagName}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _dataItems.Add(dataItem);
-            return true;
-        }
+            => base.TryAdd<DataItem>(xNode, nsmgr, ref _dataItems, out dataItem);
 
         public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentDescription componentDescription)
-        {
-            Logger.Verbose($"Reading ComponentDescription...");
-            componentDescription = new ComponentDescription(xNode, nsmgr);
-            if (!componentDescription.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Description of Component '{TagName}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Description = componentDescription;
-            return true;
-        }
+            => base.TrySet<ComponentDescription>(xNode, nsmgr, nameof(Description), out componentDescription);
 
         public bool TrySetConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentConfiguration componentConfiguration)
-        {
-            Logger.Verbose($"Reading ComponentConfiguration...");
-            componentConfiguration = new ComponentConfiguration(xNode, nsmgr);
-            if (!componentConfiguration.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Configuration of Component '{TagName}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Configuration = componentConfiguration;
-            return true;
-        }
+            => base.TrySet<ComponentConfiguration>(xNode, nsmgr, nameof(Configuration), out componentConfiguration);
 
         public bool TryAddComposition(XmlNode xNode, XmlNamespaceManager nsmgr, out Composition composition)
-        {
-            Logger.Verbose("Reading Composition {XnodeKey}", xNode.TryGetAttribute(CompositionAttributes.ID));
-            composition = new Composition(xNode, nsmgr);
-            if (!composition.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Composition of Component '{TagName}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _compositions.Add(composition);
-            return true;
-        }
+            => base.TryAdd<Composition>(xNode, nsmgr, ref _compositions, out composition);
 
         public bool TryAddReference(XmlNode xNode, XmlNamespaceManager nsmgr, out Reference reference)
         {
             Logger.Verbose("Reading Reference {XnodeKey}", xNode.TryGetAttribute(ReferenceAttributes.ID_REF));
             if (xNode.LocalName == ComponentElements.COMPONENT_REF.ToPascalCase()) {
-                reference = new ComponentRef(xNode, nsmgr);
+                reference = new ComponentRef(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
             } else if (xNode.LocalName == ComponentElements.DATA_ITEM_REF.ToPascalCase())
             {
-                reference = new DataItemRef(xNode, nsmgr);
+                reference = new DataItemRef(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
             } else
             {
                 reference = null;
@@ -168,6 +119,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             }
             if (!reference.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
             {
+                InitializationErrors.AddRange(validationExceptions);
                 Logger.Warn($"[Invalid Probe] Reference of Component '{TagName}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
                 return false;
             }
@@ -175,18 +127,19 @@ namespace MtconnectCore.Standard.Documents.Devices
             return true;
         }
 
-        /// <inheritdoc cref="MtconnectNode.TryValidate"/>
-        /// <remarks>See Part 2 Section 4.4.1 of the MTConnect specification.</remarks>
+        /// <inheritdoc />
+        /// <remarks>Version 1.2.0 of the MTConnect specification, see Part 2 Section 3.4.1.</remarks>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 2 Section 4.4.2 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
+
+            const string documentationAttributes = "See Part 2 Section 3.4.1 of the MTConnect standard.";
 
             if (string.IsNullOrEmpty(Id))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem MUST include a unique 'id' attribute. {documentationAttributes}"));
+                    $"DataItem MUST include a unique 'id' attribute."));
             }
 
             if (string.IsNullOrEmpty(Name))

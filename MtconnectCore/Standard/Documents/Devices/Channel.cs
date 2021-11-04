@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -44,13 +45,13 @@ namespace MtconnectCore.Standard.Documents.Devices
         public Channel() : base() { }
 
         /// <inheritdoc/>
-        public Channel(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        public Channel(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
         /// <inheritdoc/>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            base.TryValidate(out validationErrors);
             const string documentationAttributes = "See Part 2 Section 9.1.3.1.2 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
 
             if (string.IsNullOrEmpty(Number))
             {

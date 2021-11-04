@@ -1,9 +1,12 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -104,65 +107,27 @@ namespace MtconnectCore.Standard.Documents.Devices
         public DataItem() : base() { }
 
         /// <inheritdoc/>
-        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
         public bool TrySetSource(XmlNode xNode, XmlNamespaceManager nsmgr, out Source source)
-        {
-            Logger.Verbose($"Reading Source");
-            source = new Source(xNode, nsmgr);
-            if (!source.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Source of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Source = source;
-            return true;
-        }
+            => base.TrySet<Source>(xNode, nsmgr, nameof(Source), out source);
 
         public bool TryAddConstraint(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItemConstraint constraint)
-        {
-            Logger.Verbose($"Reading Constraint");
-            constraint = new DataItemConstraint(xNode, nsmgr);
-            if (!constraint.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Constraint of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _constraints.Add(constraint);
-            return true;
-        }
+            => base.TryAdd<DataItemConstraint>(xNode, nsmgr, ref _constraints, out constraint);
 
         public bool TryAddFilter(XmlNode xNode, XmlNamespaceManager nsmgr, out Filter filter)
-        {
-            Logger.Verbose($"Reading Filter");
-            filter = new Filter(xNode, nsmgr);
-            if (!filter.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Filter of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _filters.Add(filter);
-            return true;
-        }
+            => base.TryAdd<Filter>(xNode, nsmgr, ref _filters, out filter);
 
         public bool TrySetDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItemDefinition dataItemDefinition)
-        {
-            Logger.Verbose($"Reading Definition");
-            dataItemDefinition = new DataItemDefinition(xNode, nsmgr);
-            if (!dataItemDefinition.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Definition of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Definition = dataItemDefinition;
-            return true;
-        }
+            => base.TrySet<DataItemDefinition>(xNode, nsmgr, nameof(Definition), out dataItemDefinition);
 
         /// <remarks>See Part 2 Section 6.2.1 of MTConnect Standard</remarks>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            base.TryValidate(out validationErrors);
+
             const string documentationAttributes = "See Part 2 Section 7.2.2 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
+
             if (string.IsNullOrEmpty(Id))
             {
                 validationErrors.Add(new MtconnectValidationException(
@@ -186,6 +151,57 @@ namespace MtconnectCore.Standard.Documents.Devices
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"DataItem 'category' attribute must be one of the following: [{EnumHelper.ToListString<CategoryTypes>(", ", string.Empty, string.Empty)}]. {documentationAttributes}"));
+            }
+
+            // Validate Category, Type and SubType
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Category)) {
+                if (Enum.TryParse<CategoryTypes>(Category, out CategoryTypes category)) {
+                    switch (category)
+                    {
+                        case CategoryTypes.SAMPLE:
+                            if (!EnumHelper.Contains<SampleTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. {documentationAttributes}"));
+                            }
+                            break;
+                        case CategoryTypes.EVENT:
+                            if (!EnumHelper.Contains<EventTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. {documentationAttributes}"));
+                            }
+                            break;
+                        case CategoryTypes.CONDITION:
+                            if (!EnumHelper.Contains<ConditionTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. {documentationAttributes}"));
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            // Validate units
+            if (!string.IsNullOrEmpty(Units) && !EnumHelper.Contains<UnitsTypes>(Units))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"DataItem units of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'. {documentationAttributes}"));
+            }
+
+            // Validate nativeUnits
+            if (!string.IsNullOrEmpty(NativeUnits) && !EnumHelper.Contains<NativeUnitsTypes>(NativeUnits))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"DataItem nativeUnits of '{NativeUnits}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'. {documentationAttributes}"));
             }
 
             if (Category.ToUpper() == "SAMPLE" && string.IsNullOrEmpty(Units))

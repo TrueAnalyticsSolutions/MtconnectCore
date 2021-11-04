@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using System;
@@ -39,13 +40,14 @@ namespace MtconnectCore.Standard.Documents.Streams
         public DataItem() { }
 
         /// <inheritdoc/>
-        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE) { }
+        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
         /// <inheritdoc/>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            base.TryValidate(out validationErrors);
+
             const string documentationAttributes = "See Part 1 Section 5 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
 
             if (string.IsNullOrEmpty(DataItemId))
             {

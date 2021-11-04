@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using System.Xml;
 
@@ -76,7 +77,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Sample() : base() { }
 
         /// <inheritdoc/>
-        public Sample(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr)
+        public Sample(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Value = xNode.InnerText;
             TagName = xNode.LocalName;
