@@ -3,8 +3,10 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -149,6 +151,57 @@ namespace MtconnectCore.Standard.Documents.Devices
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"DataItem 'category' attribute must be one of the following: [{EnumHelper.ToListString<CategoryTypes>(", ", string.Empty, string.Empty)}]. {documentationAttributes}"));
+            }
+
+            // Validate Category, Type and SubType
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Category)) {
+                if (Enum.TryParse<CategoryTypes>(Category, out CategoryTypes category)) {
+                    switch (category)
+                    {
+                        case CategoryTypes.SAMPLE:
+                            if (!EnumHelper.Contains<SampleTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. {documentationAttributes}"));
+                            }
+                            break;
+                        case CategoryTypes.EVENT:
+                            if (!EnumHelper.Contains<EventTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. {documentationAttributes}"));
+                            }
+                            break;
+                        case CategoryTypes.CONDITION:
+                            if (!EnumHelper.Contains<ConditionTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. {documentationAttributes}"));
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            // Validate units
+            if (!string.IsNullOrEmpty(Units) && !EnumHelper.Contains<UnitsTypes>(Units))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"DataItem units of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'. {documentationAttributes}"));
+            }
+
+            // Validate nativeUnits
+            if (!string.IsNullOrEmpty(NativeUnits) && !EnumHelper.Contains<NativeUnitsTypes>(NativeUnits))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"DataItem nativeUnits of '{NativeUnits}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'. {documentationAttributes}"));
             }
 
             if (Category.ToUpper() == "SAMPLE" && string.IsNullOrEmpty(Units))

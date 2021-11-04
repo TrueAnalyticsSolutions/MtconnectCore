@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Documents.Assets
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"CuttingItem ItemLife missing 'type' attribute."));
             }
-            else if (!Enum.TryParse<ItemLifeTypes>(Type, out ItemLifeTypes itemLifeTypes))
+            else if (!EnumHelper.Contains<ItemLifeTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.WARNING,
@@ -67,7 +67,7 @@ namespace MtconnectCore.Standard.Documents.Assets
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"CuttingItem ItemLife missing 'countDirection' attribute."));
             }
-            else if (!Enum.TryParse<ItemLifeCountDirectionTypes>(Type, out ItemLifeCountDirectionTypes itemLifeCountDirectionTypes))
+            else if (!EnumHelper.Contains<ItemLifeCountDirectionTypes>(CountDirection))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.WARNING,

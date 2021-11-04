@@ -3900,13 +3900,13 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.REFERENCES"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Component.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Component.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <inheritdoc cref="!:MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Component.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)"/>
+            <inheritdoc />
             <remarks>Version 1.2.0 of the MTConnect specification, see Part 2 Section 3.4.1.</remarks>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration">
@@ -3928,10 +3928,10 @@
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentConfigurationElements.SPECIFICATIONS"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.#ctor">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor"/>
+            <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.ComponentConfiguration.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <inheritdoc cref="!:MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
+            <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.ComponentDescription">
             <summary>
@@ -4031,7 +4031,7 @@
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Composition.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)"/>
+            <inheritdoc />
             <remarks>See Part 2 Section 4.6.2 of the MTConnect specification.</remarks>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.CompositionDescription">

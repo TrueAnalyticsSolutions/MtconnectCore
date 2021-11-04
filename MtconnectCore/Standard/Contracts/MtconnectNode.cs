@@ -175,11 +175,13 @@ namespace MtconnectCore.Standard.Contracts
                 if (item != null) {
                     if (!item.TryValidate(out ICollection<MtconnectValidationException> validationExceptions)) {
                         Logger.Warn("[Invalid MtconnectNode] Parsing type '{MtconnectNodeType}' from XmlNode '{XnodeName}':\r\n{ValidationExceptions}", type.Name, xNode.LocalName, ExceptionHelper.ToString(validationExceptions));
+                    }
+                    if (validationExceptions.Any())
+                    {
                         InitializationErrors.AddRange(validationExceptions);
-                        return false;
                     }
                     array.Add(item);
-                    return true;
+                    return !validationExceptions.Any(o => o.Severity == ValidationSeverity.ERROR);
                 } else {
                     throw new InvalidCastException($"Could not cast item to type '{type.Name}'");
                 }
@@ -209,11 +211,13 @@ namespace MtconnectCore.Standard.Contracts
                     if (!item.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
                     {
                         Logger.Warn("[Invalid MtconnectNode] Parsing type '{MtconnectNodeType}' from XmlNode '{XnodeName}':\r\n{ValidationExceptions}", type.Name, xNode.LocalName, ExceptionHelper.ToString(validationExceptions));
+                    }
+                    if (validationExceptions.Any())
+                    {
                         InitializationErrors.AddRange(validationExceptions);
-                        return false;
                     }
                     updateProperty.SetValue(this, item);
-                    return true;
+                    return !validationExceptions.Any(o => o.Severity == ValidationSeverity.ERROR);
                 }
                 else
                 {

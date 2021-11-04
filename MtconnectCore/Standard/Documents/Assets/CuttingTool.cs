@@ -103,11 +103,20 @@ namespace MtconnectCore.Standard.Documents.Assets
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"CuttingTool MUST include a 'assetId' attribute. {documentationAttributes}"));
-            } else if (!string.Equals(AssetId, $"{ToolId}.{SerialNumber}", StringComparison.OrdinalIgnoreCase))
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectValidationMethod(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1")]
+        private bool validateAssetId_Recommendation(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            
+            if (!string.IsNullOrEmpty(AssetId) && !string.Equals(AssetId, $"{ToolId}.{SerialNumber}", StringComparison.OrdinalIgnoreCase))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.WARNING,
-                    $"CuttingTool 'assetId' SHOULD be the combination of the 'toolId' and 'serialNumber' as in 'toolId.serialNumber'. {documentationAttributes}"));
+                    ValidationSeverity.MESSAGE,
+                    $"CuttingTool 'assetId' SHOULD be the combination of the 'toolId' and 'serialNumber' as in 'toolId.serialNumber'."));
             }
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
