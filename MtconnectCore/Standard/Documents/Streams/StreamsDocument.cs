@@ -31,23 +31,12 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <inheritdoc />
         public StreamsDocument(XmlDocument xDoc) : base(xDoc)
         {
-            _header = new StreamsDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager);
+            _header = new StreamsDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager, MtconnectVersion.GetValueOrDefault());
         }
 
         public int GetDataItemCount() => Items.SelectMany(o => o.Components).Select(o => o.Samples.Count + o.Events.Count + o.Conditions.Count).Sum();
 
         /// <inheritdoc />
-        public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Device device)
-        {
-            Logger.Verbose("Reading Device {XnodeKey}", xNode.TryGetAttribute(DeviceAttributes.NAME));
-            device = new Device(xNode, nsmgr);
-            if (!device.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Stream] Device:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _items.Add(device);
-            return true;
-        }
+        public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Device device) => base.TryAdd<Device>(xNode, nsmgr, ref _items, out device);
     }
 }

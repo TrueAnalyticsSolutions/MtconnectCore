@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -35,7 +36,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public ToolLife() : base() { }
 
         /// <inheritdoc />
-        public ToolLife(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public ToolLife(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             if (double.TryParse(xNode.InnerText, out double value)) {
                 Value = value;
@@ -45,7 +46,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         /// <inheritdoc />
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
 
             if (string.IsNullOrEmpty(Type))
             {

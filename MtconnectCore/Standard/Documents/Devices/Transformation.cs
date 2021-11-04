@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using System.Xml;
 
@@ -16,10 +17,10 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElement(TransformationElements.ROTATION)]
         public string Rotation { get; set; }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode()"/>
+        /// <inheritdoc />
         public Transformation() : base() { }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
-        public Transformation(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        /// <inheritdoc />
+        public Transformation(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
     }
 }

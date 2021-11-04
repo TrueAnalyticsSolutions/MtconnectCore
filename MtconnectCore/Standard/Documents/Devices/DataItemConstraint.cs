@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public DataItemConstraint() : base() { }
 
         /// <inheritdoc/>
-        public DataItemConstraint(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) {
+        public DataItemConstraint(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) {
             if (xNode.ChildNodes.Count < 2)
             {
                 Value = xNode.InnerText;
@@ -46,8 +47,9 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc/>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            base.TryValidate(out validationErrors);
+
             const string documentationAttributes = "See Part 2 Section 7.2.3.3.1 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
 
             if (Filter != null)
             {
