@@ -3471,6 +3471,21 @@
             An Agent responds to an Asset Request with an MTConnectAssets Response Document that contains information for MTConnect Assets from the Agent, subject to any filtering defined in the Request.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ActuatorStateValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ACTUATOR_STATE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ActuatorStateValues.ACTIVE">
+            <summary>
+            The actuator is operating or active
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ActuatorStateValues.INACTIVE">
+            <summary>
+            The actuator is not operating or inactive
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AvailabilityValues">
             <summary>
             Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AVAILABILITY"/>
@@ -3536,9 +3551,34 @@
             The operator can enter operations for the controller to  perform. There is no current program being executed.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.FEED_HOLD">
+            <summary>
+            The axes of the device are commanded to stop, but the  spindle continues to function.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues">
             <summary>
             Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.DIRECTION"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.CLOCKWISE">
+            <summary>
+            The rotary component is rotating in a clockwise fashion  using the right hand rule.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.COUNTER_CLOCKWISE">
+            <summary>
+            The rotary component is rotating in a counter clockwise  fashion using the right hand rule.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.POSITIVE">
+            <summary>
+            A linear component moving in the direction of increasing  position value
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.NEGATIVE">
+            <summary>
+            A linear component moving in the direction of decreasing  position value
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues">
@@ -3554,6 +3594,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues.CLOSED">
             <summary>
             The door is closed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues.UNLATCHED">
+            <summary>
+            The door is not closed to the point of a positive  confirmation and not open to the point of a positive confirmation
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.ConditionElements.Normal">
@@ -3579,6 +3624,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ACTIVE_AXES">
             <summary>
             The set of axes being controlled by a Path. The value MUST be a space delimited set of axes names. For example: &lt;ActiveAxes …&gt;X Y Z C&lt;/ActiveAxes&gt; If this is not provided, it MUST assumed the Path is controlling all the axes.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ACTUATOR_STATE">
+            <summary>
+            An actuator state represents a device for moving or controlling a mechanism or system.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AVAILABILITY">
@@ -3636,6 +3686,16 @@
             This event refers to the optional program line number. For example in RS274/NGC the line number begins with an N and is followed by 1 to 5 digits (0 – 99999). If there is not an assigned line number in the programming systems as in RS274, the line number will refer to the position in the executing program. The line number MUST be any positive integer from 0 to 2^32 -1.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.MESSAGE">
+            <summary>
+            A text notification. Format MAY be any valid text string.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PALLET_ID">
+            <summary>
+            This is a reference to an identifier for the current pallet available at the device.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PART_COUNT">
             <summary>
             The number of parts produced. This will not be counted by the agent and MUST only be supplied if the controller provides the count.
@@ -3676,6 +3736,11 @@
             This is a reference to an identifier for the current tool in use by the Path. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_ASSET_ID">
+            <summary>
+            This is a reference to an identifier for the current tool in use by the Path.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.WORKHOLDING_ID">
             <summary>
             This is a reference to an identifier for the current workholding. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
@@ -3684,6 +3749,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ACCELERATION">
             <summary>
             The acceleration of the component MUST always be reported in MILLIMETER/SECOND^2. An acceleration MUST have a numeric value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ACCUMULATED_TIME">
+            <summary>
+            The accumulated time associated with a component. The AccumulatedTime MUST have a numeric value and MUST be reported in SECOND.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.AMPERAGE">
@@ -3711,14 +3781,19 @@
             Axis Feedrate is defined as the rate of motion of the feed axis of the tool  relative to the workpiece. An axis feedrate MUST always be reported in MILLIMETER/SECOND or PERCENT for override and MUST always have a numeric CDATA value as a floating point number.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PATH_FEEDRATE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.CLOCK_TIME">
             <summary>
-            Path Feedrate is defined as the rate of motion of the feed path of the tool  relative to the workpiece. A path feedrate MUST always be reported in MILLIMETER/SECOND or PERCENT for override and MUST always have a numeric CDATA value as a floating point number.
+            The reading of a timing device at a specific point in time. The time MUST have a value reported in W3C ISO 8601 format of YYYY-MM DDThh:mm:ss.ffff
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.FREQUENCY">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.CONCENTRATION">
             <summary>
-            The rate at which a component is vibrating. The frequency MUST have a numeric value and MUST be reported in HERTZ.
+            Percentage of one component within a mixture of components. The Concentration MUST have a value reported in PERCENT.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.CONDUCTIVITY">
+            <summary>
+            The ability of a material to conduct electricity. The Conductivity MUST have a value reported in SIEMENS/METER.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.DISPLACEMENT">
@@ -3726,9 +3801,29 @@
             The displacement as measured from zero to peak. The displacement MUST have a value reported in MILLIMETER.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.GLOBAL_POSITION">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ELECTRICAL_ENERGY">
             <summary>
-            The global position is the three space coordinate of the tool. A global position MUST always be reported in MILLIMETER and MUST always have a numeric CDATA value as three floating point numbers (x, y, and z). Position MUST always be given in absolute coordinates.
+            The measurement of electrical energy consumed by a component. ElectricalEnergy MUST have a value reported in WATT_SECOND.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.FLOW">
+            <summary>
+            The rate of flow of a fluid. The Flow MUST have a value reported in LITER/SECOND.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.FREQUENCY">
+            <summary>
+            The rate at which a component is vibrating. The frequency MUST have a numeric value and MUST be reported in HERTZ.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.FILL_LEVEL">
+            <summary>
+            The measurement of the amount of a substance remaining compared to the planned maximum amount of that substance. The FillLevel MUST be reported in PERCENT.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.LINEAR_FORCE">
+            <summary>
+            The measurement of the amount of push or pull introduced by an actuator or exerted on an object. The LinearForce MUST be reported in NEWTON.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.LOAD">
@@ -3736,9 +3831,39 @@
             The load on a component. The load MUST always be reported in NEWTON and MUST always have a numeric CDATA value as a floating point number.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.MASS">
+            <summary>
+            The measurement of the mass of an object(s) or an amount of material. The Mass MUST be reported in KILOGRAM.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PATH_FEEDRATE">
+            <summary>
+            Path Feedrate is defined as the rate of motion of the feed path of the tool  relative to the workpiece. A path feedrate MUST always be reported in MILLIMETER/SECOND or PERCENT for override and MUST always have a numeric CDATA value as a floating point number.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PATH_POSITION">
+            <summary>
+            The program position as given in 3 dimensional space. This position MUST default to WORK coordinates, if the WORK coordinates are defined, and MUST be given as a space delimited vector of floating point numbers given in MILLIMETER_3D units. The PathPosition will be given in the following format and MUST be listed in order X, Y, and Z: &lt;PathPosition …&gt;10.123 55.232 100.981&lt;/PathPosition&gt; Where X = 10.123, Y = 55.232, and Z = 100.981.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PH">
+            <summary>
+            The measure of acidity or akalinity. The PH MUST be a numeric value and MUST be provided in PH.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.GLOBAL_POSITION">
+            <summary>
+            The global position is the three space coordinate of the tool. A global position MUST always be reported in MILLIMETER and MUST always have a numeric CDATA value as three floating point numbers (x, y, and z). Position MUST always be given in absolute coordinates.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.POSITION">
             <summary>
             A position represents the location along a linear axis. A position MUST always be reported in MILLIMETER and MUST always have a numeric CDATA value as a floating point number. Position MUST always be given in absolute coordinates.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.POWER_FACTOR">
+            <summary>
+            The measurement of the ratio of real power flowing to a load to the apparent power in that AC circuit. The PowerFactor MUST be a numeric value and MUST be provided in PERCENT.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PRESSURE">
@@ -3746,14 +3871,39 @@
             The pressure on a component. The pressure MUST be a numeric value and MUST be provided in PASCALS.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.RESISTANCE">
+            <summary>
+            The measure of the degree to which an object opposes an electrical current through it. The Resistance MUST be a numeric value and MUST be provided in OHM.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ROTARY_VELOCITY">
+            <summary>
+            The rate of rotation of a rotary axis. A RotaryVelocity speed MUST always be reported in REVOLUTION/MINUTE or PERCENT for OVERRIDE.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.SOUND_LEVEL">
+            <summary>
+            The measure of acoustic sound level or sound pressure level. The SoundLevel MUST be provided in DECIBEL
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.SPINDLE_SPEED">
             <summary>
             The rate of rotation of a machine spindle. A spindle speed MUST always be reported in REVOLUTION/MINUTE and MUST always have a numeric CDATA value as a floating point number.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.STRAIN">
+            <summary>
+            The measured amount of deformation per unit length of an object. Strain MUST be reported as PERCENT.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TEMPERATURE">
             <summary>
             Temperature MUST always be reported in degrees CELSIUS and MUST always have a numeric CDATA value as a floating point number.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TILT">
+            <summary>
+            The measured amount of angular displacement of an object. Tilt MUST be reported as MICRO_RADIAN.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TORQUE">
@@ -3764,6 +3914,26 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VELOCITY">
             <summary>
             A velocity represents the rate of change in position along one or more axis. When given as a Sample for the Axes component, it represents the magnitude of the velocity vector for all given axis, similar to a path feedrate. A velocity MUST always be reported in MILLIMETER/SECOND and MUST always have a numeric CDATA value as a floating point number.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VISCOSITY">
+            <summary>
+            The measurement of a fluid’s resistance to flow. Viscosity MUST be reported as PASCAL_SECOND.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VOLTAGE">
+            <summary>
+            The measurement of electrical potential between two points. The Voltage MUST have a numeric value and MUST be reported in VOLT.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VOLT_AMPERE">
+            <summary>
+            The measurement of apparent power in an electrical circuit, equal to the product of the RMS voltage and RMS current. The VoltAmpere MUST have a numeric value and MUST be reported in VOLT_AMPERE.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VOLT_AMPERE_REACTIVE">
+            <summary>
+            The measurement of reactive power in an AC electrical circuit. The VoltAmpereReactive MUST have a numeric value and MUST be reported in VOLT_AMPERE_REACTIVE.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VOLTS">
@@ -3826,6 +3996,11 @@
             A set of axes are operating independently and without the  influence of another set of axes.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues.MASTER">
+            <summary>
+            The path provides the reference motion from which a  Synchronous or Mirror Path will follow.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues.SYNCHRONOUS">
             <summary>
             The sets of axes are operating synchronously.
@@ -3854,6 +4029,16 @@
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStatusValues">
             <summary>
             Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.POWER_STATUS"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStatusValues.ON">
+            <summary>
+            The power to the component is ON.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStatusValues.OFF">
+            <summary>
+            The power to the component is OFF.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues">

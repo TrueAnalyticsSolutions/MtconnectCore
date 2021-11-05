@@ -15,6 +15,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
         INDEPENDENT,
         /// <summary>
+        /// The path provides the reference motion from which a  Synchronous or Mirror Path will follow.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
+        MASTER,
+        /// <summary>
         /// The sets of axes are operating synchronously.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
