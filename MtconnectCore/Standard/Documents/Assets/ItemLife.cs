@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -34,7 +35,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public ItemLife() : base() { }
 
         /// <inheritdoc />
-        public ItemLife(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public ItemLife(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             if (double.TryParse(xNode.InnerText, out double value))
             {
@@ -45,7 +46,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         /// <inheritdoc />
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
 
             if (string.IsNullOrEmpty(Type))
             {
@@ -53,7 +54,7 @@ namespace MtconnectCore.Standard.Documents.Assets
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"CuttingItem ItemLife missing 'type' attribute."));
             }
-            else if (!Enum.TryParse<ItemLifeTypes>(Type, out ItemLifeTypes itemLifeTypes))
+            else if (!EnumHelper.Contains<ItemLifeTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.WARNING,
@@ -66,7 +67,7 @@ namespace MtconnectCore.Standard.Documents.Assets
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"CuttingItem ItemLife missing 'countDirection' attribute."));
             }
-            else if (!Enum.TryParse<ItemLifeCountDirectionTypes>(Type, out ItemLifeCountDirectionTypes itemLifeCountDirectionTypes))
+            else if (!EnumHelper.Contains<ItemLifeCountDirectionTypes>(CountDirection))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.WARNING,

@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -60,172 +61,45 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CuttingToolLifeCycle() : base() { }
 
         /// <inheritdoc />
-        public CuttingToolLifeCycle(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE) { }
+        public CuttingToolLifeCycle(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
         public bool TrySetReconditionCount(XmlNode xNode, XmlNamespaceManager nsmgr, out ReconditionCount reconditionCount)
-        {
-            Logger.Verbose($"Reading CuttingTool ReconditionCount...");
-            reconditionCount = new ReconditionCount(xNode, nsmgr);
-            if (!reconditionCount.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] ReconditionCount of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            ReconditionCount = reconditionCount;
-            return true;
-        }
+            => base.TrySet<ReconditionCount>(xNode, nsmgr, nameof(ReconditionCount), out reconditionCount);
 
         public bool TrySetToolLife(XmlNode xNode, XmlNamespaceManager nsmgr, out ToolLife toolLife)
-        {
-            Logger.Verbose($"Reading CuttingTool ToolLife...");
-            toolLife = new ToolLife(xNode, nsmgr);
-            if (!toolLife.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] ToolLife of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            ToolLife = toolLife;
-            return true;
-        }
+            => base.TrySet<ToolLife>(xNode, nsmgr, nameof(ToolLife), out toolLife);
 
         public bool TrySetCutterStatus(XmlNode xNode, XmlNamespaceManager nsmgr, out CutterStatus cutterStatus)
-        {
-            Logger.Verbose($"Reading CutterStatus...");
-            cutterStatus = new CutterStatus(xNode, nsmgr);
-            if (!cutterStatus.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] Cutter Status of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            CutterStatus = cutterStatus;
-            return true;
-        }
+            => base.TrySet<CutterStatus>(xNode, nsmgr, nameof(CutterStatus), out cutterStatus);
 
         public bool TrySetLocation(XmlNode xNode, XmlNamespaceManager nsmgr, out Location location)
-        {
-            Logger.Verbose($"Reading CuttingTool Location...");
-            location = new Location(xNode, nsmgr);
-            if (!location.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] Location of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Location = location;
-            return true;
-        }
+            => base.TrySet<Location>(xNode, nsmgr, nameof(Location), out location);
 
         public bool TrySetProcessSpindleSpeed(XmlNode xNode, XmlNamespaceManager nsmgr, out ProcessSpindleSpeed processSpindleSpeed)
-        {
-            Logger.Verbose($"Reading CuttingTool ProcessSpindleSpeed...");
-            processSpindleSpeed = new ProcessSpindleSpeed(xNode, nsmgr);
-            if (!processSpindleSpeed.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] ProcessSpindleSpeed of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            ProcessSpindleSpeed = processSpindleSpeed;
-            return true;
-        }
+            => base.TrySet<ProcessSpindleSpeed>(xNode, nsmgr, nameof(ProcessSpindleSpeed), out processSpindleSpeed);
 
         public bool TrySetProcessFeedRate(XmlNode xNode, XmlNamespaceManager nsmgr, out ProcessFeedRate processFeedRate)
-        {
-            Logger.Verbose($"Reading CuttingTool ProcessFeedRate...");
-            processFeedRate = new ProcessFeedRate(xNode, nsmgr);
-            if (!processFeedRate.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] ProcessFeedRate of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            ProcessFeedRate = processFeedRate;
-            return true;
-        }
+            => base.TrySet<ProcessFeedRate>(xNode, nsmgr, nameof(ProcessFeedRate), out processFeedRate);
 
         public bool TryAddMeasurement(XmlNode xNode, XmlNamespaceManager nsmgr, out CuttingToolMeasurement measurement)
-        {
-            Logger.Verbose($"Reading CuttingTool Measurements...");
-            measurement = new CuttingToolMeasurement(xNode, nsmgr);
-            if (!measurement.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] CuttingToolMeasurements of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _measurements.Add(measurement);
-            return true;
-        }
+            => base.TryAdd<CuttingToolMeasurement>(xNode, nsmgr, ref _measurements, out measurement);
 
         public bool TrySetCuttingItems(XmlNode xNode, XmlNamespaceManager nsmgr, out CuttingItems cuttingItems)
-        {
-            Logger.Verbose($"Reading CuttingTool CuttingItems...");
-            cuttingItems = new CuttingItems(xNode, nsmgr);
-            if (!cuttingItems.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Asset] CuttingItems of Asset:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            CuttingItems = cuttingItems;
-            return true;
-        }
+            => base.TrySet<CuttingItems>(xNode, nsmgr, nameof(CuttingItems), out cuttingItems);
 
         /// <inheritdoc />
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            var allErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
 
             if (CutterStatus == null)
             {
-                allErrors.Add(new MtconnectValidationException(
+                validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
                     $"CuttingToolLifeCycle missing 'CutterStatus'."));
-            } else if (!CutterStatus.TryValidate(out ICollection<MtconnectValidationException> cutterStatusErrors)) {
-                allErrors.AddRange(cutterStatusErrors);
             }
 
-            if (ReconditionCount != null && !ReconditionCount.TryValidate(out ICollection<MtconnectValidationException> reconditionCountErrors))
-            {
-                allErrors.AddRange(reconditionCountErrors);
-            }
-
-            if (ToolLife != null && !ToolLife.TryValidate(out ICollection<MtconnectValidationException> toolLifeErrors))
-            {
-                allErrors.AddRange(toolLifeErrors);
-            }
-
-            if (Location != null && !Location.TryValidate(out ICollection<MtconnectValidationException> locationErrors))
-            {
-                allErrors.AddRange(locationErrors);
-            }
-
-            if (ProcessSpindleSpeed != null && !ProcessSpindleSpeed.TryValidate(out ICollection<MtconnectValidationException> processSpindleSpeedErrors))
-            {
-                allErrors.AddRange(processSpindleSpeedErrors);
-            }
-
-            if (ProcessFeedRate != null && !ProcessFeedRate.TryValidate(out ICollection<MtconnectValidationException> processFeedRateErrors))
-            {
-                allErrors.AddRange(processFeedRateErrors);
-            }
-
-            if (Measurements?.Any() == true)
-            {
-                foreach (var measurement in Measurements)
-                {
-                    if (!measurement.TryValidate(out ICollection<MtconnectValidationException> measurementErrors))
-                    {
-                        allErrors.AddRange(measurementErrors);
-                    }
-                }
-            }
-
-            if (CuttingItems != null && !CuttingItems.TryValidate(out ICollection<MtconnectValidationException> cuttingItemsErrors))
-            {
-                allErrors.AddRange(cuttingItemsErrors);
-            }
-
-            validationErrors = allErrors;
-            if (validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR)) {
-                return false;
-            }
-            return true;
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

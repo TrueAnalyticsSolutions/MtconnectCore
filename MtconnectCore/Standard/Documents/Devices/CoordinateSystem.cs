@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
+using MtconnectCore.Standard.Contracts.Enums;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
@@ -42,55 +43,46 @@ namespace MtconnectCore.Standard.Documents.Devices
         public string Origin { get; set; }
 
         /// <inheritdoc cref="CoordinateSystemElements.TRANSFORMATION"/>
-        [MtconnectNodeElements(CoordinateSystemElements.TRANSFORMATION, nameof(TryAddTransformation), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements(CoordinateSystemElements.TRANSFORMATION, nameof(TrySetTransformation), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public Transformation Transformation { get; set; }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode()"/>
+        /// <inheritdoc />
         public CoordinateSystem() : base() { }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
-        public CoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        /// <inheritdoc />
+        public CoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
-        public bool TryAddTransformation(XmlNode xNode, XmlNamespaceManager nsmgr, out Transformation transformation)
-        {
-            Logger.Verbose("Reading Transformation for CoordinateSystem {XnodeKey}", xNode.TryGetAttribute(CoordinateSystemAttributes.ID));
-            transformation = new Transformation(xNode, nsmgr);
-            if (!transformation.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Transformation:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Transformation = transformation;
-            return true;
-        }
+        public bool TrySetTransformation(XmlNode xNode, XmlNamespaceManager nsmgr, out Transformation transformation)
+            => base.TrySet<Transformation>(xNode, nsmgr, nameof(Transformation), out transformation);
 
-        /// <remarks>See Part 2 Section 9.4.1.1 of MTConnect Standard</remarks>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 2 Section 9.4.1.1 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
-
             if (string.IsNullOrEmpty(Id))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"CoordinateSystem MUST include a unique 'id' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"CoordinateSystem MUST include a unique 'id' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"CoordinateSystem MUST include a 'type' attribute. {documentationAttributes}"));
+                    $"CoordinateSystem MUST include a 'type' attribute."));
             }
             else if (!EnumHelper.Contains<CoordinateSystemTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.WARNING,
-                    $"CoordinateSystem 'type' should be one of: [{EnumHelper.ToListString<CoordinateSystemTypes>(", ", string.Empty, string.Empty)}]. {documentationAttributes}"));
+                    $"CoordinateSystem 'type' should be one of: [{EnumHelper.ToListString<CoordinateSystemTypes>(", ", string.Empty, string.Empty)}]."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }
