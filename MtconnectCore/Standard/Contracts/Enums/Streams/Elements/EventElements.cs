@@ -12,6 +12,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
         ACTIVE_AXES,
         /// <summary>
+        /// An actuator state represents a device for moving or controlling a mechanism or system.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
+        ACTUATOR_STATE,
+        /// <summary>
         /// Represents the components ability to communicate its availability. This MUST be provided for the device and MAY be provided for all other components.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
@@ -29,7 +34,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         /// <summary>
         /// The code is just the G, M, or NC code being executed. The Code MUST only contain the simplest form of the executing command.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
+        [Obsolete("Deprecated in version 1.1.0. See BLOCK instead.")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1", MtconnectVersions.V_1_0_1)]
         CODE,
         /// <summary>
         /// The Mode of the Controller.
@@ -66,6 +72,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
         LINE,
+        /// <summary>
+        /// A text notification. Format MAY be any valid text string.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
+        MESSAGE,
+        /// <summary>
+        /// This is a reference to an identifier for the current pallet available at the device.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
+        PALLET_ID,
         /// <summary>
         /// The number of parts produced. This will not be counted by the agent and MUST only be supplied if the controller provides the count.
         /// </summary>
@@ -105,8 +121,14 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         /// <summary>
         /// This is a reference to an identifier for the current tool in use by the Path. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
+        [Obsolete("Deprecated in version 1.2.0. See ToolAssetId")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1", MtconnectVersions.V_1_1_0)]
         TOOL_ID,
+        /// <summary>
+        /// This is a reference to an identifier for the current tool in use by the Path.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
+        TOOL_ASSET_ID,
         /// <summary>
         /// This is a reference to an identifier for the current workholding. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
         /// </summary>

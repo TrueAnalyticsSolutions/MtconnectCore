@@ -27,6 +27,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
         /// The operator can enter operations for the controller to  perform. There is no current program being executed.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
-        MANUAL_DATA_INPUT
+        MANUAL_DATA_INPUT,
+        /// <summary>
+        /// The axes of the device are commanded to stop, but the  spindle continues to function.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
+        FEED_HOLD
     }
 }
