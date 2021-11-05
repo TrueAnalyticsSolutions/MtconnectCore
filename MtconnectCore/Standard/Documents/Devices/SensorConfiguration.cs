@@ -47,21 +47,18 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TryAddChannel(XmlNode xNode, XmlNamespaceManager nsmgr, out Channel channel)
             => base.TryAdd<Channel>(xNode, nsmgr, ref _channels, out channel);
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.6.7.1")]
+        private bool validateFirmwareVersion(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 9.1.3.1 of the MTConnect standard.";
-
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(FirmwareVersion))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"SensorConfiguration MUST include a 'FirmwareVersion' element. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"SensorConfiguration MUST include a 'FirmwareVersion' element."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

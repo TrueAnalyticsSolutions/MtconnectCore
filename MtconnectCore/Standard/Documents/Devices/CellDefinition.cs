@@ -37,20 +37,15 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc/>
         public CellDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            base.TryValidate(out validationErrors);
-            const string documentationAttributes = "See Part 2 Section 7.2.3.6.3 of the MTConnect standard.";
-
+        private bool validateKey(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Key))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"CellDefinition MUST include a 'key' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"CellDefinition MUST include a 'key' attribute."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

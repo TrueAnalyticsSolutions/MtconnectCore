@@ -37,22 +37,15 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc />
         public ComponentRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
-
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 9.2.1.1 of the MTConnect standard.";
-
+        private bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(IdRef))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"ComponentRelationship MUST include a 'idRef' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"ComponentRelationship MUST include a 'idRef' attribute."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

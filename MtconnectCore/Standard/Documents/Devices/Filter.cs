@@ -32,21 +32,17 @@ namespace MtconnectCore.Standard.Documents.Devices
             Value = xNode.InnerText;
         }
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 7.2.3.3.1 of the MTConnect standard.";
-
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Filter MUST include a 'type' attribute. {documentationAttributes}"));
+                    $"Filter MUST include a 'type' attribute."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

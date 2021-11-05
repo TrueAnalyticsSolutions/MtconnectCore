@@ -23,14 +23,14 @@ namespace MtconnectCore.Standard.Documents.Assets
         {
             base.TryValidate(out validationErrors);
 
-            if (!SourceNode.IsEnumName<CuttingToolMeasurementSubTypes>())
+            if (!EnumHelper.Contains<CuttingToolMeasurementSubTypes>(SourceNode.LocalName))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"Unknown CuttingToolMeasurement SubType '{SourceNode.LocalName}'."));
             }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }
