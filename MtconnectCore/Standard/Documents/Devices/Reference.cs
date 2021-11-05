@@ -28,21 +28,17 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc/>
         public Reference(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        private bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 4.8 of the MTConnect standard.";
-
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(IdRef))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Reference MUST include a unique 'idRef' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Reference MUST include a unique 'idRef' attribute."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

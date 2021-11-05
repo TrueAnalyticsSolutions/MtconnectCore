@@ -3,24 +3,20 @@
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
     /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.SPINDLE_SPEED"/>
+    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.GLOBAL_POSITION"/>
     /// </summary>
     [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_1_0)]
-    public enum SpindleSpeedSubTypes {
+    public enum GlobalPositionSubTypes
+    {
         /// <summary>
-        /// The rotational speed of a rotary axis.  ROTARY_MODE MUST be SPINDLE.
+        /// The position of the component as read from the device. 
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_1_0)]
         ACTUAL,
         /// <summary>
-        /// The rotational speed the as specified in the program. 
+        /// The position computed by the controller. 
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_1_0)]
-        COMMANDED,
-        /// <summary>
-        /// The operator’s overridden value. Percent of commanded.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_1_0)]
-        OVERRIDE
+        COMMANDED
     }
 }

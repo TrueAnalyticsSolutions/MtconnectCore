@@ -46,28 +46,31 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         public bool TryAddComponent(XmlNode xNode, XmlNamespaceManager nsmgr, out Component component) => base.TryAdd<Component>(xNode, nsmgr, ref _components, out component);
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
+        private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 1 Section 4.2.1 of the MTConnect standard.";
-
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Name))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Device MUST include a 'name' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Device MUST include a 'name' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.3.1")]
+        private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Uuid))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Device MUST include a 'uuid' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Device MUST include a 'uuid' attribute."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

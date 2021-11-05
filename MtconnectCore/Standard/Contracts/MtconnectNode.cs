@@ -235,7 +235,7 @@ namespace MtconnectCore.Standard.Contracts
         /// <inheritdoc/>
         public virtual bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = InitializationErrors;// new List<MtconnectValidationException>();
+            validationErrors = InitializationErrors;
 
             Type thisType = this.GetType();
 
@@ -245,13 +245,12 @@ namespace MtconnectCore.Standard.Contracts
                 MethodInfo[] methods = thisType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance)
                     .Where(o => !o.IsSpecialName)
                     .Where(o => o.ReturnType == typeof(bool))
-                    //.Where(o => o.GetParameters().FirstOrDefault(p => p.IsOut && p.ParameterType == typeof(ICollection<MtconnectValidationException>)) != null)
                     .ToArray();
-                Type validationAttribute = typeof(MtconnectValidationMethodAttribute);
+                Type validationAttribute = typeof(MtconnectVersionApplicabilityAttribute);
                 foreach (MethodInfo method in methods)
                 {
-                    var methodValidations = method.GetCustomAttributes<MtconnectValidationMethodAttribute>(true);
-                    if (methodValidations.Any(o => o.Version == MtconnectVersion.Value))
+                    var methodValidations = method.GetCustomAttributes<MtconnectVersionApplicabilityAttribute>(true);
+                    if (methodValidations.Any(o => o.Compare(MtconnectVersion.Value)))
                     {
                         // Verify correct signature
                         ParameterInfo outParam = method.GetParameters().FirstOrDefault(o => o.IsOut);

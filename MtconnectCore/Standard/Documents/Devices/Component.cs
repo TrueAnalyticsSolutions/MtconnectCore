@@ -126,44 +126,55 @@ namespace MtconnectCore.Standard.Documents.Devices
             _references.Add(reference);
             return true;
         }
-
-        /// <inheritdoc />
-        /// <remarks>Version 1.2.0 of the MTConnect specification, see Part 2 Section 3.4.1.</remarks>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 3.4.1 of the MTConnect standard.";
-
+        
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
+        private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Id))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"DataItem MUST include a unique 'id' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
+        private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Name))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem MUST include a unique 'name' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a unique 'name' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-            if (SampleRate.HasValue)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
-                    $"DataItem 'sampleRate' is DEPRECATED in MTConnect Version 1.2. Replaced by 'sampleInterval'. {documentationAttributes}"));
-            }
-
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
+        private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Uuid) && Uuid.Length > 255)
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem 'uuid' cannot exceed a length of 255 characters. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"DataItem 'uuid' cannot exceed a length of 255 characters."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.3")]
+        private bool validateSampleRate_Deprecated(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            if (SampleRate.HasValue)
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"DataItem 'sampleRate' is DEPRECATED in MTConnect Version 1.2. Replaced by 'sampleInterval'."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

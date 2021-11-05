@@ -47,35 +47,33 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out CompositionDescription compositionDescription)
             => base.TrySet<CompositionDescription>(xNode, nsmgr, nameof(Description), out compositionDescription);
 
-        /// <inheritdoc />
-        /// <remarks>See Part 2 Section 4.6.2 of the MTConnect specification.</remarks>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 4.6.2 of the MTConnect standard.";
-
+        private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Id))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Composition MUST include a 'id' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Composition MUST include a 'id' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Composition MUST include a 'type' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Composition MUST include a 'type' attribute."));
             }
             else if (!EnumHelper.Contains<CompositionTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
-                    $"Composition 'type' of '{Type}' is not currently defined in the MTConnect standard and may not be supported. {documentationAttributes}"));
+                    ValidationSeverity.WARNING,
+                    $"Composition 'type' of '{Type}' is not currently defined in the MTConnect standard and may not be supported."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

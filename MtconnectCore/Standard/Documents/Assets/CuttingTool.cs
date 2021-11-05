@@ -108,7 +108,7 @@ namespace MtconnectCore.Standard.Documents.Assets
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectValidationMethod(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1")]
         private bool validateAssetId_Recommendation(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             

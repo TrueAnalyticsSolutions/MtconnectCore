@@ -52,31 +52,30 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc/>
         public DeviceRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
-
         private string[] validRoles = { "SYSTEM", "AUXILIARY" };
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        private bool validateDeviceUuidRef(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 9.2.1.1 of the MTConnect standard.";
-
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(DeviceUuidRef))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DeviceRelationship MUST include a 'deviceUuidRef' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"DeviceRelationship MUST include a 'deviceUuidRef' attribute."));
             }
-            
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        private bool validateRole(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Role) && !EnumHelper.Contains<DeviceRelationshipRoleTypes>(Role))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DeviceRelationship 'role' MUST be one of the following types: [{EnumHelper.ToListString<DeviceRelationshipRoleTypes>(", ", string.Empty, string.Empty)}]. {documentationAttributes}"));
+                    $"DeviceRelationship 'role' MUST be one of the following types: [{EnumHelper.ToListString<DeviceRelationshipRoleTypes>(", ", string.Empty, string.Empty)}]."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }
