@@ -1,13 +1,17 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
+using CoordinateSystemTypes = MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
@@ -104,105 +108,250 @@ namespace MtconnectCore.Standard.Documents.Devices
         public DataItem() : base() { }
 
         /// <inheritdoc/>
-        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
         public bool TrySetSource(XmlNode xNode, XmlNamespaceManager nsmgr, out Source source)
-        {
-            Logger.Verbose($"Reading Source");
-            source = new Source(xNode, nsmgr);
-            if (!source.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Source of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Source = source;
-            return true;
-        }
+            => base.TrySet<Source>(xNode, nsmgr, nameof(Source), out source);
 
         public bool TryAddConstraint(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItemConstraint constraint)
-        {
-            Logger.Verbose($"Reading Constraint");
-            constraint = new DataItemConstraint(xNode, nsmgr);
-            if (!constraint.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Constraint of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _constraints.Add(constraint);
-            return true;
-        }
+            => base.TryAdd<DataItemConstraint>(xNode, nsmgr, ref _constraints, out constraint);
 
         public bool TryAddFilter(XmlNode xNode, XmlNamespaceManager nsmgr, out Filter filter)
-        {
-            Logger.Verbose($"Reading Filter");
-            filter = new Filter(xNode, nsmgr);
-            if (!filter.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Filter of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _filters.Add(filter);
-            return true;
-        }
+            => base.TryAdd<Filter>(xNode, nsmgr, ref _filters, out filter);
 
         public bool TrySetDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItemDefinition dataItemDefinition)
-        {
-            Logger.Verbose($"Reading Definition");
-            dataItemDefinition = new DataItemDefinition(xNode, nsmgr);
-            if (!dataItemDefinition.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Definition of DataItem '{Id}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            Definition = dataItemDefinition;
-            return true;
-        }
+            => base.TrySet<DataItemDefinition>(xNode, nsmgr, nameof(Definition), out dataItemDefinition);
 
-        /// <remarks>See Part 2 Section 6.2.1 of MTConnect Standard</remarks>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
+        private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 2 Section 7.2.2 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Id))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem MUST include a unique 'id' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a unique 'id' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-            if (string.IsNullOrEmpty(Type))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'type' attribute. {documentationAttributes}"));
-            }
-
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
+        private bool validateCategory(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Category))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'category' attribute. {documentationAttributes}"));
-            } else if (!EnumHelper.Contains<CategoryTypes>(Category)) {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem 'category' attribute must be one of the following: [{EnumHelper.ToListString<CategoryTypes>(", ", string.Empty, string.Empty)}]. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a 'category' attribute."));
             }
-
-            if (Category.ToUpper() == "SAMPLE" && string.IsNullOrEmpty(Units))
+            else if (!EnumHelper.Contains<CategoryTypes>(Category))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'units' attribute when 'category' equals 'SAMPLE'. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"DataItem 'category' attribute must be one of the following: [{EnumHelper.ToListString<CategoryTypes>(", ", string.Empty, string.Empty)}]."));
             }
-
-            if (!string.IsNullOrEmpty(CoordinateSystem) && !EnumHelper.Contains<Contracts.Enums.Devices.CoordinateSystemTypes>(CoordinateSystem))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"DataItem 'coordinateSystem' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.CoordinateSystemTypes>(", ", string.Empty, string.Empty)}]. {documentationAttributes}"));
-            }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
+        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(Type))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a 'type' attribute."));
+            }
+
+            // Validate Category, Type and SubType
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Category))
+            {
+                if (Type.StartsWith("x:"))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.MESSAGE,
+                        $"DataItem type of '{Type}' is an extension of the MTConnect Standard in version '{MtconnectVersion}'."));
+                }
+                else if (Enum.TryParse<CategoryTypes>(Category, out CategoryTypes category))
+                {
+                    switch (category)
+                    {
+                        case CategoryTypes.SAMPLE:
+                            if (!EnumHelper.Contains<SampleTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'."));
+                            }
+                            else if (!EnumHelper.ValidateToVersion<SampleTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not supported for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
+                            }
+                            break;
+                        case CategoryTypes.EVENT:
+                            if (!EnumHelper.Contains<EventTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'."));
+                            }
+                            else if (!EnumHelper.ValidateToVersion<EventTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not supported for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
+                            }
+                            break;
+                        case CategoryTypes.CONDITION:
+                            if (!EnumHelper.Contains<ConditionTypes>(Type))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'."));
+                            }
+                            else if (!EnumHelper.ValidateToVersion<ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+                            {
+                                validationErrors.Add(new MtconnectValidationException(
+                                    ValidationSeverity.WARNING,
+                                    $"DataItem type of '{Type}' is not supported for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
+        private bool validateUnits(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Units))
+            {
+                if (!EnumHelper.Contains<UnitsTypes>(Units))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem units of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
+                }
+                else if (!EnumHelper.ValidateToVersion<UnitsTypes>(Units, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem units of '{Units}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                }
+            } else if (Category.ToUpper() == "SAMPLE") {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a 'units' attribute when 'category' equals 'SAMPLE'."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
+        private bool validateNativeUnits(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(NativeUnits))
+            {
+                if (!EnumHelper.Contains<NativeUnitsTypes>(NativeUnits))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem nativeUnits of '{NativeUnits}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
+                }
+                else if (!EnumHelper.ValidateToVersion<NativeUnitsTypes>(NativeUnits, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem nativeUnits of '{NativeUnits}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1", MtconnectVersions.V_1_1_0)]
+        private bool validateRepresentation_NotImplemented(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Representation)) {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, "DataItem does not yet support 'representation' until version 1.2.0 of the MTConnect Standard."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        private bool validateRepresentation(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Representation))
+            {
+                if (!EnumHelper.Contains<RepresentationTypes>(Representation))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem representation of '{Representation}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
+                }
+                else if (!EnumHelper.ValidateToVersion<RepresentationTypes>(Representation, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem representation of '{Representation}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                }
+
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
+        private bool validateCoordinateSystem(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(CoordinateSystem))
+            {
+                if (!EnumHelper.Contains<CoordinateSystemTypes>(CoordinateSystem))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.WARNING,
+                        $"DataItem 'coordinateSystem' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.CoordinateSystemTypes>(", ", string.Empty, string.Empty)}]."));
+                }
+                else if (!EnumHelper.ValidateToVersion<CoordinateSystemTypes>(CoordinateSystem, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem coordinateSystem of '{CoordinateSystem}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        private bool validateStatistic(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Statistic))
+            {
+                if (!EnumHelper.Contains<StatisticTypes>(Statistic))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"DataItem 'statistic' attribute must be one of the following: [{EnumHelper.ToListString<StatisticTypes>(", ", string.Empty, string.Empty)}]."));
+                }
+                else if (!EnumHelper.ValidateToVersion<StatisticTypes>(Representation, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem statistic of '{Statistic}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
     }
 }

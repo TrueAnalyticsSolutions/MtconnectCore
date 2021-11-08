@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Errors;
 using System;
@@ -17,7 +18,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CutterStatus() : base() { }
 
         /// <inheritdoc />
-        public CutterStatus(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public CutterStatus(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             var statusValues = new List<string>();
             foreach (XmlNode childNode in xNode.SelectNodes("Status",nsmgr, Constants.DEFAULT_XML_NAMESPACE))
@@ -30,6 +31,8 @@ namespace MtconnectCore.Standard.Documents.Assets
         /// <inheritdoc />
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
+            base.TryValidate(out validationErrors);
+
             const string documentationAttributes = "See Part 4 Section 6.1.10 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
             var invalidMappings = new Dictionary<CuttingToolStatusTypes, CuttingToolStatusTypes[]>() {
@@ -83,14 +86,13 @@ namespace MtconnectCore.Standard.Documents.Assets
                                 validationErrors.Add(new MtconnectValidationException(
                                     Contracts.Enums.ValidationSeverity.ERROR,
                                     $"CutterStatus '{status}' MUST NOT be used with the following CutterStatus types: [{string.Join(", ", invalidMap.Select(o => o.ToString()))}].\r\n {documentationAttributes}"));
-                                return false;
                             }
                         }
                     }
                 }
             }
 
-            return true;
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

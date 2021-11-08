@@ -14,20 +14,23 @@ namespace MtconnectCoreExample
                      //Formatting = Newtonsoft.Json.Formatting.Indented
                 };
                 Consoul.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mtcDocument, options), ConsoleColor.DarkGray);
-
-                if (((T)mtcDocument).TryValidate(out ICollection<MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException> validationErrors) == false)
+                bool validationResult = ((T)mtcDocument).TryValidate(out ICollection<MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException> validationErrors);
+                foreach (var error in validationErrors)
                 {
-                    foreach (var error in validationErrors)
+                    ConsoleColor color;
+                    switch (error.Severity)
                     {
-                        if (error.Severity == ValidationSeverity.ERROR)
-                        {
-                            Consoul.Write(error.ToString(), ConsoleColor.Red);
-                        }
-                        else
-                        {
-                            Consoul.Write(error.ToString(), ConsoleColor.Yellow);
-                        }
+                        case ValidationSeverity.WARNING:
+                            color = ConsoleColor.Yellow;
+                            break;
+                        case ValidationSeverity.ERROR:
+                            color = ConsoleColor.Red;
+                            break;
+                        default:
+                            color = ConsoleColor.Gray;
+                            break;
                     }
+                    Consoul.Write(error.ToString(), color);
                 }
 
                 Consoul.Write("Done!", ConsoleColor.Green);

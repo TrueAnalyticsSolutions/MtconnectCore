@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -57,7 +58,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 0..1
         /// </summary>
-        [MtconnectNodeElements("Samples/*", nameof(TryAddSample), XmlNamespace = "m")]
+        [MtconnectNodeElements("Samples/*", nameof(TryAddSample), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public ICollection<Sample> Samples => _samples;
 
         private List<Event> _events = new List<Event>();
@@ -66,7 +67,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 0..1
         /// </summary>
-        [MtconnectNodeElements("Events/*", nameof(TryAddEvent), XmlNamespace = "m")]
+        [MtconnectNodeElements("Events/*", nameof(TryAddEvent), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public ICollection<Event> Events => _events;
 
         private List<Condition> _conditions = new List<Condition>();
@@ -75,75 +76,58 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 0..1
         /// </summary>
-        [MtconnectNodeElements("Condition/*", nameof(TryAddCondition), XmlNamespace = "m")]
+        [MtconnectNodeElements("Condition/*", nameof(TryAddCondition), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public ICollection<Condition> Conditions => _conditions;
 
         /// <inheritdoc/>
         public Component() { }
 
         /// <inheritdoc/>
-        public Component(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, "m") { }
+        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
-        public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample)
-        {
-            Logger.Verbose("Reading Sample {XnodeKey}", xNode.TryGetAttribute(SampleAttributes.DATA_ITEM_ID));
-            sample = new Sample(xNode, nsmgr);
-            if (!sample.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Stream] Sample {sample.DataItemId} of Component '{Name}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _samples.Add(sample);
-            return true;
-        }
+        public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample) => base.TryAdd<Sample>(xNode, nsmgr, ref _samples, out sample);
 
-        public bool TryAddEvent(XmlNode xNode, XmlNamespaceManager nsmgr, out Event @event)
-        {
-            Logger.Verbose("Reading Event {XnodeKey}", xNode.TryGetAttribute(EventAttributes.DATA_ITEM_ID));
-            @event = new Event(xNode, nsmgr);
-            if (!@event.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Stream] Event {@event.DataItemId} of Component '{Name}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _events.Add(@event);
-            return true;
-        }
+        public bool TryAddEvent(XmlNode xNode, XmlNamespaceManager nsmgr, out Event @event) => base.TryAdd<Event>(xNode, nsmgr, ref _events, out @event);
 
-        public bool TryAddCondition(XmlNode xNode, XmlNamespaceManager nsmgr, out Condition condition)
-        {
-            Logger.Verbose("Reading Condition {XnodeKey}", xNode.TryGetAttribute(ConditionAttributes.DATA_ITEM_ID));
-            condition = new Condition(xNode, nsmgr);
-            if (!condition.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Stream] Condition {condition.DataItemId} of Component '{Name}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _conditions.Add(condition);
-            return true;
-        }
+        public bool TryAddCondition(XmlNode xNode, XmlNamespaceManager nsmgr, out Condition condition) => base.TryAdd<Condition>(xNode, nsmgr, ref _conditions, out condition);
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4")]
+        private bool validateComponentId(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 1 Section 4.3.1 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
-
             if (string.IsNullOrEmpty(ComponentId))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Component MUST include a 'componentId' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Component MUST include a 'componentId' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4")]
+        private bool validateComponentReference(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(ComponentReference))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Component MUST include a 'component' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Component MUST include a 'component' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4", MtconnectVersions.V_1_2_0)]
+        private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(Name)) {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Component MUST include a 'name' attribute."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

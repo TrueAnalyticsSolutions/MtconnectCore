@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Error;
 using MtconnectCore.Standard.Contracts.Enums.Error.Attributes;
 using System;
@@ -20,7 +21,7 @@ namespace MtconnectCore.Standard.Documents.Error
         public string Value { get; set; }
 
         public Error() : base() { }
-        public Error(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public Error(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             Value = xNode.InnerText;
         }
