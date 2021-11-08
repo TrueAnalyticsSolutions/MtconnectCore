@@ -76,6 +76,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.12")]
         ELECTRICAL_ENERGY,
         /// <summary>
+        /// An indication that the end of a piece of bar stock has been reached.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.3")]
+        END_OF_BAR,
+        /// <summary>
         /// Represents the amount of a substance remaining compared to the planned  maximum amount of that substance
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.12")]
@@ -95,6 +100,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.3")]
         HARDWARE,
+        /// <summary>
+        /// An indication of the operation condition of an Interface component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.3")]
+        INTERFACE_STATE,
         [Obsolete("Deprecated in Rel. 1.2. See FILL_LEVEL")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.3", MtconnectVersions.V_1_1_0)]
         LEVEL,

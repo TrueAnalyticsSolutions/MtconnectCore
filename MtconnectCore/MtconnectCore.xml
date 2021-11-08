@@ -202,6 +202,13 @@
             <param name="documentVersion">Reference to the version of MTConnect implemented in the Response Document.</param>
             <returns>Flag for whether the MTConnect Response Document version matches with the specified <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.MinimumVersion"/> according to the <see cref="!:ComparisonType"/>.</returns>
         </member>
+        <member name="M:MtconnectCore.Standard.Contracts.EnumHelper.Enumify(System.String)">
+            <summary>
+            Translates a raw string into its enum-safe equivelant.
+            </summary>
+            <param name="value">Raw string value</param>
+            <returns>Enum name safe equivelant of the provided value.</returns>
+        </member>
         <member name="M:MtconnectCore.Standard.Contracts.EnumHelper.Contains``1(System.String)">
             <summary>
             Compares the provided <paramref name="value"/> against the enum values.
@@ -235,6 +242,11 @@
             The number of cutting items.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolArchetypeReferenceAttributes.SOURCE">
+            <summary>
+            The URL of the CuttingToolArchetype document . This MUST  fully qualified URL as in http://example.com/asset/A213155
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolAttributes.ASSET_ID">
             <summary>
             The unique identifier of the instance of this tool. The unique identifier of the instance of this tool. This will be the same as the toolId and serialNumber in most cases. The assetId SHOULD be the combination of the toolId and serialNumber as in toolId.serialNumber or an equivalent implementation dependent identification scheme.
@@ -263,6 +275,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolAttributes.TOOL_ID">
             <summary>
             The identifier for the class of cutting tool. The identifier for a class of cutting tools. This is defined as an XML string type and is implementation dependent.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolAttributes.REMOVED">
+            <summary>
+            This is an indicator that the Cutting Tool has been removed from the  piece of equipment.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolDefinitionAttributes.FORMAT">
@@ -416,6 +433,11 @@
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.INCRIBED_CIRCLE_DIAMETER">
+            <summary>
+            The diameter of a circle to which all edges of a equilateral and round regular insert are tangential.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.CuttingItemMeasurementSubTypes.INSCRIBED_CIRCLE_DIAMETER">
             <summary>
             The diameter of a circle to which all edges of a equilateral and round regular insert are tangential.
             </summary>
@@ -653,6 +675,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolElements.CUTTING_TOOL_LIFE_CYCLE">
             <summary>
             MTConnect data regarding the use phase of this tool.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolElements.CUTTING_TOOL_ARCHETYPE_REFERENCE">
+            <summary>
+            The content of this XML element is the Asset Id of the  CuttingToolArchetype document. It MAY also contain a source attribute that gives the URL of the archetype data as well.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolLifeCycleElements.CUTTER_STATUS">
@@ -1404,6 +1431,41 @@
             Available options for the <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Category"/>
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes">
+            <summary>
+            Sub-components of <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AUXILIARIES"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes.BAR_FEEDER">
+            <summary>
+            BarFeeder is an XML container that represents the information for a unit involved in delivering bar stock to a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes.ENVIRONMENTAL">
+            <summary>
+            Environmental is an XML container that represents the information for a unit or function involved in monitoring, managing, or conditioning the environment around or within a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes.LOADER">
+            <summary>
+            Loader is an XML container that represents the information for a unit comprised of all the parts involved in moving and distributing materials, parts, tooling, and other items to or from a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes.SENSOR">
+            <summary>
+            Sensor is a XML container that represents the information for a piece of equipment that responds to a physical stimulus and transmits a resulting impulse or value from a sensing unit. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes.TOOLING_DELIVERY">
+            <summary>
+            ToolingDelivery is an XML container that represents the information for a unit involved in managing, positioning, storing, and delivering tooling within a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes.WASTE_DISPOSAL">
+            <summary>
+            WasteDisposal is an XML container that represents the information for a unit comprised of all the parts involved in removing manufacturing byproducts from a piece of equipment.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AxesSubComponentTypes">
             <summary>
             Sub-components of <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AXES"/>
@@ -1434,6 +1496,11 @@
             A mechanical device for moving or controlling a mechanism or system. 
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AUXILIARIES">
+            <summary>
+            An XML container used to organize information for Lower Leve elements representing functional sub-systems that provide supplementary or extended capabilities for a piece of equipment, but they are not required for the basic operation of the equipment.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AXES">
             <summary>
             The Axes component is a container for the actual axes of which there are currently two types:  Linear and Rotary.
@@ -1462,6 +1529,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.THERMOSTAT">
             <summary>
             A sensor capable of measuring the temperature of a component. The temperature is always given in Celsius.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.RESOURCES">
+            <summary>
+            An XML container used to organize information for Lower Leve elements representing types of items, materials, and personnel that support the operation of a piece of equipment or work to be performed at a location. Resources also represents materials or other items consumed or transformed by a piece of equipment for production of parts or other types of goods.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SENSOR">
@@ -1500,19 +1572,24 @@
             A Path represents the motion of a control point as it moves through space as controlled by a set  of control instructions (i.e. vector move). When Path is not defined, DataItems relative to the Path MAY be reported for the Controller.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ResourcesSubComponentTypes">
+            <summary>
+            Sub-components of <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.RESOURCES"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ResourcesSubComponentTypes.MATERIALS">
+            <summary>
+            Materials is an XML container that provides information about materials or other items consumed or used by the piece of equipment for production of parts, materials, or other types of goods. Materials also represents parts or part stock that are present at a piece of equipment or location to which work is applied to transform the part or stock material into a more finished state.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ResourcesSubComponentTypes.PERSONNEL">
+            <summary>
+            Personnel is an XML container that provides information about an individual or individuals who either control, support, or otherwise interface with a piece of equipment.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes">
             <summary>
             Sub-components of <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SYSTEMS"/>
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.HYDRAULIC">
-            <summary>
-            A component representing the hydraulics and hydraulic distribution system of a device.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.PNEUMATIC">
-            <summary>
-            A component representing the pneumatics and compressed air distribution system of a device.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.COOLANT">
@@ -1520,9 +1597,9 @@
             A Component representing the coolant and coolant distribution system of a device.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.LUBRICATION">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.DIELECTRIC">
             <summary>
-            A Component representing the lubricant and lubrication distribution system of a device. 
+            Dielectric is an XML container that represents the information for a system that manages a chemical mixture used in a manufacturing process being performed at that piece of equipment. For example, this could describe the dielectric system for an EDM process or the chemical bath used in a plating process.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.ELECTRIC">
@@ -1530,11 +1607,216 @@
             A Component representing the electrical supply for a device. 
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.ENCLOSURE">
+            <summary>
+            Enclosure is an XML container that represents the information for a structure used to contain or isolate a piece of equipment or area. The Enclosure system may provide information regarding access to the internal components of a piece of equipment or the conditions within the enclosure.For example, Door may be defined as a Lower Level Component or Composition element of the Enclosure system.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.FEEDER">
+            <summary>
+            Feeder is an XML container that represents the information for a system that manages the delivery of materials within a piece of equipment. For example, this could describe the wire delivery system for an EDM or welding process; conveying system or pump and valve system distributing material to a blending station; or a fuel delivery system feeding a furnace.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.HYDRAULIC">
+            <summary>
+            A component representing the hydraulics and hydraulic distribution system of a device.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.LUBRICATION">
+            <summary>
+            A Component representing the lubricant and lubrication distribution system of a device. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.PNEUMATIC">
+            <summary>
+            A component representing the pneumatics and compressed air distribution system of a device.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.PROCESS_POWER">
+            <summary>
+            ProcessPower is an XML container that represents the information for a power source associated with a piece of equipment that supplies energy to the manufacturing process separate from the Electric system. For example, this could be the power source for an EDM machining process, an electroplating line, or a welding system.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.PROTECTIVE">
+            <summary>
+            Protective is an XML container that represents the information for those functions that detect or prevent harm or damage to equipment or personnel. Protective does not include the information relating to the Enclosure system.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes">
             <summary>
             Available types of sub-parts of a <see cref="T:MtconnectCore.Standard.Documents.Devices.Component"/>.
             </summary>
             <remarks>See Part 2 Section 6 of the MTConnect specification.</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.ACTUATOR">
+            <summary>
+            A mechanism for moving or controlling a mechanical part of a piece of  equipment. It takes energy usually provided by air, electric current, or liquid and converts the energy into some kind of motion.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.AMPLIFIER">
+            <summary>
+            An electronic component or circuit for amplifying power, electric  current, or voltage
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.BALLSCREW">
+            <summary>
+            A mechanical structure for transforming rotary motion into linear  motion.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.BELT">
+            <summary>
+            An endless flexible band used to transmit motion for a piece of  equipment or to convey materials and objects.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.BRAKE">
+            <summary>
+            A mechanism for slowing or stopping a moving object by the  absorption or transfer of the energy of momentum, usually by means of friction, electrical force, or magnetic force.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.CHAIN">
+            <summary>
+            An interconnected series of objects that band together and are used to  transmit motion for a piece of equipment or to convey materials and objects.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.CHOPPER">
+            <summary>
+            A mechanism used to break material into smaller pieces.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.CHUCK">
+            <summary>
+            A mechanism that holds a part, stock material, or any other item in  place.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.CHUTE">
+            <summary>
+            An inclined channel for conveying material.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.CIRCUIT_BREAKER">
+            <summary>
+            A mechanism for interrupting an electric circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.CLAMP">
+            <summary>
+            A mechanism used to strengthen, support, or fasten objects in place.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.COMPRESSOR">
+            <summary>
+            A pump or other mechanism for reducing volume and increasing  pressure of gases in order to condense the gases to drive pneumatically powered pieces of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.DOOR">
+            <summary>
+            A mechanical mechanism or closure that can cover a physical access  portal into a piece of equipment allowing or restricting access to other parts of the equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.DRAIN">
+            <summary>
+            A mechanism that allows material to flow for the purpose of drainage  from, for example, a vessel or tank.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.ENCODER">
+            <summary>
+            A mechanism used to measure rotary position.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.FAN">
+            <summary>
+            Any mechanism for producing a current of air.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.FILTER">
+            <summary>
+            Any substance or structure through which liquids or gases are passed to  remove suspended impurities or to recover solids.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.GRIPPER">
+            <summary>
+            A mechanism that holds a part, stock material, or any other item in  place.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.HOPPER">
+            <summary>
+            A chamber or bin in which materials are stored temporarily, typically  being filled through the top and dispensed through the bottom.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.LINEAR_POSITION_FEEDBACK">
+            <summary>
+            A mechanism that measures linear motion or position.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.MOTOR">
+            <summary>
+            A mechanism that converts electrical, pneumatic, or hydraulic energy  into mechanical energy.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.OIL">
+            <summary>
+            A viscous liquid.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.POWER_SUPPLY">
+            <summary>
+            A unit that provides power to electric mechanisms
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.PULLEY">
+            <summary>
+            A mechanism or wheel that turns in a frame or block and serves to  change the direction of or to transmit force.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.PUMP">
+            <summary>
+            An apparatus raising, driving, exhausting, or compressing fluids or  gases by means of a piston, plunger, or set of rotating vanes.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.SENSING_ELEMENT">
+            <summary>
+            A mechanism that provides a signal or measured value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.STORAGE_BATTERY">
+            <summary>
+            A component consisting of one or more cells, in which chemical energy  is converted into electricity and used as a source of power.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.SWITCH">
+            <summary>
+            A mechanism for turning on or off an electric current or for making or  breaking a circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.TANK">
+            <summary>
+            A receptacle or container for holding material.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.TENSIONER">
+            <summary>
+            A mechanism that provides or applies a stretch or strain to another  mechanism.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.TRANSFORMER">
+            <summary>
+            A mechanism that transforms electric energy from a source to a  secondary circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.VALVE">
+            <summary>
+            Any mechanism for halting or controlling the flow of a liquid, gas, or  other material through a passage, pipe, inlet, or outlet.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.WATER">
+            <summary>
+            A fluid.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.WIRE">
+            <summary>
+            A string like piece or filament of relatively rigid or flexible material  provided in a variety of diameters
+            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ControllerLowerLevelComponentTypes">
             <remarks>See Part 2 Section 5.2 of the MTConnect specification.</remarks>
@@ -1562,6 +1844,11 @@
             <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AMPERAGE"/>
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.ACTUAL">
+            <summary>
+            The measured amperage being delivered  from a power source.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.ALTERNATING">
             <summary>
             The measurement of alternating current. If not  specified further in statistic, defaults to RMS Current
@@ -1570,6 +1857,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.DIRECT">
             <summary>
             The measurement of DC current
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.TARGET">
+            <summary>
+            The desired or preset amperage to be  delivered from a power source.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AngleSubTypes">
@@ -1647,6 +1939,36 @@
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CHUCK_INTERLOCK"/>
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CompositionStateSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CompositionStateSubTypes.ACTION">
+            <summary>
+            An indication of the operating state of a mechanism represented by a  Composition type component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CompositionStateSubTypes.LATERAL">
+            <summary>
+            An indication of the position of a mechanism that may move in a lateral  direction. The mechanism is represented by a Composition type component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CompositionStateSubTypes.MOTION">
+            <summary>
+            An indication of the open or closed state of a mechanism. The  mechanism is represented by a Composition type component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CompositionStateSubTypes.SWITCHED">
+            <summary>
+            An indication of the activation state of a mechanism represented by a  Composition type component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CompositionStateSubTypes.VERTICAL">
+            <summary>
+            An indication of the position of a mechanism that may move in a vertical  direction. The mechanism is represented by a Composition type component.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.ACCELERATION">
             <summary>
             Rate of Change of Velocity 
@@ -1717,6 +2039,11 @@
             The measurement of electrical energy consumption by a Component
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.END_OF_BAR">
+            <summary>
+            An indication that the end of a piece of bar stock has been reached.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.FILL_LEVEL">
             <summary>
             Represents the amount of a substance remaining compared to the planned  maximum amount of that substance
@@ -1735,6 +2062,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.HARDWARE">
             <summary>
             The hardware subsystem of the Component’s operation condition. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.INTERFACE_STATE">
+            <summary>
+            An indication of the operation condition of an Interface component.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes.LINEAR_FORCE">
@@ -1862,6 +2194,36 @@
             The measurement of power consumed or dissipated by an electrical circuit or device
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ControllerModeOverrideSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROLLER_MODE_OVERRIDE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ControllerModeOverrideSubTypes.DRY_RUN">
+            <summary>
+            A setting or operator selection used to execute a test mode to confirm the  execution of machine functions.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ControllerModeOverrideSubTypes.SINGLE_BLOCK">
+            <summary>
+            A setting or operator selection that changes the behavior of the controller  on a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ControllerModeOverrideSubTypes.MACHINE_AXIS_LOCK">
+            <summary>
+            A setting or operator selection that changes the behavior of the controller  on a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ControllerModeOverrideSubTypes.OPTIONAL_STOP">
+            <summary>
+            A setting or operator selection that changes the behavior of the controller on a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ControllerModeOverrideSubTypes.TOOL_CHANGE_STOP">
+            <summary>
+            A setting or operator selection that changes the behavior of the controller on a piece of equipment.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DIRECTION"/>
@@ -1890,6 +2252,66 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EndOfBarSubTypes.AUXILIARY">
             <summary>
             When multiple locations on a piece of bar stock are  referenced as the indication for the End_of_Bar, the additional location(s) MUST be designated as AUXILIARY indication(s) for the End_of_Bar.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentModeSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EQUIPMENT_MODE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentModeSubTypes.LOADED">
+            <summary>
+            An indication that the sub-parts of a piece of equipment are under load.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentModeSubTypes.WORKING">
+            <summary>
+            An indication that a piece of equipment is performing any activity – the  equipment is active and performing a function under load or not.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentModeSubTypes.OPERATING">
+            <summary>
+            An indication that the major sub-parts of a piece of equipment are  powered or performing any activity whether producing a part or product or not.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentModeSubTypes.POWERED">
+            <summary>
+            An indication that primary power is applied to the piece of equipment  and, as a minimum, the controller or logic portion of the piece of equipment is powered and functioning or components that are required to remain on are powered.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentModeSubTypes.DELAY">
+            <summary>
+            An indication that a piece of equipment is waiting for an event or an  action to occur.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentTimerSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.EQUIPMENT_TIMER"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentTimerSubTypes.LOADED">
+            <summary>
+            Measurement of the time that the sub-parts  of a piece of equipment are under load. Example: For traditional machine tools, this is a measurement of the time that the cutting tool is assumed to be engaged with the part.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentTimerSubTypes.WORKING">
+            <summary>
+            Measurement of the time that a piece o equipment is performing any activity – the equipment is active and performing a function under load or not. Example: For traditional machine tools, this includes LOADED, plus rapid moves, tool changes, etc.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentTimerSubTypes.OPERATING">
+            <summary>
+            Measurement of the time that the major sub-parts of a piece of equipment are powered or performing any activity whether producing a part or product or not. Example: For traditional machine tools, this includes WORKING, plus idle time.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentTimerSubTypes.POWERED">
+            <summary>
+            The measurement of time that primary  power is applied to the piece of equipment and, as a minimum, the controller or logic portion of the piece of equipment is powered and functioning or components that are required to remain on are powered. Example: Heaters for an extrusion machine that are required to be powered even when the equipment is turned off.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EquipmentTimerSubTypes.DELAY">
+            <summary>
+            Measurement of the time that a piece o equipment is waiting for an event or an action to occur.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTUATOR_STATE">
@@ -1932,6 +2354,11 @@
             The block of code being executed. Block contains the entire expression for a line of  program code.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.BLOCK_COUNT">
+            <summary>
+            The total count of the number of blocks of program code that have been  executed since execution started.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CHUCK_INTERLOCK">
             <summary>
             An indication of the state of an interlock function or control  logic state intended to prevent the associated CHUCK component from being operated.
@@ -1942,9 +2369,19 @@
             An indication of the operating state of a mechanism t holds a part or stock material during a manufacturing process. It may also represent a mechanism that holds any other mechanism in place within a device.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE">
+            <summary>
+            An indication of the operating condition of a mechanism represented by a  Composition type element.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROLLER_MODE">
             <summary>
             The current mode of the Controller. AUTOMATIC, MANUAL,  MANUAL_DATA_INPUT, or SEMI_AUTOMATIC.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROLLER_MODE_OVERRIDE">
+            <summary>
+            A setting or operator selection that changes the behavior of a piece of  equipment.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COUPLED_AXES">
@@ -1972,6 +2409,11 @@
             The current state of the emergency stop actuator. ARMED (the circuit is complete and the  device is operating) or TRIGGERED (the circuit is open and the device MUST cease operation).
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EQUIPMENT_MODE">
+            <summary>
+            An indication that a piece of equipment, or a sub-part of a piece of  equipment, is performing specific types of activities.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EXECUTION">
             <summary>
             The execution status of the Controller. READY, ACTIVE, INTERRUPTED,  FEED_HOLD, or STOPPED
@@ -1982,6 +2424,11 @@
             The current intended production status of the device  component.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.HARDNESS">
+            <summary>
+            The measurement of the hardness of a material.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.INTERFACE_STATE">
             <summary>
             The current functional or operational state of an  Interface type element indicating whether the interface is active or not currently functioning.
@@ -1990,6 +2437,21 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE">
             <summary>
             The current line of code being executed. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE_LABEL">
+            <summary>
+            An optional identifier for a BLOCK of code in a PROGRAM.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE_NUMBER">
+            <summary>
+            A reference to the position of a block of program code within a control  program. The line number MAY represent either an absolute position starting with the first line of the program or an incremental position relative to the occurrence of the last LINE_LABEL.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MATERIAL">
+            <summary>
+            The identifier of a material used or consumed in the manufacturing process.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MESSAGE">
@@ -2015,6 +2477,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_ID">
             <summary>
             An identifier of the current part in the device 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_NUMBER">
+            <summary>
+            An identifier of a part or product moving through the manufacturing  process.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PATH_FEEDRATE_OVERRIDE">
@@ -2067,6 +2534,16 @@
             A command issued to adjust the programmed velocity fo Rotary type axis
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.SERIAL_NUMBER">
+            <summary>
+            The serial number associated with a Component, Asset, or Device. The valid data value MUST be a text string.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.SPINDLE_INTERLOCK">
+            <summary>
+            An indication of the status of the spindle for a piece of equipment when  power has been removed and it is free to rotate.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_ASSET_ID">
             <summary>
             The identifier of an individual tool asset. 
@@ -2077,9 +2554,29 @@
             The identifier of a tool provided by the device controller.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_OFFSET">
+            <summary>
+            A reference to the tool offset variables applied to the active cutting tool  associated with a Path in a Controller type component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.USER">
+            <summary>
+            The identifier of the person currently responsible for operating the piece  of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WIRE">
+            <summary>
+            The identifier for the type of wire used as the cutting mechanism in  Electrical Discharge Machining or similar processes.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WORKHOLDING_ID">
             <summary>
             The identifier for the workholding currently in use for a given Path
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WORK_OFFSET">
+            <summary>
+            A reference to the offset variables for a work piece or part associated with  a Path in a Controller type component.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.GlobalPositionSubTypes">
@@ -2095,6 +2592,41 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.GlobalPositionSubTypes.COMMANDED">
             <summary>
             The position computed by the controller. 
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardnessSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.HARDNESS"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardnessSubTypes.ROCKWELL">
+            <summary>
+            A scale to measure the resistance to deformation of a surface.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardnessSubTypes.VICKERS">
+            <summary>
+            A scale to measure the resistance to deformation of a surface.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardnessSubTypes.SHORE">
+            <summary>
+            A scale to measure the resistance to deformation of a surface.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardnessSubTypes.BRINELL">
+            <summary>
+            A scale to measure the resistance to deformation of a surface.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardnessSubTypes.LEEB">
+            <summary>
+            A scale to measure the elasticity of a surface.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardnessSubTypes.MOHS">
+            <summary>
+            A scale to measure the resistance to scratching of a surface.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.MATERIAL_FEED">
@@ -2165,6 +2697,21 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LengthSubTypes.USEABLE">
             <summary>
             The remaining useable length of  an object.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineNumberSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE_NUMBER"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineNumberSubTypes.ABSOLUTE">
+            <summary>
+            The position of a block of program code relative to the beginning of the  control program.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineNumberSubTypes.INCREMENTAL">
+            <summary>
+            The position of a block of program code relative to the occurrence of the  last LINE_LABEL encountered in the control program.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineSubTypes">
@@ -2292,6 +2839,11 @@
             The position as given by the Controller.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PositionSubTypes.PROGRAMMED">
+            <summary>
+            The position of the control point for  Component specified by a logic or motion program
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PositionSubTypes.TARGET">
             <summary>
             The target position for the movement.
@@ -2310,6 +2862,21 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerStateSubTypes.CONTROL">
             <summary>
             The state of the low power line. 
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProcessTimerSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PROCESS_TIMER"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProcessTimerSubTypes.PROCESS">
+            <summary>
+            The measurement of the time from the  beginning of production of a part or product on a piece of equipment until the time that production is complete for that part or product on that piece of equipment. This includes the time that the piece of equipment is running, producing parts or products, or in the process of producing parts.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProcessTimerSubTypes.DELAY">
+            <summary>
+            Measurement of the time that a process waiting and unable to perform its intended function.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.RotaryVelocitySubTypes">
@@ -2402,6 +2969,11 @@
             The measurement of electrical energy consumption  by a component
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.EQUIPMENT_TIMER">
+            <summary>
+            The measurement of the amount of time  piece of equipment or a sub-part of a piece of equipment has performed specific activities. Often used to determine when maintenance may be required for the equipment
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.FILL_LEVEL">
             <summary>
             The measurement of the amount of a substance  remaining compared to the planned maximum amount of that substance
@@ -2467,6 +3039,11 @@
             The force per unit area exerted by a gas or liquid
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PROCESS_TIMER">
+            <summary>
+            The measurement of the amount of time  piece of equipment has performed different types of activities associated with the process being performed at that piece of equipment.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.RESISTANCE">
             <summary>
             The measurement of the degree to which an object  opposes an electric current through it
@@ -2490,6 +3067,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.TEMPERATURE">
             <summary>
             The measurement of temperature
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.TENSION">
+            <summary>
+            A measurement of a force that stretches or  elongates an object
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.TILT">
@@ -2582,6 +3164,41 @@
             The operator’s overridden value. Percent of commanded.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ToolOffsetSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_OFFSET"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ToolOffsetSubTypes.RADIAL">
+            <summary>
+            A reference to a radial type tool offset variable.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ToolOffsetSubTypes.LENGTH">
+            <summary>
+            A reference to a length type tool offset variable.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.UserSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.USER"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.UserSubTypes.OPERATOR">
+            <summary>
+            The identifier of the person currently responsible for operating the piece  of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.UserSubTypes.MAINTENANCE">
+            <summary>
+            The identifier of the person currently responsible for performing  maintenance on the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.UserSubTypes.SET_UP">
+            <summary>
+            The identifier of the person currently responsible for preparing a piece of  equipment for production or restoring the piece of equipment to a neutral state after production.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes">
             <summary>
             <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE"/>
@@ -2595,6 +3212,31 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.DIRECT">
             <summary>
             The measurement of DC voltage 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.ACTUAL">
+            <summary>
+            The measured voltage being delivered f a power source.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.TARGET">
+            <summary>
+            The desired or preset voltage to be  delivered from a power source.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.WattageSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.WATTAGE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.WattageSubTypes.ACTUAL">
+            <summary>
+            The measured wattage being delivered f a power source.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.WattageSubTypes.TARGET">
+            <summary>
+            The desired or preset wattage to be  delivered from a power source.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DeviceRelationshipRoleTypes">
@@ -3445,6 +4087,11 @@
             Liters
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.LITER_PER_SECOND">
+            <summary>
+            Liters per second
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.LITER_SECOND">
             <summary>
             Liters per second
@@ -3685,6 +4332,17 @@
             </summary>
             <remarks>Prepared on: June 11, 2015</remarks>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_4_0">
+            <summary>
+            Version 1.4.0
+            </summary>
+            <remarks>Prepared on: March 31, 2018</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_4_1">
+            <summary>
+            Version 1.4.1
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
             <summary>
             Logical choices XML node types.
@@ -3780,6 +4438,21 @@
             The axis is a slave of the CoupledAxes
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AxisInterlockValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_INTERLOCK"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisInterlockValues.ACTIVE">
+            <summary>
+            The axis lockout function is activated power has been removed from the axis, and the axis is allowed to move freely.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisInterlockValues.INACTIVE">
+            <summary>
+            The axis lockout function has not  been activated, the axis may be powered, and the axis is capable of being controlled by another component.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues">
             <summary>
             Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_STATE"/>
@@ -3793,6 +4466,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues.TRAVEL">
             <summary>
             The axis is in motion
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues.PARKED">
+            <summary>
+            The axis has been moved to a fixed  position and is being maintained in that position either electrically or mechanically. Action is required to release the axis from this position.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues.STOPPED">
@@ -3833,6 +4511,111 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckStateValues.UNLATCHED">
             <summary>
             The chuck is not closed to the point of a positive  confirmation and not open to the point of a positive confirmation
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is ACTION
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues.ACTIVE">
+            <summary>
+            The Composition element is  operating
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues.INACTIVE">
+            <summary>
+            The Composition element is not operating
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is LATERAL
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues.RIGHT">
+            <summary>
+            The position of the Composition element is oriented to the right to the point of a positive confirmation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues.LEFT">
+            <summary>
+            The position of the Composition element is oriented to the left to the point of a positive confirmation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues.TRANSITIONING">
+            <summary>
+            The position of the Composition element is not oriented to the right to the point of a positive confirmation and is not oriented to the left to the point of a positive confirmation. It is in an intermediate position.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is MOTION
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues.OPEN">
+            <summary>
+            The position of the Composition element is open to the point of a positive confirmation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues.CLOSED">
+            <summary>
+            The position of the Composition element is closed to the point of a positive confirmation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues.UNLATCHED">
+            <summary>
+            The position of the Composition element is not open to the point of a positive confirmation and is not closed to the point of a positive confirmation. It is in an intermediate position.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateSwitchedValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is SWITCHED
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateSwitchedValues.ON">
+            <summary>
+            The activation state of the Compositio element is in an ON condition, it is operating, or it is powered.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateSwitchedValues.OFF">
+            <summary>
+            The activation state of the Compositio element is in an OFF condition, it is not operating, or it is not powered.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is VERTICAL
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues.UP">
+            <summary>
+            The position of the Composition element  is oriented in an upward direction to the point of a positive confirmation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues.DOWN">
+            <summary>
+            The position of the Composition element is oriented in a downward direction to the point of a positive confirmation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues.TRANSITIONING">
+            <summary>
+            The position of the Composition element is not oriented in an upward direction to the point of a positive confirmation and is not oriented in a downward direction to the point of a positive confirmation. It is in an intermediate position.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeOverrideValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CONTROLLER_MODE_OVERRIDE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeOverrideValues.ON">
+            <summary>
+            The indicator of the  ControllerModeOverride is in the ON state and the mode override is active.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeOverrideValues.OFF">
+            <summary>
+            The indicator of the  ControllerModeOverride is in the OFF state and the mode override is inactive
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues">
@@ -3965,14 +4748,24 @@
             Describes the way the axes will be associated to each other. This is used in conjunction with COUPLED_AXES to indicate the way the are interacting.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_FEEDRATE_OVERRIDE">
+            <summary>
+            The value of a signal or calculation issued to adjust the feedrate of an individual linear type axis.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_INTERLOCK">
+            <summary>
+            An indicator of the state of the axis lockout functio when power has been removed and the axis is allowed to move freely.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.BLOCK">
             <summary>
             A Block of code is a command being executed by the Controller. The Block MUST include the entire command with all the parameters.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CODE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.BLOCK_COUNT">
             <summary>
-            The code is just the G, M, or NC code being executed. The Code MUST only contain the simplest form of the executing command.
+            The total count of the number of blocks of program  code that have been executed since execution started.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CHUCK_INTERLOCK">
@@ -3985,9 +4778,24 @@
             The open closed state of the chuck.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CODE">
+            <summary>
+            The code is just the G, M, or NC code being executed. The Code MUST only contain the simplest form of the executing command.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE">
+            <summary>
+            An indication of the operating condition of a mechanism represented by a Composition type element.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CONTROLLER_MODE">
             <summary>
             The Mode of the Controller.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CONTROLLER_MODE_OVERRIDE">
+            <summary>
+            A setting or operator selection that changes the  behavior of a piece of equipment.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COUPLED_AXES">
@@ -4010,19 +4818,25 @@
             A YES/NO value indicating that the end of bar has been reached.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EXECUTION">
-            <summary>
-            The Execution state of the Controller.
-            </summary>
-        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EMERGENCY_STOP">
             <summary>
             The emergency stop state of the machine.
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EQUIPMENT_MODE" -->
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EXECUTION">
+            <summary>
+            The Execution state of the Controller.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.FUNCTIONAL_MODE">
             <summary>
             The overall status of the device or component for production.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.HARDNESS">
+            <summary>
+            The measurement of the hardness of a material.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.INTERFACE_STATE">
@@ -4033,6 +4847,21 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.LINE">
             <summary>
             This event refers to the optional program line number. For example in RS274/NGC the line number begins with an N and is followed by 1 to 5 digits (0 – 99999). If there is not an assigned line number in the programming systems as in RS274, the line number will refer to the position in the executing program. The line number MUST be any positive integer from 0 to 2^32 -1.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.LINE_LABEL">
+            <summary>
+            An optional identifier for a BLOCK of code in a  PROGRAM.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.LINE_NUMBER">
+            <summary>
+            A reference to the position of a block of program  code within a control program.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.MATERIAL">
+            <summary>
+            The identifier of a material used or consumed in the  manufacturing process.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.MESSAGE">
@@ -4115,6 +4944,11 @@
             The percentage override to adjust the programmed spin speed.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.SERIAL_NUMBER">
+            <summary>
+            The serial number associated with a Component,  Asset, or Device.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.SPINDLE_INTERLOCK">
             <summary>
             An indicator of the spindle lockout when power has been removed and it is free to rotate.
@@ -4130,9 +4964,34 @@
             This is a reference to an identifier for the current tool in use by the Path.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_NUMBER">
+            <summary>
+            The identifier assigned by the Controller component to a cutting tool when in use by a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_OFFSET">
+            <summary>
+            A reference to the tool offset variables applied to t active cutting tool associated with a Path in a Controller type component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.USER">
+            <summary>
+            The identifier of the person currently responsible fo operating the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.WIRE">
+            <summary>
+            The identifier for the type of wire used as the cutti mechanism in Electrical Discharge Machining or similar processes.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.WORKHOLDING_ID">
             <summary>
             This is a reference to an identifier for the current workholding. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.WORK_OFFSET">
+            <summary>
+            A reference to the offset variables for a work piece  or part associated with a Path in a Controller type component.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ACCELERATION">
@@ -4193,6 +5052,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ELECTRICAL_ENERGY">
             <summary>
             The measurement of electrical energy consumed by a component. ElectricalEnergy MUST have a value reported in WATT_SECOND.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.EQUIPMENT_TIMER">
+            <summary>
+            The measurement of the amount of time a piece of  equipment or a sub-part of a piece of equipment has performed specific activities.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.FLOW">
@@ -4265,6 +5129,11 @@
             The pressure on a component. The pressure MUST be a numeric value and MUST be provided in PASCALS.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PROCESS_TIMER">
+            <summary>
+            The measurement of the amount of time a piece of  equipment has performed different types of activities associated with the process being performed at that piece of equipment.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.RESISTANCE">
             <summary>
             The measure of the degree to which an object opposes an electrical current through it. The Resistance MUST be a numeric value and MUST be provided in OHM.
@@ -4293,6 +5162,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TEMPERATURE">
             <summary>
             Temperature MUST always be reported in degrees CELSIUS and MUST always have a numeric CDATA value as a floating point number.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TENSION">
+            <summary>
+            The measurement of a force that stretches or  elongates an object.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TILT">
@@ -4375,6 +5249,21 @@
             The end of bar has not been reached
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.EquipmentModeValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EQUIPMENT_MODE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EquipmentModeValues.ON">
+            <summary>
+            The equipment is functioning in the mode  designated by the subType
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EquipmentModeValues.OFF">
+            <summary>
+            The equipment is not functioning in th mode designated by the subType.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues">
             <summary>
             Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EXECUTION"/>
@@ -4395,14 +5284,19 @@
             The operator or the program has paused execution and is waiting to be continued.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.FEED_HOLD">
+            <summary>
+            The controller has is in a feed hold and motion has  been stopped.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.STOPPED">
             <summary>
             The controller has been stopped.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.FEED_HOLD">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.OPTIONAL_STOP">
             <summary>
-            The controller has is in a feed hold and motion has  been stopped.
+            The controller’s program has  been intentionally stopped using an M01 or similar command.The program may be stopped at the designated location based upon the state of a secondary indication provided to the controller indicating whether the program execution must be stopped at this location or program execution should continue.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.PROGRAM_STOPPED">
@@ -4538,6 +5432,56 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramEditValues.NOT_READY">
             <summary>
             The controller is in a state where it cannot edit a program.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues">
+            <summary>
+            Available values for a <see cref="P:MtconnectCore.Standard.Documents.Streams.Sample.ResetTriggered"/> element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.ACTION_COMPLETE">
+            <summary>
+            The value of the Data Entity that is measuring an action or  operation is to be reset upon completion of that action or operation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.ANNUAL">
+            <summary>
+            The value of the Data Entity is to be reset at the end of a 12- month period.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.DAY">
+            <summary>
+            The value of the Data Entity is to be reset at the end of a 24-hour  period.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.LIFE">
+            <summary>
+            The value of the data item is not reset and accumulates for the  entire life of the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.MAINTENANCE">
+            <summary>
+            The value of the data item is to be reset upon completion of a  maintenance event.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.MONTH">
+            <summary>
+            The value of the Data Entity is to be reset at the end of a monthly  period.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.POWER_ON">
+            <summary>
+            The value of the Data Entity is to be reset when power was  applied to the piece of equipment after a planned or unplanned interruption of power has occurred.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.SHIFT">
+            <summary>
+            The value of the Data Entity is to be reset at the end of a work  shift.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.WEEK">
+            <summary>
+            The value of the Data Entity is to be reset at the end of a 7-day  period.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues">
@@ -4860,6 +5804,9 @@
         <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingTool.ToolId">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolAttributes.TOOL_ID"/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingTool.Removed">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolAttributes.REMOVED"/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingTool.Description">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolElements.DESCRIPTION"/>
         </member>
@@ -4869,14 +5816,17 @@
         <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingTool.LifeCycle">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolElements.CUTTING_TOOL_LIFE_CYCLE"/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingTool.ArchetypeReference">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Elements.CuttingToolElements.CUTTING_TOOL_ARCHETYPE_REFERENCE"/>
+        </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingTool.#ctor">
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingTool.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingTool.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc/>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.CuttingToolArchetypeReference.Source">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingToolArchetypeReferenceAttributes.SOURCE"/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolDefinition">
             <inheritdoc />
@@ -4948,9 +5898,6 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolLifeCycle.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc />
-        </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement">
             <inheritdoc />
         </member>
@@ -4960,8 +5907,38 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingToolMeasurement.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
-            <inheritdoc />
+        <member name="T:MtconnectCore.Standard.Documents.Assets.ExtensibleLifeCycleElement">
+            <summary>
+            An extensible XML element that utilizes the xs: namespace in a MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ExtensibleLifeCycleElement.Name">
+            <summary>
+            Name of the extensible XML element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Documents.Assets.ExtensibleLifeCycleElement.Attributes">
+            <summary>
+            Collection of attributes and their values.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ExtensibleLifeCycleElement.Value">
+            <summary>
+            The value of the extensible XML element.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ExtensibleLifeCycleElement.#ctor">
+            <summary>
+            Constructs a blank ExtensibleLifeCycleElement
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ExtensibleLifeCycleElement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <summary>
+            Constructs an ExtensibleLifeCycleElement from an XML node.
+            </summary>
+            <param name="xNode">Reference to the XML node.</param>
+            <param name="nsmgr">Reference to the namespace manager.</param>
+            <param name="version">Reference the version of the MTConnect Standard implemented on the Response Document.</param>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.ItemLife">
             <inheritdoc />
@@ -4974,6 +5951,9 @@
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Assets.ItemLife.Limit">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.LIMIT"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ItemLife.Warning">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.WARNING"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Assets.ItemLife.Initial">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ItemLifeAttributes.INITIAL"/>
@@ -5098,6 +6078,9 @@
         <member name="P:MtconnectCore.Standard.Documents.Assets.ToolLife.Limit">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.LIMIT"/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.ToolLife.Warning">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.WARNING"/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Assets.ToolLife.Initial">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.ToolLifeAttributes.INITIAL"/>
         </member>
@@ -5105,9 +6088,6 @@
             <inheritdoc />
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <inheritdoc />
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.ToolLife.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Key">
@@ -5531,6 +6511,9 @@
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Iso841Class">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.ISO_841_CLASS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.References">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DeviceElements.REFERENCES"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Device.#ctor">
             <inheritdoc/>

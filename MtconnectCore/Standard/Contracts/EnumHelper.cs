@@ -17,11 +17,26 @@ namespace MtconnectCore.Standard.Contracts
             return string.Join(delimeter, enumValues);
         }
         
-        internal static bool Contains(Type enumType, string value)
+        /// <summary>
+        /// Translates a raw string into its enum-safe equivelant.
+        /// </summary>
+        /// <param name="value">Raw string value</param>
+        /// <returns>Enum name safe equivelant of the provided value.</returns>
+        internal static string Enumify(string value)
         {
-            if (value == null) return false;
+            if (value == null) return value;
             if (value.Contains("/")) value = value.Replace("/", "_PER_");
             if (value.Contains("^2")) value = value.Replace("^2", "_SQUARED_");
+
+            if (value.EndsWith('_')) value = value.Substring(0, value.Length - 1);
+            if (value.StartsWith('_')) value = value.Substring(1, value.Length - 1);
+
+            return value.ToUpper();
+        }
+
+        internal static bool Contains(Type enumType, string value)
+        {
+            value = Enumify(value);
 
             string[] enumValues = Enum.GetNames(enumType);
             return enumValues.Any(o => o.Equals(value, StringComparison.OrdinalIgnoreCase));
@@ -90,7 +105,7 @@ namespace MtconnectCore.Standard.Contracts
             if (!ValidateToVersion(enumType, documentVersion)) return false;
             if (!Contains(enumType, value)) return false;
 
-            if (!Enum.TryParse(enumType, value, out object? enumValue) || enumValue == null) return false;
+            if (!Enum.TryParse(enumType, Enumify(value).FromCamelCase(), out object? enumValue) || enumValue == null) return false;
 
             MemberInfo[] valueInfos = enumType.GetMember(enumValue.ToString());
             var valueInfo = valueInfos.FirstOrDefault(o => o.DeclaringType == enumType);

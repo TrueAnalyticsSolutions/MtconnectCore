@@ -108,7 +108,8 @@ namespace MtconnectCore.Standard.Documents.Devices
             Logger.Verbose("Reading Reference {XnodeKey}", xNode.TryGetAttribute(ReferenceAttributes.ID_REF));
             if (xNode.LocalName == ComponentElements.COMPONENT_REF.ToPascalCase()) {
                 reference = new ComponentRef(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
-            } else if (xNode.LocalName == ComponentElements.DATA_ITEM_REF.ToPascalCase())
+            }
+            else if (xNode.LocalName == ComponentElements.DATA_ITEM_REF.ToPascalCase())
             {
                 reference = new DataItemRef(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
             } else

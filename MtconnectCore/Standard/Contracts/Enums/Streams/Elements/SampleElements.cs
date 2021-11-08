@@ -67,6 +67,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.8.4")]
         ELECTRICAL_ENERGY,
         /// <summary>
+        /// The measurement of the amount of time a piece of  equipment or a sub-part of a piece of equipment has performed specific activities.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.1")]
+        EQUIPMENT_TIMER,
+        /// <summary>
         /// The rate of flow of a fluid. The Flow MUST have a value reported in LITER/SECOND.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.8.4")]
@@ -138,6 +143,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.2")]
         PRESSURE,
         /// <summary>
+        /// The measurement of the amount of time a piece of  equipment has performed different types of activities associated with the process being performed at that piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.1")]
+        PROCESS_TIMER,
+        /// <summary>
         /// The measure of the degree to which an object opposes an electrical current through it. The Resistance MUST be a numeric value and MUST be provided in OHM.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.8.4")]
@@ -168,6 +178,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.2")]
         TEMPERATURE,
+        /// <summary>
+        /// The measurement of a force that stretches or  elongates an object.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.1")]
+        TENSION,
         /// <summary>
         /// The measured amount of angular displacement of an object. Tilt MUST be reported as MICRO_RADIAN.
         /// </summary>

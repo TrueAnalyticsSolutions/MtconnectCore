@@ -32,7 +32,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// Occurance: 0..1
         /// </summary>
         [MtconnectNodeAttribute(EventAttributes.RESET_TRIGGERED)]
-        public ResetTriggers ResetTriggered { get; set; }
+        public ResetTriggers? ResetTriggered { get; set; }
 
         /// <summary>
         /// Collected from the compositionId attribute. Refer to Part 3 Streams - 5.5.2

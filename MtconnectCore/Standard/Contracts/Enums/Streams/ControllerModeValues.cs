@@ -37,7 +37,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
         /// <summary>
         /// The machine is executing single block or instruction.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        [Obsolete("Deprecated in version 1.4.0. See CONTROLLER_MODE_OVERRIDE.")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3", MtconnectVersions.V_1_3_1)]
         SINGLE_BLOCK,
         /// <summary>
         /// The axes of the device are commanded to stop, but the  spindle continues to function.

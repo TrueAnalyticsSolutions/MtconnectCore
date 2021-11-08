@@ -5,6 +5,7 @@ using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Streams;
 using MtconnectCore.Standard.Contracts.Errors;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="DataItemAttributes.REPRESENTATION"/>
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
-        public string Representation { get; set; }
+        public string Representation { get; set; } = RepresentationTypes.VALUE.ToCamelCase();
 
         /// <inheritdoc cref="DataItemAttributes.SIGNIFICANT_DIGITS"/>
         [MtconnectNodeAttribute(DataItemAttributes.SIGNIFICANT_DIGITS)]
@@ -250,7 +251,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             } else if (Category.ToUpper() == "SAMPLE") {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'units' attribute when 'category' equals 'SAMPLE'."));
+                    $"DataItem MUST include a 'units' attribute when 'category' equals 'SAMPLE'. DataItem [id='{Id}'][name='{Name}']."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -261,13 +262,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(NativeUnits))
             {
-                if (!EnumHelper.Contains<NativeUnitsTypes>(NativeUnits))
+                if (!EnumHelper.Contains<NativeUnitsTypes>(NativeUnits) && !EnumHelper.Contains<UnitsTypes>(NativeUnits))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
                         $"DataItem nativeUnits of '{NativeUnits}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
                 }
-                else if (!EnumHelper.ValidateToVersion<NativeUnitsTypes>(NativeUnits, MtconnectVersion.GetValueOrDefault()))
+                else if (!EnumHelper.ValidateToVersion<NativeUnitsTypes>(NativeUnits, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<UnitsTypes>(NativeUnits, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
@@ -353,5 +354,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 7.2.3.5")]
+        private bool validateResetTrigger(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(ResetTrigger) && !EnumHelper.Contains<ResetTriggerValues>(ResetTrigger)) {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"Unrecognized ResetTrigger value '{ResetTrigger}'."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public Reference(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 4.8")]
         private bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();

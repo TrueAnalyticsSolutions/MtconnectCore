@@ -3,6 +3,7 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,12 +48,21 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElements("Components/*", nameof(TryAddComponent), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<Component> Components => _components;
 
+        private List<Composition> _compositions = new List<Composition>();
+        [MtconnectNodeElements("Compositions/*", nameof(TryAddComposition), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        public ICollection<Composition> Compositions => _compositions;
+
         private List<DataItem> _dataItems = new List<DataItem>();
         [MtconnectNodeElements("DataItems/*", nameof(TryAddDataItem), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<DataItem> DataItems => _dataItems;
 
         [MtconnectNodeElements("Description", nameof(TrySetDescription), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ComponentDescription Description { get; set; }
+
+        private List<Reference> _references = new List<Reference>();
+        /// <inheritdoc cref="DeviceElements.REFERENCES"/>
+        [MtconnectNodeElements("References/*", nameof(TryAddReference), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        public ICollection<Reference> References => _references;
 
         /// <inheritdoc/>
         public Device() : base() { }
@@ -63,11 +73,41 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TryAddComponent(XmlNode xNode, XmlNamespaceManager nsmgr, out Component component)
             => base.TryAdd<Component>(xNode, nsmgr, ref _components, out component);
 
+        public bool TryAddComposition(XmlNode xNode, XmlNamespaceManager nsmgr, out Composition composition)
+            => base.TryAdd<Composition>(xNode, nsmgr, ref _compositions, out composition);
+
         public bool TryAddDataItem(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItem dataItem)
             => base.TryAdd<DataItem>(xNode, nsmgr, ref _dataItems, out dataItem);
 
         public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentDescription componentDescription)
             => base.TrySet<ComponentDescription>(xNode, nsmgr, nameof(Description), out componentDescription);
+
+        public bool TryAddReference(XmlNode xNode, XmlNamespaceManager nsmgr, out Reference reference)
+        {
+            Logger.Verbose("Reading Reference {XnodeKey}", xNode.TryGetAttribute(ReferenceAttributes.ID_REF));
+            if (xNode.LocalName == DeviceElements.COMPONENT_REF.ToPascalCase())
+            {
+                reference = new ComponentRef(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
+            }
+            else if (xNode.LocalName == ComponentElements.DATA_ITEM_REF.ToPascalCase())
+            {
+                reference = new DataItemRef(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
+            }
+            else
+            {
+                reference = null;
+                Logger.Warn("[Invalid Probe] Unsupported Reference type {XnodeName}", xNode.LocalName);
+                return false;
+            }
+            if (!reference.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
+            {
+                InitializationErrors.AddRange(validationExceptions);
+                Logger.Warn($"[Invalid Probe] Reference of Device '{Uuid}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
+                return false;
+            }
+            _references.Add(reference);
+            return true;
+        }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.4.1")]
         private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
@@ -98,6 +138,10 @@ namespace MtconnectCore.Standard.Documents.Devices
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"Device MUST include a 'uuid' attribute."));
+            } else if (Uuid.Length > 255) {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Device 'uuid' SHOULD be alphanumeric and not exceed 255 characters."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

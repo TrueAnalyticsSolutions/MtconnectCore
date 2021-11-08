@@ -72,6 +72,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
         ELECTRICAL_ENERGY,
         /// <summary>
+        /// The measurement of the amount of time  piece of equipment or a sub-part of a piece of equipment has performed specific activities. Often used to determine when maintenance may be required for the equipment
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1")]
+        EQUIPMENT_TIMER,
+        /// <summary>
         /// The measurement of the amount of a substance  remaining compared to the planned maximum amount of that substance
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
@@ -143,6 +148,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         PRESSURE,
         /// <summary>
+        /// The measurement of the amount of time  piece of equipment has performed different types of activities associated with the process being performed at that piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1")]
+        PROCESS_TIMER,
+        /// <summary>
         /// The measurement of the degree to which an object  opposes an electric current through it
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
@@ -170,6 +180,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         TEMPERATURE,
+        /// <summary>
+        /// A measurement of a force that stretches or  elongates an object
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1")]
+        TENSION,
         /// <summary>
         /// A measurement of angular displacement
         /// </summary>

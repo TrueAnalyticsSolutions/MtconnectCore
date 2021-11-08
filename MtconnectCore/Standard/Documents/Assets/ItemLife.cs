@@ -26,6 +26,10 @@ namespace MtconnectCore.Standard.Documents.Assets
         [MtconnectNodeAttribute(ItemLifeAttributes.LIMIT)]
         public double? Limit { get; set; }
 
+        /// <inheritdoc cref="ItemLifeAttributes.WARNING"/>
+        [MtconnectNodeAttribute(ItemLifeAttributes.WARNING)]
+        public double? Warning { get; set; }
+
         /// <inheritdoc cref="ItemLifeAttributes.INITIAL"/>
         [MtconnectNodeAttribute(ItemLifeAttributes.INITIAL)]
         public double? Initial { get; set; }

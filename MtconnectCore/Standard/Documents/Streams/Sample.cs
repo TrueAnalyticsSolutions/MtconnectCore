@@ -48,7 +48,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// Occurance: 0..1
         /// </summary>
         [MtconnectNodeAttribute(SampleAttributes.DURATION)]
-        public double Duration { get; set; }
+        public double? Duration { get; set; }
 
         /// <summary>
         /// Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.3.2
@@ -56,7 +56,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// Occurance: 0..1
         /// </summary>
         [MtconnectNodeAttribute(SampleAttributes.RESET_TRIGGERED)]
-        public ResetTriggers ResetTriggered { get; set; }
+        public ResetTriggers? ResetTriggered { get; set; }
 
         /// <summary>
         /// Collected from the compositionId attribute. Refer to Part 3 Streams - 5.3.2
@@ -108,6 +108,17 @@ namespace MtconnectCore.Standard.Documents.Streams
             string[] timeSeriesValues = Value.Split(' ', System.StringSplitOptions.RemoveEmptyEntries);
             if (timeSeriesValues.Length != SampleCount.GetValueOrDefault()){
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"SAMPLE number of readings MUST match the sampleCount."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 5.3.2")]
+        protected bool validateDuration(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Statistic) && !Duration.HasValue)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'duration' MUST be provided when the 'statistic' attribute is present on a SAMPLE."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

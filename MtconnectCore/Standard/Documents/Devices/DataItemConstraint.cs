@@ -44,6 +44,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             }
         }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 7.2.3.2.1")]
         private bool validateFilter(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();

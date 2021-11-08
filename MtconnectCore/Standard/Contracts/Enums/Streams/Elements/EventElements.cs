@@ -32,16 +32,25 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
         AXIS_COUPLING,
         /// <summary>
+        /// The value of a signal or calculation issued to adjust the feedrate of an individual linear type axis.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        AXIS_FEEDRATE_OVERRIDE,
+        /// <summary>
+        /// An indicator of the state of the axis lockout functio when power has been removed and the axis is allowed to move freely.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        AXIS_INTERLOCK,
+        /// <summary>
         /// A Block of code is a command being executed by the Controller. The Block MUST include the entire command with all the parameters.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
         BLOCK,
         /// <summary>
-        /// The code is just the G, M, or NC code being executed. The Code MUST only contain the simplest form of the executing command.
+        /// The total count of the number of blocks of program  code that have been executed since execution started.
         /// </summary>
-        [Obsolete("Deprecated in version 1.1.0. See BLOCK instead.")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1", MtconnectVersions.V_1_0_1)]
-        CODE,
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        BLOCK_COUNT,
         /// <summary>
         /// An interlock that prevents the chuck from being operated. The subType specifies the operation that is currently blocked.
         /// </summary>
@@ -53,10 +62,26 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
         CHUCK_STATE,
         /// <summary>
+        /// The code is just the G, M, or NC code being executed. The Code MUST only contain the simplest form of the executing command.
+        /// </summary>
+        [Obsolete("Deprecated in version 1.1.0. See BLOCK instead.")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1", MtconnectVersions.V_1_0_1)]
+        CODE,
+        /// <summary>
+        /// An indication of the operating condition of a mechanism represented by a Composition type element.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        COMPOSITION_STATE,
+        /// <summary>
         /// The Mode of the Controller.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
         CONTROLLER_MODE,
+        /// <summary>
+        /// A setting or operator selection that changes the  behavior of a piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        CONTROLLER_MODE_OVERRIDE,
         /// <summary>
         /// As a Linear or Rotary axis data item, refers to the set of associated axes to be used in conjunction with AxisCoupling. The value will be a space delimited set of axes names. For example: &lt;CoupledAxes …&gt;Y2&lt;/CoupledAxes&gt;
         /// </summary>
@@ -78,20 +103,30 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
         END_OF_BAR,
         /// <summary>
-        /// The Execution state of the Controller.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
-        EXECUTION,
-        /// <summary>
         /// The emergency stop state of the machine.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
         EMERGENCY_STOP,
         /// <summary>
+        /// An indication that a piece of equipment, or a subpart of a piece of equipment, is performing specific  types of activities.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        EQUIPMENT_MODE,
+        /// <summary>
+        /// The Execution state of the Controller.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
+        EXECUTION,
+        /// <summary>
         /// The overall status of the device or component for production.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
         FUNCTIONAL_MODE,
+        /// <summary>
+        /// The measurement of the hardness of a material.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        HARDNESS,
         /// <summary>
         /// The connection state of the interface.
         /// </summary>
@@ -102,6 +137,21 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
         LINE,
+        /// <summary>
+        /// An optional identifier for a BLOCK of code in a  PROGRAM.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        LINE_LABEL,
+        /// <summary>
+        /// A reference to the position of a block of program  code within a control program.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        LINE_NUMBER,
+        /// <summary>
+        /// The identifier of a material used or consumed in the  manufacturing process.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        MATERIAL,
         /// <summary>
         /// A text notification. Format MAY be any valid text string.
         /// </summary>
@@ -184,6 +234,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
         ROTARY_VELOCITY_OVERRIDE,
         /// <summary>
+        /// The serial number associated with a Component,  Asset, or Device.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        SERIAL_NUMBER,
+        /// <summary>
         /// An indicator of the spindle lockout when power has been removed and it is free to rotate.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
@@ -200,9 +255,34 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
         TOOL_ASSET_ID,
         /// <summary>
+        /// The identifier assigned by the Controller component to a cutting tool when in use by a piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        TOOL_NUMBER,
+        /// <summary>
+        /// A reference to the tool offset variables applied to t active cutting tool associated with a Path in a Controller type component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        TOOL_OFFSET,
+        /// <summary>
+        /// The identifier of the person currently responsible fo operating the piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        USER,
+        /// <summary>
+        /// The identifier for the type of wire used as the cutti mechanism in Electrical Discharge Machining or similar processes.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        WIRE,
+        /// <summary>
         /// This is a reference to an identifier for the current workholding. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
-        WORKHOLDING_ID
+        WORKHOLDING_ID,
+        /// <summary>
+        /// A reference to the offset variables for a work piece  or part associated with a Path in a Controller type component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
+        WORK_OFFSET
     }
 }

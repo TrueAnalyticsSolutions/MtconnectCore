@@ -16,6 +16,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// The measurement of DC voltage 
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
-        DIRECT
+        DIRECT,
+        /// <summary>
+        /// The measured voltage being delivered f a power source.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1")]
+        ACTUAL,
+        /// <summary>
+        /// The desired or preset voltage to be  delivered from a power source.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1")]
+        TARGET
     }
 }

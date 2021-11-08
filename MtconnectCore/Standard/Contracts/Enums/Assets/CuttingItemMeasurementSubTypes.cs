@@ -35,6 +35,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Assets
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.27")]
         INCRIBED_CIRCLE_DIAMETER, // Is this a typo? Should it be INSRIBED_CIRCLE_DIAMETER
         /// <summary>
+        /// The diameter of a circle to which all edges of a equilateral and round regular insert are tangential.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 4 Section 6.2.10.3")]
+        INSCRIBED_CIRCLE_DIAMETER, // Is this a typo? Should it be INSRIBED_CIRCLE_DIAMETER
+        /// <summary>
         /// The angle between the major cutting edge and the same cutting edge rotated by 180 degrees about the tool axis.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.27")]

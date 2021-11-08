@@ -68,6 +68,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// Liters per second
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.5")]
+        LITER_PER_SECOND,
+        /// <summary>
+        /// Liters per second
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.5")]
         LITER_SECOND,
         /// <summary>
         /// Measurement of Tilt
