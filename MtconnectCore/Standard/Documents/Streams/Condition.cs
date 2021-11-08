@@ -1,7 +1,12 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Errors;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -94,13 +99,37 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Condition() : base() { }
 
         /// <inheritdoc/>
-        public Condition(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr)
+        public Condition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Value = xNode.InnerText;
             if (Enum.TryParse<ConditionElements>(xNode.LocalName, out ConditionElements condition))
             {
                 TagName = condition;
             }
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.11.1")]
+        private bool validateType(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(Type))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Condition MUST include a 'type' attribute."));
+            }
+            else if (!EnumHelper.Contains<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Condition 'type' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(", ", string.Empty, string.Empty)}]."));
+            }
+            else if (!EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"Condition type of '{Type}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

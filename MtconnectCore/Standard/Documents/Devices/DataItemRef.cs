@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using System.Xml;
 
@@ -18,10 +19,10 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(DataItemRefAttributes.NAME)]
         public override string Name { get; set; }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode()"/>
+        /// <inheritdoc />
         public DataItemRef() : base() { }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
-        public DataItemRef(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr) { }
+        /// <inheritdoc />
+        public DataItemRef(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
     }
 }

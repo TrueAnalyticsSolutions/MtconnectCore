@@ -1,4 +1,6 @@
-﻿namespace MtconnectCore.Standard.Contracts.Enums.Assets.Attributes
+﻿using MtconnectCore.Standard.Contracts.Attributes;
+
+namespace MtconnectCore.Standard.Contracts.Enums.Assets.Attributes
 {
     public enum ToolLifeAttributes {
         /// <summary>

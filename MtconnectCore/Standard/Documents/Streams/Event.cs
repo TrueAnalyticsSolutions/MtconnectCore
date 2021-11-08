@@ -1,5 +1,9 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Errors;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -28,7 +32,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// Occurance: 0..1
         /// </summary>
         [MtconnectNodeAttribute(EventAttributes.RESET_TRIGGERED)]
-        public ResetTriggers ResetTriggered { get; set; }
+        public ResetTriggers? ResetTriggered { get; set; }
 
         /// <summary>
         /// Collected from the compositionId attribute. Refer to Part 3 Streams - 5.5.2
@@ -52,10 +56,23 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Event() : base() { }
 
         /// <inheritdoc/>
-        public Event(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr)
+        public Event(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Value = xNode.InnerText;
             TagName = xNode.LocalName;
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8", MtconnectVersions.V_1_1_0)]
+        protected bool validateName_Required(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(Name))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a 'name' attribute."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

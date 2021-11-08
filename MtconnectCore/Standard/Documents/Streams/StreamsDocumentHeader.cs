@@ -1,7 +1,9 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using System.Xml;
+using HeaderAttributes = MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.HeaderAttributes;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
@@ -24,6 +26,6 @@ namespace MtconnectCore.Standard.Documents.Streams
         public StreamsDocumentHeader() : base() { }
 
         /// <inheritdoc/>
-        public StreamsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE) { }
+        public StreamsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
     }
 }

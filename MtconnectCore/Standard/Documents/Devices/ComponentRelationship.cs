@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -30,32 +31,21 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(ComponentRelationshipAttributes.ID_REF)]
         public string IdRef { get; set; }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode()"/>
+        /// <inheritdoc />
         public ComponentRelationship() : base() { }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
-        public ComponentRelationship(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr) { }
+        /// <inheritdoc />
+        public ComponentRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
-
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            const string documentationAttributes = "See Part 2 Section 9.2.1.1 of the MTConnect standard.";
+        private bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
-
-            if (!base.TryValidate(out validationErrors))
-            {
-                return false;
-            }
-
             if (string.IsNullOrEmpty(IdRef))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"ComponentRelationship MUST include a 'idRef' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"ComponentRelationship MUST include a 'idRef' attribute."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

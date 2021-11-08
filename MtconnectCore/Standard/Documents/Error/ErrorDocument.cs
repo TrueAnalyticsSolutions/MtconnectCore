@@ -27,21 +27,10 @@ namespace MtconnectCore.Standard.Documents.Error
         /// <inheritdoc/>
         public ErrorDocument(XmlDocument xDoc) : base(xDoc)
         {
-            _header = new ErrorDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager);
+            _header = new ErrorDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager, MtconnectVersion.GetValueOrDefault());
         }
 
         /// <inheritdoc />
-        public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Error item)
-        {
-            Logger.Verbose("Reading Error {XnodeKey}", xNode.TryGetAttribute(ErrorAttributes.ERROR_CODE));
-            item = new Error(xNode, nsmgr);
-            if (!item.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Error] MTConnect Error:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _items.Add(item);
-            return true;
-        }
+        public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Error item) => base.TryAdd<Error>(xNode, nsmgr, ref _items, out item);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using System.Xml;
 
@@ -32,7 +33,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public CompositionDescription() : base() { }
 
         /// <inheritdoc/>
-        public CompositionDescription(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) {
+        public CompositionDescription(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) {
             Value = xNode.InnerText;
         }
     }

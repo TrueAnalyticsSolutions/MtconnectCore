@@ -17,6 +17,10 @@ namespace MtconnectCore.Standard.Contracts.Enums.Assets.Elements
         /// <summary>
         /// MTConnect data regarding the use phase of this tool.
         /// </summary>
-        CUTTING_TOOL_LIFE_CYCLE
+        CUTTING_TOOL_LIFE_CYCLE,
+        /// <summary>
+        /// The content of this XML element is the Asset Id of the  CuttingToolArchetype document. It MAY also contain a source attribute that gives the URL of the archetype data as well.
+        /// </summary>
+        CUTTING_TOOL_ARCHETYPE_REFERENCE
     }
 }
