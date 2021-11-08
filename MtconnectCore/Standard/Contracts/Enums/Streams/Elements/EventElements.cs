@@ -17,6 +17,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
         ACTUATOR_STATE,
         /// <summary>
+        /// An indicator of the current axis homed position and motion.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        AXIS_STATE,
+        /// <summary>
         /// Represents the components ability to communicate its availability. This MUST be provided for the device and MAY be provided for all other components.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
@@ -38,6 +43,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1", MtconnectVersions.V_1_0_1)]
         CODE,
         /// <summary>
+        /// An interlock that prevents the chuck from being operated. The subType specifies the operation that is currently blocked.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        CHUCK_INTERLOCK,
+        /// <summary>
+        /// The open closed state of the chuck.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        CHUCK_STATE,
+        /// <summary>
         /// The Mode of the Controller.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
@@ -58,6 +73,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
         DOOR_STATE,
         /// <summary>
+        /// A YES/NO value indicating that the end of bar has been reached.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        END_OF_BAR,
+        /// <summary>
         /// The Execution state of the Controller.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
@@ -68,6 +88,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
         EMERGENCY_STOP,
         /// <summary>
+        /// The overall status of the device or component for production.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        FUNCTIONAL_MODE,
+        /// <summary>
+        /// The connection state of the interface.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        INTERFACE_STATE,
+        /// <summary>
         /// This event refers to the optional program line number. For example in RS274/NGC the line number begins with an N and is followed by 1 to 5 digits (0 – 99999). If there is not an assigned line number in the programming systems as in RS274, the line number will refer to the position in the executing program. The line number MUST be any positive integer from 0 to 2^32 -1.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
@@ -77,6 +107,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
         MESSAGE,
+        /// <summary>
+        /// An identifier of the person operating the device. 
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        OPERATOR_ID,
         /// <summary>
         /// This is a reference to an identifier for the current pallet available at the device.
         /// </summary>
@@ -98,6 +133,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
         PATH_MODE,
         /// <summary>
+        /// A percentage override to adjust the feed rate of this path. 
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        PATH_FEEDRATE_OVERRIDE,
+        /// <summary>
         /// Power status MUST be either ON or OFF.
         /// </summary>
         [Obsolete("Deprecated in version 1.1.0 of the MTConnect Standard.")]
@@ -114,10 +154,40 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
         PROGRAM,
         /// <summary>
+        /// This refers to the controls program editing states.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        PROGRAM_EDIT,
+        /// <summary>
+        /// The name of the program being edited.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        PROGRAM_EDIT_NAME,
+        /// <summary>
+        /// The latest active comment in the executing program.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        PROGRAM_COMMENT,
+        /// <summary>
+        /// The header section of the current executing program. The content SHOULD be limited to 512 bytes.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        PROGRAM_HEADER,
+        /// <summary>
         /// The mode the rotary axis is currently operating.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
         ROTARY_MODE,
+        /// <summary>
+        /// The percentage override to adjust the programmed spin speed.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        ROTARY_VELOCITY_OVERRIDE,
+        /// <summary>
+        /// An indicator of the spindle lockout when power has been removed and it is free to rotate.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        SPINDLE_INTERLOCK,
         /// <summary>
         /// This is a reference to an identifier for the current tool in use by the Path. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
         /// </summary>

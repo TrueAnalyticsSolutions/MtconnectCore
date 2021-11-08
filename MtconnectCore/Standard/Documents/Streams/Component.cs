@@ -118,7 +118,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4", MtconnectVersions.V_1_2_0)]
         private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();

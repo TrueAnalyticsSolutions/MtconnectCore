@@ -21,6 +21,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// Indicates the count of incorrect parts produced.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
-        BAD
+        BAD,
+        /// <summary>
+        /// Indicates the number of parts that are projected or planned to  be produced
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
+        TARGET,
+        /// <summary>
+        /// The number of parts remaining in stock or to be produced.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
+        REMAINING
     }
 }

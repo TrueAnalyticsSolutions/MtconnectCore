@@ -122,8 +122,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TrySetDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItemDefinition dataItemDefinition)
             => base.TrySet<DataItemDefinition>(xNode, nsmgr, nameof(Definition), out dataItemDefinition);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1", MtconnectVersions.V_1_1_0),
-        MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
         private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -136,8 +135,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1", MtconnectVersions.V_1_1_0),
-        MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
         private bool validateCategory(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -150,14 +148,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             else if (!EnumHelper.Contains<CategoryTypes>(Category))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"DataItem 'category' attribute must be one of the following: [{EnumHelper.ToListString<CategoryTypes>(", ", string.Empty, string.Empty)}]."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1", MtconnectVersions.V_1_1_0),
-        MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
         private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -232,8 +229,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1", MtconnectVersions.V_1_1_0),
-        MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
         private bool validateUnits(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -259,8 +255,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1", MtconnectVersions.V_1_1_0),
-        MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
         private bool validateNativeUnits(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -314,8 +309,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1", MtconnectVersions.V_1_1_0),
-        MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.1")]
         private bool validateCoordinateSystem(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -336,5 +330,28 @@ namespace MtconnectCore.Standard.Documents.Devices
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.2")]
+        private bool validateStatistic(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Statistic))
+            {
+                if (!EnumHelper.Contains<StatisticTypes>(Statistic))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"DataItem 'statistic' attribute must be one of the following: [{EnumHelper.ToListString<StatisticTypes>(", ", string.Empty, string.Empty)}]."));
+                }
+                else if (!EnumHelper.ValidateToVersion<StatisticTypes>(Representation, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"DataItem statistic of '{Statistic}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
     }
 }

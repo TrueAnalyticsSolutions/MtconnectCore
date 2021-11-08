@@ -111,14 +111,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     ValidationSeverity.ERROR,
                     $"Device MUST include a 'iso841Class' attribute."));
             }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.4.1")]
-        private bool validateIso841Class(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Iso841Class))
+            else
             {
                 if (!EnumHelper.Contains<Iso841ClassTypes>(Iso841Class))
                 {
@@ -133,6 +126,15 @@ namespace MtconnectCore.Standard.Documents.Devices
                         ValidationSeverity.WARNING,
                         $"DataItem iso841Class of '{Iso841Class}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
                 }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 4.2.3")]
+        private bool validateDataItemCount(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            if (DataItems.Count <= 0) {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must have at least one DataItem. Every Device MUST report AVAILABILITY."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

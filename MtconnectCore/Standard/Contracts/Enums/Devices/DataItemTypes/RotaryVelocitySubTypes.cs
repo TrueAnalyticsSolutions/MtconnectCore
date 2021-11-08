@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
@@ -18,9 +19,15 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
         COMMANDED,
         /// <summary>
+        /// The rotational velocity specified  by a logic or motion program or set by a switch
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
+        PROGRAMMED,
+        /// <summary>
         /// The operator’s overridden value. Percent of commanded.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
+        [Obsolete("Deprecated in version 1.3.0. See EVENT Type DataItems.")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10", MtconnectVersions.V_1_2_0)]
         OVERRIDE
     }
 }

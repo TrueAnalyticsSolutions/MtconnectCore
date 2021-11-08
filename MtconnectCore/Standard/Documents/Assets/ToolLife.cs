@@ -43,45 +43,56 @@ namespace MtconnectCore.Standard.Documents.Assets
             }
         }
 
-        /// <inheritdoc />
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            base.TryValidate(out validationErrors);
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.15.1")]
+        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"CuttingTool ToolLife missing 'type' attribute."));
             }
             else if (!Enum.TryParse<ToolLifeTypes>(Type, out ToolLifeTypes toolLifeTypes))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
+                    ValidationSeverity.WARNING,
                     $"Unrecognized CuttingTool ToolLife 'type'."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.15.1")]
+        private bool validateCountDirection(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(CountDirection))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"CuttingTool ToolLife missing 'countDirection' attribute."));
             }
             else if (!Enum.TryParse<ToolLifeCountDirectionTypes>(Type, out ToolLifeCountDirectionTypes toolLifeCountDirectionTypes))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
+                    ValidationSeverity.WARNING,
                     $"Unrecognized CuttingTool ToolLife 'countDirection'."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.15.1")]
+        private bool validateValue(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (!double.TryParse(SourceNode.InnerText, out double value))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"Invalid ToolLife value. CuttingTool ToolLife value must be a number."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

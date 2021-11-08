@@ -55,6 +55,10 @@ namespace MtconnectCore.Standard.Documents.Devices
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"Channel MUST include a 'number' attribute."));
+            } else if (Number.Length > 255) {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Channel 'number' must not exceed 255 characters."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

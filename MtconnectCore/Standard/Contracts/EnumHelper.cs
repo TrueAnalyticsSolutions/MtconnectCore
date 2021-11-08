@@ -19,6 +19,7 @@ namespace MtconnectCore.Standard.Contracts
         
         internal static bool Contains(Type enumType, string value)
         {
+            if (value == null) return false;
             if (value.Contains("/")) value = value.Replace("/", "_PER_");
             if (value.Contains("^2")) value = value.Replace("^2", "_SQUARED_");
 

@@ -93,6 +93,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 4.2.1", MtconnectVersions.V_1_2_0)]
         LEVEL,
         /// <summary>
+        /// The length of an object
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
+        LENGTH,
+        /// <summary>
         /// The measure of the push or pull introduced by an  actuator or exerted on an object
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]

@@ -30,6 +30,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 5.3.10")]
         DOOR,
+        /// <summary>
+        /// The information used to coordinate actions and activity between devices  or sub-systems and a device.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 5.9")]
+        INTERFACES,
         [Obsolete("Deprecated in Rel. 1.1")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 5.3.5", MtconnectVersions.V_1_0_1)]
         POWER,
@@ -56,6 +61,12 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         [Obsolete("Deprecated in version 1.1.0.")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 5.4.1", MtconnectVersions.V_1_0_1)]
         SPINDLE,
+        /// <summary>
+        /// Stock is a Structural Element that represents the material that is used in a manufacturing process and to which work is applied in a machine or piece of equipment to produce parts.<br/><br/>
+        /// Stock may be either a continuous piece of material from which multiple parts may be produced or it may be a discrete piece of material that will produce a part or a set of parts.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 5.8")]
+        STOCK,
         /// <summary>
         /// The Systems component is a place holder for all the system types.
         /// </summary>

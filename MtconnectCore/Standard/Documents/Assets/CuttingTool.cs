@@ -49,6 +49,10 @@ namespace MtconnectCore.Standard.Documents.Assets
         [MtconnectNodeElements(nameof(CuttingToolElements.CUTTING_TOOL_LIFE_CYCLE), nameof(TrySetToolLifeCycle), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public CuttingToolLifeCycle LifeCycle { get; set; }
 
+        /// <inheritdoc cref="CuttingToolElements.CUTTING_TOOL_ARCHETYPE_REFERENCE"/>
+        [MtconnectNodeElements(nameof(CuttingToolElements.CUTTING_TOOL_ARCHETYPE_REFERENCE), nameof(TrySetToolArchetypeReference), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        public CuttingToolArchetypeReference ArchetypeReference { get; set; }
+
         /// <inheritdoc />
         public CuttingTool() : base() { }
 
@@ -64,47 +68,32 @@ namespace MtconnectCore.Standard.Documents.Assets
         public bool TrySetToolLifeCycle(XmlNode xNode, XmlNamespaceManager nsmgr, out CuttingToolLifeCycle cuttingToolLifeCycle)
             => base.TrySet<CuttingToolLifeCycle>(xNode, nsmgr, nameof(LifeCycle), out cuttingToolLifeCycle);
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public bool TrySetToolArchetypeReference(XmlNode xNode, XmlNamespaceManager nsmgr, out CuttingToolArchetypeReference cuttingToolArchetypeReference)
+            => base.TrySet<CuttingToolArchetypeReference>(xNode, nsmgr, nameof(ArchetypeReference), out cuttingToolArchetypeReference);
+
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
+        private bool validateTimestamp(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 4 Section 6.1 of the MTConnect standard.";
-
-            if (Timestamp == null) {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"CuttingTool MUST include a 'timestamp' attribute. {documentationAttributes}"));
-            }
-
-            if (string.IsNullOrEmpty(SerialNumber))
+            validationErrors = new List<MtconnectValidationException>();
+            if (Timestamp == null)
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"CuttingTool MUST include a 'serialNumber' attribute. {documentationAttributes}"));
+                    $"CuttingTool MUST include a 'timestamp' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-            if (string.IsNullOrEmpty(ToolId))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"CuttingTool MUST include a 'toolId' attribute. {documentationAttributes}"));
-            }
-
-            if (string.IsNullOrEmpty(DeviceUuid))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"CuttingTool MUST include a 'deviceUuid' attribute. {documentationAttributes}"));
-            }
-
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
+        private bool validateAssetId(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(AssetId))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"CuttingTool MUST include a 'assetId' attribute. {documentationAttributes}"));
+                    $"CuttingTool MUST include a 'assetId' attribute."));
             }
-
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
@@ -119,6 +108,45 @@ namespace MtconnectCore.Standard.Documents.Assets
                     $"CuttingTool 'assetId' SHOULD be the combination of the 'toolId' and 'serialNumber' as in 'toolId.serialNumber'."));
             }
 
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
+        private bool validateSerialNumber(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(SerialNumber))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"CuttingTool MUST include a 'serialNumber' attribute."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
+        private bool validateToolId(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(ToolId))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"CuttingTool MUST include a 'toolId' attribute."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
+        private bool validateDeviceUuid(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(DeviceUuid))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"CuttingTool MUST include a 'deviceUuid' attribute."));
+            }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }

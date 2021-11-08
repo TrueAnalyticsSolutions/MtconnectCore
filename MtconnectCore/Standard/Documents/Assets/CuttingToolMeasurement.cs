@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -18,10 +19,10 @@ namespace MtconnectCore.Standard.Documents.Assets
         /// <inheritdoc />
         public CuttingToolMeasurement(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
-        /// <inheritdoc />
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.20")]
+        public bool validateSubTypes(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
+            validationErrors = new List<MtconnectValidationException>();
 
             if (!EnumHelper.Contains<CuttingToolMeasurementSubTypes>(SourceNode.LocalName))
             {

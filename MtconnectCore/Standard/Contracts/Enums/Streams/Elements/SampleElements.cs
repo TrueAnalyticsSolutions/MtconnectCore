@@ -82,6 +82,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.8.4")]
         FILL_LEVEL,
         /// <summary>
+        /// The length of an object, usually a piece of material or stock. The Length MUST be report in MILLIMETER.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.8.4")]
+        LENGTH,
+        /// <summary>
         /// The measurement of the amount of push or pull introduced by an actuator or exerted on an object. The LinearForce MUST be reported in NEWTON.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.8.4")]
@@ -203,6 +208,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.2", MtconnectVersions.V_1_1_0)]
         VOLTS,
+        /// <summary>
+        /// The electrical power (volt-amps) consumed or dissipated by an electrical circuit or device. The Wattage MUST have a numeric value and MUST be reported in WATT.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.8.4")]
+        WATTAGE,
         /// <summary>
         /// The electrical power (volt-amps) of an electrical circuit. The watts MUST have a numeric value and MUST be reported in WATTS.
         /// </summary>

@@ -134,7 +134,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem MUST include a unique 'id' attribute."));
+                    $"Component MUST include a unique 'id' attribute."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -147,7 +147,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem MUST include a unique 'name' attribute."));
+                    $"Component MUST include a unique 'name' attribute."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -160,7 +160,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem 'uuid' cannot exceed a length of 255 characters."));
+                    $"Component 'uuid' cannot exceed a length of 255 characters."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -172,7 +172,16 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
-                    $"DataItem 'sampleRate' is DEPRECATED in MTConnect Version 1.2. Replaced by 'sampleInterval'."));
+                    $"Component 'sampleRate' is DEPRECATED in MTConnect Version 1.2. Replaced by 'sampleInterval'."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.2")]
+        private bool validateChildCount(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            if (SubComponents.Count <= 0 && DataItems.Count <= 0) {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"At least one of Components or DataItems MUST be provided."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

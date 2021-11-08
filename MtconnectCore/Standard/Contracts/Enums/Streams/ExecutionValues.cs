@@ -27,6 +27,26 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
         /// The controller has been stopped.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
-        STOPPED
+        STOPPED,
+        /// <summary>
+        /// The controller has is in a feed hold and motion has  been stopped.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        FEED_HOLD,
+        /// <summary>
+        /// The program has been stopped.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        PROGRAM_STOPPED,
+        /// <summary>
+        /// The program has completed execution.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        PROGRAM_COMPLETED,
+        /// <summary>
+        /// The program has been intentionally optionally stopped using an M01 or similar code.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
+        PROGRAM_OPTIONAL_STOP
     }
 }

@@ -76,6 +76,9 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// </summary>
         public string TagName { get; set; }
 
+        [MtconnectNodeAttribute(SampleAttributes.SAMPLE_COUNT)]
+        public int? SampleCount { get; set; }
+
         /// <inheritdoc/>
         public Sample() : base() { }
 
@@ -95,6 +98,16 @@ namespace MtconnectCore.Standard.Documents.Streams
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"DataItem MUST include a 'name' attribute."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.8.2")]
+        protected bool validateTimeSeriesCount(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            string[] timeSeriesValues = Value.Split(' ', System.StringSplitOptions.RemoveEmptyEntries);
+            if (timeSeriesValues.Length != SampleCount.GetValueOrDefault()){
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"SAMPLE number of readings MUST match the sampleCount."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

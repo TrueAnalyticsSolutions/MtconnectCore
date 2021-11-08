@@ -52,7 +52,8 @@ namespace MtconnectCore.Standard.Documents.Assets
         /// <inheritdoc />
         public CuttingItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
-            Indices = TryGetIndices(nsmgr, out _);
+            Indices = TryGetIndices(nsmgr, out ICollection<MtconnectValidationException> indicesErrors);
+            InitializationErrors.AddRange(indicesErrors);
         }
 
         public int[] TryGetIndices(XmlNamespaceManager nsmgr, out ICollection<MtconnectValidationException> validationErrors)

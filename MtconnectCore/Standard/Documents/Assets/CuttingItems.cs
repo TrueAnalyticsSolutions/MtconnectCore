@@ -31,13 +31,14 @@ namespace MtconnectCore.Standard.Documents.Assets
         public bool TryAddCuttingItem(XmlNode xNode, XmlNamespaceManager nsmgr, out CuttingItem cuttingItem)
             => base.TryAdd<CuttingItem>(xNode, nsmgr, ref _cuttingItems, out cuttingItem);
 
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.21.1")]
+        public bool validateCount(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
+            validationErrors = new List<MtconnectValidationException>();
 
             if (Count <= 0) {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"CuttingItems 'count' must be greater than zero."));
             }
 
