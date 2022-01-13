@@ -235,7 +235,7 @@ namespace MtconnectCore.Standard.Contracts
         /// <inheritdoc/>
         public virtual bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = InitializationErrors;
+            validationErrors = new List<MtconnectValidationException>();// InitializationErrors.ToList();
 
             Type thisType = this.GetType();
 

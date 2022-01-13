@@ -86,7 +86,15 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         ENCODER,
+        /// <summary>
+        /// A mechanism for emitting a type of radiation
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         EXPOSURE_UNIT,
+        /// <summary>
+        /// A mechanism for dispensing liquid or powered materials
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         EXTRUSION_UNIT,
         /// <summary>
         /// Any mechanism for producing a current of air.
@@ -98,6 +106,10 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         FILTER,
+        /// <summary>
+        /// An electromechanical actuator that produces deflection of a beam of light or energy in response to electric current through its coil in a magnetic field.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         GALVANOMOTOR,
         /// <summary>
         /// A mechanism that holds a part, stock material, or any other item in  place.
@@ -139,12 +151,20 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         PUMP,
+        /// <summary>
+        /// A rotary storage unit for material
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         REEL,
         /// <summary>
         /// A mechanism that provides a signal or measured value.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         SENSING_ELEMENT,
+        /// <summary>
+        /// A mechanism for flattening or spreadin materials
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         SPREADER,
         /// <summary>
         /// A component consisting of one or more cells, in which chemical energy  is converted into electricity and used as a source of power.
@@ -156,6 +176,10 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         SWITCH,
+        /// <summary>
+        /// A surface for holding an object or material
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         TABLE,
         /// <summary>
         /// A receptacle or container for holding material.
@@ -177,6 +201,10 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         VALVE,
+        /// <summary>
+        /// A container for liquid or powdered materials
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         VAT,
         /// <summary>
         /// A fluid.

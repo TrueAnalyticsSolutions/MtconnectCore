@@ -39,5 +39,13 @@
         /// Version 1.4.1
         /// </summary>
         V_1_4_1 = 1 << 6,
+        /// <summary>
+        /// Version 1.5.0
+        /// </summary>
+        V_1_5_0 = 1 << 7,
+        /// <summary>
+        /// Version 1.5.1
+        /// </summary>
+        V_1_5_1 = 1 << 8,
     }
 }

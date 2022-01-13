@@ -12,8 +12,7 @@
         </dl>
         <h6><strong>Example</strong></h6>
         <div class="code-well">
-<pre>
-    <code class="language-csharp">
+            <CodeBlock>
 using(var service = new MtconnectService())
 {
     var responseDocument = await service.Probe();
@@ -22,8 +21,7 @@ using(var service = new MtconnectService())
         // Maybe throw the errors returned by the MTConnect Agent
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
     <h3><code>Current</code></h3>
@@ -35,8 +33,7 @@ using(var service = new MtconnectService())
         </dl>
         <h6><strong>Example</strong></h6>
         <div class="code-well">
-<pre>
-    <code class="language-csharp">
+            <CodeBlock>
 using(var service = new MtconnectService())
 {
     var responseDocument = await service.Current();
@@ -45,8 +42,7 @@ using(var service = new MtconnectService())
         // Maybe throw the errors returned by the MTConnect Agent
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
     <h3><code>Sample</code></h3>
@@ -58,8 +54,7 @@ using(var service = new MtconnectService())
         </dl>
         <h6><strong>Example</strong></h6>
         <div class="code-well">
-<pre>
-    <code class="language-csharp">
+            <CodeBlock>
 using(var service = new MtconnectService())
 {
     var responseDocument = await service.Sample();
@@ -68,8 +63,7 @@ using(var service = new MtconnectService())
         // Maybe throw the errors returned by the MTConnect Agent
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
     <h3><code>CurrentInterval</code></h3>
@@ -82,8 +76,7 @@ using(var service = new MtconnectService())
         <h6><strong>Example</strong></h6>
         <p class="alert alert-light small">Here we are using the <a href="https://consoul.dev" target="_blank">Consoul</a> library to format the console.</p>
         <div class="code-well">
-<pre>
-            <code class="language-csharp">
+            <CodeBlock>
 bool canLoop = true;
 
 MtconnectIntervalStreamCallback callback = async (document) => {
@@ -142,8 +135,7 @@ using (CancellationTokenSource token = new CancellationTokenSource())
         waitForKeyTask.Wait();
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
     <h3><code>SampleInterval</code></h3>
@@ -156,8 +148,7 @@ using (CancellationTokenSource token = new CancellationTokenSource())
         <h6><strong>Example</strong></h6>
         <p class="alert alert-light small">Here we are using the <a href="https://consoul.dev" target="_blank">Consoul</a> library to format the console.</p>
         <div class="code-well">
-<pre>
-            <code class="language-csharp">
+            <CodeBlock>
 bool canLoop = true;
 
 MtconnectIntervalStreamCallback callback = async (document) => {
@@ -216,8 +207,7 @@ using (CancellationTokenSource token = new CancellationTokenSource())
         waitForKeyTask.Wait();
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
 </div>

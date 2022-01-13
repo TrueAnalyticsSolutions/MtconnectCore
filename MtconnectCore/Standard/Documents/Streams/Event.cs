@@ -1,6 +1,8 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,6 +73,28 @@ namespace MtconnectCore.Standard.Documents.Streams
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"DataItem MUST include a 'name' attribute."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
+        protected bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(this.SourceNode.LocalName))
+            {
+                if (!EnumHelper.Contains<EventElements>(this.SourceNode.LocalName))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"Event '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid Event type."));
+                }
+                else if (!EnumHelper.ValidateToVersion<EventElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<EventElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"Event '{this.SourceNode.LocalName}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard as a valid Event type."));
+                }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

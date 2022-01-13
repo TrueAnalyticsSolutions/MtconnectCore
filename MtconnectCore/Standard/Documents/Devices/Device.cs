@@ -112,7 +112,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.4.1")]
         private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Id)) {
+            if (string.IsNullOrEmpty(Id)) {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Device MUST include a 'id' attribute."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);

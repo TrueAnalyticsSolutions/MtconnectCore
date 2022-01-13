@@ -14,6 +14,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 5.4.4")]
         BAR_FEEDER,
         /// <summary>
+        /// Deposition is an XML container that represents the information for a system that manages the addition of material or state change of material being performed in an additive manufacturing process. For example, this could describe the portion of a piece of equipment that manages a material extrusion process or a vat polymerization process.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 5.4.7")]
+        DEPOSITION,
+        /// <summary>
         /// Environmental is an XML container that represents the information for a unit or function involved in monitoring, managing, or conditioning the environment around or within a piece of equipment.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 5.4.5")]

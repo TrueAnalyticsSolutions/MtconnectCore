@@ -1,6 +1,8 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,7 +108,8 @@ namespace MtconnectCore.Standard.Documents.Streams
         protected bool validateTimeSeriesCount(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             string[] timeSeriesValues = Value.Split(' ', System.StringSplitOptions.RemoveEmptyEntries);
-            if (timeSeriesValues.Length != SampleCount.GetValueOrDefault()){
+            // TODO: Validate when position is 3D
+            if (timeSeriesValues.Length > 1 && timeSeriesValues.Length != SampleCount.GetValueOrDefault()){
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"SAMPLE number of readings MUST match the sampleCount."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
@@ -119,6 +122,28 @@ namespace MtconnectCore.Standard.Documents.Streams
             if (!string.IsNullOrEmpty(Statistic) && !Duration.HasValue)
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'duration' MUST be provided when the 'statistic' attribute is present on a SAMPLE."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
+        protected bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(this.SourceNode.LocalName))
+            {
+                if (!EnumHelper.Contains<SampleElements>(this.SourceNode.LocalName))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"Sample '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid Sample type."));
+                }
+                else if (!EnumHelper.ValidateToVersion<SampleElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<SampleElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"Sample '{this.SourceNode.LocalName}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard as a valid Sample type."));
+                }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

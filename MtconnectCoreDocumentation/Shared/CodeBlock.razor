@@ -1,0 +1,23 @@
+﻿@inject IJSRuntime jsRuntime
+<pre>
+    <code class="@($"language-{Language}")" @ref="CodeBlockElement">
+        @ChildContent
+    </code>
+</pre>
+@code {
+    ElementReference CodeBlockElement;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Language { get; set; } = "csharp";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+        await jsRuntime.InvokeVoidAsync("Highlight.highlightElement", CodeBlockElement);   
+        }
+    }
+}

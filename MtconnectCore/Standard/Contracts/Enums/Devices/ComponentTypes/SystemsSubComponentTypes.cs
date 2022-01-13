@@ -28,6 +28,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 5.3.6")]
         ENCLOSURE,
         /// <summary>
+        /// EndEffector is an XML container that represents the information for those functions that form the last link segment of a piece of equipment. It is the part of a piece of equipment that interacts with the manufacturing process.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 5.3.11")]
+        END_EFFECTOR,
+        /// <summary>
         /// Feeder is an XML container that represents the information for a system that manages the delivery of materials within a piece of equipment. For example, this could describe the wire delivery system for an EDM or welding process; conveying system or pump and valve system distributing material to a blending station; or a fuel delivery system feeding a furnace.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 5.3.9")]
