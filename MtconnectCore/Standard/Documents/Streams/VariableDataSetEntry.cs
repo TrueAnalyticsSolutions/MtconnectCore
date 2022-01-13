@@ -1,6 +1,8 @@
-﻿namespace MtconnectCore.Standard.Documents.Streams
+﻿using MtconnectCore.Standard.Contracts;
+
+namespace MtconnectCore.Standard.Documents.Streams
 {
-    public class VariableDataSetEntry
+    public class VariableDataSetEntry : MtconnectNode
     {
         /// <summary>
         /// Collected from the key attribute. Refer to Part 3 Streams - 5.6.3.3

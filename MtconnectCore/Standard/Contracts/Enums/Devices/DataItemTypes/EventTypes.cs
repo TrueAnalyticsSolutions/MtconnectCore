@@ -91,6 +91,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.2")]
         COUPLED_AXES,
         /// <summary>
+        /// The time and date code associated with material or other physical item. DATE_CODE MUST be reported in ISO 8601 format.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        DATE_CODE,
+        /// <summary>
+        /// The identifier of another piece of equipment that is temporarily associated with a component of this piece of equipment to perform a particular function.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        DEVICE_UUID,
+        /// <summary>
         /// The direction of motion. CLOCKWISE or COUNTER_CLOCKWISE. See <c>subType</c>s: <seealso cref="DirectionSubTypes"/>
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
@@ -157,6 +167,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2")]
         MATERIAL,
         /// <summary>
+        /// Identifies the layers of material applied to a part or product as part of an additive manufacturing process.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        MATERIAL_LAYER,
+        /// <summary>
         /// An uninterpreted textual notification. 
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.2")]
@@ -176,6 +191,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
         PART_COUNT,
+        /// <summary>
+        /// An indication designating whether a part or work piece has been detected or is present.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        PART_DETECT,
         /// <summary>
         /// An identifier of the current part in the device 
         /// </summary>
@@ -205,10 +225,20 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2", MtconnectVersions.V_1_0_1)]
         POWER_STATUS,
         /// <summary>
+        /// The time and date associated with an activity or event.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        PROCESS_TIME,
+        /// <summary>
         /// The name of the program being executed 
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.2")]
         PROGRAM,
+        /// <summary>
+        /// A comment or non-executable statement in the control  program.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
+        PROGRAM_COMMENT,
         /// <summary>
         /// An indication of the Controller component’s program editing  mode.
         /// </summary>
@@ -220,15 +250,25 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
         PROGRAM_EDIT_NAME,
         /// <summary>
-        /// A comment or non-executable statement in the control  program.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-        PROGRAM_COMMENT,
-        /// <summary>
         /// The non-executable header section of the control program.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
         PROGRAM_HEADER,
+        /// <summary>
+        /// The Uniform Resource Identifier (URI) for the source file associated with PROGRAM.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        PROGRAM_LOCATION,
+        /// <summary>
+        /// Defines whether the logic or motion program defined by PROGRAM is being executed from the local memory of the controller or from an outside source.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        PROGRAM_LOCATION_TYPE,
+        /// <summary>
+        /// An indication of the nesting level within a control program that is associated with the code or instructions that is currently being executed.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        PROGRAM_NEST_LEVEL,
         /// <summary>
         /// The mode for the Rotary axis. SPINDLE, INDEX, or CONTOUR.
         /// </summary>
@@ -258,6 +298,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.11")]
         TOOL_ASSET_ID,
         /// <summary>
+        /// An identifier for the tool group associated with a specific tool. Commonly used to designate spare tools.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        TOOL_GROUP,
+        /// <summary>
         /// The identifier of a tool provided by the device controller.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.11")]
@@ -272,6 +317,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2")]
         USER,
+        /// <summary>
+        /// A data value whose meaning may change over time due to changes in the operation of a piece of equipment or the process being executed on that piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        VARIABLE,
+        /// <summary>
+        /// An indication of the reason that EXECUTION is reporting a value of WAIT
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
+        WAIT_STATE,
         /// <summary>
         /// The identifier for the type of wire used as the cutting mechanism in  Electrical Discharge Machining or similar processes.
         /// </summary>

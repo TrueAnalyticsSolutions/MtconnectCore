@@ -54,6 +54,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
         GALLON_PER_MINUTE,
         /// <summary>
+        /// A measurement of time in hours
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.6")]
+        HOUR,
+        /// <summary>
         /// Inches
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
@@ -114,6 +119,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
         MILLIMETER_PER_MINUTE,
         /// <summary>
+        /// A measurement of time in minutes
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.6")]
+        MINUTE,
+        /// <summary>
         /// US pounds
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
@@ -129,6 +139,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
         RADIAN,
         /// <summary>
+        /// Velocity in radians per minute. 
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
+        RADIAN_PER_MINUTE,
+        /// <summary>
         /// Velocity in radians per second
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
@@ -138,11 +153,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
         RADIAN_PER_SECOND_SQUARED,
-        /// <summary>
-        /// Velocity in radians per minute. 
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
-        RADIAN_PER_MINUTE,
         /// <summary>
         /// Rotational velocity in revolution per second
         /// </summary>

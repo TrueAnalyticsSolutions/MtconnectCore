@@ -49,7 +49,7 @@ namespace MtconnectCore
         /// <param name="xDoc">The available <see cref="XmlDocument"/> to be parsed</param>
         /// <param name="document">Output of the appropriately formated <see cref="IResponseDocument"/> type. Note that this document could result in a <see cref="MtconnectErrorDocument"/>.</param>
         /// <returns>Flag for whether or not the <see cref="XmlDocument"/> could be identified as an implemented <see cref="IResponseDocument"/>.</returns>
-        public bool TryParse(XmlDocument xDoc, out IResponseDocument document)
+        public static bool TryParse(XmlDocument xDoc, out IResponseDocument document)
         {
             document = null;
             string rootNodeName = xDoc.DocumentElement.LocalName;
@@ -347,6 +347,27 @@ namespace MtconnectCore
             await RequestInterval(request, query.Interval.Value, callback, cancelToken);
         }
 
+        public async Task<IResponseDocument> Assets(AssetRequestQuery query = null)
+        {
+            string request = string.Empty;
+            request += RequestTypes.ASSETS.ToString().ToLower();
+            Exception queryException = null;
+            if (query?.Validate(out queryException) == true)
+            {
+                if (string.IsNullOrEmpty(query?.Type))
+                {
+                    //throw new InvalidOperationException($"The {nameof(Asset)} request should not be made with the '{nameof(AssetRequestQuery.Type)}' query parameter included. Instead, use {nameof(SampleInterval)}.");
+                }
+                request += $"?{query}";
+            }
+            else if (queryException != null)
+            {
+                throw queryException;
+            }
+
+            return await Request<MtcAssets.AssetsDocument>(request);
+        }
+
         public async Task<IResponseDocument> Asset(string assetId = "", AssetRequestQuery query = null)
         {
             string request = string.Empty;
@@ -370,6 +391,87 @@ namespace MtconnectCore
             }
 
             return await Request<MtcAssets.AssetsDocument>(request);
+        }
+
+        /// <summary>
+        /// Performs an audit on the Agent to validate the appropriate endpoints are exposed as well as the format of the Response Documents are valid according to the standard.
+        /// </summary>
+        /// <returns>Collection of any errors or messages received from the request and initialization of MTConnect Response Documents.</returns>
+        public async Task<ICollection<MtconnectValidationException>> Audit()
+        {
+            var errors = new List<MtconnectValidationException>();
+            #region Audit Probe
+            var devices = await Probe();
+            if (devices is MtcDevices.DevicesDocument)
+            {
+                if (!devices.TryValidate(out ICollection<MtconnectValidationException> devicesErrors))
+                {
+                    errors.AddRange(devicesErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'probe' requests."));
+            }
+            #endregion
+            #region Audit Current
+            var current = await Current();
+            if (current is MtcStreams.StreamsDocument)
+            {
+                if (!current.TryValidate(out ICollection<MtconnectValidationException> currentErrors))
+                {
+                    errors.AddRange(currentErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'current' requests."));
+            }
+            #endregion
+            #region Audit Sample
+            var sample = await Sample();
+            if (sample is MtcStreams.StreamsDocument)
+            {
+                if (!sample.TryValidate(out ICollection<MtconnectValidationException> sampleErrors))
+                {
+                    errors.AddRange(sampleErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'sample' requests."));
+            }
+            #endregion
+            #region Audit Assets
+            var assets = await Assets();
+            if (assets is MtcAssets.AssetsDocument)
+            {
+                if (!assets.TryValidate(out ICollection<MtconnectValidationException> assetsErrors))
+                {
+                    errors.AddRange(assetsErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'assets' requests."));
+            }
+            #endregion
+            #region Audit Error
+            var expectedError = await Request<MtcError.ErrorDocument>("error");
+            if (expectedError is MtcError.ErrorDocument)
+            {
+                if (!expectedError.TryValidate(out ICollection<MtconnectValidationException> expectedErrorsErrors))
+                {
+                    errors.AddRange(expectedErrorsErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST return a MTConnect Errors Response Document in the event of an error."));
+            }
+            #endregion
+
+            return errors;
         }
 
         private T[] CopyAndResize<T>(T[] sourceArray, long sourceIndex, long length)

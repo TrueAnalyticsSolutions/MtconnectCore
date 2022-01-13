@@ -88,6 +88,12 @@
             <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.3.2 of MTConnect specification.</param>
             <returns></returns>
         </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.Audit">
+            <summary>
+            Performs an audit on the Agent to validate the appropriate endpoints are exposed as well as the format of the Response Documents are valid according to the standard.
+            </summary>
+            <returns>Collection of any errors or messages received from the request and initialization of MTConnect Response Documents.</returns>
+        </member>
         <member name="P:MtconnectCore.Standard.AssetRequestQuery.Type">
             <summary>
             Defines the type of MTConnect Asset to be returned in the MTConnectAssets Response Document. See Part 1 Section 8.3.4.2 of MTConnect specification.
@@ -1441,6 +1447,11 @@
             BarFeeder is an XML container that represents the information for a unit involved in delivering bar stock to a piece of equipment.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes.DEPOSITION">
+            <summary>
+            Deposition is an XML container that represents the information for a system that manages the addition of material or state change of material being performed in an additive manufacturing process. For example, this could describe the portion of a piece of equipment that manages a material extrusion process or a vat polymerization process.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.AuxiliariesSubComponentTypes.ENVIRONMENTAL">
             <summary>
             Environmental is an XML container that represents the information for a unit or function involved in monitoring, managing, or conditioning the environment around or within a piece of equipment.
@@ -1612,6 +1623,11 @@
             Enclosure is an XML container that represents the information for a structure used to contain or isolate a piece of equipment or area. The Enclosure system may provide information regarding access to the internal components of a piece of equipment or the conditions within the enclosure.For example, Door may be defined as a Lower Level Component or Composition element of the Enclosure system.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.END_EFFECTOR">
+            <summary>
+            EndEffector is an XML container that represents the information for those functions that form the last link segment of a piece of equipment. It is the part of a piece of equipment that interacts with the manufacturing process.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.FEEDER">
             <summary>
             Feeder is an XML container that represents the information for a system that manages the delivery of materials within a piece of equipment. For example, this could describe the wire delivery system for an EDM or welding process; conveying system or pump and valve system distributing material to a blending station; or a fuel delivery system feeding a furnace.
@@ -1723,6 +1739,16 @@
             A mechanism used to measure rotary position.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.EXPOSURE_UNIT">
+            <summary>
+            A mechanism for emitting a type of radiation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.EXTRUSION_UNIT">
+            <summary>
+            A mechanism for dispensing liquid or powered materials
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.FAN">
             <summary>
             Any mechanism for producing a current of air.
@@ -1731,6 +1757,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.FILTER">
             <summary>
             Any substance or structure through which liquids or gases are passed to  remove suspended impurities or to recover solids.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.GALVANOMOTOR">
+            <summary>
+            An electromechanical actuator that produces deflection of a beam of light or energy in response to electric current through its coil in a magnetic field.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.GRIPPER">
@@ -1773,9 +1804,19 @@
             An apparatus raising, driving, exhausting, or compressing fluids or  gases by means of a piston, plunger, or set of rotating vanes.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.REEL">
+            <summary>
+            A rotary storage unit for material
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.SENSING_ELEMENT">
             <summary>
             A mechanism that provides a signal or measured value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.SPREADER">
+            <summary>
+            A mechanism for flattening or spreadin materials
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.STORAGE_BATTERY">
@@ -1786,6 +1827,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.SWITCH">
             <summary>
             A mechanism for turning on or off an electric current or for making or  breaking a circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.TABLE">
+            <summary>
+            A surface for holding an object or material
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.TANK">
@@ -1806,6 +1852,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.VALVE">
             <summary>
             Any mechanism for halting or controlling the flow of a liquid, gas, or  other material through a passage, pipe, inlet, or outlet.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.VAT">
+            <summary>
+            A container for liquid or powdered materials
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.WATER">
@@ -2224,6 +2275,121 @@
             A setting or operator selection that changes the behavior of the controller on a piece of equipment.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CuttingSpeedSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CUTTING_SPEED"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CuttingSpeedSubTypes.ACTUAL">
+            <summary>
+            The measured value between the cutting mechanism and the surface of the workpiece it is operating on.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CuttingSpeedSubTypes.COMMANDED">
+            <summary>
+            The commanded value between the cutting mechanism and the surface of the workpiece it is operating on.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.CuttingSpeedSubTypes.PROGRAMMED">
+            <summary>
+            The programmed value between the cutting mechanism and the surface of the workpiece it is operating on.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DateCodeSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DATE_CODE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DateCodeSubTypes.MANUFACTURE">
+            <summary>
+            The time and date code relating to the production of a material or other physical item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DateCodeSubTypes.EXPIRATION">
+            <summary>
+            The time and date code relating to the expiration or end of useful life for a material or other physical item.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DateCodeSubTypes.FIRST_USE">
+            <summary>
+            The time and date code relating the first use of a material or other physical item.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionAccelerationVolumetricSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_ACCELERATION_VOLUMETRIC"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionAccelerationVolumetricSubTypes.ACTUAL">
+            <summary>
+            The measured rate of change in spatial volume of material deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionAccelerationVolumetricSubTypes.COMMANDED">
+            <summary>
+            The commanded rate of change in spatial volume of material to be deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionDensitySubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_DENSITY"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionDensitySubTypes.ACTUAL">
+            <summary>
+            The measured density of the material deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionDensitySubTypes.COMMANDED">
+            <summary>
+            The commanded density of material to be deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionMassSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_MASS"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionMassSubTypes.ACTUAL">
+            <summary>
+            The measured mass of the material deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionMassSubTypes.COMMANDED">
+            <summary>
+            The commanded mass of the material to be deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionRateVolumetricSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_RATE_VOLUMETRIC"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionRateVolumetricSubTypes.ACTUAL">
+            <summary>
+            The measured rate at which a spatial volume of material is deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionRateVolumetricSubTypes.COMMANDED">
+            <summary>
+            The programmed rate at which a spatial volume of material is to be deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionVolumeSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_VOLUME"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionVolumeSubTypes.ACTUAL">
+            <summary>
+            The measured spatial volume of material deposited.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DepositionVolumeSubTypes.COMMANDED">
+            <summary>
+            The target spatial volume of material to be deposited.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DIRECTION"/>
@@ -2389,6 +2555,16 @@
             Refers to the set of associated axes. The value will be a space delimited set of axes names.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DATE_CODE">
+            <summary>
+            The time and date code associated with material or other physical item. DATE_CODE MUST be reported in ISO 8601 format.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DEVICE_UUID">
+            <summary>
+            The identifier of another piece of equipment that is temporarily associated with a component of this piece of equipment to perform a particular function.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DIRECTION">
             <summary>
             The direction of motion. CLOCKWISE or COUNTER_CLOCKWISE. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes"/>
@@ -2454,6 +2630,11 @@
             The identifier of a material used or consumed in the manufacturing process.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MATERIAL_LAYER">
+            <summary>
+            Identifies the layers of material applied to a part or product as part of an additive manufacturing process.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MESSAGE">
             <summary>
             An uninterpreted textual notification. 
@@ -2472,6 +2653,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_COUNT">
             <summary>
             The current count of parts produced as represented by the Controller. MUST be  integer value. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PartCountSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_DETECT">
+            <summary>
+            An indication designating whether a part or work piece has been detected or is present.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_ID">
@@ -2499,9 +2685,19 @@
             The ON or OFF status of the Component. DEPRECATION WARNING: MAY be  deprecated in the future. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerStateSubTypes"/>
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROCESS_TIME">
+            <summary>
+            The time and date associated with an activity or event.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM">
             <summary>
             The name of the program being executed 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_COMMENT">
+            <summary>
+            A comment or non-executable statement in the control  program.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_EDIT">
@@ -2514,14 +2710,24 @@
             The name of the program being edited. This is used in conjunction with PROGRAM_EDIT when in ACTIVE state.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_COMMENT">
-            <summary>
-            A comment or non-executable statement in the control  program.
-            </summary>
-        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_HEADER">
             <summary>
             The non-executable header section of the control program.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_LOCATION">
+            <summary>
+            The Uniform Resource Identifier (URI) for the source file associated with PROGRAM.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_LOCATION_TYPE">
+            <summary>
+            Defines whether the logic or motion program defined by PROGRAM is being executed from the local memory of the controller or from an outside source.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_NEST_LEVEL">
+            <summary>
+            An indication of the nesting level within a control program that is associated with the code or instructions that is currently being executed.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ROTARY_MODE">
@@ -2549,6 +2755,11 @@
             The identifier of an individual tool asset. 
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_GROUP">
+            <summary>
+            An identifier for the tool group associated with a specific tool. Commonly used to designate spare tools.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_NUMBER">
             <summary>
             The identifier of a tool provided by the device controller.
@@ -2562,6 +2773,16 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.USER">
             <summary>
             The identifier of the person currently responsible for operating the piece  of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.VARIABLE">
+            <summary>
+            A data value whose meaning may change over time due to changes in the operation of a piece of equipment or the process being executed on that piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WAIT_STATE">
+            <summary>
+            An indication of the reason that EXECUTION is reporting a value of WAIT
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WIRE">
@@ -2729,6 +2950,21 @@
             The minimum line number of the code being executed.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.MaterialLayerSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MATERIAL_LAYER"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.MaterialLayerSubTypes.ACTUAL">
+            <summary>
+            The current number of layers of materi applied to a part or product during an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.MaterialLayerSubTypes.TARGET">
+            <summary>
+            The target or planned number layers of material applied to a part or product during an additive manufacturing process.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PartCountSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_COUNT"/>
@@ -2762,6 +2998,26 @@
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateOverrideSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PATH_FEEDRATE_OVERRIDE"/>
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedratePerRevolutionSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_FEEDRATE_PER_REVOLUTION"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedratePerRevolutionSubTypes.ACTUAL">
+            <summary>
+            The measured value of the feedrate of the axes, or a single axis.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedratePerRevolutionSubTypes.COMMANDED">
+            <summary>
+            The feedrate as specified by the Controller for the axes, or a single axis. The COMMANDED feedrate is a calculated value that includes adjustments and overrides.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedratePerRevolutionSubTypes.PROGRAMMED">
+            <summary>
+            The feedrate specified by a logic or motion program or set by a switch as the feedrate for the axes, or a single axis.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateSubTypes">
@@ -2879,6 +3135,106 @@
             Measurement of the time that a process waiting and unable to perform its intended function.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProcessTimeSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROCESS_TIME"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProcessTimeSubTypes.START">
+            <summary>
+            The time and date associated with the beginning of an activity or event.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProcessTimeSubTypes.COMPLETE">
+            <summary>
+            The time and date associated with the completion of an activity or event.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProcessTimeSubTypes.TARGET_COMPLETION">
+            <summary>
+            The projected time and date associated with the end or completion of an activity or event.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramCommentSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_COMMENT"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramCommentSubTypes.SCHEDULE">
+            <summary>
+            The identity of a control program that is used to specify the order of execution of other programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramCommentSubTypes.MAIN">
+            <summary>
+            The identity of the primary logic or motion program currently being executed. It is the starting nest level in a call structure and may contain calls to sub programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramCommentSubTypes.ACTIVE">
+            <summary>
+            The identity of the logic or motion program currently executing.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_LOCATION"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationSubTypes.SCHEDULE">
+            <summary>
+            An identity of a control program that is used to specify the order of execution of other programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationSubTypes.MAIN">
+            <summary>
+            The identity of the primary logic or motion program currently being executed. It is the starting nest level in a call structure and may contain calls to sub programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationSubTypes.ACTIVE">
+            <summary>
+            The identity of the logic or motion program currently executing.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationTypeSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_LOCATION_TYPE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationTypeSubTypes.SCHEDULE">
+            <summary>
+            An identity of a control program that is used to specify the order of execution of other programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationTypeSubTypes.MAIN">
+            <summary>
+            The identity of the primary logic or motion program currently being executed. It is the starting nest level in a call structure and may contain calls to sub programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationTypeSubTypes.ACTIVE">
+            <summary>
+            The identity of the logic or motion program currently executing.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramSubTypes.SCHEDULE">
+            <summary>
+            The identity of a control program that is used to specify the order of execution of other programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramSubTypes.MAIN">
+            <summary>
+            The identity of the primary logic or motion program currently being executed. It is the starting nest level in a call structure and may contain calls to sub programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramSubTypes.ACTIVE">
+            <summary>
+            The identity of the logic or motion program currently executing.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.RotaryVelocitySubTypes">
             <summary>
             <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ROTARY_VELOCITY"/>
@@ -2944,6 +3300,16 @@
             The feedrate of a linear axis. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AxisFeedrateSubTypes"/>
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CAPACITY_FLUID">
+            <summary>
+            The fluid capacity of an object or container
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CAPACITY_SPATIAL">
+            <summary>
+            The geometric capacity of an object or container.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CLOCK_TIME">
             <summary>
             The reading of a timing device at a specific point in  time. Clock time MUST be reported in W3C ISO 8601 format.
@@ -2957,6 +3323,41 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CONDUCTIVITY">
             <summary>
             The ability of a material to conduct electricity 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.CUTTING_SPEED">
+            <summary>
+            The speed difference (relative velocity) between the cutting mechanism and the surface of the workpiece it is operating on.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DENSITY">
+            <summary>
+            The volumetric mass of a material per unit volume of that material.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_ACCELERATION_VOLUMETRIC">
+            <summary>
+            The rate of change in spatial volume of material deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_DENSITY">
+            <summary>
+            The density of the material deposited in an additive manufacturing process per unit of volume.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_MASS">
+            <summary>
+            The mass of the material deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_RATE_VOLUMETRIC">
+            <summary>
+            The rate at which a spatial volume of material is deposited in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DEPOSITION_VOLUME">
+            <summary>
+            The spatial volume of material to be deposited in an additive manufacturing process.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DISPLACEMENT">
@@ -3012,6 +3413,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_FEEDRATE">
             <summary>
             The feedrate of the tool path. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_FEEDRATE_PER_REVOLUTION">
+            <summary>
+            The feedrate for the axes, or a single axis.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_POSITION">
@@ -3084,16 +3490,6 @@
             The turning force exerted on an object or by an object
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLT_AMPERE">
-            <summary>
-            The measure of the apparent power in an electrical  circuit, equal to the product of root-mean-square (RMS) voltage and RMS current’ (commonly referred to as VA)
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLT_AMPERE_REACTIVE">
-            <summary>
-            The measurement of reactive power in an AC  electrical circuit (commonly referred to as var)
-            </summary>
-        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VELOCITY">
             <summary>
             The rate of change of position. 
@@ -3107,6 +3503,26 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE">
             <summary>
             The measurement of electrical potential between two  points. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLT_AMPERE">
+            <summary>
+            The measure of the apparent power in an electrical  circuit, equal to the product of root-mean-square (RMS) voltage and RMS current’ (commonly referred to as VA)
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLT_AMPERE_REACTIVE">
+            <summary>
+            The measurement of reactive power in an AC  electrical circuit (commonly referred to as var)
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLUME_FLUID">
+            <summary>
+            The fluid volume of an object or container.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLUME_SPATIAL">
+            <summary>
+            The geometric volume of an object or container.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.WATTAGE">
@@ -3222,6 +3638,36 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.TARGET">
             <summary>
             The desired or preset voltage to be  delivered from a power source.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VolumeFluidSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLUME_FLUID"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VolumeFluidSubTypes.ACTUAL">
+            <summary>
+            The amount of fluid currently present in an object or container
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VolumeFluidSubTypes.CONSUMED">
+            <summary>
+            The amount of fluid material consumed from an object or container during a manufacturing process.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VolumeSpatialSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLUME_SPATIAL"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VolumeSpatialSubTypes.ACTUAL">
+            <summary>
+            The amount of bulk material currently present in an object or container.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VolumeSpatialSubTypes.CONSUMED">
+            <summary>
+            The amount of bulk material consumed from an object or container during a manufacturing process.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.WattageSubTypes">
@@ -3747,6 +4193,11 @@
             Gallons per minute. 
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.HOUR">
+            <summary>
+            A measurement of time in hours
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.INCH">
             <summary>
             Inches
@@ -3807,6 +4258,11 @@
             Velocity in millimeters per minute 
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.MINUTE">
+            <summary>
+            A measurement of time in minutes
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.POUND">
             <summary>
             US pounds
@@ -3822,6 +4278,11 @@
             Angle in radians 
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.RADIAN_PER_MINUTE">
+            <summary>
+            Velocity in radians per minute. 
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.RADIAN_PER_SECOND">
             <summary>
             Velocity in radians per second
@@ -3830,11 +4291,6 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.RADIAN_PER_SECOND_SQUARED">
             <summary>
             Rotational acceleration in radian per second squared
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.RADIAN_PER_MINUTE">
-            <summary>
-            Velocity in radians per minute. 
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.NativeUnitsTypes.REVOLUTION_PER_SECOND">
@@ -3885,6 +4341,11 @@
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.RepresentationTypes">
             <summary>
             Available options for a <c>representation</c> attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Representation"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RepresentationTypes.DATA_SET">
+            <summary>
+            The reported value(s) are represented as a set of key-value pairs. Each reported value in the Data Set MUST have a unique key.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.RepresentationTypes.VALUE">
@@ -4047,6 +4508,21 @@
             A counted event
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.CUBIC_MILLIMETER">
+            <summary>
+            Geometric volume in millimeters
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.CUBIC_MILLIMETER_PER_SECOND">
+            <summary>
+            Change of geometric volume per second
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.CUBIC_MILLIMETER_PER_SECOND_SQUARED">
+            <summary>
+            Change in geometric volume per second squared
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.DECIBEL">
             <summary>
             Sound Level 
@@ -4102,9 +4578,24 @@
             Measurement of Tilt
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIGRAM">
+            <summary>
+            Milligram
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIGRAM_PER_CUBIC_MILLIMETER">
+            <summary>
+            Milligram per cubic millimeter
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIMETER">
             <summary>
             Millimeters
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIMETER_PER_REVOLUTION">
+            <summary>
+            Millimeters per revolution.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIMETER_PER_SECOND">
@@ -4343,6 +4834,16 @@
             Version 1.4.1
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_0">
+            <summary>
+            Version 1.5.0
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_1">
+            <summary>
+            Version 1.5.1
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
             <summary>
             Logical choices XML node types.
@@ -4376,6 +4877,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.RequestTypes.SAMPLE">
             <summary>
             An Agent responds to a Sample Request with an MTConnectStreams Response Document that contains a set of values for Data Entities currently available for Streaming Data from the Agent, subject to any filtering defined in the Request.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.RequestTypes.ASSETS">
+            <summary>
+            An Agent responds to an Asset Request with an MTConnectAssets Response Document that contains information for MTConnect Assets from the Agent, subject to any filtering defined in the Request.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.RequestTypes.ASSET">
@@ -6915,12 +7421,6 @@
             <param name="item">Outputs the set <see cref="!:&lt;TItem&gt;"/>.</param>
             <returns>Flag for whether or not the item was successfully parsed from the MTConnect Response Document and added to <see cref="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Items"/>.</returns>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.GetDocumentVersion">
-            <summary>
-            Gets the version of MTConnect that has been applied to the source MTConnect Response Document.
-            </summary>
-            <returns>The MTConnect Version applied to this MTConnect Response Document.</returns>
-        </member>
         <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <summary>
             Safely tries to validate the <see cref="!:&lt;THeader&gt;"/> and all <see cref="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Items"/> in this MTConnect Response Document according to the version of MTConnect.
@@ -7296,39 +7796,16 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.SubType">
-            <summary>
-            Collected from the subType attribute. Refer to Part 3 Streams - 5.6.3.1
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.Name">
-            <summary>
-            Collected from the name attribute. Refer to Part 3 Streams - 5.6.3.1
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.CompositionId">
-            <summary>
-            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.6.3.1
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.ResetTriggered">
-            <summary>
-            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.6.3.1
-            
-            Occurance: 0..1
-            </summary>
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.Count">
             <summary>
             Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
             
             Occurance: 1
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Documents.Streams.VariableDataSet._entries">
+            <summary>
+            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
             </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.Key">

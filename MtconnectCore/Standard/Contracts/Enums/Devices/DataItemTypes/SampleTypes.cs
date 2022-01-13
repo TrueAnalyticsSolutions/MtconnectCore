@@ -47,6 +47,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         AXIS_FEEDRATE,
         /// <summary>
+        /// The fluid capacity of an object or container
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        CAPACITY_FLUID,
+        /// <summary>
+        /// The geometric capacity of an object or container.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        CAPACITY_SPATIAL,
+        /// <summary>
         /// The reading of a timing device at a specific point in  time. Clock time MUST be reported in W3C ISO 8601 format.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
@@ -61,6 +71,41 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
         CONDUCTIVITY,
+        /// <summary>
+        /// The speed difference (relative velocity) between the cutting mechanism and the surface of the workpiece it is operating on.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        CUTTING_SPEED,
+        /// <summary>
+        /// The volumetric mass of a material per unit volume of that material.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        DENSITY,
+        /// <summary>
+        /// The rate of change in spatial volume of material deposited in an additive manufacturing process.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        DEPOSITION_ACCELERATION_VOLUMETRIC,
+        /// <summary>
+        /// The density of the material deposited in an additive manufacturing process per unit of volume.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        DEPOSITION_DENSITY,
+        /// <summary>
+        /// The mass of the material deposited in an additive manufacturing process.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        DEPOSITION_MASS,
+        /// <summary>
+        /// The rate at which a spatial volume of material is deposited in an additive manufacturing process.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        DEPOSITION_RATE_VOLUMETRIC,
+        /// <summary>
+        /// The spatial volume of material to be deposited in an additive manufacturing process.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        DEPOSITION_VOLUME,
         /// <summary>
         /// The displacement as the change in position of an  object
         /// </summary>
@@ -122,6 +167,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         PATH_FEEDRATE,
+        /// <summary>
+        /// The feedrate for the axes, or a single axis.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        PATH_FEEDRATE_PER_REVOLUTION,
         /// <summary>
         /// The current program control point or program  coordinate in WORK coordinates. The coordinate system will revert to MACHINE coordinates if WORK coordinates are not available. See <c>subType</c>s: <seealso cref="PathPositionSubTypes"/>
         /// </summary>
@@ -196,16 +246,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         TORQUE,
         /// <summary>
-        /// The measure of the apparent power in an electrical  circuit, equal to the product of root-mean-square (RMS) voltage and RMS current’ (commonly referred to as VA)
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
-        VOLT_AMPERE,
-        /// <summary>
-        /// The measurement of reactive power in an AC  electrical circuit (commonly referred to as var)
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
-        VOLT_AMPERE_REACTIVE,
-        /// <summary>
         /// The rate of change of position. 
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
@@ -220,6 +260,26 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         VOLTAGE,
+        /// <summary>
+        /// The measure of the apparent power in an electrical  circuit, equal to the product of root-mean-square (RMS) voltage and RMS current’ (commonly referred to as VA)
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
+        VOLT_AMPERE,
+        /// <summary>
+        /// The measurement of reactive power in an AC  electrical circuit (commonly referred to as var)
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
+        VOLT_AMPERE_REACTIVE,
+        /// <summary>
+        /// The fluid volume of an object or container.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        VOLUME_FLUID,
+        /// <summary>
+        /// The geometric volume of an object or container.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        VOLUME_SPATIAL,
         /// <summary>
         /// The measurement of power consumed or dissipated  by an electrical circuit or device
         /// </summary>

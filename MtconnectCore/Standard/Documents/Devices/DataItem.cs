@@ -77,7 +77,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="DataItemAttributes.DISCRETE"/>
         [MtconnectNodeAttribute(DataItemAttributes.DISCRETE)]
-        public bool? Discrete { get; set; }
+        public bool? Discrete { get; set; } = false;
 
         /// <inheritdoc cref="DataItemAttributes.SAMPLE_RATE"/>
         [MtconnectNodeAttribute(DataItemAttributes.SAMPLE_RATE)]
@@ -359,6 +359,14 @@ namespace MtconnectCore.Standard.Documents.Devices
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(ResetTrigger) && !EnumHelper.Contains<ResetTriggerValues>(ResetTrigger)) {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"Unrecognized ResetTrigger value '{ResetTrigger}'."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+        
+        private bool validateRepresentationDiscrete_Deprecated(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Representation) && EnumHelper.Enumify(Representation).Equals(RepresentationTypes.DISCRETE)) {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"DataItem representation 'discrete' is obsolete, the 'discrete' attribute should be used instead."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
