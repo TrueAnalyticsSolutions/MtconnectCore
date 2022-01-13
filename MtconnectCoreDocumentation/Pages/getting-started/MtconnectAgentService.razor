@@ -1,5 +1,7 @@
 ﻿@page "/getting-started/mtconnectagentservice"
 
+<PageTitle>MtconnectAgentService - Getting Started - MtconnectCore by True Analytics Manufacturing Solutions</PageTitle>
+
 <div class="container">
     <h1><code>MtconnectAgentService</code></h1>
     <p>The <code>MtconnectAgentService</code> contains multiple methods for requesting information from a MTConnect&reg; Agent. Each request yields a <em>Response Document</em> as outlined in the MTConnect&reg; specification. The <code>Probe</code>, <code>Current</code>, and <code>Sample</code> requests are all basic HTTP requests, however the <code>CurrentInterval</code> and <code>SampleInterval</code> requests are somewhat unique in that they are asynchronous tasks that keep the connection to the MTConnect Agent alive until the specified <code>CancellationToken</code> is cancelled.</p>

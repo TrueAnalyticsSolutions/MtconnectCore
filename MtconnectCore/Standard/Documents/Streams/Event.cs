@@ -86,14 +86,14 @@ namespace MtconnectCore.Standard.Documents.Streams
                 if (!EnumHelper.Contains<EventElements>(this.SourceNode.LocalName))
                 {
                     validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"Event '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid Event type."));
+                        ValidationSeverity.ERROR,
+                        $"Event '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid Event type. Consider extending the schema and prefixing the type with the 'x:' namespace."));
                 }
                 else if (!EnumHelper.ValidateToVersion<EventElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<EventElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"Event '{this.SourceNode.LocalName}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard as a valid Event type."));
+                        $"Event '{this.SourceNode.LocalName}' is not valid in version '{MtconnectVersion}' of the MTConnect Standard as a valid Event type."));
                 }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);

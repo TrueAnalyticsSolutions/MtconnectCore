@@ -183,42 +183,42 @@ namespace MtconnectCore.Standard.Documents.Devices
                             if (!EnumHelper.Contains<SampleTypes>(Type))
                             {
                                 validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'."));
+                                    ValidationSeverity.ERROR,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. Consider extending the schema and prefixing the type with the 'x:' namespace."));
                             }
                             else if (!EnumHelper.ValidateToVersion<SampleTypes>(Type, MtconnectVersion.GetValueOrDefault()))
                             {
                                 validationErrors.Add(new MtconnectValidationException(
                                     ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not supported for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
+                                    $"DataItem type of '{Type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
                             }
                             break;
                         case CategoryTypes.EVENT:
                             if (!EnumHelper.Contains<EventTypes>(Type))
                             {
                                 validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'."));
+                                    ValidationSeverity.ERROR,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. Consider extending the schema and prefixing the type with the 'x:' namespace."));
                             }
                             else if (!EnumHelper.ValidateToVersion<EventTypes>(Type, MtconnectVersion.GetValueOrDefault()))
                             {
                                 validationErrors.Add(new MtconnectValidationException(
                                     ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not supported for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
+                                    $"DataItem type of '{Type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
                             }
                             break;
                         case CategoryTypes.CONDITION:
                             if (!EnumHelper.Contains<ConditionTypes>(Type))
                             {
                                 validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'."));
+                                    ValidationSeverity.ERROR,
+                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. Consider extending the schema and prefixing the type with the 'x:' namespace."));
                             }
                             else if (!EnumHelper.ValidateToVersion<ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault()))
                             {
                                 validationErrors.Add(new MtconnectValidationException(
                                     ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not supported for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
+                                    $"DataItem type of '{Type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
                             }
                             break;
                         default:

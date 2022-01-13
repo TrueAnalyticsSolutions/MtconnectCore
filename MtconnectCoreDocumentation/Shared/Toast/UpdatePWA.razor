@@ -1,0 +1,28 @@
+﻿@inject IJSRuntime JSRuntime
+<Toast Title="Update Available" Show="@UpdateAvailable" OnDismissed="@HandleDismissed">
+    <Body>
+        Would you like to update?
+    </Body>
+    <Actions>
+        <button type="button" class="btn btn-primary btn-sm" @onclick="@UpdateServiceWorker">Update</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast" @onclick="@HandleDismissed">Dismiss</button>
+    </Actions>
+</Toast>
+
+@code {
+    [Parameter]
+    public bool UpdateAvailable { get; set; }
+
+    [Parameter]
+    public Action<bool> ActionCallback { get; set; }
+
+    async void UpdateServiceWorker()
+    {
+        await JSRuntime.InvokeVoidAsync("serviceWorker.update");
+        ActionCallback(true);
+    }
+
+    void HandleDismissed() {
+        ActionCallback(false);
+    }
+}

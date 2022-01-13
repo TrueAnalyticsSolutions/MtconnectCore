@@ -38,5 +38,24 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         /// <inheritdoc />
         public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Device device) => base.TryAdd<Device>(xNode, nsmgr, ref _items, out device);
+
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.2")]
+        protected bool validateSequence(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            var allDataItems = new List<IDataItem>();
+            var allComponents = Items.SelectMany(o => o.Components);
+            allDataItems.AddRange(allComponents.SelectMany(o => o.Samples));
+            allDataItems.AddRange(allComponents.SelectMany(o => o.Events));
+            allDataItems.AddRange(allComponents.SelectMany(o => o.Conditions));
+            var allSequenceNumbers = allDataItems.Select(o => o.Sequence).ToArray();
+            var distinctSequenceNumbers = allSequenceNumbers.Distinct().ToArray();
+            if (allSequenceNumbers.Length != distinctSequenceNumbers.Length)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'sequence' values MUST be unique for each incoming DataItem."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }

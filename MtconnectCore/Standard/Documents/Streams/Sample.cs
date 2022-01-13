@@ -135,14 +135,14 @@ namespace MtconnectCore.Standard.Documents.Streams
                 if (!EnumHelper.Contains<SampleElements>(this.SourceNode.LocalName))
                 {
                     validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"Sample '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid Sample type."));
+                        ValidationSeverity.ERROR,
+                        $"Sample '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid Sample type. Consider extending the schema and prefixing the type with the 'x:' namespace."));
                 }
                 else if (!EnumHelper.ValidateToVersion<SampleElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<SampleElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"Sample '{this.SourceNode.LocalName}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard as a valid Sample type."));
+                        $"Sample '{this.SourceNode.LocalName}' is not valid in version '{MtconnectVersion}' of the MTConnect Standard as a valid Sample type."));
                 }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
