@@ -1,15 +1,21 @@
 {
   "name": "MtconnectCore Docs",
   "short_name": "MtcCore Docs",
+  "lang": "en-US",
+  "dir": "ltr",
   "start_url": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#03173d",
+  "categories": [ "tools" ],
+  "description": "An open source application that hosts documentation for the C# MtconnectCore library as well as MTConnect tools.",
   "icons": [
     {
-        "src": "TAMS-Icon-Blue_x256.png",
-        "type": "image/png",
-        "sizes": "256x256"
+      "src": "TAMS-Icon-Blue_x256.png",
+      "type": "image/png",
+      "sizes": "256x256",
+      "purpose": "maskable"
     }
   ]
 }
