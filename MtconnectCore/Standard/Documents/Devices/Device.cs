@@ -182,5 +182,16 @@ namespace MtconnectCore.Standard.Documents.Devices
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 5.1")]
+        private bool validateDataItemAvailability(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY.ToString()))
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must always contain an Availability data item that represents this device is available to do work."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }

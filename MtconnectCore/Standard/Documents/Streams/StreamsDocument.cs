@@ -57,5 +57,17 @@ namespace MtconnectCore.Standard.Documents.Streams
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3")]
+        protected bool validateDataItemValue(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            var allUnavailable = Items.All(o => o.Components.All(c => c.Samples.All(d => d.Value == "UNAVAILABLE") && c.Events.All(d => d.Value == "UNAVAILABLE") && c.Conditions.All(d => d.Value == "UNAVAILABLE")));
+            if (allUnavailable)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"All DataItems reporting UNAVAILABLE. This could be an indication that the Adapter is not reporting correctly."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }
