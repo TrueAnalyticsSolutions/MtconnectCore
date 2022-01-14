@@ -54,11 +54,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
         GALLON_PER_MINUTE,
         /// <summary>
-        /// A measurement of time in hours
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.6")]
-        HOUR,
-        /// <summary>
         /// Inches
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
@@ -89,11 +84,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
         INCH_POUND,
         /// <summary>
-        /// A measurement of temperature
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 6.2.2.8")]
-        KELVIN,
-        /// <summary>
         /// A measurement in kilowatt.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
@@ -118,11 +108,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
         MILLIMETER_PER_MINUTE,
-        /// <summary>
-        /// A measurement of time in minutes
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.6")]
-        MINUTE,
         /// <summary>
         /// US pounds
         /// </summary>

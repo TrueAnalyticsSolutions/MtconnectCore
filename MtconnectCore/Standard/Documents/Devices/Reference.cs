@@ -27,19 +27,5 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc/>
         public Reference(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
-
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 4.8")]
-        private bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(IdRef))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Reference MUST include a unique 'idRef' attribute."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
     }
 }

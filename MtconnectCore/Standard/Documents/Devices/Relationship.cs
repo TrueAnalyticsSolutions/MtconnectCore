@@ -56,24 +56,8 @@ namespace MtconnectCore.Standard.Documents.Devices
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"Relationship MUST include a 'type' attribute."));
-            } else if (!EnumHelper.Contains<RelationshipTypes>(Type)) {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Relationship 'type' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipTypes>(", ", string.Empty, string.Empty)}]."));
             }
 
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        private bool validateCriticality(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Criticality) && !EnumHelper.Contains<RelationshipTypes>(Type))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Relationship 'criticality' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipCriticalityTypes>(", ", string.Empty, string.Empty)}]."));
-            }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }

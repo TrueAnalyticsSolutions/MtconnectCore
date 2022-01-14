@@ -11,11 +11,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
     public enum RepresentationTypes
     {
         /// <summary>
-        /// The reported value(s) are represented as a set of key-value pairs. Each reported value in the Data Set MUST have a unique key.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.12")]
-        DATA_SET,
-        /// <summary>
         /// The measured value of a sample. If no representation is specified for a DataItem, the representation MUST be determined to be VALUE.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.8")]
@@ -25,11 +20,5 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.8")]
         TIME_SERIES,
-        /// <summary>
-        /// A data type where each discrete occurrence of the data  may have the same value as the previous occurrence of the data. There is no reported state change between occurrences of the data.
-        /// </summary>
-        [Obsolete("Deprecated in version 1.5.0. See discrete attribute for DataItem instead.")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 6.2.2.6", MtconnectVersions.V_1_4_1)]
-        DISCRETE
     }
 }

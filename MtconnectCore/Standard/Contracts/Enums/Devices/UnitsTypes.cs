@@ -25,21 +25,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.5")]
         COUNT,
         /// <summary>
-        /// Geometric volume in millimeters
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
-        CUBIC_MILLIMETER,
-        /// <summary>
-        /// Change of geometric volume per second
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
-        CUBIC_MILLIMETER_PER_SECOND,
-        /// <summary>
-        /// Change in geometric volume per second squared
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
-        CUBIC_MILLIMETER_PER_SECOND_SQUARED,
-        /// <summary>
         /// Sound Level 
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.6")]
@@ -95,25 +80,10 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.6")]
         MICRO_RADIAN,
         /// <summary>
-        /// Milligram
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
-        MILLIGRAM,
-        /// <summary>
-        /// Milligram per cubic millimeter
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
-        MILLIGRAM_PER_CUBIC_MILLIMETER,
-        /// <summary>
         /// Millimeters
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.5")]
         MILLIMETER,
-        /// <summary>
-        /// Millimeters per revolution.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
-        MILLIMETER_PER_REVOLUTION,
         /// <summary>
         /// Millimeters per second 
         /// </summary>

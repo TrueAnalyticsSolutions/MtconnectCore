@@ -14,7 +14,5 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Attributes
         RESET_TRIGGERED,
         STATISTIC,
         DURATION,
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.8.2")]
-        SAMPLE_COUNT
     }
 }

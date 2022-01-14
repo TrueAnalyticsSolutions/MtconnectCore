@@ -174,15 +174,6 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 4.2.3")]
-        private bool validateDataItemCount(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (DataItems.Count <= 0) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must have at least one DataItem. Every Device MUST report AVAILABILITY."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 5.1")]
         private bool validateDataItemAvailability(out ICollection<MtconnectValidationException> validationErrors)
         {

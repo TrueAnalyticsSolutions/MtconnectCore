@@ -47,16 +47,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         AXIS_FEEDRATE,
         /// <summary>
-        /// The fluid capacity of an object or container
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        CAPACITY_FLUID,
-        /// <summary>
-        /// The geometric capacity of an object or container.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        CAPACITY_SPATIAL,
-        /// <summary>
         /// The reading of a timing device at a specific point in  time. Clock time MUST be reported in W3C ISO 8601 format.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
@@ -72,41 +62,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
         CONDUCTIVITY,
         /// <summary>
-        /// The speed difference (relative velocity) between the cutting mechanism and the surface of the workpiece it is operating on.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        CUTTING_SPEED,
-        /// <summary>
-        /// The volumetric mass of a material per unit volume of that material.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        DENSITY,
-        /// <summary>
-        /// The rate of change in spatial volume of material deposited in an additive manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        DEPOSITION_ACCELERATION_VOLUMETRIC,
-        /// <summary>
-        /// The density of the material deposited in an additive manufacturing process per unit of volume.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        DEPOSITION_DENSITY,
-        /// <summary>
-        /// The mass of the material deposited in an additive manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        DEPOSITION_MASS,
-        /// <summary>
-        /// The rate at which a spatial volume of material is deposited in an additive manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        DEPOSITION_RATE_VOLUMETRIC,
-        /// <summary>
-        /// The spatial volume of material to be deposited in an additive manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        DEPOSITION_VOLUME,
-        /// <summary>
         /// The displacement as the change in position of an  object
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
@@ -116,11 +71,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
         ELECTRICAL_ENERGY,
-        /// <summary>
-        /// The measurement of the amount of time  piece of equipment or a sub-part of a piece of equipment has performed specific activities. Often used to determine when maintenance may be required for the equipment
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1")]
-        EQUIPMENT_TIMER,
         /// <summary>
         /// The measurement of the amount of a substance  remaining compared to the planned maximum amount of that substance
         /// </summary>
@@ -143,11 +93,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 4.2.1", MtconnectVersions.V_1_2_0)]
         LEVEL,
         /// <summary>
-        /// The length of an object
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-        LENGTH,
-        /// <summary>
         /// The measure of the push or pull introduced by an  actuator or exerted on an object
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
@@ -167,11 +112,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         PATH_FEEDRATE,
-        /// <summary>
-        /// The feedrate for the axes, or a single axis.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        PATH_FEEDRATE_PER_REVOLUTION,
         /// <summary>
         /// The current program control point or program  coordinate in WORK coordinates. The coordinate system will revert to MACHINE coordinates if WORK coordinates are not available. See <c>subType</c>s: <seealso cref="PathPositionSubTypes"/>
         /// </summary>
@@ -197,11 +137,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         PRESSURE,
-        /// <summary>
-        /// The measurement of the amount of time  piece of equipment has performed different types of activities associated with the process being performed at that piece of equipment.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1")]
-        PROCESS_TIMER,
         /// <summary>
         /// The measurement of the degree to which an object  opposes an electric current through it
         /// </summary>
@@ -230,11 +165,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         TEMPERATURE,
-        /// <summary>
-        /// A measurement of a force that stretches or  elongates an object
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1")]
-        TENSION,
         /// <summary>
         /// A measurement of angular displacement
         /// </summary>
@@ -270,16 +200,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
         VOLT_AMPERE_REACTIVE,
-        /// <summary>
-        /// The fluid volume of an object or container.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        VOLUME_FLUID,
-        /// <summary>
-        /// The geometric volume of an object or container.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        VOLUME_SPATIAL,
         /// <summary>
         /// The measurement of power consumed or dissipated  by an electrical circuit or device
         /// </summary>

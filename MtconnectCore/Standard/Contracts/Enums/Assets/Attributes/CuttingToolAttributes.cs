@@ -27,10 +27,5 @@ namespace MtconnectCore.Standard.Contracts.Enums.Assets.Attributes
         /// The identifier for the class of cutting tool. The identifier for a class of cutting tools. This is defined as an XML string type and is implementation dependent.
         /// </summary>
         TOOL_ID,
-        /// <summary>
-        /// This is an indicator that the Cutting Tool has been removed from the  piece of equipment.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 4 Section 3.2")]
-        REMOVED,
     }
 }

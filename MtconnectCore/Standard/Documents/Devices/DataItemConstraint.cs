@@ -43,18 +43,5 @@ namespace MtconnectCore.Standard.Documents.Devices
                 Value = xNode.InnerText;
             }
         }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 7.2.3.2.1")]
-        private bool validateFilter(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (Filter != null)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.WARNING,
-                    $"Filter DEPRECATED in Version 1.4 - Moved to the Filters element of a DataItem."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
     }
 }

@@ -37,10 +37,6 @@ namespace MtconnectCore.Standard.Documents.Assets
         [MtconnectNodeAttribute(CuttingToolAttributes.TOOL_ID)]
         public string ToolId { get; set; }
 
-        /// <inheritdoc cref="CuttingToolAttributes.REMOVED"/>
-        [MtconnectNodeAttribute(CuttingToolAttributes.REMOVED)]
-        public bool? Removed { get; set; }
-
         /// <inheritdoc cref="CuttingToolElements.DESCRIPTION"/>
         [MtconnectNodeElements(nameof(CuttingToolElements.DESCRIPTION), nameof(TrySetDescription), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public CuttingToolDescription Description { get; set; }
@@ -150,19 +146,6 @@ namespace MtconnectCore.Standard.Documents.Assets
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"CuttingTool MUST include a 'deviceUuid' attribute."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 4 Section 6.1.1")]
-        private bool validateCuttingToolDefinition_Deprecated(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (Definition != null)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.WARNING,
-                    $"CuttingToolDefinition was deprecated in Version 1.3.0"));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
