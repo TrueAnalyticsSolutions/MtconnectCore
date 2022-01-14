@@ -33,7 +33,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-vlhvBDYsdzUCbFwI1K0mARPDiXPUYTvq2gsf1wFtSMo=",
+      "hash": "sha256-Un8JKiYCBRlFmZRFZeR6V9pQ2ZwkqHbV5p+qlgmW2n8=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -97,11 +97,11 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
     },
     {
-      "hash": "sha256-1kS1o4XCkmEwfJkD11KLTZsmT5ZY\/rI2+V0fCB+NxII=",
+      "hash": "sha256-jp2Ad3eS0HfeWf1Gg037RVvXFlS2Qs5T\/shFpekA5cw=",
       "url": "_framework\/MtconnectCore.dll"
     },
     {
-      "hash": "sha256-cscQcMcUALFFbSUW9KEdX2yBr8kF8vZg22T6\/zqDVPk=",
+      "hash": "sha256-qsclbnU3SuZo836Js2XUMBM6Vtiqi+72DyjhNo0c92M=",
       "url": "_framework\/MtconnectCoreDocumentation.dll"
     },
     {
@@ -2325,5 +2325,5 @@
       "url": "TAMS-Icon-Blue_x256.png"
     }
   ],
-  "version": "KUIPJuzx"
+  "version": "6msL78AM"
 };
