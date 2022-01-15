@@ -113,7 +113,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Id)) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Device MUST include a 'id' attribute."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Device MUST include a 'id' attribute.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -125,7 +125,8 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Device MUST include a 'name' attribute."));
+                    $"Device MUST include a 'name' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -137,11 +138,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Device MUST include a 'uuid' attribute."));
+                    $"Device MUST include a 'uuid' attribute.",
+                    SourceNode));
             } else if (Uuid.Length > 255) {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Device 'uuid' SHOULD be alphanumeric and not exceed 255 characters."));
+                    $"Device 'uuid' SHOULD be alphanumeric and not exceed 255 characters.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -153,7 +156,8 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Device MUST include a 'iso841Class' attribute."));
+                    $"Device MUST include a 'iso841Class' attribute.",
+                    SourceNode));
             }
             else
             {
@@ -161,14 +165,16 @@ namespace MtconnectCore.Standard.Documents.Devices
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem 'iso841Class' attribute must be one of the following: [{EnumHelper.ToListString<Iso841ClassTypes>(", ", string.Empty, string.Empty)}]."));
+                        $"DataItem 'iso841Class' attribute must be one of the following: [{EnumHelper.ToListString<Iso841ClassTypes>(", ", string.Empty, string.Empty)}].",
+                        SourceNode));
 
                 }
                 else if (!EnumHelper.ValidateToVersion<Iso841ClassTypes>(Iso841Class, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem iso841Class of '{Iso841Class}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                        $"DataItem iso841Class of '{Iso841Class}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                        SourceNode));
                 }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
@@ -178,7 +184,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateDataItemCount(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (DataItems.Count <= 0) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must have at least one DataItem. Every Device MUST report AVAILABILITY."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must have at least one DataItem. Every Device MUST report AVAILABILITY.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -189,7 +195,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             validationErrors = new List<MtconnectValidationException>();
             if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY.ToString()))
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must always contain an Availability data item that represents this device is available to do work."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must always contain an Availability data item that represents this device is available to do work.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

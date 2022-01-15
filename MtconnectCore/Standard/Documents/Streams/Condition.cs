@@ -115,43 +115,28 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Condition MUST include a 'type' attribute."));
+                    $"Condition MUST include a 'type' attribute.",
+                    SourceNode));
             }
             else if (!EnumHelper.Contains<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Condition 'type' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(", ", string.Empty, string.Empty)}]."));
+                    $"Condition 'type' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(", ", string.Empty, string.Empty)}].",
+                    SourceNode));
             }
             else if (!EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault()))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
-                    $"Condition type of '{Type}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                    $"Condition type of '{Type}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
-        protected bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(this.SourceNode.LocalName))
-            {
-                if (!EnumHelper.Contains<ConditionElements>(this.SourceNode.LocalName))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.ERROR,
-                        $"Condition '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid Condition type. Consider extending the schema and prefixing the type with the 'x:' namespace."));
-                }
-                else if (!EnumHelper.ValidateToVersion<ConditionElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<ConditionElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"Condition '{this.SourceNode.LocalName}' is not valid in version '{MtconnectVersion}' of the MTConnect Standard as a valid Condition type."));
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
+            => validateNode<ConditionElements>(Contracts.Enums.Devices.CategoryTypes.CONDITION, out validationErrors);
     }
 }

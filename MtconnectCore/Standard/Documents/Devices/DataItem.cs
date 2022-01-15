@@ -163,70 +163,96 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'type' attribute."));
-            }
-
-            // Validate Category, Type and SubType
-            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Category))
+                    $"DataItem MUST include a 'type' attribute.",
+                    SourceNode));
+            } else if (!string.IsNullOrEmpty(Category))
             {
-                if (Type.StartsWith("x:"))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.MESSAGE,
-                        $"DataItem type of '{Type}' is an extension of the MTConnect Standard in version '{MtconnectVersion}'."));
-                }
-                else if (Enum.TryParse<CategoryTypes>(Category, out CategoryTypes category))
+                if (Enum.TryParse<CategoryTypes>(Category, out CategoryTypes category))
                 {
                     switch (category)
                     {
                         case CategoryTypes.SAMPLE:
-                            if (!EnumHelper.Contains<SampleTypes>(Type))
-                            {
-                                validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.ERROR,
-                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. Consider extending the schema and prefixing the type with the 'x:' namespace."));
-                            }
-                            else if (!EnumHelper.ValidateToVersion<SampleTypes>(Type, MtconnectVersion.GetValueOrDefault()))
-                            {
-                                validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
-                            }
-                            break;
+                            return validateNode<SampleTypes>(category, out validationErrors);
                         case CategoryTypes.EVENT:
-                            if (!EnumHelper.Contains<EventTypes>(Type))
-                            {
-                                validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.ERROR,
-                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. Consider extending the schema and prefixing the type with the 'x:' namespace."));
-                            }
-                            else if (!EnumHelper.ValidateToVersion<EventTypes>(Type, MtconnectVersion.GetValueOrDefault()))
-                            {
-                                validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
-                            }
-                            break;
+                            return validateNode<EventTypes>(category, out validationErrors);
                         case CategoryTypes.CONDITION:
-                            if (!EnumHelper.Contains<ConditionTypes>(Type))
-                            {
-                                validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.ERROR,
-                                    $"DataItem type of '{Type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. Consider extending the schema and prefixing the type with the 'x:' namespace."));
-                            }
-                            else if (!EnumHelper.ValidateToVersion<ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault()))
-                            {
-                                validationErrors.Add(new MtconnectValidationException(
-                                    ValidationSeverity.WARNING,
-                                    $"DataItem type of '{Type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard."));
-                            }
-                            break;
+                            return validateNode<ConditionTypes>(category, out validationErrors);
                         default:
                             break;
                     }
                 }
             }
 
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        private bool validateNode<T>(CategoryTypes categoryType, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
+        {
+            validationErrors = new List<MtconnectValidationException>();
+
+            ICollection<MtconnectValidationException> extensionErrors;
+            validateNodeExtension<T>(categoryType, out extensionErrors);
+
+            if (extensionErrors.Any())
+            {
+                validationErrors = extensionErrors;
+                return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            }
+
+            ICollection<MtconnectValidationException> standardErrors;
+            validateNodeInStandard<T>(categoryType, Type, out standardErrors);
+
+            if (standardErrors.Any())
+            {
+                validationErrors = standardErrors;
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        private bool validateNodeExtension<T>(CategoryTypes categoryType, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Type))
+            {
+                if (Type.StartsWith("x:"))
+                {
+                    if (validateNodeInStandard<T>(categoryType, Type.Replace("x:", "", StringComparison.OrdinalIgnoreCase), out ICollection<MtconnectValidationException> inStandardErrors))
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.WARNING,
+                            $"{Category} type of '{Type}' is an unnecessary extension of the MTConnect Standard as it already exists in version '{MtconnectVersion}'.",
+                            SourceNode));
+                    }
+                    else
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.MESSAGE,
+                            $"{Category} type of '{Type}' is an extension of the MTConnect Standard in this implementation.",
+                            SourceNode));
+                    }
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        private bool validateNodeInStandard<T>(CategoryTypes categoryType, string type, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!EnumHelper.Contains<T>(type))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"DataItem type of '{type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. Consider extending the schema and prefixing the type with the 'x:' namespace.",
+                    SourceNode));
+            }
+            else if (!EnumHelper.ValidateToVersion<T>(type, MtconnectVersion.GetValueOrDefault()))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"DataItem type of '{type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard.",
+                    SourceNode));
+            }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
@@ -240,18 +266,21 @@ namespace MtconnectCore.Standard.Documents.Devices
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem units of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
+                        $"DataItem units of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
+                        SourceNode));
                 }
                 else if (!EnumHelper.ValidateToVersion<UnitsTypes>(Units, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem units of '{Units}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                        $"DataItem units of '{Units}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                        SourceNode));
                 }
             } else if (Category.ToUpper() == "SAMPLE") {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'units' attribute when 'category' equals 'SAMPLE'. DataItem [id='{Id}'][name='{Name}']."));
+                    $"DataItem MUST include a 'units' attribute when 'category' equals 'SAMPLE'.",
+                        SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -266,13 +295,15 @@ namespace MtconnectCore.Standard.Documents.Devices
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem nativeUnits of '{NativeUnits}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
+                        $"DataItem nativeUnits of '{NativeUnits}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
+                        SourceNode));
                 }
                 else if (!EnumHelper.ValidateToVersion<NativeUnitsTypes>(NativeUnits, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<UnitsTypes>(NativeUnits, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem nativeUnits of '{NativeUnits}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                        $"DataItem nativeUnits of '{NativeUnits}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                        SourceNode));
                 }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
@@ -282,7 +313,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateRepresentation_NotImplemented(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Representation)) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, "DataItem does not yet support 'representation' until version 1.2.0 of the MTConnect Standard."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, "DataItem does not yet support 'representation' until version 1.2.0 of the MTConnect Standard.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -297,13 +328,15 @@ namespace MtconnectCore.Standard.Documents.Devices
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem representation of '{Representation}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
+                        $"DataItem representation of '{Representation}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
+                        SourceNode));
                 }
                 else if (!EnumHelper.ValidateToVersion<RepresentationTypes>(Representation, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem representation of '{Representation}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                        $"DataItem representation of '{Representation}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                        SourceNode));
                 }
 
             }
@@ -320,13 +353,14 @@ namespace MtconnectCore.Standard.Documents.Devices
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.WARNING,
-                        $"DataItem 'coordinateSystem' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.CoordinateSystemTypes>(", ", string.Empty, string.Empty)}]."));
+                        $"DataItem 'coordinateSystem' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.CoordinateSystemTypes>(", ", string.Empty, string.Empty)}].", SourceNode));
                 }
                 else if (!EnumHelper.ValidateToVersion<CoordinateSystemTypes>(CoordinateSystem, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem coordinateSystem of '{CoordinateSystem}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                        $"DataItem coordinateSystem of '{CoordinateSystem}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                        SourceNode));
                 }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
@@ -342,13 +376,15 @@ namespace MtconnectCore.Standard.Documents.Devices
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,
-                        $"DataItem 'statistic' attribute must be one of the following: [{EnumHelper.ToListString<StatisticTypes>(", ", string.Empty, string.Empty)}]."));
+                        $"DataItem 'statistic' attribute must be one of the following: [{EnumHelper.ToListString<StatisticTypes>(", ", string.Empty, string.Empty)}].",
+                        SourceNode));
                 }
                 else if (!EnumHelper.ValidateToVersion<StatisticTypes>(Representation, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
-                        $"DataItem statistic of '{Statistic}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+                        $"DataItem statistic of '{Statistic}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                        SourceNode));
                 }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
@@ -358,7 +394,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateResetTrigger(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(ResetTrigger) && !EnumHelper.Contains<ResetTriggerValues>(ResetTrigger)) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"Unrecognized ResetTrigger value '{ResetTrigger}'."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"Unrecognized ResetTrigger value '{ResetTrigger}'.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -366,7 +402,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateRepresentationDiscrete_Deprecated(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Representation) && EnumHelper.Enumify(Representation).Equals(RepresentationTypes.DISCRETE)) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"DataItem representation 'discrete' is obsolete, the 'discrete' attribute should be used instead."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"DataItem representation 'discrete' is obsolete, the 'discrete' attribute should be used instead.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

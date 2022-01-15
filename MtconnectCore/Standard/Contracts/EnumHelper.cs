@@ -34,13 +34,23 @@ namespace MtconnectCore.Standard.Contracts
             return value.ToUpper();
         }
 
-        internal static bool Contains(Type enumType, string value)
+        internal static bool Contains(Type enumType, string value, out object enumValue)
         {
-            value = Enumify(value.FromCamelCase());
+            if (value.ToUpper().Equals(value))
+            {
+                value = Enumify(value);
+            }
+            else
+            {
+                value = Enumify(value.FromCamelCase());
+            }
 
             string[] enumValues = Enum.GetNames(enumType);
-            return enumValues.Any(o => o.Equals(value, StringComparison.OrdinalIgnoreCase));
+            string foundEnum = enumValues.FirstOrDefault(o => o.Equals(value, StringComparison.OrdinalIgnoreCase));
+            return Enum.TryParse(enumType, foundEnum, out enumValue);
         }
+
+        internal static bool Contains(Type enumType, string value) => Contains(enumType, value, out _);
         internal static bool Contains(this Enum enumValue, string value) => Contains(enumValue.GetType(), value);
         /// <summary>
         /// Compares the provided <paramref name="value"/> against the enum values.
@@ -79,20 +89,16 @@ namespace MtconnectCore.Standard.Contracts
 
         internal static string FromCamelCase(this string input, char delimiter = '_')
         {
-            string[] words = System.Text.RegularExpressions.Regex.Matches(input, "(^[a-z]+|[A-Z]+(?![a-z])|[A-Z][a-z]+)")//"(^[a-z]+|[A-Z]+(?![a-z0-9^/])|[A-Z][a-z]+)")//
+            string[] words = System.Text.RegularExpressions.Regex.Matches(input, "(^[a-z]+|[A-Z]+(?![a-z])|[A-Z][a-z]+)")
                 .OfType<System.Text.RegularExpressions.Match>()
                 .Select(m => m.Value)
                 .ToArray();
-            foreach (var word in words)
-            {
-                input = input.Replace(word, word, StringComparison.OrdinalIgnoreCase);
-            }
-            return input;// string.Join(delimiter, words);
+            return string.Join(delimiter, words);
         }
 
         internal static string FromPascalCase(this string input, char delimiter = '_')
         {
-            string[] words = System.Text.RegularExpressions.Regex.Matches(input, "(^[a-z]+|[A-Z]+(?![a-z])|[A-Z][a-z]+)")
+            string[] words = System.Text.RegularExpressions.Regex.Matches(input, "(^[A-Z]+|[a-z]+(?![A-Z])|[a-z][A-Z]+)")
                 .OfType<System.Text.RegularExpressions.Match>()
                 .Select(m => m.Value)
                 .ToArray();
@@ -106,10 +112,15 @@ namespace MtconnectCore.Standard.Contracts
 
         internal static bool ValidateToVersion(Type enumType, string value, MtconnectVersions documentVersion)
         {
-            if (!ValidateToVersion(enumType, documentVersion)) return false;
-            if (!Contains(enumType, value)) return false;
+            if (!value.ToUpper().Equals(value))
+            {
+                value = value.FromCamelCase();
+            }
 
-            if (!Enum.TryParse(enumType, Enumify(value.FromCamelCase()), out object? enumValue) || enumValue == null) return false;
+            if (!ValidateToVersion(enumType, documentVersion)) return false;
+            if (!Contains(enumType, value, out object enumValue)) return false;
+
+            if (enumValue == null) return false;
 
             MemberInfo[] valueInfos = enumType.GetMember(enumValue.ToString());
             var valueInfo = valueInfos.FirstOrDefault(o => o.DeclaringType == enumType);

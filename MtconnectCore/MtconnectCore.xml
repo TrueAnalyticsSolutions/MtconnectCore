@@ -5470,6 +5470,11 @@
             This is a reference to an identifier for the current tool in use by the Path.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_GROUP">
+            <summary>
+            An identifier for the tool group associated with a specific tool. Commonly used to designate spare tools.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_NUMBER">
             <summary>
             The identifier assigned by the Controller component to a cutting tool when in use by a piece of equipment.
@@ -6111,6 +6116,13 @@
             </summary>
             <param name="severity">Sets the severity level of the error.</param>
             <param name="message">Sets the message of the validation error.</param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.GetXPathToNode(System.Xml.XmlNode)">
+            <summary>
+            Gets the X-Path to a given Node
+            </summary>
+            <param name="node">The Node to get the X-Path from</param>
+            <returns>The X-Path of the Node</returns>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.IMtconnectNode">
             <summary>

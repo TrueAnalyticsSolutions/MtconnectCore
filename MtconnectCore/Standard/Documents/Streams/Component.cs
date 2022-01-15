@@ -100,7 +100,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Component MUST include a 'componentId' attribute."));
+                    $"Component MUST include a 'componentId' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -113,7 +114,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Component MUST include a 'component' attribute."));
+                    $"Component MUST include a 'component' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -125,7 +127,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             if (string.IsNullOrEmpty(Name)) {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Component MUST include a 'name' attribute."));
+                    $"Component MUST include a 'name' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

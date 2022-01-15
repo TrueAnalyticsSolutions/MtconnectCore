@@ -68,16 +68,18 @@ namespace MtconnectCoreExample.Views
 
                 exceptionsSheet.Cells[1, 1].Value = "Severity";
                 exceptionsSheet.Cells[1, 2].Value = "Message";
+                exceptionsSheet.Cells[1, 3].Value = "Source";
                 int row = 2;
                 foreach (var exception in Source.Errors)
                 {
                     exceptionsSheet.Cells[row, 1].Value = exception.Severity.ToString();
                     exceptionsSheet.Cells[row, 2].Value = exception.Message;
+                    exceptionsSheet.Cells[row, 3].Value = exception.Source;
                     row++;
                 }
                 row--;
-                exceptionsSheet.Tables.Add(new ExcelAddressBase(1, 1, row, 2), "Results");
-                exceptionsSheet.Cells[1, 1, row, 2].AutoFitColumns();
+                exceptionsSheet.Tables.Add(new ExcelAddressBase(1, 1, row, 3), "Results");
+                exceptionsSheet.Cells[1, 1, row, 3].AutoFitColumns();
 
                 var fi = new FileInfo(path);
                 pkg.SaveAs(fi);

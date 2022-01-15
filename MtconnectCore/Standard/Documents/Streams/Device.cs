@@ -55,7 +55,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Device MUST include a 'name' attribute."));
+                    $"Device MUST include a 'name' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -68,7 +69,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Device MUST include a 'uuid' attribute."));
+                    $"Device MUST include a 'uuid' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

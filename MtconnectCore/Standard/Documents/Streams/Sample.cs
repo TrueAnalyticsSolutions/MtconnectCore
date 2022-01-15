@@ -99,7 +99,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'name' attribute."));
+                    $"DataItem MUST include a 'name' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -109,8 +110,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             validationErrors = new List<MtconnectValidationException>();
             string[] timeSeriesValues = Value.Split(' ', System.StringSplitOptions.RemoveEmptyEntries);
             // TODO: Validate when position is 3D
-            if (timeSeriesValues.Length > 1 && timeSeriesValues.Length != SampleCount.GetValueOrDefault()){
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"SAMPLE number of readings MUST match the sampleCount."));
+            if (timeSeriesValues.Length > 1 && timeSeriesValues.Length != SampleCount.GetValueOrDefault() && timeSeriesValues.Length != 3){
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"SAMPLE number of readings MUST match the sampleCount.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -121,31 +122,13 @@ namespace MtconnectCore.Standard.Documents.Streams
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Statistic) && !Duration.HasValue)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'duration' MUST be provided when the 'statistic' attribute is present on a SAMPLE."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'duration' MUST be provided when the 'statistic' attribute is present on a SAMPLE.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
-        protected bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(this.SourceNode.LocalName))
-            {
-                if (!EnumHelper.Contains<SampleElements>(this.SourceNode.LocalName))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.ERROR,
-                        $"Sample '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid Sample type. Consider extending the schema and prefixing the type with the 'x:' namespace."));
-                }
-                else if (!EnumHelper.ValidateToVersion<SampleElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<SampleElements>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"Sample '{this.SourceNode.LocalName}' is not valid in version '{MtconnectVersion}' of the MTConnect Standard as a valid Sample type."));
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
+            => validateNode<SampleElements>(Contracts.Enums.Devices.CategoryTypes.SAMPLE, out validationErrors);
     }
 }

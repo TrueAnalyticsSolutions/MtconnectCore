@@ -255,6 +255,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams.Elements
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
         TOOL_ASSET_ID,
         /// <summary>
+        /// An identifier for the tool group associated with a specific tool. Commonly used to designate spare tools.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 3 Section ")]
+        TOOL_GROUP,
+        /// <summary>
         /// The identifier assigned by the Controller component to a cutting tool when in use by a piece of equipment.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]

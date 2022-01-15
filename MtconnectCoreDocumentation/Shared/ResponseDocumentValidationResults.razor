@@ -64,6 +64,7 @@ else if (ResponseDocument != null)
                             <tr>
                                 <th>Severity</th>
                                 <th>Message</th>
+                                <th>Source</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,6 +82,7 @@ else if (ResponseDocument != null)
                                 <tr class="@cssClass">
                                     <td>@(exception.Severity.ToString())</td>
                                     <td>@(exception.Message)</td>
+                                    <td>@(!string.IsNullOrEmpty(exception.Source) ? exception.Source : "")</td>
                                 </tr>
                             }
                         </tbody>
