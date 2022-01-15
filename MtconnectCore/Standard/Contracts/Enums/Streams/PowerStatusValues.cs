@@ -1,11 +1,11 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     /// <summary>
-    /// Available values for EVENT element <see cref="EventElements.POWER_STATUS"/>
+    /// Available values for EVENT element <see cref="EventTypes.POWER_STATUS"/>
     /// </summary>
     [Obsolete("Deprecated in version 1.1.0.")]
     [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1", MtconnectVersions.V_1_0_1)]

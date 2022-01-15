@@ -139,14 +139,14 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [Obsolete("Deprecated in Rel. 1.1")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_0_1)]
         GLOBAL_POSITION,
-        [Obsolete("Deprecated in Rel. 1.2 See FILL_LEVEL")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 4.2.1", MtconnectVersions.V_1_2_0)]
-        LEVEL,
         /// <summary>
         /// The length of an object
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
         LENGTH,
+        [Obsolete("Deprecated in Rel. 1.2 See FILL_LEVEL")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 4.2.1", MtconnectVersions.V_1_2_0)]
+        LEVEL,
         /// <summary>
         /// The measure of the push or pull introduced by an  actuator or exerted on an object
         /// </summary>

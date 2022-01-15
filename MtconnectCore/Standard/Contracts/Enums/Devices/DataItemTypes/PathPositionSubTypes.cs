@@ -26,6 +26,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// The position provided by a probe
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.1")]
-        PROBE
+        PROBE,
+        /// <summary>
+        /// The position of the control point specified by a logic or motion program.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
+        PROGRAMMED
     }
 }

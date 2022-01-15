@@ -2480,14 +2480,14 @@
             Measurement of the time that a piece o equipment is waiting for an event or an action to occur.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTUATOR_STATE">
-            <summary>
-            The state of the Actuator - ACTIVE or INACTIVE.
-            </summary>
-        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTIVE_AXES">
             <summary>
             The set of axes associated with a Path that the Controller is controlling. If  DataItem is not provided, it will be assumed the Controller is controlling all axes.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTUATOR_STATE">
+            <summary>
+            The state of the Actuator - ACTIVE or INACTIVE.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY">
@@ -3078,6 +3078,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathPositionSubTypes.PROBE">
             <summary>
             The position provided by a probe
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathPositionSubTypes.PROGRAMMED">
+            <summary>
+            The position of the control point specified by a logic or motion program.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PositionSubTypes">
@@ -4891,7 +4896,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ActuatorStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ACTUATOR_STATE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTUATOR_STATE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ActuatorStateValues.ACTIVE">
@@ -4904,9 +4909,54 @@
             The actuator is not operating or inactive
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.ACTION_COMPLETE">
+            <summary>
+            The value of the Data Entity that is measuring an action or operation was reset upon completion of that action or operation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.ANNUAL">
+            <summary>
+            The value of the Data Entity was reset at the end of a 12-month period.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.DAY">
+            <summary>
+            The value of the Data Entity was reset at the end of a 24-hour period.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.MAINTENANCE">
+            <summary>
+            The value of the Data Entity was reset upon completion of a maintenance event.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.MANUAL">
+            <summary>
+            The value of the Data Entity was reset based on a physical reset action.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.MONTH">
+            <summary>
+            The value of the Data Entity was reset at the end of a monthly period.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.POWER_ON">
+            <summary>
+            The value of the Data Entity was reset when power was applied to the piece of equipment after a planned or unplanned interruption of power has occurred.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.SHIFT">
+            <summary>
+            The value of the Data Entity was reset at the end of a work shift.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.WEEK">
+            <summary>
+            The value of the Data Entity was reset at the end of a 7-day period.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AvailabilityValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AVAILABILITY"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AvailabilityValues.AVAILABLE">
@@ -4921,7 +4971,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AxisCouplingValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_COUPLING"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AXIS_COUPLING"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisCouplingValues.TANDEM">
@@ -4946,7 +4996,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AxisInterlockValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_INTERLOCK"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AXIS_INTERLOCK"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisInterlockValues.ACTIVE">
@@ -4961,7 +5011,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_STATE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AXIS_STATE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues.HOME">
@@ -4986,7 +5036,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckInterlockValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CHUCK_INTERLOCK"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CHUCK_INTERLOCK"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckInterlockValues.ACTIVE">
@@ -5001,7 +5051,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CHUCK_STATE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CHUCK_STATE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckStateValues.OPEN">
@@ -5021,7 +5071,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is ACTION
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is ACTION
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues.ACTIVE">
@@ -5036,7 +5086,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is LATERAL
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is LATERAL
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues.RIGHT">
@@ -5056,7 +5106,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is MOTION
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is MOTION
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues.OPEN">
@@ -5076,7 +5126,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateSwitchedValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is SWITCHED
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is SWITCHED
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateSwitchedValues.ON">
@@ -5091,7 +5141,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE"/> when the subType is VERTICAL
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is VERTICAL
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues.UP">
@@ -5111,7 +5161,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeOverrideValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CONTROLLER_MODE_OVERRIDE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROLLER_MODE_OVERRIDE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeOverrideValues.ON">
@@ -5126,7 +5176,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CONTROLLER_MODE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROLLER_MODE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.AUTOMATIC">
@@ -5166,7 +5216,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.DIRECTION"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DIRECTION"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.CLOCKWISE">
@@ -5191,7 +5241,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.DOOR_STATE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DOOR_STATE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues.OPEN">
@@ -5229,510 +5279,9 @@
             The condition is in an indeterminate state since the data source is no longer providing  431 data. This will also be the initial state of the condition before a connection is established 432 with the data source. The condition MUST be Unavailable when the value is 433 unknown.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ACTIVE_AXES">
-            <summary>
-            The set of axes being controlled by a Path. The value MUST be a space delimited set of axes names. For example: &lt;ActiveAxes …&gt;X Y Z C&lt;/ActiveAxes&gt; If this is not provided, it MUST assumed the Path is controlling all the axes.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ACTUATOR_STATE">
-            <summary>
-            An actuator state represents a device for moving or controlling a mechanism or system.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_STATE">
-            <summary>
-            An indicator of the current axis homed position and motion.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AVAILABILITY">
-            <summary>
-            Represents the components ability to communicate its availability. This MUST be provided for the device and MAY be provided for all other components.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_COUPLING">
-            <summary>
-            Describes the way the axes will be associated to each other. This is used in conjunction with COUPLED_AXES to indicate the way the are interacting.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_FEEDRATE_OVERRIDE">
-            <summary>
-            The value of a signal or calculation issued to adjust the feedrate of an individual linear type axis.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.AXIS_INTERLOCK">
-            <summary>
-            An indicator of the state of the axis lockout functio when power has been removed and the axis is allowed to move freely.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.BLOCK">
-            <summary>
-            A Block of code is a command being executed by the Controller. The Block MUST include the entire command with all the parameters.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.BLOCK_COUNT">
-            <summary>
-            The total count of the number of blocks of program  code that have been executed since execution started.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CHUCK_INTERLOCK">
-            <summary>
-            An interlock that prevents the chuck from being operated. The subType specifies the operation that is currently blocked.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CHUCK_STATE">
-            <summary>
-            The open closed state of the chuck.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CODE">
-            <summary>
-            The code is just the G, M, or NC code being executed. The Code MUST only contain the simplest form of the executing command.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COMPOSITION_STATE">
-            <summary>
-            An indication of the operating condition of a mechanism represented by a Composition type element.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CONTROLLER_MODE">
-            <summary>
-            The Mode of the Controller.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.CONTROLLER_MODE_OVERRIDE">
-            <summary>
-            A setting or operator selection that changes the  behavior of a piece of equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.COUPLED_AXES">
-            <summary>
-            As a Linear or Rotary axis data item, refers to the set of associated axes to be used in conjunction with AxisCoupling. The value will be a space delimited set of axes names. For example: &lt;CoupledAxes …&gt;Y2&lt;/CoupledAxes&gt;
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.DIRECTION">
-            <summary>
-            A Direction indicates the direction of rotation. The CDATA MUST be either CLOCKWISE or COUNTER_CLOCKWISE.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.DOOR_STATE">
-            <summary>
-            A door state represents an opening that can be opened or closed.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.END_OF_BAR">
-            <summary>
-            A YES/NO value indicating that the end of bar has been reached.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EMERGENCY_STOP">
-            <summary>
-            The emergency stop state of the machine.
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EQUIPMENT_MODE" -->
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EXECUTION">
-            <summary>
-            The Execution state of the Controller.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.FUNCTIONAL_MODE">
-            <summary>
-            The overall status of the device or component for production.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.HARDNESS">
-            <summary>
-            The measurement of the hardness of a material.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.INTERFACE_STATE">
-            <summary>
-            The connection state of the interface.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.LINE">
-            <summary>
-            This event refers to the optional program line number. For example in RS274/NGC the line number begins with an N and is followed by 1 to 5 digits (0 – 99999). If there is not an assigned line number in the programming systems as in RS274, the line number will refer to the position in the executing program. The line number MUST be any positive integer from 0 to 2^32 -1.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.LINE_LABEL">
-            <summary>
-            An optional identifier for a BLOCK of code in a  PROGRAM.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.LINE_NUMBER">
-            <summary>
-            A reference to the position of a block of program  code within a control program.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.MATERIAL">
-            <summary>
-            The identifier of a material used or consumed in the  manufacturing process.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.MESSAGE">
-            <summary>
-            A text notification. Format MAY be any valid text string.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.OPERATOR_ID">
-            <summary>
-            An identifier of the person operating the device. 
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PALLET_ID">
-            <summary>
-            This is a reference to an identifier for the current pallet available at the device.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PART_COUNT">
-            <summary>
-            The number of parts produced. This will not be counted by the agent and MUST only be supplied if the controller provides the count.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PART_ID">
-            <summary>
-            This is a reference to an identifier for the current part being machined. It is a placeholder for now and can be used at the discretion of the implementation.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PATH_MODE">
-            <summary>
-            The Path mode is provided for devices that are controlling multiple sets of axes using one program.When PathMode is not provided it MUST be assumed to be INDEPENDENT.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PATH_FEEDRATE_OVERRIDE">
-            <summary>
-            A percentage override to adjust the feed rate of this path. 
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.POWER_STATUS">
-            <summary>
-            Power status MUST be either ON or OFF.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.POWER_STATE">
-            <summary>
-            Power state MUST be either ON or OFF. DEPRECATION WARNING: MAY be deprecated in the future.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PROGRAM">
-            <summary>
-            The name of the program executing in the controller. This is usually the name of the file containing the program instructions.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PROGRAM_EDIT">
-            <summary>
-            This refers to the controls program editing states.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PROGRAM_EDIT_NAME">
-            <summary>
-            The name of the program being edited.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PROGRAM_COMMENT">
-            <summary>
-            The latest active comment in the executing program.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PROGRAM_HEADER">
-            <summary>
-            The header section of the current executing program. The content SHOULD be limited to 512 bytes.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ROTARY_MODE">
-            <summary>
-            The mode the rotary axis is currently operating.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ROTARY_VELOCITY_OVERRIDE">
-            <summary>
-            The percentage override to adjust the programmed spin speed.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.SERIAL_NUMBER">
-            <summary>
-            The serial number associated with a Component,  Asset, or Device.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.SPINDLE_INTERLOCK">
-            <summary>
-            An indicator of the spindle lockout when power has been removed and it is free to rotate.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_ID">
-            <summary>
-            This is a reference to an identifier for the current tool in use by the Path. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_ASSET_ID">
-            <summary>
-            This is a reference to an identifier for the current tool in use by the Path.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_GROUP">
-            <summary>
-            An identifier for the tool group associated with a specific tool. Commonly used to designate spare tools.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_NUMBER">
-            <summary>
-            The identifier assigned by the Controller component to a cutting tool when in use by a piece of equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.TOOL_OFFSET">
-            <summary>
-            A reference to the tool offset variables applied to t active cutting tool associated with a Path in a Controller type component.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.USER">
-            <summary>
-            The identifier of the person currently responsible fo operating the piece of equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.WIRE">
-            <summary>
-            The identifier for the type of wire used as the cutti mechanism in Electrical Discharge Machining or similar processes.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.WORKHOLDING_ID">
-            <summary>
-            This is a reference to an identifier for the current workholding. It is a placeholder for now and can be used at the discretion of the implementation. Once mobile assets have been defined, this will refer to the corresponding asset.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.WORK_OFFSET">
-            <summary>
-            A reference to the offset variables for a work piece  or part associated with a Path in a Controller type component.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ACCELERATION">
-            <summary>
-            The acceleration of the component MUST always be reported in MILLIMETER/SECOND^2. An acceleration MUST have a numeric value.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ACCUMULATED_TIME">
-            <summary>
-            The accumulated time associated with a component. The AccumulatedTime MUST have a numeric value and MUST be reported in SECOND.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.AMPERAGE">
-            <summary>
-            The current in an electrical circuit. The amperage MUST have a numeric  348 value and MUST be reported in AMPS.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ANGLE">
-            <summary>
-            An angle MUST always be reported in DEGREE and MUST always have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ANGULAR_ACCELERATION">
-            <summary>
-            The angular acceleration of the component as measured in DEGREE/SECOND^2. An acceleration MUST have a numeric value.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ANGULAR_VELOCITY">
-            <summary>
-            A angular velocity represents the rate of change in angle. An angular velocity MUST always be reported in DEGREE/SECOND and MUST always have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.AXIS_FEEDRATE">
-            <summary>
-            Axis Feedrate is defined as the rate of motion of the feed axis of the tool  relative to the workpiece. An axis feedrate MUST always be reported in MILLIMETER/SECOND or PERCENT for override and MUST always have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.CLOCK_TIME">
-            <summary>
-            The reading of a timing device at a specific point in time. The time MUST have a value reported in W3C ISO 8601 format of YYYY-MM DDThh:mm:ss.ffff
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.CONCENTRATION">
-            <summary>
-            Percentage of one component within a mixture of components. The Concentration MUST have a value reported in PERCENT.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.CONDUCTIVITY">
-            <summary>
-            The ability of a material to conduct electricity. The Conductivity MUST have a value reported in SIEMENS/METER.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.DISPLACEMENT">
-            <summary>
-            The displacement as measured from zero to peak. The displacement MUST have a value reported in MILLIMETER.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ELECTRICAL_ENERGY">
-            <summary>
-            The measurement of electrical energy consumed by a component. ElectricalEnergy MUST have a value reported in WATT_SECOND.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.EQUIPMENT_TIMER">
-            <summary>
-            The measurement of the amount of time a piece of  equipment or a sub-part of a piece of equipment has performed specific activities.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.FLOW">
-            <summary>
-            The rate of flow of a fluid. The Flow MUST have a value reported in LITER/SECOND.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.FREQUENCY">
-            <summary>
-            The rate at which a component is vibrating. The frequency MUST have a numeric value and MUST be reported in HERTZ.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.FILL_LEVEL">
-            <summary>
-            The measurement of the amount of a substance remaining compared to the planned maximum amount of that substance. The FillLevel MUST be reported in PERCENT.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.LENGTH">
-            <summary>
-            The length of an object, usually a piece of material or stock. The Length MUST be report in MILLIMETER.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.LINEAR_FORCE">
-            <summary>
-            The measurement of the amount of push or pull introduced by an actuator or exerted on an object. The LinearForce MUST be reported in NEWTON.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.LOAD">
-            <summary>
-            The load on a component. The load MUST always be reported in NEWTON and MUST always have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.MASS">
-            <summary>
-            The measurement of the mass of an object(s) or an amount of material. The Mass MUST be reported in KILOGRAM.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PATH_FEEDRATE">
-            <summary>
-            Path Feedrate is defined as the rate of motion of the feed path of the tool  relative to the workpiece. A path feedrate MUST always be reported in MILLIMETER/SECOND or PERCENT for override and MUST always have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PATH_POSITION">
-            <summary>
-            The program position as given in 3 dimensional space. This position MUST default to WORK coordinates, if the WORK coordinates are defined, and MUST be given as a space delimited vector of floating point numbers given in MILLIMETER_3D units. The PathPosition will be given in the following format and MUST be listed in order X, Y, and Z: &lt;PathPosition …&gt;10.123 55.232 100.981&lt;/PathPosition&gt; Where X = 10.123, Y = 55.232, and Z = 100.981.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PH">
-            <summary>
-            The measure of acidity or akalinity. The PH MUST be a numeric value and MUST be provided in PH.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.GLOBAL_POSITION">
-            <summary>
-            The global position is the three space coordinate of the tool. A global position MUST always be reported in MILLIMETER and MUST always have a numeric CDATA value as three floating point numbers (x, y, and z). Position MUST always be given in absolute coordinates.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.POSITION">
-            <summary>
-            A position represents the location along a linear axis. A position MUST always be reported in MILLIMETER and MUST always have a numeric CDATA value as a floating point number. Position MUST always be given in absolute coordinates.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.POWER_FACTOR">
-            <summary>
-            The measurement of the ratio of real power flowing to a load to the apparent power in that AC circuit. The PowerFactor MUST be a numeric value and MUST be provided in PERCENT.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PRESSURE">
-            <summary>
-            The pressure on a component. The pressure MUST be a numeric value and MUST be provided in PASCALS.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.PROCESS_TIMER">
-            <summary>
-            The measurement of the amount of time a piece of  equipment has performed different types of activities associated with the process being performed at that piece of equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.RESISTANCE">
-            <summary>
-            The measure of the degree to which an object opposes an electrical current through it. The Resistance MUST be a numeric value and MUST be provided in OHM.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.ROTARY_VELOCITY">
-            <summary>
-            The rate of rotation of a rotary axis. A RotaryVelocity speed MUST always be reported in REVOLUTION/MINUTE or PERCENT for OVERRIDE.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.SOUND_LEVEL">
-            <summary>
-            The measure of acoustic sound level or sound pressure level. The SoundLevel MUST be provided in DECIBEL
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.SPINDLE_SPEED">
-            <summary>
-            The rate of rotation of a machine spindle. A spindle speed MUST always be reported in REVOLUTION/MINUTE and MUST always have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.STRAIN">
-            <summary>
-            The measured amount of deformation per unit length of an object. Strain MUST be reported as PERCENT.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TEMPERATURE">
-            <summary>
-            Temperature MUST always be reported in degrees CELSIUS and MUST always have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TENSION">
-            <summary>
-            The measurement of a force that stretches or  elongates an object.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TILT">
-            <summary>
-            The measured amount of angular displacement of an object. Tilt MUST be reported as MICRO_RADIAN.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.TORQUE">
-            <summary>
-            The torque of the component MUST be reported in SI units of NEWTON_METER and MUST have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VELOCITY">
-            <summary>
-            A velocity represents the rate of change in position along one or more axis. When given as a Sample for the Axes component, it represents the magnitude of the velocity vector for all given axis, similar to a path feedrate. A velocity MUST always be reported in MILLIMETER/SECOND and MUST always have a numeric CDATA value as a floating point number.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VISCOSITY">
-            <summary>
-            The measurement of a fluid’s resistance to flow. Viscosity MUST be reported as PASCAL_SECOND.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VOLTAGE">
-            <summary>
-            The measurement of electrical potential between two points. The Voltage MUST have a numeric value and MUST be reported in VOLT.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VOLT_AMPERE">
-            <summary>
-            The measurement of apparent power in an electrical circuit, equal to the product of the RMS voltage and RMS current. The VoltAmpere MUST have a numeric value and MUST be reported in VOLT_AMPERE.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VOLT_AMPERE_REACTIVE">
-            <summary>
-            The measurement of reactive power in an AC electrical circuit. The VoltAmpereReactive MUST have a numeric value and MUST be reported in VOLT_AMPERE_REACTIVE.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.VOLTS">
-            <summary>
-            The potential difference as measured across an electrical circuit. The voltage MUST have a numeric value and MUST be reported in VOLTS.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.WATTAGE">
-            <summary>
-            The electrical power (volt-amps) consumed or dissipated by an electrical circuit or device. The Wattage MUST have a numeric value and MUST be reported in WATT.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.SampleElements.WATTS">
-            <summary>
-            The electrical power (volt-amps) of an electrical circuit. The watts MUST have a numeric value and MUST be reported in WATTS.
-            </summary>
-        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.EmergencyStopValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EMERGENCY_STOP"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EMERGENCY_STOP"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EmergencyStopValues.ARMED">
@@ -5747,7 +5296,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.EndOfBarValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.END_OF_BAR"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.END_OF_BAR"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EndOfBarValues.YES">
@@ -5762,7 +5311,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.EquipmentModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EQUIPMENT_MODE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EQUIPMENT_MODE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EquipmentModeValues.ON">
@@ -5777,7 +5326,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.EXECUTION"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EXECUTION"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.READY">
@@ -5793,6 +5342,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.INTERRUPTED">
             <summary>
             The operator or the program has paused execution and is waiting to be continued.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.WAIT">
+            <summary>
+            The execution of the controller’s program is suspended while a secondary operation is executing or completing. Execution will resume automatically once the secondary operation is completed.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.FEED_HOLD">
@@ -5827,7 +5381,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.FUNCTIONAL_MODE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.FUNCTIONAL_MODE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues.PRODUCTION">
@@ -5857,7 +5411,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.InterfaceStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.INTERFACE_STATE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.INTERFACE_STATE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.InterfaceStateValues.ENABLED">
@@ -5870,9 +5424,24 @@
             The interface is not operational.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PartDetectValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_DETECT"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartDetectValues.PRESENT">
+            <summary>
+            If a part or work piece has been detected or is present.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartDetectValues.NOT_PRESENT">
+            <summary>
+            If a part or work piece is not detected or is not present.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PATH_MODE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PATH_MODE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues.INDEPENDENT">
@@ -5897,7 +5466,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.POWER_STATE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_STATE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStateValues.ON">
@@ -5912,7 +5481,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStatusValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.POWER_STATUS"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_STATUS"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStatusValues.ON">
@@ -5927,7 +5496,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramEditValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.PROGRAM_EDIT"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_EDIT"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramEditValues.ACTIVE">
@@ -5943,6 +5512,21 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramEditValues.NOT_READY">
             <summary>
             The controller is in a state where it cannot edit a program.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramLocationTypeValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_LOCATION_TYPE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramLocationTypeValues.LOCAL">
+            <summary>
+            Managed by the controller.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramLocationTypeValues.EXTERNAL">
+            <summary>
+            Not managed by the controller.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues">
@@ -5997,7 +5581,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.ROTARY_MODE"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ROTARY_MODE"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues.SPINDLE">
@@ -6017,7 +5601,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.SpindleInterlockValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.EventElements.SPINDLE_INTERLOCK"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.SPINDLE_INTERLOCK"/>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.SpindleInterlockValues.ACTIVE">
@@ -6028,6 +5612,66 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.SpindleInterlockValues.INACTIVE">
             <summary>
             The spindle can be operated.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WAIT_STATE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.POWERING_UP">
+            <summary>
+            An indication that execution is waiting while the equipment is powering up and is not currently available to begin producing parts or products.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.POWERING_DOWN">
+            <summary>
+            An indication that the execution is waiting while the equipment is powering down but has not fully reached a stopped state.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.PART_LOAD">
+            <summary>
+            An indication that the execution is waiting while one or more discrete workpieces are being loaded.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.PART_UNLOAD">
+            <summary>
+            An indication that the execution is waiting while one or more discrete workpieces are being unloaded.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.TOOL_LOAD">
+            <summary>
+            An indication that the execution is waiting while a tool or tooling is being loaded.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.TOOL_UNLOAD">
+            <summary>
+            An indication that the execution is waiting while a tool or tooling is being unloaded.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.MATERIAL_LOAD">
+            <summary>
+            An indication that the execution is waiting while bulk material or the container for bulk material used in the production process is being loaded. Bulk material includes those materials from which multiple workpieces may be created.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.MATERIAL_UNLOAD">
+            <summary>
+            An indication that the execution is waiting while bulk material or the container for bulk material used in the production process is being unloaded. Bulk material includes those materials from which multiple workpieces may be created.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.SECONDARY_PROCESS">
+            <summary>
+            An indication that the execution is waiting while another process is completed before the execution can resume.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.PAUSING">
+            <summary>
+            An indication that the execution is waiting while the equipment is pausing but the piece of equipment has not yet reached a fully paused state.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.RESUMING">
+            <summary>
+            An indication that the execution is waiting while the equipment is resuming the production cycle but has not yet resumed execution.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentErrorException">
