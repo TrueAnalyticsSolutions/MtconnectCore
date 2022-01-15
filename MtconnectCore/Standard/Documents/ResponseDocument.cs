@@ -70,7 +70,8 @@ namespace MtconnectCore.Standard.Documents
         {
             Source = xDoc;
 
-            DocumentVersion = GetDocumentVersion();
+            DocumentVersion = VersionHelper.GetVersionFromDocument(xDoc);
+            MtconnectVersion = DocumentVersion;
             DocumentElementName = Source.DocumentElement.LocalName;
             MtconnectDocumentTypeMismatchException<THeader, TItem> typeError;
             switch (DocumentElementName)
@@ -152,27 +153,27 @@ namespace MtconnectCore.Standard.Documents
         /// <returns>Flag for whether or not the item was successfully parsed from the MTConnect Response Document and added to <see cref="Items"/>.</returns>
         public abstract bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out TItem item);
 
-        /// <summary>
-        /// Gets the version of MTConnect that has been applied to the source MTConnect Response Document.
-        /// </summary>
-        /// <returns>The MTConnect Version applied to this MTConnect Response Document.</returns>
-        protected MtconnectVersions GetDocumentVersion()
-        {
-            MtconnectVersions? version = null;
-            Regex regVersion = new Regex(@"^urn\:mtconnect.org\:(.*?)\:(?<version>.*?)$");
-            string docDefaultNamespace = Source.DocumentElement.GetAttribute("xmlns");
-            string strDocVersion = string.Empty;
-            var match = regVersion.Match(docDefaultNamespace);
-            if (match.Success)
-            {
-                strDocVersion = match.Groups["version"].Value;
-            }
-            if (!string.IsNullOrEmpty(strDocVersion))
-            {
-                version = VersionHelper.GetVersion(strDocVersion);
-            }
-            return version.GetValueOrDefault();
-        }
+        ///// <summary>
+        ///// Gets the version of MTConnect that has been applied to the source MTConnect Response Document.
+        ///// </summary>
+        ///// <returns>The MTConnect Version applied to this MTConnect Response Document.</returns>
+        //protected MtconnectVersions GetDocumentVersion()
+        //{
+        //    MtconnectVersions? version = null;
+        //    Regex regVersion = new Regex(@"^urn\:mtconnect.org\:(.*?)\:(?<version>.*?)$");
+        //    string docDefaultNamespace = Source.DocumentElement.GetAttribute("xmlns");
+        //    string strDocVersion = string.Empty;
+        //    var match = regVersion.Match(docDefaultNamespace);
+        //    if (match.Success)
+        //    {
+        //        strDocVersion = match.Groups["version"].Value;
+        //    }
+        //    if (!string.IsNullOrEmpty(strDocVersion))
+        //    {
+        //        version = VersionHelper.GetVersion(strDocVersion);
+        //    }
+        //    return version.GetValueOrDefault();
+        //}
 
         /// <summary>
         /// Safely tries to validate the <see cref="{THeader}"/> and all <see cref="Items"/> in this MTConnect Response Document according to the version of MTConnect.
@@ -181,24 +182,7 @@ namespace MtconnectCore.Standard.Documents
         /// <returns>Flag for whether or not any of the validation errors were of the <see cref="ValidationSeverity.ERROR"/> severity.</returns>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
-
-            foreach (var item in Items)
-            {
-                if (!item.TryValidate(out ICollection<MtconnectValidationException> itemErrors)) {
-                    foreach (var error in itemErrors)
-                    {
-                        validationErrors.Add(error);
-                    }
-                }
-            }
-
-            if (!_header.TryValidate(out ICollection<MtconnectValidationException> headerErrors)) {
-                foreach (var error in headerErrors)
-                {
-                    validationErrors.Add(error);
-                }
-            }
+            base.TryValidate(out validationErrors);
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

@@ -1,0 +1,154 @@
+﻿@using MtconnectCore.Standard.Documents
+@using System.Xml;
+@if (Document != null && Validating)
+{
+<div class="d-flex justify-content-center">
+    <div class="spinner-border text-center" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+}
+else if (ResponseDocument != null)
+{
+<div class="table table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Response Document Type</th>
+                <th>Version</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@(ResponseDocument.Type.ToString())</td>
+                <td>@(ResponseDocument.DocumentVersion.ToString())</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="accordion" id="mtcAccordion">
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="mtcExceptionsHeading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#mtcExceptions" aria-expanded="true" aria-controls="mtcExceptions">
+            Validation Results
+            </button>
+        </h5>
+        <div id="mtcExceptions" class="accordion-collapse collapse show" aria-aria-labelledby="mtcExceptionsHeading" data-bs-parent="#mtcAccordion">
+            <div class="accordion-body">
+                    @if (Exceptions?.Count > 0)
+                    {
+                <p>These are the results of the <code>MtconnectAgentService.TryParse</code> method which attempts to compare the provided <code>ResponseDocument</code> against rules written in the standard.</p>
+                <div class="table table-responsive">
+                    <table class="table table-sm caption-top">
+                        <caption>Overview</caption>
+                        <thead>
+                            <tr>
+                                <th>Errors</th>
+                                <th>Warnings</th>
+                                <th>Messages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@(Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR).Count())</td>
+                                <td>@(Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.WARNING).Count())</td>
+                                <td>@(Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.MESSAGE).Count())</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table table-responsive">
+                    <table class="table table-hover table-sm table-striped caption-top">
+                        <caption>Validation Results</caption>
+                        <thead>
+                            <tr>
+                                <th>Severity</th>
+                                <th>Message</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var exception in Exceptions)
+                            {
+                                string cssClass = "table-primary";
+                                switch(exception.Severity){
+                                    case MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR:
+                                        cssClass = "table-danger";
+                                        break;
+                                    case MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.WARNING:
+                                        cssClass = "table-warning";
+                                        break;
+                                }
+                                <tr class="@cssClass">
+                                    <td>@(exception.Severity.ToString())</td>
+                                    <td>@(exception.Message)</td>
+                                    <td>@(!string.IsNullOrEmpty(exception.Source) ? exception.Source : "")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                    } else
+                    {
+                        <p class="alert alert-info">No exceptions found</p>
+                    }
+                </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="mtcJsonHeading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#mtcJson" aria-expanded="true" aria-controls="mtcJson">
+            JSON
+            </button>
+        </h5>
+        <div id="mtcJson" class="accordion-collapse collapse" aria-aria-labelledby="mtcJsonHeading" data-bs-parent="#mtcAccordion">
+            <div class="accordion-body">
+                <p>This is an example of how <code>MtconnectCore</code> converts your MTConnect&reg; Response Document into a strongly typed object model. The output below is a JSON serialization of the C# object model defined in <code>MtconnectCore</code>.</p>
+                <CodeBlock Language="json">@ExampleDocument</CodeBlock>
+            </div>
+        </div>
+    </div>
+</div>
+} else
+{
+    <p class="alert alert-info">Not Loaded</p>
+}
+
+@code {
+        [Parameter]
+        public XmlDocument Document { get; set; }
+
+    private bool Validating { get; set; } = false;
+    private IResponseDocument ResponseDocument { get; set; }
+    private ICollection<MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException> Exceptions;
+    private string ExampleDocument { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Validating = true;
+        ResponseDocument = null;
+        Exceptions = null;
+        ExampleDocument = "No Content";
+        await Task.Run(() =>
+        {
+            try
+            {
+                if (MtconnectCore.MtconnectAgentService.TryParse(Document, out MtconnectCore.Standard.Documents.IResponseDocument mtcDoc))
+                {
+                    ResponseDocument = mtcDoc;
+                    ExampleDocument = Newtonsoft.Json.JsonConvert.SerializeObject(mtcDoc, Newtonsoft.Json.Formatting.Indented);
+                    ResponseDocument.TryValidate(out Exceptions);
+                }
+                else
+                {
+                    ExampleDocument = "Couldn't parse document into MTConnect Response Document.";
+                }
+            }
+            catch (Exception ex)
+            {
+                ExampleDocument = ex.Message;
+            }
+        });
+        Validating = false;
+    }
+}

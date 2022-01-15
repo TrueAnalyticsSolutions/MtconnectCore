@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Errors;
 using System;
@@ -15,21 +16,21 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CuttingItemMeasurement() : base() { }
 
         /// <inheritdoc />
-        public CuttingItemMeasurement(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr) { }
+        public CuttingItemMeasurement(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         /// <inheritdoc />
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
 
-            if (!SourceNode.IsEnumName<CuttingItemMeasurementSubTypes>())
+            if (!EnumHelper.Contains<CuttingItemMeasurementSubTypes>(SourceNode.LocalName))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"Unknown CuttingItemMeasurement SubType '{SourceNode.LocalName}'."));
             }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public ProcessFeedRate() : base() { }
 
         /// <inheritdoc />
-        public ProcessFeedRate(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public ProcessFeedRate(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             if (double.TryParse(xNode.InnerText, out double value))
             {
@@ -37,14 +38,15 @@ namespace MtconnectCore.Standard.Documents.Assets
             }
         }
 
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.17")]
+        public bool validateValue(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
 
             if (!double.TryParse(SourceNode.InnerText, out double value))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"Invalid ProcessFeedRate value. CuttingTool ProcessFeedRate value must be a number."));
             }
 

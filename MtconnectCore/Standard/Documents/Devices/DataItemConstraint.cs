@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -36,27 +37,24 @@ namespace MtconnectCore.Standard.Documents.Devices
         public DataItemConstraint() : base() { }
 
         /// <inheritdoc/>
-        public DataItemConstraint(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) {
+        public DataItemConstraint(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) {
             if (xNode.ChildNodes.Count < 2)
             {
                 Value = xNode.InnerText;
             }
         }
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 7.2.3.2.1")]
+        private bool validateFilter(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 2 Section 7.2.3.3.1 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
-
             if (Filter != null)
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
-                    $"Filter DEPRECATED in Version 1.4 - Moved to the Filters element of a DataItem. {documentationAttributes}"));
+                    ValidationSeverity.WARNING,
+                    $"Filter DEPRECATED in Version 1.4 - Moved to the Filters element of a DataItem."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

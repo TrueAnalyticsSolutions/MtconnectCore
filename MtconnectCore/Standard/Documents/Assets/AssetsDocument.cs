@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         /// <inheritdoc />
         public AssetsDocument(XmlDocument xDoc) : base(xDoc)
         {
-            _header = new AssetsDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager);
+            _header = new AssetsDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager, MtconnectVersion.GetValueOrDefault());
         }
 
         /// <inheritdoc />
@@ -39,7 +39,7 @@ namespace MtconnectCore.Standard.Documents.Assets
             switch (xNode.LocalName)
             {
                 case "CuttingTool":
-                    item = new CuttingTool(xNode, nsmgr);
+                    item = new CuttingTool(xNode, nsmgr, DocumentVersion);
                     if (!item.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
                     {
                         Logger.Warn($"[Invalid Assets] CuttingTool:\r\n{ExceptionHelper.ToString(validationExceptions)}");

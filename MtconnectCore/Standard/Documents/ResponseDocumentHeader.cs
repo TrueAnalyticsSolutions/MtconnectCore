@@ -41,7 +41,8 @@ namespace MtconnectCore.Standard.Documents
         /// <param name="xNode">A source XML node from the MTConnect Response Document.</param>
         /// <param name="nsmgr">Reference to the namespace manager.</param>
         /// <param name="defaultNamespace">Reference to the namespace primarily used for this node.</param>
-        public ResponseDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, string defaultNamespace) : base(xNode, nsmgr, defaultNamespace) { }
+        /// <param name="version"></param>
+        public ResponseDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) : base(xNode, nsmgr, defaultNamespace, version) { }
 
         /// <inheritdoc/>
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)

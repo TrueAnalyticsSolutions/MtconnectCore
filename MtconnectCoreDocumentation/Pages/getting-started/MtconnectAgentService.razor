@@ -1,5 +1,7 @@
 ﻿@page "/getting-started/mtconnectagentservice"
 
+<PageTitle>MtconnectAgentService - Getting Started - MtconnectCore by True Analytics Manufacturing Solutions</PageTitle>
+
 <div class="container">
     <h1><code>MtconnectAgentService</code></h1>
     <p>The <code>MtconnectAgentService</code> contains multiple methods for requesting information from a MTConnect&reg; Agent. Each request yields a <em>Response Document</em> as outlined in the MTConnect&reg; specification. The <code>Probe</code>, <code>Current</code>, and <code>Sample</code> requests are all basic HTTP requests, however the <code>CurrentInterval</code> and <code>SampleInterval</code> requests are somewhat unique in that they are asynchronous tasks that keep the connection to the MTConnect Agent alive until the specified <code>CancellationToken</code> is cancelled.</p>
@@ -12,8 +14,7 @@
         </dl>
         <h6><strong>Example</strong></h6>
         <div class="code-well">
-<pre>
-    <code class="language-csharp">
+            <CodeBlock>
 using(var service = new MtconnectService())
 {
     var responseDocument = await service.Probe();
@@ -22,8 +23,7 @@ using(var service = new MtconnectService())
         // Maybe throw the errors returned by the MTConnect Agent
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
     <h3><code>Current</code></h3>
@@ -35,8 +35,7 @@ using(var service = new MtconnectService())
         </dl>
         <h6><strong>Example</strong></h6>
         <div class="code-well">
-<pre>
-    <code class="language-csharp">
+            <CodeBlock>
 using(var service = new MtconnectService())
 {
     var responseDocument = await service.Current();
@@ -45,8 +44,7 @@ using(var service = new MtconnectService())
         // Maybe throw the errors returned by the MTConnect Agent
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
     <h3><code>Sample</code></h3>
@@ -58,8 +56,7 @@ using(var service = new MtconnectService())
         </dl>
         <h6><strong>Example</strong></h6>
         <div class="code-well">
-<pre>
-    <code class="language-csharp">
+            <CodeBlock>
 using(var service = new MtconnectService())
 {
     var responseDocument = await service.Sample();
@@ -68,8 +65,7 @@ using(var service = new MtconnectService())
         // Maybe throw the errors returned by the MTConnect Agent
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
     <h3><code>CurrentInterval</code></h3>
@@ -82,8 +78,7 @@ using(var service = new MtconnectService())
         <h6><strong>Example</strong></h6>
         <p class="alert alert-light small">Here we are using the <a href="https://consoul.dev" target="_blank">Consoul</a> library to format the console.</p>
         <div class="code-well">
-<pre>
-            <code class="language-csharp">
+            <CodeBlock>
 bool canLoop = true;
 
 MtconnectIntervalStreamCallback callback = async (document) => {
@@ -142,8 +137,7 @@ using (CancellationTokenSource token = new CancellationTokenSource())
         waitForKeyTask.Wait();
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
     <h3><code>SampleInterval</code></h3>
@@ -156,8 +150,7 @@ using (CancellationTokenSource token = new CancellationTokenSource())
         <h6><strong>Example</strong></h6>
         <p class="alert alert-light small">Here we are using the <a href="https://consoul.dev" target="_blank">Consoul</a> library to format the console.</p>
         <div class="code-well">
-<pre>
-            <code class="language-csharp">
+            <CodeBlock>
 bool canLoop = true;
 
 MtconnectIntervalStreamCallback callback = async (document) => {
@@ -216,8 +209,7 @@ using (CancellationTokenSource token = new CancellationTokenSource())
         waitForKeyTask.Wait();
     }
 }
-    </code>
-</pre>
+            </CodeBlock>
         </div>
     </div>
 </div>

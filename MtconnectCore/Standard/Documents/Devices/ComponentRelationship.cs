@@ -1,5 +1,7 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -30,32 +32,57 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(ComponentRelationshipAttributes.ID_REF)]
         public string IdRef { get; set; }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode()"/>
+        /// <inheritdoc />
         public ComponentRelationship() : base() { }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
-        public ComponentRelationship(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr) { }
+        /// <inheritdoc />
+        public ComponentRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
-
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.2")]
+        private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 2 Section 9.2.1.1 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
-
-            if (!base.TryValidate(out validationErrors))
+            if (string.IsNullOrEmpty(Id))
             {
-                return false;
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"ComponentRelationship MUST include a 'id' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.2")]
+        private bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(IdRef))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"ComponentRelationship MUST include a 'idRef' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"ComponentRelationship MUST include a 'idRef' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.2")]
+        private bool validateType(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(Type))
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"ComponentRelationship MUST include a 'type' attribute."));
+            }
+            else if (!EnumHelper.Contains<RelationshipTypes>(Type))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"ComponentRelationship type of '{Type}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
+            }
+            else if (!EnumHelper.ValidateToVersion<RelationshipTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"ComponentRelationship type of '{Type}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

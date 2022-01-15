@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -35,33 +36,23 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElements("Specifications/*", nameof(TryAddSpecification), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<Specification> Specifications => _specifications;
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode()"/>
+        /// <inheritdoc />
         public ComponentConfiguration() : base() { }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
-        public ComponentConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        /// <inheritdoc />
+        public ComponentConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
         public bool TryAddCoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr, out CoordinateSystem coordinateSystem)
-        {
-            Logger.Verbose("Reading CoordinateSystem {XnodeKey}", xNode.TryGetAttribute(CoordinateSystemAttributes.ID));
-            coordinateSystem = new CoordinateSystem(xNode, nsmgr);
-            if (!coordinateSystem.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] CoordinateSystem:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _coordinateSystems.Add(coordinateSystem);
-            return true;
-        }
+            => base.TryAdd<CoordinateSystem>(xNode, nsmgr, ref _coordinateSystems, out coordinateSystem);
 
         public bool TryAddRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, out Relationship relationship)
         {
             Logger.Verbose("Reading Relationship {XnodeKey}", xNode.TryGetAttribute(RelationshipAttributes.ID));
             if (xNode.LocalName == ComponentConfigurationElements.DEVICE_RELATIONSHIP.ToPascalCase())
             {
-                relationship = new DeviceRelationship(xNode, nsmgr);
+                relationship = new DeviceRelationship(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
             } else if (xNode.LocalName == ComponentConfigurationElements.COMPONENT_RELATIONSHIP.ToPascalCase()) {
-                relationship = new ComponentRelationship(xNode, nsmgr);
+                relationship = new ComponentRelationship(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
             } else {
                 Logger.Warn("[Invalid Probe] Relationship {XnodeTag} is not supported", xNode.LocalName);
                 relationship = null;
@@ -78,29 +69,9 @@ namespace MtconnectCore.Standard.Documents.Devices
         }
 
         public bool TryAddSpecification(XmlNode xNode, XmlNamespaceManager nsmgr, out Specification specification)
-        {
-            Logger.Verbose("Reading Specification {XnodeKey}", xNode.TryGetAttribute(SpecificationAttributes.TYPE));
-            specification = new Specification(xNode, nsmgr);
-            if (!specification.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Specification:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _specifications.Add(specification);
-            return true;
-        }
+            => base.TryAdd<Specification>(xNode, nsmgr, ref _specifications, out specification);
 
         public bool TryAddSensorConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, out SensorConfiguration sensorConfiguration)
-        {
-            Logger.Verbose("Reading SensorConfiguration");
-            sensorConfiguration = new SensorConfiguration(xNode, nsmgr);
-            if (!sensorConfiguration.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] SensorConfiguration:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _sensorConfiguration.Add(sensorConfiguration);
-            return true;
-        }
+            => base.TryAdd<SensorConfiguration>(xNode, nsmgr, ref _sensorConfiguration, out sensorConfiguration);
     }
 }

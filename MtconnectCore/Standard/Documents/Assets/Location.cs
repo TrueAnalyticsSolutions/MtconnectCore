@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -31,7 +32,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public Location() : base() { }
 
         /// <inheritdoc />
-        public Location(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE)
+        public Location(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
             Value = xNode.InnerText;
         }
@@ -39,7 +40,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         /// <inheritdoc />
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
 
             if (string.IsNullOrEmpty(Type))
             {
@@ -53,11 +54,7 @@ namespace MtconnectCore.Standard.Documents.Assets
                     $"Unrecognized CuttingTool Location 'type'."));
             }
 
-            if (validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR)) {
-                return false;
-            }
-
-            return true;
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

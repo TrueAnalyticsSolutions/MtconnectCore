@@ -1,46 +1,31 @@
-﻿using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
-    public class VariableDataSet : DataItem
+    public class VariableDataSet : Sample
     {
-        /// <summary>
-        /// Collected from the subType attribute. Refer to Part 3 Streams - 5.6.3.1
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        public string SubType { get; set; }
-
-        /// <summary>
-        /// Collected from the name attribute. Refer to Part 3 Streams - 5.6.3.1
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Collected from the compositionId attribute. Refer to Part 3 Streams - 5.6.3.1
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        public string CompositionId { get; set; }
-
-        /// <summary>
-        /// Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.6.3.1
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        public ResetTriggers ResetTriggered { get; set; }
-
         /// <summary>
         /// Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
         /// 
         /// Occurance: 1
         /// </summary>
-        public int Count { get; set; }
+        [MtconnectNodeAttribute(VariableDataSetAttributes.COUNT)]
+        public int? Count { get; set; }
 
+        /// <summary>
+        /// Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
+        /// </summary>
         private List<VariableDataSetEntry> _entries = new List<VariableDataSetEntry>();
+        [MtconnectNodeElements(VariableDataSetElements.ENTRY, nameof(TryAddEntry), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public ICollection<VariableDataSetEntry> Entries => _entries;
+
+        public bool TryAddEntry(XmlNode xNode, XmlNamespaceManager nsmgr, out VariableDataSetEntry entry) => base.TryAdd<VariableDataSetEntry>(xNode, nsmgr, ref _entries, out entry);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -40,35 +41,22 @@ namespace MtconnectCore.Standard.Documents.Devices
         public EntryDefinition() : base() { }
 
         /// <inheritdoc/>
-        public EntryDefinition(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        public EntryDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
         public bool TryAddCellDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, out CellDefinition cellDefinition)
-        {
-            Logger.Verbose("Reading CellDefinition {XnodeKey}", xNode.TryGetAttribute(CellDefinitionAttributes.KEY));
-            cellDefinition = new CellDefinition(xNode, nsmgr);
-            if (!cellDefinition.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] CellDefinition of EntryDefinition '{Key}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _cellDefinitions.Add(cellDefinition);
-            return true;
-        }
+            => base.TryAdd<CellDefinition>(xNode, nsmgr, ref _cellDefinitions, out cellDefinition);
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 2 Section 7.2.3.6.2 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
-
             if (string.IsNullOrEmpty(Key))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"EntryDefinition MUST include a 'key' attribute. {documentationAttributes}"));
+                    $"EntryDefinition MUST include a 'key' attribute."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

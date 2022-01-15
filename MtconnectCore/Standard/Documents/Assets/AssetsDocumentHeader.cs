@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,18 +27,14 @@ namespace MtconnectCore.Standard.Documents.Assets
         public AssetsDocumentHeader() : base() { }
 
         /// <inheritdoc />
-        public AssetsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE) { }
+        public AssetsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
         /// <inheritdoc />
         public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 2 Section 4.4.2 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
+            base.TryValidate(out validationErrors);
 
-            if (!base.TryValidate(out validationErrors))
-            {
-                return false;
-            }
+            const string documentationAttributes = "See Part 2 Section 4.4.2 of the MTConnect standard.";
 
             if (!AssetBufferSize.HasValue)
             {

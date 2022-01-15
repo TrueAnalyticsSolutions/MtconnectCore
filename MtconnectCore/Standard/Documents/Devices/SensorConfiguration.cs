@@ -1,5 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -37,39 +38,27 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElements("Channels/*", nameof(TryAddChannel), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<Channel> Channels => _channels;
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode()"/>
+        /// <inheritdoc />
         public SensorConfiguration() : base() { }
 
-        /// <inheritdoc cref="MtconnectNode.MtconnectNode(XmlNode, XmlNamespaceManager, string)"/>
-        public SensorConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE) { }
+        /// <inheritdoc />
+        public SensorConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
         public bool TryAddChannel(XmlNode xNode, XmlNamespaceManager nsmgr, out Channel channel)
-        {
-            Logger.Verbose("Reading Channel {XnodeKey}", xNode.TryGetAttribute(ChannelAttributes.NUMBER));
-            channel = new Channel(xNode, nsmgr);
-            if (!channel.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn($"[Invalid Probe] Channel:\r\n{ExceptionHelper.ToString(validationExceptions)}");
-                return false;
-            }
-            _channels.Add(channel);
-            return true;
-        }
+            => base.TryAdd<Channel>(xNode, nsmgr, ref _channels, out channel);
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.6.7.1")]
+        private bool validateFirmwareVersion(out ICollection<MtconnectValidationException> validationErrors)
         {
-            const string documentationAttributes = "See Part 2 Section 9.1.3.1 of the MTConnect standard.";
             validationErrors = new List<MtconnectValidationException>();
-
             if (string.IsNullOrEmpty(FirmwareVersion))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"SensorConfiguration MUST include a 'FirmwareVersion' element. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"SensorConfiguration MUST include a 'FirmwareVersion' element."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }
