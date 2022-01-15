@@ -1,11 +1,11 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     /// <summary>
-    /// Available values for EVENT element <see cref="EventElements.CONTROLLER_MODE"/>
+    /// Available values for EVENT element <see cref="EventTypes.CONTROLLER_MODE"/>
     /// </summary>
     [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
     public enum ControllerModeValues {

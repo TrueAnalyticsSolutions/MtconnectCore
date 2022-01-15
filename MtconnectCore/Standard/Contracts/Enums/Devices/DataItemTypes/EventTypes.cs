@@ -6,6 +6,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
     [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
     public enum EventTypes {
         /// <summary>
+        /// The set of axes associated with a Path that the Controller is controlling. If  DataItem is not provided, it will be assumed the Controller is controlling all axes.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.2")]
+        ACTIVE_AXES,
+        /// <summary>
         /// The state of the Actuator - ACTIVE or INACTIVE.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.11")]
@@ -13,11 +18,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [Obsolete("Deprecated in Rel. 1.1. Replaced with CONDITION.")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2", MtconnectVersions.V_1_0_1)]
         ALARM,
-        /// <summary>
-        /// The set of axes associated with a Path that the Controller is controlling. If  DataItem is not provided, it will be assumed the Controller is controlling all axes.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.2")]
-        ACTIVE_AXES,
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 4.1")]
         ASSET_CHANGED,
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 4.1")]

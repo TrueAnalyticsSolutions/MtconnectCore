@@ -1,10 +1,10 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     /// <summary>
-    /// Available values for EVENT element <see cref="EventElements.COMPOSITION_STATE"/> when the subType is LATERAL
+    /// Available values for EVENT element <see cref="EventTypes.COMPOSITION_STATE"/> when the subType is LATERAL
     /// </summary>
     public enum CompositionStateLateralValues
     {

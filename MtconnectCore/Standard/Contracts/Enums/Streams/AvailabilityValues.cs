@@ -1,10 +1,10 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     /// <summary>
-    /// Available values for EVENT element <see cref="EventElements.AVAILABILITY"/>
+    /// Available values for EVENT element <see cref="EventTypes.AVAILABILITY"/>
     /// </summary>
     [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10")]
     public enum AvailabilityValues {

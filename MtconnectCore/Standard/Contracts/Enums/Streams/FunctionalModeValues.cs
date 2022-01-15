@@ -1,10 +1,10 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     /// <summary>
-    /// Available values for EVENT element <see cref="EventElements.FUNCTIONAL_MODE"/>
+    /// Available values for EVENT element <see cref="EventTypes.FUNCTIONAL_MODE"/>
     /// </summary>
     [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
     public enum FunctionalModeValues

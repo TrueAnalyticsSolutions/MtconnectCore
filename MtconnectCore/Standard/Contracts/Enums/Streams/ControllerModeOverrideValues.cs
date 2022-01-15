@@ -1,10 +1,10 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     /// <summary>
-    /// Available values for EVENT element <see cref="EventElements.CONTROLLER_MODE_OVERRIDE"/>
+    /// Available values for EVENT element <see cref="EventTypes.CONTROLLER_MODE_OVERRIDE"/>
     /// </summary>
     [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
     public enum ControllerModeOverrideValues
