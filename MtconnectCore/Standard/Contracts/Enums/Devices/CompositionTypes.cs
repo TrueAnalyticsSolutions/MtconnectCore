@@ -216,6 +216,10 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         WIRE,
+        /// <summary>
+        /// An object or material on which a form of work is performed.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 6")]
         WORKPIECE
     }
 }

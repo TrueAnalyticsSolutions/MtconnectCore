@@ -4,7 +4,7 @@ using MtconnectCore.Standard.Documents.Streams;
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     /// <summary>
-    /// Available values for a <see cref="Sample.ResetTriggered"/> element.
+    /// Available values for a <see cref="ResetTrigger"/> element.
     /// </summary>
     [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 7.2.3.5")]
     public enum ResetTriggerValues

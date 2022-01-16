@@ -72,16 +72,19 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.1 and 3.8")]
         protected bool validateSequence(out ICollection<MtconnectValidationException> validationErrors)
         {
+            const long sequenceCeiling = 2 ^ 64;
             validationErrors = new List<MtconnectValidationException>();
-            if (Sequence == default(int))
+            if (Sequence > 0 && Sequence < sequenceCeiling)
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"Data entity MUST include a 'sequence' attribute.",
-                        SourceNode));
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
+
+        protected abstract bool validateValue(out ICollection<MtconnectValidationException> validationErrors);
 
         protected abstract bool validateNode(out ICollection<MtconnectValidationException> validationErrors);
 

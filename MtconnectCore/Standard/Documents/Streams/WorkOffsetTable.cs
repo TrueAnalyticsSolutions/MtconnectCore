@@ -49,5 +49,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             validationErrors = new List<MtconnectValidationException>();
             return true;
         }
+
+        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new System.NotImplementedException();
     }
 }

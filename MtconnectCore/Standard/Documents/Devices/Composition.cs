@@ -54,7 +54,22 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Composition MUST include a 'id' attribute."));
+                    $"Composition MUST include a 'id' attribute.",
+                    SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 4.6.2")]
+        private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Uuid) && Uuid.Length > 255)
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Composition 'uuid' cannot exceed a length of 255 characters.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -67,13 +82,15 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Composition MUST include a 'type' attribute."));
+                    $"Composition MUST include a 'type' attribute.",
+                    SourceNode));
             }
             else if (!EnumHelper.Contains<CompositionTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
-                    $"Composition 'type' of '{Type}' is not currently defined in the MTConnect standard and may not be supported."));
+                    $"Composition 'type' of '{Type}' is not currently defined in the MTConnect standard and may not be supported.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

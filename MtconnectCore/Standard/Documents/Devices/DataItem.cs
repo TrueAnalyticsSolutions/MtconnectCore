@@ -131,7 +131,8 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem MUST include a unique 'id' attribute."));
+                    $"DataItem MUST include a unique 'id' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -144,13 +145,15 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'category' attribute."));
+                    $"DataItem MUST include a 'category' attribute.",
+                    SourceNode));
             }
             else if (!EnumHelper.Contains<CategoryTypes>(Category))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem 'category' attribute must be one of the following: [{EnumHelper.ToListString<CategoryTypes>(", ", string.Empty, string.Empty)}]."));
+                    $"DataItem 'category' attribute must be one of the following: [{EnumHelper.ToListString<CategoryTypes>(", ", string.Empty, string.Empty)}].",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -399,6 +402,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
         
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2")]
         private bool validateRepresentationDiscrete_Deprecated(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Representation) && EnumHelper.Enumify(Representation).Equals(RepresentationTypes.DISCRETE)) {

@@ -85,9 +85,36 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <inheritdoc/>
         public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
-        public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample) => base.TryAdd<Sample>(xNode, nsmgr, ref _samples, out sample);
+        public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample)
+        {
+            if (xNode.Name == "VariableDataSet")
+            {
+                var variableList = new List<SampleVariableDataSet>();
+                var variableParseResult = base.TryAdd<SampleVariableDataSet>(xNode, nsmgr, ref variableList, out SampleVariableDataSet variableDataSet);
+                _samples.Add(variableDataSet as Sample);
+                sample = variableDataSet;
+                return variableParseResult;
+            }
+            else
+            {
+                return base.TryAdd<Sample>(xNode, nsmgr, ref _samples, out sample);
+            }
+        }
 
-        public bool TryAddEvent(XmlNode xNode, XmlNamespaceManager nsmgr, out Event @event) => base.TryAdd<Event>(xNode, nsmgr, ref _events, out @event);
+        public bool TryAddEvent(XmlNode xNode, XmlNamespaceManager nsmgr, out Event @event)
+        {
+            if (xNode.Name == "VariableDataSet")
+            {
+                var variableList = new List<EventVariableDataSet>();
+                var variableParseResult = base.TryAdd<EventVariableDataSet>(xNode, nsmgr, ref variableList, out EventVariableDataSet variableDataSet);
+                _events.Add(variableDataSet);
+                @event = variableDataSet;
+                return variableParseResult;
+            } else
+            {
+                return base.TryAdd<Event>(xNode, nsmgr, ref _events, out @event);
+            }
+        }
 
         public bool TryAddCondition(XmlNode xNode, XmlNamespaceManager nsmgr, out Condition condition) => base.TryAdd<Condition>(xNode, nsmgr, ref _conditions, out condition);
 

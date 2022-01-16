@@ -55,6 +55,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TrySetTransformation(XmlNode xNode, XmlNamespaceManager nsmgr, out Transformation transformation)
             => base.TrySet<Transformation>(xNode, nsmgr, nameof(Transformation), out transformation);
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 9.4.1.1.1")]
         private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -62,11 +63,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"CoordinateSystem MUST include a unique 'id' attribute."));
+                    $"CoordinateSystem MUST include a unique 'id' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 9.4.1.1.1")]
         private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -74,13 +77,15 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"CoordinateSystem MUST include a 'type' attribute."));
+                    $"CoordinateSystem MUST include a 'type' attribute.",
+                    SourceNode));
             }
             else if (!EnumHelper.Contains<CoordinateSystemTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.WARNING,
-                    $"CoordinateSystem 'type' should be one of: [{EnumHelper.ToListString<CoordinateSystemTypes>(", ", string.Empty, string.Empty)}]."));
+                    $"CoordinateSystem 'type' should be one of: [{EnumHelper.ToListString<CoordinateSystemTypes>(", ", string.Empty, string.Empty)}].",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

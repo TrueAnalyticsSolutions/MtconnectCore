@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 4.8")]
-        private bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors)
+        protected virtual bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(IdRef))

@@ -34,8 +34,19 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// <summary>
         /// The measurement of AC Current or a DC current. See <c>subType</c>s: <seealso cref="AmperageSubTypes"/>
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
+        [Obsolete("Deprecated in v1.6.0")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_5_0)]
         AMPERAGE,
+        /// <summary>
+        /// The measurement of an electrical current that reverses direction at regular short intervals.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2.1")]
+        AMPERAGE_AC,
+        /// <summary>
+        /// The measurement of an electric current flowing in one direction only.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2.1")]
+        AMPERAGE_DC,
         /// <summary>
         /// The angular position of a component relative to the  parent. See <c>subType</c>s: <seealso cref="AngleSubTypes"/>
         /// </summary>
@@ -107,6 +118,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
         DEPOSITION_VOLUME,
         /// <summary>
+        /// The measured dimension of a diameter.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        DIAMETER,
+        /// <summary>
         /// The displacement as the change in position of an  object
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
@@ -140,6 +156,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_0_1)]
         GLOBAL_POSITION,
         /// <summary>
+        /// The amount of water vapor present expressed as a percent to reach saturation at the same temperature.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        HUMIDITY_RELATIVE,
+        /// <summary>
+        /// The ratio of the water vapor present over the total weight of the water vapor and air present expressed as a percent.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        HUMIDITY_SPECIFIC,
+        /// <summary>
         /// The length of an object
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
@@ -162,6 +188,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
         MASS,
+        /// <summary>
+        /// A measured or calculated orientation of a plane or vector relative to a cartesian coordinate system.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        ORIENTATION,
         /// <summary>
         /// The feedrate of the tool path. See <c>subType</c>s: <seealso cref="PathFeedrateSubTypes"/>
         /// </summary>
@@ -258,8 +289,19 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// <summary>
         /// The measurement of electrical potential between two  points. See <c>subType</c>s: <seealso cref="VoltageSubTypes"/>
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
+        [Obsolete("Deprecated in v1.6.0")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_5_0)]
         VOLTAGE,
+        /// <summary>
+        /// The measurement of the electrical potential between two points in an electrical circuit in which the current periodically reverses direction.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        VOLTAGE_AC,
+        /// <summary>
+        /// The measurement of the electrical potential between two points in an electrical circuit in which the current is unidirectional.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        VOLTAGE_DC,
         /// <summary>
         /// The measure of the apparent power in an electrical  circuit, equal to the product of root-mean-square (RMS) voltage and RMS current’ (commonly referred to as VA)
         /// </summary>
@@ -284,6 +326,21 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// The measurement of power consumed or dissipated  by an electrical circuit or device
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
-        WATTAGE
+        WATTAGE,
+        /// <summary>
+        /// Measured dimension of an entity relative to the X direction of the referenced coordinate system.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        X_DIMENSION,
+        /// <summary>
+        /// Measured dimension of an entity relative to the Y direction of the referenced coordinate system.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        Y_DIMENSION,
+        /// <summary>
+        /// Measured dimension of an entity relative to the Z direction of the referenced coordinate system.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        Z_DIMENSION
     }
 }

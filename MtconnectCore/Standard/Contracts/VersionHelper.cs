@@ -49,6 +49,8 @@ namespace MtconnectCore.Standard.Contracts
              { MtconnectVersions.V_1_4_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
              { MtconnectVersions.V_1_5_0, MtconnectVersions.V_1_1_0 },
              { MtconnectVersions.V_1_5_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
+             { MtconnectVersions.V_1_6_0, MtconnectVersions.V_1_1_0 },
+             { MtconnectVersions.V_1_6_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
         };
 
         public static string ToName(this MtconnectVersions version) => versionNames[version];
@@ -160,6 +162,18 @@ namespace MtconnectCore.Standard.Contracts
                     break;
                 case MtconnectVersions.V_1_5_1:
                     //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.5");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_1_6_0:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.6");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_1_6_1:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.6");
                     nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
                     // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
                     nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");

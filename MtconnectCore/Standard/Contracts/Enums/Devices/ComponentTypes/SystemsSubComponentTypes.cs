@@ -60,6 +60,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         /// Protective is an XML container that represents the information for those functions that detect or prevent harm or damage to equipment or personnel. Protective does not include the information relating to the Enclosure system.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 5.3.7")]
-        PROTECTIVE
+        PROTECTIVE,
+        /// <summary>
+        /// WorkEnvelope organizes information about the physical process execution space within a piece of equipment. The WorkEnvelope MAY provide information regarding the physical workspace and the conditions within that workspace.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 5.3.12")]
+        WORK_ENVELOPE
     }
 }

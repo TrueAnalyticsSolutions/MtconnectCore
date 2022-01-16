@@ -81,5 +81,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
             => validateNode<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(Contracts.Enums.Devices.CategoryTypes.EVENT, out validationErrors);
+
+        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new System.NotImplementedException();
     }
 }

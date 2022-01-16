@@ -27,5 +27,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc/>
         public ComponentRef(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
+
+        //protected override bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors) => base.validateIdRef(out validationErrors);
     }
 }

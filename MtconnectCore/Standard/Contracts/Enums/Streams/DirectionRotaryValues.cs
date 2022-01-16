@@ -4,9 +4,9 @@ using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.DIRECTION"/>
+    /// Available values for EVENT element <see cref="DirectionSubTypes.ROTARY"/>
     /// </summary>
-    public enum DirectionValues
+    public enum DirectionRotaryValues
     {
         /// <summary>
         /// The rotary component is rotating in a clockwise fashion  using the right hand rule.
@@ -19,14 +19,9 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
         COUNTER_CLOCKWISE,
         /// <summary>
-        /// A linear component moving in the direction of increasing  position value
+        /// No direction.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
-        POSITIVE,
-        /// <summary>
-        /// A linear component moving in the direction of decreasing  position value
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 3 Section 3.10.2")]
-        NEGATIVE
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 3 Section 6.2")]
+        NONE
     }
 }
