@@ -195,7 +195,22 @@ namespace MtconnectCore.Standard.Documents.Devices
             validationErrors = new List<MtconnectValidationException>();
             if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY.ToString()))
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must always contain an Availability data item that represents this device is available to do work.", SourceNode));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an AVAILABILITY DataItem that represents this device is available to do work.", SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        private bool validateDataItemAssets(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_CHANGED.ToString()))
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an ASSET_CHANGED DataItem.", SourceNode));
+            }
+            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_REMOVED.ToString()))
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an ASSET_REMOVED DataItem.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

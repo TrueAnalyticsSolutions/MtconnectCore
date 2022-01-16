@@ -60,6 +60,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.5")]
         DEGREE_PER_SECOND_SQUARED,
         /// <summary>
+        /// A space-delimited, floating-point representation of the angular rotation in degrees around the X, Y, and Z axes relative to a cartesian coordinate system respectively in order as A, B, and C. If any of the rotations is not known, it MUST be zero (0).
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 7.2.2.5")]
+        DEGREE_3D,
+        /// <summary>
+        /// Gram per cubic meter.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 7.2.2.5")]
+        GRAM_PER_CUBIC_METER,
+        /// <summary>
         /// Frequency measured in cycles per second
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.5")]
@@ -85,11 +95,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.5")]
         LITER_PER_SECOND,
         /// <summary>
-        /// Liters per second
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.5")]
-        LITER_SECOND,
-        /// <summary>
         /// Measurement of Tilt
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.6")]
@@ -104,6 +109,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
         MILLIGRAM_PER_CUBIC_MILLIMETER,
+        /// <summary>
+        /// Milliliter
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
+        MILLILITER,
         /// <summary>
         /// Millimeters
         /// </summary>
@@ -169,6 +179,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.5")]
         REVOLUTION_PER_MINUTE,
+        /// <summary>
+        /// Revolutions per second.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 7.2.2.5")]
+        REVOLUTION_PER_SECOND,
+        /// <summary>
+        /// Revolutions per second squared.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 7.2.2.5")]
+        REVOLUTION_PER_SECOND_SQUARED,
         /// <summary>
         /// A measurement of time. 
         /// </summary>

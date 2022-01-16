@@ -141,7 +141,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1", MtconnectVersions.V_1_2_0)]
         private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();

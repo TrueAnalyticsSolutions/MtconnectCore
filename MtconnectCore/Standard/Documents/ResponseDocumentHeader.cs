@@ -54,28 +54,32 @@ namespace MtconnectCore.Standard.Documents
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Response Document Header MUST include a 'version' attribute. {documentationAttributes}"));
+                    $"Response Document Header MUST include a 'version' attribute. {documentationAttributes}",
+                    SourceNode));
             }
 
             if (CreationTime == null)
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Response Document Header MUST include a 'creationTime' attribute. {documentationAttributes}"));
+                    $"Response Document Header MUST include a 'creationTime' attribute. {documentationAttributes}",
+                    SourceNode));
             }
 
             if (InstanceId == default(ulong))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Response Document Header MUST include a 'instanceId' attribute. {documentationAttributes}"));
+                    $"Response Document Header MUST include a 'instanceId' attribute. {documentationAttributes}",
+                    SourceNode));
             }
 
             if (string.IsNullOrEmpty(Sender))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Response Document Header MUST include a 'sender' attribute. {documentationAttributes}"));
+                    $"Response Document Header MUST include a 'sender' attribute. {documentationAttributes}",
+                    SourceNode));
             }
 
             return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);

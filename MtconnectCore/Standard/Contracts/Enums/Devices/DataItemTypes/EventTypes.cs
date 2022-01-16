@@ -18,6 +18,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [Obsolete("Deprecated in Rel. 1.1. Replaced with CONDITION.")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2", MtconnectVersions.V_1_0_1)]
         ALARM,
+        /// <summary>
+        /// The application on a component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
+        APPLICATION,
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 4.1")]
         ASSET_CHANGED,
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 4.1")]
@@ -131,6 +136,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
         EXECUTION,
         /// <summary>
+        /// The embedded software of a component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
+        FIRMWARE,
+        /// <summary>
         /// The current intended production status of the device  component.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
@@ -141,10 +151,20 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2")]
         HARDNESS,
         /// <summary>
+        /// The hardware of a component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
+        HARDWARE,
+        /// <summary>
         /// The current functional or operational state of an  Interface type element indicating whether the interface is active or not currently functioning.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
         INTERFACE_STATE,
+        /// <summary>
+        /// The software library on a component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
+        LIBRARY,
         /// <summary>
         /// The current line of code being executed. See <c>subType</c>s: <seealso cref="LineSubTypes"/>
         /// </summary>
@@ -176,6 +196,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.2")]
         MESSAGE,
+        /// <summary>
+        /// Network details of a component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
+        NETWORK,
+        /// <summary>
+        /// The Operating System of a component.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
+        OPERATING_SYSTEM,
         /// <summary>
         /// The identifier of the person currently responsible fo operating the device.
         /// </summary>
@@ -280,6 +310,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
         ROTARY_VELOCITY_OVERRIDE,
         /// <summary>
+        /// A three space angular rotation relative to a coordinate system.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
+        ROTATION,
+        /// <summary>
         /// The serial number associated with a Component, Asset, or Device. The valid data value MUST be a text string.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2")]
@@ -312,6 +347,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2")]
         TOOL_OFFSET,
+        /// <summary>
+        /// A three space linear translation relative to a coordinate system.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
+        TRANSLATION,
         /// <summary>
         /// The identifier of the person currently responsible for operating the piece  of equipment.
         /// </summary>

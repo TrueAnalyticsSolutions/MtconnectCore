@@ -223,6 +223,26 @@
             <param name="value">Value to compare against the enum.</param>
             <returns>Flag for whether or not the <paramref name="value"/> was found in the enum.</returns>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.AssetAttributes.ASSET_ID">
+            <summary>
+            The unique identifier for the MTConnect Asset.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.AssetAttributes.TIMESTAMP">
+            <summary>
+            The time this MTConnect Asset was last modified.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.AssetAttributes.DEVICE_UUID">
+            <summary>
+            The piece of equipment’s UUID that supplied this data.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.AssetAttributes.REMOVED">
+            <summary>
+            This is an optional attribute that is an indicator that the MTConnect Asset has been removed from the piece of equipment.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.CuttingItemAttributes.INDICES">
             <summary>
             The number or numbers representing the individual cutting item or items on the tool.
@@ -1399,39 +1419,6 @@
             References the CoordinateSystem for geometric Specification elements.
             </summary>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes">
-            <remarks>See Part 2 Section 5.4 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.LOADER">
-            <remarks>See Part 2 Section 5.4.1 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.WASTE_DISPOSAL">
-            <remarks>See Part 2 Section 5.4.2 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.TOOLING_DELIVERY">
-            <remarks>See Part 2 Section 5.4.3 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.BAR_FEEDER">
-            <remarks>See Part 2 Section 5.4.4 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.ENVIRONMENTAL">
-            <remarks>See Part 2 Section 5.4.5 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.SENSOR">
-            <remarks>See Part 2 Section 5.4.6 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes.DEPOSITION">
-            <remarks>See Part 2 Section 5.4.7 of the MTConnect specification.</remarks>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.AxesLowerLevelComponentTypes">
-            <remarks>See Part 2 Section 5.1 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AxesLowerLevelComponentTypes.ROTARY">
-            <remarks>See Part 2 Section 5.1.4 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.AxesLowerLevelComponentTypes.LINEAR">
-            <remarks>See Part 2 Section 5.1.5 of the MTConnect specification.</remarks>
-        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes">
             <summary>
             Available options for the <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Category"/>
@@ -1658,6 +1645,11 @@
             Protective is an XML container that represents the information for those functions that detect or prevent harm or damage to equipment or personnel. Protective does not include the information relating to the Enclosure system.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.SystemsSubComponentTypes.WORK_ENVELOPE">
+            <summary>
+            WorkEnvelope organizes information about the physical process execution space within a piece of equipment. The WorkEnvelope MAY provide information regarding the physical workspace and the conditions within that workspace.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes">
             <summary>
             Available types of sub-parts of a <see cref="T:MtconnectCore.Standard.Documents.Devices.Component"/>.
@@ -1869,11 +1861,10 @@
             A string like piece or filament of relatively rigid or flexible material  provided in a variety of diameters
             </summary>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ControllerLowerLevelComponentTypes">
-            <remarks>See Part 2 Section 5.2 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ControllerLowerLevelComponentTypes.PATH">
-            <remarks>See Part 2 Section 5.2.1 of the MTConnect specification.</remarks>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CompositionTypes.WORKPIECE">
+            <summary>
+            An object or material on which a form of work is performed.
+            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes">
             <summary>
@@ -1888,6 +1879,46 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes.MACHINE">
             <summary>
             The coordinate system that represents the working area for a particular workpiece whose origin is shifted within the MACHINE coordinate system. If the WORK coordinates are not currently defined in the device, the MACHINE coordinates will be used.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageAcSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AMPERAGE_AC"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageAcSubTypes.ACTUAL">
+            <summary>
+            The measured amperage within an electrical circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageAcSubTypes.COMMANDED">
+            <summary>
+            The value for a current as specified by a component. The COMMANDED current is a calculated value that includes adjustments and overrides.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageAcSubTypes.PROGRAMMED">
+            <summary>
+            The value for a current as specified by a logic or motion program or set by a switch.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageDcSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AMPERAGE_DC"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageDcSubTypes.ACTUAL">
+            <summary>
+            The measured amperage within an electrical circuit
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageDcSubTypes.COMMANDED">
+            <summary>
+            The value for a current as specified by a component. The COMMANDED current is a calculated value that includes adjustments and overrides.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageDcSubTypes.PROGRAMMED">
+            <summary>
+            The value for a current as specified by a logic or motion program or set by a switch.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes">
@@ -1928,6 +1959,36 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AngleSubTypes.COMMANDED">
             <summary>
             The angular position computed by the Controller.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ApplicationSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.APPLICATION"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ApplicationSubTypes.LICENSE">
+            <summary>
+            The license code to validate or activate the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ApplicationSubTypes.VERSION">
+            <summary>
+            The version of the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ApplicationSubTypes.RELEASE_DATE">
+            <summary>
+            The date the hardware or software was released for general use.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ApplicationSubTypes.INSTALL_DATE">
+            <summary>
+            The date the hardware or software was installed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ApplicationSubTypes.MANUFACTURER">
+            <summary>
+            The corporate identity for the maker of the hardware or software.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AxisFeedrateOverrideSubTypes">
@@ -2490,6 +2551,11 @@
             The state of the Actuator - ACTIVE or INACTIVE.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.APPLICATION">
+            <summary>
+            The application on a component.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY">
             <summary>
             Represents the ability of a Component to communicate. This MUST be provided fo Device and MAY be provided for any other Component. AVAILABLE or UNAVAILABLE.
@@ -2595,6 +2661,11 @@
             The execution status of the Controller. READY, ACTIVE, INTERRUPTED,  FEED_HOLD, or STOPPED
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.FIRMWARE">
+            <summary>
+            The embedded software of a component.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.FUNCTIONAL_MODE">
             <summary>
             The current intended production status of the device  component.
@@ -2605,9 +2676,19 @@
             The measurement of the hardness of a material.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.HARDWARE">
+            <summary>
+            The hardware of a component.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.INTERFACE_STATE">
             <summary>
             The current functional or operational state of an  Interface type element indicating whether the interface is active or not currently functioning.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LIBRARY">
+            <summary>
+            The software library on a component.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE">
@@ -2638,6 +2719,16 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MESSAGE">
             <summary>
             An uninterpreted textual notification. 
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.NETWORK">
+            <summary>
+            Network details of a component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.OPERATING_SYSTEM">
+            <summary>
+            The Operating System of a component.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.OPERATOR_ID">
@@ -2740,6 +2831,11 @@
             A command issued to adjust the programmed velocity fo Rotary type axis
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ROTATION">
+            <summary>
+            A three space angular rotation relative to a coordinate system.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.SERIAL_NUMBER">
             <summary>
             The serial number associated with a Component, Asset, or Device. The valid data value MUST be a text string.
@@ -2770,6 +2866,11 @@
             A reference to the tool offset variables applied to the active cutting tool  associated with a Path in a Controller type component.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TRANSLATION">
+            <summary>
+            A three space linear translation relative to a coordinate system.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.USER">
             <summary>
             The identifier of the person currently responsible for operating the piece  of equipment.
@@ -2798,6 +2899,36 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WORK_OFFSET">
             <summary>
             A reference to the offset variables for a work piece or part associated with  a Path in a Controller type component.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.FirmwareSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.FIRMWARE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.FirmwareSubTypes.LICENSE">
+            <summary>
+            The license code to validate or activate the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.FirmwareSubTypes.VERSION">
+            <summary>
+            The version of the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.FirmwareSubTypes.RELEASE_DATE">
+            <summary>
+            The date the hardware or software was released for general use.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.FirmwareSubTypes.INSTALL_DATE">
+            <summary>
+            The date the hardware or software was installed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.FirmwareSubTypes.MANUFACTURER">
+            <summary>
+            The corporate identity for the maker of the hardware or software.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.GlobalPositionSubTypes">
@@ -2848,6 +2979,66 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardnessSubTypes.MOHS">
             <summary>
             A scale to measure the resistance to scratching of a surface.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardwareSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.HARDWARE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardwareSubTypes.LICENSE">
+            <summary>
+            The license code to validate or activate the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardwareSubTypes.VERSION">
+            <summary>
+            The version of the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardwareSubTypes.RELEASE_DATE">
+            <summary>
+            The date the hardware or software was released for general use.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardwareSubTypes.INSTALL_DATE">
+            <summary>
+            The date the hardware or software was installed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardwareSubTypes.MANUFACTURER">
+            <summary>
+            The corporate identity for the maker of the hardware or software.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumidityRelativeSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.HUMIDITY_RELATIVE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumidityRelativeSubTypes.ACTUAL">
+            <summary>
+            The measured value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumidityRelativeSubTypes.COMMANDED">
+            <summary>
+            The commanded value. 
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumiditySpecificSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.HUMIDITY_SPECIFIC"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumiditySpecificSubTypes.ACTUAL">
+            <summary>
+            The measured value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumiditySpecificSubTypes.COMMANDED">
+            <summary>
+            The commanded value. 
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.MATERIAL_FEED">
@@ -2920,6 +3111,36 @@
             The remaining useable length of  an object.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LibrarySubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LIBRARY"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LibrarySubTypes.LICENSE">
+            <summary>
+            The license code to validate or activate the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LibrarySubTypes.VERSION">
+            <summary>
+            The version of the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LibrarySubTypes.RELEASE_DATE">
+            <summary>
+            The date the hardware or software was released for general use.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LibrarySubTypes.INSTALL_DATE">
+            <summary>
+            The date the hardware or software was installed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LibrarySubTypes.MANUFACTURER">
+            <summary>
+            The corporate identity for the maker of the hardware or software.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LineNumberSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE_NUMBER"/>
@@ -2965,6 +3186,91 @@
             The target or planned number layers of material applied to a part or product during an additive manufacturing process.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.NetworkSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.NETWORK"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.NetworkSubTypes.IPV4_ADDRESS">
+            <summary>
+            The IPV4 network address of the component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.NetworkSubTypes.IPV6_ADDRESS">
+            <summary>
+            The IPV6 network address of the component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.NetworkSubTypes.GATEWAY">
+            <summary>
+            The Gateway for the component network.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.NetworkSubTypes.SUBNET_MASK">
+            <summary>
+            The SubNet mask for the component network.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.NetworkSubTypes.VLAN_ID">
+            <summary>
+            The layer2 Virtual Local Network (VLAN) ID for the component network.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.NetworkSubTypes.MAC_ADDRESS">
+            <summary>
+            Media Access Control Address. The unique physical address of the network hardware.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.NetworkSubTypes.WIRELESS">
+            <summary>
+            Identifies whether the connection type is wireless.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OperatingSystemSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.OPERATING_SYSTEM"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OperatingSystemSubTypes.LICENSE">
+            <summary>
+            The license code to validate or activate the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OperatingSystemSubTypes.VERSION">
+            <summary>
+            The version of the hardware or software.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OperatingSystemSubTypes.RELEASE_DATE">
+            <summary>
+            The date the hardware or software was released for general use.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OperatingSystemSubTypes.INSTALL_DATE">
+            <summary>
+            The date the hardware or software was installed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OperatingSystemSubTypes.MANUFACTURER">
+            <summary>
+            The corporate identity for the maker of the hardware or software.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OrientationSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ORIENTATION"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OrientationSubTypes.ACTUAL">
+            <summary>
+            The measured value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.OrientationSubTypes.COMMANDED">
+            <summary>
+            The commanded value. 
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PartCountSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_COUNT"/>
@@ -2998,6 +3304,21 @@
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateOverrideSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PATH_FEEDRATE_OVERRIDE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateOverrideSubTypes.JOG">
+            <summary>
+            The value of a signal or calculation issued to adjust the feedrate of the axes associated with a Path component when the axes, or a single axis, are being operated in a manual mode or method (jogging).
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateOverrideSubTypes.PROGRAMMED">
+            <summary>
+            The value of a signal or calculation issued to adjust the feedrate of the axes associated with a Path component when the axes, or a single axis, are operating as specified by a logic or motion program or set by a switch.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateOverrideSubTypes.RAPID">
+            <summary>
+            The value of a signal or calculation issued to adjust the feedrate of the axes associated with a Path component when the axes, or a single axis, are being operated in a rapid positioning mode or method (rapid).
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedratePerRevolutionSubTypes">
@@ -3180,6 +3501,26 @@
             The identity of the logic or motion program currently executing.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramHeaderSubTypes">
+            <summary>
+            <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_HEADER"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramHeaderSubTypes.SCHEDULE">
+            <summary>
+            The identity of a control program that is used to specify the order of execution of other programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramHeaderSubTypes.MAIN">
+            <summary>
+            The identity of the primary logic or motion program currently being executed. It is the starting nest level in a call structure and may contain calls to sub programs.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramHeaderSubTypes.ACTIVE">
+            <summary>
+            The identity of the logic or motion program currently executing.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ProgramLocationSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_LOCATION"/>
@@ -3295,6 +3636,16 @@
             The measurement of AC Current or a DC current. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes"/>
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AMPERAGE_AC">
+            <summary>
+            The measurement of an electrical current that reverses direction at regular short intervals.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AMPERAGE_DC">
+            <summary>
+            The measurement of an electric current flowing in one direction only.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ANGLE">
             <summary>
             The angular position of a component relative to the  parent. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AngleSubTypes"/>
@@ -3365,6 +3716,11 @@
             The spatial volume of material to be deposited in an additive manufacturing process.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DIAMETER">
+            <summary>
+            The measured dimension of a diameter.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.DISPLACEMENT">
             <summary>
             The displacement as the change in position of an  object
@@ -3395,6 +3751,16 @@
             The measurement of the number of occurrences of a  repeating event per unit time
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.HUMIDITY_RELATIVE">
+            <summary>
+            The amount of water vapor present expressed as a percent to reach saturation at the same temperature.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.HUMIDITY_SPECIFIC">
+            <summary>
+            The ratio of the water vapor present over the total weight of the water vapor and air present expressed as a percent.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.LENGTH">
             <summary>
             The length of an object
@@ -3413,6 +3779,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.MASS">
             <summary>
             The measurement of the mass of an object(s) or an  amount of material
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.ORIENTATION">
+            <summary>
+            A measured or calculated orientation of a plane or vector relative to a cartesian coordinate system.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.PATH_FEEDRATE">
@@ -3510,6 +3881,16 @@
             The measurement of electrical potential between two  points. See <c>subType</c>s: <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes"/>
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE_AC">
+            <summary>
+            The measurement of the electrical potential between two points in an electrical circuit in which the current periodically reverses direction.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE_DC">
+            <summary>
+            The measurement of the electrical potential between two points in an electrical circuit in which the current is unidirectional.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLT_AMPERE">
             <summary>
             The measure of the apparent power in an electrical  circuit, equal to the product of root-mean-square (RMS) voltage and RMS current’ (commonly referred to as VA)
@@ -3533,6 +3914,21 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.WATTAGE">
             <summary>
             The measurement of power consumed or dissipated  by an electrical circuit or device
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.X_DIMENSION">
+            <summary>
+            Measured dimension of an entity relative to the X direction of the referenced coordinate system.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.Y_DIMENSION">
+            <summary>
+            Measured dimension of an entity relative to the Y direction of the referenced coordinate system.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.Z_DIMENSION">
+            <summary>
+            Measured dimension of an entity relative to the Z direction of the referenced coordinate system.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes">
@@ -3585,6 +3981,21 @@
             The operator’s overridden value. Percent of commanded.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.TemperatureSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.TEMPERATURE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.TemperatureSubTypes.ACTUAL">
+            <summary>
+            The measured value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.TemperatureSubTypes.COMMANDED">
+            <summary>
+            The commanded value.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ToolOffsetSubTypes">
             <summary>
             <c>subType</c>s of EVENT <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_OFFSET"/>
@@ -3618,6 +4029,46 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.UserSubTypes.SET_UP">
             <summary>
             The identifier of the person currently responsible for preparing a piece of  equipment for production or restoring the piece of equipment to a neutral state after production.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageAcSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE_AC"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageAcSubTypes.ACTUAL">
+            <summary>
+            The measured voltage within an electrical circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageAcSubTypes.COMMANDED">
+            <summary>
+            The value for a voltage as specified by a Controller component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageAcSubTypes.PROGRAMMED">
+            <summary>
+            The value for a voltage as specified by a logic or motion program or set by a switch.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageDcSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE_DC"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageDcSubTypes.ACTUAL">
+            <summary>
+            The measured voltage within an electrical circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageDcSubTypes.COMMANDED">
+            <summary>
+            The value for a voltage as specified by a Controller component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageDcSubTypes.PROGRAMMED">
+            <summary>
+            The value for a voltage as specified by a logic or motion program or set by a switch.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes">
@@ -3984,9 +4435,6 @@
             <summary>
             Rotations about X, Y, and Z axes are expressed in A, B, and C respectively within a 3-dimensional vector. The values MUST be given in DEGREE_3D. Positive A, B, and C are in the directions to advance right-hand screws in the positive X, Y, and Z directions, respectively. Ref:ISO 9787:2013
             </summary>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.InterfacesLowerLevelComponentTypes">
-            <remarks>See Part 2 Section 5.6 of the MTConnect specification.</remarks>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Iso841ClassTypes">
             <summary>
@@ -4368,18 +4816,6 @@
             A data type where each discrete occurrence of the data  may have the same value as the previous occurrence of the data. There is no reported state change between occurrences of the data.
             </summary>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes">
-            <remarks>See Part 2 Section 5.5 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes.MATERIALS">
-            <remarks>See Part 2 Section 5.5.1 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes.STOCK">
-            <remarks>See Part 2 Section 5.5.2 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes.PERSONNEL">
-            <remarks>See Part 2 Section 5.5.3 of the MTConnect specification.</remarks>
-        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.StatisticTypes">
             <summary>
             Available options for a <c>statistic</c> attribute on a <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Statistic"/>
@@ -4429,69 +4865,6 @@
             <summary>
             Statistical Standard Deviation value calculated for the DataItem during the calculation period
             </summary>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes">
-            <remarks>See Part 2 Section 5.3 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.HYDRAULIC">
-            <remarks>See Part 2 Section 5.3.1 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.PNEUMATIC">
-            <remarks>See Part 2 Section 5.3.2 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.COOLANT">
-            <remarks>See Part 2 Section 5.3.3 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.LUBRICANT">
-            <remarks>See Part 2 Section 5.3.4 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.ELECTRIC">
-            <remarks>See Part 2 Section 5.3.5 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.ENCLOSURE">
-            <remarks>See Part 2 Section 5.3.6 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.PROTECTIVE">
-            <remarks>See Part 2 Section 5.3.7 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.PROCESS_POWER">
-            <remarks>See Part 2 Section 5.3.8 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.FEEDER">
-            <remarks>See Part 2 Section 5.3.9 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.DIELECTRIC">
-            <remarks>See Part 2 Section 5.3.10 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.END_EFFECTOR">
-            <remarks>See Part 2 Section 5.3.11 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes.WORK_ENVELOPE">
-            <remarks>See Part 2 Section 5.3.12 of the MTConnect specification.</remarks>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes">
-            <summary>
-            Top Level Component elements are used to group the Structural Elements representing the most significant physical or logical functions of a piece of equipment. The Top Level Component elements provided in an MTConnectDevices document SHOULD be restricted to those defined in Table 16. However, these Top Level Component elements MAY also be used as Lower Level Component elements; as required.
-            </summary>
-            <remarks>See Part 2 Section 5 of the MTConnect specification.</remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.AXES">
-            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.AxesLowerLevelComponentTypes" />
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.CONTROLLER">
-            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.ControllerLowerLevelComponentTypes" />
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.SYSTEMS">
-            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.SystemsLowerLevelComponentTypes" />
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.AUXILIARIES">
-            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.AuxiliariesLowerLevelComponentTypes" />
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.RESOURCES">
-            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.ResourcesLowerLevelComponentTypes" />
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.TopLevelComponentTypes.INTERFACES">
-            <seealso cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.InterfacesLowerLevelComponentTypes" />
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes">
             <summary>
@@ -4548,6 +4921,16 @@
             Angular acceleration in degrees per second squared
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.DEGREE_3D">
+            <summary>
+            A space-delimited, floating-point representation of the angular rotation in degrees around the X, Y, and Z axes relative to a cartesian coordinate system respectively in order as A, B, and C. If any of the rotations is not known, it MUST be zero (0).
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.GRAM_PER_CUBIC_METER">
+            <summary>
+            Gram per cubic meter.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.HERTZ">
             <summary>
             Frequency measured in cycles per second
@@ -4573,11 +4956,6 @@
             Liters per second
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.LITER_SECOND">
-            <summary>
-            Liters per second
-            </summary>
-        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MICRO_RADIAN">
             <summary>
             Measurement of Tilt
@@ -4591,6 +4969,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIGRAM_PER_CUBIC_MILLIMETER">
             <summary>
             Milligram per cubic millimeter
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLILITER">
+            <summary>
+            Milliliter
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.MILLIMETER">
@@ -4656,6 +5039,16 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.REVOLUTION_PER_MINUTE">
             <summary>
             Revolutions per minute
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.REVOLUTION_PER_SECOND">
+            <summary>
+            Revolutions per second.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.REVOLUTION_PER_SECOND_SQUARED">
+            <summary>
+            Revolutions per second squared.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.UnitsTypes.SECOND">
@@ -4847,6 +5240,17 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_1">
             <summary>
             Version 1.5.1
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_0">
+            <summary>
+            Version 1.6.0
+            </summary>
+            <remarks>Prepared on: July 15, 2020</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_1">
+            <summary>
+            Version 1.6.1
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
@@ -5214,29 +5618,39 @@
             The axes of the device are commanded to stop, but the  spindle continues to function.
             </summary>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues">
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionLinearValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DIRECTION"/>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes.LINEAR"/>
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.CLOCKWISE">
-            <summary>
-            The rotary component is rotating in a clockwise fashion  using the right hand rule.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.COUNTER_CLOCKWISE">
-            <summary>
-            The rotary component is rotating in a counter clockwise  fashion using the right hand rule.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.POSITIVE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionLinearValues.POSITIVE">
             <summary>
             A linear component moving in the direction of increasing  position value
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.NEGATIVE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionLinearValues.NEGATIVE">
             <summary>
             A linear component moving in the direction of decreasing  position value
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionRotaryValues">
+            <summary>
+            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.DirectionSubTypes.ROTARY"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionRotaryValues.CLOCKWISE">
+            <summary>
+            The rotary component is rotating in a clockwise fashion  using the right hand rule.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionRotaryValues.COUNTER_CLOCKWISE">
+            <summary>
+            The rotary component is rotating in a counter clockwise  fashion using the right hand rule.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionRotaryValues.NONE">
+            <summary>
+            No direction.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues">
@@ -5531,7 +5945,7 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues">
             <summary>
-            Available values for a <see cref="P:MtconnectCore.Standard.Documents.Streams.Sample.ResetTriggered"/> element.
+            Available values for a <see cref="!:ResetTrigger"/> element.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.ACTION_COMPLETE">
@@ -5835,6 +6249,18 @@
         </member>
         <member name="M:MtconnectCore.Standard.CurrentRequestQuery.Validate(System.Exception@)">
             <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Asset.AssetId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.AssetAttributes.ASSET_ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Asset.Timestamp">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.AssetAttributes.TIMESTAMP"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Asset.DeviceUuid">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.AssetAttributes.DEVICE_UUID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Assets.Asset.Removed">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Assets.Attributes.AssetAttributes.REMOVED"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.#ctor">
             <inheritdoc/>
@@ -7357,6 +7783,24 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet.Count">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet._entries">
+            <summary>
+            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SubType">
             <summary>
             Collected from the subType attribute. Refer to Part 3 Streams - 5.3.2
@@ -7422,6 +7866,24 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleVariableDataSet.Count">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Documents.Streams.SampleVariableDataSet._entries">
+            <summary>
+            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.SampleVariableDataSet.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.SampleVariableDataSet.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
         <member name="T:MtconnectCore.Standard.Documents.Streams.StreamsDocument">
             <inheritdoc />
         </member>
@@ -7452,18 +7914,6 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSet.Count">
-            <summary>
-            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
-            
-            Occurance: 1
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Documents.Streams.VariableDataSet._entries">
-            <summary>
-            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
-            </summary>
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.Key">
             <summary>
             Collected from the key attribute. Refer to Part 3 Streams - 5.6.3.3
@@ -7482,6 +7932,12 @@
             <summary>
             Collected from the textcontent of the Entry element. Refer to Part 3 Streams - 5.6.3.3
             </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetCell.Key">
             <summary>

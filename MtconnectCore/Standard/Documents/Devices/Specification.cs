@@ -66,7 +66,8 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Specification MUST include a unique 'type' attribute."));
+                    $"Specification MUST include a unique 'type' attribute.",
+                    SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
