@@ -33,15 +33,15 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-LXb7VoKsdZcCW14OTmVJbF7luBlXLgZSfj9lqEqVAPY=",
+      "hash": "sha256-sOBAtLl2HIg69EC5B4hrzG5YeDTBS0RRGCvcXd+LSUo=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-TlRiwY\/KbQKxtGzg2gK9abhN7qGUnDQceDUyvZLq2Io=",
+      "hash": "sha256-vdRBdhlxB5dr21r9bYqFjKmPQtvkG2a8qiK1OszpOsg=",
       "url": "_framework\/Microsoft.AspNetCore.Components.dll"
     },
     {
-      "hash": "sha256-\/WB9CdZ5jZrb9uD4oQq12d93SZ7InWWfA7RYJxuO\/c4=",
+      "hash": "sha256-1WoB39XummqjDV0SH+rSGEFyCGSQOoHS0O2hh7oOaWE=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.dll"
     },
     {
@@ -97,11 +97,11 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
     },
     {
-      "hash": "sha256-gtqUnJWcXiY3JucE66HMd2ot8P+bJZNhRDduA4C2N8g=",
+      "hash": "sha256-tBW7\/wXO01E6BOATluqh6EPk9isqjscqf2CaLGsr7C4=",
       "url": "_framework\/MtconnectCore.dll"
     },
     {
-      "hash": "sha256-KYRd+gFu9d1tJd2AjqoJVSQyCPu3bjV3fpfCMvWGjEw=",
+      "hash": "sha256-9HifD0Cb16F\/PYWquGs0Fym4RBVv4bo3tGzMSsZCh7o=",
       "url": "_framework\/MtconnectCoreDocumentation.dll"
     },
     {
@@ -139,6 +139,10 @@
     {
       "hash": "sha256-BTTRLMDIWkbGESoFTA1YYjNM3ukzMWLi5IYCBUO+y1g=",
       "url": "_framework\/System.ComponentModel.TypeConverter.dll"
+    },
+    {
+      "hash": "sha256-S68wwfCR3hL\/AwuoXBSLOYZ7Mi0dnxOduJjJwUeiG8M=",
+      "url": "_framework\/System.Console.dll"
     },
     {
       "hash": "sha256-krR5K5XLWNyYBbN8hI6xcapcwqSYes24sZLe4UOfJPM=",
@@ -189,7 +193,7 @@
       "url": "_framework\/System.ObjectModel.dll"
     },
     {
-      "hash": "sha256-fo5m1tH2\/i915Lme4\/F07tfuFTql70TGDZb3+1IjfuY=",
+      "hash": "sha256-Set4vi\/0c4hRQos3uInGLb5sYfrG3qOd2aEVVie1xW4=",
       "url": "_framework\/System.Private.CoreLib.dll"
     },
     {
@@ -213,7 +217,7 @@
       "url": "_framework\/System.Runtime.CompilerServices.Unsafe.dll"
     },
     {
-      "hash": "sha256-gPVp6aVJeLgqX0O5JCZTAwhSXUwXn3PssHPHWX5Nh60=",
+      "hash": "sha256-Ah\/5yX8QCoMJtfHMA3OnZ2x5NblNRKWpcCNdWhbosuk=",
       "url": "_framework\/System.Runtime.dll"
     },
     {
@@ -261,7 +265,7 @@
       "url": "_framework\/System.Xml.ReaderWriter.dll"
     },
     {
-      "hash": "sha256-we2H+KSiMQired3A46NUueKzxoK4Su6pjIFUWREODCA=",
+      "hash": "sha256-2fhemDLetAB1DE0zixnwbmcwqutRJ7NMXFuYTf1lkYo=",
       "url": "MtconnectCoreDocumentation.styles.css"
     },
     {
@@ -369,7 +373,7 @@
       "url": "images\/MTConnect\/2018_MTConnect_R_MBDG.png"
     },
     {
-      "hash": "sha256-g5fz68y5ji0dIGvOfshZ9JP5Ojdoslm93utSmvz9tU4=",
+      "hash": "sha256-HhwJptqsNGSkCu+Kh3WDurfCAYKrX3ywxRSJ7p+JlFg=",
       "url": "index.html"
     },
     {
@@ -2325,5 +2329,5 @@
       "url": "TAMS-Icon-Blue_x256.png"
     }
   ],
-  "version": "U0PrIE6l"
+  "version": "hgQbHb3d"
 };

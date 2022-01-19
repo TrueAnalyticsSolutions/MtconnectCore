@@ -132,3 +132,78 @@
         display: block;
     }
 }
+/* /Shared/Xml/XmlNode.razor.rz.scp.css */
+.xml-node-list .xml-node[b-d03ip7p680] {
+  position: relative;
+  white-space: nowrap;
+  list-style-type: none;
+}
+.xml-node-list .xml-node.has-children[b-d03ip7p680] {
+  cursor: pointer;
+}
+.xml-node-list .xml-node.has-children[b-d03ip7p680]::before {
+  position: absolute;
+  content: '\e034';
+  font-family: 'Icons';
+  left: -1.5em;
+  font-size: 1em;
+}
+.xml-node-list .xml-node.has-children.collapsed[b-d03ip7p680]::before {
+  transform: rotate(-90deg);
+}
+.xml-node-list .xml-node.has-children.collapsed ul[b-d03ip7p680] {
+  display: none;
+}
+.xml-node-list .xml-node.selected[b-d03ip7p680] {
+  background-color: orange;
+  --xml-node-color: yellow;
+  --xml-node-value-color: #000000;
+  --xml-attribute-name-color: forestgreen;
+  --xml-attribute-value-color: darkred;
+}
+.xml-node-list .xml-node span[b-d03ip7p680] {
+  margin: 0px;
+  padding: 0px;
+  white-space: nowrap;
+}
+.xml-node-list .xml-node .xml-node-open-start[b-d03ip7p680] {
+  color: var(--xml-node-color);
+}
+.xml-node-list .xml-node .xml-node-name[b-d03ip7p680] {
+  color: var(--xml-node-color);
+}
+.xml-node-list .xml-node .xml-node-attribute-name[b-d03ip7p680] {
+  color: var(--xml-attribute-name-color);
+}
+.xml-node-list .xml-node .xml-node-attribute-symbol[b-d03ip7p680] {
+  color: var(--xml-attribute-name-color);
+}
+.xml-node-list .xml-node .xml-node-attribute-quote[b-d03ip7p680] {
+  color: var(--xml-attribute-value-color);
+}
+.xml-node-list .xml-node .xml-node-attribute-value[b-d03ip7p680] {
+  color: var(--xml-attribute-value-color);
+}
+.xml-node-list .xml-node .xml-node-open-end[b-d03ip7p680] {
+  color: var(--xml-node-color);
+}
+.xml-node-list .xml-node .xml-node-value[b-d03ip7p680] {
+  color: var(--xml-node-value-color);
+}
+.xml-node-list .xml-node .xml-node-close-start[b-d03ip7p680] {
+  color: var(--xml-node-color);
+}
+.xml-node-list .xml-node .xml-node-close-symbol[b-d03ip7p680] {
+  color: var(--xml-node-color);
+}
+.xml-node-list .xml-node .xml-node-close-end[b-d03ip7p680] {
+  color: var(--xml-node-color);
+}
+/* /Shared/Xml/XmlViewer.razor.rz.scp.css */
+.xml-viewer[b-mv0ap1k3bg] {
+  --xml-node-color: #CACE89;
+  --xml-node-value-color: #000000;
+  --xml-attribute-name-color: #AAC89E;
+  --xml-attribute-value-color: #C89191;
+  max-height: 75vh;
+}
