@@ -74,7 +74,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         {
             const long sequenceCeiling = 2 ^ 64;
             validationErrors = new List<MtconnectValidationException>();
-            if (Sequence > 0 && Sequence < sequenceCeiling)
+            if (Sequence < 1 && Sequence > sequenceCeiling)
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
@@ -158,6 +158,27 @@ namespace MtconnectCore.Standard.Documents.Streams
                 }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        /// <summary>
+        /// Attempts to validate a DataItem subType value according the specified type (<typeparamref name="T"/>).
+        /// </summary>
+        /// <typeparam name="T">Reference to the <see cref="Enum"/> containing appropriate subType values.</typeparam>
+        /// <param name="subType">Reference to the subType provided in the Response Document.</param>
+        /// <param name="validationError">Output of the error found in validating the subType.</param>
+        /// <returns>Flag for whether or not the validation passed.</returns>
+        protected bool tryValidateSubType<T>(string subType, out MtconnectValidationException validationError) where T : Enum
+        {
+            validationError = null;
+            if (!EnumHelper.Contains<T>(subType))
+            {
+                validationError = new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"{SourceNode.LocalName} MUST be one of the following subTypes: {EnumHelper.ToListString<T>(", ", "'", "'")}",
+                    SourceNode);
+                return true;
+            }
+            return false;
         }
     }
 }

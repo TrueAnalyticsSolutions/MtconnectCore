@@ -6,5 +6,17 @@
   {
     "outputFile": "wwwroot/css/loader.css",
     "inputFile": "wwwroot/css/loader.scss"
+  },
+  {
+    "outputFile": "Shared/Xml/XmlNode.razor.css",
+    "inputFile": "Shared/Xml/XmlNode.razor.less"
+  },
+  {
+    "outputFile": "Shared/Xml/XmlViewer.css",
+    "inputFile": "Shared/Xml/XmlViewer.less"
+  },
+  {
+    "outputFile": "Shared/Xml/XmlViewer.razor.css",
+    "inputFile": "Shared/Xml/XmlViewer.razor.less"
   }
 ]

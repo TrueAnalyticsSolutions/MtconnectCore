@@ -82,7 +82,11 @@ else if (ResponseDocument != null)
                                 <tr class="@cssClass">
                                     <td>@(exception.Severity.ToString())</td>
                                     <td>@(exception.Message)</td>
-                                    <td>@(!string.IsNullOrEmpty(exception.Source) ? exception.Source : "")</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(exception.Source)) {
+                                            <span @onclick="(e) => OnSourceClick(exception.Source)">@(exception.Source)</span>
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -108,6 +112,18 @@ else if (ResponseDocument != null)
             </div>
         </div>
     </div>
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="mtcXmlHeading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#mtcXml" aria-expanded="true" aria-controls="mtcXml">
+            XML
+            </button>
+        </h5>
+        <div id="mtcXml" class="accordion-collapse collapse" aria-aria-labelledby="mtcXmlHeading" data-bs-parent="#mtcAccordion">
+            <div class="accordion-body">
+                <MtconnectCoreDocumentation.Shared.Xml.XmlViewer Document="Document" XPathSelection="@selectedXpath"></MtconnectCoreDocumentation.Shared.Xml.XmlViewer>
+            </div>
+        </div>
+    </div>
 </div>
 } else
 {
@@ -115,8 +131,10 @@ else if (ResponseDocument != null)
 }
 
 @code {
-        [Parameter]
-        public XmlDocument Document { get; set; }
+    [Parameter]
+    public XmlDocument Document { get; set; }
+
+    private string selectedXpath { get; set; }
 
     private bool Validating { get; set; } = false;
     private IResponseDocument ResponseDocument { get; set; }
@@ -150,5 +168,11 @@ else if (ResponseDocument != null)
             }
         });
         Validating = false;
+    }
+
+    protected async void OnSourceClick(string source)
+    {
+        selectedXpath = source;
+        StateHasChanged();
     }
 }

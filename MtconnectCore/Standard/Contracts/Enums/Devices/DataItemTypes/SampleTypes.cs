@@ -156,6 +156,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1", MtconnectVersions.V_1_0_1)]
         GLOBAL_POSITION,
         /// <summary>
+        /// The amount of water vapor expressed in grams per cubic meter.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
+        HUMIDITY_ABSOLUTE,
+        /// <summary>
         /// The amount of water vapor present expressed as a percent to reach saturation at the same temperature.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]

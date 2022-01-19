@@ -3011,6 +3011,21 @@
             The corporate identity for the maker of the hardware or software.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumidityAbsoluteSubTypes">
+            <summary>
+            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.HUMIDITY_ABSOLUTE"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumidityAbsoluteSubTypes.ACTUAL">
+            <summary>
+            The measured value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumidityAbsoluteSubTypes.COMMANDED">
+            <summary>
+            The commanded value. 
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HumidityRelativeSubTypes">
             <summary>
             <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.HUMIDITY_RELATIVE"/>
@@ -3749,6 +3764,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.FREQUENCY">
             <summary>
             The measurement of the number of occurrences of a  repeating event per unit time
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.HUMIDITY_ABSOLUTE">
+            <summary>
+            The amount of water vapor expressed in grams per cubic meter.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.HUMIDITY_RELATIVE">
@@ -7711,6 +7731,15 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.tryValidateSubType``1(System.String,MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException@)">
+            <summary>
+            Attempts to validate a DataItem subType value according the specified type (<typeparamref name="T"/>).
+            </summary>
+            <typeparam name="T">Reference to the <see cref="T:System.Enum"/> containing appropriate subType values.</typeparam>
+            <param name="subType">Reference to the subType provided in the Response Document.</param>
+            <param name="validationError">Output of the error found in validating the subType.</param>
+            <returns>Flag for whether or not the validation passed.</returns>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Name">
             <summary>

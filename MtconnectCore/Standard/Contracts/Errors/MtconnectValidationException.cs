@@ -63,7 +63,7 @@ namespace MtconnectCore.Standard.Contracts.Errors
             }
 
             // the path to a node is the path to its parent, plus "/node()[n]", where n is its position among its siblings.         
-            return String.Format("{0}/{1}[{2}]", GetXPathToNode(node.ParentNode), node.Name, indexInParent);
+            return String.Format("{0}/*[local-name()='{1}'][{2}]", GetXPathToNode(node.ParentNode), node.Name, indexInParent);
         }
     }
 }

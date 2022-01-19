@@ -1,0 +1,7 @@
+﻿.xml-viewer {
+  --xml-node-color: #CACE89;
+  --xml-node-value-color: #000000;
+  --xml-attribute-name-color: #AAC89E;
+  --xml-attribute-value-color: #C89191;
+  max-height: 75vh;
+}
