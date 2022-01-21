@@ -246,7 +246,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"DataItem type of '{type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'. Consider extending the schema and prefixing the type with the 'x:' namespace.",
+                    $"DataItem type of '{type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'.",
                     SourceNode));
             }
             else if (!EnumHelper.ValidateToVersion<T>(type, MtconnectVersion.GetValueOrDefault()))

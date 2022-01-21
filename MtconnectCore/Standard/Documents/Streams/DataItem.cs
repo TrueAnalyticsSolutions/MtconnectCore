@@ -146,7 +146,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,
-                        $"{categoryType.ToString()} '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid {categoryType.ToString()} type. Consider extending the schema and prefixing the type with the 'x:' namespace.",
+                        $"{categoryType.ToString()} '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid {categoryType.ToString()} type.",
                         SourceNode));
                 }
                 else if (!EnumHelper.ValidateToVersion<T>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<T>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()))
