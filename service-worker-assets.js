@@ -33,7 +33,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-REUrOoq9F5fs+oFpdaalnn6RgnpZ5wtjUARvMeJpJ0Q=",
+      "hash": "sha256-ZP8dYwRhVGLVdyI\/MTfYmDo7QhhImwE9Eug5EyzumL0=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -41,7 +41,7 @@
       "url": "_framework\/Microsoft.AspNetCore.Components.dll"
     },
     {
-      "hash": "sha256-1WoB39XummqjDV0SH+rSGEFyCGSQOoHS0O2hh7oOaWE=",
+      "hash": "sha256-NdchPm5\/3BmrpQXybRlyh7kGpPnxiE40QJCmJy4X3wg=",
       "url": "_framework\/Microsoft.AspNetCore.Components.Web.dll"
     },
     {
@@ -101,7 +101,7 @@
       "url": "_framework\/MtconnectCore.dll"
     },
     {
-      "hash": "sha256-TU4qh3xlSML38k9S60p4dZQR40ebf0H9FNgk\/uV8sgc=",
+      "hash": "sha256-5SD8IDWRicAH2ysXpgMqoKULvgKmyVu9NXLTyVgfNSA=",
       "url": "_framework\/MtconnectCoreDocumentation.dll"
     },
     {
@@ -2325,9 +2325,17 @@
       "url": "manifest.json"
     },
     {
+      "hash": "sha256-\/6vbsapf02J6jafQNP3s1TgsVmubD1d9cSeIsQ3rtPA=",
+      "url": "robots.txt"
+    },
+    {
+      "hash": "sha256-VzAkUngPyE\/J5OEmeTdxybZke2l\/zTreJGwnPFC0q5w=",
+      "url": "sitemap.xml"
+    },
+    {
       "hash": "sha256-\/6jPn5Dnl90JlqDYz5pAt3XVYmBGDDJvN\/7BtzjzKYM=",
       "url": "TAMS-Icon-Blue_x256.png"
     }
   ],
-  "version": "H5l4KuTc"
+  "version": "sqofd4YW"
 };
