@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+	<url>
+		<loc>https://mtconnectcore.dev/</loc>
+		<lastmod>2022-01-21T16:46:08+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://mtconnectcore.dev/getting-started/introduction</loc>
+		<lastmod>2022-01-21T16:46:08+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://mtconnectcore.dev/getting-started/document-types</loc>
+		<lastmod>2022-01-21T16:46:08+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://mtconnectcore.dev/getting-started/mtconnectagentservice</loc>
+		<lastmod>2022-01-21T16:46:08+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://mtconnectcore.dev/tools/validator</loc>
+		<lastmod>2022-01-21T16:46:08+00:00</lastmod>
+	</url>
+	<url>
+		<loc>https://mtconnectcore.dev/tools/audit</loc>
+		<lastmod>2022-01-21T16:46:08+00:00</lastmod>
+	</url>
+</urlset>
