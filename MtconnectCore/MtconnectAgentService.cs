@@ -10,12 +10,12 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using MtconnectCore.Standard;
 using System.Threading;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
+using System.Net.Http;
 
 namespace MtconnectCore
 {

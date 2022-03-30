@@ -111,7 +111,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.8.2")]
         protected bool validateTimeSeriesCount(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
-            string[] timeSeriesValues = Value.Split(' ', System.StringSplitOptions.RemoveEmptyEntries);
+            string[] timeSeriesValues = Value.Split(new[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
             // TODO: Validate when position is 3D
             if (timeSeriesValues.Length > 1 && timeSeriesValues.Length != SampleCount.GetValueOrDefault() && timeSeriesValues.Length != 3){
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"SAMPLE number of readings MUST match the sampleCount.", SourceNode));
@@ -286,7 +286,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                     case Contracts.Enums.Devices.DataItemTypes.SampleTypes.MASS:
                         break;
                     case Contracts.Enums.Devices.DataItemTypes.SampleTypes.ORIENTATION:
-                        if (Value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length != 3 || Value.Split(' ', StringSplitOptions.RemoveEmptyEntries).All(o => decimal.TryParse(o, out _)) == false)
+                        if (Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length != 3 || Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).All(o => decimal.TryParse(o, out _)) == false)
                         {
                             validationErrors.Add(new MtconnectValidationException(
                                 ValidationSeverity.ERROR,
@@ -310,7 +310,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                         if (!string.IsNullOrEmpty(SubType) && !tryValidateSubType<PathPositionSubTypes>(SubType, out MtconnectValidationException pathPositionSubTypeError))
                         {
                             validationErrors.Add(pathPositionSubTypeError);
-                        } else if (!Value.Split(' ', StringSplitOptions.RemoveEmptyEntries).All(o => decimal.TryParse(o, out _)))
+                        } else if (!Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).All(o => decimal.TryParse(o, out _)))
                         {
                             validationErrors.Add(new MtconnectValidationException(
                                 ValidationSeverity.ERROR,

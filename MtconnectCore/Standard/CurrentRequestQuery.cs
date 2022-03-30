@@ -38,7 +38,7 @@ namespace MtconnectCore.Standard
                 return string.Empty;
             }
 
-            return string.Join('&', parameters.ToArray());
+            return string.Join("&", parameters.ToArray());
         }
 
         /// <inheritdoc/>

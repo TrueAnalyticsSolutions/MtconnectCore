@@ -28,8 +28,8 @@ namespace MtconnectCore.Standard.Contracts
             if (value.Contains("/")) value = value.Replace("/", "_PER_");
             if (value.Contains("^2")) value = value.Replace("^2", "_SQUARED_");
 
-            if (value.EndsWith('_')) value = value.Substring(0, value.Length - 1);
-            if (value.StartsWith('_')) value = value.Substring(1, value.Length - 1);
+            if (value.EndsWith("_")) value = value.Substring(0, value.Length - 1);
+            if (value.StartsWith("_")) value = value.Substring(1, value.Length - 1);
 
             return value.ToUpper();
         }
@@ -47,7 +47,8 @@ namespace MtconnectCore.Standard.Contracts
 
             string[] enumValues = Enum.GetNames(enumType);
             string foundEnum = enumValues.FirstOrDefault(o => o.Equals(value, StringComparison.OrdinalIgnoreCase));
-            return Enum.TryParse(enumType, foundEnum, out enumValue);
+            enumValue = Enum.Parse(enumType, foundEnum);
+            return enumValue != null; // Enum.TryParse(enumType, foundEnum, out enumValue);
         }
 
         internal static bool Contains(Type enumType, string value) => Contains(enumType, value, out _);
@@ -82,7 +83,7 @@ namespace MtconnectCore.Standard.Contracts
             string[] parts = input.Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length > 0)
             {
-                return string.Join("", parts.Select(o => WordToPascalCase(o)).ToArray());
+                return string.Join(string.Empty, parts.Select(o => WordToPascalCase(o)).ToArray());
             }
             return string.Empty;
         }
@@ -93,7 +94,7 @@ namespace MtconnectCore.Standard.Contracts
                 .OfType<System.Text.RegularExpressions.Match>()
                 .Select(m => m.Value)
                 .ToArray();
-            return string.Join(delimiter, words);
+            return string.Join(delimiter.ToString(), words);
         }
 
         internal static string FromPascalCase(this string input, char delimiter = '_')
@@ -102,7 +103,7 @@ namespace MtconnectCore.Standard.Contracts
                 .OfType<System.Text.RegularExpressions.Match>()
                 .Select(m => m.Value)
                 .ToArray();
-            return string.Join(delimiter, words);
+            return string.Join(delimiter.ToString(), words);
         }
 
         internal static string WordToPascalCase(string input) => input.Length > 1 ? input.Substring(0, 1).ToUpper() + input.Substring(1).ToLower() : input.ToUpper();
