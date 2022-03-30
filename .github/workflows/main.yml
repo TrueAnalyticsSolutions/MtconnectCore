@@ -16,6 +16,9 @@ jobs:
       uses: actions/setup-dotnet@main
       with:
         dotnet-version: '3.1'
+    - name: Setup MSBuild Path
+      uses: warrenbuckley/Setup-MSBuild@v1
+      
     - name: Build with dotnet
       run: dotnet build MtconnectCore --configuration Release
       
