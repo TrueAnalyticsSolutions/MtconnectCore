@@ -65,7 +65,7 @@ namespace MtconnectCore.Standard.Documents.Assets
             string rawIndices = SourceNode.Attributes[attributeName]?.Value;// SourceNode.TryGetAttribute(CuttingItemAttributes.INDICES, null, nsmgr.LookupNamespace(Constants.DEFAULT_XML_NAMESPACE));
             if (!string.IsNullOrEmpty(rawIndices))
             {
-                string[] strIndices = rawIndices.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                string[] strIndices = rawIndices.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string strIndex in strIndices)
                 {
                     if (strIndex.Contains('-'))
