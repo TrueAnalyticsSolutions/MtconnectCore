@@ -254,7 +254,7 @@ namespace MtconnectCore.Standard.Contracts
                     {
                         // Verify correct signature
                         ParameterInfo outParam = method.GetParameters().FirstOrDefault(o => o.IsOut);
-                        Type? genericTypeDefinition = outParam.ParameterType.GetElementType();
+                        Type genericTypeDefinition = outParam.ParameterType.GetElementType();
                         if (method.ReturnType != typeof(bool))
                         {
                             throw new InvalidOperationException("Cannot execute MTConnect validation method that does not have a return type of boolean.");
@@ -302,7 +302,7 @@ namespace MtconnectCore.Standard.Contracts
                 ).ToArray();
             foreach (var property in mtconnectNodeProperties)
             {
-                object? propertyValue = property.GetValue(this);
+                object propertyValue = property.GetValue(this);
                 if (propertyValue != null)
                 {
                     if (isCollectionOfMtconnectNode(property))

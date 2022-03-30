@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>netcoreapp3.1;netstandard2.0;net45</TargetFrameworks>
     <ApplicationIcon>tams_icon_black_x32.ico</ApplicationIcon>
     <Copyright>True Analytics Manufacturing Solutions, LLC</Copyright>
     <PackageIcon>TAMS-Icon-Blue_x256.png</PackageIcon>
@@ -23,6 +23,10 @@
     <Version>1.6.0.1</Version>
   </PropertyGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)'=='net45'">
+		<PackageReference Include="System.Net.Http" Version="4.0.0" />
+	</ItemGroup>
+	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Users\LightWorks\Source\Repos\MtconnectCore\MtconnectCore\MtconnectCore.xml</DocumentationFile>
   </PropertyGroup>

@@ -37,7 +37,7 @@ namespace MtconnectCore.Standard.Contracts.Attributes
         public string GetName(MtconnectNodeNameProcessors processor = MtconnectNodeNameProcessors.None)
         {
             string name = Name.ToString();
-            if (name.Contains('/')) return name;
+            if (name.Contains("/")) return name;
             switch (processor)
             {
                 case MtconnectNodeNameProcessors.CamelCase:

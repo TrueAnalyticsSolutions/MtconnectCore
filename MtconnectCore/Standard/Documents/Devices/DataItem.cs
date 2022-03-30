@@ -220,7 +220,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 if (Type.StartsWith("x:"))
                 {
-                    if (validateNodeInStandard<T>(categoryType, Type.Replace("x:", "", StringComparison.OrdinalIgnoreCase), out ICollection<MtconnectValidationException> inStandardErrors))
+                    if (validateNodeInStandard<T>(categoryType, Type.Replace("x:", string.Empty), out ICollection<MtconnectValidationException> inStandardErrors))
                     {
                         validationErrors.Add(new MtconnectValidationException(
                             ValidationSeverity.WARNING,
