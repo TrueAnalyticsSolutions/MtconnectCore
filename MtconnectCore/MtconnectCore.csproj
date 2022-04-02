@@ -20,7 +20,7 @@
     <PackageReleaseNotes>Included builds to .NET Framework 4.5 and .NET Standard 2.0</PackageReleaseNotes>
     <AssemblyVersion>1.0.1.2</AssemblyVersion>
     <FileVersion>1.0.1.1</FileVersion>
-    <Version>1.6.0.2</Version>
+    <Version>1.6.0.3</Version>
   </PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net45'">

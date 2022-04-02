@@ -36,6 +36,7 @@ namespace MtconnectCore.Standard.Contracts
 
         internal static bool Contains(Type enumType, string value, out object enumValue)
         {
+            enumValue = null;
             if (value.ToUpper().Equals(value))
             {
                 value = Enumify(value);
@@ -47,8 +48,9 @@ namespace MtconnectCore.Standard.Contracts
 
             string[] enumValues = Enum.GetNames(enumType);
             string foundEnum = enumValues.FirstOrDefault(o => o.Equals(value, StringComparison.OrdinalIgnoreCase));
+            if (foundEnum == null) return false;
             enumValue = Enum.Parse(enumType, foundEnum);
-            return enumValue != null; // Enum.TryParse(enumType, foundEnum, out enumValue);
+            return enumValue != null;
         }
 
         internal static bool Contains(Type enumType, string value) => Contains(enumType, value, out _);
