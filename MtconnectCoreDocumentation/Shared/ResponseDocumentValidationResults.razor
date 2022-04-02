@@ -125,6 +125,8 @@ else if (ResponseDocument != null)
         </div>
     </div>
 </div>
+} else if (!string.IsNullOrEmpty(ExampleDocument)) {
+    <p class="alert alert-warn">@ExampleDocument</p>
 } else
 {
     <p class="alert alert-info">Not Loaded</p>
@@ -146,25 +148,28 @@ else if (ResponseDocument != null)
         Validating = true;
         ResponseDocument = null;
         Exceptions = null;
-        ExampleDocument = "No Content";
+        ExampleDocument = string.Empty;
         await Task.Run(() =>
         {
             try
             {
-                if (MtconnectCore.MtconnectAgentService.TryParse(Document, out MtconnectCore.Standard.Documents.IResponseDocument mtcDoc))
+                if (Document != null)
                 {
-                    ResponseDocument = mtcDoc;
-                    ExampleDocument = Newtonsoft.Json.JsonConvert.SerializeObject(mtcDoc, Newtonsoft.Json.Formatting.Indented);
-                    ResponseDocument.TryValidate(out Exceptions);
-                }
-                else
-                {
-                    ExampleDocument = "Couldn't parse document into MTConnect Response Document.";
+                    if (MtconnectCore.MtconnectAgentService.TryParse(Document, out MtconnectCore.Standard.Documents.IResponseDocument mtcDoc))
+                    {
+                        ResponseDocument = mtcDoc;
+                        ExampleDocument = Newtonsoft.Json.JsonConvert.SerializeObject(mtcDoc, Newtonsoft.Json.Formatting.Indented);
+                        ResponseDocument.TryValidate(out Exceptions);
+                    }
+                    else
+                    {
+                        ExampleDocument = "Couldn't parse document into MTConnect Response Document.";
+                    }
                 }
             }
             catch (Exception ex)
             {
-                ExampleDocument = ex.Message;
+                ExampleDocument = ex.Message + "\r\n" + ex.StackTrace;
             }
         });
         Validating = false;

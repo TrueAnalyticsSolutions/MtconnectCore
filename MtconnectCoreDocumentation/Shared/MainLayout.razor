@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
+@inject HttpClient Http
+@using MtconnectCoreDocumentation.Models
 
 <div class="page">
     <div class="sidebar">
@@ -9,5 +12,32 @@
         <div class="content px-4">
             @Body
         </div>
+        <MtconnectCoreDocumentation.Shared.Toast.UpdatePWA UpdateAvailable="@PWAUpdateAvailable" ActionCallback="@HandleUpdateCallback" />
     </div>
 </div>
+
+@code {
+    bool PWAUpdateAvailable { get; set; }
+    
+    private UpdateAvailableEventInterop UpdateAvailableInterop { get; set; }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            UpdateAvailableInterop = new(JSRuntime);
+            await UpdateAvailableInterop.SetupCallback(async () => await HandleUpdateAvailable());
+        }
+    }
+
+    private async Task HandleUpdateAvailable() {
+        Console.WriteLine("PWA Update Available");
+        PWAUpdateAvailable = true;
+        StateHasChanged();
+    }
+
+    void HandleUpdateCallback(bool updated) {
+        PWAUpdateAvailable = !updated;
+        StateHasChanged();
+    }
+}
