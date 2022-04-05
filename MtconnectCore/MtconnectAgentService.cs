@@ -16,6 +16,7 @@ using MtconnectCore.Standard;
 using System.Threading;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
 using System.Net.Http;
+using System.Net.Sockets;
 
 namespace MtconnectCore
 {
@@ -118,8 +119,11 @@ namespace MtconnectCore
 
         internal async Task RequestInterval(string request, int interval, MtconnectIntervalStreamCallback callback, CancellationToken cancelToken)
         {
-            HttpResponseMessage req = await Client.GetAsync(request);
-            using (Stream responseStream = await req.Content.ReadAsStreamAsync())
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, request);
+
+            HttpResponseMessage httpResponse = await Client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead);
+
+            using (Stream responseStream = await httpResponse.Content.ReadAsStreamAsync())
             {
                 // Set timeout to 150% of expected stream interval
                 try
@@ -184,6 +188,9 @@ namespace MtconnectCore
                             if (TryParse(xDoc, out IResponseDocument mtcDoc))
                             {
                                 callback(mtcDoc);
+                            } else
+                            {
+                                throw new InvalidCastException("Response was not valid MTConnect Response Document.");
                             }
                         }
                         catch (Exception ex)
