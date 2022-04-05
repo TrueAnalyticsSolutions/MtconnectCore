@@ -6245,7 +6245,6 @@
             <param name="xNode">Reference to a <see cref="T:System.Xml.XmlNode"/> as part of a larger MTConnect Response Document.</param>
             <param name="nsmgr">Reference to the </param>
             <param name="defaultNamespace"></param>
-            <param name="version"></param>
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc/>
