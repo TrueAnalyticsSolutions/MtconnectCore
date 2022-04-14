@@ -219,7 +219,7 @@ namespace MtconnectCore
         /// </summary>
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.1.1 of MTConnect specification.</param>
         /// <returns></returns>
-        public async Task<MtcDevices.DevicesDocument> Probe(string equipmentId = "")
+        public async Task<IResponseDocument> Probe(string equipmentId = "")
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId)) {
@@ -236,7 +236,7 @@ namespace MtconnectCore
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.2.1 of MTConnect specification.</param>
         /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.2.2 of MTConnect specification.</param>
         /// <returns></returns>
-        public async Task<MtcStreams.StreamsDocument> Current(string equipmentId = "", CurrentRequestQuery query = null)
+        public async Task<IResponseDocument> Current(string equipmentId = "", CurrentRequestQuery query = null)
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId)) {
@@ -295,7 +295,7 @@ namespace MtconnectCore
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.3.1 of MTConnect specification.</param>
         /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.3.2 of MTConnect specification.</param>
         /// <returns></returns>
-        public async Task<MtcStreams.StreamsDocument> Sample(string equipmentId = "", SampleRequestQuery query = null)
+        public async Task<IResponseDocument> Sample(string equipmentId = "", SampleRequestQuery query = null)
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId))
@@ -317,7 +317,7 @@ namespace MtconnectCore
                 throw queryException;
             }
 
-            return await Request<MtcStreams.StreamsDocument>(request);
+            return await Request<IResponseDocument>(request);
         }
 
         /// <summary>
