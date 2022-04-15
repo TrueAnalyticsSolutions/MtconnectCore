@@ -18,7 +18,7 @@
     <RepositoryUrl>https://github.com/TrueAnalyticsSolutions/MtconnectCore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Included builds to .NET Framework 4.5 and .NET Standard 2.0</PackageReleaseNotes>
-    <AssemblyVersion>1.6.0.6</AssemblyVersion>
+    <AssemblyVersion>1.6.0.7</AssemblyVersion>
     <FileVersion>1.0.1.1</FileVersion>
     <Version>1.6.0.7</Version>
   </PropertyGroup>
