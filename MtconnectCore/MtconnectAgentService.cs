@@ -89,7 +89,6 @@ namespace MtconnectCore
 
         internal async Task<T> Request<T>(string request) where T : IResponseDocument
         {
-            Client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
             using (HttpResponseMessage res = await Client.GetAsync(request))
             {
                 if (!res.EnsureSuccessStatusCode().IsSuccessStatusCode)
@@ -118,7 +117,9 @@ namespace MtconnectCore
 
         internal async Task RequestInterval(string request, MtconnectIntervalStreamCallback callback, CancellationToken cancelToken)
         {
-            using(var httpRequest = new HttpRequestMessage(HttpMethod.Get, request))
+            Client.CancelPendingRequests();
+            Client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            using (var httpRequest = new HttpRequestMessage(HttpMethod.Get, request))
             using (HttpResponseMessage httpResponse = await Client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead))
             using (Stream responseStream = await httpResponse.Content.ReadAsStreamAsync())
             {
