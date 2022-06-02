@@ -1,4 +1,6 @@
-﻿namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
+﻿using MtconnectCore.Standard.Contracts.Attributes;
+
+namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
 {
     /// <summary>
     /// Attributes of the Specification element
@@ -32,6 +34,16 @@
         /// <summary>
         /// References the CoordinateSystem for geometric Specification elements.
         /// </summary>
-        COORDINATE_SYSTEM_ID_REF
+        COORDINATE_SYSTEM_ID_REF,
+        /// <summary>
+        /// The unique identifier for this Specification. The id attribute MUST be unique within the MTConnectDevices document.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 9.3.1.1")]
+        ID,
+        /// <summary>
+        /// A reference to the creator of the Specification.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 9.3.1.1")]
+        ORIGINATOR
     }
 }

@@ -3,6 +3,8 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System;
 using System.Collections.Generic;

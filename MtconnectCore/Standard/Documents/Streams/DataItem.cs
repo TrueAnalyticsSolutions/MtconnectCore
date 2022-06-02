@@ -10,6 +10,7 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
+
     public abstract class DataItem : MtconnectNode, IDataItem
     {
         /// <summary>

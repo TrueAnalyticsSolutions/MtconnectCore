@@ -16,6 +16,10 @@
         /// <remarks>See Part 2 Section 9.4.1 of the MTConnect specification</remarks>
         COORDINATE_SYSTEM,
         /// <summary>
+        /// Motion defines the movement of the Component relative to a coordinate system.
+        /// </summary>
+        MOTION,
+        /// <summary>
         /// Relationships is an XML container that organizes information defining the associ ation between pieces of equipment that function independently but together perform a manufacturing operation. Relationships may also define the association between components within a piece of equipment.
         /// </summary>
         /// <remarks>See Part 2 Section 9.2 of the MTConnect specification</remarks>
@@ -35,6 +39,10 @@
         /// </summary>
         /// <remarks>See Part 2 Section 9.1.3 of the MTConnect specification</remarks>
         SENSOR_CONFIGURATION,
+        /// <summary>
+        /// SolidModel references a file with the three-dimensional geometry of the Component or Composition.
+        /// </summary>
+        SOLID_MODEL,
         /// <summary>
         /// Specifications is an XML container in the Configuration of a Component that contains one or more Specification elements describing the design characteristics for a piece of equipment.
         /// </summary>

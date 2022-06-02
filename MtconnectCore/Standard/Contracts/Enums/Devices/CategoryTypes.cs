@@ -1,4 +1,5 @@
-﻿using MtconnectCore.Standard.Documents.Devices;
+﻿using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Documents.Devices;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices
 {

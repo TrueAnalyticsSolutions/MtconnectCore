@@ -87,6 +87,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         ENCODER,
         /// <summary>
+        /// A POT for a tool that is no longer useable for removal from a ToolMagazine or Turret.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 6")]
+        EXPIRED_POT,
+        /// <summary>
         /// A mechanism for emitting a type of radiation
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
@@ -137,6 +142,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         OIL,
         /// <summary>
+        /// A tool storage location associated with a ToolMagazine or AutomaticToolChanger.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 6")]
+        POT,
+        /// <summary>
         /// A unit that provides power to electric mechanisms
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
@@ -157,6 +167,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         REEL,
         /// <summary>
+        /// A POT for a tool to be removed from a ToolMagazine or Turret to a location outside of the piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 7")]
+        REMOVAL_POT,
+        /// <summary>
+        /// A POT for a tool removed from Spindle or Turret and awaiting for return to a ToolMagazine.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 7")]
+        RETURN_POT,
+        /// <summary>
         /// A mechanism that provides a signal or measured value.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
@@ -166,6 +186,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6")]
         SPREADER,
+        /// <summary>
+        /// A POT for a tool awaiting transfer to a ToolMagazine or Turret from outside of the piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 6")]
+        STAGING_POT,
+        /// <summary>
+        /// A storage or mounting location for a tool associated with a Turret, GangToolBar, or ToolRack.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 6")]
+        STATION,
         /// <summary>
         /// A component consisting of one or more cells, in which chemical energy  is converted into electricity and used as a source of power.
         /// </summary>
@@ -191,6 +221,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 6")]
         TENSIONER,
+        /// <summary>
+        /// A mechanism for physically moving a tool from one location to another.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 6")]
+        TRANSFER_ARM,
+        /// <summary>
+        /// A POT for a tool awaiting transfer from a ToolMagazine to Spindle or Turret.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 6")]
+        TRANSFER_POT,
         /// <summary>
         /// A mechanism that transforms electric energy from a source to a  secondary circuit.
         /// </summary>

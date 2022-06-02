@@ -15,9 +15,24 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.11")]
         ACTUATOR_STATE,
+        /// <summary>
+        /// The originator’s software version of the Adapter.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        ADAPTER_SOFTWARE_VERSION,
+        /// <summary>
+        /// The URI of the Adapter.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        ADAPTER_URI,
         [Obsolete("Deprecated in Rel. 1.1. Replaced with CONDITION.")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2", MtconnectVersions.V_1_0_1)]
         ALARM,
+        /// <summary>
+        /// A set of limits used to trigger warning or alarm indicators.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        ALARM_LIMIT,
         /// <summary>
         /// The application on a component.
         /// </summary>
@@ -81,6 +96,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2")]
         COMPOSITION_STATE,
         /// <summary>
+        /// The status of the connection between an Adapter and an Agent.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        CONNECTION_STATUS,
+        /// <summary>
+        /// A set of limits used to indicate whether a process variable is stable and in control.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        CONTROL_LIMIT,
+        /// <summary>
         /// The current mode of the Controller. AUTOMATIC, MANUAL,  MANUAL_DATA_INPUT, or SEMI_AUTOMATIC.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
@@ -100,6 +125,21 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
         DATE_CODE,
+        /// <summary>
+        /// DEVICE_ADDED is an Event that provides the UUID of a new device added to an MTConnect Agent.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        DEVICE_ADDED,
+        /// <summary>
+        /// DEVICE_CHANGED is an Event that provides the UUID of the device whose Metadata has changed.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        DEVICE_CHANGED,
+        /// <summary>
+        /// DEVICE_REMOVED is an Event that provides the UUID of a device removed from an MTConnect Agent.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        DEVICE_REMOVED,
         /// <summary>
         /// The identifier of another piece of equipment that is temporarily associated with a component of this piece of equipment to perform a particular function.
         /// </summary>
@@ -197,6 +237,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.2")]
         MESSAGE,
         /// <summary>
+        /// The reference version of the MTConnect Standard supported by the Adapter.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        MTCONNECT_VERSION,
+        /// <summary>
         /// Network details of a component.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
@@ -227,15 +272,36 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
         PART_DETECT,
         /// <summary>
+        /// Identifier given to a collection of individual parts. If no subType is specified, UUID is default.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        PART_GROUP_ID,
+        /// <summary>
         /// An identifier of the current part in the device 
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.2")]
         PART_ID,
         /// <summary>
+        /// Identifier given to link the individual occurrence to a class of parts, typically distinguished by a particular part design.If no subType is specified, UUID is default.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        PART_KIND_ID,
+        /// <summary>
         /// An identifier of a part or product moving through the manufacturing  process.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2")]
+        [Obsolete("Deprecated in Version 1.7 PART_NUMBER is now a subType of PART_KIND_ID.")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2", MtconnectVersions.V_1_6_1)]
         PART_NUMBER,
+        /// <summary>
+        /// State or condition of a part.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        PART_STATUS,
+        /// <summary>
+        /// Identifier given to a distinguishable, individual part. If no subType is specified, UUID is default.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        PART_UNIQUE_ID,
         /// <summary>
         /// The value of a signal or calculation issued to adjust the  feedrate for the axes associated with a Path component - may represent a single axis or the coordinated movement of multiple axes.
         /// </summary>
@@ -254,6 +320,21 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [Obsolete("Deprecated in Rel. 1.1")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2", MtconnectVersions.V_1_0_1)]
         POWER_STATUS,
+        /// <summary>
+        /// Identifier given to link the individual occurrence to a group of related occurrences, such as a process step in a process plan.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        PROCESS_AGGREGATE_ID,
+        /// <summary>
+        /// Identifier given to link the individual occurrence to a class of processes or process definition.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        PROCESS_KIND_ID,
+        /// <summary>
+        /// An identifier of a process being executed by the device.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        PROCESS_OCCURRENCE_ID,
         /// <summary>
         /// The time and date associated with an activity or event.
         /// </summary>
@@ -319,6 +400,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.2")]
         SERIAL_NUMBER,
+        /// <summary>
+        /// A set of limits defining a range of values designating acceptable performance for a variable.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
+        SPECIFICATION_LIMIT,
         /// <summary>
         /// An indication of the status of the spindle for a piece of equipment when  power has been removed and it is free to rotate.
         /// </summary>

@@ -17,6 +17,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 5.3.11", MtconnectVersions.V_1_3_1)]
         ACTUATOR,
         /// <summary>
+        /// Adapters is a Component that organizes Adapter Components representing the connectivity state of the MTConnect Agent.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 5")]
+        ADAPTERS,
+        /// <summary>
         /// An XML container used to organize information for Lower Leve elements representing functional sub-systems that provide supplementary or extended capabilities for a piece of equipment, but they are not required for the basic operation of the equipment.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 5")]
@@ -42,6 +47,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 5.9")]
         INTERFACES,
+        /// <summary>
+        /// PartOccurrence organizes information about a specific part as it exists at a specific place and time, such as a specific instance of a bracket at a specific timestamp.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 5.9.4.1")]
+        PART_OCCURANCE,
+        /// <summary>
+        /// ProcessOccurrence organizes information about the execution of a specific process that takes place at a specific place and time, such as a specific instance of part-milling occurring at a specific timestamp.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 5.9.4.2")]
+        PROCESS_OCCURANCE,
         [Obsolete("Deprecated in Rel. 1.1")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 5.3.5", MtconnectVersions.V_1_0_1)]
         POWER,
@@ -81,6 +96,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         [Obsolete("Deprecated in version 1.4.0. Due to its uniqueness, has been redefined as a piece of equipment with the ability to be represented as a Lower Level component of a parent Component element.")]
         [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 5.8", MtconnectVersions.V_1_3_1)]
         STOCK,
+        /// <summary>
+        /// Structure is a Component that organizes the parts comprising the rigid bodies of the piece of equipment.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 5")]
+        STRUCTURE,
         /// <summary>
         /// The Systems component is a place holder for all the system types.
         /// </summary>

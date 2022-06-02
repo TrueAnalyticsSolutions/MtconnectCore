@@ -17,6 +17,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         /// Personnel is an XML container that provides information about an individual or individuals who either control, support, or otherwise interface with a piece of equipment.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 5.5.2")]
-        PERSONNEL
+        PERSONNEL,
+        /// <summary>
+        /// Stock is an XML container that represents the information for the material that is used in a manufacturing process and to which work is applied in a machine or piece of equipment to produce parts. 
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 5.5.1.1")]
+        STOCK
     }
 }

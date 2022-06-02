@@ -9,6 +9,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
     [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
     public enum NativeUnitsTypes {
         /// <summary>
+        /// Pressure in Bar.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 7.2.2.6")]
+        BAR,
+        /// <summary>
         /// A measure of Viscosity
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.9")]
@@ -124,6 +129,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.6")]
         MINUTE,
         /// <summary>
+        /// Pascal per minute.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 7.2.2.6")]
+        PASCAL_PER_MINUTE,
+        /// <summary>
         /// US pounds
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
@@ -158,6 +168,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.1.6")]
         REVOLUTION_PER_SECOND,
+        /// <summary>
+        /// Pressure in Torr.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 7.2.2.6")]
+        TORR,
         /// <summary>
         /// Unsupported units
         /// </summary>
