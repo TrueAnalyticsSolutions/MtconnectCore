@@ -20,6 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\MtconnectCore\MtconnectCore.xml" Link="wwwroot\MtconnectCore.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\images\GitHub-Mark\.DS_Store" />
     <None Include="wwwroot\images\GitHub-Mark\Vector\GitHub-Mark.ai" />

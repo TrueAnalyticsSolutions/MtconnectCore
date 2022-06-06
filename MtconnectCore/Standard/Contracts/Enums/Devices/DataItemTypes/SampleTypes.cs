@@ -53,6 +53,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         ANGLE,
         /// <summary>
+        /// Negative rate of change of angular velocity.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.1")]
+        ANGULAR_DECELERATION,
+        /// <summary>
+        /// The average rate of change of values for assets in the MTConnect streams. The average is computed over a rolling window defined by the implementation.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.1")]
+        ASSET_UPDATE_RATE,
+        /// <summary>
         /// The feedrate of a linear axis. See <c>subType</c>s: <seealso cref="AxisFeedrateSubTypes"/>
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
@@ -87,6 +97,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
         CUTTING_SPEED,
+        /// <summary>
+        /// Negative rate of change of velocity.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.1")]
+        DECELERATION,
         /// <summary>
         /// The volumetric mass of a material per unit volume of that material.
         /// </summary>
@@ -194,6 +209,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
         MASS,
         /// <summary>
+        /// The average rate of change of values for data items in the MTConnect streams. The average is computed over a rolling window defined by the implementation.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.1")]
+        OBSERVATION_UPDATE_RATE,
+        /// <summary>
         /// A measured or calculated orientation of a plane or vector relative to a cartesian coordinate system.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
@@ -233,6 +253,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
         PRESSURE,
+        /// <summary>
+        /// The force per unit area measured relative to a vacuum.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.1")]
+        PRESSURE_ABSOLUTE,
+        /// <summary>
+        /// The change of pressure per unit time.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.1")]
+        PRESSURIZATION_RATE,
         /// <summary>
         /// The measurement of the amount of time  piece of equipment has performed different types of activities associated with the process being performed at that piece of equipment.
         /// </summary>

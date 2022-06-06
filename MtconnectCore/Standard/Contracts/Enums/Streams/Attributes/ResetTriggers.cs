@@ -1,4 +1,6 @@
-﻿namespace MtconnectCore.Standard.Contracts.Enums.Streams.Attributes
+﻿using MtconnectCore.Standard.Contracts.Attributes;
+
+namespace MtconnectCore.Standard.Contracts.Enums.Streams.Attributes
 {
     public enum ResetTriggers
     {

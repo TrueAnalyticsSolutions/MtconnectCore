@@ -21,6 +21,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.8")]
         VALUE,
         /// <summary>
+        /// A Table is a two dimensional set of key-value pairs where the Entry represents a row, and the value is a set of key-value pair Cell elements. The Table follows the same behavior as the Data Set for change tracking, clearing, and history. When an Entry changes, all Cell elements update as a single unit following the behavior of a Data Set.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 7.2.2.12")]
+        TABLE,
+        /// <summary>
         /// A series of sampled data. The data is collected for a specified number of samples and each sample is collected with a fixed period
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.8")]

@@ -25,6 +25,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.5")]
         COUNT,
         /// <summary>
+        /// Count per second.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 7.2.2.5")]
+        COUNT_PER_SECOND,
+        /// <summary>
         /// Geometric volume in millimeters
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 7.2.2.5")]
@@ -160,6 +165,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.1.5")]
         PASCAL,
         /// <summary>
+        /// Pascal per second.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 7.2.2.5")]
+        PASCAL_PER_SECOND,
+        /// <summary>
         /// Measurement of Viscosity
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.6")]
@@ -199,6 +209,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.6")]
         SIEMENS_PER_METER,
+        /// <summary>
+        /// A 3D Unit Vector. Space delimited list of three floating point numbers.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 7.2.2.5")]
+        UNIT_VECTOR_3D,
         /// <summary>
         /// A status that conforms to the data item’s  controlled vocabulary. Used in events to indicate states or status.
         /// </summary>
