@@ -47,20 +47,20 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc/>
         public Channel(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            base.TryValidate(out validationErrors);
-            const string documentationAttributes = "See Part 2 Section 9.1.3.1.2 of the MTConnect standard.";
-
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.6.7.2")]
+        private bool validateNumber(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Number))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Channel MUST include a 'number' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Channel MUST include a 'number' attribute."));
+            } else if (Number.Length > 255) {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Channel 'number' must not exceed 255 characters."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

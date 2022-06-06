@@ -47,5 +47,19 @@ namespace MtconnectCoreExample.Views
             var view = new CurrentIntervalRequestView();
             view.Run();
         }
+
+        [ViewOption("Test MTConnect Raw File validation")]
+        public void TestRawFile()
+        {
+            var view = new TestFileView();
+            view.Run();
+        }
+
+        [ViewOption("Audit MTConnect Agent")]
+        public void AuditAgent()
+        {
+            var view = new AuditView();
+            view.Run();
+        }
     }
 }

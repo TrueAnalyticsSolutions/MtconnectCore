@@ -10,6 +10,7 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
+
     public abstract class DataItem : MtconnectNode, IDataItem
     {
         /// <summary>
@@ -42,35 +43,143 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <inheritdoc/>
         public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 1 Section 5 of the MTConnect standard.";
-
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.1 and 3.8")]
+        protected bool validateDataItemId(out ICollection<MtconnectValidationException> validationErrors) {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(DataItemId))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Data entity MUST include a 'dataItemId' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a 'dataItemId' attribute.",
+                        SourceNode));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.1 and 3.8")]
+        protected bool validateTimestamp(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (Timestamp == null)
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Data entity MUST include a 'timestamp' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Data entity MUST include a 'timestamp' attribute.",
+                        SourceNode));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-            if (Sequence == default(int))
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.1 and 3.8")]
+        protected bool validateSequence(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            const long sequenceCeiling = 2 ^ 64;
+            validationErrors = new List<MtconnectValidationException>();
+            if (Sequence < 1 && Sequence > sequenceCeiling)
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Data entity MUST include a 'sequence' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Data entity MUST include a 'sequence' attribute.",
+                    SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        protected abstract bool validateValue(out ICollection<MtconnectValidationException> validationErrors);
+
+        protected abstract bool validateNode(out ICollection<MtconnectValidationException> validationErrors);
+
+        protected bool validateNode<T>(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes categoryType, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
+        {
+            validationErrors = new List<MtconnectValidationException>();
+
+            ICollection<MtconnectValidationException> extensionErrors;
+            validateNodeExtension<T>(categoryType, out extensionErrors);
+
+            if (extensionErrors.Any())
+            {
+                validationErrors = extensionErrors;
+                return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
             }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            ICollection<MtconnectValidationException> standardErrors;
+            validateNodeInStandard<T>(categoryType, out standardErrors);
+
+            if (standardErrors.Any())
+            {
+                validationErrors = standardErrors;
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        protected bool validateNodeExtension<T>(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes categoryType, out ICollection<MtconnectValidationException> validationErrors) where T: Enum
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(this.SourceNode.Name))
+            {
+                if (SourceNode.Name.StartsWith("x:"))
+                {
+                    if (validateNodeInStandard<T>(categoryType, out ICollection<MtconnectValidationException> inStandardErrors))
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.WARNING,
+                            $"{categoryType.ToString()} type of '{SourceNode.Name}' is an unnecessary extension of the MTConnect Standard as it already exists in version '{MtconnectVersion}'.",
+                            SourceNode));
+                    } else
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.MESSAGE,
+                            $"{categoryType.ToString()} type of '{SourceNode.Name}' is an extension of the MTConnect Standard in this implementation.",
+                            SourceNode));
+                    }
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        protected bool validateNodeInStandard<T>(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes categoryType, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(this.SourceNode.LocalName))
+            {
+                if (!EnumHelper.Contains<T>(this.SourceNode.LocalName))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"{categoryType.ToString()} '{this.SourceNode.LocalName}' is not defined in the MTConnect Standard in version '{MtconnectVersion}' as a valid {categoryType.ToString()} type.",
+                        SourceNode));
+                }
+                else if (!EnumHelper.ValidateToVersion<T>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<T>(this.SourceNode.LocalName, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"{categoryType.ToString()} '{this.SourceNode.LocalName}' is not valid in version '{MtconnectVersion}' of the MTConnect Standard as a valid {categoryType.ToString()} type.",
+                        SourceNode));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        /// <summary>
+        /// Attempts to validate a DataItem subType value according the specified type (<typeparamref name="T"/>).
+        /// </summary>
+        /// <typeparam name="T">Reference to the <see cref="Enum"/> containing appropriate subType values.</typeparam>
+        /// <param name="subType">Reference to the subType provided in the Response Document.</param>
+        /// <param name="validationError">Output of the error found in validating the subType.</param>
+        /// <returns>Flag for whether or not the validation passed.</returns>
+        protected bool tryValidateSubType<T>(string subType, out MtconnectValidationException validationError) where T : Enum
+        {
+            validationError = null;
+            if (!EnumHelper.Contains<T>(subType))
+            {
+                validationError = new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"{SourceNode.LocalName} MUST be one of the following subTypes: {EnumHelper.ToListString<T>(", ", "'", "'")}",
+                    SourceNode);
+                return true;
+            }
+            return false;
         }
     }
 }

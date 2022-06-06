@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -42,5 +43,13 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         private List<WorkOffsetTableEntry> _entries = new List<WorkOffsetTableEntry>();
         public ICollection<WorkOffsetTableEntry> Entries => _entries;
+
+        protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            return true;
+        }
+
+        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new System.NotImplementedException();
     }
 }

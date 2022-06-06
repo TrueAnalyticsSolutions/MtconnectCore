@@ -52,7 +52,8 @@ namespace MtconnectCore.Standard.Documents.Assets
         /// <inheritdoc />
         public CuttingItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
         {
-            Indices = TryGetIndices(nsmgr, out _);
+            Indices = TryGetIndices(nsmgr, out ICollection<MtconnectValidationException> indicesErrors);
+            InitializationErrors.AddRange(indicesErrors);
         }
 
         public int[] TryGetIndices(XmlNamespaceManager nsmgr, out ICollection<MtconnectValidationException> validationErrors)
@@ -64,7 +65,7 @@ namespace MtconnectCore.Standard.Documents.Assets
             string rawIndices = SourceNode.Attributes[attributeName]?.Value;// SourceNode.TryGetAttribute(CuttingItemAttributes.INDICES, null, nsmgr.LookupNamespace(Constants.DEFAULT_XML_NAMESPACE));
             if (!string.IsNullOrEmpty(rawIndices))
             {
-                string[] strIndices = rawIndices.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                string[] strIndices = rawIndices.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string strIndex in strIndices)
                 {
                     if (strIndex.Contains('-'))

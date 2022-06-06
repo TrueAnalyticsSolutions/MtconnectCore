@@ -1,4 +1,6 @@
-﻿namespace MtconnectCore.Standard.Contracts.Enums.Devices.Elements
+﻿using MtconnectCore.Standard.Contracts.Attributes;
+
+namespace MtconnectCore.Standard.Contracts.Enums.Devices.Elements
 {
     /// <summary>
     /// Elements within the Specification element in the MTConnect Response document.

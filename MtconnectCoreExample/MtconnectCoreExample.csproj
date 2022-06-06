@@ -11,7 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Consoul" Version="1.5.9" />
+    <PackageReference Include="Consoul" Version="1.5.12" />
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 

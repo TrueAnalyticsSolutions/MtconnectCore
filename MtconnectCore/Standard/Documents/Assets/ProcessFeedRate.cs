@@ -38,14 +38,15 @@ namespace MtconnectCore.Standard.Documents.Assets
             }
         }
 
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.17")]
+        public bool validateValue(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
+            validationErrors = new List<MtconnectValidationException>();
 
             if (!double.TryParse(SourceNode.InnerText, out double value))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
+                    ValidationSeverity.ERROR,
                     $"Invalid ProcessFeedRate value. CuttingTool ProcessFeedRate value must be a number."));
             }
 

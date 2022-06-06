@@ -1,0 +1,36 @@
+﻿@page "/tools/validator"
+@using MtconnectCore.Standard.Documents
+@using System.Xml
+<PageTitle>MTConnect&reg; Response Document Validator - MtconnectCore by True Analytics Manufacturing Solutions</PageTitle>
+<HeadContent>
+    <meta name="description" content="Validate your own MTConnect Response Document using constraints defined in the MTConnect Standard." />
+</HeadContent>
+
+<h3>MTConnect&reg; Response Document Validator</h3>
+<p>This tool runs locally on your device. Any files chosen in the form below are processed within your browser and are not sent over the network. Any information processed from the chosen file(s) will not be used outside of this session in your browser.</p>
+
+<div class="input-group mb-3">
+    <label class="input-group-text" for="inptResponseDocument">MTConnect Response Document</label>
+    <InputFile type="file" class="form-control" id="inptResponseDocument" OnChange="LoadFile" />
+</div>
+
+<ResponseDocumentValidationResults Document="Document"></ResponseDocumentValidationResults>
+
+@code {
+    XmlDocument Document;
+
+    private async Task LoadFile(InputFileChangeEventArgs e)
+    {
+        Document = null;
+        using (var ms = new System.IO.MemoryStream())
+        {
+            using (var reader = new System.IO.StreamReader(e.File.OpenReadStream()))
+            {
+                Document = new System.Xml.XmlDocument();
+                string contents = await reader.ReadToEndAsync();
+                Document.LoadXml(contents);
+                StateHasChanged();
+            }
+        }
+    }
+}

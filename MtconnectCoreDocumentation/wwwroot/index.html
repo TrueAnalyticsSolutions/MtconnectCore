@@ -7,7 +7,8 @@
     <title>MtconnectCore Documentation</title>
     <base href="/" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet" />
+    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="css/loader.css" rel="stylesheet" />
     <link href="css/input-group-midtext.min.css" rel="stylesheet" />
@@ -15,6 +16,16 @@
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="256x256" href="TAMS-Icon-Blue_x256.png" />
     <link rel="stylesheet" href="libs/highlight/styles/vs.min.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-59CPJ5H2ZD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-59CPJ5H2ZD');
+    </script>
+    <script id="agent-probe" type="text/xml" src="http://mtconnect.mazakcorp.com:5609/"></script>
 </head>
 
 <body>
@@ -31,18 +42,70 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        window.serviceWorker = {
+            registration: null,
+            update: function () {
+                if (window.serviceWorker.registration.waiting) {
+                    window.serviceWorker.registration.waiting.postMessage({ action: 'skipWaiting' });
+                }
+            },
+            addUpdateAvailableListener: function (dotNetObjectRef) {
+                window.serviceWorker._updateAvailableAudience.push(dotNetObjectRef);
+            },
+            _updateAvailableAudience: [],
+            triggerUpdateEvent: function () {
+                for (var i = 0; i < window.serviceWorker._updateAvailableAudience.length; i++) {
+                    window.serviceWorker._updateAvailableAudience[i].invokeMethodAsync("OnUpdateAvailable");
+                }
+            }
+        };
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(function (reg) {
+                    window.serviceWorker.registration = reg;
+                    window.serviceWorker.registration.addEventListener('updatefound', function () {
+                        var checkForUpdates = function (state) {
+                            switch (state) {
+                                case 'installed':
+                                    if (navigator.serviceWorker.controller) {
+                                        window.serviceWorker.triggerUpdateEvent();
+                                    }
+                                default:
+                            }
+                        }
+                        var listenForChanges = function (registrationType) {
+                            if (typeof window.serviceWorker.registration[registrationType] !== 'undefined' && window.serviceWorker.registration[registrationType] !== null) {
+                                window.serviceWorker.registration[registrationType].addEventListener("statechange", (function () {
+                                    if (this.registration) {
+                                        checkForUpdates(this.registration.state);
+                                    }
+                                }).bind({ registration: window.serviceWorker.registration[registrationType] }));
+                            }
+                        }
+                        listenForChanges('installing');
+                        listenForChanges('waiting');
+                    });
+                });
+        }
+    </script>
     <script id="hljs" src="libs/highlight/highlight.min.js"></script>
     <script id="hljscsharp" src="libs/highlight/languages/csharp.min.js"></script>
+    <script id="hljsjson" src="libs/highlight/languages/json.min.js"></script>
     <script>
         window['Highlight'] = {
             highlightInlineCode: function () {
                 document.querySelectorAll('.inline-code').forEach(el => {
                     hljs.highlightElement(el);
                 });
+            },
+            highlightElement: function (e) {
+                hljs.highlightElement(e);
             }
         }
     </script>
+    <script type="text/javascript" src="js/fetchMtconnect/fetch-mtconnect.js"></script>
 </body>
 
 </html>

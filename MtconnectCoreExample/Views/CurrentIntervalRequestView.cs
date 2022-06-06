@@ -83,6 +83,7 @@ namespace MtconnectCoreExample.Views
                     }).ContinueWith((task) =>
                     {
                         Consoul.Write($"An error occurred while requesting interval document.");
+                        Consoul.Write(task.Exception.ToString(), ConsoleColor.Red);
                         token.Cancel();
                     }, TaskContinuationOptions.OnlyOnFaulted);
                     waitForKeyTask.Wait();

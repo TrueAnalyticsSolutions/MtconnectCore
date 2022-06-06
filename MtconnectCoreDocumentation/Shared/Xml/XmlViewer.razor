@@ -1,0 +1,48 @@
+﻿@inject IJSRuntime jsRuntime
+@using System.Xml
+
+<div class="container">
+<div class="input-group mb-3">
+    <label class="input-group-text" for="inptResponseDocument">XPath Search</label>
+    <input type="text" class="form-control" id="inptXPath" @onchange="OnXpathChange" value="@XPathSelection" />
+</div>
+<div class="xml-viewer max-vh-75 overflow-auto">
+    <ul class="xml-node-list">
+        <CascadingValue Value="selectedElement">
+            <XmlNode Node="Document.DocumentElement"></XmlNode>
+        </CascadingValue>
+    </ul>
+</div>
+</div>
+
+@code {
+    [Parameter]
+    public XmlDocument Document { get; set; }
+
+    [Parameter]
+    public string XPathSelection { get; set; }
+
+    private XmlElement selectedElement { get; set; }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        if (!string.IsNullOrEmpty(XPathSelection))
+        {
+            var selectedNodes = Document?.SelectNodes(XPathSelection);
+            Console.WriteLine("Checking XPath selection. Query: " + XPathSelection + ". Results: " + selectedNodes.Count);
+            if (selectedNodes.Count > 0)
+            {
+                var selectedNode = selectedNodes[0];
+                if (selectedNode?.NodeType == XmlNodeType.Element)
+                {
+                    selectedElement = (XmlElement)selectedNode;
+                }
+            }
+        } 
+    }
+
+    private async void OnXpathChange(ChangeEventArgs e)
+    {
+        XPathSelection = e.Value?.ToString();
+    }
+}

@@ -40,14 +40,16 @@ namespace MtconnectCore.Standard.Documents.Assets
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"MTConnectDevices Header MUST include a 'assetBufferSize' attribute. {documentationAttributes}"));
+                    $"MTConnectDevices Header MUST include a 'assetBufferSize' attribute. {documentationAttributes}",
+                    SourceNode));
             }
 
             if (!AssetCount.HasValue)
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"MTConnectDevices Header MUST include a 'assetCount' attribute. {documentationAttributes}"));
+                    $"MTConnectDevices Header MUST include a 'assetCount' attribute. {documentationAttributes}",
+                    SourceNode));
             }
 
             return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);

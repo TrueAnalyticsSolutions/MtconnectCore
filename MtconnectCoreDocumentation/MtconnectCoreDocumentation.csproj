@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
     <ApplicationIcon />
     <Authors>John Murphy; Trais McAllister</Authors>
@@ -20,10 +20,44 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\MtconnectCore\MtconnectCore.xml" Link="wwwroot\MtconnectCore.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\images\GitHub-Mark\.DS_Store" />
     <None Include="wwwroot\images\GitHub-Mark\Vector\GitHub-Mark.ai" />
     <None Include="wwwroot\images\GitHub-Mark\Vector\GitHub-Mark.eps" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-utilities.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-utilities.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap.rtl.css.map" />
+    <None Include="wwwroot\libs\bootstrap\css\bootstrap.rtl.min.css.map" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.esm.js" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.esm.js.map" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.esm.min.js" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.esm.min.js.map" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\libs\bootstrap\js\bootstrap.min.js.map" />
     <None Include="wwwroot\libs\highlight\DIGESTS.md" />
     <None Include="wwwroot\libs\highlight\highlight.js" />
     <None Include="wwwroot\libs\highlight\highlight.min.js" />
@@ -223,10 +257,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.7" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -35,39 +35,46 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc />
         public Relationship(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
-        /// <inheritdoc />
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 9.2.1 of the MTConnect standard.";
-
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Id))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Relationship MUST include a unique 'id' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Relationship MUST include a unique 'id' attribute."));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Relationship MUST include a 'type' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Relationship MUST include a 'type' attribute."));
             } else if (!EnumHelper.Contains<RelationshipTypes>(Type)) {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Relationship 'type' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipTypes>(", ", string.Empty, string.Empty)}]. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Relationship 'type' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipTypes>(", ", string.Empty, string.Empty)}]."));
             }
 
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        private bool validateCriticality(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Criticality) && !EnumHelper.Contains<RelationshipTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Relationship 'criticality' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipCriticalityTypes>(", ", string.Empty, string.Empty)}]. {documentationAttributes}"));
+                    $"Relationship 'criticality' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipCriticalityTypes>(", ", string.Empty, string.Empty)}]."));
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

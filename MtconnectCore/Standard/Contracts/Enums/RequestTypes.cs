@@ -20,6 +20,10 @@
         /// <summary>
         /// An Agent responds to an Asset Request with an MTConnectAssets Response Document that contains information for MTConnect Assets from the Agent, subject to any filtering defined in the Request.
         /// </summary>
+        ASSETS,
+        /// <summary>
+        /// An Agent responds to an Asset Request with an MTConnectAssets Response Document that contains information for MTConnect Assets from the Agent, subject to any filtering defined in the Request.
+        /// </summary>
         ASSET,
     }
 }

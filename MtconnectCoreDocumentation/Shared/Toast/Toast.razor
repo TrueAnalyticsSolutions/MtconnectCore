@@ -1,0 +1,40 @@
+﻿<div class="@Class" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="false">
+    <div class="toast-header">
+        <strong class="me-auto">@Title</strong>
+        <small></small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" @onclick="@HandleDismissed"></button>
+    </div>
+    @if (Body != null)
+    {
+        <div class="toast-body">
+        @Body
+        @if (Actions != null) {
+            <div class="mt-2 pt-2 border-top">
+            @Actions
+            </div>
+         }
+        </div>
+    }
+</div>
+@code {
+    [Parameter]
+    public bool Show { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+    [Parameter]
+    public RenderFragment Actions { get; set; }
+
+    [Parameter]
+    public Action OnDismissed { get; set; }
+
+    string Class => $"toast {(Show ? "show" : "")}";
+
+    void HandleDismissed() {
+        OnDismissed();
+    }
+}

@@ -235,7 +235,7 @@ namespace MtconnectCore.Standard.Contracts
         /// <inheritdoc/>
         public virtual bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = InitializationErrors;// new List<MtconnectValidationException>();
+            validationErrors = new List<MtconnectValidationException>();// InitializationErrors.ToList();
 
             Type thisType = this.GetType();
 
@@ -245,17 +245,16 @@ namespace MtconnectCore.Standard.Contracts
                 MethodInfo[] methods = thisType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance)
                     .Where(o => !o.IsSpecialName)
                     .Where(o => o.ReturnType == typeof(bool))
-                    //.Where(o => o.GetParameters().FirstOrDefault(p => p.IsOut && p.ParameterType == typeof(ICollection<MtconnectValidationException>)) != null)
                     .ToArray();
-                Type validationAttribute = typeof(MtconnectValidationMethodAttribute);
+                Type validationAttribute = typeof(MtconnectVersionApplicabilityAttribute);
                 foreach (MethodInfo method in methods)
                 {
-                    var methodValidations = method.GetCustomAttributes<MtconnectValidationMethodAttribute>(true);
-                    if (methodValidations.Any(o => o.Version == MtconnectVersion.Value))
+                    var methodValidations = method.GetCustomAttributes<MtconnectVersionApplicabilityAttribute>(true);
+                    if (methodValidations.Any(o => o.Compare(MtconnectVersion.Value)))
                     {
                         // Verify correct signature
                         ParameterInfo outParam = method.GetParameters().FirstOrDefault(o => o.IsOut);
-                        Type? genericTypeDefinition = outParam.ParameterType.GetElementType();
+                        Type genericTypeDefinition = outParam.ParameterType.GetElementType();
                         if (method.ReturnType != typeof(bool))
                         {
                             throw new InvalidOperationException("Cannot execute MTConnect validation method that does not have a return type of boolean.");
@@ -303,7 +302,7 @@ namespace MtconnectCore.Standard.Contracts
                 ).ToArray();
             foreach (var property in mtconnectNodeProperties)
             {
-                object? propertyValue = property.GetValue(this);
+                object propertyValue = property.GetValue(this);
                 if (propertyValue != null)
                 {
                     if (isCollectionOfMtconnectNode(property))

@@ -21,6 +21,11 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElements("CoordinateSystems/*", nameof(TryAddCoordinateSystem), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<CoordinateSystem> CoordinateSystems => _coordinateSystems;
 
+        private List<Motion> _motion = new List<Motion>();
+        /// <inheritdoc cref="ComponentConfigurationElements.MOTION"/>
+        [MtconnectNodeElements("Motion/*", nameof(TryAddMotion), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        public ICollection<Motion> Motion => _motion;
+
         private List<Relationship> _relationships = new List<Relationship>();
         /// <inheritdoc cref="ComponentConfigurationElements.RELATIONSHIPS"/>
         [MtconnectNodeElements("Relationships/*", nameof(TryAddRelationship), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
@@ -30,6 +35,11 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc cref="ComponentConfigurationElements.SENSOR_CONFIGURATION"/>
         [MtconnectNodeElements("SensorConfiguration/*", nameof(TryAddSensorConfiguration), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<SensorConfiguration> SensorConfiguration => _sensorConfiguration;
+
+        private List<SolidModel> _solidModel = new List<SolidModel>();
+        /// <inheritdoc cref="ComponentConfigurationElements.SOLID_MODEL"/>
+        [MtconnectNodeElements("SolidModel/*", nameof(TryAddSolidModel), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        public ICollection<SolidModel> SolidModel => _solidModel;
 
         private List<Specification> _specifications = new List<Specification>();
         /// <inheritdoc cref="ComponentConfigurationElements.SPECIFICATIONS"/>
@@ -44,6 +54,9 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         public bool TryAddCoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr, out CoordinateSystem coordinateSystem)
             => base.TryAdd<CoordinateSystem>(xNode, nsmgr, ref _coordinateSystems, out coordinateSystem);
+
+        public bool TryAddMotion(XmlNode xNode, XmlNamespaceManager nsmgr, out Motion motion)
+            => base.TryAdd<Motion>(xNode, nsmgr, ref _motion, out motion);
 
         public bool TryAddRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, out Relationship relationship)
         {
@@ -68,10 +81,14 @@ namespace MtconnectCore.Standard.Documents.Devices
             return true;
         }
 
+        public bool TryAddSensorConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, out SensorConfiguration sensorConfiguration)
+            => base.TryAdd<SensorConfiguration>(xNode, nsmgr, ref _sensorConfiguration, out sensorConfiguration);
+
+        public bool TryAddSolidModel(XmlNode xNode, XmlNamespaceManager nsmgr, out SolidModel solidModel)
+            => base.TryAdd<SolidModel>(xNode, nsmgr, ref _solidModel, out solidModel);
+
         public bool TryAddSpecification(XmlNode xNode, XmlNamespaceManager nsmgr, out Specification specification)
             => base.TryAdd<Specification>(xNode, nsmgr, ref _specifications, out specification);
 
-        public bool TryAddSensorConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, out SensorConfiguration sensorConfiguration)
-            => base.TryAdd<SensorConfiguration>(xNode, nsmgr, ref _sensorConfiguration, out sensorConfiguration);
     }
 }

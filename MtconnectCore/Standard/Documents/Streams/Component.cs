@@ -85,34 +85,79 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <inheritdoc/>
         public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
-        public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample) => base.TryAdd<Sample>(xNode, nsmgr, ref _samples, out sample);
+        public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample)
+        {
+            if (xNode.Name == "VariableDataSet")
+            {
+                var variableList = new List<SampleVariableDataSet>();
+                var variableParseResult = base.TryAdd<SampleVariableDataSet>(xNode, nsmgr, ref variableList, out SampleVariableDataSet variableDataSet);
+                _samples.Add(variableDataSet as Sample);
+                sample = variableDataSet;
+                return variableParseResult;
+            }
+            else
+            {
+                return base.TryAdd<Sample>(xNode, nsmgr, ref _samples, out sample);
+            }
+        }
 
-        public bool TryAddEvent(XmlNode xNode, XmlNamespaceManager nsmgr, out Event @event) => base.TryAdd<Event>(xNode, nsmgr, ref _events, out @event);
+        public bool TryAddEvent(XmlNode xNode, XmlNamespaceManager nsmgr, out Event @event)
+        {
+            if (xNode.Name == "VariableDataSet")
+            {
+                var variableList = new List<EventVariableDataSet>();
+                var variableParseResult = base.TryAdd<EventVariableDataSet>(xNode, nsmgr, ref variableList, out EventVariableDataSet variableDataSet);
+                _events.Add(variableDataSet);
+                @event = variableDataSet;
+                return variableParseResult;
+            } else
+            {
+                return base.TryAdd<Event>(xNode, nsmgr, ref _events, out @event);
+            }
+        }
 
         public bool TryAddCondition(XmlNode xNode, XmlNamespaceManager nsmgr, out Condition condition) => base.TryAdd<Condition>(xNode, nsmgr, ref _conditions, out condition);
 
-        /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4")]
+        private bool validateComponentId(out ICollection<MtconnectValidationException> validationErrors)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 1 Section 4.3.1 of the MTConnect standard.";
-
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(ComponentId))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Component MUST include a 'componentId' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Component MUST include a 'componentId' attribute.",
+                    SourceNode));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4")]
+        private bool validateComponentReference(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(ComponentReference))
             {
                 validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Component MUST include a 'component' attribute. {documentationAttributes}"));
+                    ValidationSeverity.ERROR,
+                    $"Component MUST include a 'component' attribute.",
+                    SourceNode));
             }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4", MtconnectVersions.V_1_2_0)]
+        private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(Name)) {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Component MUST include a 'name' attribute.",
+                    SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

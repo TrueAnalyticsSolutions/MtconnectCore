@@ -10,12 +10,13 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using MtconnectCore.Standard;
 using System.Threading;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
+using System.Net.Http;
+using System.Net.Sockets;
 
 namespace MtconnectCore
 {
@@ -31,16 +32,28 @@ namespace MtconnectCore
     /// </summary>
     public partial class MtconnectAgentService : IDisposable
     {
+        /// <summary>
+        /// Reference to the underlying HTTP Client that sends requests to the MTConnect Agent
+        /// </summary>
         public HttpClient Client { get; }
 
+        /// <summary>
+        /// Constructs a new <see cref="MtconnectAgentService"/> with an existing <see cref="HttpClient"/>. Note that the <see cref="HttpClient.Timeout"/> is overwritten during construction with <see cref="Timeout.Infinite"/> to accomodate MTConnect Interval request(s). This can be overwritten again after construction, but is reset to <see cref="Timeout.Infinite"/> each time an Interval request is executed.
+        /// </summary>
+        /// <param name="client">Reference to an existing <see cref="HttpClient"/>.</param>
+        /// <param name="uri">Reference to the <see cref="HttpClient.BaseAddress"/> that should be set for requests to the MTConnect Agent.</param>
         public MtconnectAgentService(HttpClient client, Uri uri)
         {
             Client = client;
-
+            Client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
             Client.BaseAddress = uri;
             Client.DefaultRequestHeaders.Add("Accept", "application/xml");
         }
 
+        /// <summary>
+        /// Constructs a new <see cref="MtconnectAgentService"/>.
+        /// </summary>
+        /// <param name="uri"><inheritdoc cref="MtconnectAgentService.MtconnectAgentService(HttpClient, Uri)" path="/param[@name='uri']"/></param>
         public MtconnectAgentService(Uri uri) : this(new HttpClient(), uri) { }
 
         /// <summary>
@@ -49,7 +62,7 @@ namespace MtconnectCore
         /// <param name="xDoc">The available <see cref="XmlDocument"/> to be parsed</param>
         /// <param name="document">Output of the appropriately formated <see cref="IResponseDocument"/> type. Note that this document could result in a <see cref="MtconnectErrorDocument"/>.</param>
         /// <returns>Flag for whether or not the <see cref="XmlDocument"/> could be identified as an implemented <see cref="IResponseDocument"/>.</returns>
-        public bool TryParse(XmlDocument xDoc, out IResponseDocument document)
+        public static bool TryParse(XmlDocument xDoc, out IResponseDocument document)
         {
             document = null;
             string rootNodeName = xDoc.DocumentElement.LocalName;
@@ -76,61 +89,40 @@ namespace MtconnectCore
 
         internal async Task<T> Request<T>(string request) where T : IResponseDocument
         {
-            HttpResponseMessage res = await Client.GetAsync(request);
-
-            if (res.EnsureSuccessStatusCode().IsSuccessStatusCode)
+            using (HttpResponseMessage res = await Client.GetAsync(request))
             {
-                Stream responseStream = await res.Content.ReadAsStreamAsync();
+                if (!res.EnsureSuccessStatusCode().IsSuccessStatusCode)
+                    throw new HttpRequestException($"MTConnect Agent responded with {res.StatusCode}");
 
-                if (responseStream != null)
+                using (var responseStream = await res.Content.ReadAsStreamAsync())
                 {
+                    if (responseStream == null)
+                        throw new NullReferenceException("No content returned from stream response.");
+
                     XmlDocument response = new XmlDocument();
                     response.Load(responseStream);
                     responseStream.Close();
 
                     IResponseDocument mtcDocument;
-                    if (TryParse(response, out mtcDocument))
-                    {
-                        if (mtcDocument is T)
-                        {
-                            return (T)mtcDocument;
-                        }
-                        else
-                        {
-                            throw new Exception($"Expected {typeof(T)} and received {mtcDocument.Type} instead.");
-                        }
-                    }
-                    else
-                    {
+                    if (!TryParse(response, out mtcDocument))
                         throw new MtconnectProbeFailure($"Failed to parse MTConnect Response Document");
-                    }
+
+                    if (!(mtcDocument is T))
+                        throw new Exception($"Expected {typeof(T)} and received {mtcDocument.Type} instead.");
+
+                    return (T)mtcDocument;
                 }
-                else
-                {
-                    throw new Exception("Invalid stream response.");
-                }
-            }
-            else
-            {
-                throw new HttpRequestException($"MTConnect Agent responded with {res.StatusCode}");
             }
         }
 
-        internal async Task RequestInterval(string request, int interval, MtconnectIntervalStreamCallback callback, CancellationToken cancelToken)
+        internal async Task RequestInterval(string request, MtconnectIntervalStreamCallback callback, CancellationToken cancelToken)
         {
-            HttpResponseMessage req = await Client.GetAsync(request);
-            using (Stream responseStream = await req.Content.ReadAsStreamAsync())
+            Client.CancelPendingRequests();
+            Client.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
+            using (var httpRequest = new HttpRequestMessage(HttpMethod.Get, request))
+            using (HttpResponseMessage httpResponse = await Client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead))
+            using (Stream responseStream = await httpResponse.Content.ReadAsStreamAsync())
             {
-                // Set timeout to 150% of expected stream interval
-                try
-                {
-                    responseStream.ReadTimeout = (int)Math.Ceiling(interval * 1.5);
-                }
-                catch (InvalidOperationException ioException)
-                {
-                    // Do nothing
-                }
-
                 byte[] data = new byte[4096];
 
                 // These are used to determine when a document in the stream start and stops
@@ -141,67 +133,93 @@ namespace MtconnectCore
 
                 // Open memory stream to temporarily hold the incoming document from the HTTP stream
                 MemoryStream memory = new MemoryStream();
-                while ((read = responseStream.Read(data, 0, data.Length)) > 0 && !cancelToken.IsCancellationRequested)
+                bool endOfStream = false;
+                try
                 {
-                    // Fill the byte sequence with what was just read in the 'while'
-                    byte[] remainder = CopyAndResize(data, 0, read);
-
-                    // Search for the 'start' sequence in the current byte sequence
-                    IEnumerable<int> startLocations = SearchBytePattern(start, remainder);
-                    if (startLocations.Any())
+                    while (!endOfStream && !cancelToken.IsCancellationRequested)
                     {
-                        // Re-initialize the memory stream to hold the incoming Xml document
-                        memory = new MemoryStream();
-                        // Get location of the start of the 'start' sequence
-                        int startLocation = startLocations.First();
-                        // Write the contents of the byte sequence starting at the start location
-                        // NOTE: This may be too much sent into the document memory stream because it's possible the document is within this request as well.
-                        memory.Write(remainder, startLocation, remainder.Length - startLocation);
-                        // Reset current byte sequence
-                        remainder = new byte[0];
-                    }
-
-                    // Search for the 'end' sequence in the current byte sequence
-                    IEnumerable<int> endLocations = SearchBytePattern(end, remainder);
-                    if (endLocations.Any())
-                    {
-                        // Get location of the start of the 'end' sequence
-                        int endLocation = endLocations.First();
-                        // Write the contents of the byte sequence starting from the beginning until the end of the 'end' sequence
-                        memory.Write(remainder, 0, endLocation + end.Length);
-                        // Re-initialize the remaining byte sequence after the 'end' sequence
-                        remainder = CopyAndResize(remainder, endLocation + end.Length, remainder.Length - (endLocation + end.Length));
-
-                        // Now that we have a full Xml document, we can invoke the callback
-                        try
+                        if (responseStream.CanSeek)
                         {
-                            // Get the raw Xml contents from the memory stream
-                            string rawXml = Encoding.UTF8.GetString(memory.ToArray());
-                            XmlDocument xDoc = new XmlDocument();
-                            // Load the raw Xml into a document to be parsed into an IMtconnectDocument
-                            xDoc.LoadXml(rawXml);
+                            endOfStream = responseStream.Position == (responseStream.Length - 1);
+                        }
 
-                            if (TryParse(xDoc, out IResponseDocument mtcDoc))
-                            {
-                                callback(mtcDoc);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.Error(ex);
-                            throw ex;
-                        }
-                        finally
+                        read = responseStream.Read(data, 0, data.Length);
+
+                        // Fill the byte sequence with what was just read in the 'while'
+                        byte[] remainder = CopyAndResize(data, 0, read);
+
+                        // Search for the 'start' sequence in the current byte sequence
+                        IEnumerable<int> startLocations = SearchBytePattern(start, remainder);
+                        if (startLocations.Any())
                         {
                             // Re-initialize the memory stream to hold the incoming Xml document
                             memory = new MemoryStream();
+                            // Get location of the start of the 'start' sequence
+                            int startLocation = startLocations.First();
+                            // Write the contents of the byte sequence starting at the start location
+                            // NOTE: This may be too much sent into the document memory stream because it's possible the document is within this request as well.
+                            memory.Write(remainder, startLocation, remainder.Length - startLocation);
+                            // Reset current byte sequence
+                            remainder = new byte[0];
+                        }
+
+                        // Search for the 'end' sequence in the current byte sequence
+                        IEnumerable<int> endLocations = SearchBytePattern(end, remainder);
+                        if (endLocations.Any())
+                        {
+                            // Get location of the start of the 'end' sequence
+                            int endLocation = endLocations.First();
+                            // Write the contents of the byte sequence starting from the beginning until the end of the 'end' sequence
+                            memory.Write(remainder, 0, endLocation + end.Length);
+                            // Re-initialize the remaining byte sequence after the 'end' sequence
+                            remainder = CopyAndResize(remainder, endLocation + end.Length, remainder.Length - (endLocation + end.Length));
+
+                            // Now that we have a full Xml document, we can invoke the callback
+                            try
+                            {
+                                // Get the raw Xml contents from the memory stream
+                                string rawXml = Encoding.UTF8.GetString(memory.ToArray());
+                                XmlDocument xDoc = new XmlDocument();
+                                // Load the raw Xml into a document to be parsed into an IMtconnectDocument
+                                xDoc.LoadXml(rawXml);
+
+                                if (TryParse(xDoc, out IResponseDocument mtcDoc))
+                                {
+                                    await callback(mtcDoc);
+                                }
+                                else
+                                {
+                                    throw new InvalidCastException("Response was not valid MTConnect Response Document.");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.Error(ex);
+                                throw ex;
+                            }
+                            finally
+                            {
+                                memory.Close();
+                                memory.Dispose();
+                                // Re-initialize the memory stream to hold the incoming Xml document
+                                memory = new MemoryStream();
+                            }
+                        }
+
+                        // If anything remains in the current byte sequence, then add it to the memory stream
+                        if (remainder.Length > 0)
+                        {
+                            memory.Write(remainder, 0, remainder.Length);
                         }
                     }
-
-                    // If anything remains in the current byte sequence, then add it to the memory stream
-                    if (remainder.Length > 0)
+                }
+                finally
+                {
+                    httpResponse.Dispose();
+                    if (memory != null)
                     {
-                        memory.Write(remainder, 0, remainder.Length);
+                        memory.Close();
+                        memory.Dispose();
                     }
                 }
             }
@@ -211,8 +229,8 @@ namespace MtconnectCore
         /// Sends a Probe Request to the MTConnect Agent. See Part 1 Section 8.3.1 of MTConnect specification.
         /// </summary>
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.1.1 of MTConnect specification.</param>
-        /// <returns></returns>
-        public async Task<MtcDevices.DevicesDocument> Probe(string equipmentId = "")
+        /// <returns>A generic reference to a <see cref="IResponseDocument"/> in case the unexpected, but handlable <see cref="MtcError.ErrorDocument"/> is returned from the MTConnect Agent.</returns>
+        public async Task<IResponseDocument> Probe(string equipmentId = "")
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId)) {
@@ -228,8 +246,8 @@ namespace MtconnectCore
         /// </summary>
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.2.1 of MTConnect specification.</param>
         /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.2.2 of MTConnect specification.</param>
-        /// <returns></returns>
-        public async Task<MtcStreams.StreamsDocument> Current(string equipmentId = "", CurrentRequestQuery query = null)
+        /// <returns><inheritdoc cref="Probe" path="/returns"/></returns>
+        public async Task<IResponseDocument> Current(string equipmentId = "", CurrentRequestQuery query = null)
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId)) {
@@ -279,7 +297,7 @@ namespace MtconnectCore
                 throw queryException;
             }
 
-            await RequestInterval(request, query.Interval.Value, callback, cancelToken);
+            await RequestInterval(request, callback, cancelToken);
         }
 
         /// <summary>
@@ -287,8 +305,8 @@ namespace MtconnectCore
         /// </summary>
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.3.1 of MTConnect specification.</param>
         /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.3.2 of MTConnect specification.</param>
-        /// <returns></returns>
-        public async Task<MtcStreams.StreamsDocument> Sample(string equipmentId = "", SampleRequestQuery query = null)
+        /// <returns><inheritdoc cref="Probe" path="/returns"/></returns>
+        public async Task<IResponseDocument> Sample(string equipmentId = "", SampleRequestQuery query = null)
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId))
@@ -310,7 +328,7 @@ namespace MtconnectCore
                 throw queryException;
             }
 
-            return await Request<MtcStreams.StreamsDocument>(request);
+            return await Request<IResponseDocument>(request);
         }
 
         /// <summary>
@@ -344,9 +362,41 @@ namespace MtconnectCore
                 throw queryException;
             }
 
-            await RequestInterval(request, query.Interval.Value, callback, cancelToken);
+            await RequestInterval(request, callback, cancelToken);
         }
 
+        /// <summary>
+        /// Sends an Assets Request to the MTConnect Agent.
+        /// </summary>
+        /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document.</param>
+        /// <returns><inheritdoc cref="Probe" path="/returns"/></returns>
+        public async Task<IResponseDocument> Assets(AssetRequestQuery query = null)
+        {
+            string request = string.Empty;
+            request += RequestTypes.ASSETS.ToString().ToLower();
+            Exception queryException = null;
+            if (query?.Validate(out queryException) == true)
+            {
+                if (string.IsNullOrEmpty(query?.Type))
+                {
+                    //throw new InvalidOperationException($"The {nameof(Asset)} request should not be made with the '{nameof(AssetRequestQuery.Type)}' query parameter included. Instead, use {nameof(SampleInterval)}.");
+                }
+                request += $"?{query}";
+            }
+            else if (queryException != null)
+            {
+                throw queryException;
+            }
+
+            return await Request<MtcAssets.AssetsDocument>(request);
+        }
+
+        /// <summary>
+        /// Sends an Asset Request to the MTConnect Agent for a specific asset by id.
+        /// </summary>
+        /// <param name="assetId">Reference to a specific Asset ID.</param>
+        /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document.</param>
+        /// <returns><inheritdoc cref="Probe" path="/returns"/></returns>
         public async Task<IResponseDocument> Asset(string assetId = "", AssetRequestQuery query = null)
         {
             string request = string.Empty;
@@ -370,6 +420,87 @@ namespace MtconnectCore
             }
 
             return await Request<MtcAssets.AssetsDocument>(request);
+        }
+
+        /// <summary>
+        /// Performs an audit on the Agent to validate the appropriate endpoints are exposed as well as the format of the Response Documents are valid according to the standard.
+        /// </summary>
+        /// <returns>Collection of any errors or messages received from the request and initialization of MTConnect Response Documents.</returns>
+        public async Task<ICollection<MtconnectValidationException>> Audit()
+        {
+            var errors = new List<MtconnectValidationException>();
+            #region Audit Probe
+            var devices = await Probe();
+            if (devices is MtcDevices.DevicesDocument)
+            {
+                if (!devices.TryValidate(out ICollection<MtconnectValidationException> devicesErrors))
+                {
+                    errors.AddRange(devicesErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'probe' requests."));
+            }
+            #endregion
+            #region Audit Current
+            var current = await Current();
+            if (current is MtcStreams.StreamsDocument)
+            {
+                if (!current.TryValidate(out ICollection<MtconnectValidationException> currentErrors))
+                {
+                    errors.AddRange(currentErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'current' requests."));
+            }
+            #endregion
+            #region Audit Sample
+            var sample = await Sample();
+            if (sample is MtcStreams.StreamsDocument)
+            {
+                if (!sample.TryValidate(out ICollection<MtconnectValidationException> sampleErrors))
+                {
+                    errors.AddRange(sampleErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'sample' requests."));
+            }
+            #endregion
+            #region Audit Assets
+            var assets = await Assets();
+            if (assets is MtcAssets.AssetsDocument)
+            {
+                if (!assets.TryValidate(out ICollection<MtconnectValidationException> assetsErrors))
+                {
+                    errors.AddRange(assetsErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'assets' requests."));
+            }
+            #endregion
+            #region Audit Error
+            var expectedError = await Request<MtcError.ErrorDocument>("error");
+            if (expectedError is MtcError.ErrorDocument)
+            {
+                if (!expectedError.TryValidate(out ICollection<MtconnectValidationException> expectedErrorsErrors))
+                {
+                    errors.AddRange(expectedErrorsErrors);
+                }
+            }
+            else
+            {
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST return a MTConnect Errors Response Document in the event of an error."));
+            }
+            #endregion
+
+            return errors;
         }
 
         private T[] CopyAndResize<T>(T[] sourceArray, long sourceIndex, long length)
@@ -400,7 +531,8 @@ namespace MtconnectCore
             }
             return positions;
         }
-
+        
+        /// <inheritdoc/>
         public void Dispose()
         {
             Client.Dispose();
