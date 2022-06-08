@@ -32,7 +32,7 @@ namespace MtconnectCoreExample.Views
             {
                 Consoul.Write("Please type/paste the filepath of the MTConnect Response Document data you wish to process:", ConsoleColor.Yellow);
                 filePath = Consoul.Read();
-            } while (string.IsNullOrEmpty(filePath) && !File.Exists(filePath));
+            } while (string.IsNullOrEmpty(filePath) && !System.IO.File.Exists(filePath));
             if (filePath.StartsWith("\"") && filePath.EndsWith("\"")) filePath = filePath.Substring(1, filePath.Length - 2);
             Source.FilePath = filePath;
         }

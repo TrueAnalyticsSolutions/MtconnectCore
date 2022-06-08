@@ -6020,10 +6020,11 @@
             </summary>
             <remarks>Prepared on: February 25, 2021</remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_7_1">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_8_0">
             <summary>
-            Version 1.7.1
+            Version 1.8.0
             </summary>
+            <remarks>Prepared on: September 6, 2021</remarks>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
             <summary>
@@ -7235,6 +7236,64 @@
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser">
+            <summary>
+            An in-memory class to maintain static references to the methods necessary for parsing the MTConnect XML into a <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/>.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.Type">
+            <summary>
+            Reference to the inherited <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/> type.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.Properties">
+            <summary>
+            Collection of XML parsers for the <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/> properties that can be parsed from XML.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.#ctor(System.Type)">
+            <summary>
+            Constructs a new XmlParser based on the provided type.
+            </summary>
+            <param name="type">Reference to the <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/> type.</param>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser">
+            <summary>
+            An in-memory class to maintain static references to the methods necessary for parsing a MTConnect XML node into the property of a <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/>.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.Type">
+            <summary>
+            Reference to the inherited <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/> type.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.Property">
+            <summary>
+            Reference to the source property for this Xml-based property.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.ParseMethodAttribute">
+            <summary>
+            Method for which the MTConnect Response Document should be processed to fill this property.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.#ctor(System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Constructs a new <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser" /> based on the provided <paramref name="property"/> in the provided <paramref name="sourceType"/>.
+            </summary>
+            <param name="sourceType">Reference to the inherited <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/> type.</param>
+            <param name="property">Reference to the source property for this Xml-based property.</param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.Set``1(``0,System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <summary>
+            Sets the parsed value from the <paramref name="node"/> into the <see cref="P:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.Property"/> of the provided <paramref name="obj"/>.
+            </summary>
+            <param name="obj">Reference to the object to update.</param>
+            <param name="node">Reference to the MTConnect XML node to parse.</param>
+            <param name="nsmgr"></param>
+            <param name="defaultNamespace"></param>
+            <param name="version"></param>
         </member>
         <member name="P:MtconnectCore.Standard.CurrentRequestQuery.Path">
             <summary>
