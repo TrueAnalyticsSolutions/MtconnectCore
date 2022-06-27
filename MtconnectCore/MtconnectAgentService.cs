@@ -91,9 +91,6 @@ namespace MtconnectCore
         {
             using (HttpResponseMessage res = await Client.GetAsync(request))
             {
-                if (!res.EnsureSuccessStatusCode().IsSuccessStatusCode)
-                    throw new HttpRequestException($"MTConnect Agent responded with {res.StatusCode}");
-
                 using (var responseStream = await res.Content.ReadAsStreamAsync())
                 {
                     if (responseStream == null)
