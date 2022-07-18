@@ -87,9 +87,19 @@ namespace MtconnectCore
             return document != null;
         }
 
-        internal async Task<T> Request<T>(string request) where T : IResponseDocument
+        /// <summary>
+        /// Performs a HTTP request on the MTConnect Agent.
+        /// </summary>
+        /// <typeparam name="T">Generic reference to the type of <see cref="IResponseDocument"/> that is expected.</typeparam>
+        /// <param name="request">The request path to be sent.</param>
+        /// <param name="cancellationToken">Optional cancellation token to cancel the HTTP request.</param>
+        /// <returns>A <see cref="IResponseDocument"/> of the specified <typeparamref name="T"/>.</returns>
+        /// <exception cref="NullReferenceException">Throws a <see cref="NullReferenceException"/> when the response from the HTTP request is empty.</exception>
+        /// <exception cref="MtconnectProbeFailure">Throws a <see cref="MtconnectProbeFailure"/> when the response could not be parsed as a valid <see cref="IResponseDocument"/>.</exception>
+        /// <exception cref="Exception"></exception>
+        internal async Task<T> Request<T>(string request, Nullable<CancellationToken> cancellationToken = null) where T : IResponseDocument
         {
-            using (HttpResponseMessage res = await Client.GetAsync(request))
+            using (HttpResponseMessage res = await Client.GetAsync(request, cancellationToken.GetValueOrDefault()))
             {
                 using (var responseStream = await res.Content.ReadAsStreamAsync())
                 {
@@ -226,8 +236,9 @@ namespace MtconnectCore
         /// Sends a Probe Request to the MTConnect Agent. See Part 1 Section 8.3.1 of MTConnect specification.
         /// </summary>
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.1.1 of MTConnect specification.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>A generic reference to a <see cref="IResponseDocument"/> in case the unexpected, but handlable <see cref="MtcError.ErrorDocument"/> is returned from the MTConnect Agent.</returns>
-        public async Task<IResponseDocument> Probe(string equipmentId = "")
+        public async Task<IResponseDocument> Probe(string equipmentId = "", Nullable<CancellationToken> cancellationToken = null)
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId)) {
@@ -235,7 +246,7 @@ namespace MtconnectCore
             }
             request += RequestTypes.PROBE.ToString().ToLower();
 
-            return await Request<MtcDevices.DevicesDocument>(request);
+            return await Request<MtcDevices.DevicesDocument>(request, cancellationToken.GetValueOrDefault());
         }
 
         /// <summary>
@@ -244,7 +255,7 @@ namespace MtconnectCore
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.2.1 of MTConnect specification.</param>
         /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.2.2 of MTConnect specification.</param>
         /// <returns><inheritdoc cref="Probe" path="/returns"/></returns>
-        public async Task<IResponseDocument> Current(string equipmentId = "", CurrentRequestQuery query = null)
+        public async Task<IResponseDocument> Current(string equipmentId = "", CurrentRequestQuery query = null, Nullable<CancellationToken> cancellationToken = null)
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId)) {
@@ -261,7 +272,7 @@ namespace MtconnectCore
                 throw queryException;
             }
 
-            return await Request<MtcStreams.StreamsDocument>(request);
+            return await Request<MtcStreams.StreamsDocument>(request, cancellationToken);
         }
 
         /// <summary>
@@ -303,7 +314,7 @@ namespace MtconnectCore
         /// <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.3.1 of MTConnect specification.</param>
         /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.3.2 of MTConnect specification.</param>
         /// <returns><inheritdoc cref="Probe" path="/returns"/></returns>
-        public async Task<IResponseDocument> Sample(string equipmentId = "", SampleRequestQuery query = null)
+        public async Task<IResponseDocument> Sample(string equipmentId = "", SampleRequestQuery query = null, Nullable<CancellationToken> cancellationToken = null)
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(equipmentId))
@@ -325,7 +336,7 @@ namespace MtconnectCore
                 throw queryException;
             }
 
-            return await Request<IResponseDocument>(request);
+            return await Request<IResponseDocument>(request, cancellationToken);
         }
 
         /// <summary>
@@ -367,7 +378,7 @@ namespace MtconnectCore
         /// </summary>
         /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document.</param>
         /// <returns><inheritdoc cref="Probe" path="/returns"/></returns>
-        public async Task<IResponseDocument> Assets(AssetRequestQuery query = null)
+        public async Task<IResponseDocument> Assets(AssetRequestQuery query = null, Nullable<CancellationToken> cancellationToken = null)
         {
             string request = string.Empty;
             request += RequestTypes.ASSETS.ToString().ToLower();
@@ -385,7 +396,7 @@ namespace MtconnectCore
                 throw queryException;
             }
 
-            return await Request<MtcAssets.AssetsDocument>(request);
+            return await Request<MtcAssets.AssetsDocument>(request, cancellationToken);
         }
 
         /// <summary>
@@ -394,7 +405,7 @@ namespace MtconnectCore
         /// <param name="assetId">Reference to a specific Asset ID.</param>
         /// <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document.</param>
         /// <returns><inheritdoc cref="Probe" path="/returns"/></returns>
-        public async Task<IResponseDocument> Asset(string assetId = "", AssetRequestQuery query = null)
+        public async Task<IResponseDocument> Asset(string assetId = "", AssetRequestQuery query = null, Nullable<CancellationToken> cancellationToken = null)
         {
             string request = string.Empty;
             if (!string.IsNullOrEmpty(assetId))
@@ -416,7 +427,7 @@ namespace MtconnectCore
                 throw queryException;
             }
 
-            return await Request<MtcAssets.AssetsDocument>(request);
+            return await Request<MtcAssets.AssetsDocument>(request, cancellationToken);
         }
 
         /// <summary>

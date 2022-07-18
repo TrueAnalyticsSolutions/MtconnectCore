@@ -63,20 +63,33 @@
             <param name="document">Output of the appropriately formated <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/> type. Note that this document could result in a <see cref="!:MtconnectErrorDocument"/>.</param>
             <returns>Flag for whether or not the <see cref="T:System.Xml.XmlDocument"/> could be identified as an implemented <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/>.</returns>
         </member>
-        <member name="M:MtconnectCore.MtconnectAgentService.Probe(System.String)">
+        <member name="M:MtconnectCore.MtconnectAgentService.Request``1(System.String,System.Nullable{System.Threading.CancellationToken})">
+            <summary>
+            Performs a HTTP request on the MTConnect Agent.
+            </summary>
+            <typeparam name="T">Generic reference to the type of <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/> that is expected.</typeparam>
+            <param name="request">The request path to be sent.</param>
+            <param name="cancellationToken">Optional cancellation token to cancel the HTTP request.</param>
+            <returns>A <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/> of the specified <typeparamref name="T"/>.</returns>
+            <exception cref="T:System.NullReferenceException">Throws a <see cref="T:System.NullReferenceException"/> when the response from the HTTP request is empty.</exception>
+            <exception cref="T:MtconnectCore.Standard.Contracts.Errors.MtconnectProbeFailure">Throws a <see cref="T:MtconnectCore.Standard.Contracts.Errors.MtconnectProbeFailure"/> when the response could not be parsed as a valid <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/>.</exception>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.Probe(System.String,System.Nullable{System.Threading.CancellationToken})">
             <summary>
             Sends a Probe Request to the MTConnect Agent. See Part 1 Section 8.3.1 of MTConnect specification.
             </summary>
             <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.1.1 of MTConnect specification.</param>
+            <param name="cancellationToken">Cancellation token</param>
             <returns>A generic reference to a <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/> in case the unexpected, but handlable <see cref="T:MtconnectCore.Standard.Documents.Error.ErrorDocument"/> is returned from the MTConnect Agent.</returns>
         </member>
-        <member name="M:MtconnectCore.MtconnectAgentService.Current(System.String,MtconnectCore.Standard.CurrentRequestQuery)">
+        <member name="M:MtconnectCore.MtconnectAgentService.Current(System.String,MtconnectCore.Standard.CurrentRequestQuery,System.Nullable{System.Threading.CancellationToken})">
             <summary>
             Sends a Current Request to the MTConnect Agent. See Part 1 Section 8.3.2 of MTConnect specification.
             </summary>
             <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.2.1 of MTConnect specification.</param>
             <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.2.2 of MTConnect specification.</param>
-            <returns><inheritdoc cref="M:MtconnectCore.MtconnectAgentService.Probe(System.String)" path="/returns"/></returns>
+            <returns><inheritdoc cref="M:MtconnectCore.MtconnectAgentService.Probe(System.String,System.Nullable{System.Threading.CancellationToken})" path="/returns"/></returns>
         </member>
         <member name="M:MtconnectCore.MtconnectAgentService.CurrentInterval(MtconnectCore.MtconnectIntervalStreamCallback,System.Threading.CancellationToken,System.String,MtconnectCore.Standard.CurrentRequestQuery)">
             <summary>
@@ -88,13 +101,13 @@
             <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.2.2 of MTConnect specification.</param>
             <returns></returns>
         </member>
-        <member name="M:MtconnectCore.MtconnectAgentService.Sample(System.String,MtconnectCore.Standard.SampleRequestQuery)">
+        <member name="M:MtconnectCore.MtconnectAgentService.Sample(System.String,MtconnectCore.Standard.SampleRequestQuery,System.Nullable{System.Threading.CancellationToken})">
             <summary>
             Sends a Sample Request to the MTConnect Agent. See Part 1 Section 8.3.3 of MTConnect specification.
             </summary>
             <param name="equipmentId">If present, specifies that only the Equipment Metadata for the piece of equipment represented by the name or uuid will be published. See Part 1 Section 8.3.3.1 of MTConnect specification.</param>
             <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.3.2 of MTConnect specification.</param>
-            <returns><inheritdoc cref="M:MtconnectCore.MtconnectAgentService.Probe(System.String)" path="/returns"/></returns>
+            <returns><inheritdoc cref="M:MtconnectCore.MtconnectAgentService.Probe(System.String,System.Nullable{System.Threading.CancellationToken})" path="/returns"/></returns>
         </member>
         <member name="M:MtconnectCore.MtconnectAgentService.SampleInterval(MtconnectCore.MtconnectIntervalStreamCallback,System.Threading.CancellationToken,System.String,MtconnectCore.Standard.SampleRequestQuery)">
             <summary>
@@ -106,20 +119,20 @@
             <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document. See Part 1 Section 8.3.3.2 of MTConnect specification.</param>
             <returns></returns>
         </member>
-        <member name="M:MtconnectCore.MtconnectAgentService.Assets(MtconnectCore.Standard.AssetRequestQuery)">
+        <member name="M:MtconnectCore.MtconnectAgentService.Assets(MtconnectCore.Standard.AssetRequestQuery,System.Nullable{System.Threading.CancellationToken})">
             <summary>
             Sends an Assets Request to the MTConnect Agent.
             </summary>
             <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document.</param>
-            <returns><inheritdoc cref="M:MtconnectCore.MtconnectAgentService.Probe(System.String)" path="/returns"/></returns>
+            <returns><inheritdoc cref="M:MtconnectCore.MtconnectAgentService.Probe(System.String,System.Nullable{System.Threading.CancellationToken})" path="/returns"/></returns>
         </member>
-        <member name="M:MtconnectCore.MtconnectAgentService.Asset(System.String,MtconnectCore.Standard.AssetRequestQuery)">
+        <member name="M:MtconnectCore.MtconnectAgentService.Asset(System.String,MtconnectCore.Standard.AssetRequestQuery,System.Nullable{System.Threading.CancellationToken})">
             <summary>
             Sends an Asset Request to the MTConnect Agent for a specific asset by id.
             </summary>
             <param name="assetId">Reference to a specific Asset ID.</param>
             <param name="query">If present, specifies various query parameters to precisely define the specific information to be included in the response document.</param>
-            <returns><inheritdoc cref="M:MtconnectCore.MtconnectAgentService.Probe(System.String)" path="/returns"/></returns>
+            <returns><inheritdoc cref="M:MtconnectCore.MtconnectAgentService.Probe(System.String,System.Nullable{System.Threading.CancellationToken})" path="/returns"/></returns>
         </member>
         <member name="M:MtconnectCore.MtconnectAgentService.Audit">
             <summary>
@@ -6020,11 +6033,10 @@
             </summary>
             <remarks>Prepared on: February 25, 2021</remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_8_0">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_7_1">
             <summary>
-            Version 1.8.0
+            Version 1.7.1
             </summary>
-            <remarks>Prepared on: September 6, 2021</remarks>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
             <summary>
