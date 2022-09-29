@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-HKVdx4zh8C6LZ37MJl3JcZgIv5ogBX26TygqCVwiTak=",
+      "hash": "sha256-Xw\/FnYCNwRdQHJ11fkpd2edGIjjqBO98rMtwR7dXNLs=",
       "url": "MtconnectCore.xml"
     },
     {
@@ -2105,7 +2105,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-cwdU6+FUhlNkAqTYRd3hUt4Q+EYTHE5ZjgTbD6XiBG0=",
+      "hash": "sha256-apybk5Vv+6deZgMgp5wzrfGRi+8\/eRO6NUjR0sGIl1g=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -2169,11 +2169,11 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
     },
     {
-      "hash": "sha256-+YKdDOF3Geq6o+pmXtWzWcB0Zs30+28R0dJJwiC3aYQ=",
+      "hash": "sha256-DIbADwmuTnSqsFuDOwJ+LQ\/vM4AtGD1Ok8RlgvM7CJA=",
       "url": "_framework\/MtconnectCore.dll"
     },
     {
-      "hash": "sha256-zyj2TUDF23z65Z0wwWDIRAqzlW\/W6dohXcCCu5NtxnM=",
+      "hash": "sha256-OlWCsswFfE7h9bpi1jWffQsXr\/N8jJZdXkh9NTlwkkA=",
       "url": "_framework\/MtconnectCoreDocumentation.dll"
     },
     {
@@ -2289,7 +2289,7 @@
       "url": "_framework\/System.Runtime.CompilerServices.Unsafe.dll"
     },
     {
-      "hash": "sha256-nbiwZTF59jT822hikqDV7d\/EUQ\/g9tvTnb7gK2HEVfY=",
+      "hash": "sha256-rG8uyz59Hll7vrKLX\/ntAogb65kR8Uz0Xi8MWGcFo8U=",
       "url": "_framework\/System.Runtime.dll"
     },
     {
@@ -2341,5 +2341,5 @@
       "url": "MtconnectCoreDocumentation.styles.css"
     }
   ],
-  "version": "hv44yhhw"
+  "version": "h0eX39zt"
 };
