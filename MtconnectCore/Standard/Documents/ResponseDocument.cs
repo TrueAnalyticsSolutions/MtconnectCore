@@ -1,6 +1,7 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace MtconnectCore.Standard.Documents
         /// <summary>
         /// Collection of <see cref="{TItem}"/> contained within a MTConnect Response Document.
         /// </summary>
-        public TItem[] Items => _items.ToArray();// ICollection<TItem> Items => _items;
+        public TItem[] Items => _items.ToArray();
 
         /// <summary>
         /// Reference to the type of MTConnect Response Document.
@@ -132,9 +133,9 @@ namespace MtconnectCore.Standard.Documents
             if (ctor != null)
             {
                 header = (THeader)ctor.Invoke(new object[] { xNode, nsmgr });
-                if (!header.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
+                if (!header.TryValidate())
                 {
-                    Logger.Warn($"[Invalid Stream] Header:\r\n{ExceptionHelper.ToString(validationExceptions)}");
+                    //Logger.Warn($"[Invalid Stream] Header:\r\n{ExceptionHelper.ToString(validationExceptions)}");
                     return false;
                 }
                 _header = header;
@@ -180,11 +181,13 @@ namespace MtconnectCore.Standard.Documents
         /// </summary>
         /// <param name="validationErrors">Outputs a collection of validation errors. Note that this collection may contain errors, warnings, and messages.</param>
         /// <returns>Flag for whether or not any of the validation errors were of the <see cref="ValidationSeverity.ERROR"/> severity.</returns>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public override bool TryValidate(ValidationReport report)
         {
-            base.TryValidate(out validationErrors);
-
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            using (var validationContext = report.CreateContext(this))
+            {
+                var baseResult = base.TryValidate(report);
+                return baseResult && !validationContext.HasErrors();
+            }
         }
     }
 }

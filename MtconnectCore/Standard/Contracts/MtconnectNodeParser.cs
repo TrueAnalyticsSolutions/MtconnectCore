@@ -1,6 +1,7 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -110,7 +111,7 @@ namespace MtconnectCore.Standard.Contracts
                 foreach (PropertyInfo property in properties)
                 {
                     var parser = new XmlPropertyParser(Type, property);
-                    if (parser.ParseMethodAttribute != null)
+                    if (parser.ParseMethodAttribute != null || parser.IsOfMtconnectNode || parser.IsCollectionOfMtconnectNode)
                     {
                         xmlParsers.Add(parser);
                     }
@@ -157,64 +158,49 @@ namespace MtconnectCore.Standard.Contracts
                 }
             }
 
-            public bool TryValidate<T>(T item, out ICollection<MtconnectValidationException> validationErrors) where T : MtconnectNode
+            public bool TryValidate<T>(T item, ValidationReport report = null) where T : MtconnectNode
             {
-                validationErrors = new List<MtconnectValidationException>();
-
-                // Validate this type based on the local validation methods
-                foreach (var validationMethod in ValidationMethods)
+                using (var validationContext = new ValidationContext(report, item))
                 {
-                    validationMethod.TryValidate(item, out ICollection<MtconnectValidationException> errors);
-                    if (errors?.Any() == true)
+                    // Validate this type based on the local validation methods
+                    foreach (var validationMethod in ValidationMethods)
                     {
-                        foreach (var error in errors)
+                        bool validationResult = validationMethod.TryValidate(item, out ICollection<MtconnectValidationException> errors);
+                        if (errors?.Any() == true)
                         {
-                            validationErrors.Add(error);
+                            validationContext.AddExceptions(errors.ToArray());
                         }
                     }
-                }
 
-                // Validate this type based on the child entities
-                foreach (var property in Properties)
-                {
-                    object propertyValue = property.Property.GetValue(item);
-                    if (propertyValue == null) continue;
-
-                    if (property.IsCollectionOfMtconnectNode)
+                    // Validate this type based on the child entities
+                    foreach (var property in Properties)
                     {
-                        IEnumerable<MtconnectNode> typedPropertyValue = (IEnumerable<MtconnectNode>)propertyValue;
-                        if (typedPropertyValue?.Any() == true)
+                        object propertyValue = property.Property.GetValue(item);
+                        if (propertyValue == null) continue;
+
+                        if (property.IsCollectionOfMtconnectNode)
                         {
-                            foreach (var nodeItem in typedPropertyValue)
+                            IEnumerable<MtconnectNode> typedPropertyValue = (IEnumerable<MtconnectNode>)propertyValue;
+                            if (typedPropertyValue?.Any() == true)
                             {
-                                nodeItem.TryValidate(out ICollection<MtconnectValidationException> propertyErrors);
-                                if (propertyErrors?.Any() == true)
+                                foreach (var nodeItem in typedPropertyValue)
                                 {
-                                    foreach (var propertyError in propertyErrors)
-                                    {
-                                        validationErrors.Add(propertyError);
-                                    }
+                                    nodeItem.TryValidate(report);
                                 }
                             }
                         }
-                    } else if (property.IsOfMtconnectNode)
-                    {
-                        MtconnectNode typedPropertyValue = (MtconnectNode)propertyValue;
-                        if (typedPropertyValue != null)
+                        else if (property.IsOfMtconnectNode)
                         {
-                            typedPropertyValue.TryValidate(out ICollection<MtconnectValidationException> propertyErrors);
-                            if (propertyErrors?.Any() == true)
+                            MtconnectNode typedPropertyValue = (MtconnectNode)propertyValue;
+                            if (typedPropertyValue != null)
                             {
-                                foreach (var propertyError in propertyErrors)
-                                {
-                                    validationErrors.Add(propertyError);
-                                }
+                                typedPropertyValue.TryValidate(report);
                             }
                         }
                     }
-                }
 
-                return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+                    return !validationContext.HasErrors();
+                }
             }
 
             /// <summary>

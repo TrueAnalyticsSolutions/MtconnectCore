@@ -72,9 +72,9 @@ namespace MtconnectCore.Standard.Documents.Devices
                 return false;
             }
 
-            if (!relationship.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
+            if (!relationship.TryValidate())
             {
-                Logger.Warn($"[Invalid Probe] Relationship:\r\n{ExceptionHelper.ToString(validationExceptions)}");
+                //Logger.Warn($"[Invalid Probe] Relationship:\r\n{ExceptionHelper.ToString(validationExceptions)}");
                 return false;
             }
             _relationships.Add(relationship);

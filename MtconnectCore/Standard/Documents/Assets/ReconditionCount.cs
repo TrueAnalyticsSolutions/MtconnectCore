@@ -3,6 +3,7 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -30,19 +31,21 @@ namespace MtconnectCore.Standard.Documents.Assets
             }
         }
 
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public override bool TryValidate(ValidationReport report)
         {
-            base.TryValidate(out validationErrors);
-
-            if (!int.TryParse(SourceNode.InnerText, out int value))
+            using (var validationContext = report.CreateContext(this))
             {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Invalid ReconditionCount value. CuttingTool ReconditionCount value must be a number."));
+                var baseResult = base.TryValidate(report);
+
+                if (!int.TryParse(SourceNode.InnerText, out int value))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"Invalid ReconditionCount value. CuttingTool ReconditionCount value must be a number."));
+                }
+
+                return baseResult && !validationContext.HasErrors();
             }
-
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
-
         }
     }
 }

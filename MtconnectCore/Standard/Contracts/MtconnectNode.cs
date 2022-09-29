@@ -1,6 +1,7 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,15 +60,7 @@ namespace MtconnectCore.Standard.Contracts
 
             array.Add(item);
 
-            if (!item.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn("[Invalid MtconnectNode] Parsing type '{MtconnectNodeType}' from XmlNode '{XnodeName}':\r\n{ValidationExceptions}", typeof(T).Name, xNode.LocalName, ExceptionHelper.ToString(validationExceptions));
-            }
-            if (validationExceptions.Any())
-            {
-                InitializationErrors.AddRange(validationExceptions);
-            }
-            return !validationExceptions.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return true;
         }
 
         public bool TrySet<T>(XmlNode xNode, XmlNamespaceManager nsmgr, string propertyName, out T item) where T : MtconnectNode
@@ -80,32 +73,16 @@ namespace MtconnectCore.Standard.Contracts
 
             propertyParser.Property.SetValue(this, item);
 
-            if (!item.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
-            {
-                Logger.Warn("[Invalid MtconnectNode] Parsing type '{MtconnectNodeType}' from XmlNode '{XnodeName}':\r\n{ValidationExceptions}", propertyParser.Type.Name, xNode.LocalName, ExceptionHelper.ToString(validationExceptions));
-            }
-            if (validationExceptions.Any())
-            {
-                InitializationErrors.AddRange(validationExceptions);
-            }
-            return !validationExceptions.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return true;
         }
 
         /// <inheritdoc/>
-        public virtual bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public virtual bool TryValidate(ValidationReport report = null)
         {
-            validationErrors = new List<MtconnectValidationException>();// InitializationErrors.ToList();
+            Type nodeType = this.GetType();
+            var parser = MtconnectNodeParser.GetParser(nodeType);
 
-            Type thisType = this.GetType();
-            var parser = MtconnectNodeParser.GetParser(thisType);
-
-            parser.TryValidate(this, out ICollection<MtconnectValidationException> errors);
-            foreach (MtconnectValidationException error in errors)
-            {
-                validationErrors.Add(error);
-            }
-
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return parser.TryValidate(this, report);
         }
     }
 }

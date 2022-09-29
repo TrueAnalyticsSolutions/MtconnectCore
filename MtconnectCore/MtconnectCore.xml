@@ -7207,7 +7207,7 @@
             An interface that represents a single MTConnect Response Document XML element.
             </summary>
         </member>
-        <member name="M:MtconnectCore.Standard.Contracts.IMtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Contracts.IMtconnectNode.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <summary>
             Validates the format of the MTConnect XML element.
             </summary>
@@ -7246,7 +7246,7 @@
             <param name="nsmgr">Reference to the </param>
             <param name="defaultNamespace"></param>
         </member>
-        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser">
@@ -7404,7 +7404,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.AssetsDocumentHeader.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.CutterStatus">
@@ -7416,7 +7416,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CutterStatus.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingItem">
@@ -7455,7 +7455,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.CuttingItemMeasurement.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.CuttingItems">
@@ -7717,7 +7717,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.ItemLife.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.Location">
@@ -7738,7 +7738,7 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.Location.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Location.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.Measurement">
@@ -8735,6 +8735,31 @@
             Structural interface for a MTConnect Response Document. See Part 1 Section 6 of MTConnect specification.
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.Type">
+            <summary>
+            Reference to the type of MTConnect Response Document this object represents.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.DocumentElementName">
+            <summary>
+            Reference to the tag name of the root XML node.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.DataElementName">
+            <summary>
+            Reference to the tag name of the XML node containing the document data.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.NamespaceManager">
+            <summary>
+            Reference to the XML Namespaces used throughout the document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.DocumentVersion">
+            <summary>
+            Reference to the release version of MTConnect this document should be held to in validation.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Documents.IResponseDocumentHeader">
             <summary>
             Structural interface for a MTConnect Response Document Header. See Part 1 Section 6.5 of MTConnect specification.
@@ -8760,7 +8785,7 @@
             A number indicating a specific instantiation of the buffer associated with the Agent that published the Response Document.
             </summary>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.IResponseDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Documents.IResponseDocumentHeader.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <summary>
             An overridable method for validating the entity model. It is recommended to validate sometime after parsing a MTConnect Response Document.
             </summary>
@@ -8840,7 +8865,7 @@
             <param name="item">Outputs the set <see cref="!:&lt;TItem&gt;"/>.</param>
             <returns>Flag for whether or not the item was successfully parsed from the MTConnect Response Document and added to <see cref="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Items"/>.</returns>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocument`2.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <summary>
             Safely tries to validate the <see cref="!:&lt;THeader&gt;"/> and all <see cref="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Items"/> in this MTConnect Response Document according to the version of MTConnect.
             </summary>
@@ -8878,7 +8903,7 @@
             <param name="defaultNamespace">Reference to the namespace primarily used for this node.</param>
             <param name="version"></param>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.TryValidate(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.AssetChanged.#ctor">

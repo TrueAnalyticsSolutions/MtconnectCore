@@ -40,16 +40,15 @@ namespace MtconnectCore.Standard.Documents.Assets
             {
                 case "CuttingTool":
                     item = new CuttingTool(xNode, nsmgr, DocumentVersion);
-                    if (!item.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
+                    if (!item.TryValidate())
                     {
-                        Logger.Warn($"[Invalid Assets] CuttingTool:\r\n{ExceptionHelper.ToString(validationExceptions)}");
+                        //Logger.Warn($"[Invalid Assets] CuttingTool:\r\n{ExceptionHelper.ToString(validationExceptions)}");
                         return false;
-                    }
-
-                    if (validationExceptions?.Any(o => o.Severity == ValidationSeverity.ERROR) == false)
+                    } else
                     {
                         _items.Add(item);
                     }
+
                     break;
                 default:
                     Logger.Error(new MtconnectValidationException(

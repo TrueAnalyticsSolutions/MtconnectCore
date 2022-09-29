@@ -1,8 +1,11 @@
 ﻿using ConsoulLibrary;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Documents;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace MtconnectCoreExample
 {
     public static class Helper
@@ -14,8 +17,11 @@ namespace MtconnectCoreExample
                      //Formatting = Newtonsoft.Json.Formatting.Indented
                 };
                 Consoul.Write(Newtonsoft.Json.JsonConvert.SerializeObject(mtcDocument, options), ConsoleColor.DarkGray);
-                bool validationResult = ((T)mtcDocument).TryValidate(out ICollection<MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException> validationErrors);
-                foreach (var error in validationErrors)
+
+                var report = new ValidationReport();
+
+                bool validationResult = ((T)mtcDocument).TryValidate(report);
+                foreach (var error in report.Exceptions)
                 {
                     ConsoleColor color;
                     switch (error.Severity)

@@ -2,6 +2,7 @@
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -30,29 +31,32 @@ namespace MtconnectCore.Standard.Documents.Assets
         public AssetsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
 
         /// <inheritdoc />
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public override bool TryValidate(ValidationReport report)
         {
-            base.TryValidate(out validationErrors);
-
-            const string documentationAttributes = "See Part 2 Section 4.4.2 of the MTConnect standard.";
-
-            if (!AssetBufferSize.HasValue)
+            using (var validationContext = report.CreateContext(this))
             {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"MTConnectDevices Header MUST include a 'assetBufferSize' attribute. {documentationAttributes}",
-                    SourceNode));
-            }
+                var baseResult = base.TryValidate(report);
 
-            if (!AssetCount.HasValue)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"MTConnectDevices Header MUST include a 'assetCount' attribute. {documentationAttributes}",
-                    SourceNode));
-            }
+                const string documentationAttributes = "See Part 2 Section 4.4.2 of the MTConnect standard.";
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+                if (!AssetBufferSize.HasValue)
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"MTConnectDevices Header MUST include a 'assetBufferSize' attribute. {documentationAttributes}",
+                        SourceNode));
+                }
+
+                if (!AssetCount.HasValue)
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"MTConnectDevices Header MUST include a 'assetCount' attribute. {documentationAttributes}",
+                        SourceNode));
+                }
+
+                return baseResult && !validationContext.HasErrors();
+            }
         }
     }
 }

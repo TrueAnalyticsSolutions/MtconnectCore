@@ -1,5 +1,6 @@
 ﻿@using MtconnectCore.Standard.Documents
 @using System.Xml;
+@using MtconnectCore.Validation
 @if (Document != null && Validating)
 {
 <div class="d-flex justify-content-center">
@@ -35,8 +36,8 @@ else if (ResponseDocument != null)
         </h5>
         <div id="mtcExceptions" class="accordion-collapse collapse show" aria-aria-labelledby="mtcExceptionsHeading" data-bs-parent="#mtcAccordion">
             <div class="accordion-body">
-                    @if (Exceptions?.Count > 0)
-                    {
+                @if (ValidationReport != null)
+                {
                 <p>These are the results of the <code>MtconnectAgentService.TryParse</code> method which attempts to compare the provided <code>ResponseDocument</code> against rules written in the standard.</p>
                 <div class="table table-responsive">
                     <table class="table table-sm caption-top">
@@ -50,9 +51,9 @@ else if (ResponseDocument != null)
                         </thead>
                         <tbody>
                             <tr>
-                                <td>@(Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR).Count())</td>
-                                <td>@(Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.WARNING).Count())</td>
-                                <td>@(Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.MESSAGE).Count())</td>
+                                <td>@(ValidationReport.Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR).Count())</td>
+                                <td>@(ValidationReport.Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.WARNING).Count())</td>
+                                <td>@(ValidationReport.Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.MESSAGE).Count())</td>
                             </tr>
                         </tbody>
                     </table>
@@ -68,35 +69,40 @@ else if (ResponseDocument != null)
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var exception in Exceptions)
+                            @foreach (var errantNode in ValidationReport.Items)
                             {
-                                string cssClass = "table-primary";
-                                switch(exception.Severity){
-                                    case MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR:
-                                        cssClass = "table-danger";
-                                        break;
-                                    case MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.WARNING:
-                                        cssClass = "table-warning";
-                                        break;
+                                foreach (var nodeError in errantNode.Value)
+                                {
+                                    string cssClass = "table-primary";
+                                    switch (nodeError.Severity)
+                                    {
+                                        case MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR:
+                                            cssClass = "table-danger";
+                                            break;
+                                        case MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.WARNING:
+                                            cssClass = "table-warning";
+                                            break;
+                                    }
+                                    <tr class="@cssClass">
+                                        <td>@(nodeError.Severity.ToString())</td>
+                                        <td>@(nodeError.Message)</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(nodeError.Source))
+                                            {
+                                            <span @onclick="(e) => OnSourceClick(nodeError.Source)">@(errantNode.Key.GetType().Name)</span>
+                                            }
+                                        </td>
+                                    </tr>
                                 }
-                                <tr class="@cssClass">
-                                    <td>@(exception.Severity.ToString())</td>
-                                    <td>@(exception.Message)</td>
-                                    <td>
-                                        @if (!string.IsNullOrEmpty(exception.Source)) {
-                                            <span @onclick="(e) => OnSourceClick(exception.Source)">@(exception.Source)</span>
-                                        }
-                                    </td>
-                                </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-                    } else
-                    {
-                        <p class="alert alert-info">No exceptions found</p>
-                    }
-                </div>
+                } else
+                {
+                    <p class="alert alert-info">No exceptions found</p>
+                }
+            </div>
         </div>
     </div>
     <div class="accordion-item">
@@ -140,14 +146,14 @@ else if (ResponseDocument != null)
 
     private bool Validating { get; set; } = false;
     private IResponseDocument ResponseDocument { get; set; }
-    private ICollection<MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException> Exceptions;
+    private ValidationReport ValidationReport;
     private string ExampleDocument { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
         Validating = true;
         ResponseDocument = null;
-        Exceptions = null;
+        ValidationReport = null;
         ExampleDocument = string.Empty;
         await Task.Run(() =>
         {
@@ -159,7 +165,11 @@ else if (ResponseDocument != null)
                     {
                         ResponseDocument = mtcDoc;
                         ExampleDocument = Newtonsoft.Json.JsonConvert.SerializeObject(mtcDoc, Newtonsoft.Json.Formatting.Indented);
-                        ResponseDocument.TryValidate(out Exceptions);
+                        ValidationReport = new ValidationReport();
+                        ResponseDocument.TryValidate(ValidationReport);
+                        if (!ValidationReport.HasErrors()) {
+                            ValidationReport = null;
+                        }
                     }
                     else
                     {

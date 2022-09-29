@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,6 +35,6 @@ namespace MtconnectCore.Standard.Documents
         /// An overridable method for validating the entity model. It is recommended to validate sometime after parsing a MTConnect Response Document.
         /// </summary>
         /// <returns>Flag for whether the entity is valid.</returns>
-        bool TryValidate(out ICollection<MtconnectValidationException> validationErrors);
+        bool TryValidate(ValidationReport report = null);
     }
 }

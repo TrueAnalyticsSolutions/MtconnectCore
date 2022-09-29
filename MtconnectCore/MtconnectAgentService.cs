@@ -17,6 +17,7 @@ using System.Threading;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
 using System.Net.Http;
 using System.Net.Sockets;
+using MtconnectCore.Validation;
 
 namespace MtconnectCore
 {
@@ -439,11 +440,13 @@ namespace MtconnectCore
             var errors = new List<MtconnectValidationException>();
             #region Audit Probe
             var devices = await Probe();
+            var devicesReport = new ValidationReport();
+
             if (devices is MtcDevices.DevicesDocument)
             {
-                if (!devices.TryValidate(out ICollection<MtconnectValidationException> devicesErrors))
+                if (!devices.TryValidate(devicesReport))
                 {
-                    errors.AddRange(devicesErrors);
+                    errors.AddRange(devicesReport.Exceptions);
                 }
             }
             else
@@ -453,11 +456,13 @@ namespace MtconnectCore
             #endregion
             #region Audit Current
             var current = await Current();
+            var currentReport = new ValidationReport();
+
             if (current is MtcStreams.StreamsDocument)
             {
-                if (!current.TryValidate(out ICollection<MtconnectValidationException> currentErrors))
+                if (!current.TryValidate(currentReport))
                 {
-                    errors.AddRange(currentErrors);
+                    errors.AddRange(currentReport.Exceptions);
                 }
             }
             else
@@ -467,11 +472,13 @@ namespace MtconnectCore
             #endregion
             #region Audit Sample
             var sample = await Sample();
+            var sampleReport = new ValidationReport();
+
             if (sample is MtcStreams.StreamsDocument)
             {
-                if (!sample.TryValidate(out ICollection<MtconnectValidationException> sampleErrors))
+                if (!sample.TryValidate(sampleReport))
                 {
-                    errors.AddRange(sampleErrors);
+                    errors.AddRange(sampleReport.Exceptions);
                 }
             }
             else
@@ -481,11 +488,13 @@ namespace MtconnectCore
             #endregion
             #region Audit Assets
             var assets = await Assets();
+            var assetsReport = new ValidationReport();
+
             if (assets is MtcAssets.AssetsDocument)
             {
-                if (!assets.TryValidate(out ICollection<MtconnectValidationException> assetsErrors))
+                if (!assets.TryValidate(assetsReport))
                 {
-                    errors.AddRange(assetsErrors);
+                    errors.AddRange(assetsReport.Exceptions);
                 }
             }
             else
@@ -495,11 +504,13 @@ namespace MtconnectCore
             #endregion
             #region Audit Error
             var expectedError = await Request<MtcError.ErrorDocument>("error");
+            var errorReport = new ValidationReport();
+
             if (expectedError is MtcError.ErrorDocument)
             {
-                if (!expectedError.TryValidate(out ICollection<MtconnectValidationException> expectedErrorsErrors))
+                if (!expectedError.TryValidate(errorReport))
                 {
-                    errors.AddRange(expectedErrorsErrors);
+                    errors.AddRange(errorReport.Exceptions);
                 }
             }
             else

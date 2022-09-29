@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
 
 namespace MtconnectCore.Standard.Contracts
@@ -12,6 +13,6 @@ namespace MtconnectCore.Standard.Contracts
         /// Validates the format of the MTConnect XML element.
         /// </summary>
         /// <returns>Flag for whether or not the MTConnect XML element is considered valid.</returns>
-        bool TryValidate(out ICollection<MtconnectValidationException> validationErrors);
+        bool TryValidate(ValidationReport report = null);
     }
 }

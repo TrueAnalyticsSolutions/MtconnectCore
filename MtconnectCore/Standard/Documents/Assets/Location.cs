@@ -4,6 +4,7 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,23 +39,27 @@ namespace MtconnectCore.Standard.Documents.Assets
         }
 
         /// <inheritdoc />
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public override bool TryValidate(ValidationReport report)
         {
-            base.TryValidate(out validationErrors);
+            using (var validationContext = report.CreateContext(this))
+            {
+                var baseResult = base.TryValidate(report);
 
-            if (string.IsNullOrEmpty(Type))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"CuttingTool Location missing 'type' attribute."));
-            } else if (!Enum.TryParse<LocationTypes>(Type, out LocationTypes locationType))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Unrecognized CuttingTool Location 'type'."));
+                if (string.IsNullOrEmpty(Type))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"CuttingTool Location missing 'type' attribute."));
+                }
+                else if (!Enum.TryParse<LocationTypes>(Type, out LocationTypes locationType))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"Unrecognized CuttingTool Location 'type'."));
+                }
+
+                return baseResult && !validationContext.HasErrors();
             }
-
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

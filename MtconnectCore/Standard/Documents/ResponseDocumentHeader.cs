@@ -2,6 +2,7 @@
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,44 +46,48 @@ namespace MtconnectCore.Standard.Documents
         public ResponseDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) : base(xNode, nsmgr, defaultNamespace, version) { }
 
         /// <inheritdoc/>
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public override bool TryValidate(ValidationReport report)
         {
-            const string documentationAttributes = "See Part 1 Section 6.5.1 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
-
-            if (string.IsNullOrEmpty(AgentVersion))
+            using (var validationContext = report.CreateContext(this))
             {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Response Document Header MUST include a 'version' attribute. {documentationAttributes}",
-                    SourceNode));
-            }
+                var baseResult = base.TryValidate(report);
 
-            if (CreationTime == null)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Response Document Header MUST include a 'creationTime' attribute. {documentationAttributes}",
-                    SourceNode));
-            }
+                const string documentationAttributes = "See Part 1 Section 6.5.1 of the MTConnect standard.";
 
-            if (InstanceId == default(ulong))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Response Document Header MUST include a 'instanceId' attribute. {documentationAttributes}",
-                    SourceNode));
-            }
+                if (string.IsNullOrEmpty(AgentVersion))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"Response Document Header MUST include a 'version' attribute. {documentationAttributes}",
+                        SourceNode));
+                }
 
-            if (string.IsNullOrEmpty(Sender))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Response Document Header MUST include a 'sender' attribute. {documentationAttributes}",
-                    SourceNode));
-            }
+                if (CreationTime == null)
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"Response Document Header MUST include a 'creationTime' attribute. {documentationAttributes}",
+                        SourceNode));
+                }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+                if (InstanceId == default(ulong))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"Response Document Header MUST include a 'instanceId' attribute. {documentationAttributes}",
+                        SourceNode));
+                }
+
+                if (string.IsNullOrEmpty(Sender))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"Response Document Header MUST include a 'sender' attribute. {documentationAttributes}",
+                        SourceNode));
+                }
+
+                return baseResult && !validationContext.HasErrors();
+            }
         }
     }
 }

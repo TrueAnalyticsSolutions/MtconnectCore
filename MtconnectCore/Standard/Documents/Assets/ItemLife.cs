@@ -4,6 +4,7 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,44 +49,47 @@ namespace MtconnectCore.Standard.Documents.Assets
         }
 
         /// <inheritdoc />
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public override bool TryValidate(ValidationReport report)
         {
-            base.TryValidate(out validationErrors);
+            using (var validationContext = report.CreateContext(this))
+            {
+                var baseResult = base.TryValidate(report);
 
-            if (string.IsNullOrEmpty(Type))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"CuttingItem ItemLife missing 'type' attribute."));
-            }
-            else if (!EnumHelper.Contains<ItemLifeTypes>(Type))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
-                    $"Unrecognized CuttingItem ItemLife 'type'."));
-            }
+                if (string.IsNullOrEmpty(Type))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"CuttingItem ItemLife missing 'type' attribute."));
+                }
+                else if (!EnumHelper.Contains<ItemLifeTypes>(Type))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.WARNING,
+                        $"Unrecognized CuttingItem ItemLife 'type'."));
+                }
 
-            if (string.IsNullOrEmpty(CountDirection))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"CuttingItem ItemLife missing 'countDirection' attribute."));
-            }
-            else if (!EnumHelper.Contains<ItemLifeCountDirectionTypes>(CountDirection))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
-                    $"Unrecognized CuttingItem ItemLife 'countDirection'."));
-            }
+                if (string.IsNullOrEmpty(CountDirection))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"CuttingItem ItemLife missing 'countDirection' attribute."));
+                }
+                else if (!EnumHelper.Contains<ItemLifeCountDirectionTypes>(CountDirection))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.WARNING,
+                        $"Unrecognized CuttingItem ItemLife 'countDirection'."));
+                }
 
-            if (!double.TryParse(SourceNode.InnerText, out double value))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Invalid ItemLife value. CuttingItem ItemLife value must be a number."));
-            }
+                if (!double.TryParse(SourceNode.InnerText, out double value))
+                {
+                    validationContext.AddExceptions(new MtconnectValidationException(
+                        Contracts.Enums.ValidationSeverity.ERROR,
+                        $"Invalid ItemLife value. CuttingItem ItemLife value must be a number."));
+                }
 
-            return !validationErrors.Any(o => o.Severity == Contracts.Enums.ValidationSeverity.ERROR);
+                return baseResult && !validationContext.HasErrors();
+            }
         }
     }
 }

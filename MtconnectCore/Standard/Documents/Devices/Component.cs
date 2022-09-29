@@ -118,10 +118,10 @@ namespace MtconnectCore.Standard.Documents.Devices
                 Logger.Warn("[Invalid Probe] Unsupported Reference type {XnodeName}", xNode.LocalName);
                 return false;
             }
-            if (!reference.TryValidate(out ICollection<MtconnectValidationException> validationExceptions))
+            if (!reference.TryValidate())
             {
-                InitializationErrors.AddRange(validationExceptions);
-                Logger.Warn($"[Invalid Probe] Reference of Component '{TagName}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
+                //InitializationErrors.AddRange(validationExceptions);
+                //Logger.Warn($"[Invalid Probe] Reference of Component '{TagName}':\r\n{ExceptionHelper.ToString(validationExceptions)}");
                 return false;
             }
             _references.Add(reference);

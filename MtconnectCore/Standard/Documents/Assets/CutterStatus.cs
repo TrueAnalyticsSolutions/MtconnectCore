@@ -2,6 +2,7 @@
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,13 +30,14 @@ namespace MtconnectCore.Standard.Documents.Assets
         }
 
         /// <inheritdoc />
-        public override bool TryValidate(out ICollection<MtconnectValidationException> validationErrors)
+        public override bool TryValidate(ValidationReport report)
         {
-            base.TryValidate(out validationErrors);
+            using (var validationContext = report.CreateContext(this))
+            {
+                var baseResult = base.TryValidate(report);
 
-            const string documentationAttributes = "See Part 4 Section 6.1.10 of the MTConnect standard.";
-            validationErrors = new List<MtconnectValidationException>();
-            var invalidMappings = new Dictionary<CuttingToolStatusTypes, CuttingToolStatusTypes[]>() {
+                const string documentationAttributes = "See Part 4 Section 6.1.10 of the MTConnect standard.";
+                var invalidMappings = new Dictionary<CuttingToolStatusTypes, CuttingToolStatusTypes[]>() {
                 {
                     CuttingToolStatusTypes.NEW,
                     new[] {
@@ -76,23 +78,27 @@ namespace MtconnectCore.Standard.Documents.Assets
                     }
                 }
             };
-            if (Statuses.Any()) {
-                foreach (string status in Statuses)
+                if (Statuses.Any())
                 {
-                    if (Enum.TryParse<CuttingToolStatusTypes>(status, out CuttingToolStatusTypes statusType)) {
-                        if (invalidMappings.TryGetValue(statusType, out CuttingToolStatusTypes[] invalidMap)) {
-                            if (invalidMap.Any(o => Statuses.Any(s => s == o.ToString())))
+                    foreach (string status in Statuses)
+                    {
+                        if (Enum.TryParse<CuttingToolStatusTypes>(status, out CuttingToolStatusTypes statusType))
+                        {
+                            if (invalidMappings.TryGetValue(statusType, out CuttingToolStatusTypes[] invalidMap))
                             {
-                                validationErrors.Add(new MtconnectValidationException(
-                                    Contracts.Enums.ValidationSeverity.ERROR,
-                                    $"CutterStatus '{status}' MUST NOT be used with the following CutterStatus types: [{string.Join(", ", invalidMap.Select(o => o.ToString()))}].\r\n {documentationAttributes}"));
+                                if (invalidMap.Any(o => Statuses.Any(s => s == o.ToString())))
+                                {
+                                    validationContext.AddExceptions(new MtconnectValidationException(
+                                        Contracts.Enums.ValidationSeverity.ERROR,
+                                        $"CutterStatus '{status}' MUST NOT be used with the following CutterStatus types: [{string.Join(", ", invalidMap.Select(o => o.ToString()))}].\r\n {documentationAttributes}"));
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+                return baseResult && !validationContext.HasErrors();
+            }
         }
     }
 }
