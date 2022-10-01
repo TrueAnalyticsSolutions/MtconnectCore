@@ -19,7 +19,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Changed the methodology for producing validation results. Errors were no longer bubbling up to the root document.</PackageReleaseNotes>
     <AssemblyVersion>1.7.0.4</AssemblyVersion>
-    <FileVersion>1.0.1.1</FileVersion>
+    <FileVersion>1.7.0.4</FileVersion>
     <Version>1.7.0.4</Version>
   </PropertyGroup>
 
