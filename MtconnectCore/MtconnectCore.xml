@@ -9430,5 +9430,57 @@
         <member name="M:MtconnectCore.Standard.SampleRequestQuery.Validate(System.Exception@)">
             <inheritdoc/>
         </member>
+        <member name="T:MtconnectCore.Validation.ValidationContext">
+            <summary>
+            Provides a context for logging multiple validation exceptions to a single MTConnect node.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationContext.AddExceptions(MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException[])">
+            <summary>
+            Adds one or more validation exceptions.
+            </summary>
+            <param name="exceptions"></param>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationContext.HasErrors">
+            <summary>
+            Determines if there are any exceptions that are of the severity level ERROR.
+            </summary>
+            <returns>Flag if any exception has the severity level of ERROR.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationContext.Dispose">
+            <summary>
+            Disposes of the validation context and logs any exceptions gathered during the context to the underlying Report.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Validation.ValidationReport">
+            <summary>
+            Stores a collection of validation errors for a Response Document.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Validation.ValidationReport.Items">
+            <summary>
+            Collection of validation errors organized by their respective nodes.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationReport.AddExceptions(MtconnectCore.Standard.Contracts.MtconnectNode,MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException[])">
+            <summary>
+            Adds one or more validation exceptions in the context of a single node.
+            </summary>
+            <param name="node"></param>
+            <param name="exceptions"></param>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationReport.CreateContext(MtconnectCore.Standard.Contracts.MtconnectNode)">
+            <summary>
+            Creates a validation context to help log multiple exceptions in the context of a single node.
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationReport.HasErrors">
+            <summary>
+            Determines if there are any exceptions that are of the severity level ERROR.
+            </summary>
+            <returns>Flag if any exception has the severity level of ERROR.</returns>
+        </member>
     </members>
 </doc>

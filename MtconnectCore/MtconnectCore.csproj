@@ -28,7 +28,7 @@
 	</ItemGroup>
 	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\LightWorks\Source\Repos\MtconnectCore\MtconnectCore\MtconnectCore.xml</DocumentationFile>
+    <DocumentationFile>MtconnectCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
