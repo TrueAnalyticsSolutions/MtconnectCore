@@ -444,7 +444,7 @@ namespace MtconnectCore
 
             if (devices is MtcDevices.DevicesDocument)
             {
-                if (!devices.TryValidate(devicesReport))
+                if (!devices.TryValidate(devicesReport) || devicesReport.HasErrors())
                 {
                     errors.AddRange(devicesReport.Exceptions);
                 }
@@ -460,7 +460,7 @@ namespace MtconnectCore
 
             if (current is MtcStreams.StreamsDocument)
             {
-                if (!current.TryValidate(currentReport))
+                if (!current.TryValidate(currentReport) || currentReport.HasErrors())
                 {
                     errors.AddRange(currentReport.Exceptions);
                 }
@@ -476,7 +476,7 @@ namespace MtconnectCore
 
             if (sample is MtcStreams.StreamsDocument)
             {
-                if (!sample.TryValidate(sampleReport))
+                if (!sample.TryValidate(sampleReport) || sampleReport.HasErrors())
                 {
                     errors.AddRange(sampleReport.Exceptions);
                 }
@@ -492,7 +492,7 @@ namespace MtconnectCore
 
             if (assets is MtcAssets.AssetsDocument)
             {
-                if (!assets.TryValidate(assetsReport))
+                if (!assets.TryValidate(assetsReport) || assetsReport.HasErrors())
                 {
                     errors.AddRange(assetsReport.Exceptions);
                 }
@@ -508,7 +508,7 @@ namespace MtconnectCore
 
             if (expectedError is MtcError.ErrorDocument)
             {
-                if (!expectedError.TryValidate(errorReport))
+                if (!expectedError.TryValidate(errorReport) || errorReport.HasErrors())
                 {
                     errors.AddRange(errorReport.Exceptions);
                 }

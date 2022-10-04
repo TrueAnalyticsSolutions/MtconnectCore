@@ -41,9 +41,17 @@ namespace MtconnectCoreExample.Views
             Consoul.Write("Running audit... ", ConsoleColor.Gray, false);
             using (var agent = new MtconnectAgentService(new Uri(Source.AgentUrl)))
             {
-                Source.Errors = agent.Audit().Result;
+                try
+                {
+                    Source.Errors = agent.Audit().Result;
+                }
+                catch (Exception ex)
+                {
+                    Consoul.Write(ex.ToString(), ConsoleColor.Red);
+                }
             }
             Consoul.Write("Done!", ConsoleColor.Green);
+            Consoul.Wait();
         }
 
         private string _exportAuditMessage() => $"Export Report ({(Source.Errors == null ? "Perform Audit First" : "Ready")})";
