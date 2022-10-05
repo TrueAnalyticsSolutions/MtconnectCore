@@ -160,6 +160,7 @@ namespace MtconnectCore.Standard.Contracts
 
             public bool TryValidate<T>(T item, ValidationReport report = null) where T : MtconnectNode
             {
+                report = report ?? new ValidationReport();
                 using (var validationContext = new ValidationContext(report, item))
                 {
                     // Validate this type based on the local validation methods
