@@ -382,7 +382,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         $"DataItem 'statistic' attribute must be one of the following: [{EnumHelper.ToListString<StatisticTypes>(", ", string.Empty, string.Empty)}].",
                         SourceNode));
                 }
-                else if (!EnumHelper.ValidateToVersion<StatisticTypes>(Representation, MtconnectVersion.GetValueOrDefault()))
+                else if (!EnumHelper.ValidateToVersion<StatisticTypes>(Statistic, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
