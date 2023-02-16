@@ -58,7 +58,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 dataItemTypes.Add(categoryEnum);
             }
             // Process the template into enum files
-            processTemplate(dataItemTypes, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"));
+            processTemplate(dataItemTypes, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
 
 
             //// Process Enums
