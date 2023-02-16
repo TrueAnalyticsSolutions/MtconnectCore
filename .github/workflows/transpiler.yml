@@ -16,7 +16,7 @@ jobs:
         include-prerelease: true
 
     - name: Build solution
-      run: dotnet build "MtconnectTranspiler.Sinks.MtconnectCore/MtconnectTranspiler.Sinks.MtconnectCore.csproj --configuration Release
+      run: dotnet build "MtconnectTranspiler.Sinks.MtconnectCore/MtconnectTranspiler.Sinks.MtconnectCore.csproj" --configuration Release
 
     - name: Run transpiler
       run: dotnet "MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.dll" "../../../../MtconnectCore/Standard/Contracts"
