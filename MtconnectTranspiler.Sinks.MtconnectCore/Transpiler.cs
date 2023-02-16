@@ -25,18 +25,22 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
             foreach (var category in categories)
             {
+                // Get the UmlPackage for the category (ie. Samples, Events, Conditions).
                 var typesPackage = model
                     ?.ObservationInformationModel
                     ?.ObservationTypes
                     ?.Elements
                     ?.Where(o => o.Name == $"{category} Types")
                     ?.FirstOrDefault() as UmlPackage;
+                // Get all DataItem Type and SubType references
                 var allTypes = typesPackage
                     ?.Elements
                     ?.Where(o => o is UmlClass)
                     ?.Select(o => o as UmlClass);
+                // Filter to get just the Type references
                 var types = allTypes
                     ?.Where(o => !o.Name.Contains("."));
+                // Filter and group each SubType by the relevant Type reference
                 var subTypes = allTypes
                     ?.Where(o => o.Name.Contains("."))
                     ?.GroupBy(o => o.Name.Substring(0, o.Name.IndexOf(".")), o => o)
@@ -56,15 +60,25 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
                         subTypeEnum.AddItems(model, typeSubTypes);
 
+                        // Cleanup Enum names
                         foreach (var item in subTypeEnum.Items)
                         {
-                            item.Name = ScribanHelperMethods.ToPascalCode(subTypeEnum.Name.Substring(subTypeEnum.Name.IndexOf("." + 1)));
+                            if (!item.Name.Contains(".")) continue;
+                            item.Name = ScribanHelperMethods.ToUpperSnakeCode(item.Name.Substring(item.Name.IndexOf(".") + 1));
                         }
 
+                        // Register the DataItem SubType Enum
                         dataItemTypes.Add(subTypeEnum);
                     }
                 }
 
+                // Cleanup Enum names
+                foreach (var item in categoryEnum.Items)
+                {
+                    item.Name = ScribanHelperMethods.ToUpperSnakeCode(item.Name);
+                }
+
+                // Register the DataItem Category Enum (ie. Samples, Events, Conditions)
                 dataItemTypes.Add(categoryEnum);
             }
             // Process the template into enum files
