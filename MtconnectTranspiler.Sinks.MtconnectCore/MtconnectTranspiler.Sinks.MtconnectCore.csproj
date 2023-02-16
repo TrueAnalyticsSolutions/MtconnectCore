@@ -34,7 +34,7 @@
     <PackageReference Include="CaseExtensions" Version="1.1.0" />
     <PackageReference Include="Consoul" Version="1.6.2" />
     <PackageReference Include="MtconnectTranspiler" Version="0.0.2" />
-    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="0.0.4">
+    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="0.0.5">
       <GeneratePathProperty>True</GeneratePathProperty>
     </PackageReference>
     <PackageReference Include="Scriban" Version="5.6.0" />
