@@ -28,7 +28,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                     ?.ObservationInformationModel
                     ?.ObservationTypes
                     ?.Elements
-                    ?.Where(o => o.Name == $"{categories} Types")
+                    ?.Where(o => o.Name == $"{category} Types")
                     ?.FirstOrDefault() as UmlPackage;
                 var allTypes = typesPackage
                     ?.Elements

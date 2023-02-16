@@ -2,7 +2,7 @@
   "profiles": {
     "MtconnectTranspiler.Sinks.MtconnectCore": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\LightWorks\\Desktop\\MTConnect Transpiled\\CSharp\""
+      "commandLineArgs": "\"../../../../MtconnectCore/Standard/Contracts\""
     }
   }
 }
