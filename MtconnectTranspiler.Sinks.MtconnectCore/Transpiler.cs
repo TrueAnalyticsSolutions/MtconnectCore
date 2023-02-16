@@ -18,6 +18,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
         {
             Model.SetValue("model", model, true);
 
+            const string DataItemNamespace = "MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes";
             List<MtconnectCoreEnum> dataItemTypes = new List<MtconnectCoreEnum>();
             // Process DataItem Types
             string[] categories = new string[] { "Sample", "Event", "Condition" };
@@ -42,15 +43,24 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                     ?.Where(o => o.Any())
                     ?.ToDictionary(o => o.Key, o => o?.ToList());
 
-                var categoryEnum = new MtconnectCoreEnum(model, typesPackage, $"{category}Types");
+                var categoryEnum = new MtconnectCoreEnum(model, typesPackage, $"{category}Types") { Namespace = DataItemNamespace };
 
                 foreach (var type in types)
                 {
+                    categoryEnum.AddItem(model, type);
+
                     if (subTypes.ContainsKey(type.Name))
                     {
                         var typeSubTypes = subTypes[type.Name];
-                        var subTypeEnum = new MtconnectCoreEnum(model, type, $"{type.Name}SubTypes");
+                        var subTypeEnum = new MtconnectCoreEnum(model, type, $"{type.Name}SubTypes") { Namespace = DataItemNamespace };
+
                         subTypeEnum.AddItems(model, typeSubTypes);
+
+                        foreach (var item in subTypeEnum.Items)
+                        {
+                            item.Name = ScribanHelperMethods.ToPascalCode(subTypeEnum.Name.Substring(subTypeEnum.Name.IndexOf("." + 1)));
+                        }
+
                         dataItemTypes.Add(subTypeEnum);
                     }
                 }
