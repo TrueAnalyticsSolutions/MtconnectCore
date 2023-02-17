@@ -21,30 +21,25 @@ jobs:
     - name: Build solution
       run: dotnet build "MtconnectCore.sln" --configuration Release
 
-    - name: Download Release Asset
+    - name: Get latest release info
+      id: get_release_info
       uses: actions/github-script@v4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const fs = require('fs');
-          const path = require('path');
-          const { Octokit } = require('@octokit/rest');
-
-          const octokit = new Octokit();
-          const { data: release } = await octokit.repos.getLatestRelease({
+          const response = await github.repos.getLatestRelease({
             owner: 'mtconnect',
             repo: 'mtconnect_sysml_model'
           });
-          const asset = release.assets.find(a => a.name === 'Model.xml');
-          const { data: file } = await octokit.repos.downloadReleaseAsset({
-            url: asset.url,
-            headers: {
-              Accept: 'application/octet-stream',
-              Authorization: `token ${{ secrets.GITHUB_TOKEN }}`
-            }
-          });
+          console.log(JSON.stringify(response.data.assets[0].browser_download_url));
+          console.log(JSON.stringify(response.data.tag_name));
+          core.setOutput('url', response.data.assets[0].browser_download_url);
+          core.setOutput('tag_name', response.data.tag_name);
 
-          fs.writeFileSync(path.join(process.env.GITHUB_WORKSPACE, 'Model.xml'), file);
+    - name: Download file
+      run: |
+        curl -o Model.xml -L ${{ steps.get_release_info.outputs.url }}
+
 
     - name: Run transpiler
       run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe "../../../../MtconnectCore/Standard/Contracts" "../../../../../Model.xml"
