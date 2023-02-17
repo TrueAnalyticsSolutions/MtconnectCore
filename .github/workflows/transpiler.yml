@@ -46,7 +46,8 @@ jobs:
         curl -o ${{ env.MODEL_PATH }} -L ${{ steps.get_release_info.outputs.url }}
 
     - name: Run transpiler
-      run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe "${{ env.OUTPUT_PATH }}" "${{ env.MODEL_PATH }}"
+      # run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe "${{ env.OUTPUT_PATH }}" "${{ env.MODEL_PATH }}"
+      run: Start-Process MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe -ArgumentList "/parameter1:${{ env.OUTPUT_PATH }} /parameter2:${{ env.MODEL_PATH }}" -verb runAs
       id: transpiler
 
     - name: Delete Model.xml
