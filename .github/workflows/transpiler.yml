@@ -22,7 +22,7 @@ jobs:
       run: dotnet build "MtconnectCore.sln" --configuration Release
 
     - name: Run transpiler
-      run: dotnet "MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.dll" "../../../../MtconnectCore/Standard/Contracts"
+      run: dotnet "MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe" "../../../../MtconnectCore/Standard/Contracts"
       id: transpiler
 
     - name: Publish Artifact
