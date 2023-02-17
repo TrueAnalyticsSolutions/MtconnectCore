@@ -25,6 +25,8 @@ internal class Program
         TranspilerDispatcherOptions dispatchOptions = null;
         if (args.Length > 1)
         {
+            if (!File.Exists(args[1])) throw new FileNotFoundException(args[1]);
+
             dispatchOptions = new FromFileOptions() { Filepath = args[1] };
             Consoul.Write("Dispatching from file: " + args[1]);
         } else
