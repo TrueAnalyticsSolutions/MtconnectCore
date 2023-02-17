@@ -70,11 +70,11 @@ jobs:
         git commit -m "Transpiled SysML model"
         git push -u origin ${{ env.BRANCH }}
 
-    #- name: Push Changes
-    #  uses: ad-m/github-push-action@master
-    #  with:
-    #    github_token: ${{ secrets.GITHUB_TOKEN }}
-    #    branch: ${{ env.BRANCH }}
+    - name: Push Changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ env.BRANCH }}
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
