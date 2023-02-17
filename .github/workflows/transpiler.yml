@@ -42,14 +42,14 @@ jobs:
 
     - name: Set paths
       run: |
-        model_path=$PWD/Model.xml
-        output_path=$PWD/MtconnectCore/Standard/Contracts
-        echo "::set-output name=model_path::$model_path"
-        echo "::set-output name=output_path::$output_path"
+        $modelPath = "$(System.DefaultWorkingDirectory)/Model.xml"
+        $outputPath = "$(System.DefaultWorkingDirectory)/MtconnectCore/Standard/Contracts"
+        echo "::set-env name=MODEL_PATH::$modelPath"
+        echo "::set-env name=OUTPUT_PATH::$outputPath"
       id: set-paths
 
     - name: Run transpiler
-      run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe ${{ steps.set-paths.outputs.output_path }} ${{ steps.set-paths.outputs.model_path }}
+      run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe ${{ env.OUTPUT_PATH }} ${{ env.MODEL_PATH }}
       id: transpiler
 
     - name: Publish Artifact
