@@ -25,6 +25,12 @@ jobs:
       run: dotnet "MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.dll" "../../../../MtconnectCore/Standard/Contracts"
       id: transpiler
 
+    - name: Publish Artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: dataItems
+        path: "MtconnectCore/Standard/Contracts/Devices/DataItems"
+        
     - name: Create new branch
       run: git checkout -b develop/generated
 
