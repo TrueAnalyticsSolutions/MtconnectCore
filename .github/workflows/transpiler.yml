@@ -49,12 +49,10 @@ jobs:
       run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe "${{ env.OUTPUT_PATH }}" "${{ env.MODEL_PATH }}"
       id: transpiler
 
-    - name: Publish Artifact
-      uses: actions/upload-artifact@master
-      with:
-        name: dataItems
-        path: "./"
-        
+    - name: Delete Model.xml
+      run: |
+        Remove-Item -Path "${{ env.MODEL_PATH }}" -Force
+
     - name: Create new branch
       run: git checkout -b develop/generated
 
