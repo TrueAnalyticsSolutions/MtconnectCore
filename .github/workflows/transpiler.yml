@@ -42,7 +42,7 @@ jobs:
 
 
     - name: Run transpiler
-      run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe "../../../../MtconnectCore/Standard/Contracts" "../../../../../Model.xml"
+      run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe "../../../../MtconnectCore/Standard/Contracts" "../../../../Model.xml"
       id: transpiler
 
     - name: Publish Artifact
