@@ -1,22 +1,25 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of EVENT <c>type</c> <see cref="EventTypes.DIRECTION"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.11")]
-    public enum DirectionSubTypes
-    {
-        /// <summary>
-        /// The rotational direction of a rotary device using the right hand rule convention as defined  in Appendix B. CLOCKWISE or COUNTER_CLOCKWISE
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.11")]
-        ROTARY,
-        /// <summary>
-        /// The direction of motion of a linear device. POSTIVE or NEGATIVE
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.11")]
-        LINEAR
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum DirectionSubTypes
+	{
+		/// <summary>
+		﻿/// rotational direction of a rotary motion using the right hand rule convention.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+		ROTARY,
+		/// <summary>
+		﻿/// direction of motion of a linear motion.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+		LINEAR,
+	}
 }

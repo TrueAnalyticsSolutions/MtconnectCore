@@ -1,22 +1,25 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.DEPOSITION_MASS"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-    public enum DepositionMassSubTypes
-    {
-        /// <summary>
-        /// The measured mass of the material deposited in an additive manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        ACTUAL,
-        /// <summary>
-        /// The commanded mass of the material to be deposited in an additive manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        COMMANDED,
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum DepositionMassSubTypes
+	{
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		ACTUAL,
+		/// <summary>
+		﻿/// directive value including adjustments such as an offset or overrides.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		COMMANDED,
+	}
 }

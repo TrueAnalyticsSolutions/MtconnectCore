@@ -1,27 +1,30 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of EVENT <c>type</c> <see cref="EventTypes.PART_UNIQUE_ID"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-    public enum PartUniqueIdSubTypes
-    {
-        /// <summary>
-        /// The globally unique identifier as specified in ISO 11578 or RFC 4122.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-        UUID,
-        /// <summary>
-        /// A serial number that uniquely identifies a specific part.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-        SERIAL_NUMBER,
-        /// <summary>
-        /// The unique identifier for a singular piece of material that is used to make a single part.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-        RAW_MATERIAL,
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum PartUniqueIdSubTypes
+	{
+		/// <summary>
+		﻿/// serial number that uniquely identifies a specific part.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		SERIAL_NUMBER,
+		/// <summary>
+		﻿/// material that is used to produce parts.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		RAW_MATERIAL,
+		/// <summary>
+		﻿/// universally unique identifier as specified in ISO 11578 or RFC 4122.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		UUID,
+	}
 }

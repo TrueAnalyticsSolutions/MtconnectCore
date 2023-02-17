@@ -1,27 +1,30 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.CUTTING_SPEED"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-    public enum CuttingSpeedSubTypes
-    {
-        /// <summary>
-        /// The measured value between the cutting mechanism and the surface of the workpiece it is operating on.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        ACTUAL,
-        /// <summary>
-        /// The commanded value between the cutting mechanism and the surface of the workpiece it is operating on.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        COMMANDED,
-        /// <summary>
-        /// The programmed value between the cutting mechanism and the surface of the workpiece it is operating on.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        PROGRAMMED,
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum CuttingSpeedSubTypes
+	{
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		ACTUAL,
+		/// <summary>
+		﻿/// directive value including adjustments such as an offset or overrides.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		COMMANDED,
+		/// <summary>
+		﻿/// directive value without offsets and adjustments.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		PROGRAMMED,
+	}
 }

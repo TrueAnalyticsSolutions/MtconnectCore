@@ -1,22 +1,45 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.VOLUME_SPATIAL"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-    public enum VolumeSpatialSubTypes
-    {
-        /// <summary>
-        /// The amount of bulk material currently present in an object or container.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        ACTUAL,
-        /// <summary>
-        /// The amount of bulk material consumed from an object or container during a manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        CONSUMED
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum VolumeSpatialSubTypes
+	{
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		ACTUAL,
+		/// <summary>
+		﻿/// reported or measured value of the amount used in the manufacturing process.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		CONSUMED,
+		/// <summary>
+		﻿/// reported or measured value of amount included in the <i>part</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		PART,
+		/// <summary>
+		﻿/// reported or measured value of the amount discarded
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		WASTE,
+		/// <summary>
+		﻿/// boundary when an activity or an event terminates.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		ENDED,
+		/// <summary>
+		﻿/// boundary when an activity or an event commences.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		START,
+	}
 }

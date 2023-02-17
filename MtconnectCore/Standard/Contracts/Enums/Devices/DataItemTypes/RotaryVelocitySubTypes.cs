@@ -1,33 +1,36 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
 using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.ROTARY_VELOCITY"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
-    public enum RotaryVelocitySubTypes {
-        /// <summary>
-        /// The rotational speed the rotary axis is spinning at.  ROTARY_MODE MUST be SPINDLE.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
-        ACTUAL,
-        /// <summary>
-        /// The rotational speed as specified in the program. 
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10")]
-        COMMANDED,
-        /// <summary>
-        /// The rotational velocity specified  by a logic or motion program or set by a switch
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-        PROGRAMMED,
-        /// <summary>
-        /// The operator’s overridden value. Percent of commanded.
-        /// </summary>
-        [Obsolete("Deprecated in version 1.3.0. See EVENT Type DataItems.")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10", MtconnectVersions.V_1_2_0)]
-        OVERRIDE
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum RotaryVelocitySubTypes
+	{
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+		ACTUAL,
+		/// <summary>
+		﻿/// directive value including adjustments such as an offset or overrides.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+		COMMANDED,
+		/// <summary>
+		﻿/// directive value without offsets and adjustments.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		PROGRAMMED,
+		/// <summary>
+		﻿/// The operators overridden value.  
+		/// </summary>
+		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/", MtconnectVersions.V_1_3_0)]
+		OVERRIDE,
+	}
 }

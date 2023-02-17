@@ -1,38 +1,40 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
 using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.AMPERAGE"/>
-    /// </summary>
-    [Obsolete("Deprecated in v1.6.0")]
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10", MtconnectVersions.V_1_5_0)]
-    public enum AmperageSubTypes
-    {
-        /// <summary>
-        /// The measured amperage being delivered  from a power source.
-        /// </summary>
-        [Obsolete("Deprecated in v1.6.0")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1", MtconnectVersions.V_1_5_0)]
-        ACTUAL,
-        /// <summary>
-        /// The measurement of alternating current. If not  specified further in statistic, defaults to RMS Current
-        /// </summary>
-        [Obsolete("Deprecated in v1.6.0")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10", MtconnectVersions.V_1_5_0)]
-        ALTERNATING,
-        /// <summary>
-        /// The measurement of DC current
-        /// </summary>
-        [Obsolete("Deprecated in v1.6.0")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.5.10", MtconnectVersions.V_1_5_0)]
-        DIRECT,
-        /// <summary>
-        /// The desired or preset amperage to be  delivered from a power source.
-        /// </summary>
-        [Obsolete("Deprecated in v1.6.0")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 8.1", MtconnectVersions.V_1_5_0)]
-        TARGET
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/", MtconnectVersions.V_1_6_0)]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum AmperageSubTypes
+	{
+		/// <summary>
+		﻿/// measurement of alternating voltage or current.   If not specified further in statistic, defaults to RMS voltage.   <b>DEPRECATED</b> in <i>Version 1.6</i>.
+		/// </summary>
+		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/", MtconnectVersions.V_1_6_0)]
+		ALTERNATING,
+		/// <summary>
+		﻿/// measurement of DC current or voltage.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+		/// </summary>
+		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/", MtconnectVersions.V_1_6_0)]
+		DIRECT,
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+		/// </summary>
+		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/", MtconnectVersions.V_1_6_0)]
+		ACTUAL,
+		/// <summary>
+		﻿/// goal of the operation or process.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+		/// </summary>
+		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/", MtconnectVersions.V_1_6_0)]
+		TARGET,
+	}
 }

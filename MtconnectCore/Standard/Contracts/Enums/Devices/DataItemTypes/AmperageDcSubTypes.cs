@@ -1,27 +1,30 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.AMPERAGE_DC"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
-    public enum AmperageDcSubTypes
-    {
-        /// <summary>
-        /// The measured amperage within an electrical circuit
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
-        ACTUAL,
-        /// <summary>
-        /// The value for a current as specified by a component. The COMMANDED current is a calculated value that includes adjustments and overrides.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
-        COMMANDED,
-        /// <summary>
-        /// The value for a current as specified by a logic or motion program or set by a switch.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
-        PROGRAMMED
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum AmperageDCSubTypes
+	{
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		ACTUAL,
+		/// <summary>
+		﻿/// directive value including adjustments such as an offset or overrides.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		COMMANDED,
+		/// <summary>
+		﻿/// directive value without offsets and adjustments.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		PROGRAMMED,
+	}
 }

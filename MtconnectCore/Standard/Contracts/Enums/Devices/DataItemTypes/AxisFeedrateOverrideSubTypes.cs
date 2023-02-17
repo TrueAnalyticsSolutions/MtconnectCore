@@ -1,27 +1,30 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of EVENT <c>type</c> <see cref="EventTypes.AXIS_FEEDRATE_OVERRIDE"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-    public enum AxisFeedrateOverrideSubTypes
-    {
-        /// <summary>
-        /// The value of a signal or calculation issued to adjust feedrate of an individual linear type axis when that axis is being operated in a manual state or method (jogging).
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-        JOG,
-        /// <summary>
-        /// The value of a signal or calculation issued to adjust the  feedrate of an individual linear type axis that has been specified by a logic or motion program or set by a switch.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-        PROGRAMMED,
-        /// <summary>
-        /// The value of a signal or calculation issued to adjust the  feedrate of an individual linear type axis that is operating in a rapid positioning mode.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-        RAPID
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum AxisFeedrateOverrideSubTypes
+	{
+		/// <summary>
+		﻿/// relating to momentary activation of a function or a movement.  <b>DEPRECATION WARNING</b>: May be deprecated in the future./// Description
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		JOG,
+		/// <summary>
+		﻿/// directive value without offsets and adjustments.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		PROGRAMMED,
+		/// <summary>
+		﻿/// performing an operation faster or in less time than nominal rate.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		RAPID,
+	}
 }
