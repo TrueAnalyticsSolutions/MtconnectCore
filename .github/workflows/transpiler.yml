@@ -45,7 +45,6 @@ jobs:
     - name: Create new branch
       run: |
         git checkout -b ${{ env.BRANCH }}
-        git pull
 
     - name: Download file
       run: |
