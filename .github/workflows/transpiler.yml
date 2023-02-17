@@ -63,7 +63,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git add .
         git commit -am "Transpiled SysML model"
-        git push -f origin develop/generated
+        git push -u origin develop/generated
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
