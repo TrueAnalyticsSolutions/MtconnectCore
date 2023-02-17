@@ -68,7 +68,6 @@ jobs:
     - name: Commit Changes
       run: |
         git commit -m "Transpiled SysML model"
-        git push -u origin ${{ env.BRANCH }}
 
     - name: Push Changes
       uses: ad-m/github-push-action@master
