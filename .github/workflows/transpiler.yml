@@ -21,8 +21,33 @@ jobs:
     - name: Build solution
       run: dotnet build "MtconnectCore.sln" --configuration Release
 
+    - name: Download Release Asset
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          const { Octokit } = require('@octokit/rest');
+
+          const octokit = new Octokit();
+          const { data: release } = await octokit.repos.getLatestRelease({
+            owner: 'mtconnect',
+            repo: 'mtconnect_sysml_model'
+          });
+          const asset = release.assets.find(a => a.name === 'Model.xml');
+          const { data: file } = await octokit.repos.downloadReleaseAsset({
+            url: asset.url,
+            headers: {
+              Accept: 'application/octet-stream',
+              Authorization: `token ${{ secrets.GITHUB_TOKEN }}`
+            }
+          });
+
+          fs.writeFileSync(path.join(process.env.GITHUB_WORKSPACE, 'Model.xml'), file);
+
     - name: Run transpiler
-      run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe "../../../../MtconnectCore/Standard/Contracts"
+      run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe "../../../../MtconnectCore/Standard/Contracts" "../../../../../Model.xml"
       id: transpiler
 
     - name: Publish Artifact
