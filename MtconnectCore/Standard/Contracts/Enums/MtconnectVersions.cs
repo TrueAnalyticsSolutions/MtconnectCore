@@ -64,6 +64,26 @@
         /// <summary>
         /// Version 1.7.1
         /// </summary>
-        V_1_7_1 = 1 << 12
+        V_1_7_1 = 1 << 12,
+        /// <summary>
+        /// Version 1.8.0
+        /// </summary>
+        /// <remarks>Prepared on: September 6, 2021</remarks>
+        V_1_8_0 = 1 << 13,
+        /// <summary>
+        /// Version 2.0.0
+        /// </summary>
+        /// <remarks>Prepared on: May 24, 2022</remarks>
+        V_2_0_0 = 1 << 14,
+        /// <summary>
+        /// Version 2.1.0
+        /// </summary>
+        /// <remarks>Prepared on: January 14, 2023</remarks>
+        V_2_1_0 = 1 << 15,
+        /// <summary>
+        /// Version 2.2.0
+        /// </summary>
+        /// <remarks>Pre-Release</remarks>
+        V_2_2_0 = 1 << 16,
     }
 }

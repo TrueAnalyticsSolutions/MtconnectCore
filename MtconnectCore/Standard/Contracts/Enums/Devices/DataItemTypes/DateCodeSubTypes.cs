@@ -1,27 +1,30 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of EVENT <c>type</c> <see cref="EventTypes.DATE_CODE"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
-    public enum DateCodeSubTypes
-    {
-        /// <summary>
-        /// The time and date code relating to the production of a material or other physical item.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
-        MANUFACTURE,
-        /// <summary>
-        /// The time and date code relating to the expiration or end of useful life for a material or other physical item.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
-        EXPIRATION,
-        /// <summary>
-        /// The time and date code relating the first use of a material or other physical item.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.2")]
-        FIRST_USE
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum DateCodeSubTypes
+	{
+		/// <summary>
+		﻿/// time and date code relating to the production of a material or other physical item.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		MANUFACTURE,
+		/// <summary>
+		﻿/// time and date code relating to the expiration or end of useful life for a material or other physical item.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		EXPIRATION,
+		/// <summary>
+		﻿/// time and date code relating the first use of a material or other physical item.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		FIRST_USE,
+	}
 }

@@ -1,21 +1,25 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.ANGLE"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
-    public enum AngleSubTypes {
-        /// <summary>
-        /// The angular position as read from the physical  component.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
-        ACTUAL,
-        /// <summary>
-        /// The angular position computed by the Controller.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.1")]
-        COMMANDED
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum AngleSubTypes
+	{
+		/// <summary>
+		﻿/// directive value including adjustments such as an offset or overrides.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		COMMANDED,
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		ACTUAL,
+	}
 }

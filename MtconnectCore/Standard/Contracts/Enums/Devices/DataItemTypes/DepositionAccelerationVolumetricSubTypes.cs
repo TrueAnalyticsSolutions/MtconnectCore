@@ -1,22 +1,25 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.DEPOSITION_ACCELERATION_VOLUMETRIC"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-    public enum DepositionAccelerationVolumetricSubTypes
-    {
-        /// <summary>
-        /// The measured rate of change in spatial volume of material deposited in an additive manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        ACTUAL,
-        /// <summary>
-        /// The commanded rate of change in spatial volume of material to be deposited in an additive manufacturing process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        COMMANDED
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum DepositionAccelerationVolumetricSubTypes
+	{
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		ACTUAL,
+		/// <summary>
+		﻿/// directive value including adjustments such as an offset or overrides.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		COMMANDED,
+	}
 }

@@ -1,36 +1,35 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of SAMPLE <c>type</c> <see cref="SampleTypes.PATH_POSITION"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.1")]
-    public enum PathPositionSubTypes {
-        /// <summary>
-        /// The position of the Component as read from the  device.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.1")]
-        ACTUAL,
-        /// <summary>
-        /// The position computed by the Controller.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.1")]
-        COMMANDED,
-        /// <summary>
-        /// The target position for the movement.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.1")]
-        TARGET,
-        /// <summary>
-        /// The position provided by a probe
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 4.2.1")]
-        PROBE,
-        /// <summary>
-        /// The position of the control point specified by a logic or motion program.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 8.1")]
-        PROGRAMMED
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum PathPositionSubTypes
+	{
+		/// <summary>
+		﻿/// measured or reported value of an <i>observation</i>.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		ACTUAL,
+		/// <summary>
+		﻿/// directive value including adjustments such as an offset or overrides.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		COMMANDED,
+		/// <summary>
+		﻿/// goal of the operation or process.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		TARGET,
+		/// <summary>
+		﻿/// position provided by a measurement probe.  <b>DEPRECATION WARNING</b>: May be deprecated in the future.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		PROBE,
+	}
 }

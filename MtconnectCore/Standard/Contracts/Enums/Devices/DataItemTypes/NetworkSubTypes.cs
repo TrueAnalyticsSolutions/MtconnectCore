@@ -1,47 +1,50 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of EVENT <c>type</c> <see cref="EventTypes.NETWORK"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
-    public enum NetworkSubTypes
-    {
-        /// <summary>
-        /// The IPV4 network address of the component.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
-        IPV4_ADDRESS,
-        /// <summary>
-        /// The IPV6 network address of the component.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
-        IPV6_ADDRESS,
-        /// <summary>
-        /// The Gateway for the component network.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
-        GATEWAY,
-        /// <summary>
-        /// The SubNet mask for the component network.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
-        SUBNET_MASK,
-        /// <summary>
-        /// The layer2 Virtual Local Network (VLAN) ID for the component network.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
-        VLAN_ID,
-        /// <summary>
-        /// Media Access Control Address. The unique physical address of the network hardware.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
-        MAC_ADDRESS,
-        /// <summary>
-        /// Identifies whether the connection type is wireless.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 8.2")]
-        WIRELESS
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum NetworkSubTypes
+	{
+		/// <summary>
+		﻿/// IPV4 network address of the component. 
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		I_PV4_ADDRESS,
+		/// <summary>
+		﻿/// IPV6 network address of the component. 
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		I_PV6_ADDRESS,
+		/// <summary>
+		﻿/// Gateway for the component network.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		GATEWAY,
+		/// <summary>
+		﻿/// SubNet mask for the component network. 
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		SUBNET_MASK,
+		/// <summary>
+		﻿/// layer2 Virtual Local Network (VLAN) ID for the component network.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		V_LAN_ID,
+		/// <summary>
+		﻿/// Media Access Control Address.   The unique physical address of the network hardware. 
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		MAC_ADDRESS,
+		/// <summary>
+		﻿/// identifies whether the connection type is wireless.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/")]
+		WIRELESS,
+	}
 }

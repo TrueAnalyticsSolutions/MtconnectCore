@@ -1,37 +1,40 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of EVENT <c>type</c> <see cref="EventTypes.PART_GROUP_ID"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-    public enum PartGroupIdSubTypes
-    {
-        /// <summary>
-        /// The globally unique identifier as specified in ISO 11578 or RFC 4122.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-        UUID,
-        /// <summary>
-        /// An identifier that references a group of parts tracked as a lot.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-        LOT,
-        /// <summary>
-        /// An identifier that references a group of parts produced in a batch.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-        BATCH,
-        /// <summary>
-        /// The unique identifier for a singular piece of material that is used to make multiple parts.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-        RAW_MATERIAL,
-        /// <summary>
-        /// An identifier used to reference a material heat number.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 8.2")]
-        HEAT_TREAT
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum PartGroupIdSubTypes
+	{
+		/// <summary>
+		﻿/// identifier that references a group of parts tracked as a lot. 
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		LOT,
+		/// <summary>
+		﻿/// material that is used to produce parts.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		RAW_MATERIAL,
+		/// <summary>
+		﻿/// identifier that references a group of parts produced in a batch.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		BATCH,
+		/// <summary>
+		﻿/// universally unique identifier as specified in ISO 11578 or RFC 4122.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		UUID,
+		/// <summary>
+		﻿/// identifier used to reference a material heat number.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		HEAT_TREAT,
+	}
 }

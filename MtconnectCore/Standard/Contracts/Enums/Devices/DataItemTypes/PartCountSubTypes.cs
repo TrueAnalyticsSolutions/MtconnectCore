@@ -1,36 +1,55 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums;
+using System;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
-    /// <summary>
-    /// <c>subType</c>s of EVENT <c>type</c> <see cref="EventTypes.PART_COUNT"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
-    public enum PartCountSubTypes {
-        /// <summary>
-        /// The count of all the parts produced. If the subtype is not given, this is the default. 
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
-        ALL,
-        /// <summary>
-        /// Indicates the count of correct parts made. 
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
-        GOOD,
-        /// <summary>
-        /// Indicates the count of incorrect parts produced.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 4.2.2")]
-        BAD,
-        /// <summary>
-        /// Indicates the number of parts that are projected or planned to  be produced
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-        TARGET,
-        /// <summary>
-        /// The number of parts remaining in stock or to be produced.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 7.1")]
-        REMAINING
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum PartCountSubTypes
+	{
+		/// <summary>
+		﻿/// accumulation of all actions, items, or activities being counted independent of the outcome.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		ALL,
+		/// <summary>
+		﻿/// accumulation of actions, items, or activities being counted that conform to specification or expectation.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		GOOD,
+		/// <summary>
+		﻿/// accumulation of actions, items, or activities being counted that do not conform to specification or expectation.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		BAD,
+		/// <summary>
+		﻿/// goal of the operation or process.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		TARGET,
+		/// <summary>
+		﻿/// accumulation of actions, items, or activities yet to be counted.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		REMAINING,
+		/// <summary>
+		﻿/// accumulation of actions, items, or activities that have been completed, independent of the outcome.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		COMPLETE,
+		/// <summary>
+		﻿/// accumulation of actions or activities that were attempted, but terminated before they could be completed.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		ABORTED,
+		/// <summary>
+		﻿/// accumulation of actions or activities that were attempted, but failed to complete or resulted in an unexpected or unacceptable outcome.
+		/// </summary>
+		[MTConnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		FAILED,
+	}
 }
