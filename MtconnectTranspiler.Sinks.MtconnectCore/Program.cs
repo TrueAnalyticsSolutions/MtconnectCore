@@ -41,7 +41,11 @@ internal class Program
             Consoul.Write("Beginning deserialization and dispatching");
             var task = Task.Run(() => dispatcher.TranspileAsync(tokenSource.Token)).ContinueWith((t) => tokenSource.Cancel());
 
+#if DEBUG
             Consoul.Wait(cancellationToken: tokenSource.Token);
+#else
+            task.Wait();
+#endif
 
             if (task.IsCompletedSuccessfully)
             {
