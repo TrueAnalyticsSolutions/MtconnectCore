@@ -22,13 +22,23 @@ internal class Program
             .CreateLogger<TranspilerDispatcher>();
 
         // NOTE: The GitHubRelease can be a reference to a specific tag referring to the version in which to download.
-        var dispatchOptions = new FromGitHubOptions() { GitHubRelease = "latest" };
+        TranspilerDispatcherOptions dispatchOptions = null;
+        if (args.Length > 1)
+        {
+            dispatchOptions = new FromFileOptions() { Filepath = args[1] };
+            Consoul.Write("Dispatching from file: " + args[1]);
+        } else
+        {
+            dispatchOptions = new FromGitHubOptions() { GitHubRelease = "latest" };
+            Consoul.Write("Dispatching from GitHub's latest release");
+        }
 
         using (var tokenSource = new CancellationTokenSource())
         using (var dispatcher = new TranspilerDispatcher(dispatchOptions, logger))
         {
             dispatcher.AddSink(new Transpiler(projectPath));
 
+            Consoul.Write("Beginning deserialization and dispatching");
             var task = Task.Run(() => dispatcher.TranspileAsync(tokenSource.Token)).ContinueWith((t) => tokenSource.Cancel());
 
             Consoul.Wait(cancellationToken: tokenSource.Token);
