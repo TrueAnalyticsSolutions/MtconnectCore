@@ -7,7 +7,7 @@ namespace {{ to_pascal_code source.namespace }} {
 	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Structure__{{ source.id }}">model.mtconnect.org</seealso>
 	{{ source?.summary }}
 	/// </summary>
-	{{ include 'MTConnectVersionApplicability.scriban' source }}
+	{{ include 'MtconnectVersionApplicability.scriban' source }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
 	public {{ source.modifier }} class {{ source.name }} {
 	{{~ for item in source.items ~}}
@@ -15,7 +15,7 @@ namespace {{ to_pascal_code source.namespace }} {
 		{{ item?.summary }}
 		/// </summary>
 		/// <remarks>Original Name: {{ item.name }}</remarks>
-		{{ include 'MTConnectVersionApplicability.scriban' item }}
+		{{ include 'MtconnectVersionApplicability.scriban' item }}
 		{{ item.access_modifier }} {{ item.type }} {{ item.name }} { get; set; }
 	{{~ end ~}}
 

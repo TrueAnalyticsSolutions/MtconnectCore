@@ -1,6 +1,6 @@
-﻿﻿using MtconnectCore.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums;
-using System;
+﻿using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace {{ to_pascal_code source.namespace }}
 {
@@ -11,7 +11,7 @@ namespace {{ to_pascal_code source.namespace }}
 	{{~ if source?.deprecated_version != "" ~}}
 	[Obsolete("Deprecated according to https://model.mtconnect.org/")]
 	{{~ end ~}}
-	{{ include 'MTConnectVersionApplicability.scriban' source }}
+	{{ include 'MtconnectVersionApplicability.scriban' source }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
 	public enum {{ to_pascal_case source.name }}
 	{
@@ -22,7 +22,7 @@ namespace {{ to_pascal_code source.namespace }}
 		{{~ if item?.deprecated_version != "" ~}}
 		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
 		{{~ end ~}}
-		{{ include 'MTConnectVersionApplicability.scriban' item }}
+		{{ include 'MtconnectVersionApplicability.scriban' item }}
 		{{ item.name }},
 	{{~ end ~}}
 	}

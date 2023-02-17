@@ -1,6 +1,6 @@
-﻿using MtconnectCore.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums;
 using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
@@ -14,32 +14,32 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// <summary>
 		﻿/// {{def(ConditionEnum:ACTUATOR)}}
 		/// </summary>
-		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
 		ACTUATOR,
 		/// <summary>
 		﻿/// {{def(ConditionEnum:COMMUNICATIONS)}}
 		/// </summary>
-		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
 		COMMUNICATIONS,
 		/// <summary>
 		﻿/// {{def(ConditionEnum:DATA_RANGE)}}
 		/// </summary>
-		[MTConnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
 		DATA_RANGE,
 		/// <summary>
 		﻿/// {{def(ConditionEnum:LOGIC_PROGRAM)}}
 		/// </summary>
-		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
 		LOGIC_PROGRAM,
 		/// <summary>
 		﻿/// {{def(ConditionEnum:MOTION_PROGRAM)}}
 		/// </summary>
-		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
 		MOTION_PROGRAM,
 		/// <summary>
 		﻿/// {{def(ConditionEnum:SYSTEM)}}
 		/// </summary>
-		[MTConnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
 		SYSTEM,
 	}
 }

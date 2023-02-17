@@ -1,1 +1,4 @@
-﻿{{~ if $1?.normative_version != "" ~}}[MTConnectVersionApplicability({{ $1?.normative_version }}, "https://model.mtconnect.org/"{{~ if $1?.deprecated_version != "" ~}}, {{ $1?.deprecated_version }}{{~ end ~}})]{{~ end ~}}
+﻿{{~
+minVersion=$1?.normative_version
+maxVersion=$1?.deprecated_version ~}}
+{{~ if minVersion && minVersion != "" ~}}[MtconnectVersionApplicability({{ minVersion }}, "https://model.mtconnect.org/" {{~ if maxVersion && maxVersion != "" ~}} , {{ maxVersion }} {{~ end ~}})]{{~ end ~}}

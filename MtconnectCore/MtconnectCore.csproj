@@ -18,9 +18,9 @@
     <RepositoryUrl>https://github.com/TrueAnalyticsSolutions/MtconnectCore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>Changed the methodology for producing validation results. Errors were no longer bubbling up to the root document.</PackageReleaseNotes>
-    <AssemblyVersion>1.7.0.5</AssemblyVersion>
-    <FileVersion>1.7.0.4</FileVersion>
-    <Version>1.7.0.5</Version>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion></FileVersion>
+    <Version>2.1.0.1</Version>
   </PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net45'">
