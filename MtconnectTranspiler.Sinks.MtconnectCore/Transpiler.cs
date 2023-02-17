@@ -1,4 +1,5 @@
 ﻿using ConsoulLibrary;
+using Microsoft.Extensions.Logging;
 using MtconnectTranspiler.Model;
 using MtconnectTranspiler.Sinks.CSharp;
 using MtconnectTranspiler.Sinks.CSharp.Models;
@@ -13,11 +14,11 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
         /// 
         /// </summary>
         /// <param name="projectPath">Expected to be <c>MtconnectCore/Standard/Contracts</c></param>
-        public Transpiler(string projectPath) : base(projectPath) { }
+        public Transpiler(string projectPath, ILogger<Transpiler> logger = default) : base(projectPath, logger) { }
 
         public override void Transpile(MTConnectModel model, CancellationToken cancellationToken = default(CancellationToken))
         {
-            Consoul.Write("Received MTConnectModel, beginning transpilation");
+            _logger?.LogInformation("Received MTConnectModel, beginning transpilation");
 
             Model.SetValue("model", model, true);
 
@@ -85,7 +86,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 dataItemTypes.Add(categoryEnum);
             }
 
-            Consoul.Write($"Processing {dataItemTypes.Count} DataItem types/subTypes");
+            _logger?.LogInformation($"Processing {dataItemTypes.Count} DataItem types/subTypes");
 
             // Process the template into enum files
             processTemplate(dataItemTypes, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
@@ -125,7 +126,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                         // Process Enums
                         processTemplate(
                             new MtconnectCoreEnum(Model["model"] as MTConnectModel, subModel),
-                            Path.Combine(ProjectPath, "Enums", "Devices", "ComponentTypes"));// Path.Combine(ProjectPath, "Enums"));
+                            Path.Combine(ProjectPath, "Enums", "Devices", "ComponentTypes"));
                     }
                     else
                     {

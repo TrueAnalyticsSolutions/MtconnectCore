@@ -18,8 +18,10 @@ internal class Program
             Directory.CreateDirectory(projectPath);
         }
 
-        var logger = LoggerFactory.Create((o) => o.AddConsoulLogger())
-            .CreateLogger<TranspilerDispatcher>();
+        var logFactory = LoggerFactory.Create((o) => o.AddConsoulLogger());
+        var dispatchLogger = logFactory.CreateLogger<TranspilerDispatcher>();
+        var transpilerLogger = logFactory.CreateLogger<Transpiler>();
+
 
         // NOTE: The GitHubRelease can be a reference to a specific tag referring to the version in which to download.
         TranspilerDispatcherOptions dispatchOptions = null;
@@ -36,9 +38,9 @@ internal class Program
         }
 
         using (var tokenSource = new CancellationTokenSource())
-        using (var dispatcher = new TranspilerDispatcher(dispatchOptions, logger))
+        using (var dispatcher = new TranspilerDispatcher(dispatchOptions, dispatchLogger))
         {
-            dispatcher.AddSink(new Transpiler(projectPath));
+            dispatcher.AddSink(new Transpiler(projectPath, transpilerLogger));
 
             Consoul.Write("Beginning deserialization and dispatching");
             var task = Task.Run(() => dispatcher.TranspileAsync(tokenSource.Token));
