@@ -42,8 +42,8 @@ jobs:
 
     - name: Set paths
       run: |
-        $modelPath = "$(System.DefaultWorkingDirectory)/Model.xml"
-        $outputPath = "$(System.DefaultWorkingDirectory)/MtconnectCore/Standard/Contracts"
+        $modelPath = "${{ github.workspace }}/Model.xml"
+        $outputPath = "${{ github.workspace }}/MtconnectCore/Standard/Contracts"
         echo "::set-env name=MODEL_PATH::$modelPath"
         echo "::set-env name=OUTPUT_PATH::$outputPath"
       id: set-paths
