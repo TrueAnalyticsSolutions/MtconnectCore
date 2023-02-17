@@ -29,7 +29,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: dataItems
-        path: "MtconnectCore/Standard/Contracts/Enums/Devices/DataItemTypes"
+        path: "./"
         
     - name: Create new branch
       run: git checkout -b develop/generated
