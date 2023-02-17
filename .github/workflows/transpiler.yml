@@ -43,7 +43,9 @@ jobs:
       run: dotnet build "MtconnectCore.sln" --configuration Release
 
     - name: Create new branch
-      run: git checkout -b ${{ env.BRANCH }}
+      run: |
+        git checkout -b ${{ env.BRANCH }}
+        git pull
 
     - name: Download file
       run: |
