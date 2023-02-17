@@ -1,4 +1,5 @@
-﻿using MtconnectTranspiler.Model;
+﻿using ConsoulLibrary;
+using MtconnectTranspiler.Model;
 using MtconnectTranspiler.Sinks.CSharp;
 using MtconnectTranspiler.Sinks.CSharp.Models;
 using MtconnectTranspiler.Sinks.MtconnectCore.Models;
@@ -16,6 +17,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
         public override void Transpile(MTConnectModel model, CancellationToken cancellationToken = default(CancellationToken))
         {
+            Consoul.Write("Received MTConnectModel, beginning transpilation");
+
             Model.SetValue("model", model, true);
 
             const string DataItemNamespace = "MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes";
@@ -81,6 +84,9 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 // Register the DataItem Category Enum (ie. Samples, Events, Conditions)
                 dataItemTypes.Add(categoryEnum);
             }
+
+            Consoul.Write($"Processing {dataItemTypes.Count} DataItem types/subTypes");
+
             // Process the template into enum files
             processTemplate(dataItemTypes, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
 
