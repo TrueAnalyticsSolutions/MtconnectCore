@@ -3,6 +3,10 @@ name: Transpile from SysML
 on:
   workflow_dispatch:
 
+env:
+  MODEL_PATH: ${{ github.workspace }}/Model.xml
+  OUTPUT_PATH: ${{ github.workspace }}/MtconnectCore/Standard/Contracts
+  
 jobs:
   build-and-generate:
     runs-on: windows-latest
@@ -24,14 +28,6 @@ jobs:
           core.setOutput('url', response.data.assets[0].browser_download_url);
           core.setOutput('tag_name', response.data.tag_name);
 
-    - name: Set paths
-      run: |
-        $modelPath = "${{ github.workspace }}/Model.xml"
-        $outputPath = "${{ github.workspace }}/MtconnectCore/Standard/Contracts"
-        echo "::set-env name=MODEL_PATH::$modelPath"
-        echo "::set-env name=OUTPUT_PATH::$outputPath"
-      id: set-paths
-
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -47,7 +43,7 @@ jobs:
 
     - name: Download file
       run: |
-        curl -o Model.xml -L ${{ steps.get_release_info.outputs.url }}
+        curl -o ${{ env.MODEL_PATH }} -L ${{ steps.get_release_info.outputs.url }}
 
     - name: Run transpiler
       run: MtconnectTranspiler.Sinks.MtconnectCore/bin/Release/net6.0/MtconnectTranspiler.Sinks.MtconnectCore.exe ${{ env.OUTPUT_PATH }} ${{ env.MODEL_PATH }}
