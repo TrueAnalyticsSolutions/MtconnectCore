@@ -1,0 +1,40 @@
+# This action checks the latest Release from the mtconnect/mtconnect_sysml_model repository, then triggers the transpiler action
+name: Check SysML Release
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # run every day at midnight UTC
+
+jobs:
+  check-latest-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout mtconnect_sysml_model repository
+      uses: actions/checkout@v2
+      with:
+        repository: mtconnect/mtconnect_sysml_model
+        ref: main
+
+    - name: Get latest release tag
+      id: get-latest-release
+      uses: actions/github-script@v3
+      with:
+        script: |
+          const res = await github.repos.getLatestRelease({
+            owner: 'mtconnect',
+            repo: 'mtconnect_sysml_model'
+          });
+          console.log(res.data.tag_name);
+          console.log(res.data.zipball_url);
+          console.log(res.data.published_at);
+          console.log(res.data.body);
+          return {
+            tag_name: res.data.tag_name,
+            published_at: res.data.published_at
+          }
+
+    - name: Check if this is the latest release
+      if: ${{ semver.lt(github.event.release.tag_name, steps.get-latest-release.outputs.tag_name) }}
+      run: |
+        echo "Newer release available."
+        # Trigger another local action to do something here
