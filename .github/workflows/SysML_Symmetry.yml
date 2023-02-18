@@ -16,8 +16,8 @@ jobs:
         repository: mtconnect/mtconnect_sysml_model
         ref: main
 
-    - name: Get latest release tag
-      id: get-latest-release
+    - name: Get MTConnect release tag
+      id: get-mtc-release
       uses: actions/github-script@v3
       with:
         script: |
@@ -33,9 +33,18 @@ jobs:
             tag_name: res.data.tag_name,
             published_at: res.data.published_at
           }
-
-    - name: Check if this is the latest release
-      if: ${{ semver.lt(github.event.release.tag_name, steps.get-latest-release.outputs.tag_name) }}
-      run: |
-        echo "Newer release available."
-        # Trigger another local action to do something here
+    - name: Compare Versions
+      id: comparison
+      uses: actions/github-script@v5
+      with:
+        script: |
+            const semver = require('semver');
+            const thisVersion = "${{ github.event.release.tag_name }}";
+            const mtcVersion = "${{ steps.get-latest-release.outputs.tag_name }}";
+            console.log(`MtconnectCore Version: ${thisVersion}`);
+            console.log(`MTConnect Version: ${mtcVersion}`);
+            if (semver.gt(mtcVersion, thisVersion)) {
+              console.log('MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore.');
+            } else {
+              console.log('MtconnectCore has the latest MTConnect updates.');
+            }
