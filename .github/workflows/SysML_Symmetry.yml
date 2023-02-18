@@ -4,6 +4,7 @@ name: Check SysML Release
 on:
   schedule:
     - cron: '0 0 * * *' # run every day at midnight UTC
+  workflow_dispatch:
 
 jobs:
   check-latest-release:
