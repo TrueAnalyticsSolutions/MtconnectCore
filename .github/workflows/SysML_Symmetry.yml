@@ -18,8 +18,9 @@ jobs:
 
     - name: Get MTConnect release tag
       id: get-mtc-release
-      uses: actions/github-script@v3
+      uses: actions/github-script@v5
       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const res = await github.repos.getLatestRelease({
             owner: 'mtconnect',
