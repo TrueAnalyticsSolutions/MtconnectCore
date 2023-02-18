@@ -2,7 +2,7 @@
 
 [![Package](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/main.yml/badge.svg)](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/main.yml)
 [![Documentation](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/gh-pages.yml)
-
+[![SysML Transpiler](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/transpiler.yml/badge.svg)](https://github.com/TrueAnalyticsSolutions/MtconnectCore/actions/workflows/transpiler.yml)
 
 This is an open source implementation of [True Analytics Manufacturing Solution](https://github.com/TrueAnalyticsSolutions)'s MTConnect library using .NET Core.
 
