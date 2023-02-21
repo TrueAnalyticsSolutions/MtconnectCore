@@ -1,3 +1,0 @@
-﻿{{~
-subType=$1?.sub_types[$2.name] ~}}
-{{~ if subType && subType != "" ~}}[ObservationalSubType(typeof({{ subType }}))]{{~ end ~}}

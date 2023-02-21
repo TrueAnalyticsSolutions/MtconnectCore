@@ -5,9 +5,14 @@ using MtconnectTranspiler.Sinks.CSharp;
 using MtconnectTranspiler.Sinks.CSharp.Models;
 using MtconnectTranspiler.Sinks.MtconnectCore.Models;
 using MtconnectTranspiler.Xmi.UML;
+using Scriban.Runtime;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore
 {
+    public class CategoryFunctions : ScriptObject
+    {
+        public static bool CategoryContains(MtconnectCoreEnum @enum, EnumItem item) => @enum.SubTypes.ContainsKey(item.Name);
+    }
     internal class Transpiler : CsharpTranspiler
     {
         /// <summary>
@@ -21,6 +26,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             _logger?.LogInformation("Received MTConnectModel, beginning transpilation");
 
             Model.SetValue("model", model, true);
+
+            base.TemplateContext.PushGlobal(new CategoryFunctions());
 
             const string DataItemNamespace = "MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes";
             List<MtconnectCoreEnum> dataItemTypes = new List<MtconnectCoreEnum>();
@@ -60,7 +67,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                     if (subTypes.ContainsKey(type.Name))
                     {
                         // Register type as having a subType in the CATEGORY enum
-                        if (categoryEnum.SubTypes.ContainsKey(type.Name)) categoryEnum.SubTypes.Add(type.Name, $"{type.Name}SubTypes");
+                        if (!categoryEnum.SubTypes.ContainsKey(type.Name)) categoryEnum.SubTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(type.Name), $"{type.Name}SubTypes");
 
                         var typeSubTypes = subTypes[type.Name];
                         var subTypeEnum = new MtconnectCoreEnum(model, type, $"{type.Name}SubTypes") { Namespace = DataItemNamespace };
