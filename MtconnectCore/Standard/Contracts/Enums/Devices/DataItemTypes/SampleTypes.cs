@@ -15,6 +15,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(SampleEnum:ACCELERATION)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+        [ObservationalSubType(typeof(AccelerationSubTypes))]
 		ACCELERATION,
 		/// <summary>
 		﻿/// {{def(SampleEnum:ACCUMULATED_TIME)}}

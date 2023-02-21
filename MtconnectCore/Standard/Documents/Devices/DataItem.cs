@@ -10,6 +10,7 @@ using MtconnectCore.Standard.Contracts.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
 using CoordinateSystemTypes = MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes;
@@ -83,6 +84,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(DataItemAttributes.SAMPLE_RATE)]
         public string SampleRate { get; set; }
 
+        /// <inheritdoc cref="DataItemElements.SOURCE"/>
         [MtconnectNodeElements(DataItemElements.SOURCE, nameof(TrySetSource), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public Source Source { get; set; }
 
@@ -96,9 +98,11 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElements("Filters/*", nameof(TryAddFilter), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<Filter> Filters => _filters;
 
+        /// <inheritdoc cref="DataItemElements.INITIAL_VALUE"/>
         [MtconnectNodeElement(DataItemElements.INITIAL_VALUE)]
         public string InitialValue { get; set; }
 
+        /// <inheritdoc cref="DataItemElements.RESET_TRIGGER"/>
         [MtconnectNodeElement(DataItemElements.RESET_TRIGGER)]
         public string ResetTrigger { get; set; }
 
@@ -241,13 +245,17 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         private bool validateNodeInStandard<T>(CategoryTypes categoryType, string type, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
         {
+            bool isValidType = true, isValidSubType = true;
             validationErrors = new List<MtconnectValidationException>();
+
+            // Validate the observational type
             if (!EnumHelper.Contains<T>(type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"DataItem type of '{type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'.",
                     SourceNode));
+                isValidType = false;
             }
             else if (!EnumHelper.ValidateToVersion<T>(type, MtconnectVersion.GetValueOrDefault()))
             {
@@ -255,7 +263,38 @@ namespace MtconnectCore.Standard.Documents.Devices
                     ValidationSeverity.WARNING,
                     $"DataItem type of '{type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard.",
                     SourceNode));
+                isValidType = false;
             }
+
+            if (isValidType)
+            {
+                // Get the Enum and look for an attribute pointing to the SubType enum
+                Type enumType = typeof(T);
+                MemberInfo[] typeValueInfos = enumType.GetMember(type);
+                var valueInfo = typeValueInfos.FirstOrDefault(o => o.DeclaringType == enumType);
+                var obsSubType = valueInfo.GetCustomAttribute<ObservationalSubTypeAttribute>();
+                // Validate the observational sub-type
+                if (obsSubType != null)
+                {
+                    if (!EnumHelper.Contains(obsSubType.SubTypeEnum, SubType))
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            $"DataItem subType of '{SubType}' is not defined in the MTConnect Standard for category '{Category}' and type '{type}' in version '{MtconnectVersion}'.",
+                            SourceNode));
+                        isValidSubType = false;
+                    }
+                    else if (!EnumHelper.ValidateToVersion(obsSubType.SubTypeEnum, SubType, MtconnectVersion.GetValueOrDefault()))
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.WARNING,
+                            $"DataItem subType of '{SubType}' is not valid for category '{Category}' and type '{type}' in version '{MtconnectVersion}' of the MTConnect Standard.",
+                            SourceNode));
+                        isValidSubType = false;
+                    }
+                }
+            }
+
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 

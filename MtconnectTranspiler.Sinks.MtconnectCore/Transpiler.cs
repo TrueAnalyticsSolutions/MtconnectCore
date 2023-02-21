@@ -59,6 +59,9 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
                     if (subTypes.ContainsKey(type.Name))
                     {
+                        // Register type as having a subType in the CATEGORY enum
+                        if (categoryEnum.SubTypes.ContainsKey(type.Name)) categoryEnum.SubTypes.Add(type.Name, $"{type.Name}SubTypes");
+
                         var typeSubTypes = subTypes[type.Name];
                         var subTypeEnum = new MtconnectCoreEnum(model, type, $"{type.Name}SubTypes") { Namespace = DataItemNamespace };
 
