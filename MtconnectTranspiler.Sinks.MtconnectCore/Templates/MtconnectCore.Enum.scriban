@@ -23,6 +23,9 @@ namespace {{ to_pascal_code source.namespace }}
 		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
 		{{~ end ~}}
 		{{ include 'MtconnectVersionApplicability.scriban' item }}
+		{{~ if category_contains source item ~}}
+		[ObservationalSubType(typeof({{ source?.sub_types[item.name] }}))]
+{{ end ~}}
 		{{ item.name }},
 	{{~ end ~}}
 	}

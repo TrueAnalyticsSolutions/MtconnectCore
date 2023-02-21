@@ -257,6 +257,16 @@
             <param name="documentVersion">Reference to the version of MTConnect implemented in the Response Document.</param>
             <returns>Flag for whether the MTConnect Response Document version matches with the specified <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.MinimumVersion"/> according to the <see cref="!:ComparisonType"/>.</returns>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Attributes.ObservationalSubTypeAttribute">
+            <summary>
+            An attribute used to indicate that an enum value that represents an observational type also has relevant sub-type(s).
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Attributes.ObservationalSubTypeAttribute.SubTypeEnum">
+            <summary>
+            Reference to the enum for the subtype.
+            </summary>
+        </member>
         <member name="M:MtconnectCore.Standard.Contracts.EnumHelper.Enumify(System.String)">
             <summary>
             Translates a raw string into its enum-safe equivelant.
@@ -8892,11 +8902,20 @@
         <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.SampleRate">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.SAMPLE_RATE"/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Source">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.SOURCE"/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Constraints">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.CONSTRAINTS"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Filters">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.FILTERS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.InitialValue">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.INITIAL_VALUE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.ResetTrigger">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.RESET_TRIGGER"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.#ctor">
             <inheritdoc/>
