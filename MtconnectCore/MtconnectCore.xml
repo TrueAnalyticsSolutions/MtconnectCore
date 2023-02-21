@@ -6637,9 +6637,7 @@
             <remarks>Prepared on: March 31, 2018</remarks>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_4_1">
-            <summary>
-            Version 1.4.1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_4_0"/>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_0">
             <summary>
@@ -6647,9 +6645,7 @@
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_1">
-            <summary>
-            Version 1.5.1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_5_0"/>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_0">
             <summary>
@@ -6658,9 +6654,7 @@
             <remarks>Prepared on: July 15, 2020</remarks>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_1">
-            <summary>
-            Version 1.6.1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_6_0"/>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_7_0">
             <summary>
@@ -6669,9 +6663,7 @@
             <remarks>Prepared on: February 25, 2021</remarks>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_7_1">
-            <summary>
-            Version 1.7.1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_7_0"/>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_8_0">
             <summary>
@@ -6679,17 +6671,26 @@
             </summary>
             <remarks>Prepared on: September 6, 2021</remarks>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_8_1">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_1_8_0"/>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_0_0">
             <summary>
             Version 2.0.0
             </summary>
             <remarks>Prepared on: May 24, 2022</remarks>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_0_1">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_0_0"/>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_1_0">
             <summary>
             Version 2.1.0
             </summary>
             <remarks>Prepared on: January 14, 2023</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_1_1">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_1_0"/>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_2_0">
             <summary>
@@ -7965,6 +7966,9 @@
             <param name="nsmgr"></param>
             <param name="defaultNamespace"></param>
             <param name="version"></param>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.VersionHelper.versionMinimumVersion">
+            <remarks>Find this in the <c>MTConnectDevices_x.x.xsd</c> referenced at <c>/xs:schema[@vs:minVersion]</c></remarks>
         </member>
         <member name="P:MtconnectCore.Standard.CurrentRequestQuery.Path">
             <summary>

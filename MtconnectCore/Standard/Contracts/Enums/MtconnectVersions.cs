@@ -35,55 +35,53 @@
         /// </summary>
         /// <remarks>Prepared on: March 31, 2018</remarks>
         V_1_4_0 = 1 << 5,
-        /// <summary>
-        /// Version 1.4.1
-        /// </summary>
+        /// <inheritdoc cref="V_1_4_0"/>
         V_1_4_1 = 1 << 6,
         /// <summary>
         /// Version 1.5.0
         /// </summary>
         V_1_5_0 = 1 << 7,
-        /// <summary>
-        /// Version 1.5.1
-        /// </summary>
+        /// <inheritdoc cref="V_1_5_0"/>
         V_1_5_1 = 1 << 8,
         /// <summary>
         /// Version 1.6.0
         /// </summary>
         /// <remarks>Prepared on: July 15, 2020</remarks>
         V_1_6_0 = 1 << 9,
-        /// <summary>
-        /// Version 1.6.1
-        /// </summary>
+        /// <inheritdoc cref="V_1_6_0"/>
         V_1_6_1 = 1 << 10,
         /// <summary>
         /// Version 1.7.0
         /// </summary>
         /// <remarks>Prepared on: February 25, 2021</remarks>
         V_1_7_0 = 1 << 11,
-        /// <summary>
-        /// Version 1.7.1
-        /// </summary>
+        /// <inheritdoc cref="V_1_7_0"/>
         V_1_7_1 = 1 << 12,
         /// <summary>
         /// Version 1.8.0
         /// </summary>
         /// <remarks>Prepared on: September 6, 2021</remarks>
         V_1_8_0 = 1 << 13,
+        /// <inheritdoc cref="V_1_8_0"/>
+        V_1_8_1 = 1 << 14,
         /// <summary>
         /// Version 2.0.0
         /// </summary>
         /// <remarks>Prepared on: May 24, 2022</remarks>
-        V_2_0_0 = 1 << 14,
+        V_2_0_0 = 1 << 15,
+        /// <inheritdoc cref="V_2_0_0"/>
+        V_2_0_1 = 1 << 16,
         /// <summary>
         /// Version 2.1.0
         /// </summary>
         /// <remarks>Prepared on: January 14, 2023</remarks>
-        V_2_1_0 = 1 << 15,
+        V_2_1_0 = 1 << 17,
+        /// <inheritdoc cref="V_2_1_0"/>
+        V_2_1_1 = 1 << 18,
         /// <summary>
         /// Version 2.2.0
         /// </summary>
         /// <remarks>Pre-Release</remarks>
-        V_2_2_0 = 1 << 16,
+        V_2_2_0 = 1 << 19,
     }
 }

@@ -24,6 +24,14 @@ namespace MtconnectCore.Standard.Contracts
             { MtconnectVersions.V_1_6_0, "1.6.0" },
             { MtconnectVersions.V_1_6_1, "1.6.1" },
             { MtconnectVersions.V_1_7_0, "1.7.0" },
+            { MtconnectVersions.V_1_7_1, "1.7.1" },
+            { MtconnectVersions.V_1_8_0, "1.8.0" },
+            { MtconnectVersions.V_1_8_1, "1.8.1" },
+            { MtconnectVersions.V_2_0_0, "2.0.0" },
+            { MtconnectVersions.V_2_0_1, "2.0.1" },
+            { MtconnectVersions.V_2_1_0, "2.1.0" },
+            { MtconnectVersions.V_2_1_1, "2.1.1" },
+            { MtconnectVersions.V_2_2_0, "2.2.0" }
         };
 
         private static Dictionary<MtconnectVersions, DateTime> versionReleaseDate = new Dictionary<MtconnectVersions, DateTime>() {
@@ -39,8 +47,16 @@ namespace MtconnectCore.Standard.Contracts
             { MtconnectVersions.V_1_6_0, new DateTime(2020, 07, 15) },
             { MtconnectVersions.V_1_6_1, new DateTime(2020, 07, 15) },
             { MtconnectVersions.V_1_7_0, new DateTime(2021, 02, 25) },
+            { MtconnectVersions.V_1_7_1, new DateTime(2021, 02, 25) },
+            { MtconnectVersions.V_1_8_0, new DateTime(2021, 09, 06) },
+            { MtconnectVersions.V_1_8_1, new DateTime(2021, 09, 06) },
+            { MtconnectVersions.V_2_0_0, new DateTime(2022, 05, 24) },
+            { MtconnectVersions.V_2_0_1, new DateTime(2022, 05, 24) },
+            { MtconnectVersions.V_2_1_0, new DateTime(2023, 01, 14) },
+            { MtconnectVersions.V_2_1_1, new DateTime(2023, 01, 14) },
         };
 
+        /// <remarks>Find this in the <c>MTConnectDevices_x.x.xsd</c> referenced at <c>/xs:schema[@vs:minVersion]</c></remarks>
         private static Dictionary<MtconnectVersions, MtconnectVersions?> versionMinimumVersion = new Dictionary<MtconnectVersions, MtconnectVersions?>() {
              { MtconnectVersions.V_1_0_1, null },
              { MtconnectVersions.V_1_1_0, null },
@@ -54,11 +70,18 @@ namespace MtconnectCore.Standard.Contracts
              { MtconnectVersions.V_1_6_0, MtconnectVersions.V_1_1_0 },
              { MtconnectVersions.V_1_6_1, null }, // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
              { MtconnectVersions.V_1_7_0, MtconnectVersions.V_1_1_0 },
+             { MtconnectVersions.V_1_7_1, null },
+             { MtconnectVersions.V_1_8_0, MtconnectVersions.V_1_1_0 },
+             { MtconnectVersions.V_1_8_1, null },
+             { MtconnectVersions.V_2_0_0, MtconnectVersions.V_1_1_0 },
+             { MtconnectVersions.V_2_0_1, null },
+             { MtconnectVersions.V_2_1_0, MtconnectVersions.V_1_1_0 },
+             { MtconnectVersions.V_2_1_1, null },
         };
 
         public static string ToName(this MtconnectVersions version) => versionNames[version];
 
-        public static MtconnectVersions? GetVersion(string version) => versionNames.Where(o => version.Contains(o.Value) || o.Value.Contains(version)).Select(o => o.Key).FirstOrDefault();
+        public static MtconnectVersions? GetVersion(string version) => versionNames.Where(o => version.Contains(o.Value) || o.Value.StartsWith(version)).Select(o => o.Key).FirstOrDefault();
 
         public static DateTime GetReleaseDate(this MtconnectVersions version) => versionReleaseDate[version];
 
@@ -187,6 +210,54 @@ namespace MtconnectCore.Standard.Contracts
                     nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
                     nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                     break;
+                case MtconnectVersions.V_1_7_1:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.7");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_1_8_0:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.8");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_1_8_1:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:1.8");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_2_0_0:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:2.0");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_2_0_1:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:2.0");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_2_1_0:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:2.1");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_2_1_1:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:2.1");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    // Missing vc:minVersion??? See https://github.com/mtconnect/schema/issues/10
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
+                case MtconnectVersions.V_2_2_0:
+                    //nsmgr.AddNamespace(defaultNamespace, $"urn:mtconnect.org:{mtconnectNamespace}:2.2");
+                    nsmgr.AddNamespace(defaultNamespace, xDoc.DocumentElement.GetAttribute("xmlns"));
+                    nsmgr.AddNamespace("vc", "http://www.w3.org/2007/XMLSchema-versioning");
+                    nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    break;
                 default:
                     break;
             }
@@ -252,6 +323,30 @@ namespace MtconnectCore.Standard.Contracts
                     break;
                 case MtconnectVersions.V_1_7_0:
                     nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.7");
+                    break;
+                case MtconnectVersions.V_1_7_1:
+                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.7");
+                    break;
+                case MtconnectVersions.V_1_8_0:
+                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.8");
+                    break;
+                case MtconnectVersions.V_1_8_1:
+                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:1.8");
+                    break;
+                case MtconnectVersions.V_2_0_0:
+                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:2.0");
+                    break;
+                case MtconnectVersions.V_2_0_1:
+                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:2.0");
+                    break;
+                case MtconnectVersions.V_2_1_0:
+                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:2.1");
+                    break;
+                case MtconnectVersions.V_2_1_1:
+                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:2.1");
+                    break;
+                case MtconnectVersions.V_2_2_0:
+                    nsmgr.AddNamespace("m", "urn:mtconnect.org:MTConnectStreams:2.2");
                     break;
                 default:
                     break;
