@@ -1,11 +1,13 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtcStreams = MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -13,19 +15,11 @@ namespace MtconnectCore.Standard.Documents.Streams
     public class Event : DataItem
     {
         /// <summary>
-        /// Collected from the subType attribute. Refer to Part 3 Streams - 5.5.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        [MtconnectNodeAttribute(EventAttributes.SUB_TYPE)]
-        public string SubType { get; set; }
-
-        /// <summary>
         /// Collected from the name attribute. Refer to Part 3 Streams - 5.5.2
         /// 
         /// Occurance: 0..1
         /// </summary>
-        [MtconnectNodeAttribute(EventAttributes.NAME)]
+        [MtconnectNodeAttribute(MtcStreams.EventAttributes.NAME)]
         public string Name { get; set; }
 
         /// <summary>
@@ -33,15 +27,15 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 0..1
         /// </summary>
-        [MtconnectNodeAttribute(EventAttributes.RESET_TRIGGERED)]
-        public ResetTriggers? ResetTriggered { get; set; }
+        [MtconnectNodeAttribute(MtcStreams.EventAttributes.RESET_TRIGGERED)]
+        public MtcStreams.ResetTriggers? ResetTriggered { get; set; }
 
         /// <summary>
         /// Collected from the compositionId attribute. Refer to Part 3 Streams - 5.5.2
         /// 
         /// Occurance: 0..1
         /// </summary>
-        [MtconnectNodeAttribute(EventAttributes.COMPOSITION_ID)]
+        [MtconnectNodeAttribute(MtcStreams.EventAttributes.COMPOSITION_ID)]
         public string CompositionId { get; set; }
 
         /// <summary>
@@ -82,6 +76,33 @@ namespace MtconnectCore.Standard.Documents.Streams
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
             => validateNode<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(Contracts.Enums.Devices.CategoryTypes.EVENT, out validationErrors);
 
-        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new System.NotImplementedException();
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "")]
+        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+
+            if (string.IsNullOrEmpty(Value))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a value.",
+                    SourceNode));
+            } else if (Enum.TryParse<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(SourceNode.LocalName, out MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes type))
+            {
+                var observationalValue = type.GetType().GetCustomAttribute<ObservationalValueAttribute>();
+                if (observationalValue != null)
+                {
+                    if (!EnumHelper.Contains(observationalValue.ValueEnum, Value))
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            $"DataItem value does not match expected values for EVENT type '{SourceNode.LocalName}'",
+                            SourceNode));
+                    }
+                }
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }

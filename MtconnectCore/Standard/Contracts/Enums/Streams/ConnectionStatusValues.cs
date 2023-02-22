@@ -1,28 +1,30 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
+using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
-    /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.CONNECTION_STATUS"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 3 Section 6.2")]
-    public enum ConnectionStatusValues
-    {
-        /// <summary>
-        /// Represents no connection at all.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 3 Section 6.2")]
-        CLOSED,
-        /// <summary>
-        /// Represents the Agent waiting for a connection request from an Adapter.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 3 Section 6.2")]
-        LISTEN,
-        /// <summary>
-        /// Represents an open connection. The normal state for the data transfer phase of the connection.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 3 Section 6.2")]
-        ESTABLISHED
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum ConnectionStatusValues
+	{
+		/// <summary>
+		﻿/// no connection at all.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		CLOSED,
+		/// <summary>
+		﻿/// <i>agent</i> is waiting for a connection request from an <i>adapter</i>.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		LISTEN,
+		/// <summary>
+		﻿/// open connection.  The normal state for the data transfer phase of the connection.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		ESTABLISHED,
+	}
 }

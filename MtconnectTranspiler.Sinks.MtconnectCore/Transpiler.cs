@@ -11,7 +11,9 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 {
     public class CategoryFunctions : ScriptObject
     {
-        public static bool CategoryContains(MtconnectCoreEnum @enum, EnumItem item) => @enum.SubTypes.ContainsKey(item.Name);
+        public static bool CategoryContainsType(MtconnectCoreEnum @enum, EnumItem item) => @enum.SubTypes.ContainsKey(item.Name);
+        public static bool CategoryContainsValue(MtconnectCoreEnum @enum, EnumItem item) => @enum.ValueTypes.ContainsKey(item.Name);
+        public static bool EnumHasValues(MtconnectCoreEnum @enum) => @enum.ValueTypes.Any();
     }
     internal class Transpiler : CsharpTranspiler
     {
@@ -30,8 +32,11 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             base.TemplateContext.PushGlobal(new CategoryFunctions());
 
             const string DataItemNamespace = "MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes";
-            List<MtconnectCoreEnum> dataItemTypes = new List<MtconnectCoreEnum>();
+            const string DataItemValueNamespace = "MtconnectCore.Standard.Contracts.Enums.Streams";
+
             // Process DataItem Types
+            List<MtconnectCoreEnum> dataItemTypeEnums = new List<MtconnectCoreEnum>();
+            var valueEnums = new List<MtconnectCoreEnum>();
             string[] categories = new string[] { "Sample", "Event", "Condition" };
 
             foreach (var category in categories)
@@ -62,16 +67,39 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
                 foreach (var type in types)
                 {
+                    // Add type to CATEGORY enum
                     categoryEnum.AddItem(model, type);
 
+                    // Find value
+                    var typeResult = type?.Properties?.FirstOrDefault(o => o.Name == "result");
+                    if (typeResult != null)
+                    {
+                        var typeValuesSysEnum = model
+                            ?.Profile
+                            ?.ProfileDataTypes
+                            ?.Elements
+                            ?.FirstOrDefault(o => o is UmlEnumeration && o.Id == typeResult.PropertyType);
+                        if (typeValuesSysEnum != null)
+                        {
+                            var typeValuesEnum = new MtconnectCoreEnum(model, typeValuesSysEnum as UmlEnumeration) { Namespace = DataItemValueNamespace, Name = $"{type.Name}Values" };
+                            foreach (var value in typeValuesEnum.Items)
+                            {
+                                value.Name = value.SysML_Name;
+                            }
+                            if (!categoryEnum.ValueTypes.ContainsKey(type.Name)) categoryEnum.ValueTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(type.Name), $"{type.Name}Values");
+                            valueEnums.Add(typeValuesEnum);
+                        }
+                    }
+
+                    // Add subType as enum
                     if (subTypes.ContainsKey(type.Name))
                     {
                         // Register type as having a subType in the CATEGORY enum
                         if (!categoryEnum.SubTypes.ContainsKey(type.Name)) categoryEnum.SubTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(type.Name), $"{type.Name}SubTypes");
 
-                        var typeSubTypes = subTypes[type.Name];
                         var subTypeEnum = new MtconnectCoreEnum(model, type, $"{type.Name}SubTypes") { Namespace = DataItemNamespace };
 
+                        var typeSubTypes = subTypes[type.Name];
                         subTypeEnum.AddItems(model, typeSubTypes);
 
                         // Cleanup Enum names
@@ -82,7 +110,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                         }
 
                         // Register the DataItem SubType Enum
-                        dataItemTypes.Add(subTypeEnum);
+                        dataItemTypeEnums.Add(subTypeEnum);
                     }
                 }
 
@@ -93,23 +121,18 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 }
 
                 // Register the DataItem Category Enum (ie. Samples, Events, Conditions)
-                dataItemTypes.Add(categoryEnum);
+                dataItemTypeEnums.Add(categoryEnum);
             }
 
-            _logger?.LogInformation($"Processing {dataItemTypes.Count} DataItem types/subTypes");
+            _logger?.LogInformation($"Processing {dataItemTypeEnums.Count} DataItem types/subTypes");
 
             // Process the template into enum files
-            processTemplate(dataItemTypes, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
+            processTemplate(dataItemTypeEnums, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
+            processTemplate(valueEnums, Path.Combine(ProjectPath, "Enums", "Streams"), true);
 
+            // Process DataItem Values
+            List<MtconnectCoreEnum> dataItemValues = new List<MtconnectCoreEnum>();
 
-            //// Process Enums
-            //processTemplate(
-            //    model?.Profile?.ProfileDataTypes?.Elements
-            //    ?.Where(o => o is UmlEnumeration)
-            //    ?.Select(o => new MtconnectCoreEnum(model, o as UmlEnumeration)),
-            //    Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"));
-
-            //processDeviceModel(model.DeviceModel);
         }
 
         private void processDeviceModel(MTConnectDeviceInformationModel model, string @namespace = "MtconnectCore.Standard")

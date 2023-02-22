@@ -1,28 +1,30 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
+using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
-    /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.ROTARY_MODE"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
-    public enum RotaryModeValues
-    {
-        /// <summary>
-        /// The axis is operating like a spindle and spinning.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
-        SPINDLE,
-        /// <summary>
-        /// The axis is indexing to a position.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
-        INDEX,
-        /// <summary>
-        /// The axes is indexing and rotating at a programmed velocity.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
-        CONTOUR
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum RotaryModeValues
+	{
+		/// <summary>
+		﻿/// axis is functioning as a spindle.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		SPINDLE,
+		/// <summary>
+		﻿/// axis is configured to index.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		INDEX,
+		/// <summary>
+		﻿/// position of the axis is being interpolated.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		CONTOUR,
+	}
 }

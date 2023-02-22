@@ -1,23 +1,25 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
+using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
-    /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.EQUIPMENT_MODE"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
-    public enum EquipmentModeValues
-    {
-        /// <summary>
-        /// The equipment is functioning in the mode  designated by the subType
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
-        ON,
-        /// <summary>
-        /// The equipment is not functioning in th mode designated by the subType.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
-        OFF
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum EquipmentModeValues
+	{
+		/// <summary>
+		﻿/// equipment is functioning in the mode designated by the <c>subType</c>.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/")]
+		ON,
+		/// <summary>
+		﻿/// equipment is not functioning in the mode designated by the <c>subType</c>.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/")]
+		OFF,
+	}
 }

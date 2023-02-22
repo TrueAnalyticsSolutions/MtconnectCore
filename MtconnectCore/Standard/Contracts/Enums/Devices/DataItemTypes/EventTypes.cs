@@ -1,6 +1,7 @@
 using System;
 using System.CodeDom.Compiler;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums.Streams;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
@@ -20,6 +21,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:ACTUATOR_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(ActuatorStateValues))]
 		ACTUATOR_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:ALARM)}}
@@ -41,11 +43,13 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:AVAILABILITY)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(AvailabilityValues))]
 		AVAILABILITY,
 		/// <summary>
 		﻿/// {{def(EventEnum:AXIS_COUPLING)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(AxisCouplingValues))]
 		AXIS_COUPLING,
 		/// <summary>
 		﻿/// {{def(EventEnum:AXIS_FEEDRATE_OVERRIDE)}}
@@ -57,11 +61,13 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:AXIS_INTERLOCK)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(AxisInterlockValues))]
 		AXIS_INTERLOCK,
 		/// <summary>
 		﻿/// {{def(EventEnum:AXIS_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(AxisStateValues))]
 		AXIS_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:BLOCK)}}
@@ -78,11 +84,13 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
 		[ObservationalSubType(typeof(ChuckInterlockSubTypes))]
+		[ObservationalValue(typeof(ChuckInterlockValues))]
 		CHUCK_INTERLOCK,
 		/// <summary>
 		﻿/// {{def(EventEnum:CHUCK_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(ChuckStateValues))]
 		CHUCK_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:CODE)}}
@@ -100,12 +108,14 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:CONTROLLER_MODE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(ControllerModeValues))]
 		CONTROLLER_MODE,
 		/// <summary>
 		﻿/// {{def(EventEnum:CONTROLLER_MODE_OVERRIDE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/")]
 		[ObservationalSubType(typeof(ControllerModeOverrideSubTypes))]
+		[ObservationalValue(typeof(ControllerModeOverrideValues))]
 		CONTROLLER_MODE_OVERRIDE,
 		/// <summary>
 		﻿/// {{def(EventEnum:COUPLED_AXES)}}
@@ -128,38 +138,45 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
 		[ObservationalSubType(typeof(DirectionSubTypes))]
+		[ObservationalValue(typeof(DirectionValues))]
 		DIRECTION,
 		/// <summary>
 		﻿/// {{def(EventEnum:DOOR_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(DoorStateValues))]
 		DOOR_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:EMERGENCY_STOP)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(EmergencyStopValues))]
 		EMERGENCY_STOP,
 		/// <summary>
 		﻿/// {{def(EventEnum:END_OF_BAR)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
 		[ObservationalSubType(typeof(EndOfBarSubTypes))]
+		[ObservationalValue(typeof(EndOfBarValues))]
 		END_OF_BAR,
 		/// <summary>
 		﻿/// {{def(EventEnum:EQUIPMENT_MODE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/")]
 		[ObservationalSubType(typeof(EquipmentModeSubTypes))]
+		[ObservationalValue(typeof(EquipmentModeValues))]
 		EQUIPMENT_MODE,
 		/// <summary>
 		﻿/// {{def(EventEnum:EXECUTION)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(ExecutionValues))]
 		EXECUTION,
 		/// <summary>
 		﻿/// {{def(EventEnum:FUNCTIONAL_MODE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(FunctionalModeValues))]
 		FUNCTIONAL_MODE,
 		/// <summary>
 		﻿/// {{def(EventEnum:HARDNESS)}}
@@ -221,6 +238,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:PART_DETECT)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(PartDetectValues))]
 		PART_DETECT,
 		/// <summary>
 		﻿/// {{def(EventEnum:PART_ID)}}
@@ -243,18 +261,21 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:PATH_MODE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(PathModeValues))]
 		PATH_MODE,
 		/// <summary>
 		﻿/// {{def(EventEnum:POWER_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
 		[ObservationalSubType(typeof(PowerStateSubTypes))]
+		[ObservationalValue(typeof(PowerStateValues))]
 		POWER_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:POWER_STATUS)}}
 		/// </summary>
 		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/", MtconnectVersions.V_1_1_0)]
+		[ObservationalValue(typeof(PowerStatusValues))]
 		POWER_STATUS,
 		/// <summary>
 		﻿/// {{def(EventEnum:PROCESS_TIME)}}
@@ -278,6 +299,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:PROGRAM_EDIT)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(ProgramEditValues))]
 		PROGRAM_EDIT,
 		/// <summary>
 		﻿/// {{def(EventEnum:PROGRAM_EDIT_NAME)}}
@@ -301,6 +323,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
 		[ObservationalSubType(typeof(ProgramLocationTypeSubTypes))]
+		[ObservationalValue(typeof(ProgramLocationTypeValues))]
 		PROGRAM_LOCATION_TYPE,
 		/// <summary>
 		﻿/// {{def(EventEnum:PROGRAM_NEST_LEVEL)}}  If an initial value is not defined, the nesting level associated with the highest or initial nesting level of the program <b>MUST</b> default to zero (0). 
@@ -311,6 +334,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:ROTARY_MODE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(RotaryModeValues))]
 		ROTARY_MODE,
 		/// <summary>
 		﻿/// {{def(EventEnum:ROTARY_VELOCITY_OVERRIDE)}}  This command represents a percentage change to the velocity calculated by a logic or motion program or set by a switch for a <see cref="Rotary">Rotary</see> type axis.
@@ -326,6 +350,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:SPINDLE_INTERLOCK)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(SpindleInterlockValues))]
 		SPINDLE_INTERLOCK,
 		/// <summary>
 		﻿/// {{def(EventEnum:TOOL_ASSET_ID)}}
@@ -369,6 +394,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:WAIT_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(WaitStateValues))]
 		WAIT_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:WIRE)}}
@@ -441,6 +467,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:PART_STATUS)}}  If unique identifier is given, part status is for that individual. If group identifier is given without a unique identifier, then the status is assumed to be for the whole group.
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(PartStatusValues))]
 		PART_STATUS,
 		/// <summary>
 		﻿/// {{def(EventEnum:ALARM_LIMIT)}}
@@ -483,6 +510,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:CONNECTION_STATUS)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(ConnectionStatusValues))]
 		CONNECTION_STATUS,
 		/// <summary>
 		﻿/// {{def(EventEnum:ADAPTER_SOFTWARE_VERSION)}}
@@ -555,22 +583,26 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:PART_PROCESSING_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(PartProcessingStateValues))]
 		PART_PROCESSING_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:PROCESS_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(ProcessStateValues))]
 		PROCESS_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:VALVE_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
 		[ObservationalSubType(typeof(ValveStateSubTypes))]
+		[ObservationalValue(typeof(ValveStateValues))]
 		VALVE_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:LOCK_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(LockStateValues))]
 		LOCK_STATE,
 		/// <summary>
 		﻿/// {{def(EventEnum:UNLOAD_COUNT)}}
@@ -588,6 +620,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:OPERATING_MODE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(OperatingModeValues))]
 		OPERATING_MODE,
 		/// <summary>
 		﻿/// {{def(EventEnum:ASSET_COUNT)}}
@@ -608,6 +641,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:PART_COUNT_TYPE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(PartCountTypeValues))]
 		PART_COUNT_TYPE,
 		/// <summary>
 		﻿/// {{def(EventEnum:CLOCK_TIME)}}
@@ -628,11 +662,13 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		﻿/// {{def(EventEnum:LEAK_DETECT)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(LeakDetectValues))]
 		LEAK_DETECT,
 		/// <summary>
 		﻿/// {{def(EventEnum:BATTERY_STATE)}}
 		/// </summary>
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/")]
+		[ObservationalValue(typeof(BatteryStateValues))]
 		BATTERY_STATE,
 	}
 }

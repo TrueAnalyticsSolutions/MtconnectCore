@@ -6755,17 +6755,17 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ActuatorStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTUATOR_STATE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ActuatorStateValues.ACTIVE">
             <summary>
-            The actuator is operating or active
+            <see cref="!:Actuator">Actuator</see> is operating.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ActuatorStateValues.INACTIVE">
             <summary>
-            The actuator is not operating or inactive
+            <see cref="!:Actuator">Actuator</see> is not operating.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryTypes.ASSEMBLY">
@@ -6950,117 +6950,142 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AvailabilityValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AvailabilityValues.AVAILABLE">
             <summary>
-            The component is available.
+            data source is active and capable of providing data.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AvailabilityValues.UNAVAILABLE">
             <summary>
-            The component is not available.
+            data source is either inactive or not capable of providing data.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AxisCouplingValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AXIS_COUPLING"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisCouplingValues.TANDEM">
             <summary>
-            The axes are physically connected to each other and must  operate as a single unit.
+            axes are physically connected to each other and operate as a single unit.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisCouplingValues.SYNCHRONOUS">
             <summary>
-            The axes are coupled and are operating together in  lockstep.
+            axes are not physically connected to each other but are operating together in lockstep.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisCouplingValues.MASTER">
             <summary>
-            The axis is the master of the CoupledAxes
+            axis is the master of the <see cref="!:CoupledAxes">CoupledAxes</see>.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisCouplingValues.SLAVE">
             <summary>
-            The axis is a slave of the CoupledAxes
+            axis is a slave to the <see cref="!:CoupledAxes">CoupledAxes</see>.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AxisInterlockValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AXIS_INTERLOCK"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisInterlockValues.ACTIVE">
             <summary>
-            The axis lockout function is activated power has been removed from the axis, and the axis is allowed to move freely.
+            axis lockout function is activated, power has been removed from the axis, and the axis is allowed to move freely.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisInterlockValues.INACTIVE">
             <summary>
-            The axis lockout function has not  been activated, the axis may be powered, and the axis is capable of being controlled by another component.
+            axis lockout function has not been activated, the axis may be powered, and the axis is capable of being controlled by another component.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AXIS_STATE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues.HOME">
             <summary>
-            The axis is in its home position.
+            axis is in its home position.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues.TRAVEL">
             <summary>
-            The axis is in motion
+            axis is in motion.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues.PARKED">
             <summary>
-            The axis has been moved to a fixed  position and is being maintained in that position either electrically or mechanically. Action is required to release the axis from this position.
+            axis has been moved to a fixed position and is being maintained in that position either electrically or mechanically.   Action is required to release the axis from this position.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.AxisStateValues.STOPPED">
             <summary>
-            The axis is stopped
+            axis is stopped.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.BatteryStateValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.BatteryStateValues.CHARGED">
+            <summary>
+            <see cref="!:Component">Component</see> is at it's maximum rated charge level.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.BatteryStateValues.CHARGING">
+            <summary>
+            <see cref="!:Component">Component</see>'s charge is increasing.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.BatteryStateValues.DISCHARGING">
+            <summary>
+            <see cref="!:Component">Component</see>'s charge is decreasing.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.BatteryStateValues.DISCHARGED">
+            <summary>
+            <see cref="!:Component">Component</see> is at it's minimum charge level.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckInterlockValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CHUCK_INTERLOCK"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckInterlockValues.ACTIVE">
             <summary>
-            The chuck cannot be operated.
+            chuck cannot be unclamped.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckInterlockValues.INACTIVE">
             <summary>
-            The chuck can be operated.
+            chuck can be unclamped.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CHUCK_STATE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckStateValues.OPEN">
             <summary>
-            The chuck is open to the point of a positive confirmation
+            <see cref="!:Chuck">Chuck</see> is open to the point of a positive confirmation.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckStateValues.CLOSED">
             <summary>
-            The chuck is closed to the point of a positive  confirmation
+            <see cref="!:Chuck">Chuck</see> is closed to the point of a positive confirmation.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckStateValues.UNLATCHED">
             <summary>
-            The chuck is not closed to the point of a positive  confirmation and not open to the point of a positive confirmation
+            <see cref="!:Chuck">Chuck</see> is not closed to the point of a positive confirmation and not open to the point of a positive confirmation.   It is in an intermediate position.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues">
@@ -7155,77 +7180,72 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ConnectionStatusValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONNECTION_STATUS"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ConnectionStatusValues.CLOSED">
             <summary>
-            Represents no connection at all.
+            no connection at all.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ConnectionStatusValues.LISTEN">
             <summary>
-            Represents the Agent waiting for a connection request from an Adapter.
+            <i>agent</i> is waiting for a connection request from an <i>adapter</i>.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ConnectionStatusValues.ESTABLISHED">
             <summary>
-            Represents an open connection. The normal state for the data transfer phase of the connection.
+            open connection.  The normal state for the data transfer phase of the connection.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeOverrideValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROLLER_MODE_OVERRIDE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeOverrideValues.ON">
             <summary>
-            The indicator of the  ControllerModeOverride is in the ON state and the mode override is active.
+            <see cref="!:ControllerModeOverride">ControllerModeOverride</see> is in the <c>ON</c> state and the mode override is active.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeOverrideValues.OFF">
             <summary>
-            The indicator of the  ControllerModeOverride is in the OFF state and the mode override is inactive
+            <see cref="!:ControllerModeOverride">ControllerModeOverride</see> is in the <c>OFF</c> state and the mode override is inactive.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROLLER_MODE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.AUTOMATIC">
             <summary>
-            The controller is configured to automatically execute a  program.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.SEMI_AUTOMATIC">
-            <summary>
-            The controller is operating in a single cycle, single block,  or single step mode.
+            <see cref="!:Controller">Controller</see> is configured to automatically execute a program.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.MANUAL">
             <summary>
-            The controller is under manual control by the operator.
+            <see cref="!:Controller">Controller</see> is not executing an active program.   It is capable of receiving instructions from an external source – typically an operator. The <see cref="!:Controller">Controller</see> executes operations based on the instructions received from the external source.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.MANUAL_DATA_INPUT">
             <summary>
-            The operator can enter operations for the controller to  perform. There is no current program being executed.
+            operator can enter a series of operations for the <see cref="!:Controller">Controller</see> to perform.  The <see cref="!:Controller">Controller</see> will execute this specific series of operations and then stop.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.SEMI_AUTOMATIC">
+            <summary>
+            <see cref="!:Controller">Controller</see> is operating in a mode that restricts the active program from processing its next process step without operator intervention.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.EDIT">
             <summary>
-            The controller is currently editing a program in the  foreground.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.SINGLE_BLOCK">
-            <summary>
-            The machine is executing single block or instruction.
+            <see cref="!:Controller">Controller</see> is currently functioning as a programming device and is not capable of executing an active program.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ControllerModeValues.FEED_HOLD">
             <summary>
-            The axes of the device are commanded to stop, but the  spindle continues to function.
+            axes of the device are commanded to stop, but the spindle continues to function.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionLinearValues">
@@ -7263,24 +7283,47 @@
             No direction.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.CLOCKWISE">
+            <summary>
+            clockwise rotation using the right-hand rule.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.COUNTER_CLOCKWISE">
+            <summary>
+            counter-clockwise rotation using the right-hand rule.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.POSITIVE">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues.NEGATIVE">
+            <summary>
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.DOOR_STATE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues.OPEN">
             <summary>
-            The door is opened.
+            <see cref="!:Door">Door</see> is open to the point of a positive confirmation.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues.CLOSED">
             <summary>
-            The door is closed.
+            <see cref="!:Door">Door</see> is closed to the point of a positive confirmation.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DoorStateValues.UNLATCHED">
             <summary>
-            The door is not closed to the point of a positive  confirmation and not open to the point of a positive confirmation
+            <see cref="!:Door">Door</see> is not closed to the point of a positive confirmation and not open to the point of a positive confirmation.   It is in an intermediate position.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Elements.AbstractFileElements.FILE_PROPERTIES">
@@ -7355,102 +7398,97 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.EmergencyStopValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EMERGENCY_STOP"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EmergencyStopValues.ARMED">
             <summary>
-            The circuit is complete and the device is operating.
+            emergency stop circuit is complete and the piece of equipment, component, or composition is allowed to operate. 
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EmergencyStopValues.TRIGGERED">
             <summary>
-            The circuit is open and the device must cease operation.
+            operation of the piece of equipment, component, or composition is inhibited.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.EndOfBarValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.END_OF_BAR"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EndOfBarValues.YES">
             <summary>
-            The end of bar has been reached
+            <see cref="!:EndOfBar">EndOfBar</see> has been reached.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EndOfBarValues.NO">
             <summary>
-            The end of bar has not been reached
+            <see cref="!:EndOfBar">EndOfBar</see> has not been reached.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.EquipmentModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EQUIPMENT_MODE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EquipmentModeValues.ON">
             <summary>
-            The equipment is functioning in the mode  designated by the subType
+            equipment is functioning in the mode designated by the <c>subType</c>.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.EquipmentModeValues.OFF">
             <summary>
-            The equipment is not functioning in th mode designated by the subType.
+            equipment is not functioning in the mode designated by the <c>subType</c>.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EXECUTION"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.READY">
             <summary>
-            The controller is ready to execute. It is currently idle.
+            <see cref="!:Component">Component</see> is ready to execute instructions.  It is currently idle.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.ACTIVE">
             <summary>
-            The controller is actively executing an instruction.
+            <see cref="!:Component">Component</see> is actively executing an instruction.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.INTERRUPTED">
             <summary>
-            The operator or the program has paused execution and is waiting to be continued.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.WAIT">
-            <summary>
-            The execution of the controller’s program is suspended while a secondary operation is executing or completing. Execution will resume automatically once the secondary operation is completed.
+            <see cref="!:Component">Component</see> suspends the execution of the program due to an external signal.  Action is required to resume execution.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.FEED_HOLD">
             <summary>
-            The controller has is in a feed hold and motion has  been stopped.
+            motion of the active axes are commanded to stop at their current position.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.STOPPED">
             <summary>
-            The controller has been stopped.
+            <see cref="!:Component">Component</see> program is not <c>READY</c> to execute.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.OPTIONAL_STOP">
             <summary>
-            The controller’s program has  been intentionally stopped using an M01 or similar command.The program may be stopped at the designated location based upon the state of a secondary indication provided to the controller indicating whether the program execution must be stopped at this location or program execution should continue.
+            command from the program has intentionally interrupted execution.  The <see cref="!:Component">Component</see> <b>MAY</b> have another state that indicates if the execution is interrupted or the execution ignores the interrupt instruction.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.PROGRAM_STOPPED">
             <summary>
-            The program has been stopped.
+            command from the program has intentionally interrupted execution.  Action is required to resume execution.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.PROGRAM_COMPLETED">
             <summary>
-            The program has completed execution.
+            program completed execution.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.PROGRAM_OPTIONAL_STOP">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.WAIT">
             <summary>
-            The program has been intentionally optionally stopped using an M01 or similar code.
+            <see cref="!:Component">Component</see> suspends execution while a secondary operation executes.  Execution resumes automatically once the secondary operation completes.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FileStateValues.EXPERIMENTAL">
@@ -7470,32 +7508,32 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.FUNCTIONAL_MODE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues.PRODUCTION">
             <summary>
-            The device is ready for automated production.
+            <see cref="!:Component">Component</see> is currently producing product, ready to produce product, or its current intended use is to be producing product.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues.SETUP">
             <summary>
-            The device is being setup for a new part type.
+            <see cref="!:Component">Component</see> is not currently producing product.   It is being prepared or modified to begin production of product.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues.TEARDOWN">
             <summary>
-            The current setup is being removed from the device.
+            <see cref="!:Component">Component</see> is not currently producing product.  Typically, it has completed the production of a product and is being modified or returned to a neutral state such that it may then be prepared to begin production of a different product.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues.MAINTENANCE">
             <summary>
-            The device is being repaired or routine service is being  performed.
+            <see cref="!:Component">Component</see> is not currently producing product.  It is currently being repaired, waiting to be repaired, or has not yet been returned to a normal production status after maintenance has been performed.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues.PROCESS_DEVELOPMENT">
             <summary>
-            The device is being used to prove-out a new process.
+            <see cref="!:Component">Component</see> is being used to prove-out a new process, testing of equipment or processes, or any other active use that does not result in the production of product.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.InterfaceStateValues">
@@ -7513,124 +7551,287 @@
             The interface is not operational.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.LeakDetectValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.LeakDetectValues.DETECTED">
+            <summary>
+            leak is currently being detected.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.LeakDetectValues.NOT_DETECTED">
+            <summary>
+            leak is currently not being detected.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.LockStateValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.LockStateValues.LOCKED">
+            <summary>
+            mechanism is engaged and preventing the associated <see cref="!:Component">Component</see> from being opened or operated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.LockStateValues.UNLOCKED">
+            <summary>
+            mechanism is disengaged and the associated <see cref="!:Component">Component</see> is able to be opened or operated.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.OperatingModeValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.OperatingModeValues.AUTOMATIC">
+            <summary>
+            automatically execute instructions from a recipe or program.  > Note: Setpoint comes from a recipe.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.OperatingModeValues.MANUAL">
+            <summary>
+            execute instructions from an external agent or person.  > Note 1 to entry: Valve or switch is manipulated by an agent/person.  > Note 2 to entry: Direct control of the PID output. % of the range: A user manually sets the % output, not the setpoint.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.OperatingModeValues.SEMI_AUTOMATIC">
+            <summary>
+            executes a single instruction from a recipe or program.  > Note 1 to entry: Setpoint is entered and fixed, but the PID is controlling.  > Note 2 to entry: Still goes through the PID control system.  > Note 3 to entry: Manual fixed entry from a recipe.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PartCountTypeValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartCountTypeValues.EACH">
+            <summary>
+            count is of individual items.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartCountTypeValues.BATCH">
+            <summary>
+            pre-specified group of items.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PartDetectValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_DETECT"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartDetectValues.PRESENT">
             <summary>
-            If a part or work piece has been detected or is present.
+            part or work piece is detected or is present.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartDetectValues.NOT_PRESENT">
             <summary>
-            If a part or work piece is not detected or is not present.
+            part or work piece is not detected or is not present.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.NEEDS_PROCESSING">
+            <summary>
+            part occurrence is not actively being processed, but the processing has not ended.   Processing requirements exist that have not yet been fulfilled. This is the default entry state when the part occurrence is originally received. In some cases, the part occurrence may return to this state while it waits for additional processing to be performed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.IN_PROCESS">
+            <summary>
+            part occurrence is actively being processed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.PROCESSING_ENDED">
+            <summary>
+            part occurrence is no longer being processed.   A general state when the reason for termination is unknown.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.PROCESSING_ENDED_COMPLETE">
+            <summary>
+            part occurrence has completed processing successfully.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.PROCESSING_ENDED_STOPPED">
+            <summary>
+            process has been stopped during the processing.   The part occurrence will require special treatment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.PROCESSING_ENDED_ABORTED">
+            <summary>
+            processing of the part occurrence has come to a premature end.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.PROCESSING_ENDED_LOST">
+            <summary>
+            terminal state when the part occurrence has been removed from the equipment by an external entity and it no longer exists at the equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.PROCESSING_ENDED_SKIPPED">
+            <summary>
+            part occurrence has been skipped for processing on the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.PROCESSING_ENDED_REJECTED">
+            <summary>
+            part occurrence has been processed completely. However, the processing may have a problem.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.WAITING_FOR_TRANSIT">
+            <summary>
+            part occurrence is waiting for transit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.IN_TRANSIT">
+            <summary>
+            part occurrence is being transported to its destination.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartProcessingStateValues.TRANSIT_COMPLETE">
+            <summary>
+            part occurrence has been placed at its designated destination.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PartStatusValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_STATUS"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartStatusValues.PASS">
             <summary>
-            The part does conform to given requirements.
+            part conforms to given requirements.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PartStatusValues.FAIL">
             <summary>
-            The part does not conform to some given requirements.
+            part does not conform to some given requirements.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PATH_MODE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues.INDEPENDENT">
             <summary>
-            A set of axes are operating independently and without the  influence of another set of axes.
+            path is operating independently and without the influence of another path.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues.MASTER">
             <summary>
-            The path provides the reference motion from which a  Synchronous or Mirror Path will follow.
+            path provides information or state values that influences the operation of other <see cref="!:DataItem">DataItem</see> of similar type.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues.SYNCHRONOUS">
             <summary>
-            The sets of axes are operating synchronously.
+            physical or logical parts which are not physically connected to each other but are operating together.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PathModeValues.MIRROR">
             <summary>
-            The sets of axes are mirroring each other.
+            axes associated with the path are mirroring the motion of the <c>MASTER</c> path.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_STATE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStateValues.ON">
             <summary>
-            The power to the component is ON.
+            source of energy for an entity or the enabling signal providing permission for the entity to perform its function(s) is present and active.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStateValues.OFF">
             <summary>
-            The power to the component is OFF.
+            source of energy for an entity or the enabling signal providing permission for the entity to perform its function(s) is not present or is disconnected.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStatusValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_STATUS"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStatusValues.ON">
             <summary>
-            The power to the component is ON.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.PowerStatusValues.OFF">
             <summary>
-            The power to the component is OFF.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ProcessStateValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProcessStateValues.INITIALIZING">
+            <summary>
+            device is preparing to execute the process occurrence.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProcessStateValues.READY">
+            <summary>
+            process occurrence is ready to be executed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProcessStateValues.ACTIVE">
+            <summary>
+            process occurrence is actively executing.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProcessStateValues.COMPLETE">
+            <summary>
+            process occurrence is now finished.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProcessStateValues.INTERRUPTED">
+            <summary>
+            process occurrence has been stopped and may be resumed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProcessStateValues.ABORTED">
+            <summary>
+            process occurrence has come to a premature end and cannot be resumed.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramEditValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_EDIT"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramEditValues.ACTIVE">
             <summary>
-            A program is currently being edited.
+            <see cref="!:Controller">Controller</see> is in the program edit mode.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramEditValues.READY">
             <summary>
-            The controller is capable of editing a program, but it is not  currently editing a program.
+            <see cref="!:Controller">Controller</see> is capable of entering the program edit mode and no function is inhibiting a change to that mode.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramEditValues.NOT_READY">
             <summary>
-            The controller is in a state where it cannot edit a program.
+            <see cref="!:Controller">Controller</see> is being inhibited by a function from entering the program edit mode.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramLocationTypeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PROGRAM_LOCATION_TYPE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramLocationTypeValues.LOCAL">
             <summary>
-            Managed by the controller.
+            managed by the controller.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ProgramLocationTypeValues.EXTERNAL">
             <summary>
-            Not managed by the controller.
+            not managed by the controller.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues">
@@ -7685,97 +7886,122 @@
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ROTARY_MODE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues.SPINDLE">
             <summary>
-            The axis is operating like a spindle and spinning.
+            axis is functioning as a spindle.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues.INDEX">
             <summary>
-            The axis is indexing to a position.
+            axis is configured to index.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues.CONTOUR">
             <summary>
-            The axes is indexing and rotating at a programmed velocity.
+            position of the axis is being interpolated.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.SpindleInterlockValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.SPINDLE_INTERLOCK"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.SpindleInterlockValues.ACTIVE">
             <summary>
-            The spindle cannot be operated.
+            power has been removed and the spindle cannot be operated.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.SpindleInterlockValues.INACTIVE">
             <summary>
-            The spindle can be operated.
+            spindle has not been deactivated.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ValveStateValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ValveStateValues.OPEN">
+            <summary>
+            <see cref="!:ValveState">ValveState</see> where flow is allowed and the aperture is static.  > Note: For a binary value, <c>OPEN</c> indicates the valve has the maximum possible aperture.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ValveStateValues.OPENING">
+            <summary>
+            valve is transitioning from a <c>CLOSED</c> state to an <c>OPEN</c> state.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ValveStateValues.CLOSED">
+            <summary>
+            <see cref="!:ValveState">ValveState</see> where flow is not possible, the aperture is static, and the valve is completely shut.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ValveStateValues.CLOSING">
+            <summary>
+            valve is transitioning from an <c>OPEN</c> state to a <c>CLOSED</c> state.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues">
             <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WAIT_STATE"/>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.POWERING_UP">
             <summary>
-            An indication that execution is waiting while the equipment is powering up and is not currently available to begin producing parts or products.
+            execution is waiting while the equipment is powering up and is not currently available to begin producing parts or products.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.POWERING_DOWN">
             <summary>
-            An indication that the execution is waiting while the equipment is powering down but has not fully reached a stopped state.
+            execution is waiting while the equipment is powering down but has not fully reached a stopped state.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.PART_LOAD">
             <summary>
-            An indication that the execution is waiting while one or more discrete workpieces are being loaded.
+            execution is waiting while one or more discrete workpieces are being loaded.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.PART_UNLOAD">
             <summary>
-            An indication that the execution is waiting while one or more discrete workpieces are being unloaded.
+            execution is waiting while one or more discrete workpieces are being unloaded.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.TOOL_LOAD">
             <summary>
-            An indication that the execution is waiting while a tool or tooling is being loaded.
+            execution is waiting while a tool or tooling is being loaded.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.TOOL_UNLOAD">
             <summary>
-            An indication that the execution is waiting while a tool or tooling is being unloaded.
+            execution is waiting while a tool or tooling is being unloaded.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.MATERIAL_LOAD">
             <summary>
-            An indication that the execution is waiting while bulk material or the container for bulk material used in the production process is being loaded. Bulk material includes those materials from which multiple workpieces may be created.
+            execution is waiting while material is being loaded.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.MATERIAL_UNLOAD">
             <summary>
-            An indication that the execution is waiting while bulk material or the container for bulk material used in the production process is being unloaded. Bulk material includes those materials from which multiple workpieces may be created.
+            execution is waiting while material is being unloaded.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.SECONDARY_PROCESS">
             <summary>
-            An indication that the execution is waiting while another process is completed before the execution can resume.
+            execution is waiting while another process is completed before the execution can resume.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.PAUSING">
             <summary>
-            An indication that the execution is waiting while the equipment is pausing but the piece of equipment has not yet reached a fully paused state.
+            execution is waiting while the equipment is pausing but the piece of equipment has not yet reached a fully paused state.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.WaitStateValues.RESUMING">
             <summary>
-            An indication that the execution is waiting while the equipment is resuming the production cycle but has not yet resumed execution.
+            execution is waiting while the equipment is resuming the production cycle but has not yet resumed execution.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentErrorException">
@@ -9704,13 +9930,6 @@
             Occurance: 0..1
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.SubType">
-            <summary>
-            Collected from the subType attribute. Refer to Part 3 Streams - 5.8.3
-            
-            Occurance: 0..1
-            </summary>
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.CompositionId">
             <summary>
             Collected from the compositionId attribute. Refer to Part 3 Streams - 5.8.3
@@ -9748,6 +9967,9 @@
             Occurance: 1
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.SubType">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.SUB_TYPE"/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.Timestamp">
             <summary>
             Collected from the timestamp attribute. Refer to Part 3 Streams - 5.3.2, 5.5.2, 5.8.3
@@ -9767,15 +9989,6 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.tryValidateSubType``1(System.String,MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException@)">
-            <summary>
-            Attempts to validate a DataItem subType value according the specified type (<typeparamref name="T"/>).
-            </summary>
-            <typeparam name="T">Reference to the <see cref="T:System.Enum"/> containing appropriate subType values.</typeparam>
-            <param name="subType">Reference to the subType provided in the Response Document.</param>
-            <param name="validationError">Output of the error found in validating the subType.</param>
-            <returns>Flag for whether or not the validation passed.</returns>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Name">
             <summary>
@@ -9803,13 +10016,6 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.SubType">
-            <summary>
-            Collected from the subType attribute. Refer to Part 3 Streams - 5.5.2
-            
-            Occurance: 0..1
-            </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Event.Name">
             <summary>
@@ -9865,13 +10071,6 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SubType">
-            <summary>
-            Collected from the subType attribute. Refer to Part 3 Streams - 5.3.2
-            
-            Occurance: 0..1
-            </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Name">
             <summary>
