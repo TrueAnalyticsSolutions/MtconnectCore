@@ -13,14 +13,6 @@ namespace MtconnectCore.Standard.Documents.Streams
     public class Event : DataItem
     {
         /// <summary>
-        /// Collected from the subType attribute. Refer to Part 3 Streams - 5.5.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        [MtconnectNodeAttribute(EventAttributes.SUB_TYPE)]
-        public string SubType { get; set; }
-
-        /// <summary>
         /// Collected from the name attribute. Refer to Part 3 Streams - 5.5.2
         /// 
         /// Occurance: 0..1

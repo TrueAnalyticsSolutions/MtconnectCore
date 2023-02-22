@@ -62,14 +62,6 @@ namespace MtconnectCore.Standard.Documents.Streams
         public string Statistic { get; set; }
 
         /// <summary>
-        /// Collected from the subType attribute. Refer to Part 3 Streams - 5.8.3
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        [MtconnectNodeAttribute(ConditionAttributes.SUB_TYPE)]
-        public string SubType { get; set; }
-
-        /// <summary>
         /// Collected from the compositionId attribute. Refer to Part 3 Streams - 5.8.3
         /// 
         /// Occurance: 0..1
@@ -137,7 +129,7 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
-            => validateNode<ConditionElements>(Contracts.Enums.Devices.CategoryTypes.CONDITION, out validationErrors);
+            => validateNode<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Contracts.Enums.Devices.CategoryTypes.CONDITION, out validationErrors);
 
         protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new NotImplementedException();
     }
