@@ -74,6 +74,23 @@ namespace MtconnectCore.Standard.Documents.Streams
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
             => validateNode<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(Contracts.Enums.Devices.CategoryTypes.EVENT, out validationErrors);
 
-        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new System.NotImplementedException();
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "")]
+        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+
+            if (string.IsNullOrEmpty(Value))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"DataItem MUST include a value.",
+                    SourceNode));
+            } else if (true)
+            {
+
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }
