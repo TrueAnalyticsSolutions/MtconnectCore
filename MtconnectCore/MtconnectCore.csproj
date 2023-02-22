@@ -20,7 +20,7 @@
     <PackageReleaseNotes>Changed the methodology for producing validation results. Errors were no longer bubbling up to the root document.</PackageReleaseNotes>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>2.1.0.2</Version>
+    <Version>2.1.0.3</Version>
   </PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net45'">
