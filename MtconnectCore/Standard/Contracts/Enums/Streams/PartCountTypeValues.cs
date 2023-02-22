@@ -7,19 +7,19 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 	/// <summary>
 	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
 	﻿	/// </summary>
-	[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+	[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/")]
 	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
-	public enum ActuatorStateValues
+	public enum PartCountTypeValues
 	{
 		/// <summary>
-		﻿/// <see cref="Actuator">Actuator</see> is operating.
+		﻿/// count is of individual items.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
-		ACTIVE,
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/")]
+		EACH,
 		/// <summary>
-		﻿/// <see cref="Actuator">Actuator</see> is not operating.
+		﻿/// pre-specified group of items.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
-		INACTIVE,
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/")]
+		BATCH,
 	}
 }

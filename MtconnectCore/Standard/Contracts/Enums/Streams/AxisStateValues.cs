@@ -1,33 +1,35 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
+using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
-    /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.AXIS_STATE"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-    public enum AxisStateValues
-    {
-        /// <summary>
-        /// The axis is in its home position.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        HOME,
-        /// <summary>
-        /// The axis is in motion
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        TRAVEL,
-        /// <summary>
-        /// The axis has been moved to a fixed  position and is being maintained in that position either electrically or mechanically. Action is required to release the axis from this position.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
-        PARKED,
-        /// <summary>
-        /// The axis is stopped
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        STOPPED
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum AxisStateValues
+	{
+		/// <summary>
+		﻿/// axis is in its home position.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		HOME,
+		/// <summary>
+		﻿/// axis is in motion.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		TRAVEL,
+		/// <summary>
+		﻿/// axis has been moved to a fixed position and is being maintained in that position either electrically or mechanically.   Action is required to release the axis from this position.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		PARKED,
+		/// <summary>
+		﻿/// axis is stopped.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		STOPPED,
+	}
 }

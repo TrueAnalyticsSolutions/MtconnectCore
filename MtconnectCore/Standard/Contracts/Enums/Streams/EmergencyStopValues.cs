@@ -1,23 +1,25 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
+using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
-    /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.EMERGENCY_STOP"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
-    public enum EmergencyStopValues
-    {
-        /// <summary>
-        /// The circuit is complete and the device is operating.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
-        ARMED,
-        /// <summary>
-        /// The circuit is open and the device must cease operation.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.10.1")]
-        TRIGGERED
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum EmergencyStopValues
+	{
+		/// <summary>
+		﻿/// emergency stop circuit is complete and the piece of equipment, component, or composition is allowed to operate. 
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		ARMED,
+		/// <summary>
+		﻿/// operation of the piece of equipment, component, or composition is inhibited.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		TRIGGERED,
+	}
 }

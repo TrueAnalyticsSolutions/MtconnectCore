@@ -1,38 +1,40 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
+using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
-    /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.FUNCTIONAL_MODE"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-    public enum FunctionalModeValues
-    {
-        /// <summary>
-        /// The device is ready for automated production.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        PRODUCTION,
-        /// <summary>
-        /// The device is being setup for a new part type.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        SETUP,
-        /// <summary>
-        /// The current setup is being removed from the device.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        TEARDOWN,
-        /// <summary>
-        /// The device is being repaired or routine service is being  performed.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        MAINTENANCE,
-        /// <summary>
-        /// The device is being used to prove-out a new process.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        PROCESS_DEVELOPMENT
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum FunctionalModeValues
+	{
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> is currently producing product, ready to produce product, or its current intended use is to be producing product.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		PRODUCTION,
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> is not currently producing product.   It is being prepared or modified to begin production of product.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		SETUP,
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> is not currently producing product.  Typically, it has completed the production of a product and is being modified or returned to a neutral state such that it may then be prepared to begin production of a different product.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		TEARDOWN,
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> is not currently producing product.  It is currently being repaired, waiting to be repaired, or has not yet been returned to a normal production status after maintenance has been performed.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		MAINTENANCE,
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> is being used to prove-out a new process, testing of equipment or processes, or any other active use that does not result in the production of product.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		PROCESS_DEVELOPMENT,
+	}
 }

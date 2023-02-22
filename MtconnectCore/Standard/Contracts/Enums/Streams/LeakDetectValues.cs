@@ -7,19 +7,19 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 	/// <summary>
 	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
 	﻿	/// </summary>
-	[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+	[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/")]
 	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
-	public enum ActuatorStateValues
+	public enum LeakDetectValues
 	{
 		/// <summary>
-		﻿/// <see cref="Actuator">Actuator</see> is operating.
+		﻿/// leak is currently being detected.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
-		ACTIVE,
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/")]
+		DETECTED,
 		/// <summary>
-		﻿/// <see cref="Actuator">Actuator</see> is not operating.
+		﻿/// leak is currently not being detected.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
-		INACTIVE,
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/")]
+		NOT_DETECTED,
 	}
 }

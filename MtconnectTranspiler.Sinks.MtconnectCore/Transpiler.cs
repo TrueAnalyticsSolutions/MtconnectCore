@@ -76,9 +76,16 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                             ?.Profile
                             ?.ProfileDataTypes
                             ?.Elements
-                            ?.FirstOrDefault(o => o is UmlEnumeration && o.Id == typeResult.Id);
-                        var typeValuesEnum = new MtconnectCoreEnum(model, typeValuesSysEnum as UmlEnumeration, $"{type.Name}Values");
-                        valueEnums.Add(typeValuesEnum);
+                            ?.FirstOrDefault(o => o is UmlEnumeration && o.Id == typeResult.PropertyType);
+                        if (typeValuesSysEnum != null)
+                        {
+                            var typeValuesEnum = new MtconnectCoreEnum(model, typeValuesSysEnum as UmlEnumeration) { Namespace = DataItemValueNamespace, Name = $"{type.Name}Values" };
+                            foreach (var value in typeValuesEnum.Items)
+                            {
+                                value.Name = value.SysML_Name;
+                            }
+                            valueEnums.Add(typeValuesEnum);
+                        }
                     }
 
                     // Add subType as enum
@@ -87,9 +94,9 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                         // Register type as having a subType in the CATEGORY enum
                         if (!categoryEnum.SubTypes.ContainsKey(type.Name)) categoryEnum.SubTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(type.Name), $"{type.Name}SubTypes");
 
-                        var typeSubTypes = subTypes[type.Name];
                         var subTypeEnum = new MtconnectCoreEnum(model, type, $"{type.Name}SubTypes") { Namespace = DataItemNamespace };
 
+                        var typeSubTypes = subTypes[type.Name];
                         subTypeEnum.AddItems(model, typeSubTypes);
 
                         // Cleanup Enum names

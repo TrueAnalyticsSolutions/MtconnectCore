@@ -1,64 +1,60 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
-    /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.EXECUTION"/>
-    /// </summary>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
-    public enum ExecutionValues {
-        /// <summary>
-        /// The controller is ready to execute. It is currently idle.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
-        READY,
-        /// <summary>
-        /// The controller is actively executing an instruction.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
-        ACTIVE,
-        /// <summary>
-        /// The operator or the program has paused execution and is waiting to be continued.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
-        INTERRUPTED,
-        /// <summary>
-        /// The execution of the controller’s program is suspended while a secondary operation is executing or completing. Execution will resume automatically once the secondary operation is completed.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 6.2")]
-        WAIT,
-        /// <summary>
-        /// The controller has is in a feed hold and motion has  been stopped.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        FEED_HOLD,
-        /// <summary>
-        /// The controller has been stopped.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1")]
-        STOPPED,
-        /// <summary>
-        /// The controller’s program has  been intentionally stopped using an M01 or similar command.The program may be stopped at the designated location based upon the state of a secondary indication provided to the controller indicating whether the program execution must be stopped at this location or program execution should continue.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 3 Section 6.2")]
-        OPTIONAL_STOP,
-        /// <summary>
-        /// The program has been stopped.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        PROGRAM_STOPPED,
-        /// <summary>
-        /// The program has completed execution.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3")]
-        PROGRAM_COMPLETED,
-        /// <summary>
-        /// The program has been intentionally optionally stopped using an M01 or similar code.
-        /// </summary>
-        [Obsolete("Deprecated in version 1.4.0. See OPTIONAL_STOP")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 3 Section 3.10.3", MtconnectVersions.V_1_3_1)]
-        PROGRAM_OPTIONAL_STOP
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum ExecutionValues
+	{
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> is ready to execute instructions.  It is currently idle.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		READY,
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> is actively executing an instruction.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		ACTIVE,
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> suspends the execution of the program due to an external signal.  Action is required to resume execution.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		INTERRUPTED,
+		/// <summary>
+		﻿/// motion of the active axes are commanded to stop at their current position.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		FEED_HOLD,
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> program is not <c>READY</c> to execute.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/")]
+		STOPPED,
+		/// <summary>
+		﻿/// command from the program has intentionally interrupted execution.  The <see cref="Component">Component</see> <b>MAY</b> have another state that indicates if the execution is interrupted or the execution ignores the interrupt instruction.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		OPTIONAL_STOP,
+		/// <summary>
+		﻿/// command from the program has intentionally interrupted execution.  Action is required to resume execution.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		PROGRAM_STOPPED,
+		/// <summary>
+		﻿/// program completed execution.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/")]
+		PROGRAM_COMPLETED,
+		/// <summary>
+		﻿/// <see cref="Component">Component</see> suspends execution while a secondary operation executes.  Execution resumes automatically once the secondary operation completes.
+		/// </summary>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/")]
+		WAIT,
+	}
 }

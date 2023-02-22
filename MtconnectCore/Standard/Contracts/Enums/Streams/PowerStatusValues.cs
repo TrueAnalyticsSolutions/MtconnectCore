@@ -1,27 +1,26 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using System;
+using System.CodeDom.Compiler;
+using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
-    /// <summary>
-    /// Available values for EVENT element <see cref="EventTypes.POWER_STATUS"/>
-    /// </summary>
-    [Obsolete("Deprecated in version 1.1.0.")]
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1", MtconnectVersions.V_1_0_1)]
-    public enum PowerStatusValues
-    {
-        /// <summary>
-        /// The power to the component is ON.
-        /// </summary>
-        [Obsolete("Deprecated in version 1.1.0.")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1", MtconnectVersions.V_1_0_1)]
-        ON,
-        /// <summary>
-        /// The power to the component is OFF.
-        /// </summary>
-        [Obsolete("Deprecated in version 1.1.0.")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8.1", MtconnectVersions.V_1_0_1)]
-        OFF
-    }
+	/// <summary>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	﻿	/// </summary>
+	[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/", MtconnectVersions.V_1_1_0)]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	public enum PowerStatusValues
+	{
+		/// <summary>
+		﻿		/// </summary>
+		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/", MtconnectVersions.V_1_1_0)]
+		ON,
+		/// <summary>
+		﻿		/// </summary>
+		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/", MtconnectVersions.V_1_1_0)]
+		OFF,
+	}
 }
