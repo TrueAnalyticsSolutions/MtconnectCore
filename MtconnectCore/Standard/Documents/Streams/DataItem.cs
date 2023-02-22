@@ -191,13 +191,20 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 // Get the Enum and look for an attribute pointing to the SubType enum
                 Type enumType = typeof(T);
-                MemberInfo[] typeValueInfos = enumType.GetMember(SourceNode.LocalName);
+                MemberInfo[] typeValueInfos = enumType.GetMember(EnumHelper.Enumify(SourceNode.LocalName));
                 var valueInfo = typeValueInfos.FirstOrDefault(o => o.DeclaringType == enumType);
-                var obsSubType = valueInfo.GetCustomAttribute<ObservationalSubTypeAttribute>();
+                var obsSubType = valueInfo?.GetCustomAttribute<ObservationalSubTypeAttribute>();
                 // Validate the observational sub-type
                 if (obsSubType != null)
                 {
-                    if (!EnumHelper.Contains(obsSubType.SubTypeEnum, SubType))
+                    if (string.IsNullOrEmpty(SubType))
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            $"DataItem type '{SourceNode.LocalName}' is missing a subType",
+                            SourceNode));
+                        isValidSubType = false;
+                    } else if (!EnumHelper.Contains(obsSubType.SubTypeEnum, SubType))
                     {
                         validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,

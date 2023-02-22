@@ -12,7 +12,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
     public class CategoryFunctions : ScriptObject
     {
         public static bool CategoryContainsType(MtconnectCoreEnum @enum, EnumItem item) => @enum.SubTypes.ContainsKey(item.Name);
-        public static bool CategoryContainsValue(MtconnectCoreEnum @enum, EnumItem item) => @enum.Values.ContainsKey(item.Name);
+        public static bool CategoryContainsValue(MtconnectCoreEnum @enum, EnumItem item) => @enum.ValueTypes.ContainsKey(item.Name);
+        public static bool EnumHasValues(MtconnectCoreEnum @enum) => @enum.ValueTypes.Any();
     }
     internal class Transpiler : CsharpTranspiler
     {
@@ -85,7 +86,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                             {
                                 value.Name = value.SysML_Name;
                             }
-                            if (!categoryEnum.Values.ContainsKey(type.Name)) categoryEnum.Values.Add(ScribanHelperMethods.ToUpperSnakeCode(type.Name), $"{type.Name}Values");
+                            if (!categoryEnum.ValueTypes.ContainsKey(type.Name)) categoryEnum.ValueTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(type.Name), $"{type.Name}Values");
                             valueEnums.Add(typeValuesEnum);
                         }
                     }

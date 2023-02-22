@@ -1,6 +1,9 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using MtconnectCore.Standard.Contracts.Attributes;
+{{~ if enum_has_values source ~}}
+using MtconnectCore.Standard.Contracts.Enums.Streams;
+{{ end ~}}
 
 namespace {{ to_pascal_code source.namespace }}
 {

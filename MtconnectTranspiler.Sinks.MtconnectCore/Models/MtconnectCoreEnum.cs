@@ -12,7 +12,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         public Dictionary<string, string> SubTypes { get; set; } = new Dictionary<string, string>();
 
         // NOTE: Only used for CATEGORY types that have value enums.
-        public Dictionary<string, string> Values { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> ValueTypes { get; set; } = new Dictionary<string, string>();
 
         public MtconnectCoreEnum(MTConnectModel model, XmiElement source, string name) : base(model, source, name) { }
 
