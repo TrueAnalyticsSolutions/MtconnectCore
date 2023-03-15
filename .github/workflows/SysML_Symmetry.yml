@@ -13,8 +13,8 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install SemVer
-      run: pip install semver
+    - name: Install version-parser
+      run: pip install version-parser
     - name: Get MTConnectCore release tag
       id: get-core-release
       uses: pozetroninc/github-action-get-latest-release@master
@@ -30,10 +30,10 @@ jobs:
       with:
         fail-on-error: false
         script: |
-          import semver
-          this_version = semver.VersionInfo.parse('${{ steps.get-core-release.outputs.release }}'[1:])
-          mtc_version = semver.VersionInfo.parse('${{ steps.get-mtc-release.outputs.release }}'[1:])
-          if mtc_version.major >= this_version.major and mtc_version.minor > this_version.minor:
+          from version_parser import Version
+          this_version = Version("${{ steps.get-core-release.outputs.release }}")
+          mtc_version = Version("${{ steps.get-mtc-release.outputs.release }}")
+          if mtc_version > this_version:
             print(1)
           else:
             print(0)
