@@ -10,6 +10,9 @@ jobs:
   check-latest-release:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
     - name: Install SemVer
       run: pip install semver
     - name: Get MTConnectCore release tag
@@ -22,6 +25,14 @@ jobs:
       uses: pozetroninc/github-action-get-latest-release@master
       with:
         repository: mtconnect/mtconnect_sysml_model
+    - uses: jannekem/run-python-script-action@v1
+      id: script
+      with:
+        fail-on-error: false
+        script: |
+          this_version = "${{ steps.get-core-release.outputs.release }}";
+          mtc_version = "${{ steps.get-mtc-release.outputs.release }}";
+          set_env("VERSION_DIFF", semver(mtc_version, this_version));
     - name: Compare Versions
       id: comparison
       uses: actions/github-script@v5
@@ -31,7 +42,7 @@ jobs:
             const mtcVersion = "${{ steps.get-mtc-release.outputs.release }}";
             console.log(`MtconnectCore Version: ${thisVersion}`);
             console.log(`MTConnect Version: ${mtcVersion}`);
-            if (semver.compare(mtcVersion, thisVersion) > 0) {
+            if (env.VERSION_DIFF > 0) {
               console.log('MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore.');
             } else {
               console.log('MtconnectCore has the latest MTConnect updates.');
