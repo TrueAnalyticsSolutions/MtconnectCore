@@ -10,6 +10,13 @@ jobs:
   check-latest-release:
     runs-on: ubuntu-latest
     steps:
+    - name: Install SemVer
+      run: pip install semver
+    - name: Get MTConnectCore release tag
+      id: get-core-release
+      uses: pozetroninc/github-action-get-latest-release@master
+      with:
+        repository: TrueAnalyticsSolutions/MtconnectCore
     - name: Get MTConnect release tag
       id: get-mtc-release
       uses: pozetroninc/github-action-get-latest-release@master
@@ -21,7 +28,7 @@ jobs:
       with:
         script: |
             const semver = require('semver');
-            const thisVersion = "${{ github.event.release.tag_name }}";
+            const thisVersion = "${{ steps.get-core-release.outputs.release }}";
             const mtcVersion = "${{ steps.get-mtc-release.outputs.release }}";
             console.log(`MtconnectCore Version: ${thisVersion}`);
             console.log(`MTConnect Version: ${mtcVersion}`);
