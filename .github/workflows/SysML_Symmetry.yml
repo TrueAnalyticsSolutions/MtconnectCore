@@ -10,43 +10,11 @@ jobs:
   check-latest-release:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout mtconnect_sysml_model repository
-      uses: actions/checkout@v2
-      with:
-        repository: mtconnect/mtconnect_sysml_model
-        ref: master
-
     - name: Get MTConnect release tag
       id: get-mtc-release
-      uses: actions/github-script@v5
+      uses: pozetroninc/github-action-get-latest-release@master
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const octokit = new github.GitHub('${{ secrets.GITHUB_TOKEN }}');
-          const res = await octokit.repos.getLatestRelease({
-            owner: 'owner-name',
-            repo: 'repo-name'
-          });
-          console.log(res.data.tag_name);
-          console.log(res.data.zipball_url);
-          console.log(res.data.published_at);
-          console.log(res.data.body);
-          return {
-            tag_name: res.data.tag_name,
-            published_at: res.data.published_at
-          }
-#          const res = await github.repos.getLatestRelease({
-#            owner: 'mtconnect',
-#            repo: 'mtconnect_sysml_model'
-#          });
-#          console.log(res.data.tag_name);
-#          console.log(res.data.zipball_url);
-#          console.log(res.data.published_at);
-#          console.log(res.data.body);
-#         return {
-#            tag_name: res.data.tag_name,
-#            published_at: res.data.published_at
-#          }
+        repository: mtconnect/mtconnect_sysml_model
     - name: Compare Versions
       id: comparison
       uses: actions/github-script@v5
@@ -54,7 +22,7 @@ jobs:
         script: |
             const semver = require('semver');
             const thisVersion = "${{ github.event.release.tag_name }}";
-            const mtcVersion = "${{ steps.get-latest-release.outputs.tag_name }}";
+            const mtcVersion = "${{ get-latest-release.release }}";
             console.log(`MtconnectCore Version: ${thisVersion}`);
             console.log(`MTConnect Version: ${mtcVersion}`);
             if (semver.gt(mtcVersion, thisVersion)) {
