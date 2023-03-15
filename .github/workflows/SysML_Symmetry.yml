@@ -33,8 +33,13 @@ jobs:
           import semver
           this_version = "${{ steps.get-core-release.outputs.release }}"
           mtc_version = "${{ steps.get-mtc-release.outputs.release }}"
-          set_env("VERSION_DIFF", semver(mtc_version, this_version))
+          print(semver.compare(mtc_version, this_version))
     - name: Compare Versions
+      if: ${{ steps.script.stdout == '1' }}
+      run: echo "MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore."
+      env:
+        VERSION_DIFF: steps.script.stdout
+    - name: GitHub Compare
       id: comparison
       uses: actions/github-script@v5
       with:
@@ -43,7 +48,7 @@ jobs:
             const mtcVersion = "${{ steps.get-mtc-release.outputs.release }}";
             console.log(`MtconnectCore Version: ${thisVersion}`);
             console.log(`MTConnect Version: ${mtcVersion}`);
-            if (env.VERSION_DIFF > 0) {
+            if (${{ steps.script.stdout }} > 0) {
               console.log('MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore.');
             } else {
               console.log('MtconnectCore has the latest MTConnect updates.');
