@@ -30,9 +30,10 @@ jobs:
       with:
         fail-on-error: false
         script: |
-          this_version = "${{ steps.get-core-release.outputs.release }}";
-          mtc_version = "${{ steps.get-mtc-release.outputs.release }}";
-          set_env("VERSION_DIFF", semver(mtc_version, this_version));
+          import semver
+          this_version = "${{ steps.get-core-release.outputs.release }}"
+          mtc_version = "${{ steps.get-mtc-release.outputs.release }}"
+          set_env("VERSION_DIFF", semver(mtc_version, this_version))
     - name: Compare Versions
       id: comparison
       uses: actions/github-script@v5
