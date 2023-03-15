@@ -32,12 +32,12 @@ jobs:
         script: |
           from version_parser import Version
           
-          this_version = "${{ steps.get-core-release.outputs.release }}"
+          this_version = "${{ steps.get-core-release.outputs.release }}"[1:]
           last_dot_index = this_version.rfind('.')
           if last_dot_index != -1:
             this_version = this_version[:last_dot_index]
           
-          mtc_version = "${{ steps.get-mtc-release.outputs.release }}"
+          mtc_version = "${{ steps.get-mtc-release.outputs.release }}"[1:]
           if Version(mtc_version) > Version(this_version):
             print(1)
           else:
