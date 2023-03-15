@@ -31,8 +31,8 @@ jobs:
         fail-on-error: false
         script: |
           import semver
-          this_version = semver.VersionInfo.parse('${{ steps.get-core-release.outputs.release }}')
-          mtc_version = semver.VersionInfo.parse('${{ steps.get-mtc-release.outputs.release }}')
+          this_version = semver.VersionInfo.parse('${{ steps.get-core-release.outputs.release }}'[1:])
+          mtc_version = semver.VersionInfo.parse('${{ steps.get-mtc-release.outputs.release }}'[1:])
           if mtc_version.major >= this_version.major and mtc_version.minor > this_version.minor:
             print(1)
           else:
