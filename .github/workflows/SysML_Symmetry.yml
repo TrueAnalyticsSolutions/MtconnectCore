@@ -42,22 +42,14 @@ jobs:
             print(1)
           else:
             print(0)
-    - name: Compare Versions
-      if: ${{ steps.script.outputs.stdout == '1' }}
-      run: echo "MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore."
-      env:
-        VERSION_DIFF: steps.script.stdout
-    - name: GitHub Compare
-      id: comparison
-      uses: actions/github-script@v5
-      with:
-        script: |
-            const thisVersion = "${{ steps.get-core-release.outputs.release }}";
-            const mtcVersion = "${{ steps.get-mtc-release.outputs.release }}";
-            console.log(`MtconnectCore Version: ${thisVersion}`);
-            console.log(`MTConnect Version: ${mtcVersion}`);
-            if (${{ steps.script.outputs.stdout }} > 0) {
-              console.log('MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore.');
-            } else {
-              console.log('MtconnectCore has the latest MTConnect updates.');
-            }
+    - name: Exit with Success
+      if: steps.script.outputs.stdout > 0
+      run: |
+        echo "MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore."
+        exit 0
+    - name: Exit with failure
+      if: steps.script.outputs.stdout != 1
+      run: |
+        echo "MtconnectCore has the latest MTConnect updates."
+        exit -1
+        
