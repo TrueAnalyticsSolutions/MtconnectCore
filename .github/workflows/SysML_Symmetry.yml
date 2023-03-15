@@ -31,8 +31,8 @@ jobs:
         fail-on-error: false
         script: |
           import semver
-          this_version = "${{ steps.get-core-release.outputs.release }}"
-          mtc_version = "${{ steps.get-mtc-release.outputs.release }}"
+          this_version = "${{ steps.get-core-release.outputs.release }}"[1:]
+          mtc_version = "${{ steps.get-mtc-release.outputs.release }}"[1:]
           print(semver.compare(mtc_version, this_version))
     - name: Compare Versions
       if: ${{ steps.script.stdout == '1' }}
