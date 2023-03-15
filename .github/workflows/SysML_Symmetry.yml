@@ -22,9 +22,11 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const res = await github.repos.getLatestRelease({
-            owner: 'mtconnect',
-            repo: 'mtconnect_sysml_model'
+          const github = require('@actions/github');
+          const octokit = new github.GitHub('${{ secrets.GITHUB_TOKEN }}');
+          const res = await octokit.repos.getLatestRelease({
+            owner: 'owner-name',
+            repo: 'repo-name'
           });
           console.log(res.data.tag_name);
           console.log(res.data.zipball_url);
@@ -34,6 +36,18 @@ jobs:
             tag_name: res.data.tag_name,
             published_at: res.data.published_at
           }
+#          const res = await github.repos.getLatestRelease({
+#            owner: 'mtconnect',
+#            repo: 'mtconnect_sysml_model'
+#          });
+#          console.log(res.data.tag_name);
+#          console.log(res.data.zipball_url);
+#          console.log(res.data.published_at);
+#          console.log(res.data.body);
+#         return {
+#            tag_name: res.data.tag_name,
+#            published_at: res.data.published_at
+#          }
     - name: Compare Versions
       id: comparison
       uses: actions/github-script@v5
