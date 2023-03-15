@@ -22,7 +22,6 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const github = require('@actions/github');
           const octokit = new github.GitHub('${{ secrets.GITHUB_TOKEN }}');
           const res = await octokit.repos.getLatestRelease({
             owner: 'owner-name',
