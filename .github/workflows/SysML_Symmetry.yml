@@ -27,12 +27,11 @@ jobs:
       uses: actions/github-script@v5
       with:
         script: |
-            const semver = require('semver');
             const thisVersion = "${{ steps.get-core-release.outputs.release }}";
             const mtcVersion = "${{ steps.get-mtc-release.outputs.release }}";
             console.log(`MtconnectCore Version: ${thisVersion}`);
             console.log(`MTConnect Version: ${mtcVersion}`);
-            if (semver.gt(mtcVersion, thisVersion)) {
+            if (semver.compare(mtcVersion, thisVersion) > 0) {
               console.log('MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore.');
             } else {
               console.log('MtconnectCore has the latest MTConnect updates.');
