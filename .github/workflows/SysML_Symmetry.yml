@@ -31,9 +31,12 @@ jobs:
         fail-on-error: false
         script: |
           import semver
-          this_version = "${{ steps.get-core-release.outputs.release }}"[1:]
-          mtc_version = "${{ steps.get-mtc-release.outputs.release }}"[1:]
-          print(semver.compare(mtc_version, this_version))
+          this_version = semver.VersionInfo.parse('${{ steps.get-core-release.outputs.release }}')
+          mtc_version = semver.VersionInfo.parse('${{ steps.get-mtc-release.outputs.release }}')
+          if mtc_version.major >= this_version.major and mtc_version.minor > this_version.minor:
+            print(1)
+          else:
+            print(0)
     - name: Compare Versions
       if: ${{ steps.script.stdout == '1' }}
       run: echo "MTConnect has been updated, therefore the Transpiler should be run to updated MtconnectCore."
