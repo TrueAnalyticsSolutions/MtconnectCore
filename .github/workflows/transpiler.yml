@@ -2,6 +2,10 @@ name: Transpile from SysML
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: [ "SysML_Symmetry" ]
+    types:
+      - completed
 
 env:
   MODEL_PATH: ${{ github.workspace }}\Model.xml
@@ -11,6 +15,8 @@ env:
 jobs:
   build-and-generate:
     runs-on: windows-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_dispatch == 'true' }}
+    
     steps:
     - uses: actions/checkout@v2
 
