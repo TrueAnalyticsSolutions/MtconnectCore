@@ -22,7 +22,7 @@ jobs:
         script: |
             const semver = require('semver');
             const thisVersion = "${{ github.event.release.tag_name }}";
-            const mtcVersion = "${{ steps.get-mtc-release.release }}";
+            const mtcVersion = "${{ steps.get-mtc-release.outputs.release }}";
             console.log(`MtconnectCore Version: ${thisVersion}`);
             console.log(`MTConnect Version: ${mtcVersion}`);
             if (semver.gt(mtcVersion, thisVersion)) {
