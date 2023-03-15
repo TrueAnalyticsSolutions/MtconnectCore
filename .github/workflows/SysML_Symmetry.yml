@@ -37,7 +37,7 @@ jobs:
           if last_dot_index != -1:
             this_version = this_version[:last_dot_index]
           
-          mtc_version = "${{ steps.get-mtc-release.outputs.release }}"[1:]
+          mtc_version = "${{ steps.get-mtc-release.outputs.release }}.0"[1:]
           if Version(mtc_version) > Version(this_version):
             print(1)
           else:
