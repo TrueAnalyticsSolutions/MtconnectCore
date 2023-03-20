@@ -11,7 +11,7 @@ env:
   BRANCH: develop/generated
   
 jobs:
-  check-latest-release:
+  check_latest_release:
     name: Check latest release of MTConnect SysML model
     runs-on: ubuntu-latest
     if: ${{ github.event.schedule == 'true' }}
