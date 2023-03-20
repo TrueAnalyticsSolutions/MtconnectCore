@@ -14,25 +14,30 @@ jobs:
   check_latest_release:
     name: Check latest release of MTConnect SysML model
     runs-on: ubuntu-latest
-    if: ${{ github.event.schedule == 'true' }}
     outputs:
       update_available: ${{ steps.mtc_version.update_available }}
     steps:
       - name: Get MTConnectCore release tag
+        if: ${{ github.event.schedule == 'true' }}
         id: get-core-release
         uses: pozetroninc/github-action-get-latest-release@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: TrueAnalyticsSolutions/MtconnectCore
       - name: Compare MTConnect Version
+        if: ${{ github.event.schedule == 'true' }}
         id: mtc_version
         uses: TrueAnalyticsSolutions/mtconnect-compare-version-action@v1.0
         with:
           version: ${{ steps.get-core-release.outputs.release}}
+      - name: Fallback for Manual Dispatch
+        if: ${{ github.event.workflow_dispatch == 'true' }}
+        run: echo "update_available == 'false'" >> $GITHUB_OUTPUT
 
   build-and-generate:
     runs-on: windows-latest
-    if: ${{ github.event.workflow_dispatch == 'true' || (github.event.schedule == 'true' && github.event.schedule.conclusion == 'success' && check_latest_release.outputs.update_available == 'true') }}
+    needs: check_latest_release
+    if: ${{ github.event.workflow_dispatch == 'true' || (github.event.schedule == 'true' && github.event.schedule.conclusion == 'success' && needs.check_latest_release.outputs.update_available == 'true') }}
     
     steps:
     - uses: actions/checkout@v2
