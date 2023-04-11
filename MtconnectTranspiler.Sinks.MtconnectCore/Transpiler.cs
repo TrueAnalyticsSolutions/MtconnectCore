@@ -1,9 +1,10 @@
 ﻿using ConsoulLibrary;
 using Microsoft.Extensions.Logging;
-using MtconnectTranspiler.Model;
+using MtconnectTranspiler.Contracts;
 using MtconnectTranspiler.Sinks.CSharp;
 using MtconnectTranspiler.Sinks.CSharp.Models;
 using MtconnectTranspiler.Sinks.MtconnectCore.Models;
+using MtconnectTranspiler.Xmi;
 using MtconnectTranspiler.Xmi.UML;
 using Scriban.Runtime;
 
@@ -23,7 +24,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
         /// <param name="projectPath">Expected to be <c>MtconnectCore/Standard/Contracts</c></param>
         public Transpiler(string projectPath, ILogger<Transpiler> logger = default) : base(projectPath, logger) { }
 
-        public override void Transpile(MTConnectModel model, CancellationToken cancellationToken = default(CancellationToken))
+        public override void Transpile(XmiDocument model, CancellationToken cancellationToken = default(CancellationToken))
         {
             _logger?.LogInformation("Received MTConnectModel, beginning transpilation");
 
@@ -34,80 +35,222 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             const string DataItemNamespace = "MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes";
             const string DataItemValueNamespace = "MtconnectCore.Standard.Contracts.Enums.Streams";
 
-            // Process DataItem Types
-            List<MtconnectCoreEnum> dataItemTypeEnums = new List<MtconnectCoreEnum>();
+            // Process DataItem Types/Sub-Types
+            var dataItemTypeEnums = new List<MtconnectCoreEnum>();
             var valueEnums = new List<MtconnectCoreEnum>();
+            var valueTypes = new List<MtconnectValueType>();
+            var unitHelper = new UnitHelper(model);
+
             string[] categories = new string[] { "Sample", "Event", "Condition" };
 
-            foreach (var category in categories)
+            var modelEnumSubTypes = model.JumpToPackage(MTConnectHelper.PackageNavigationTree.Profile.DataTypes)
+                    .Enumerations
+                    .FirstOrDefault(o => o.Name == $"DataItemSubTypeEnum");
+            foreach (string category in categories)
             {
                 // Get the UmlPackage for the category (ie. Samples, Events, Conditions).
-                var typesPackage = model
-                    ?.ObservationInformationModel
-                    ?.ObservationTypes
-                    ?.Elements
-                    ?.Where(o => o.Name == $"{category} Types")
-                    ?.FirstOrDefault() as UmlPackage;
+                var typesPackage = MTConnectHelper
+                    .JumpToPackage(model!, MTConnectHelper.PackageNavigationTree.ObservationInformationModel.ObservationTypes)?
+                    .Packages
+                    .FirstOrDefault(o => o.Name == $"{category} Types")
+                    ?? throw new NullReferenceException($"Cannot find {category} package type");
+
                 // Get all DataItem Type and SubType references
                 var allTypes = typesPackage
-                    ?.Elements
-                    ?.Where(o => o is UmlClass)
-                    ?.Select(o => o as UmlClass);
+                    ?.Classes
+                    ?.Where(o => o != null)
+                    ?? Enumerable.Empty<UmlClass>();
                 // Filter to get just the Type references
-                var types = allTypes
-                    ?.Where(o => !o.Name.Contains("."));
+                var modelTypes = (allTypes
+                    ?.Where(o => !o!.Name.Contains('.')))
+                    ?? throw new NullReferenceException($"Cannot find {category} root types");
+                var modelEnumTypes = model.JumpToPackage(MTConnectHelper.PackageNavigationTree.Profile.DataTypes)
+                        .Enumerations
+                        .FirstOrDefault(o => o.Name == $"{category}Enum");
                 // Filter and group each SubType by the relevant Type reference
-                var subTypes = allTypes
-                    ?.Where(o => o.Name.Contains("."))
-                    ?.GroupBy(o => o.Name.Substring(0, o.Name.IndexOf(".")), o => o)
+                var subTypes = (allTypes
+                    ?.Where(o => o!.Name.Contains('.'))
+                    ?.GroupBy(o => o!.Name[..o.Name.IndexOf(".")], o => o)
                     ?.Where(o => o.Any())
-                    ?.ToDictionary(o => o.Key, o => o?.ToList());
+                    ?.ToDictionary(o => o.Key, o => o.ToList()))
+                    ?? throw new NullReferenceException($"Cannot find {category} sub types");
 
-                var categoryEnum = new MtconnectCoreEnum(model, typesPackage, $"{category}Types") { Namespace = DataItemNamespace };
+                var categoryEnum = new MtconnectCoreEnum(model!, typesPackage!, $"{category}Types") { Namespace = DataItemNamespace };
 
-                foreach (var type in types)
+                var dataTypesPackage = MTConnectHelper
+                    .JumpToPackage(model!, MTConnectHelper.PackageNavigationTree.Profile.DataTypes);
+
+                foreach (UmlClass modelType in modelTypes)
                 {
-                    // Add type to CATEGORY enum
-                    categoryEnum.AddItem(model, type);
+                    var modelTypeEnumId = (modelType.Properties?.FirstOrDefault(o => o.Name == "type")?.DefaultValue as UmlInstanceValue)
+                        ?.Instance;
+                    var modelTypeEnum = modelEnumTypes
+                        ?.Items
+                        ?.FirstOrDefault(o => o.Id == modelTypeEnumId);
 
-                    // Find value
-                    var typeResult = type?.Properties?.FirstOrDefault(o => o.Name == "result");
-                    if (typeResult != null)
+                    MtconnectCoreEnum typeValuesEnum;
+                    MtconnectValueType typeValues = null;
+
+                    // Add type to CATEGORY enum
+                    categoryEnum.Add(model, modelTypeEnum);
+
+                    string? valueType = null;
+
+                    // Find the value type for the observational type
+                    var typeResult = modelType?.Properties?.FirstOrDefault(o => o.Name.Equals("result", StringComparison.OrdinalIgnoreCase));
+                    if (!string.IsNullOrEmpty(typeResult?.PropertyType))
                     {
-                        var typeValuesSysEnum = model
-                            ?.Profile
-                            ?.ProfileDataTypes
-                            ?.Elements
-                            ?.FirstOrDefault(o => o is UmlEnumeration && o.Id == typeResult.PropertyType);
+                        // Attempt to find a UmlEnumeration as the value type
+                        var typeValuesSysEnum = dataTypesPackage
+                            .Enumerations
+                            .GetById(typeResult?.PropertyType);
+                        // Attempt to find a UmlDataType as the value type
+                        var typeValuesSysDataType = dataTypesPackage
+                            .DataTypes
+                            .GetById(typeResult?.PropertyType);
+
+                        // Make first attempt to process the value type in the context of an EVENT, which uses Enumerations for some of its values
                         if (typeValuesSysEnum != null)
                         {
-                            var typeValuesEnum = new MtconnectCoreEnum(model, typeValuesSysEnum as UmlEnumeration) { Namespace = DataItemValueNamespace, Name = $"{type.Name}Values" };
-                            foreach (var value in typeValuesEnum.Items)
-                            {
+                            valueType = "string";
+
+                            // Create the value type enumeration
+                            typeValues = new MtconnectEventValueType(model!, typeValuesSysEnum) {
+                                Namespace = DataItemValueNamespace,
+                                Name = $"{modelType!.Name}",
+                                ReferenceId = typeValuesSysEnum.Id
+                            };
+
+                            // Create the Enum for value options
+                            typeValuesEnum = new MtconnectCoreEnum(model!, typeValuesSysEnum) {
+                                Namespace = DataItemValueNamespace,
+                                Name = $"{modelType!.Name}Values",
+                                ReferenceId = typeValuesSysEnum.Id
+                            };
+                            // Cleanup Enum names
+                            foreach (EnumItem value in typeValuesEnum.Items)
                                 value.Name = value.SysML_Name;
-                            }
-                            if (!categoryEnum.ValueTypes.ContainsKey(type.Name)) categoryEnum.ValueTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(type.Name), $"{type.Name}Values");
+
+                            // Add value type reference
+                            if (!categoryEnum.ValueTypes.ContainsKey(modelType.Name))
+                                categoryEnum.ValueTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(modelType.Name), $"{modelType.Name}Values");
+
+
                             valueEnums.Add(typeValuesEnum);
+                        }
+                        else if (typeValuesSysDataType != null)
+                        {
+                            valueType = ScribanHelperMethods.ToPrimitiveType(typeValuesSysDataType)?.Name ?? "string";
                         }
                     }
 
+                    if (string.IsNullOrEmpty(valueType))
+                    {
+                        valueType = category == "Sample"
+                            ? "float"
+                            : category == "Condition"
+                                ? "Condition"
+                                : "string";
+                    }
+
+                    // If the previous logic didn't create value type from UmlEnumeration, try a primitive type
+                    if (typeValues == null)
+                        typeValues = new MtconnectValueType(
+                            category,
+                            valueType,
+                            model!,
+                            modelType!) {
+                            Namespace = DataItemValueNamespace,
+                            Category = category,
+                            ReferenceId = modelType!.Properties.FirstOrDefault(o => o.Name.Equals("result", StringComparison.OrdinalIgnoreCase))?.PropertyType
+                        };
+
+                    // Attempt to add native units
+                    string? expectedUnits = null;
+                    var unitsAttribute = modelType!.Properties.FirstOrDefault(o => o.Name.Equals("units", StringComparison.OrdinalIgnoreCase));
+                    if (unitsAttribute != null)
+                    {
+                        if (unitsAttribute.DefaultValue is UmlInstanceValue)
+                        {
+                            string defaultValueInstance = (unitsAttribute.DefaultValue as UmlInstanceValue).Instance;
+                            // Find the instance in the Profile.Data Types.UnitEnum package
+                            var unit = MTConnectHelper
+                                .JumpToPackage(model!, MTConnectHelper.PackageNavigationTree.Profile.DataTypes)?
+                                .Enumerations
+                                .GetByName("UnitEnum")
+                                .Items?
+                                .FirstOrDefault(o => o.Id == defaultValueInstance);
+                            if (unit != null)
+                                expectedUnits = UnitHelper.ToEnumSafe(unit.Name);
+                        }
+                        else if (unitsAttribute.DefaultValue is UmlLiteralString)
+                        {
+                            string defaultValueValue = (unitsAttribute.DefaultValue as UmlLiteralString).Value;
+                            // TODO: Check the unit.value attribute, see Amperage as an example with AMPERE
+                            expectedUnits = defaultValueValue;
+                        }
+                        else
+                        {
+                            _logger?.LogTrace("Unidentified units type: {UnitType}", unitsAttribute.DefaultValueElement.GetAttribute("type", "http://www.omg.org/spec/XMI/20131001"));
+                        }
+
+                        if (!string.IsNullOrEmpty(expectedUnits))
+                            unitHelper.TypeLookup.TryAdd(ScribanHelperMethods.ToUpperSnakeCode(modelType.Name!), expectedUnits);
+                    }
+
+                    if (typeValues != null)
+                    {
+                        typeValues.ExpectedUnits = expectedUnits;
+                        // Update value type based on presence of Unit type
+                        if (category == "Sample" && expectedUnits?.Contains("3D") == true)
+                        {
+                            typeValues.Category = "Sample3D";
+                            typeValues.ValueType = "float[]";
+                        }
+                        foreach (var value in typeValues.Items)
+                            value.Name = value.SysML_Name;
+                        valueTypes.Add(typeValues);
+                    }
+
                     // Add subType as enum
-                    if (subTypes.ContainsKey(type.Name))
+                    if (subTypes.ContainsKey(modelType.Name!))
                     {
                         // Register type as having a subType in the CATEGORY enum
-                        if (!categoryEnum.SubTypes.ContainsKey(type.Name)) categoryEnum.SubTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(type.Name), $"{type.Name}SubTypes");
+                        if (!categoryEnum.SubTypes.ContainsKey(modelType.Name!)) categoryEnum.SubTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(modelType.Name), $"{modelType.Name}SubTypes");
 
-                        var subTypeEnum = new MtconnectCoreEnum(model, type, $"{type.Name}SubTypes") { Namespace = DataItemNamespace };
+                        MtconnectCoreEnum subTypeEnum = new(model!, modelType, $"{modelType.Name}SubTypes") {
+                            Namespace = DataItemNamespace,
+                            ReferenceId = modelType.Id
+                        };
 
-                        var typeSubTypes = subTypes[type.Name];
-                        subTypeEnum.AddItems(model, typeSubTypes);
-
-                        // Cleanup Enum names
-                        foreach (var item in subTypeEnum.Items)
+                        List<UmlClass?>? typeSubTypes = subTypes[modelType.Name!];
+                        foreach (var typeSubType in typeSubTypes)
                         {
-                            if (!item.Name.Contains(".")) continue;
-                            item.Name = ScribanHelperMethods.ToUpperSnakeCode(item.Name.Substring(item.Name.IndexOf(".") + 1));
+                            var modelSubTypeEnumId = (typeSubType.Properties?.FirstOrDefault(o => o.Name == "subType")?.DefaultValue as UmlInstanceValue)
+                                ?.Instance;
+                            var modelSubTypeEnum = modelEnumSubTypes
+                                ?.Items
+                                ?.FirstOrDefault(o => o.Id == modelSubTypeEnumId);
+
+                            subTypeEnum.Add(model, typeSubType);
+                            if (modelSubTypeEnum != null)
+                            {
+                                subTypeEnum.Items.Last().Name = modelSubTypeEnum.Name;
+                            }
                         }
+                        // Cleanup Enum names
+                        foreach (EnumItem item in subTypeEnum.Items)
+                        {
+                            if (item.Name.Contains('.'))
+                            {
+                                item.Name = ScribanHelperMethods.ToUpperSnakeCode(item.Name[(item.Name.IndexOf(".") + 1)..]);
+                            }
+
+                            // Register type as having a subType in the Value Type class
+                            if (typeValues != null && !typeValues.SubTypes.Contains(item.Name))
+                                typeValues.SubTypes.Add(item.Name);
+                        }
+
 
                         // Register the DataItem SubType Enum
                         dataItemTypeEnums.Add(subTypeEnum);
@@ -115,9 +258,9 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 }
 
                 // Cleanup Enum names
-                foreach (var item in categoryEnum.Items)
+                foreach (EnumItem item in categoryEnum.Items)
                 {
-                    item.Name = ScribanHelperMethods.ToUpperSnakeCode(item.Name);
+                    item.Name = item.SysML_Name;
                 }
 
                 // Register the DataItem Category Enum (ie. Samples, Events, Conditions)
@@ -127,46 +270,12 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             _logger?.LogInformation($"Processing {dataItemTypeEnums.Count} DataItem types/subTypes");
 
             // Process the template into enum files
-            processTemplate(dataItemTypeEnums, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
-            processTemplate(valueEnums, Path.Combine(ProjectPath, "Enums", "Streams"), true);
+            ProcessTemplate(dataItemTypeEnums, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
+            ProcessTemplate(valueEnums, Path.Combine(ProjectPath, "Enums", "Streams"), true);
 
             // Process DataItem Values
             List<MtconnectCoreEnum> dataItemValues = new List<MtconnectCoreEnum>();
 
-        }
-
-        private void processDeviceModel(MTConnectDeviceInformationModel model, string @namespace = "MtconnectCore.Standard")
-        {
-            if (model == null) return;
-
-            if (model.Classes != null && model.Classes.Any())
-            {
-                // NOTE: For now, do not build classes with this solution
-                //processTemplate(
-                //    model.Classes.Select(o => new MtconnectCoreClass(Model["model"] as MTConnectModel, o) { Namespace = $"{@namespace}.{o.Name}" }),
-                //    ProjectPath
-                //);
-            }
-
-            if (model.SubModels != null && model.SubModels.Any())
-            {
-                // Recursively build sub-class structure
-                foreach (var subModel in model.SubModels)
-                {
-                    if (subModel.Name == "Component Types")
-                    {
-                        // Convert Component Classes into Enums
-                        // Process Enums
-                        processTemplate(
-                            new MtconnectCoreEnum(Model["model"] as MTConnectModel, subModel),
-                            Path.Combine(ProjectPath, "Enums", "Devices", "ComponentTypes"));
-                    }
-                    else
-                    {
-                        processDeviceModel(subModel, $"{@namespace}.{model.Name}");
-                    }
-                }
-            }
         }
     }
 }
