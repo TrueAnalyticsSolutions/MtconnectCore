@@ -1,3 +1,5 @@
+#pragma warning disable 0618
+#pragma warning disable 1574
 using System;
 using System.CodeDom.Compiler;
 using MtconnectCore.Standard.Contracts.Attributes;
@@ -5,41 +7,71 @@ using MtconnectCore.Standard.Contracts.Attributes;
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
 	/// <summary>
-	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_45f01b9_1580309879217_713704_44360">model.mtconnect.org</seealso>
 	﻿	/// </summary>
 	
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "0.0.12.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.7.0")]
 	public enum ConditionTypes
 	{
 		/// <summary>
-		﻿/// {{def(ConditionEnum:ACTUATOR)}}
+		﻿/// indication of a fault associated with an actuator.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		ACTUATOR,
 		/// <summary>
-		﻿/// {{def(ConditionEnum:COMMUNICATIONS)}}
+		﻿/// indication that the piece of equipment has experienced a communications failure.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		COMMUNICATIONS,
 		/// <summary>
-		﻿/// {{def(ConditionEnum:DATA_RANGE)}}
+		﻿/// indication that the value of the data associated with a measured value or a calculation is outside of an expected range.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/")]
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.2">v1.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		DATA_RANGE,
 		/// <summary>
-		﻿/// {{def(ConditionEnum:LOGIC_PROGRAM)}}
+		﻿/// indication that an error occurred in the logic program or programmable logic controller (PLC) associated with a piece of equipment.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		LOGIC_PROGRAM,
 		/// <summary>
-		﻿/// {{def(ConditionEnum:MOTION_PROGRAM)}}
+		﻿/// indication that an error occurred in the motion program associated with a piece of equipment.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		MOTION_PROGRAM,
 		/// <summary>
-		﻿/// {{def(ConditionEnum:SYSTEM)}}
+		﻿/// general purpose indication associated with an electronic component of a piece of equipment or a controller that represents a fault that is not associated with the operator, program, or hardware.
 		/// </summary>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/")]
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		SYSTEM,
 	}
 }

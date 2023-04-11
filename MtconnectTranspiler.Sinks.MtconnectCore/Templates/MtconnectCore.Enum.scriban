@@ -1,4 +1,8 @@
-﻿using System;
+﻿{{~ nversion_slim = (source?.normative_version | string.slice 20 3) | string.replace "_" "."
+dversion_slim = (source?.deprecated_version | string.slice 20 3) | string.replace "_" "." ~}}
+#pragma warning disable 0618
+#pragma warning disable 1574
+using System;
 using System.CodeDom.Compiler;
 using MtconnectCore.Standard.Contracts.Attributes;
 {{~ if enum_has_values source ~}}
@@ -8,22 +12,54 @@ using MtconnectCore.Standard.Contracts.Enums.Streams;
 namespace {{ to_pascal_code source.namespace }}
 {
 	/// <summary>
-	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__{{ source.sysml_id }}">model.mtconnect.org</seealso>
+	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__{{ source.reference_id }}">model.mtconnect.org</seealso>
 	{{ include 'UmlCommentsSummaryContent.scriban' source?.summary ~}}
 	/// </summary>
-	{{~ if source?.deprecated_version != "" ~}}
-	[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+	{{~ if nversion_slim != "" || dversion_slim != "" ~}}
+	/// <remarks>
+	/// <list type="bullet">
+	{{~ if nversion_slim != "" ~}}
+	/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_{{ nversion_slim }}">v{{ nversion_slim }}</see></item>
+	{{~ end ~}}
+	{{~ if dversion_slim != "" ~}}
+	/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_{{ dversion_slim }}">v{{ dversion_slim }}</see></item>
+	{{~ end ~}}
+	/// </list>
+	/// </remarks>
+	{{~ end ~}}
+	{{~ if dversion_slim != "" ~}}
+	[Obsolete("Deprecated in v{{ dversion_slim }} according to https://model.mtconnect.org/#_Version_{{ dversion_slim }}")]
 	{{~ end ~}}
 	{{ include 'MtconnectVersionApplicability.scriban' source }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
 	public enum {{ to_pascal_case source.name }}
 	{
 	{{~ for item in source.items ~}}
+{{~ n_item_version_slim = (item?.normative_version | string.slice 20 3) | string.replace "_" "."
+d_item_version_slim = (item?.deprecated_version | string.slice 20 3) | string.replace "_" "." ~}}
 		/// <summary>
 		{{ include 'UmlCommentsSummaryContent.scriban' item?.summary ~}}
 		/// </summary>
-		{{~ if item?.deprecated_version != "" ~}}
-		[Obsolete("Deprecated according to https://model.mtconnect.org/")]
+		{{~ if n_item_version_slim != "" || d_item_version_slim != "" ||  category_contains_type source item || category_contains_value source item ~}}
+		/// <remarks>
+		/// <list type="bullet">
+		{{~ if category_contains_type source item ~}}
+		/// <item><b>Sub-Type</b>: <see cref="{{ source?.sub_types[item.name] }}" /></item>
+		{{~ end ~}}
+		{{~ if category_contains_value source item ~}}
+		/// <item><b>Values</b>: <see cref="{{ source?.value_types[item.name] }}" /></item>
+		{{~ end ~}}
+		{{~ if n_item_version_slim != "" ~}}
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_{{ n_item_version_slim }}">v{{ n_item_version_slim }}</see></item>
+		{{~ end ~}}
+		{{~ if d_item_version_slim != "" ~}}
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_{{ d_item_version_slim }}">v{{ d_item_version_slim }}</see></item>
+		{{~ end ~}}
+		/// </list>
+		/// </remarks>
+		{{~ end ~}}
+		{{~ if d_item_version_slim != "" ~}}
+		[Obsolete("Deprecated in v{{ d_item_version_slim }} according to https://model.mtconnect.org/#_Version_{{ d_item_version_slim }}")]
 		{{~ end ~}}
 		{{ include 'MtconnectVersionApplicability.scriban' item }}
 		{{~ if category_contains_type source item ~}}

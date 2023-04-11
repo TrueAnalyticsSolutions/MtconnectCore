@@ -1,5 +1,4 @@
-﻿using MtconnectTranspiler.Model;
-using MtconnectTranspiler.Sinks.CSharp.Attributes;
+﻿using MtconnectTranspiler.Sinks.CSharp.Attributes;
 using MtconnectTranspiler.Xmi;
 using MtconnectTranspiler.Xmi.UML;
 
@@ -14,12 +13,10 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         // NOTE: Only used for CATEGORY types that have value enums.
         public Dictionary<string, string> ValueTypes { get; set; } = new Dictionary<string, string>();
 
-        public MtconnectCoreEnum(MTConnectModel model, XmiElement source, string name) : base(model, source, name) { }
+        public MtconnectCoreEnum(XmiDocument model, XmiElement source, string name) : base(model, source, name) { }
 
-        public MtconnectCoreEnum(MTConnectModel model, UmlEnumeration source) : base(model, source) { }
+        public MtconnectCoreEnum(XmiDocument model, UmlEnumeration source) : base(model, source) { }
 
-        public MtconnectCoreEnum(MTConnectModel model, UmlPackage source) : base(model, source) { }
-
-        public MtconnectCoreEnum(MTConnectModel model, MTConnectDeviceInformationModel source) : base(model, source) { }
+        public MtconnectCoreEnum(XmiDocument model, UmlPackage source) : base(model, source) { }
     }
 }
