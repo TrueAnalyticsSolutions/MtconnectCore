@@ -15,7 +15,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.7.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
 	public enum PartCountTypeValues
 	{
 		/// <summary>

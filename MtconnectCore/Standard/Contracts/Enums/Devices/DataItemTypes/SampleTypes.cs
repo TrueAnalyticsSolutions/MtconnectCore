@@ -10,7 +10,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_45f01b9_1580309868367_570061_44359">model.mtconnect.org</seealso>
 	﻿	/// </summary>
 	
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.7.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
 	public enum SampleTypes
 	{
 		/// <summary>
@@ -630,40 +630,48 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
+		/// <item><b>Sub-Type</b>: <see cref="AmperageDCSubTypes" /></item>
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		[ObservationalSubType(typeof(AmperageDCSubTypes))]
 		AMPERAGE_DC,
 		/// <summary>
 		﻿/// electrical current that reverses direction at regular short intervals.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
+		/// <item><b>Sub-Type</b>: <see cref="AmperageACSubTypes" /></item>
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		[ObservationalSubType(typeof(AmperageACSubTypes))]
 		AMPERAGE_AC,
 		/// <summary>
 		﻿/// electrical potential between two points in an electrical circuit in which the current periodically reverses direction.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
+		/// <item><b>Sub-Type</b>: <see cref="VoltageACSubTypes" /></item>
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		[ObservationalSubType(typeof(VoltageACSubTypes))]
 		VOLTAGE_AC,
 		/// <summary>
 		﻿/// electrical potential between two points in an electrical circuit in which the current is unidirectional.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
+		/// <item><b>Sub-Type</b>: <see cref="VoltageDCSubTypes" /></item>
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		[ObservationalSubType(typeof(VoltageDCSubTypes))]
 		VOLTAGE_DC,
 		/// <summary>
 		﻿/// dimension of an entity relative to the X direction of the referenced coordinate system. 
@@ -998,6 +1006,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </list>
 		/// </remarks>
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/#_Version_2.1")]
-		DISPLACEMENT_ANGULAR
+		DISPLACEMENT_ANGULAR,
+		/// <summary>
+		﻿/// point in a <i>cartesian coordinate system</i>.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.1">v2.1</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/#_Version_2.1")]
+		POSITION_CARTESIAN,
 	}
 }

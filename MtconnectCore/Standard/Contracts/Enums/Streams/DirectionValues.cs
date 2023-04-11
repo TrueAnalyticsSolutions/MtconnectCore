@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 	/// </remarks>
 	[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_4_0)]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.7.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
 	public enum DirectionValues
 	{
 		/// <summary>

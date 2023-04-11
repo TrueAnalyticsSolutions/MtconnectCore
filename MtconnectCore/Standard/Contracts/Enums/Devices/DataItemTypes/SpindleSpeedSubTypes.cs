@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// </remarks>
 	[Obsolete("Deprecated in v1.2 according to https://model.mtconnect.org/#_Version_1.2")]
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_2_0)]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.7.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
 	public enum SpindleSpeedSubTypes
 	{
 		/// <summary>

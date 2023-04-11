@@ -15,7 +15,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.7.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
 	public enum AngleSubTypes
 	{
 		/// <summary>
