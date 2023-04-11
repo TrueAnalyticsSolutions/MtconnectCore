@@ -81,7 +81,7 @@ namespace MtconnectCore.Standard.Contracts
 
         public static string ToName(this MtconnectVersions version) => versionNames[version];
 
-        public static MtconnectVersions? GetVersion(string version) => versionNames.Where(o => version.Contains(o.Value) || o.Value.StartsWith(version)).Select(o => o.Key).FirstOrDefault();
+        public static MtconnectVersions? GetVersion(string version) => versionNames.Where(o => version.StartsWith(o.Value) || o.Value.StartsWith(version)).Select(o => o.Key).FirstOrDefault();
 
         public static DateTime GetReleaseDate(this MtconnectVersions version) => versionReleaseDate[version];
 
