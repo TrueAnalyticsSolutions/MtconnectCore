@@ -998,18 +998,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </list>
 		/// </remarks>
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/#_Version_2.1")]
-		DISPLACEMENT_ANGULAR,
-		/// <summary>
-		﻿/// position of a control point associated with a <see cref="Controller">Controller</see> or a <see cref="Path">Path</see>.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Sub-Type</b>: <see cref="PathPositionSubTypes" /></item>
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
-		[ObservationalSubType(typeof(PathPositionSubTypes))]
-		PATH_POSITION,
+		DISPLACEMENT_ANGULAR
 	}
 }
