@@ -152,5 +152,32 @@ namespace MtconnectCore.Standard.Contracts
 
             return true;
         }
+
+        /// <summary>
+        /// <inheritdoc cref="GetSubTypes(Type, string)" path="/summary"/>
+        /// </summary>
+        /// <typeparam name="T">Generic type reference for the provided <paramref name="dataItemType"/>.</typeparam>
+        /// <param name="dataItemType"><inheritdoc cref="GetSubTypes(Type, string)" path="/param[@name='dataItemType']"/></param>
+        /// <returns><inheritdoc cref="GetSubTypes(Type, string)" path="/returns"/></returns>
+        public static Type GetSubTypes<T>(T dataItemType) where T : Enum
+            => GetSubTypes(typeof(T), dataItemType.ToString());
+        /// <summary>
+        /// Gets the type for the enum associated with any potential DataItem <c>subType</c> for the provided <paramref name="dataItemType"/>.
+        /// </summary>
+        /// <param name="enumType">Type reference for the provided <paramref name="dataItemType"/>.</param>
+        /// <param name="dataItemType">Reference to the specific DataItem <c>type</c>.</param>
+        /// <returns>Type of the enum containing available <c>subType</c>s for the provided <paramref name="dataItemType"/>. Returns <c>null</c> if the <paramref name="dataItemType"/> in the <paramref name="enumType"/> is not decorated with the <see cref="ObservationalSubTypeAttribute"/>.</returns>
+        public static Type GetSubTypes(Type enumType, string dataItemType)
+        {
+            var subTypeAttribute = enumType.GetMember(dataItemType)
+                ?.FirstOrDefault(o => o.DeclaringType == enumType)
+                ?.GetCustomAttributes<ObservationalSubTypeAttribute>(true)
+                ?.FirstOrDefault();
+
+            if (subTypeAttribute != null && subTypeAttribute is ObservationalSubTypeAttribute)
+                return (subTypeAttribute as ObservationalSubTypeAttribute).SubTypeEnum;
+
+            return null;
+        }
     }
 }

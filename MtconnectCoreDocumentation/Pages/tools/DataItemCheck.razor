@@ -13,60 +13,64 @@
             <h4>DataItem Selection</h4>
             <EditForm Model="SelectedDataItemType" OnSubmit="FormSubmitted">
                 <div class="input-group">
-                    <label class="label" for="selDataItemTypes">DataItem Type:</label>
-                    <InputSelect required @bind-Value="SelectedDataItemType.Type" class="form-control" id="selDataItemTypes" OnChange="LoadFile">
-                        <optgroup label="Samples">
-                            <!-- MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes -->
-                            @foreach (var item in Enum.GetValues(typeof(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes)))
-                            {
-                                <option value="@(item.ToString())">@(item.ToString())</option>
-                            }
-                        </optgroup>
-                        <optgroup label="Events">
-                            <!-- MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes -->
-                            @foreach (var item in Enum.GetValues(typeof(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes)))
-                            {
-                                <option value="@(item.ToString())">@(item.ToString())</option>
-                            }
-                        </optgroup>
-                        <optgroup label="Conditions">
-                            <!-- MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes -->
-                            @foreach (var item in Enum.GetValues(typeof(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes)))
-                            {
-                                <option value="@(item.ToString())">@(item.ToString())</option>
-                            }
-                        </optgroup>
-                    </InputSelect>
+                    <label class="label" for="selDataItemTypes">DataItem Type:
+                        <InputSelect required @bind-Value="SelectedDataItemType.Type" class="form-control" id="selDataItemTypes" @onchange="LoadSubTypes">
+                            <optgroup label="Samples">
+                                <!-- MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes -->
+                                @foreach (var item in Enum.GetValues(typeof(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes)))
+                                {
+                                    <option value="@(item)">@(item.ToString())</option>
+                                }
+                            </optgroup>
+                            <optgroup label="Events">
+                                <!-- MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes -->
+                                @foreach (var item in Enum.GetValues(typeof(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes)))
+                                {
+                                    <option value="@(item)">@(item.ToString())</option>
+                                }
+                            </optgroup>
+                            <optgroup label="Conditions">
+                                <!-- MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes -->
+                                @foreach (var item in Enum.GetValues(typeof(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes)))
+                                {
+                                    <option value="@(item)">@(item.ToString())</option>
+                                }
+                            </optgroup>
+                        </InputSelect>
+                    </label>
                 </div>
                 <div class="input-group">
-                    <label class="label" for="selDataItemSubTypes">DataItem Sub-Types:</label>
-                    <InputSelect @bind-Value="SelectedDataItemType.SubType" class="form-control" id="selDataItemSubTypes">
+                    <label class="label" for="selDataItemSubTypes">DataItem Sub-Types:
+                        <InputSelect @bind-Value="SelectedDataItemType.SubType" class="form-control" id="selDataItemSubTypes">
                         @*@MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateOverrideSubTypes*@
-                    </InputSelect>
+                        </InputSelect>
+                    </label>
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </EditForm>
             <ul id="lstDataItems">
                 @foreach (var item in SelectedDataItems)
                 {
-                    <li><span>@(item.Type)</span><span>@(string.IsNullOrEmpty(item.SubType) ? "" : $" + {item.SubType}")</span></li>
+                    <li><span>@(item.Type)</span><span>@(item.SubType == null ? "" : $" + {item.SubType}")</span></li>
                 }
             </ul>
-        </div>
-        <div class="col-6">
         </div>
     </div>
 </div>
 
 @code {
-    private DataItemTypeReference SelectedDataItemType = new DataItemTypeReference();
+    private DataItemTypeViewModel SelectedDataItemType = new DataItemTypeViewModel();
 
-    private List<DataItemTypeReference> SelectedDataItems = new List<DataItemTypeReference>();
+    private List<DataItemTypeViewModel> SelectedDataItems = new List<DataItemTypeViewModel>();
 
     void FormSubmitted(EditContext editContext)
     {
         bool formIsValid = editContext.Validate();
         SelectedDataItems.Add(SelectedDataItemType);
-        SelectedDataItemType = new DataItemTypeReference();
+        SelectedDataItemType = new DataItemTypeViewModel();
+    }
+    void LoadSubTypes()
+    {
+        GetSubTypes( SelectedDataItemType.Type);
     }
 }
