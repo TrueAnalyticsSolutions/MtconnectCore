@@ -109,7 +109,7 @@ namespace MtconnectCore.Standard.Contracts
         public static MtconnectVersions GetVersionFromDocument(XmlDocument xDoc)
         {
             MtconnectVersions? version = null;
-            Regex regVersion = new Regex(@"^urn\:mtconnect.(org|com)\:(.*?)\:(?<version>.*?)$");
+            Regex regVersion = new Regex(@"^(?<schema>.*?)\:(?<address>.*?)\:(?<documenttype>.*?)\:(?<version>.*?)$");
             string docDefaultNamespace = xDoc.DocumentElement.GetAttribute("xmlns");
             string strDocVersion = string.Empty;
             var match = regVersion.Match(docDefaultNamespace);
