@@ -17,10 +17,10 @@
     <Description>Provides methods for communicating with MTConnect Agents as well as parsing the XML into DTOs modeled off the MTConnect standard.</Description>
     <RepositoryUrl>https://github.com/TrueAnalyticsSolutions/MtconnectCore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Changed the methodology for producing validation results. Errors were no longer bubbling up to the root document.</PackageReleaseNotes>
+    <PackageReleaseNotes>Changed Regex to identify the version of the schema in cases where a local schema file is referenced.</PackageReleaseNotes>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>2.1.0.6</Version>
+    <Version>2.1.0.7</Version>
   </PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net45'">
