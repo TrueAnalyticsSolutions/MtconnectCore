@@ -266,7 +266,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 isValidType = false;
             }
 
-            if (isValidType)
+            if (isValidType && !string.IsNullOrEmpty(SubType))
             {
                 // Get the Enum and look for an attribute pointing to the SubType enum
                 Type enumType = typeof(T);
