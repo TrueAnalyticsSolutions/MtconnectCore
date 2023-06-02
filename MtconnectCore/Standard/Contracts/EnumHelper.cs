@@ -37,7 +37,10 @@ namespace MtconnectCore.Standard.Contracts
         internal static bool Contains(Type enumType, string value, out object enumValue)
         {
             enumValue = null;
-            if (value.ToUpper().Equals(value))
+            
+            if (string.IsNullOrEmpty(value)) return false;
+
+            if (value.ToUpper().Equals(value) == true)
             {
                 value = Enumify(value);
             }
