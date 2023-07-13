@@ -20,7 +20,7 @@
     <PackageReleaseNotes>Changed Regex to identify the version of the schema in cases where a local schema file is referenced.</PackageReleaseNotes>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>2.1.0.9</Version>
+    <Version>2.1.0.10</Version>
   </PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net45'">
