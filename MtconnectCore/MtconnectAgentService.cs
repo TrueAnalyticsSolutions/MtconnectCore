@@ -18,6 +18,7 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 using System.Net.Http;
 using System.Net.Sockets;
 using MtconnectCore.Validation;
+using System.Net;
 
 namespace MtconnectCore
 {
@@ -55,7 +56,18 @@ namespace MtconnectCore
         /// Constructs a new <see cref="MtconnectAgentService"/>.
         /// </summary>
         /// <param name="uri"><inheritdoc cref="MtconnectAgentService.MtconnectAgentService(HttpClient, Uri)" path="/param[@name='uri']"/></param>
-        public MtconnectAgentService(Uri uri) : this(new HttpClient(), uri) { }
+        public MtconnectAgentService(Uri uri) : this(CreateDefaultClient(), uri) { }
+
+        public static HttpClient CreateDefaultClient()
+        {
+            var handler = new HttpClientHandler() {
+                ClientCertificateOptions = ClientCertificateOption.Automatic
+            };
+            //specify to use TLS 1.2 as default connection
+            System.Net.ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
+            return new HttpClient(handler);
+        }
 
         /// <summary>
         /// Tries to parse a <see cref="XmlDocument"/> into the appropriate <see cref="IResponseDocument"/> based on the MTConnect standard.
