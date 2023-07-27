@@ -12240,6 +12240,109 @@
             <param name="defaultNamespace"></param>
             <param name="version"></param>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Observation">
+            <summary>
+            A reference to an observational type and sub-type.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Observation.Category">
+            <summary>
+            Category for the observation reference (ie. SAMPLE, EVENT, or CONDITION)
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Observation.Type">
+            <summary>
+            Raw observational type
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Observation.ExplicitType">
+            <summary>
+            Reference, if any, to the explicit type defined in the standard.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Observation.SubType">
+            <summary>
+            Raw observational sub-type
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Observation.ExplicitSubType">
+            <summary>
+            Reference, if any, to the explicit sub-type defined in the standard for the provided <see cref="P:MtconnectCore.Standard.Contracts.Observation.Type"/>.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.String,System.String)">
+            <summary>
+            Constructs a new observation as a reference.
+            </summary>
+            <param name="category"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.Category" path="/summary" /></param>
+            <param name="type"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.Type" path="/summary" /></param>
+            <param name="subType"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.SubType" path="/summary" /></param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.Enum,System.String)">
+            <summary>
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.String,System.String)" />
+            </summary>
+            <param name="category"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.Category" path="/summary" /></param>
+            <param name="type"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.Type" path="/summary" /></param>
+            <param name="subType"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.SubType" path="/summary" /></param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.Enum,System.Enum)">
+            <summary>
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.String,System.String)" />
+            </summary>
+            <param name="category"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.Category" path="/summary" /></param>
+            <param name="type"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.Type" path="/summary" /></param>
+            <param name="subType"><inheritdoc cref="P:MtconnectCore.Standard.Contracts.Observation.SubType" path="/summary" /></param>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.EventObservation">
+            <summary>
+            A reference to an observational EVENT type and sub-type.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.EventObservation.Category">
+            <summary>
+            EVENT Category for the observation reference.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.EventObservation.ExplicitType">
+            <summary>
+            Reference, if any, to the explicit EVENT type defined in the standard.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.EventObservation.#ctor(System.String,System.String)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.String,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.EventObservation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes,System.String)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.Enum,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.EventObservation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes,System.Enum)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.Enum,System.Enum)"/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.SampleObservation">
+            <summary>
+            A reference to an observational SAMPLE type and sub-type.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.SampleObservation.Category">
+            <summary>
+            SAMPLE Category for the observation reference.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.SampleObservation.ExplicitType">
+            <summary>
+            Reference, if any, to the explicit SAMPLE type defined in the standard.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.SampleObservation.#ctor(System.String,System.String)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.String,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.SampleObservation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes,System.String)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.Enum,System.String)"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.SampleObservation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes,System.Enum)">
+            <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.Enum,System.Enum)"/>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.VersionHelper.versionMinimumVersion">
             <remarks>Find this in the <c>MTConnectDevices_x.x.xsd</c> referenced at <c>/xs:schema[@vs:minVersion]</c></remarks>
         </member>
