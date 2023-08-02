@@ -11,7 +11,9 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// <inheritdoc cref="IResponseDocument" path="/summary"/>
+    /// </summary>
     public class DevicesDocument : ResponseDocument<DevicesDocumentHeader, Device>
     {
         /// <inheritdoc />

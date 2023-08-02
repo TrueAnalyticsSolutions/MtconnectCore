@@ -12140,6 +12140,11 @@
             An interface that represents a single MTConnect Response Document XML element.
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Contracts.IMtconnectNode.SourceNode">
+            <summary>
+            Reference to the Source XmlNode.
+            </summary>
+        </member>
         <member name="M:MtconnectCore.Standard.Contracts.IMtconnectNode.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <summary>
             Validates the format of the MTConnect XML element.
@@ -13410,7 +13415,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.DevicesDocument">
-            <inheritdoc />
+            <summary>
+            <inheritdoc cref="T:MtconnectCore.Standard.Documents.IResponseDocument" path="/summary"/>
+            </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocument.Type">
             <inheritdoc />
@@ -13806,6 +13813,11 @@
         <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.DocumentVersion">
             <summary>
             Reference to the release version of MTConnect this document should be held to in validation.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.Source">
+            <summary>
+            Reference to the source MTConnect Response Document.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.IResponseDocumentHeader">
