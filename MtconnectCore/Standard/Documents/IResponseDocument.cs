@@ -1,7 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
-using System.Collections.Generic;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents
@@ -35,6 +33,11 @@ namespace MtconnectCore.Standard.Documents
         /// Reference to the release version of MTConnect this document should be held to in validation.
         /// </summary>
         MtconnectVersions DocumentVersion { get; set; }
+
+        /// <summary>
+        /// Reference to the source MTConnect Response Document.
+        /// </summary>
+        XmlDocument Source { get; }
 
         bool TryValidate(ValidationReport report);
     }

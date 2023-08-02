@@ -56,7 +56,7 @@ namespace MtconnectCore.Standard.Documents
         /// <summary>
         /// Reference to the source MTConnect Response Document.
         /// </summary>
-        internal XmlDocument Source { get; set; }
+        public XmlDocument Source { get; }
 
         /// <summary>
         /// Reference to the version of MTConnect applied to the Response Document.

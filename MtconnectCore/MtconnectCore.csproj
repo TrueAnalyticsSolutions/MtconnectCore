@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;netstandard2.0;net45</TargetFrameworks>
@@ -10,6 +10,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://mtconnectcore.dev</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>True Analytics Manufacturing Solutions, LLC</Company>
     <Product>Revolution DIY</Product>
@@ -20,7 +21,7 @@
     <PackageReleaseNotes>Changed Regex to identify the version of the schema in cases where a local schema file is referenced.</PackageReleaseNotes>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>2.1.0.12</Version>
+    <Version>2.1.0.13</Version>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>symbols.nupkg</SymbolPackageFormat>
   </PropertyGroup>
@@ -32,6 +33,17 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>MtconnectCore.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	<DocumentationFile>MtconnectCore.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="MtconnectCore.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MtconnectCore.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Standard\Contracts\Enums\Attributes\" />

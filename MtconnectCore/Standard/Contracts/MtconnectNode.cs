@@ -21,7 +21,7 @@ namespace MtconnectCore.Standard.Contracts
         /// <summary>
         /// Reference to the Source XmlNode.
         /// </summary>
-        internal XmlNode SourceNode { get; set; }
+        public XmlNode SourceNode { get; }
 
         /// <summary>
         /// Reference to the version of the MTConnect Standard implemented on the MTConnect Response Document.
