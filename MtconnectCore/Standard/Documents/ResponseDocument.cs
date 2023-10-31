@@ -51,12 +51,14 @@ namespace MtconnectCore.Standard.Documents
         /// <summary>
         /// Global XML namespace manager for the source document.
         /// </summary>
-        public XmlNamespaceManager NamespaceManager { get; set; }
+        [NonSerialized]
+        public XmlNamespaceManager NamespaceManager;
 
         /// <summary>
         /// Reference to the source MTConnect Response Document.
         /// </summary>
-        public XmlDocument Source { get; }
+        [NonSerialized]
+        public XmlDocument Source;
 
         /// <summary>
         /// Reference to the version of MTConnect applied to the Response Document.

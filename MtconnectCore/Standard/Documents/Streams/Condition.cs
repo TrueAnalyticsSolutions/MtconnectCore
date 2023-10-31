@@ -1,6 +1,7 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
@@ -11,23 +12,9 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
-    public class Condition : DataItem
+    public class Condition : Value
     {
-        /// <summary>
-        /// Collected from the name attribute. Refer to Part 3 Streams - 5.8.3
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        [MtconnectNodeAttribute(ConditionAttributes.NAME)]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Collected from the type attribute. Refer to Part 3 Streams - 5.8.3
-        /// 
-        /// Occurance: 1
-        /// </summary>
-        [MtconnectNodeAttribute(ConditionAttributes.TYPE)]
-        public string Type { get; set; }
+        public override CategoryTypes Category => CategoryTypes.CONDITION;
 
         /// <summary>
         /// Collected from the nativeCode attribute. Refer to Part 3 Streams - 5.8.3
@@ -50,6 +37,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 0..1
         /// </summary>
+        // TODO: Validate Enum
         [MtconnectNodeAttribute(ConditionAttributes.QUALIFIER)]
         public string Qualifier { get; set; }
 
@@ -58,16 +46,9 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 0..1
         /// </summary>
+        // TODO: Validate Enum
         [MtconnectNodeAttribute(ConditionAttributes.STATISTIC)]
         public string Statistic { get; set; }
-
-        /// <summary>
-        /// Collected from the compositionId attribute. Refer to Part 3 Streams - 5.8.3
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        [MtconnectNodeAttribute(ConditionAttributes.COMPOSITION_ID)]
-        public string CompositionId { get; set; }
 
         /// <summary>
         /// Collected from the xs:lang attribute. Refer to Part 3 Streams - 5.8.3
@@ -82,10 +63,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// </summary>
         public string Value { get; set; }
 
-        /// <summary>
-        /// Reference to the name of the element. Refer to Part 3 Streams - 5.8
-        /// </summary>
-        public ConditionElements TagName { get; set; }
+        public ConditionElements? State { get; set; }
 
         /// <inheritdoc/>
         public Condition() : base() { }
@@ -94,9 +72,9 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Condition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Value = xNode.InnerText;
-            if (Enum.TryParse<ConditionElements>(xNode.LocalName, out ConditionElements condition))
+            if (Enum.TryParse<ConditionElements>(TagName, out ConditionElements condition))
             {
-                TagName = condition;
+                State = condition;
             }
         }
 
@@ -110,14 +88,18 @@ namespace MtconnectCore.Standard.Documents.Streams
                     $"Condition MUST include a 'type' attribute.",
                     SourceNode));
             }
-            else if (!EnumHelper.Contains<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type))
+            else if (!EnumHelper.Contains<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type)
+                && !EnumHelper.Contains<Contracts.Enums.Devices.DataItemTypes.EventTypes>(Type)
+                && !EnumHelper.Contains<Contracts.Enums.Devices.DataItemTypes.SampleTypes>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Condition 'type' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(", ", string.Empty, string.Empty)}].",
+                    $"Condition 'type' attribute must be of Condition, Event, or Sample types.",
                     SourceNode));
             }
-            else if (!EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+            else if (!EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault())
+                && !EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.EventTypes>(Type, MtconnectVersion.GetValueOrDefault())
+                && !EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.SampleTypes>(Type, MtconnectVersion.GetValueOrDefault()))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
@@ -129,7 +111,7 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
-            => validateNode<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Contracts.Enums.Devices.CategoryTypes.CONDITION, out validationErrors);
+            => base.validateNode(out validationErrors);
 
         protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new NotImplementedException();
     }

@@ -87,13 +87,23 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample)
         {
-            if (xNode.Name == "VariableDataSet")
+            if (xNode.Name.EndsWith("DataSet"))
             {
-                var variableList = new List<SampleVariableDataSet>();
-                var variableParseResult = base.TryAdd<SampleVariableDataSet>(xNode, nsmgr, ref variableList, out SampleVariableDataSet variableDataSet);
-                _samples.Add(variableDataSet as Sample);
-                sample = variableDataSet;
-                return variableParseResult;
+                var dataset = new List<SampleDataSet>();
+                var datasetParseResult = base.TryAdd<SampleDataSet>(xNode, nsmgr, ref dataset, out SampleDataSet datasetInstance);
+                if (datasetParseResult)
+                    _samples.Add(datasetInstance);
+                sample = datasetInstance;
+                return datasetParseResult;
+            }
+            else if (xNode.Name.EndsWith("Table"))
+            {
+                var table = new List<SampleTable>();
+                var tableParseResult = base.TryAdd<SampleTable>(xNode, nsmgr, ref table, out SampleTable tableInstance);
+                if (tableParseResult)
+                    _samples.Add(tableInstance);
+                sample = tableInstance;
+                return tableParseResult;
             }
             else
             {
@@ -103,13 +113,21 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         public bool TryAddEvent(XmlNode xNode, XmlNamespaceManager nsmgr, out Event @event)
         {
-            if (xNode.Name == "VariableDataSet")
+            if (xNode.Name.EndsWith("DataSet"))
             {
-                var variableList = new List<EventVariableDataSet>();
-                var variableParseResult = base.TryAdd<EventVariableDataSet>(xNode, nsmgr, ref variableList, out EventVariableDataSet variableDataSet);
-                _events.Add(variableDataSet);
-                @event = variableDataSet;
-                return variableParseResult;
+                var dataset = new List<EventDataSet>();
+                var datasetParseResult = base.TryAdd<EventDataSet>(xNode, nsmgr, ref dataset, out EventDataSet datasetInstance);
+                if (datasetParseResult)
+                    _events.Add(datasetInstance);
+                @event = datasetInstance;
+                return datasetParseResult;
+            } else if (xNode.Name.EndsWith("Table")){
+                var table = new List<EventTable>();
+                var tableParseResult = base.TryAdd<EventTable>(xNode, nsmgr, ref table, out EventTable tableInstance);
+                if (tableParseResult)
+                    _events.Add(tableInstance);
+                @event = tableInstance;
+                return tableParseResult;
             } else
             {
                 return base.TryAdd<Event>(xNode, nsmgr, ref _events, out @event);

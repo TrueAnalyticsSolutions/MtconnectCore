@@ -1,13 +1,8 @@
-﻿using MtconnectCore.Standard.Contracts.Attributes;
-using MtconnectCore.Standard.Contracts.Enums;
+﻿using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
 
@@ -21,7 +16,8 @@ namespace MtconnectCore.Standard.Contracts
         /// <summary>
         /// Reference to the Source XmlNode.
         /// </summary>
-        public XmlNode SourceNode { get; }
+        [NonSerialized]
+        public XmlNode SourceNode;
 
         /// <summary>
         /// Reference to the version of the MTConnect Standard implemented on the MTConnect Response Document.

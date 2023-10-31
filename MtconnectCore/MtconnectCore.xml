@@ -10101,9 +10101,54 @@
             The type of application that will use this file.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.CellAttributes">
+            <summary>
+            Attributes for the <c>CELL</c> representation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.CellAttributes.KEY">
+            <summary>
+            unique identifier for each key-value pair.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.CellAttributes.RESULT">
+            <summary>
+            value of the  Cell.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DataSetAttributes">
+            <summary>
+            Attributes for the <c>DATA_SET</c> representation
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DestinationAttributes.DEVICE_UUID">
             <summary>
             uuid of the target device or application.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DiscreteAttributes">
+            <summary>
+            Attributes for the <c>DISCRETE</c> representation
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.EntryAttributes">
+            <summary>
+            Attributes for the <c>ENTRY</c> representation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.EntryAttributes.KEY">
+            <summary>
+            unique identifier for each key-value pair.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.EntryAttributes.REMOVED">
+            <summary>
+            removal indicator of a key-value pair.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.EntryAttributes.RESULT">
+            <summary>
+            value of the  Entry.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.FileAttributes.SIZE">
@@ -10134,6 +10179,52 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.FilePropertyAttributes.NAME">
             <summary>
             The name of the FileProperty
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.COMPOSITION_ID" -->
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.DATA_ITEM_ID">
+            <summary>
+            unique identifier of the  DataItem associated with this  Observation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.NAME">
+            <summary>
+            name of the  DataItem associated with this  Observation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.SEQUENCE">
+            <summary>
+            number representing the sequential position of an occurrence of an observation in the data buffer of an agent.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.SUB_TYPE">
+            <summary>
+            subtype of the  DataItem associated with this  Observation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.TIMESTAMP">
+            <summary>
+            most accurate time available to a piece of equipment that represents the point in time that the data reported was measured.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.TYPE">
+            <summary>
+            type of the  DataItem associated with this  Observation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.UNITS">
+            <summary>
+            units of the  DataItem associated with this  Observation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.IS_UNAVAILABLE">
+            <summary>
+            when true, Observation::result is indeterminate.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.RESULT">
+            <summary>
+            observation of the  Observation entity.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.Originators.MANUFACTURER">
@@ -10189,6 +10280,51 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.WEEK">
             <summary>
             The value of the Data Entity was reset at the end of a 7-day period.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TableAttributes">
+            <summary>
+            Attributes for the <c>TABLE</c> representation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TableAttributes.COUNT">
+            <summary>
+            number of key-value pairs represented as  Entry entities.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TableEntryAttributes">
+            <summary>
+            Attributes for the <c>TABLE_ENTRY</c> representation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TableEntryAttributes.KEY">
+            <summary>
+            unique identifier for each key-value pair.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TableEntryAttributes.REMOVED">
+            <summary>
+            removal indicator of a key-value pair.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TimeSeriesAttributes">
+            <summary>
+            Attributes for the <c>TIME_SERIES</c> representation
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TimeSeriesAttributes.SAMPLE_COUNT">
+            <summary>
+            number of values given for the  Observation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TimeSeriesAttributes.RESULT">
+            <summary>
+            Value of the TIME_SERIES
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ValueAttributes">
+            <summary>
+            Attributes for the <c>VALUE</c> representation
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.AvailabilityValues">
@@ -12140,11 +12276,6 @@
             An interface that represents a single MTConnect Response Document XML element.
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Contracts.IMtconnectNode.SourceNode">
-            <summary>
-            Reference to the Source XmlNode.
-            </summary>
-        </member>
         <member name="M:MtconnectCore.Standard.Contracts.IMtconnectNode.TryValidate(MtconnectCore.Validation.ValidationReport)">
             <summary>
             Validates the format of the MTConnect XML element.
@@ -12156,7 +12287,7 @@
             Represents the most basic form of a MTConnect Response Document XML node. Used for parsing a MTConnect Response Document.
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Contracts.MtconnectNode.SourceNode">
+        <member name="F:MtconnectCore.Standard.Contracts.MtconnectNode.SourceNode">
             <summary>
             Reference to the Source XmlNode.
             </summary>
@@ -13805,19 +13936,9 @@
             Reference to the tag name of the XML node containing the document data.
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.NamespaceManager">
-            <summary>
-            Reference to the XML Namespaces used throughout the document.
-            </summary>
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.DocumentVersion">
             <summary>
             Reference to the release version of MTConnect this document should be held to in validation.
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.Source">
-            <summary>
-            Reference to the source MTConnect Response Document.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.IResponseDocumentHeader">
@@ -13886,12 +14007,12 @@
             Reference to the XML element name that contains node to be processed into <see cref="!:&lt;TItem&gt;"/>s.
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.NamespaceManager">
+        <member name="F:MtconnectCore.Standard.Documents.ResponseDocument`2.NamespaceManager">
             <summary>
             Global XML namespace manager for the source document.
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.Source">
+        <member name="F:MtconnectCore.Standard.Documents.ResponseDocument`2.Source">
             <summary>
             Reference to the source MTConnect Response Document.
             </summary>
@@ -13978,6 +14099,22 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.AssetRemoved.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Cell.Key">
+            <summary>
+            Collected from the key attribute. Refer to Part 3 Streams - 5.6.5.3.5
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Cell.Result">
+            <summary>
+            Collected from the textcontent of the Cell element. Refer to Part 3 Streams - 5.6.5.3.6
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Cell.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Cell.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.ComponentId">
             <summary>
             Collected from the componentId attribute. Refer to Part 3 Streams - 4.3.2
@@ -14040,20 +14177,6 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Component.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Name">
-            <summary>
-            Collected from the name attribute. Refer to Part 3 Streams - 5.8.3
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Type">
-            <summary>
-            Collected from the type attribute. Refer to Part 3 Streams - 5.8.3
-            
-            Occurance: 1
-            </summary>
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.NativeCode">
             <summary>
             Collected from the nativeCode attribute. Refer to Part 3 Streams - 5.8.3
@@ -14082,13 +14205,6 @@
             Occurance: 0..1
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.CompositionId">
-            <summary>
-            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.8.3
-            
-            Occurance: 0..1
-            </summary>
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Language">
             <summary>
             Collected from the xs:lang attribute. Refer to Part 3 Streams - 5.8.3
@@ -14101,45 +14217,10 @@
             Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.8.4
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.TagName">
-            <summary>
-            Reference to the name of the element. Refer to Part 3 Streams - 5.8
-            </summary>
-        </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Condition.#ctor">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Condition.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <inheritdoc/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.DataItemId">
-            <summary>
-            Collected from the dataItemId attribute. Refer to Part 3 Streams - 5.3.2, 5.5.2, 5.8.3
-            
-            Occurance: 1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.SubType">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.SUB_TYPE"/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.Timestamp">
-            <summary>
-            Collected from the timestamp attribute. Refer to Part 3 Streams - 5.3.2, 5.5.2, 5.8.3
-            
-            Occurance: 1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.DataItem.Sequence">
-            <summary>
-            Collected from the sequence attribute. Refer to Part 3 Streams - 5.3.2, 5.5.2, 5.8.3
-            
-            Occurance: 1
-            </summary>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor">
-            <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Name">
@@ -14169,23 +14250,91 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.Name">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Entry.Key">
             <summary>
-            Collected from the name attribute. Refer to Part 3 Streams - 5.5.2
+            Collected from the key attribute. Refer to Part 3 Streams - 5.6.3.3
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Entry.Removed">
+            <summary>
+            Collected from the removed attribute. Refer to Part 3 Streams - 5.6.3.3
             
             Occurance: 0..1
             </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Entry.Result">
+            <summary>
+            Collected from the textcontent of the Entry element. Refer to Part 3 Streams - 5.6.3.3
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Entry.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Entry.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDiscrete.Representation">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventDiscrete.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventDiscrete.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventTable.Representation">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventTable.Count">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventTable.Result">
+            <summary>
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventTable.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventTable.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Representation">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Count">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Result">
+            <summary>
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventDataSet.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventDataSet.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Event.ResetTriggered">
             <summary>
             Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.5.2
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.CompositionId">
-            <summary>
-            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.5.2
             
             Occurance: 0..1
             </summary>
@@ -14195,41 +14344,71 @@
             Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.TagName">
-            <summary>
-            Reference to the name of the element. Refer to Part 3 Streams - 5.5
-            </summary>
-        </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor">
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet.Count">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.IDataSet.Count">
             <summary>
             Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
             
             Occurance: 1
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet._entries">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.IDataSet.Result">
             <summary>
             Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
             </summary>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet.#ctor">
-            <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.EventVariableDataSet.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <inheritdoc/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Name">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.ITable.Count">
             <summary>
-            Collected from the name attribute. Refer to Part 3 Streams - 5.3.2
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.5.1
             
-            Occurance: 0..1
+            Occurance: 1
             </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.CompositionId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.COMPOSITION_ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.DataItemId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.DATA_ITEM_ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.Sequence">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.SEQUENCE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.SubType">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.SUB_TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.Timestamp">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.TIMESTAMP"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.Type">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.Units">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.UNITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.IsUnavailable">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.IS_UNAVAILABLE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.Result">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.RESULT"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Observation.TagName">
+            <summary>
+            Reference to the name of the element. Refer to Part 3 Streams - 5.5
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Observation.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Observation.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SampleRate">
             <summary>
@@ -14259,13 +14438,6 @@
             Occurance: 0..1
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.CompositionId">
-            <summary>
-            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.3.2
-            
-            Occurance: 0..1
-            </summary>
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Value">
             <summary>
             Collected from the textcontent of the Sample element. Refer to Part 3 Streams - 5.3.3
@@ -14282,22 +14454,56 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleVariableDataSet.Count">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleDataSet.Representation">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleDataSet.Count">
             <summary>
             Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
             
             Occurance: 1
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Documents.Streams.SampleVariableDataSet._entries">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleDataSet.Result">
             <summary>
-            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
             </summary>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.SampleVariableDataSet.#ctor">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleTable.Representation">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleTable.Count">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleTable.Result">
+            <summary>
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleTimeSeries.Representation">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleTimeSeries.SampleCount">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.SampleTimeSeries.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.SampleVariableDataSet.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+        <member name="M:MtconnectCore.Standard.Documents.Streams.SampleTimeSeries.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Streams.StreamsDocument">
@@ -14330,88 +14536,39 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.StreamsDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.Key">
-            <summary>
-            Collected from the key attribute. Refer to Part 3 Streams - 5.6.3.3
-            
-            Occurance: 1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.Removed">
-            <summary>
-            Collected from the removed attribute. Refer to Part 3 Streams - 5.6.3.3
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.Value">
-            <summary>
-            Collected from the textcontent of the Entry element. Refer to Part 3 Streams - 5.6.3.3
-            </summary>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.#ctor">
-            <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.VariableDataSetEntry.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <inheritdoc/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetCell.Key">
-            <summary>
-            Collected from the key attribute. Refer to Part 3 Streams - 5.6.5.3.5
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetCell.Value">
-            <summary>
-            Collected from the textcontent of the Cell element. Refer to Part 3 Streams - 5.6.5.3.6
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.SubType">
-            <summary>
-            Collected from the subType attribute. Refer to Part 3 Streams - 5.6.5.1
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.Name">
-            <summary>
-            Collected from the name attribute. Refer to Part 3 Streams - 5.6.5.1
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.CompositionId">
-            <summary>
-            Collected from the compositionId attribute. Refer to Part 3 Streams - 5.6.5.1
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.ResetTriggered">
-            <summary>
-            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.6.5.1
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTable.Count">
-            <summary>
-            Collected from the count attribute. Refer to Part 3 Streams - 5.6.5.1
-            
-            Occurance: 1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTableEntry.Key">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.TableEntry.Key">
             <summary>
             Collected from the key attribute. Refer to Part 3 Streams - 5.6.5.3.3
             
             Occurance: 1
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.WorkOffsetTableEntry.Removed">
+        <member name="P:MtconnectCore.Standard.Documents.Streams.TableEntry.Removed">
             <summary>
             Collected from the removed attribute. Refer to Part 3 Streams - 5.6.5.3.3
             
             Occurance: 0..1
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.TableEntry.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.TableEntry.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.Streams.Value">
+            <summary>
+            Default representation type for all Observation Types where <c>result</c> of the Observation  Types is an MTConnect data type.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Value.Representation">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Value.Result">
+            <summary>
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.IRequestQuery">

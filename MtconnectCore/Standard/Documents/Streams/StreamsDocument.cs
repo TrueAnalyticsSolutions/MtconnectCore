@@ -44,7 +44,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         protected bool validateSequence(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
-            var allDataItems = new List<IDataItem>();
+            var allDataItems = new List<IObservation>();
             var allComponents = Items.SelectMany(o => o.Components);
             allDataItems.AddRange(allComponents.SelectMany(o => o.Samples));
             allDataItems.AddRange(allComponents.SelectMany(o => o.Events));
@@ -62,7 +62,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         protected bool validateDataItemValue(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
-            var allUnavailable = Items.All(o => o.Components.All(c => c.Samples.All(d => d.Value == "UNAVAILABLE") && c.Events.All(d => d.Value == "UNAVAILABLE") && c.Conditions.All(d => d.Value == "UNAVAILABLE")));
+            var allUnavailable = Items.All(o => o.Components.All(c => c.Samples.All(d => d.IsUnavailable) && c.Events.All(d => d.IsUnavailable) && c.Conditions.All(d => d.IsUnavailable)));
             if (allUnavailable)
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"All DataItems reporting UNAVAILABLE. This could be an indication that the Adapter is not reporting correctly."));

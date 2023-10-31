@@ -9,5 +9,7 @@ namespace MtconnectCore.Standard.Contracts
         public const string DEFAULT_XML_NAMESPACE = "m";
 
         public const string DEFAULT_DEVICES_XML_NAMESPACE = "mt";
+
+        public const string UNAVAILABLE = "UNAVAILABLE";
     }
 }
