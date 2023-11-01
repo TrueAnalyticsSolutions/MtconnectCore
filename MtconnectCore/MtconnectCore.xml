@@ -9949,6 +9949,15 @@
             <summary>
             Version 2.2.0
             </summary>
+            <remarks>Prepared on: July 26, 2023</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_2_1">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_2_0"/>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_3_0">
+            <summary>
+            Version 2.3.0
+            </summary>
             <remarks>Pre-Release</remarks>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
