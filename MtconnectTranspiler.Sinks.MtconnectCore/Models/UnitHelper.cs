@@ -1,6 +1,6 @@
 ﻿using MtconnectTranspiler.Contracts;
-using MtconnectTranspiler.Sinks.CSharp.Attributes;
 using MtconnectTranspiler.Sinks.CSharp.Models;
+using MtconnectTranspiler.Sinks.ScribanTemplates;
 using MtconnectTranspiler.Xmi;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
@@ -46,6 +46,6 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         }
 
         public static string ToEnumSafe(string input)
-            => ScribanHelperMethods.ToCodeSafe(input.Replace("/", "_PER_").Replace("^2", "_SQUARED").Replace("^3", "_CUBED"));
+            => CSharp.Models.ScribanHelperMethods.ToCodeSafe(input.Replace("/", "_PER_").Replace("^2", "_SQUARED").Replace("^3", "_CUBED"));
     }
 }
