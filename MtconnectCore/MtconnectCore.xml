@@ -2358,7 +2358,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.ALTERNATING">
             <summary>
-            measurement of alternating voltage or current.   If not specified further in statistic, defaults to RMS voltage.   <b>DEPRECATED</b> in <i>Version 1.6</i>.
+            measurement of alternating voltage or current.   If not specified further in statistic, defaults to RMS voltage.   <b>DEPRECATED</b> in <i>Version 1.6</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -2369,7 +2369,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.DIRECT">
             <summary>
-            measurement of DC current or voltage.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+            measurement of DC current or voltage.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -2380,7 +2380,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.ACTUAL">
             <summary>
-            measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+            measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -2391,7 +2391,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.AmperageSubTypes.TARGET">
             <summary>
-            goal of the operation or process.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+            goal of the operation or process.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -3793,7 +3793,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CODE">
             <summary>
-            programmatic code being executed.  <b>DEPRECATED</b> in <i>Version 1.1</i>.
+            programmatic code being executed.  <b>DEPRECATED</b> in <i>Version 1.1</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -3927,7 +3927,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.EXECUTION">
             <summary>
-            execution status of the <see cref="!:Component">Component</see>.
+            operating state of a <see cref="!:Component">Component</see>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -3960,7 +3960,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LINE">
             <summary>
-            current line of code being executed.  <b>DEPRECATED</b> in <i>Version 1.4.0</i>.
+            current line of code being executed.  <b>DEPRECATED</b> in <i>Version 1.4.0</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4076,7 +4076,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.PART_NUMBER">
             <summary>
-            identifier of a part or product moving through the manufacturing process.  <b>DEPRECATED</b> in <i>Version 1.7</i>. <c>PART_NUMBER</c> is now a <c>subType</c> of <c>PART_KIND_ID</c>.
+            identifier of a part or product moving through the manufacturing process.  <b>DEPRECATED</b> in <i>Version 1.7</i>s. <c>PART_NUMBER</c> is now a <c>subType</c> of <c>PART_KIND_ID</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4121,7 +4121,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_STATUS">
             <summary>
-            status of the <see cref="!:Component">Component</see>.  <b>DEPRECATED</b> in <i>Version 1.1.0</i>.
+            status of the <see cref="!:Component">Component</see>.  <b>DEPRECATED</b> in <i>Version 1.1.0</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4293,7 +4293,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_ID">
             <summary>
-            identifier of the tool currently in use for a given <c>Path</c>.  <b>DEPRECATED</b> in <i>Version 1.2.0</i>.   See <c>TOOL_ASSET_ID</c>.
+            identifier of the tool currently in use for a given <c>Path</c>.  <b>DEPRECATED</b> in <i>Version 1.2.0</i>s.   See <c>TOOL_ASSET_ID</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4314,7 +4314,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_OFFSET">
             <summary>
-            reference to the tool offset variables applied to the active cutting tool associated with a <see cref="!:Path">Path</see> in a <see cref="!:Controller">Controller</see> type component.
+            reference to the tool offset variables applied to the active cutting tool.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4367,7 +4367,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WORKHOLDING_ID">
             <summary>
-            identifier for the current workholding or part clamp in use by a piece of equipment.
+            identifier for the current workholding or part clamp in use by a piece of equipment.  <b>DEPRECATION WARNING</b>: Recommend using <c>FIXTURE_ID</c> instead.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4377,7 +4377,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WORK_OFFSET">
             <summary>
-            offset variables for a work piece or part associated with a <see cref="!:Path">Path</see> in a <see cref="!:Controller">Controller</see> type component.
+            reference to offset variables for a work piece or part.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4495,7 +4495,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ALARM_LIMIT">
             <summary>
-            set of limits used to trigger warning or alarm indicators.
+            set of limits used to trigger warning or alarm indicators.  <b>DEPRECATION WARNING</b>. Recommend using <c>ALARM_LIMITS</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4557,7 +4557,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.SPECIFICATION_LIMIT">
             <summary>
-            set of limits defining a range of values designating acceptable performance for a variable.
+            set of limits defining a range of values designating acceptable performance for a variable.  <b>DEPRECATION WARNING</b>. Recommend using <c>SPECIFICATION_LIMITS</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4598,7 +4598,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.CONTROL_LIMIT">
             <summary>
-            set of limits used to indicate whether a process variable is stable and in control.
+            set of limits used to indicate whether a process variable is stable and in control.  <b>DEPRECATION WARNING</b>. Recommend using <c>CONTROL_LIMITS</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4803,7 +4803,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.FIXTURE_ID">
             <summary>
-            identifier for a fixture.
+            identifier for the current workholding or part clamp in use by a piece of equipment.
             </summary>
             <remarks>
             <list type="bullet">
@@ -4871,6 +4871,122 @@
             <list type="bullet">
             <item><b>Values</b>: <see cref="T:MtconnectCore.Standard.Contracts.Enums.Streams.BatteryStateValues" /></item>
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.1">v2.1</see></item>
+            </list>
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.FEATURE_PERSISTENT_ID" -->
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.SENSOR_STATE">
+            <summary>
+            detection result of a sensor.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Sub-Type</b>: <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SensorStateSubTypes" /></item>
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPONENT_DATA">
+            <summary>
+            <see cref="!:Event">Event</see> that represents a <see cref="!:Component">Component</see> where the <see cref="!:EntryDefinition">EntryDefinition</see> identifies the <see cref="!:Component">Component</see> and the <see cref="!:CellDefinition">CellDefinition</see>s define the <see cref="!:Component">Component</see>'s observed <see cref="!:DataItem">DataItem</see>s.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.WORK_OFFSETS">
+            <summary>
+            properties of each addressable work offset.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_OFFSETS">
+            <summary>
+            properties of each addressable tool offset.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.FEATURE_MEASUREMENT">
+            <summary>
+            assessing elements of a <i>feature</i>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MEASUREMENT_TYPE" -->
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MEASUREMENT_VALUE">
+            <summary>
+            measurement based on the measurement type.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.MEASUREMENT_UNITS">
+            <summary>
+            engineering units of the measurement.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.UNCERTAINTY_TYPE">
+            <summary>
+            method used to compute <i>standard uncertainty</i>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Values</b>: <see cref="T:MtconnectCore.Standard.Contracts.Enums.Streams.UncertaintyTypeValues" /></item>
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.UNCERTAINTY">
+            <summary>
+            <i>uncertainty</i> specified by <see cref="!:UncertaintyType">UncertaintyType</see>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.TOOL_CUTTING_ITEM">
+            <summary>
+            references the <see cref="!:CuttingToolLifeCycle">CuttingToolLifeCycle</see> <see cref="!:CuttingItem">CuttingItem</see> index related to the <see cref="!:indices" /> property of the currently active cutting tool edge.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+            </list>
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LOCATION_ADDRESS" -->
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_SOURCE">
+            <summary>
+            active energy source for the <see cref="!:Component">Component</see>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Sub-Type</b>: <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes" /></item>
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
             </list>
             </remarks>
         </member>
@@ -5103,7 +5219,7 @@
             </summary>
             <remarks>
             <list type="bullet">
-            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
             </list>
             </remarks>
         </member>
@@ -5154,6 +5270,16 @@
             <remarks>
             <list type="bullet">
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.HardwareSubTypes.MODEL">
+            <summary>
+            model info of the hardware or software.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
             </list>
             </remarks>
         </member>
@@ -6132,7 +6258,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PathFeedrateSubTypes.OVERRIDE">
             <summary>
-            operator's overridden value.  <b>DEPRECATED</b> in <i>Version 1.3</i>.
+            operator's overridden value.  <b>DEPRECATED</b> in <i>Version 1.3</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -6238,6 +6364,46 @@
             <remarks>
             <list type="bullet">
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1696872166478_3528_3677">model.mtconnect.org</seealso>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes.STANDBY">
+            <summary>
+            <see cref="!:EventEnum:POWER_SOURCE">EventEnum:POWER_SOURCE</see> that is <see cref="!:DataItemSubTypeEnum:STANDBY">DataItemSubTypeEnum:STANDBY</see> that is uninterruptible or generator power supply. 
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes.SECONDARY">
+            <summary>
+            <see cref="!:EventEnum:POWER_SOURCE">EventEnum:POWER_SOURCE</see> that is <see cref="!:DataItemSubTypeEnum:SECONDARY">DataItemSubTypeEnum:SECONDARY</see>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes.PRIMARY">
+            <summary>
+            <see cref="!:EventEnum:POWER_SOURCE">EventEnum:POWER_SOURCE</see> that is <see cref="!:DataItemSubTypeEnum:PRIMARY">DataItemSubTypeEnum:PRIMARY</see>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
             </list>
             </remarks>
         </member>
@@ -6830,7 +6996,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.AMPERAGE">
             <summary>
-            strength of electrical current.  <b>DEPRECATED</b> in <i>Version 1.6</i>. Replaced by <c>AMPERAGE_AC</c> and <c>AMPERAGE_DC</c>.
+            strength of electrical current.  <b>DEPRECATED</b> in <i>Version 1.6</i>s. Replaced by <c>AMPERAGE_AC</c> and <c>AMPERAGE_DC</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -7085,7 +7251,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.LEVEL">
             <summary>
-            level of a resource.  <b>DEPRECATED</b> in <i>Version 1.2</i>.  See <c>FILL_LEVEL</c>.
+            level of a resource.  <b>DEPRECATED</b> in <i>Version 1.2</i>s.  See <c>FILL_LEVEL</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -7243,7 +7409,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.SPINDLE_SPEED">
             <summary>
-            rotational speed of the rotary axis.  <b>DEPRECATED</b> in <i>Version 1.2</i>.  Replaced by <c>ROTARY_VELOCITY</c>.
+            rotational speed of the rotary axis.  <b>DEPRECATED</b> in <i>Version 1.2</i>s.  Replaced by <c>ROTARY_VELOCITY</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -7325,7 +7491,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.VOLTAGE">
             <summary>
-            electrical potential between two points.  <b>DEPRECATED</b> in <i>Version 1.6</i>. Replaced by <c>VOLTAGE_AC</c> and <c>VOLTAGE_DC</c>.
+            electrical potential between two points.  <b>DEPRECATED</b> in <i>Version 1.6</i>s. Replaced by <c>VOLTAGE_AC</c> and <c>VOLTAGE_DC</c>.
             </summary>
             <remarks>
             <list type="bullet">
@@ -7759,6 +7925,56 @@
             </list>
             </remarks>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SensorStateSubTypes">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1677588817278_345680_780">model.mtconnect.org</seealso>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SensorStateSubTypes.BINARY">
+            <summary>
+            <see cref="!:EventEnum:SENSOR_STATE">EventEnum:SENSOR_STATE</see> where the state is <see cref="!:DataItemSubTypeEnum:BINARY">DataItemSubTypeEnum:BINARY</see>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SensorStateSubTypes.BOOLEAN">
+            <summary>
+            <see cref="!:EventEnum:SENSOR_STATE">EventEnum:SENSOR_STATE</see> where the state is <see cref="!:DataItemSubTypeEnum:BOOLEAN">DataItemSubTypeEnum:BOOLEAN</see>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SensorStateSubTypes.ENUMERATED">
+            <summary>
+            <see cref="!:EventEnum:SENSOR_STATE">EventEnum:SENSOR_STATE</see> where the state is <see cref="!:DataItemSubTypeEnum:ENUMERATED">DataItemSubTypeEnum:ENUMERATED</see>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SensorStateSubTypes.DETECT">
+            <summary>
+            <see cref="!:EventEnum:SENSOR_STATE">EventEnum:SENSOR_STATE</see> where the state is <see cref="!:DataItemSubTypeEnum:DETECT">DataItemSubTypeEnum:DETECT</see>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SettlingErrorAngularSubTypes">
             <summary>
             View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1660329285538_924389_578">model.mtconnect.org</seealso>
@@ -7922,7 +8138,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SpindleSpeedSubTypes.ACTUAL">
             <summary>
-            measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.3</i>.
+            measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.3</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -7933,7 +8149,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SpindleSpeedSubTypes.COMMANDED">
             <summary>
-            directive value including adjustments such as an offset or overrides.  <b>DEPRECATED</b> in <i>Version 1.3</i>.
+            directive value including adjustments such as an offset or overrides.  <b>DEPRECATED</b> in <i>Version 1.3</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -7944,7 +8160,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SpindleSpeedSubTypes.OVERRIDE">
             <summary>
-            operator's overridden value.  <b>DEPRECATED</b> in <i>Version 1.3</i>.
+            operator's overridden value.  <b>DEPRECATED</b> in <i>Version 1.3</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -8336,7 +8552,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.ALTERNATING">
             <summary>
-            alternating voltage or current.   If not specified further in statistic, defaults to RMS voltage.   <b>DEPRECATED</b> in <i>Version 1.6</i>.
+            alternating voltage or current.   If not specified further in statistic, defaults to RMS voltage.   <b>DEPRECATED</b> in <i>Version 1.6</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -8347,7 +8563,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.DIRECT">
             <summary>
-            DC current or voltage.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+            DC current or voltage.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -8358,7 +8574,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.ACTUAL">
             <summary>
-            measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+            measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -8369,7 +8585,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.VoltageSubTypes.TARGET">
             <summary>
-            goal of the operation or process.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+            goal of the operation or process.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
             </summary>
             <remarks>
             <list type="bullet">
@@ -10561,6 +10777,87 @@
             </list>
             </remarks>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1678195723846_572772_17405">model.mtconnect.org</seealso>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues.PASS">
+            <summary>
+            measurement is within acceptable tolerances.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues.FAIL">
+            <summary>
+            measurement is not within acceptable tolerances.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues.REWORK">
+            <summary>
+            failed, but acceptable constraints achievable by utilizing additional manufacturing processes.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues.SYSTEM_ERROR">
+            <summary>
+            measurement is indeterminate due to an equipment failure.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues.INDETERMINATE">
+            <summary>
+            measurement cannot be determined.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues.NOT_ANALYZED">
+            <summary>
+            measurement cannot be evaluated.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues.BASIC_OR_THEORETIC_EXACT_DIMENSION" -->
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CharacteristicStatusValues.UNDEFINED">
+            <summary>
+            status of measurement cannot be determined.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ChuckInterlockValues">
             <summary>
             View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1632486692761_582059_81">model.mtconnect.org</seealso>
@@ -11216,7 +11513,7 @@
             </summary>
             <remarks>
             <list type="bullet">
-            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
             </list>
             </remarks>
         </member>
@@ -11247,6 +11544,17 @@
             <remarks>
             <list type="bullet">
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.5">v1.5</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ExecutionValues.PROGRAM_OPTIONAL_STOP">
+            <summary>
+            program has been intentionally optionally stopped using an M01 or similar code.  <b>DEPRECATED</b> in <i>version 1.4</i>s and replaced with <c>OPTIONAL_STOP</c>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
+            <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
             </list>
             </remarks>
         </member>
@@ -12031,6 +12339,27 @@
             </list>
             </remarks>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.UncertaintyTypeValues">
+            <summary>
+            View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1678195766304_380006_17434">model.mtconnect.org</seealso>
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.UncertaintyTypeValues.COMBINED">
+            <summary>
+            <i>combined standard uncertainty</i>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+            </list>
+            </remarks>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Streams.UncertaintyTypeValues.MEAN" -->
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ValveStateValues">
             <summary>
             View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1622456100008_63209_110">model.mtconnect.org</seealso>

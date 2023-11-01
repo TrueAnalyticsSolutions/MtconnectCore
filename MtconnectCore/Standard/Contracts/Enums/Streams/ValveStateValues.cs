@@ -15,7 +15,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
 	public enum ValveStateValues
 	{
 		/// <summary>

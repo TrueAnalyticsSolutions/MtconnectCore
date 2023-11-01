@@ -10,7 +10,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_45f01b9_1580309868367_570061_44359">model.mtconnect.org</seealso>
 	﻿	/// </summary>
 	
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
 	public enum SampleTypes
 	{
 		/// <summary>
@@ -36,7 +36,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		ACCUMULATED_TIME,
 		/// <summary>
-		﻿/// strength of electrical current.  <b>DEPRECATED</b> in <i>Version 1.6</i>. Replaced by <c>AMPERAGE_AC</c> and <c>AMPERAGE_DC</c>.
+		﻿/// strength of electrical current.  <b>DEPRECATED</b> in <i>Version 1.6</i>s. Replaced by <c>AMPERAGE_AC</c> and <c>AMPERAGE_DC</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -306,7 +306,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[ObservationalSubType(typeof(LengthSubTypes))]
 		LENGTH,
 		/// <summary>
-		﻿/// level of a resource.  <b>DEPRECATED</b> in <i>Version 1.2</i>.  See <c>FILL_LEVEL</c>.
+		﻿/// level of a resource.  <b>DEPRECATED</b> in <i>Version 1.2</i>s.  See <c>FILL_LEVEL</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -472,7 +472,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[ObservationalSubType(typeof(SoundLevelSubTypes))]
 		SOUND_LEVEL,
 		/// <summary>
-		﻿/// rotational speed of the rotary axis.  <b>DEPRECATED</b> in <i>Version 1.2</i>.  Replaced by <c>ROTARY_VELOCITY</c>.
+		﻿/// rotational speed of the rotary axis.  <b>DEPRECATED</b> in <i>Version 1.2</i>s.  Replaced by <c>ROTARY_VELOCITY</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -556,7 +556,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		VISCOSITY,
 		/// <summary>
-		﻿/// electrical potential between two points.  <b>DEPRECATED</b> in <i>Version 1.6</i>. Replaced by <c>VOLTAGE_AC</c> and <c>VOLTAGE_DC</c>.
+		﻿/// electrical potential between two points.  <b>DEPRECATED</b> in <i>Version 1.6</i>s. Replaced by <c>VOLTAGE_AC</c> and <c>VOLTAGE_DC</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">

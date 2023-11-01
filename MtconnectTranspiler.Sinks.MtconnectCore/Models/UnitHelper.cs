@@ -46,6 +46,6 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         }
 
         public static string ToEnumSafe(string input)
-            => CSharp.Models.ScribanHelperMethods.ToCodeSafe(input.Replace("/", "_PER_").Replace("^2", "_SQUARED").Replace("^3", "_CUBED"));
+            => CSharpHelperMethods.ToCodeSafe(input.Replace("/", "_PER_").Replace("^2", "_SQUARED").Replace("^3", "_CUBED"));
     }
 }

@@ -11,7 +11,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_45f01b9_1580309852285_621670_44358">model.mtconnect.org</seealso>
 	﻿	/// </summary>
 	
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
 	public enum EventTypes
 	{
 		/// <summary>
@@ -175,7 +175,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[ObservationalValue(typeof(ChuckStateValues))]
 		CHUCK_STATE,
 		/// <summary>
-		﻿/// programmatic code being executed.  <b>DEPRECATED</b> in <i>Version 1.1</i>.
+		﻿/// programmatic code being executed.  <b>DEPRECATED</b> in <i>Version 1.1</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -323,7 +323,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[ObservationalValue(typeof(EquipmentModeValues))]
 		EQUIPMENT_MODE,
 		/// <summary>
-		﻿/// execution status of the <see cref="Component">Component</see>.
+		﻿/// operating state of a <see cref="Component">Component</see>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -359,7 +359,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[ObservationalSubType(typeof(HardnessSubTypes))]
 		HARDNESS,
 		/// <summary>
-		﻿/// current line of code being executed.  <b>DEPRECATED</b> in <i>Version 1.4.0</i>.
+		﻿/// current line of code being executed.  <b>DEPRECATED</b> in <i>Version 1.4.0</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -481,7 +481,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		PART_ID,
 		/// <summary>
-		﻿/// identifier of a part or product moving through the manufacturing process.  <b>DEPRECATED</b> in <i>Version 1.7</i>. <c>PART_NUMBER</c> is now a <c>subType</c> of <c>PART_KIND_ID</c>.
+		﻿/// identifier of a part or product moving through the manufacturing process.  <b>DEPRECATED</b> in <i>Version 1.7</i>s. <c>PART_NUMBER</c> is now a <c>subType</c> of <c>PART_KIND_ID</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -531,7 +531,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[ObservationalValue(typeof(PowerStateValues))]
 		POWER_STATE,
 		/// <summary>
-		﻿/// status of the <see cref="Component">Component</see>.  <b>DEPRECATED</b> in <i>Version 1.1.0</i>.
+		﻿/// status of the <see cref="Component">Component</see>.  <b>DEPRECATED</b> in <i>Version 1.1.0</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -715,7 +715,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		TOOL_GROUP,
 		/// <summary>
-		﻿/// identifier of the tool currently in use for a given <c>Path</c>.  <b>DEPRECATED</b> in <i>Version 1.2.0</i>.   See <c>TOOL_ASSET_ID</c>.
+		﻿/// identifier of the tool currently in use for a given <c>Path</c>.  <b>DEPRECATED</b> in <i>Version 1.2.0</i>s.   See <c>TOOL_ASSET_ID</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -737,7 +737,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		TOOL_NUMBER,
 		/// <summary>
-		﻿/// reference to the tool offset variables applied to the active cutting tool associated with a <see cref="Path">Path</see> in a <see cref="Controller">Controller</see> type component.
+		﻿/// reference to the tool offset variables applied to the active cutting tool.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -793,7 +793,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		WIRE,
 		/// <summary>
-		﻿/// identifier for the current workholding or part clamp in use by a piece of equipment.
+		﻿/// identifier for the current workholding or part clamp in use by a piece of equipment.  <b>DEPRECATION WARNING</b>: Recommend using <c>FIXTURE_ID</c> instead.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -803,7 +803,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		WORKHOLDING_ID,
 		/// <summary>
-		﻿/// offset variables for a work piece or part associated with a <see cref="Path">Path</see> in a <see cref="Controller">Controller</see> type component.
+		﻿/// reference to offset variables for a work piece or part.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -929,7 +929,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[ObservationalValue(typeof(PartStatusValues))]
 		PART_STATUS,
 		/// <summary>
-		﻿/// set of limits used to trigger warning or alarm indicators.
+		﻿/// set of limits used to trigger warning or alarm indicators.  <b>DEPRECATION WARNING</b>. Recommend using <c>ALARM_LIMITS</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -993,7 +993,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		DEVICE_CHANGED,
 		/// <summary>
-		﻿/// set of limits defining a range of values designating acceptable performance for a variable.
+		﻿/// set of limits defining a range of values designating acceptable performance for a variable.  <b>DEPRECATION WARNING</b>. Recommend using <c>SPECIFICATION_LIMITS</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -1035,7 +1035,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		SENSOR_ATTACHMENT,
 		/// <summary>
-		﻿/// set of limits used to indicate whether a process variable is stable and in control.
+		﻿/// set of limits used to indicate whether a process variable is stable and in control.  <b>DEPRECATION WARNING</b>. Recommend using <c>CONTROL_LIMITS</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -1255,7 +1255,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		MAINTENANCE_LIST,
 		/// <summary>
-		﻿/// identifier for a fixture.
+		﻿/// identifier for the current workholding or part clamp in use by a piece of equipment.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -1330,5 +1330,151 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/#_Version_2.1")]
 		[ObservationalValue(typeof(BatteryStateValues))]
 		BATTERY_STATE,
+		/// <summary>
+		﻿/// <i>UUID</i> of a <i>feature</i>. <seealso href="https://www.google.com/search?q=ISO 10303 AP 242/239&btnI=I">ISO 10303 AP 242/239</seealso>.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		FEATURE_PERSISTENT_ID,
+		/// <summary>
+		﻿/// detection result of a sensor.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Sub-Type</b>: <see cref="SensorStateSubTypes" /></item>
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		[ObservationalSubType(typeof(SensorStateSubTypes))]
+		SENSOR_STATE,
+		/// <summary>
+		﻿/// <see cref="Event">Event</see> that represents a <see cref="Component">Component</see> where the <see cref="EntryDefinition">EntryDefinition</see> identifies the <see cref="Component">Component</see> and the <see cref="CellDefinition">CellDefinition</see>s define the <see cref="Component">Component</see>'s observed <see cref="DataItem">DataItem</see>s.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		COMPONENT_DATA,
+		/// <summary>
+		﻿/// properties of each addressable work offset.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		WORK_OFFSETS,
+		/// <summary>
+		﻿/// properties of each addressable tool offset.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		TOOL_OFFSETS,
+		/// <summary>
+		﻿/// assessing elements of a <i>feature</i>.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		FEATURE_MEASUREMENT,
+		/// <summary>
+		﻿/// class of measurement being performed. <seealso href="https://www.google.com/search?q=QIF 3:2018 Section 6.3&btnI=I">QIF 3:2018 Section 6.3</seealso>
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		MEASUREMENT_TYPE,
+		/// <summary>
+		﻿/// measurement based on the measurement type.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		MEASUREMENT_VALUE,
+		/// <summary>
+		﻿/// engineering units of the measurement.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		MEASUREMENT_UNITS,
+		/// <summary>
+		﻿/// method used to compute <i>standard uncertainty</i>.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Values</b>: <see cref="UncertaintyTypeValues" /></item>
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		[ObservationalValue(typeof(UncertaintyTypeValues))]
+		UNCERTAINTY_TYPE,
+		/// <summary>
+		﻿/// <i>uncertainty</i> specified by <see cref="UncertaintyType">UncertaintyType</see>.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		UNCERTAINTY,
+		/// <summary>
+		﻿/// references the <see cref="CuttingToolLifeCycle">CuttingToolLifeCycle</see> <see cref="CuttingItem">CuttingItem</see> index related to the <see cref="indices" /> property of the currently active cutting tool edge.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
+		TOOL_CUTTING_ITEM,
+		/// <summary>
+		﻿/// structured information that allows the unambiguous determination of an object for purposes of identification and location. <seealso href="https://www.google.com/search?q=ISO 19160-4:2017&btnI=I">ISO 19160-4:2017</seealso>
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
+		LOCATION_ADDRESS,
+		/// <summary>
+		﻿/// active energy source for the <see cref="Component">Component</see>.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Sub-Type</b>: <see cref="PowerSourceSubTypes" /></item>
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
+		[ObservationalSubType(typeof(PowerSourceSubTypes))]
+		POWER_SOURCE,
 	}
 }
