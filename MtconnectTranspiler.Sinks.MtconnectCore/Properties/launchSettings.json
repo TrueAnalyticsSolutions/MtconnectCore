@@ -2,7 +2,7 @@
   "profiles": {
     "MtconnectTranspiler.Sinks.MtconnectCore": {
       "commandName": "Project",
-      "commandLineArgs": "\"../../../../MtconnectCore/Standard/Contracts\""
+      "commandLineArgs": "\"../../../../MtconnectCore/Standard/Contracts\" \"C:\\Users\\LightWorks\\Source\\Repos\\mtconnect_sysml_model_dev\\MTConnect SysML Model.xml\""
     }
   }
 }
