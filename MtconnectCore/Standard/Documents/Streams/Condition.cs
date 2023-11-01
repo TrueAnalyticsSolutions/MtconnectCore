@@ -61,7 +61,15 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <summary>
         /// Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.8.4
         /// </summary>
-        public string Value { get; set; }
+        [Obsolete]
+        public string Value {
+            get {
+                return Result;
+            }
+            set {
+                Result = value;
+            }
+        }
 
         public ConditionElements? State { get; set; }
 
@@ -71,14 +79,14 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <inheritdoc/>
         public Condition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
-            Value = xNode.InnerText;
+            Result = xNode.InnerText;
             if (Enum.TryParse<ConditionElements>(TagName, out ConditionElements condition))
             {
                 State = condition;
             }
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 3 Section 3.11.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "See model.mtconnect.org/Observation Information Model/Condition")]
         private bool validateType(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Type))
@@ -109,7 +117,42 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Condition")]
+        protected bool validateStatistic(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Statistic))
+            {
+                if (!EnumHelper.Contains<StatisticTypes>(Statistic))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"Observation 'statistic' is unrecognized as '{Statistic}'.",
+                        SourceNode));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "See model.mtconnect.org/Observation Information Model/Condition")]
+        protected bool validateQualifier(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(Qualifier))
+            {
+                if (!EnumHelper.Contains<QualifierTypes>(Qualifier))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"Observation 'qualifier' is unrecognized as '{Qualifier}'.",
+                        SourceNode));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Sample")]
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
             => base.validateNode(out validationErrors);
 

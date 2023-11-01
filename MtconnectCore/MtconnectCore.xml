@@ -9338,6 +9338,21 @@
             Unsupported units
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.QualifierTypes">
+            <summary>
+            Available options for a <c>statistic</c> attribute on a <see cref="!:Condition.Qualifier"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.QualifierTypes.HIGH">
+            <summary>
+            measured value is greater than the expected value for a process variable.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.QualifierTypes.LOW">
+            <summary>
+            measured value is less than the expected value for a process variable.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.RelationshipCriticalityTypes">
             <summary>
             Available options for a <see cref="P:MtconnectCore.Standard.Documents.Devices.Relationship.Criticality"/>.
@@ -11887,52 +11902,52 @@
             </list>
             </remarks>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues">
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues">
             <summary>
             Available values for a <see cref="!:ResetTrigger"/> element.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.ACTION_COMPLETE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.ACTION_COMPLETE">
             <summary>
             The value of the Data Entity that is measuring an action or  operation is to be reset upon completion of that action or operation.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.ANNUAL">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.ANNUAL">
             <summary>
             The value of the Data Entity is to be reset at the end of a 12- month period.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.DAY">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.DAY">
             <summary>
             The value of the Data Entity is to be reset at the end of a 24-hour  period.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.LIFE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.LIFE">
             <summary>
             The value of the data item is not reset and accumulates for the  entire life of the piece of equipment.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.MAINTENANCE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.MAINTENANCE">
             <summary>
             The value of the data item is to be reset upon completion of a  maintenance event.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.MONTH">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.MONTH">
             <summary>
             The value of the Data Entity is to be reset at the end of a monthly  period.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.POWER_ON">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.POWER_ON">
             <summary>
             The value of the Data Entity is to be reset when power was  applied to the piece of equipment after a planned or unplanned interruption of power has occurred.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.SHIFT">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.SHIFT">
             <summary>
             The value of the Data Entity is to be reset at the end of a work  shift.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggerValues.WEEK">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.WEEK">
             <summary>
             The value of the Data Entity is to be reset at the end of a 7-day  period.
             </summary>
@@ -12281,6 +12296,11 @@
             Validates the format of the MTConnect XML element.
             </summary>
             <returns>Flag for whether or not the MTConnect XML element is considered valid.</returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.IMtconnectNode.GetSourceNode">
+            <summary>
+            Reference to the Source XmlNode.
+            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.MtconnectNode">
             <summary>
@@ -14250,6 +14270,11 @@
         <member name="M:MtconnectCore.Standard.Documents.Streams.Device.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
+        <member name="T:MtconnectCore.Standard.Documents.Streams.Entry">
+            <summary>
+            Child of a <see cref="T:MtconnectCore.Standard.Documents.Streams.IDataSet"/>
+            </summary>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Entry.Key">
             <summary>
             Collected from the key attribute. Refer to Part 3 Streams - 5.6.3.3
@@ -14273,6 +14298,47 @@
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Entry.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.ResetTriggered">
+            <summary>
+            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.5.2
+            
+            Occurance: 0..1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.Value">
+            <summary>
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Representation">
+            <summary>
+            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Count">
+            <summary>
+            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
+            
+            Occurance: 1
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Result">
+            <summary>
+            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventDataSet.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Streams.EventDataSet.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.EventDiscrete.Representation">
@@ -14307,47 +14373,6 @@
             <inheritdoc/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.EventTable.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <inheritdoc/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Representation">
-            <summary>
-            Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Count">
-            <summary>
-            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
-            
-            Occurance: 1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.EventDataSet.Result">
-            <summary>
-            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
-            </summary>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.EventDataSet.#ctor">
-            <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.EventDataSet.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <inheritdoc/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.ResetTriggered">
-            <summary>
-            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.5.2
-            
-            Occurance: 0..1
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Event.Value">
-            <summary>
-            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
-            </summary>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor">
-            <inheritdoc/>
-        </member>
-        <member name="M:MtconnectCore.Standard.Documents.Streams.Event.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.IDataSet.Count">
@@ -14443,11 +14468,6 @@
             Collected from the textcontent of the Sample element. Refer to Part 3 Streams - 5.3.3
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.TagName">
-            <summary>
-            Reference to the name of the element. Refer to Part 3 Streams - 5.3
-            </summary>
-        </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor">
             <inheritdoc/>
         </member>
@@ -14491,13 +14511,6 @@
         <member name="P:MtconnectCore.Standard.Documents.Streams.SampleTimeSeries.Representation">
             <summary>
             Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.SampleTimeSeries.SampleCount">
-            <summary>
-            Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
-            
-            Occurance: 1
             </summary>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.SampleTimeSeries.#ctor">
@@ -14564,11 +14577,6 @@
         <member name="P:MtconnectCore.Standard.Documents.Streams.Value.Representation">
             <summary>
             Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
-            </summary>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.Value.Result">
-            <summary>
-            Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.IRequestQuery">

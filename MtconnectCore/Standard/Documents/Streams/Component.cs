@@ -105,6 +105,15 @@ namespace MtconnectCore.Standard.Documents.Streams
                 sample = tableInstance;
                 return tableParseResult;
             }
+            else if (xNode.Name.EndsWith("TimeSeries"))
+            {
+                var timeseries = new List<SampleTimeSeries>();
+                var timeseriesParseResult = base.TryAdd<SampleTimeSeries>(xNode, nsmgr, ref timeseries, out SampleTimeSeries timeseriesInstance);
+                if (timeseriesParseResult)
+                    _samples.Add(timeseriesInstance);
+                sample = timeseriesInstance;
+                return timeseriesParseResult;
+            }
             else
             {
                 return base.TryAdd<Sample>(xNode, nsmgr, ref _samples, out sample);

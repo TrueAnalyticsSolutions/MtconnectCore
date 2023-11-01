@@ -1,4 +1,6 @@
 ﻿using MtconnectCore.Validation;
+using System.Xml;
+using System;
 
 namespace MtconnectCore.Standard.Contracts
 {
@@ -12,5 +14,10 @@ namespace MtconnectCore.Standard.Contracts
         /// </summary>
         /// <returns>Flag for whether or not the MTConnect XML element is considered valid.</returns>
         bool TryValidate(ValidationReport report = null);
+
+        /// <summary>
+        /// Reference to the Source XmlNode.
+        /// </summary>
+        XmlNode GetSourceNode();
     }
 }

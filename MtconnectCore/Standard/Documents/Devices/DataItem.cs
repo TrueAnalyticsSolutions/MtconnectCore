@@ -435,7 +435,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 7.2.3.5")]
         private bool validateResetTrigger(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(ResetTrigger) && !EnumHelper.Contains<ResetTriggerValues>(ResetTrigger)) {
+            if (!string.IsNullOrEmpty(ResetTrigger) && !EnumHelper.Contains<ResetTriggeredValues>(ResetTrigger)) {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"Unrecognized ResetTrigger value '{ResetTrigger}'.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);

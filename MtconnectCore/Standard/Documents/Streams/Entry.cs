@@ -2,11 +2,17 @@
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Errors;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
+    /// <summary>
+    /// Child of a <see cref="IDataSet"/>
+    /// </summary>
     public class Entry : MtconnectNode
     {
         /// <summary>
@@ -47,5 +53,18 @@ namespace MtconnectCore.Standard.Documents.Streams
             Result = xNode.InnerText;
         }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "See model.mtconnect.org/Observation Information Model/Representations/Entry")]
+        private bool validateKey(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(Key))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Entry representation MUST include a 'key' attribute with a unique value within the DataSet.",
+                    SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         /// <inheritdoc cref="ObservationAttributes.RESULT"/>
         [MtconnectNodeAttribute(ObservationAttributes.RESULT)]
-        public string Result { get; set; }
+        public virtual string Result { get; set; }
 
         /// <summary>
         /// Reference to the name of the element. Refer to Part 3 Streams - 5.5
@@ -81,6 +81,10 @@ namespace MtconnectCore.Standard.Documents.Streams
                 {
                     Type = TagName.Substring(0, TagName.LastIndexOf("Table"));
                 }
+                else if (TagName.EndsWith("TimeSeries"))
+                {
+                    Type = TagName.Substring(0, TagName.LastIndexOf("TimeSeries"));
+                }
                 else
                 {
                     Type = TagName;
@@ -88,7 +92,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             }
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.1 and 3.8")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation")]
         protected bool validateDataItemId(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(DataItemId))
@@ -101,7 +105,21 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.1 and 3.8")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation", MtconnectVersions.V_1_1_0)]
+        protected bool validateName_Required(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(Name))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Observation MUST include a 'name' attribute.",
+                    SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation")]
         protected bool validateTimestamp(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -115,7 +133,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.1 and 3.8")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation")]
         protected bool validateUnits(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -132,7 +150,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.6.1 and 3.8")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation")]
         protected bool validateSequence(out ICollection<MtconnectValidationException> validationErrors)
         {
             const long sequenceCeiling = (2 ^ 64) - 1;
@@ -141,7 +159,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Observation MUST include a 'sequence' attribute.",
+                    $"Observation MUST include a 'sequence' attribute between 1 and {sequenceCeiling}.",
                     SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);

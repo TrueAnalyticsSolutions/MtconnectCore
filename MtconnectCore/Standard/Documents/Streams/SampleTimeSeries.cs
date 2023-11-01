@@ -3,7 +3,9 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
+using MtconnectCore.Standard.Contracts.Errors;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 
@@ -16,14 +18,6 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// </summary>
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
         public override string Representation { get; set; } = RepresentationTypes.TIME_SERIES.ToString();
-
-        /// <summary>
-        /// Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
-        /// 
-        /// Occurance: 1
-        /// </summary>
-        [MtconnectNodeAttribute(TimeSeriesAttributes.SAMPLE_COUNT)]
-        public int? SampleCount { get; set; }
 
         public new float[] Result { get; set; }
 
@@ -50,6 +44,20 @@ namespace MtconnectCore.Standard.Documents.Streams
         {
             internal bool Success;
             internal float? Value;
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Representations/TimeSeries")]
+        private bool validateSampleCount(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (SampleCount != Result?.Length)
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"TimeSeries 'sampleCount' MUST equal the number of result values.",
+                    SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
     }
 }

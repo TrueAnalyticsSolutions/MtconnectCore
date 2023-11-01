@@ -48,6 +48,8 @@ namespace MtconnectCore.Standard.Contracts
             MtconnectNodeParser.UpdateFromXml(this, xNode, nsmgr, defaultNamespace, version);
         }
 
+        public XmlNode GetSourceNode() => SourceNode;
+
         public bool TryAdd<T>(XmlNode xNode, XmlNamespaceManager nsmgr, ref List<T> array, out T item) where T : MtconnectNode
         {
 

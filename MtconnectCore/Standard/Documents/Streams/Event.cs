@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
+using MtconnectCore.Standard.Contracts.Enums.Streams;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
@@ -27,7 +28,8 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <summary>
         /// Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
         /// </summary>
-        public string Value {
+        [Obsolete]
+        public virtual string Value {
             get {
                 return Result;
             }
@@ -40,30 +42,13 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Event() : base() { }
 
         /// <inheritdoc/>
-        public Event(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
-        {
-            TagName = xNode.LocalName;
-        }
+        public Event(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8", MtconnectVersions.V_1_1_0)]
-        protected bool validateName_Required(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Name))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'name' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.8")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Event")]
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
             => base.validateNode(out validationErrors);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Event")]
         protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -91,5 +76,23 @@ namespace MtconnectCore.Standard.Documents.Streams
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "See model.mtconnect.org/Observation Information Model/Event")]
+        protected bool validateResetTriggered(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (!string.IsNullOrEmpty(ResetTriggered))
+            {
+                if (!EnumHelper.Contains<ResetTriggeredValues>(ResetTriggered))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"Observation resetTriggered of '{ResetTriggered}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
+                            SourceNode));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
     }
 }

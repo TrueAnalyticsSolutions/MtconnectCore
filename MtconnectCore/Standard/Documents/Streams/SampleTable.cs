@@ -1,10 +1,13 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
+using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -26,6 +29,13 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectNodeAttribute(TableAttributes.COUNT)]
         public int? Count { get; set; }
 
+        public new IDictionary<string, float[]> Value {
+            get {
+                return _entries
+                    .ToDictionary(o => o.Key, o => o.Cells.Select(c => float.Parse(c.Result)).ToArray());
+            }
+        }
+
         private List<TableEntry> _entries = new List<TableEntry>();
         /// <summary>
         /// Collected from the textcontent of the Event element. Refer to Part 3 Streams - 5.5.3
@@ -34,5 +44,43 @@ namespace MtconnectCore.Standard.Documents.Streams
         public new ICollection<TableEntry> Result => _entries;
 
         public bool TryAddEntry(XmlNode xNode, XmlNamespaceManager nsmgr, out TableEntry entry) => base.TryAdd<TableEntry>(xNode, nsmgr, ref _entries, out entry);
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "See model.mtconnect.org/Observation Information Model/Representations/Table")]
+        private bool validateCount(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (Count == null)
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Table representation MUST include a 'count' attribute equal to the number of Entry entities.",
+                    SourceNode));
+            }
+            else if (Count != _entries.Count)
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Table representation 'count' attribute MUST equal the number of Entry entities.",
+                    SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "See model.mtconnect.org/Observation Information Model/Representations/TableEntry")]
+        private bool validateTableEntryKey(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (_entries.Count > 0)
+            {
+                if (!_entries.All(o => _entries.Count(e => e.Key == o.Key) == 1))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"TableEntry 'key' must be a unique identifier for each key-value pair within the Table.",
+                        SourceNode));
+                }
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }
