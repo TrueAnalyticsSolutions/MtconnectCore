@@ -46,7 +46,13 @@ namespace MtconnectCore.Standard.Contracts
             }
             else
             {
-                value = Enumify(value.FromCamelCase());
+                if (char.IsUpper(value[0]))
+                {
+                    value = Enumify(value.FromPascalCase());
+                } else
+                {
+                    value = Enumify(value.FromCamelCase());
+                }
             }
 
             string[] enumValues = Enum.GetNames(enumType);
@@ -95,6 +101,7 @@ namespace MtconnectCore.Standard.Contracts
 
         internal static string FromCamelCase(this string input, char delimiter = '_')
         {
+            //return string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) ? delimiter + x.ToString() : x.ToString())).ToUpper();
             string[] words = System.Text.RegularExpressions.Regex.Matches(input, "(^[a-z]+|[A-Z]+(?![a-z])|[A-Z][a-z]+)")
                 .OfType<System.Text.RegularExpressions.Match>()
                 .Select(m => m.Value)
@@ -104,6 +111,7 @@ namespace MtconnectCore.Standard.Contracts
 
         internal static string FromPascalCase(this string input, char delimiter = '_')
         {
+            return string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) && !char.IsUpper(input[i - 1]) ? delimiter + x.ToString() : x.ToString())).ToUpper();
             string[] words = System.Text.RegularExpressions.Regex.Matches(input, "(^[A-Z]+|[a-z]+(?![A-Z])|[a-z][A-Z]+)")
                 .OfType<System.Text.RegularExpressions.Match>()
                 .Select(m => m.Value)
@@ -118,9 +126,18 @@ namespace MtconnectCore.Standard.Contracts
 
         internal static bool ValidateToVersion(Type enumType, string value, MtconnectVersions documentVersion)
         {
+            if (string.IsNullOrEmpty(value))
+                return false;
+
             if (!value.ToUpper().Equals(value))
             {
-                value = value.FromCamelCase();
+                if (char.IsUpper(value[0]))
+                {
+                    value = value.FromPascalCase();
+                } else
+                {
+                    value = value.FromCamelCase();
+                }
             }
 
             if (!ValidateToVersion(enumType, documentVersion)) return false;

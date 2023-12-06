@@ -111,8 +111,11 @@ namespace MtconnectCore.Standard.Contracts.Enums
         /// <summary>
         /// Version 2.3.0
         /// </summary>
-        /// <remarks>Pre-Release</remarks>
+        /// <remarks>Prepared on: February 11, 2024</remarks>
         [Description("2.3")]
         V_2_3_0 = 1 << 21,
+        /// <inheritdoc cref="V_2_3_0"/>
+        [Description("2.3.1")]
+        V_2_3_1 = 1 << 22,
     }
 }

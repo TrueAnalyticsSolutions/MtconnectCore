@@ -59,9 +59,10 @@ namespace MtconnectCore.Standard.Documents.Streams
                     ValidationSeverity.ERROR,
                     $"Observation '{DataItemId}' MUST include a result.",
                     SourceNode));
-            } else if (Enum.TryParse<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(Type, out MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes type))
+            } else if (Enum.TryParse<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(EnumHelper.FromPascalCase(Type), out MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes type))
             {
-                var observationalValue = type.GetType().GetCustomAttribute<ObservationalValueAttribute>();
+                var eventFieldType = typeof(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes).GetField(EnumHelper.FromPascalCase(Type));
+                var observationalValue = eventFieldType.GetCustomAttribute<ObservationalValueAttribute>();
                 if (observationalValue != null)
                 {
                     if (!EnumHelper.Contains(observationalValue.ValueEnum, Value))
