@@ -15,7 +15,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
 	public enum ExecutionValues
 	{
 		/// <summary>
@@ -73,10 +73,10 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		OPTIONAL_STOP,
 		/// <summary>
 		﻿/// command from the program has intentionally interrupted execution.  Action is required to resume execution.
@@ -108,5 +108,17 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </remarks>
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		WAIT,
+		/// <summary>
+		﻿/// program has been intentionally optionally stopped using an M01 or similar code.  <b>DEPRECATED</b> in <i>version 1.4</i>s and replaced with <c>OPTIONAL_STOP</c>.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
+		/// </list>
+		/// </remarks>
+		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3", MtconnectVersions.V_1_4_0)]
+		PROGRAM_OPTIONAL_STOP,
 	}
 }

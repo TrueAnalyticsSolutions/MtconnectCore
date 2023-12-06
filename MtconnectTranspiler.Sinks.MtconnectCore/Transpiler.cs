@@ -4,9 +4,12 @@ using MtconnectTranspiler.Contracts;
 using MtconnectTranspiler.Sinks.CSharp;
 using MtconnectTranspiler.Sinks.CSharp.Models;
 using MtconnectTranspiler.Sinks.MtconnectCore.Models;
+using MtconnectTranspiler.Sinks.ScribanTemplates;
 using MtconnectTranspiler.Xmi;
 using MtconnectTranspiler.Xmi.UML;
 using Scriban.Runtime;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore
 {
@@ -88,6 +91,9 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                         ?.Items
                         ?.FirstOrDefault(o => o.Id == modelTypeEnumId);
 
+                    if (categoryEnum.Items.Any(o => o.SysML_ID == modelTypeEnum.Id))
+                        continue;
+
                     MtconnectCoreEnum typeValuesEnum;
                     MtconnectValueType typeValues = null;
 
@@ -133,14 +139,14 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
                             // Add value type reference
                             if (!categoryEnum.ValueTypes.ContainsKey(modelType.Name))
-                                categoryEnum.ValueTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(modelType.Name), $"{modelType.Name}Values");
+                                categoryEnum.ValueTypes.Add(CSharpHelperMethods.ToUpperSnakeCode(modelType.Name), $"{modelType.Name}Values");
 
 
                             valueEnums.Add(typeValuesEnum);
                         }
                         else if (typeValuesSysDataType != null)
                         {
-                            valueType = ScribanHelperMethods.ToPrimitiveType(typeValuesSysDataType)?.Name ?? "string";
+                            valueType = CSharpHelperMethods.ToPrimitiveType(typeValuesSysDataType)?.Name ?? "string";
                         }
                     }
 
@@ -195,7 +201,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                         }
 
                         if (!string.IsNullOrEmpty(expectedUnits))
-                            unitHelper.TypeLookup.TryAdd(ScribanHelperMethods.ToUpperSnakeCode(modelType.Name!), expectedUnits);
+                            unitHelper.TypeLookup.TryAdd(CSharpHelperMethods.ToUpperSnakeCode(modelType.Name!), expectedUnits);
                     }
 
                     if (typeValues != null)
@@ -216,7 +222,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                     if (subTypes.ContainsKey(modelType.Name!))
                     {
                         // Register type as having a subType in the CATEGORY enum
-                        if (!categoryEnum.SubTypes.ContainsKey(modelType.Name!)) categoryEnum.SubTypes.Add(ScribanHelperMethods.ToUpperSnakeCode(modelType.Name), $"{modelType.Name}SubTypes");
+                        if (!categoryEnum.SubTypes.ContainsKey(modelType.Name!)) categoryEnum.SubTypes.Add(CSharpHelperMethods.ToUpperSnakeCode(modelType.Name), $"{modelType.Name}SubTypes");
 
                         MtconnectCoreEnum subTypeEnum = new(model!, modelType, $"{modelType.Name}SubTypes") {
                             Namespace = DataItemNamespace,
@@ -240,7 +246,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                         foreach (EnumItem item in subTypeEnum.Items)
                         {
                             if (item.Name.Contains('.'))
-                                item.Name = ScribanHelperMethods.ToUpperSnakeCode(item.SysML_Name[(item.SysML_Name.IndexOf(".") + 1)..]);
+                                item.Name = CSharpHelperMethods.ToUpperSnakeCode(item.SysML_Name[(item.SysML_Name.IndexOf(".") + 1)..]);
 
                             // Register type as having a subType in the Value Type class
                             if (typeValues != null && !typeValues.SubTypes.Contains(item.Name))
@@ -266,7 +272,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             _logger?.LogInformation($"Processing {dataItemTypeEnums.Count} DataItem types/subTypes");
 
             // Process the template into enum files
-            ProcessTemplate(dataItemTypeEnums, Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
+            ProcessTemplate(dataItemTypeEnums.DistinctBy(o => o.Name), Path.Combine(ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
             ProcessTemplate(valueEnums, Path.Combine(ProjectPath, "Enums", "Streams"), true);
 
             // Process DataItem Values

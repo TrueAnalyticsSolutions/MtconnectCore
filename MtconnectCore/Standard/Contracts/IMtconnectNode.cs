@@ -1,7 +1,6 @@
-﻿using MtconnectCore.Standard.Contracts.Errors;
-using MtconnectCore.Validation;
-using System.Collections.Generic;
+﻿using MtconnectCore.Validation;
 using System.Xml;
+using System;
 
 namespace MtconnectCore.Standard.Contracts
 {
@@ -11,14 +10,14 @@ namespace MtconnectCore.Standard.Contracts
     public interface IMtconnectNode
     {
         /// <summary>
-        /// Reference to the Source XmlNode.
-        /// </summary>
-        XmlNode SourceNode { get; }
-
-        /// <summary>
         /// Validates the format of the MTConnect XML element.
         /// </summary>
         /// <returns>Flag for whether or not the MTConnect XML element is considered valid.</returns>
         bool TryValidate(ValidationReport report = null);
+
+        /// <summary>
+        /// Reference to the Source XmlNode.
+        /// </summary>
+        XmlNode GetSourceNode();
     }
 }

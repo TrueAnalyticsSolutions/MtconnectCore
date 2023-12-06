@@ -251,14 +251,22 @@ namespace MtconnectCore.Standard.Documents.Devices
             // Validate the observational type
             if (!EnumHelper.Contains<T>(type))
             {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem type of '{type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'.",
-                    SourceNode));
-                isValidType = false;
+                if (categoryType != CategoryTypes.CONDITION
+                    || (!EnumHelper.Contains<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(type)
+                    && !EnumHelper.Contains<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes>(type)))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"DataItem type of '{type}' is not defined in the MTConnect Standard for category '{Category}' in version '{MtconnectVersion}'.",
+                        SourceNode));
+                    isValidType = false;
+                }
             }
             else if (!EnumHelper.ValidateToVersion<T>(type, MtconnectVersion.GetValueOrDefault()))
             {
+                if (categoryType != CategoryTypes.CONDITION
+                    || (!EnumHelper.ValidateToVersion<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(type, MtconnectVersion.GetValueOrDefault())
+                        && !EnumHelper.ValidateToVersion<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes>(type, MtconnectVersion.GetValueOrDefault())))
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
                     $"DataItem type of '{type}' is not valid for category '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard.",
@@ -435,7 +443,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 7.2.3.5")]
         private bool validateResetTrigger(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(ResetTrigger) && !EnumHelper.Contains<ResetTriggerValues>(ResetTrigger)) {
+            if (!string.IsNullOrEmpty(ResetTrigger) && !EnumHelper.Contains<ResetTriggeredValues>(ResetTrigger)) {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"Unrecognized ResetTrigger value '{ResetTrigger}'.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);

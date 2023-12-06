@@ -1,6 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Validation;
-using System.Xml;
 
 namespace MtconnectCore.Standard.Documents
 {
@@ -25,19 +24,9 @@ namespace MtconnectCore.Standard.Documents
         string DataElementName { get; }
 
         /// <summary>
-        /// Reference to the XML Namespaces used throughout the document.
-        /// </summary>
-        XmlNamespaceManager NamespaceManager { get; set; }
-
-        /// <summary>
         /// Reference to the release version of MTConnect this document should be held to in validation.
         /// </summary>
         MtconnectVersions DocumentVersion { get; set; }
-
-        /// <summary>
-        /// Reference to the source MTConnect Response Document.
-        /// </summary>
-        XmlDocument Source { get; }
 
         bool TryValidate(ValidationReport report);
     }

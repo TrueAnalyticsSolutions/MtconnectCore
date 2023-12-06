@@ -17,11 +17,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// </remarks>
 	[Obsolete("Deprecated in v1.6 according to https://model.mtconnect.org/#_Version_1.6")]
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_6_0)]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
 	public enum VoltageSubTypes
 	{
 		/// <summary>
-		﻿/// alternating voltage or current.   If not specified further in statistic, defaults to RMS voltage.   <b>DEPRECATED</b> in <i>Version 1.6</i>.
+		﻿/// alternating voltage or current.   If not specified further in statistic, defaults to RMS voltage.   <b>DEPRECATED</b> in <i>Version 1.6</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -33,7 +33,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2", MtconnectVersions.V_1_6_0)]
 		ALTERNATING,
 		/// <summary>
-		﻿/// DC current or voltage.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+		﻿/// DC current or voltage.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -45,7 +45,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2", MtconnectVersions.V_1_6_0)]
 		DIRECT,
 		/// <summary>
-		﻿/// measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+		﻿/// measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -57,7 +57,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4", MtconnectVersions.V_1_6_0)]
 		ACTUAL,
 		/// <summary>
-		﻿/// goal of the operation or process.  <b>DEPRECATED</b> in <i>Version 1.6</i>.
+		﻿/// goal of the operation or process.  <b>DEPRECATED</b> in <i>Version 1.6</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">

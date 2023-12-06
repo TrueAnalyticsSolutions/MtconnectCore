@@ -7,7 +7,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
     /// Available values for a <see cref="ResetTrigger"/> element.
     /// </summary>
     [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 7.2.3.5")]
-    public enum ResetTriggerValues
+    public enum ResetTriggeredValues
     {
         /// <summary>
         /// The value of the Data Entity that is measuring an action or  operation is to be reset upon completion of that action or operation.

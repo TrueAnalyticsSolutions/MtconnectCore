@@ -17,11 +17,11 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// </remarks>
 	[Obsolete("Deprecated in v1.2 according to https://model.mtconnect.org/#_Version_1.2")]
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_2_0)]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.12.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
 	public enum SpindleSpeedSubTypes
 	{
 		/// <summary>
-		﻿/// measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.3</i>.
+		﻿/// measured or reported value of an <i>observation</i>.  <b>DEPRECATED</b> in <i>Version 1.3</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -33,7 +33,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_2_0)]
 		ACTUAL,
 		/// <summary>
-		﻿/// directive value including adjustments such as an offset or overrides.  <b>DEPRECATED</b> in <i>Version 1.3</i>.
+		﻿/// directive value including adjustments such as an offset or overrides.  <b>DEPRECATED</b> in <i>Version 1.3</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -45,7 +45,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_2_0)]
 		COMMANDED,
 		/// <summary>
-		﻿/// operator's overridden value.  <b>DEPRECATED</b> in <i>Version 1.3</i>.
+		﻿/// operator's overridden value.  <b>DEPRECATED</b> in <i>Version 1.3</i>s.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
