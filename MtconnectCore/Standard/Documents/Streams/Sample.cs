@@ -176,11 +176,38 @@ namespace MtconnectCore.Standard.Documents.Streams
                         }
                         break;
                     default:
+                        validateUnavailableFloatValue(validationErrors);
                         break;
                 }
+            } else
+            {
+                validateUnavailableFloatValue(validationErrors);
             }
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        private void validateUnavailableFloatValue(ICollection<MtconnectValidationException> validationErrors)
+        {
+            if (!string.IsNullOrEmpty(Result))
+            {
+                if (Result == Constants.UNAVAILABLE)
+                {
+                    return;
+                } else if (Value == null)
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        $"SAMPLE result MUST be a float value.",
+                        SourceNode));
+                }
+            } else
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"SAMPLE result MUST contain a value.",
+                    SourceNode));
+            }
         }
     }
 }

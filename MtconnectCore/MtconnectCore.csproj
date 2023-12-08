@@ -21,7 +21,7 @@
     <PackageReleaseNotes>Changed Regex to identify the version of the schema in cases where a local schema file is referenced.</PackageReleaseNotes>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>2.3.0.0</Version>
+    <Version>2.3.0.1</Version>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>symbols.nupkg</SymbolPackageFormat>
   </PropertyGroup>

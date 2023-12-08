@@ -65,7 +65,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                 var observationalValue = eventFieldType.GetCustomAttribute<ObservationalValueAttribute>();
                 if (observationalValue != null)
                 {
-                    if (!EnumHelper.Contains(observationalValue.ValueEnum, Value))
+                    if (!EnumHelper.Contains(observationalValue.ValueEnum, Result) && Result != Constants.UNAVAILABLE)
                     {
                         validationErrors.Add(new MtconnectValidationException(
                             ValidationSeverity.ERROR,

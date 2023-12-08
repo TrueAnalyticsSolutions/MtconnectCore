@@ -156,6 +156,13 @@ namespace MtconnectCore.Standard.Documents.Streams
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
             => base.validateNode(out validationErrors);
 
-        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new NotImplementedException();
+        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+
+            // TODO: Determine if there are any validation rules for CONDITION
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
     }
 }
