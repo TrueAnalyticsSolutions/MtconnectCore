@@ -22,7 +22,8 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
         public virtual string Representation { get; set; } = RepresentationTypes.VALUE.ToString();
 
-        public override bool IsUnavailable => !string.IsNullOrEmpty(Result) && !Result.Equals(Constants.UNAVAILABLE, StringComparison.OrdinalIgnoreCase);
+        public override bool IsUnavailable
+            => string.IsNullOrEmpty(Result) || Result.Equals(Constants.UNAVAILABLE, StringComparison.OrdinalIgnoreCase);
 
         public Value() : base() { }
 
