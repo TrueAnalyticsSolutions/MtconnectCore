@@ -112,6 +112,7 @@ namespace MtconnectCore
         /// <exception cref="Exception"></exception>
         internal async Task<T> Request<T>(string request, Nullable<CancellationToken> cancellationToken = null) where T : IResponseDocument
         {
+            Client.CancelPendingRequests();
             using (HttpResponseMessage res = await Client.GetAsync(request, cancellationToken.GetValueOrDefault()))
             {
                 using (var responseStream = await res.Content.ReadAsStreamAsync())
