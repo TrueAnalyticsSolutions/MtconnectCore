@@ -24,7 +24,7 @@ jobs:
       run: dotnet pack MtconnectCore --configuration Release -o finalpackage --no-build
     
     - name: Publish Artifact
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@main
       with:
         name: nupkg
         path: finalpackage
@@ -41,7 +41,7 @@ jobs:
           dotnet-version: '3.1'
 
       - name: Download Artifact
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@main
         with:
           name: nupkg
       
