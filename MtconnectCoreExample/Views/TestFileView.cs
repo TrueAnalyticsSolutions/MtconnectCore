@@ -9,6 +9,7 @@ using MtconnectCore.Standard.Documents.Streams;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -69,6 +70,94 @@ namespace MtconnectCoreExample.Views
                             break;
                     }
                 } else {
+                    Consoul.Write("Failed to parse the file as a MTConnect Response Document.", ConsoleColor.Red);
+                }
+            }
+            catch (Exception ex)
+            {
+                Consoul.Write(ex.ToString(), ConsoleColor.Red);
+            }
+            Consoul.Wait();
+        }
+
+        private string _countDataItemsMessage() => Source.File != null ? "Count Data Items (Ready)" : "Count Data Items (Not Ready)";
+        private ConsoleColor _countDataItemsColor() => Source.File != null ? ConsoleColor.Yellow : ConsoleColor.Red;
+        [DynamicViewOption(nameof(_countDataItemsMessage), nameof(_countDataItemsColor))]
+        public void CountDataItems()
+        {
+            try
+            {
+                IResponseDocument mtcDocument;
+
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(Source.File.FullName);
+
+                if (MtconnectAgentService.TryParse(xDoc, out mtcDocument))
+                {
+                    switch (mtcDocument.Type)
+                    {
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Devices:
+                            Consoul.Write(DataItemNavigator.GetAll(mtcDocument as DevicesDocument).Count() + " Data Items");
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Streams:
+                            Consoul.Write(DataItemNavigator.GetAll(mtcDocument as StreamsDocument).Count() + " Data Items");
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Assets:
+                            Consoul.Write("Cannot count DataItems from Assets", ConsoleColor.Red);
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Errors:
+                            Consoul.Write("DataItems are not in Errors", ConsoleColor.Red);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    Consoul.Write("Failed to parse the file as a MTConnect Response Document.", ConsoleColor.Red);
+                }
+            }
+            catch (Exception ex)
+            {
+                Consoul.Write(ex.ToString(), ConsoleColor.Red);
+            }
+            Consoul.Wait();
+        }
+
+        private string _countComponentsMessage() => Source.File != null ? "Count Components (Ready)" : "Count Components (Not Ready)";
+        private ConsoleColor _countComponentsColor() => Source.File != null ? ConsoleColor.Yellow : ConsoleColor.Red;
+        [DynamicViewOption(nameof(_countComponentsMessage), nameof(_countComponentsColor))]
+        public void CountComponents()
+        {
+            try
+            {
+                IResponseDocument mtcDocument;
+
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(Source.File.FullName);
+
+                if (MtconnectAgentService.TryParse(xDoc, out mtcDocument))
+                {
+                    switch (mtcDocument.Type)
+                    {
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Devices:
+                            Consoul.Write(DataItemNavigator.GetAllComponents(mtcDocument as DevicesDocument).Count() + " Components");
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Streams:
+                            Consoul.Write(DataItemNavigator.GetAllComponents(mtcDocument as StreamsDocument).Count() + " Components");
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Assets:
+                            Consoul.Write("Cannot count Components from Assets", ConsoleColor.Red);
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Errors:
+                            Consoul.Write("Components are not in Errors", ConsoleColor.Red);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
                     Consoul.Write("Failed to parse the file as a MTConnect Response Document.", ConsoleColor.Red);
                 }
             }

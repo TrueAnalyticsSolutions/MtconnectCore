@@ -9,6 +9,27 @@
             A helper class for navigating Response Documents
             </summary>
         </member>
+        <member name="M:MtconnectCore.DataItemNavigator.GetAll(MtconnectCore.Standard.Documents.Devices.DevicesDocument)">
+            <summary>
+            Recursively collects data items from the document level
+            </summary>
+            <param name="document">Reference to the root document</param>
+            <returns>Collection of data items</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.GetAll(MtconnectCore.Standard.Documents.Devices.Device)">
+            <summary>
+            Recursively collects data items from the device level
+            </summary>
+            <param name="device">Reference to the root device</param>
+            <returns>Collection of data items</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.GetAll(MtconnectCore.Standard.Documents.Devices.Component)">
+            <summary>
+            Recursively collects data items from the component level
+            </summary>
+            <param name="component">Reference to the root component</param>
+            <returns>Collection of data items</returns>
+        </member>
         <member name="M:MtconnectCore.DataItemNavigator.FindByType(System.Collections.Generic.IEnumerable{MtconnectCore.Standard.Documents.Devices.DataItem},System.String,System.String)">
             <summary>
             Searches the data item collection for data items with the provided type (and subtype)
@@ -108,6 +129,27 @@
             <param name="component">Reference to component structure to search</param>
             <param name="name">Lookup key</param>
             <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.GetAll(MtconnectCore.Standard.Documents.Streams.StreamsDocument)">
+            <summary>
+            Recursively collects data items from the document level
+            </summary>
+            <param name="document">Reference to the root document</param>
+            <returns>Collection of data items</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.GetAll(MtconnectCore.Standard.Documents.Streams.Device)">
+            <summary>
+            Recursively collects data items from the device level
+            </summary>
+            <param name="device">Reference to the root device</param>
+            <returns>Collection of data items</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.GetAll(MtconnectCore.Standard.Documents.Streams.Component)">
+            <summary>
+            Recursively collects data items from the component level
+            </summary>
+            <param name="component">Reference to the root component</param>
+            <returns>Collection of data items</returns>
         </member>
         <member name="M:MtconnectCore.DataItemNavigator.FindByType(System.Collections.Generic.IEnumerable{MtconnectCore.Standard.Documents.Streams.Observation},System.String,System.String)">
             <summary>

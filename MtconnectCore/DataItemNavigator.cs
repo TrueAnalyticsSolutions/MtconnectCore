@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.Data;
 
 namespace MtconnectCore
 {
@@ -14,6 +15,125 @@ namespace MtconnectCore
     public static class DataItemNavigator
     {
         #region Devices Response Document
+        /// <summary>
+        /// Recursively collects data items from the document level
+        /// </summary>
+        /// <param name="document">Reference to the root document</param>
+        /// <returns>Collection of data items</returns>
+        public static IEnumerable<Devices.DataItem> GetAll(this Devices.DevicesDocument document)
+        {
+            var dataItems = new List<Devices.DataItem>();
+
+            foreach (var device in document.Items)
+            {
+                var deviceItems = GetAll(device);
+                if (deviceItems.Any())
+                    dataItems.AddRange(deviceItems);
+            }
+
+            return dataItems;
+        }
+        /// <summary>
+        /// Recursively collects data items from the device level
+        /// </summary>
+        /// <param name="device">Reference to the root device</param>
+        /// <returns>Collection of data items</returns>
+        public static IEnumerable<Devices.DataItem> GetAll(this Devices.Device device)
+        {
+            var dataItems = new List<Devices.DataItem>();
+            var deviceItems = device.DataItems;
+            if (deviceItems.Any())
+                dataItems.AddRange(deviceItems);
+
+            if (device.Components.Any())
+            {
+                foreach (var component in device.Components)
+                {
+                    var componentItems = GetAll(component);
+                    if (componentItems.Any())
+                        dataItems.AddRange(componentItems);
+                }
+            }
+
+            return dataItems;
+        }
+        /// <summary>
+        /// Recursively collects data items from the component level
+        /// </summary>
+        /// <param name="component">Reference to the root component</param>
+        /// <returns>Collection of data items</returns>
+        public static IEnumerable<Devices.DataItem> GetAll(this Devices.Component component)
+        {
+            var dataItems = new List<Devices.DataItem>();
+            var componentItems = component.DataItems;
+            if (componentItems.Any())
+                dataItems.AddRange(componentItems);
+
+            if (component.SubComponents.Any())
+            {
+                foreach (var subComponent in component.SubComponents)
+                {
+                    var subComponentItems = GetAll(subComponent);
+                    if (subComponentItems.Any())
+                        dataItems.AddRange(subComponentItems);
+                }
+            }
+
+            return dataItems;
+        }
+
+        public static IEnumerable<Devices.Component> GetAllComponents(this Devices.DevicesDocument document)
+        {
+            var components = new List<Devices.Component>();
+
+            foreach (var device in document.Items)
+            {
+                var deviceComponents = GetAllComponents(device);
+                if (deviceComponents.Any())
+                    components.AddRange(deviceComponents);
+            }
+
+            return components;
+        }
+        public static IEnumerable<Devices.Component> GetAllComponents(this Devices.Device device)
+        {
+            var components = new List<Devices.Component>();
+            var deviceComponents = device.Components;
+            if (deviceComponents.Any())
+                components.AddRange(deviceComponents);
+
+            if (device.Components.Any())
+            {
+                foreach (var component in device.Components)
+                {
+                    var componentItems = GetAllComponents(component);
+                    if (componentItems.Any())
+                        components.AddRange(componentItems);
+                }
+            }
+
+            return components;
+        }
+        public static IEnumerable<Devices.Component> GetAllComponents(this Devices.Component component)
+        {
+            var components = new List<Devices.Component>();
+            var componentItems = component.SubComponents;
+            if (componentItems.Any())
+                components.AddRange(componentItems);
+
+            if (component.SubComponents.Any())
+            {
+                foreach (var subComponent in component.SubComponents)
+                {
+                    var subComponentItems = GetAllComponents(subComponent);
+                    if (subComponentItems.Any())
+                        components.AddRange(subComponentItems);
+                }
+            }
+
+            return components;
+        }
+
         /// <summary>
         /// Searches the data item collection for data items with the provided type (and subtype)
         /// </summary>
@@ -257,6 +377,86 @@ namespace MtconnectCore
         #endregion
 
         #region Streams Response Document
+        /// <summary>
+        /// Recursively collects data items from the document level
+        /// </summary>
+        /// <param name="document">Reference to the root document</param>
+        /// <returns>Collection of data items</returns>
+        public static IEnumerable<Streams.Observation> GetAll(this Streams.StreamsDocument document)
+        {
+            var dataItems = new List<Streams.Observation>();
+
+            foreach (var device in document.Items)
+            {
+                var deviceItems = GetAll(device);
+                if (deviceItems.Any())
+                    dataItems.AddRange(deviceItems);
+            }
+
+            return dataItems;
+        }
+        /// <summary>
+        /// Recursively collects data items from the device level
+        /// </summary>
+        /// <param name="device">Reference to the root device</param>
+        /// <returns>Collection of data items</returns>
+        public static IEnumerable<Streams.Observation> GetAll(this Streams.Device device)
+        {
+            var dataItems = new List<Streams.Observation>();
+
+            if (device.Components.Any())
+            {
+                foreach (var component in device.Components)
+                {
+                    var componentItems = GetAll(component);
+                    if (componentItems.Any())
+                        dataItems.AddRange(componentItems);
+                }
+            }
+
+            return dataItems;
+        }
+        /// <summary>
+        /// Recursively collects data items from the component level
+        /// </summary>
+        /// <param name="component">Reference to the root component</param>
+        /// <returns>Collection of data items</returns>
+        public static IEnumerable<Streams.Observation> GetAll(this Streams.Component component)
+        {
+            var dataItems = new List<Streams.Observation>();
+            if (component.Conditions.Any())
+                dataItems.AddRange(component.Conditions);
+            if (component.Events.Any())
+                dataItems.AddRange(component.Events);
+            if (component.Samples.Any())
+                dataItems.AddRange(component.Samples);
+
+            return dataItems;
+        }
+
+        public static IEnumerable<Streams.Component> GetAllComponents(this Streams.StreamsDocument document)
+        {
+            var components = new List<Streams.Component>();
+
+            foreach (var device in document.Items)
+            {
+                var deviceComponents = GetAllComponents(device);
+                if (deviceComponents.Any())
+                    components.AddRange(deviceComponents);
+            }
+
+            return components;
+        }
+        public static IEnumerable<Streams.Component> GetAllComponents(this Streams.Device device)
+        {
+            var components = new List<Streams.Component>();
+            var deviceComponents = device.Components;
+            if (deviceComponents.Any())
+                components.AddRange(deviceComponents);
+
+            return components;
+        }
+
         /// <summary>
         /// Searches the observation collection for observations with the provided type (and subtype)
         /// </summary>
