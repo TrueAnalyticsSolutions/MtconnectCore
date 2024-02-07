@@ -42,32 +42,39 @@ namespace MtconnectCoreExample.Views
         [DynamicViewOption(nameof(_validateMessage), nameof(_validateColor))]
         public void Validate()
         {
-            IResponseDocument mtcDocument;
-
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(Source.File.FullName);
-
-            if (MtconnectAgentService.TryParse(xDoc, out mtcDocument))
+            try
             {
-                switch (mtcDocument.Type)
+                IResponseDocument mtcDocument;
+
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(Source.File.FullName);
+
+                if (MtconnectAgentService.TryParse(xDoc, out mtcDocument))
                 {
-                    case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Devices:
-                        mtcDocument.DisplayDocumentAndValidate<DevicesDocument>();
-                        break;
-                    case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Streams:
-                        mtcDocument.DisplayDocumentAndValidate<StreamsDocument>();
-                        break;
-                    case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Assets:
-                        mtcDocument.DisplayDocumentAndValidate<AssetsDocument>();
-                        break;
-                    case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Errors:
-                        mtcDocument.DisplayDocumentAndValidate<ErrorDocument>();
-                        break;
-                    default:
-                        break;
+                    switch (mtcDocument.Type)
+                    {
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Devices:
+                            mtcDocument.DisplayDocumentAndValidate<DevicesDocument>();
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Streams:
+                            mtcDocument.DisplayDocumentAndValidate<StreamsDocument>();
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Assets:
+                            mtcDocument.DisplayDocumentAndValidate<AssetsDocument>();
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Errors:
+                            mtcDocument.DisplayDocumentAndValidate<ErrorDocument>();
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    Consoul.Write("Failed to parse the file as a MTConnect Response Document.", ConsoleColor.Red);
                 }
-            } else {
-                Consoul.Write("Failed to parse the file as a MTConnect Response Document.", ConsoleColor.Red);
+            }
+            catch (Exception ex)
+            {
+                Consoul.Write(ex.ToString(), ConsoleColor.Red);
             }
             Consoul.Wait();
         }

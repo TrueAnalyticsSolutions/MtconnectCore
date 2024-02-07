@@ -280,7 +280,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 Type enumType = typeof(T);
                 MemberInfo[] typeValueInfos = enumType.GetMember(type);
                 var valueInfo = typeValueInfos.FirstOrDefault(o => o.DeclaringType == enumType);
-                var obsSubType = valueInfo.GetCustomAttribute<ObservationalSubTypeAttribute>();
+                var obsSubType = valueInfo?.GetCustomAttribute<ObservationalSubTypeAttribute>();
                 // Validate the observational sub-type
                 if (obsSubType != null)
                 {

@@ -4,6 +4,211 @@
         <name>MtconnectCore</name>
     </assembly>
     <members>
+        <member name="T:MtconnectCore.DataItemNavigator">
+            <summary>
+            A helper class for navigating Response Documents
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByType(System.Collections.Generic.IEnumerable{MtconnectCore.Standard.Documents.Devices.DataItem},System.String,System.String)">
+            <summary>
+            Searches the data item collection for data items with the provided type (and subtype)
+            </summary>
+            <param name="dataItems">Reference to data item collection to search</param>
+            <param name="type">Lookup key</param>
+            <param name="subType">Optional, secondary lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByType(MtconnectCore.Standard.Documents.Devices.DevicesDocument,System.String,System.String)">
+            <summary>
+            Searches the document structure for data items with the provided type (and subtype)
+            </summary>
+            <param name="document">Reference to document structure to search</param>
+            <param name="type">Lookup key</param>
+            <param name="subType">Optional, secondary lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByType(MtconnectCore.Standard.Documents.Devices.Device,System.String,System.String)">
+            <summary>
+            Searches the device structure for data items with the provided type (and subtype)
+            </summary>
+            <param name="device">Reference to device structure to search</param>
+            <param name="type">Lookup key</param>
+            <param name="subType">Optional, secondary lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByType(MtconnectCore.Standard.Documents.Devices.Component,System.String,System.String)">
+            <summary>
+            Searches the component structure for data items with the provided type (and subtype)
+            </summary>
+            <param name="component">Reference to component structure to search</param>
+            <param name="type">Lookup key</param>
+            <param name="subType">Optional, secondary lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindById(System.Collections.Generic.IEnumerable{MtconnectCore.Standard.Documents.Devices.DataItem},System.String)">
+            <summary>
+            Searches the data item collection for data items with the provided id
+            </summary>
+            <param name="dataItems">Reference to data item collection to search</param>
+            <param name="dataItemId">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindById(MtconnectCore.Standard.Documents.Devices.DevicesDocument,System.String)">
+            <summary>
+            Searches the document structure for data items with the provided id
+            </summary>
+            <param name="document">Reference to document structure to search</param>
+            <param name="dataItemId">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindById(MtconnectCore.Standard.Documents.Devices.Device,System.String)">
+            <summary>
+            Searches the device structure for data items with the provided id
+            </summary>
+            <param name="device">Reference to document structure to search</param>
+            <param name="dataItemId">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindById(MtconnectCore.Standard.Documents.Devices.Component,System.String)">
+            <summary>
+            Searches the component structure for data items with the provided id
+            </summary>
+            <param name="component">Reference to document structure to search</param>
+            <param name="dataItemId">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByName(System.Collections.Generic.IEnumerable{MtconnectCore.Standard.Documents.Devices.DataItem},System.String)">
+            <summary>
+            Searches the data item collection for data items with the provided name
+            </summary>
+            <param name="dataItems">Reference to data item collection to search</param>
+            <param name="name">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByName(MtconnectCore.Standard.Documents.Devices.DevicesDocument,System.String)">
+            <summary>
+            Searches the document structure for data items with the provided name
+            </summary>
+            <param name="document">Reference to document structure to search</param>
+            <param name="name">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByName(MtconnectCore.Standard.Documents.Devices.Device,System.String)">
+            <summary>
+            Searches the device structure for data items with the provided name
+            </summary>
+            <param name="device">Reference to device structure to search</param>
+            <param name="name">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByName(MtconnectCore.Standard.Documents.Devices.Component,System.String)">
+            <summary>
+            Searches the component structure for data items with the provided name
+            </summary>
+            <param name="component">Reference to component structure to search</param>
+            <param name="name">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByType(System.Collections.Generic.IEnumerable{MtconnectCore.Standard.Documents.Streams.Observation},System.String,System.String)">
+            <summary>
+            Searches the observation collection for observations with the provided type (and subtype)
+            </summary>
+            <param name="observations">Reference to observation collection to search</param>
+            <param name="type">Lookup key</param>
+            <param name="subType">Optional, secondary lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByType(MtconnectCore.Standard.Documents.Streams.StreamsDocument,System.String,System.String)">
+            <summary>
+            Searches the document structure for observations with the provided type (and subtype)
+            </summary>
+            <param name="document">Reference to document structure to search</param>
+            <param name="type">Lookup key</param>
+            <param name="subType">Optional, secondary lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByType(MtconnectCore.Standard.Documents.Streams.Device,System.String,System.String)">
+            <summary>
+            Searches the device structure for observations with the provided type (and subtype)
+            </summary>
+            <param name="device">Reference to device structure to search</param>
+            <param name="type">Lookup key</param>
+            <param name="subType">Optional, secondary lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByType(MtconnectCore.Standard.Documents.Streams.Component,System.String,System.String)">
+            <summary>
+            Searches the component structure for observations with the provided type (and subtype)
+            </summary>
+            <param name="component">Reference to component structure to search</param>
+            <param name="type">Lookup key</param>
+            <param name="subType">Optional, secondary lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindById(System.Collections.Generic.IEnumerable{MtconnectCore.Standard.Documents.Streams.Observation},System.String)">
+            <summary>
+            Searches the observation collection for observations with the provided id
+            </summary>
+            <param name="observations">Reference to observation collection to search</param>
+            <param name="dataItemId">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindById(MtconnectCore.Standard.Documents.Streams.StreamsDocument,System.String)">
+            <summary>
+            Searches the document structure for observations with the provided id
+            </summary>
+            <param name="document">Reference to document structure to search</param>
+            <param name="dataItemId">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindById(MtconnectCore.Standard.Documents.Streams.Device,System.String)">
+            <summary>
+            Searches the device structure for observations with the provided id
+            </summary>
+            <param name="device">Reference to device structure to search</param>
+            <param name="dataItemId">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindById(MtconnectCore.Standard.Documents.Streams.Component,System.String)">
+            <summary>
+            Searches the component structure for observations with the provided id
+            </summary>
+            <param name="component">Reference to component structure to search</param>
+            <param name="dataItemId">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByName(System.Collections.Generic.IEnumerable{MtconnectCore.Standard.Documents.Streams.Observation},System.String)">
+            <summary>
+            Searches the observation collection for observations with the provided name
+            </summary>
+            <param name="observations">Reference to observation collection to search</param>
+            <param name="name">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByName(MtconnectCore.Standard.Documents.Streams.StreamsDocument,System.String)">
+            <summary>
+            Searches the documen structure for observations with the provided name
+            </summary>
+            <param name="document">Reference to document structure to search</param>
+            <param name="name">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByName(MtconnectCore.Standard.Documents.Streams.Device,System.String)">
+            <summary>
+            Searches the device structure for observations with the provided name
+            </summary>
+            <param name="device">Reference to device structure to search</param>
+            <param name="name">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
+        <member name="M:MtconnectCore.DataItemNavigator.FindByName(MtconnectCore.Standard.Documents.Streams.Component,System.String)">
+            <summary>
+            Searches the component structure for observations with the provided name
+            </summary>
+            <param name="component">Reference to component structure to search</param>
+            <param name="name">Lookup key</param>
+            <returns>Collection of matches</returns>
+        </member>
         <member name="T:MtconnectCore.Logging.InternalLogger">
             <summary>
             An internal implementation of <see cref="T:MtconnectCore.Logging.IMtconnectCoreLogger"/> that is used when no other loggers are specified
