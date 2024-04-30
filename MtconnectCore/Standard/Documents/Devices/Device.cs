@@ -149,7 +149,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.4.1", MtconnectVersions.V_1_0_1)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.4.1", MtconnectVersions.V_1_1_0)]
         private bool validateIso841Class_Required(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Iso841Class))
@@ -193,10 +193,17 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateDataItemAvailability(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
-            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY.ToString()))
+
+            System.Func<DataItem, bool> containsAvailability = (o) => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY.ToString();
+            if (!DataItems.Any(containsAvailability))
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an AVAILABILITY DataItem that represents this device is available to do work.", SourceNode));
             }
+            else if (DataItems.Count(containsAvailability) > 1)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Multiplicity of AVAILABILITY observed by a Device is 1.", SourceNode));
+            }
+
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
@@ -204,13 +211,24 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateDataItemAssets(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
-            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_CHANGED.ToString()))
+
+            System.Func<DataItem, bool> containsAssetChanged = (o) => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_CHANGED.ToString();
+            if (!DataItems.Any(containsAssetChanged))
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an ASSET_CHANGED DataItem.", SourceNode));
+            } else if (DataItems.Count(containsAssetChanged) > 1)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Multiplicity of ASSET_CHANGED observed by a Device is 1.", SourceNode));
             }
-            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_REMOVED.ToString()))
+
+            System.Func<DataItem, bool> containsAssetRemoved = (o) => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_REMOVED.ToString();
+            if (!DataItems.Any(containsAssetRemoved))
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an ASSET_REMOVED DataItem.", SourceNode));
+            }
+            else if (DataItems.Count(containsAssetRemoved) > 1)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Multiplicity of ASSET_REMOVED observed by a Device is 1.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

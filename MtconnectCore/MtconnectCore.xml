@@ -10426,6 +10426,24 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_3_1">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_3_0"/>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_4_0">
+            <summary>
+            Version 2.4.0
+            </summary>
+            <remarks>Prepared on: July 16, 2024</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_4_1">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_4_0"/>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_5_0">
+            <summary>
+            Version 2.5.0
+            </summary>
+            <remarks>Prepared on: January 16, 2025</remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_5_1">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.MtconnectVersions.V_2_5_0"/>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.NodeTypes">
             <summary>
             Logical choices XML node types.
@@ -13089,6 +13107,44 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.VersionHelper.versionMinimumVersion">
             <remarks>Find this in the <c>MTConnectDevices_x.x.xsd</c> referenced at <c>/xs:schema[@vs:minVersion]</c></remarks>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.GetVersion(System.String)">
+            <summary>
+            Searches for a MTConnect version by string. Note that this expects the format of the Enum field. For example, "V_1_0_1"
+            </summary>
+            <param name="version">String representation of the MTConnect Version.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.GetReleaseDate(MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <summary>
+            Looks up the official release date of the provided version.
+            </summary>
+            <param name="version">Version of MTConnect</param>
+            <returns>Official release date of the provided version.</returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.GetVersionFromHeader(System.Xml.XmlDocument)">
+            <summary>
+            Gets the value of the <c>version</c> attribute that should be present in the <c>Header</c> element according to MTConnect.
+            </summary>
+            <param name="xDoc">Reference to the XML document</param>
+            <returns>Version of MTConnect as described by the <c>version</c> attribute in the <c>Header</c></returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.GetVersionFromDocument(System.Xml.XmlDocument)">
+            <summary>
+            Parses the namespaces of the XML document to determine the version of MTConnect implemented.
+            </summary>
+            <param name="xDoc">Reference to the XML document</param>
+            <returns>Version of MTConnect implemented, based on the namespace definitions in the XML document. If no version could be parsed, then a default version is returned.</returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.GetDocumentNamespaces(MtconnectCore.Standard.Contracts.Enums.MtconnectVersions,System.Xml.XmlDocument,System.String)">
+            <summary>
+            Constructs a namespace table for the XML document in order to use proper XPath.
+            </summary>
+            <param name="version">Reference to the version of MTConnect being used in the document.</param>
+            <param name="xDoc">Reference to the XML document</param>
+            <param name="defaultNamespace">Reference to the default namespace name (ie. <c>m</c>, or <c>mt</c>)</param>
+            <returns>XML name table</returns>
+            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="P:MtconnectCore.Standard.CurrentRequestQuery.Path">
             <summary>

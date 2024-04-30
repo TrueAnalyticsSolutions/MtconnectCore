@@ -72,6 +72,12 @@ namespace MtconnectCore.Standard.Documents
         public ResponseDocument(XmlDocument xDoc)
         {
             Source = xDoc;
+            
+            // Detect if there are missing namespaces
+            if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns")))
+                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns' attribute"));
+            if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns:" + DefaultNamespace)))
+                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns" + DefaultNamespace + "' attribute"));
 
             DocumentVersion = VersionHelper.GetVersionFromDocument(xDoc);
             MtconnectVersion = DocumentVersion;
@@ -112,8 +118,11 @@ namespace MtconnectCore.Standard.Documents
             XmlNode xDataRoot = xDoc.DocumentElement.SelectSingleNode(DataElementName, NamespaceManager, DefaultNamespace);
             XmlNodeList xDataElements = xDataRoot.ChildNodes;
             Logger.Verbose($"Found {xDataElements?.Count} {DataElementName} in {DocumentElementName}");
-            foreach (XmlElement xDataElement in xDataElements)
+            foreach (XmlNode xNode in xDataElements)
             {
+                if (xNode.NodeType != XmlNodeType.Element)
+                    continue;
+                XmlElement xDataElement = xNode as XmlElement;
                 if (!xDataElement.HasAttributes) continue;
 
                 _ = this.TryAddItem(xDataElement, NamespaceManager, out _);
