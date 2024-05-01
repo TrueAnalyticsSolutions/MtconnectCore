@@ -13,19 +13,13 @@ namespace MtconnectCore.Standard.Documents.Streams
 {
     public class Device : MtconnectNode
     {
-        /// <summary>
-        /// Collected from the name attribute. Refer to Part 3 Streams - 4.2.2
-        /// 
-        /// Occurance: 1
-        /// </summary>
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1620240839406_285612_1596";
+
+        /// <inheritdoc cref="DeviceAttributes.NAME"/>
         [MtconnectNodeAttribute(DeviceAttributes.NAME)]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Collected from the uuid attribute. Refer to Part 3 Streams - 4.2.2
-        /// 
-        /// Occurance: 1
-        /// </summary>
+        /// <inheritdoc cref="DeviceAttributes.UUID"/>
         [MtconnectNodeAttribute(DeviceAttributes.UUID)]
         public string Uuid { get; set; }
 
@@ -46,8 +40,7 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         public bool TryAddComponent(XmlNode xNode, XmlNamespaceManager nsmgr, out Component component) => base.TryAdd<Component>(xNode, nsmgr, ref _components, out component);
 
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -61,7 +54,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.3.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();

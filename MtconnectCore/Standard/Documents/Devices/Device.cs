@@ -14,6 +14,8 @@ namespace MtconnectCore.Standard.Documents.Devices
 {
     public class Device : MtconnectNode
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1620240839406_285612_1596";
+
         /// <inheritdoc cref="DeviceAttributes.UUID"/>
         [MtconnectNodeAttribute(DeviceAttributes.UUID)]
         public string Uuid { get; set; }
@@ -42,6 +44,14 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(DeviceAttributes.ISO_841_CLASS)]
         public string Iso841Class { get; set; }
 
+        /// <inheritdoc cref="DeviceAttributes.MTCONNECT_VERSION"/>
+        [MtconnectNodeAttribute(DeviceAttributes.MTCONNECT_VERSION)]
+        public string MtconnectVersionAttribute { get; set; }
+
+        /// <inheritdoc cref="DeviceAttributes.HASH"/>
+        [MtconnectNodeAttribute(DeviceAttributes.HASH)]
+        public string Hash { get; set; }
+
         public int Size => _components?.Sum(o => o.Size) ?? 0;
 
         private List<Component> _components = new List<Component>();
@@ -58,6 +68,10 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         [MtconnectNodeElements("Description", nameof(TrySetDescription), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ComponentDescription Description { get; set; }
+
+        /// <inheritdoc cref="ComponentElements.CONFIGURATION"/>
+        [MtconnectNodeElements("Configuration", nameof(TrySetConfiguration), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        public ComponentConfiguration Configuration { get; set; }
 
         private List<Reference> _references = new List<Reference>();
         /// <inheritdoc cref="DeviceElements.REFERENCES"/>
@@ -81,6 +95,9 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentDescription componentDescription)
             => base.TrySet<ComponentDescription>(xNode, nsmgr, nameof(Description), out componentDescription);
+
+        public bool TrySetConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentConfiguration componentConfiguration)
+            => base.TrySet<ComponentConfiguration>(xNode, nsmgr, nameof(Configuration), out componentConfiguration);
 
         public bool TryAddReference(XmlNode xNode, XmlNamespaceManager nsmgr, out Reference reference)
         {
@@ -109,7 +126,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return true;
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.4.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Id)) {
@@ -118,7 +135,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.4.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         private bool validateName(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Name))
@@ -131,7 +148,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.2")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, MODEL_BROWSER_URL)]
         private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Uuid))
@@ -149,7 +166,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.4.1", MtconnectVersions.V_1_0_1)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL, MtconnectVersions.V_1_1_0)]
         private bool validateIso841Class_Required(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Iso841Class))
@@ -180,39 +197,102 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 4.2.3")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, MODEL_BROWSER_URL)]
+        private bool validateIso841Class_Deprecated(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+
+            if (!string.IsNullOrEmpty(Iso841Class))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.WARNING,
+                    $"Device 'iso841Class' was DEPRECATED in MTConnect Version 1.2.",
+                    SourceNode));
+
+                // Might as well validate the legitamacy of the attribute since it was added
+                if (!EnumHelper.Contains<Iso841ClassTypes>(Iso841Class))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"Device 'iso841Class' attribute MUST be one of the following: [{EnumHelper.ToListString<Iso841ClassTypes>(", ", string.Empty, string.Empty)}].",
+                        SourceNode));
+
+                }
+                else if (!EnumHelper.ValidateToVersion<Iso841ClassTypes>(Iso841Class, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"Device 'iso841Class' of '{Iso841Class}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                        SourceNode));
+                }
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, MODEL_BROWSER_URL)]
         private bool validateDataItemCount(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (DataItems.Count <= 0) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must have at least one DataItem. Every Device MUST report AVAILABILITY.", SourceNode));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device must have at least one DataItem. Every Device MUST report AVAILABILITY, ASSET_CHANGED, and ASSET_REMOVED.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "Part 2 Section 5.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, MODEL_BROWSER_URL)]
         private bool validateDataItemAvailability(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
-            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY.ToString()))
+
+            System.Func<DataItem, bool> containsAvailability = (o) => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.AVAILABILITY.ToString();
+            if (!DataItems.Any(containsAvailability))
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an AVAILABILITY DataItem that represents this device is available to do work.", SourceNode));
+            }
+            else if (DataItems.Count(containsAvailability) > 1)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Multiplicity of AVAILABILITY observed by a Device is 1.", SourceNode));
+            }
+
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, MODEL_BROWSER_URL)]
+        private bool validateDataItemAssets(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+
+            System.Func<DataItem, bool> containsAssetChanged = (o) => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_CHANGED.ToString();
+            if (!DataItems.Any(containsAssetChanged))
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an ASSET_CHANGED DataItem.", SourceNode));
+            } else if (DataItems.Count(containsAssetChanged) > 1)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Multiplicity of ASSET_CHANGED observed by a Device is 1.", SourceNode));
+            }
+
+            System.Func<DataItem, bool> containsAssetRemoved = (o) => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_REMOVED.ToString();
+            if (!DataItems.Any(containsAssetRemoved))
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an ASSET_REMOVED DataItem.", SourceNode));
+            }
+            else if (DataItems.Count(containsAssetRemoved) > 1)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Multiplicity of ASSET_REMOVED observed by a Device is 1.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "Part 2 Section 4.2")]
-        private bool validateDataItemAssets(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, MODEL_BROWSER_URL)]
+        private bool validateContents(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
-            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_CHANGED.ToString()))
+            if (DataItems.Count <= 0 && Components.Count <= 0 && References.Count <= 0)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an ASSET_CHANGED DataItem.", SourceNode));
-            }
-            if (!DataItems.Any(o => o.Type == MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ASSET_REMOVED.ToString()))
-            {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have an ASSET_REMOVED DataItem.", SourceNode));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Device MUST have at least one of Component, DataItem, or Reference entities.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
+
     }
 }

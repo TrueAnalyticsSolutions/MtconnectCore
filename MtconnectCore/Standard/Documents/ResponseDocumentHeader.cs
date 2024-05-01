@@ -52,13 +52,13 @@ namespace MtconnectCore.Standard.Documents
             {
                 var baseResult = base.TryValidate(report);
 
-                const string documentationAttributes = "See Part 1 Section 6.5.1 of the MTConnect standard.";
+                const string documentationAttributes = "https://model.mtconnect.org/#Structure__EAID_2299B0B3_B209_47ae_B93A_BA694AD50051";
 
                 if (string.IsNullOrEmpty(AgentVersion))
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"Response Document Header MUST include a 'version' attribute. {documentationAttributes}",
+                        $"Response Document Header MUST include a 'version' attribute.",
                         SourceNode));
                 }
 
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Documents
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"Response Document Header MUST include a 'creationTime' attribute. {documentationAttributes}",
+                        $"Response Document Header MUST include a 'creationTime' attribute.",
                         SourceNode));
                 }
 
@@ -74,7 +74,7 @@ namespace MtconnectCore.Standard.Documents
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"Response Document Header MUST include a 'instanceId' attribute. {documentationAttributes}",
+                        $"Response Document Header MUST include a 'instanceId' attribute.",
                         SourceNode));
                 }
 
@@ -82,7 +82,7 @@ namespace MtconnectCore.Standard.Documents
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"Response Document Header MUST include a 'sender' attribute. {documentationAttributes}",
+                        $"Response Document Header MUST include a 'sender' attribute.",
                         SourceNode));
                 }
 

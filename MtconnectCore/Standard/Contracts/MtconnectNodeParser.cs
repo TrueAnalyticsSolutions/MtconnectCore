@@ -452,6 +452,15 @@ namespace MtconnectCore.Standard.Contracts
                 {
                     validationErrors = new List<MtconnectValidationException>();
 
+                    // Check if node has initialization errors
+                    if (item.InitializationErrors.Any())
+                    {
+                        foreach (var initializationError in item.InitializationErrors)
+                        {
+                            validationErrors.Add(initializationError);
+                        }
+                    }
+
                     // If none of the Applicibility attributes apply to the version associated with this node, then all should be good, right?
                     if (!ApplicibilityAttributes.Any(o => o.Compare(item.MtconnectVersion.GetValueOrDefault()))) return true;
 

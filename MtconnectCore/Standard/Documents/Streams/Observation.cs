@@ -15,6 +15,8 @@ namespace MtconnectCore.Standard.Documents.Streams
 {
     public abstract class Observation : MtconnectNode, IObservation
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1579566531115_47734_25731";
+
         public abstract CategoryTypes Category { get; }
 
         /// <inheritdoc cref="ObservationAttributes.COMPOSITION_ID"/>
@@ -92,7 +94,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             }
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         protected bool validateDataItemId(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(DataItemId))
@@ -105,7 +107,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation", MtconnectVersions.V_1_1_0)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL, MtconnectVersions.V_1_1_0)]
         protected bool validateName_Required(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -119,7 +121,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         protected bool validateTimestamp(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -133,24 +135,64 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         protected bool validateUnits(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
+
             if (!string.IsNullOrEmpty(Units))
             {
-                if (!EnumHelper.Contains<UnitsTypes>(Units))
+                if (Units.Contains(":"))
+                {
+                    string extendedUnits = Units.Substring(Units.LastIndexOf(":") + 1);
+                    if (!EnumHelper.Contains<UnitsTypes>(extendedUnits))
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.WARNING,
+                            $"Observation 'units' of '{extendedUnits}' is an unnecessary extension of the MTConnect Standard as it already exists in version '{MtconnectVersion}'.",
+                            SourceNode));
+                    }
+                    else if (!EnumHelper.ValidateToVersion<UnitsTypes>(extendedUnits, MtconnectVersion.GetValueOrDefault()))
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.WARNING,
+                            $"Observation 'units' of '{extendedUnits}' is not valid in version '{MtconnectVersion}' of the MTConnect Standard.",
+                            SourceNode));
+                    }
+                    else
+                    {
+                        validationErrors.Add(new MtconnectValidationException(
+                            ValidationSeverity.MESSAGE,
+                            $"Observation 'units' of '{extendedUnits}' is an extension of the MTConnect Standard in this implementation.",
+                            SourceNode));
+                    }
+                }
+                else if (!EnumHelper.Contains<UnitsTypes>(Units))
                 {
                     validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.ERROR,
-                        $"Observation units of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
-                            SourceNode));
+                        ValidationSeverity.WARNING,
+                        $"Observation 'units' of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
+                        SourceNode));
                 }
+                else if (!EnumHelper.ValidateToVersion<UnitsTypes>(Units, MtconnectVersion.GetValueOrDefault()))
+                {
+                    validationErrors.Add(new MtconnectValidationException(
+                        ValidationSeverity.WARNING,
+                        $"Observation 'units' of '{Units}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                        SourceNode));
+                }
+            }
+            else if (Category == CategoryTypes.SAMPLE)
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Sample MUST include a 'units' attribute.",
+                        SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Observation")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         protected bool validateSequence(out ICollection<MtconnectValidationException> validationErrors)
         {
             const long sequenceCeiling = (2 ^ 64) - 1;

@@ -14,41 +14,29 @@ namespace MtconnectCore.Standard.Documents.Streams
 {
     public class Condition : Value
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1579566531113_85883_25726";
+
         public override CategoryTypes Category => CategoryTypes.CONDITION;
 
-        /// <summary>
-        /// Collected from the nativeCode attribute. Refer to Part 3 Streams - 5.8.3
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="ConditionAttributes.NATIVE_CODE"/>
         [MtconnectNodeAttribute(ConditionAttributes.NATIVE_CODE)]
         public string NativeCode { get; set; }
 
-        /// <summary>
-        /// Collected from the nativeSeverity attribute. Refer to Part 3 Streams - 5.8.3
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="ConditionAttributes.NATIVE_SEVERITY"/>
         [MtconnectNodeAttribute(ConditionAttributes.NATIVE_SEVERITY)]
         public string NativeSeverity { get; set; }
 
-        /// <summary>
-        /// Collected from the qualifier attribute. Refer to Part 3 Streams - 5.8.3
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        // TODO: Validate Enum
+        /// <inheritdoc cref="ConditionAttributes.QUALIFIER"/>
         [MtconnectNodeAttribute(ConditionAttributes.QUALIFIER)]
         public string Qualifier { get; set; }
 
-        /// <summary>
-        /// Collected from the statistic attribute. Refer to Part 3 Streams - 5.8.3
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
-        // TODO: Validate Enum
+        /// <inheritdoc cref="ConditionAttributes.STATISTIC"/>
         [MtconnectNodeAttribute(ConditionAttributes.STATISTIC)]
         public string Statistic { get; set; }
+
+        /// <inheritdoc cref="ConditionAttributes.CONDITION_ID"/>
+        [MtconnectNodeAttribute(ConditionAttributes.CONDITION_ID)]
+        public string ConditionId { get; set; }
 
         /// <summary>
         /// Collected from the xs:lang attribute. Refer to Part 3 Streams - 5.8.3
@@ -86,7 +74,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             }
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "See model.mtconnect.org/Observation Information Model/Condition")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, MODEL_BROWSER_URL)]
         private bool validateType(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Type))
@@ -111,13 +99,13 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
-                    $"Condition type of '{Type}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
+                    $"Condition 'type' of '{Type}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
                     SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Condition")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, MODEL_BROWSER_URL)]
         protected bool validateStatistic(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -134,7 +122,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "See model.mtconnect.org/Observation Information Model/Condition")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, MODEL_BROWSER_URL)]
         protected bool validateQualifier(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -151,8 +139,21 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
+        [MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, MODEL_BROWSER_URL)]
+        protected bool validateConditionId(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (string.IsNullOrEmpty(ConditionId))
+            {
+                validationErrors.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Condition MUST include 'conditionId' attribute.",
+                    SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Sample")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
             => base.validateNode(out validationErrors);
 

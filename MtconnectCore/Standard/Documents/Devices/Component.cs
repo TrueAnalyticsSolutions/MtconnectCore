@@ -185,8 +185,8 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.2")]
         private bool validateChildCount(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
-            if (SubComponents.Count <= 0 && DataItems.Count <= 0) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"At least one of Components or DataItems MUST be provided.", SourceNode));
+            if (SubComponents.Count <= 0 && DataItems.Count <= 0 && References.Count <= 0) {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Component MUST have at least one of Component, DataItem, or Reference entities.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

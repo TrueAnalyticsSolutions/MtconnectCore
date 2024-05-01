@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MtconnectCore\MtconnectCore.csproj" />
+    <ProjectReference Include="..\MtconnectCore\MtconnectCore.csproj">
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
