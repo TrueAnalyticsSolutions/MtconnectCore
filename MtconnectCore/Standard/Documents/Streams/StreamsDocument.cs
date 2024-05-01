@@ -14,6 +14,8 @@ namespace MtconnectCore.Standard.Documents.Streams
     /// <inheritdoc />
     public partial class StreamsDocument : ResponseDocument<StreamsDocumentHeader, Device>
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure__EAID_02192189_58E6_456c_A679_CDDFF559DA00";
+
         /// <inheritdoc />
         public override DocumentTypes Type => DocumentTypes.Streams;
 
@@ -40,34 +42,29 @@ namespace MtconnectCore.Standard.Documents.Streams
         public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Device device) => base.TryAdd<Device>(xNode, nsmgr, ref _items, out device);
 
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.2")]
-        protected bool validateSequence(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
+        protected bool validateDataItems(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
-            var allDataItems = new List<IObservation>();
-            var allComponents = Items.SelectMany(o => o.Components);
-            allDataItems.AddRange(allComponents.SelectMany(o => o.Samples));
-            allDataItems.AddRange(allComponents.SelectMany(o => o.Events));
-            allDataItems.AddRange(allComponents.SelectMany(o => o.Conditions));
-            var allSequenceNumbers = allDataItems.Select(o => o.Sequence).ToArray();
+
+            var allObservations = DataItemNavigator.GetAll(this);
+            var allComponents = DataItemNavigator.GetAllComponents(this);
+
+            var allSequenceNumbers = allObservations.Select(o => o.Sequence).ToArray();
             var distinctSequenceNumbers = allSequenceNumbers.Distinct().ToArray();
             if (allSequenceNumbers.Length != distinctSequenceNumbers.Length)
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'sequence' values MUST be unique for each incoming DataItem."));
             }
+
+            var allUnavailable = allObservations.All(o => o.IsUnavailable);
+            if (allUnavailable)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"All Observations reporting UNAVAILABLE. This could be an indication that the Adapter is not reporting correctly."));
+            }
+
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3")]
-        protected bool validateDataItemValue(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            var allUnavailable = Items.All(o => o.Components.All(c => c.Samples.All(d => d.IsUnavailable) && c.Events.All(d => d.IsUnavailable) && c.Conditions.All(d => d.IsUnavailable)));
-            if (allUnavailable)
-            {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"All DataItems reporting UNAVAILABLE. This could be an indication that the Adapter is not reporting correctly."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
     }
 }

@@ -88,7 +88,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,
-                        $"Observation resetTriggered of '{ResetTriggered}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
+                        $"Observation 'resetTriggered' of '{ResetTriggered}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
                             SourceNode));
                 }
             }

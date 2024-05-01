@@ -12,69 +12,46 @@ namespace MtconnectCore.Standard.Documents.Streams
 {
     public class Component : MtconnectNode
     {
-        /// <summary>
-        /// Collected from the componentId attribute. Refer to Part 3 Streams - 4.3.2
-        /// 
-        /// Occurance: 1
-        /// </summary>
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure__EAID_9057AAF9_4687_42be_BD2B_E2F18DF049DC";
+
+        /// <inheritdoc cref="ComponentAttributes.COMPONENT_ID"/>
         [MtconnectNodeAttribute(ComponentAttributes.COMPONENT_ID)]
         public string ComponentId { get; set; }
 
-        /// <summary>
-        /// Collected from the name attribute. Refer to Part 3 Streams - 4.3.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="ComponentAttributes.NAME"/>
         [MtconnectNodeAttribute(ComponentAttributes.NAME)]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Collected from the nativeName attribute. Refer to Part 3 Streams - 4.3.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="ComponentAttributes.NATIVE_NAME"/>
         [MtconnectNodeAttribute(ComponentAttributes.NATIVE_NAME)]
         public string NativeName { get; set; }
 
-        /// <summary>
-        /// Collected from the component attribute. Refer to Part 3 Streams - 4.3.2
-        /// 
-        /// Occurance: 1
-        /// </summary>
+        /// <inheritdoc cref="ComponentAttributes.COMPONENT"/>
         [MtconnectNodeAttribute(ComponentAttributes.COMPONENT)]
         public string ComponentReference { get; set; }
 
-        /// <summary>
-        /// Collected from the uuid attribute. Refer to Part 3 Streams - 4.3.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="ComponentAttributes.UUID"/>
         [MtconnectNodeAttribute(ComponentAttributes.UUID)]
         public string Uuid { get; set; }
 
         private List<Sample> _samples = new List<Sample>();
         /// <summary>
-        /// Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
-        /// 
-        /// Occurance: 0..1
+        /// Samples groups one or more Sample entities. See Section Sample.
         /// </summary>
         [MtconnectNodeElements("Samples/*", nameof(TryAddSample), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public ICollection<Sample> Samples => _samples;
 
         private List<Event> _events = new List<Event>();
         /// <summary>
-        /// Collected from Event elements. Refer to Part 3 Streams - 4.3.3
-        /// 
-        /// Occurance: 0..1
+        /// Events groups one or more Event entities. See Section Event.
         /// </summary>
         [MtconnectNodeElements("Events/*", nameof(TryAddEvent), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public ICollection<Event> Events => _events;
 
         private List<Condition> _conditions = new List<Condition>();
         /// <summary>
-        /// Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
-        /// 
-        /// Occurance: 0..1
+        /// Conditions groups one or more Condition entities. See Section Condition.
+        /// Note: In the XML representation, Conditions MUST appear as Condition element in the MTConnectStreams Response Document.
         /// </summary>
         [MtconnectNodeElements("Condition/*", nameof(TryAddCondition), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
         public ICollection<Condition> Conditions => _conditions;
@@ -146,7 +123,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         public bool TryAddCondition(XmlNode xNode, XmlNamespaceManager nsmgr, out Condition condition) => base.TryAdd<Condition>(xNode, nsmgr, ref _conditions, out condition);
 
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         private bool validateComponentId(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -160,7 +137,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         private bool validateComponentReference(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -174,8 +151,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 3 Section 3.4", MtconnectVersions.V_1_2_0)]
-        private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL, MtconnectVersions.V_1_2_0)]
+        private bool validateNameRequired_Deprecated(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
             if (string.IsNullOrEmpty(Name)) {
@@ -183,6 +160,17 @@ namespace MtconnectCore.Standard.Documents.Streams
                     ValidationSeverity.ERROR,
                     $"Component MUST include a 'name' attribute.",
                     SourceNode));
+            }
+            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        }
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, MODEL_BROWSER_URL)]
+        private bool validateContents(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            validationErrors = new List<MtconnectValidationException>();
+            if (Events.Count <= 0 && Samples.Count <= 0 && Conditions.Count <= 0)
+            {
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "ComponentStream MUST have at least one of Event, Sample, or Condition.", SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

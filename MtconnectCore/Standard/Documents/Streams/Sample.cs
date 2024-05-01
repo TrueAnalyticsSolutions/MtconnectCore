@@ -14,37 +14,23 @@ namespace MtconnectCore.Standard.Documents.Streams
 {
     public class Sample : Value
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1579566531116_175117_25733";
+
         public override CategoryTypes Category => CategoryTypes.SAMPLE;
 
-        /// <summary>
-        /// Collected from the sampleRate attribute. Refer to Part 3 Streams - 5.3.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="SampleAttributes.SAMPLE_RATE"/>
         [MtconnectNodeAttribute(SampleAttributes.SAMPLE_RATE)]
         public float? SampleRate { get; set; }
 
-        /// <summary>
-        /// Collected from the statistic attribute. Refer to Part 3 Streams - 5.3.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="SampleAttributes.STATISTIC"/>
         [MtconnectNodeAttribute(SampleAttributes.STATISTIC)]
         public string Statistic { get; set; }
 
-        /// <summary>
-        /// Collected from the duration attribute. Refer to Part 3 Streams - 5.3.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="SampleAttributes.DURATION"/>
         [MtconnectNodeAttribute(SampleAttributes.DURATION)]
         public double? Duration { get; set; }
 
-        /// <summary>
-        /// Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.3.2
-        /// 
-        /// Occurance: 0..1
-        /// </summary>
+        /// <inheritdoc cref="SampleAttributes.RESET_TRIGGERED"/>
         [MtconnectNodeAttribute(SampleAttributes.RESET_TRIGGERED)]
         public string ResetTriggered { get; set; }
 
@@ -62,6 +48,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             }
         }
 
+        /// <inheritdoc cref="SampleAttributes.SAMPLE_COUNT"/>
         [MtconnectNodeAttribute(SampleAttributes.SAMPLE_COUNT)]
         public int? SampleCount { get; set; }
 
@@ -71,7 +58,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <inheritdoc/>
         public Sample(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "See model.mtconnect.org/Observation Information Model/Sample")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, MODEL_BROWSER_URL)]
         protected bool validateTimeSeriesCount(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             string[] timeSeriesValues = SourceNode.InnerText.Split(new[] { " " }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -85,7 +72,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Sample")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, MODEL_BROWSER_URL)]
         protected bool validateDuration(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -93,13 +80,13 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"'duration' MUST be provided when the 'statistic' attribute is present on a SAMPLE.",
+                    $"Observation MUST include 'duration' attribute when the 'statistic' attribute is present.",
                     SourceNode));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Sample")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, MODEL_BROWSER_URL)]
         protected bool validateStatistic(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -116,7 +103,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "See model.mtconnect.org/Observation Information Model/Sample")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, MODEL_BROWSER_URL)]
         protected bool validateResetTriggered(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -126,18 +113,18 @@ namespace MtconnectCore.Standard.Documents.Streams
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,
-                        $"Observation resetTriggered of '{ResetTriggered}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
+                        $"Observation 'resetTriggered' of '{ResetTriggered}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
                             SourceNode));
                 }
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Sample")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors)
             => base.validateNode(out validationErrors);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "See model.mtconnect.org/Observation Information Model/Sample")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();

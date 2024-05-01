@@ -1539,6 +1539,57 @@
             The optional name of the DataItemRef. Only informative.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.UUID">
+            <summary>
+            universally unique identifier for the element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.NAME">
+            <summary>
+            name of an element or a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.ID">
+            <summary>
+            unique identifier for the Component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.SAMPLE_INTERVAL">
+            <summary>
+            interval in milliseconds between the completion of the reading of the data associated with the Component until the beginning of the next sampling of that data.
+            This information may be used by client software applications to understand how often information from a Component is expected to be refreshed.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.NATIVE_NAME">
+            <summary>
+            common name associated with Component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.SAMPLE_RATE">
+            <summary>
+            DEPRECATED in MTConnect Version 1.2. Replaced by Component::sampleInterval.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.ISO_841_CLASS">
+            <summary>
+            DEPRECATED in MTConnect Version 1.2.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.MTCONNECT_VERSION">
+            <summary>
+            MTConnect version of the Device Information Model used to configure the information to be published for a piece of equipment in an MTConnect Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.HASH">
+            <summary>
+            condensed message digest from a secure one-way hash function. FIPS PUB 180-4
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.COORDINATE_SYSTEM_ID_REF">
+            <summary>
+            specifies the  CoordinateSystem for this Component and its children.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceRelationshipAttributes">
             <summary>
             DeviceRelationship describes the association between two pieces of equipment that function independently but together perform a manufacturing operation.
@@ -10624,6 +10675,63 @@
             value of the  Cell.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.COMPONENT_ID">
+            <summary>
+            identifier of the Component as defined by the Component::id in the MTConnectDevices Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.NAME">
+            <summary>
+            name of the Component associated with the ComponentStream.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.NATIVE_NAME">
+            <summary>
+            common name of the Component associated with the  ComponentStream.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.COMPONENT">
+            <summary>
+            identifies the Component type associated with the ComponentStream.
+            Examples of  ComponentStream::component are  Device,  Controller,  Linear and  Loader.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.UUID">
+            <summary>
+            uuid of the Component associated with the  ComponentStream.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.NATIVE_CODE">
+            <summary>
+            native code is the proprietary identifier designating a specific alarm, fault or warning code provided by the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.NATIVE_SEVERITY">
+            <summary>
+            severity information to a client software application if the piece of equipment designates a severity level to a fault.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.QUALIFIER">
+            <summary>
+            additional information regarding a condition state associated with the measured value of a process variable.
+            Condition::qualifier defines whether the condition state represented indicates a measured value that is above or below an expected value of a process variable.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.STATISTIC">
+            <summary>
+            Condition::statistic provides additional information describing the meaning of the Condition entity.
+            Condition::statistic MUST match the  DataItem::statistic defined in the MTConnectDevices Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.CONDITION_ID">
+            <summary>
+            identifier of an individual condition activation provided by a piece of equipment.
+            Condition::conditionId MUST be unique for all concurrent condition activation.
+            Condition::conditionId MUST be maintained for all state transitions related to the same condition activation.
+            Multiple Condition::conditionIds MAY exist for the same  Condition::nativeCode.
+            If Condition::conditionId is not given, the value is the Condition::nativeCode. If Condition::nativeCode and  Condition::conditionId are not given, Condition::conditionId MUST be generated.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DataSetAttributes">
             <summary>
             Attributes for the <c>DATA_SET</c> representation
@@ -10632,6 +10740,16 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DestinationAttributes.DEVICE_UUID">
             <summary>
             uuid of the target device or application.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DeviceAttributes.NAME">
+            <summary>
+            name of the Device.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DeviceAttributes.UUID">
+            <summary>
+            uuid of the Device.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DiscreteAttributes">
@@ -10657,6 +10775,12 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.EntryAttributes.RESULT">
             <summary>
             value of the  Entry.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.EventAttributes.RESET_TRIGGERED">
+            <summary>
+            identifies when a reported value has been reset and what has caused that reset to occur for those  DataItem entities that may be periodically reset to an initial value.
+            resetTriggered MUST only be provided for the specific occurrence of a  DataItem reported in the MTConnectStreams Response Document when the reset occurred.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.FileAttributes.SIZE">
@@ -10689,7 +10813,11 @@
             The name of the FileProperty
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.COMPOSITION_ID" -->
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.COMPOSITION_ID">
+            <summary>
+            identifier of the Composition entity defined in the MTConnectDevices Response Document associated with the data reported for the  Observation.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ObservationAttributes.DATA_ITEM_ID">
             <summary>
             unique identifier of the  DataItem associated with this  Observation.
@@ -10788,6 +10916,28 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ResetTriggers.WEEK">
             <summary>
             The value of the Data Entity was reset at the end of a 7-day period.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.SAMPLE_RATE">
+            <summary>
+            rate at which successive samples of the value are recorded.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.RESET_TRIGGERED">
+            <summary>
+            identifies when a reported value has been reset and what has caused that reset to occur for those  DataItem entities that may be periodically reset to an initial value.
+            resetTriggered MUST only be provided for the specific occurrence of a  DataItem reported in the MTConnectStreams Response Document when the reset occurred.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.STATISTIC">
+            <summary>
+            type of statistical calculation defined by the  DataItem::statistic defined in the MTConnectDevices Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.DURATION">
+            <summary>
+            time-period over which the data was collected.
+            Sample::duration MUST be provided when the  DataItem::statistic is defined in the MTConnectDevices Response Document.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.TableAttributes">
@@ -14018,7 +14168,9 @@
             <inheritdoc />
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.DataItem">
-            <inheritdoc />
+            <summary>
+            information reported about a piece of equipment. <see href="https://model.mtconnect.org/#Structure__EAID_002C94B7_1257_49be_8EAA_CE7FCD7AFF8A">MTConnect Model Browser</see>
+            </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DataItem.Id">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes.ID"/>
@@ -14167,6 +14319,15 @@
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Iso841Class">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.ISO_841_CLASS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.MtconnectVersionAttribute">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.MTCONNECT_VERSION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Hash">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DeviceAttributes.HASH"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Device.Configuration">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.CONFIGURATION"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.Device.References">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DeviceElements.REFERENCES"/>
@@ -14780,59 +14941,34 @@
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.ComponentId">
-            <summary>
-            Collected from the componentId attribute. Refer to Part 3 Streams - 4.3.2
-            
-            Occurance: 1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.COMPONENT_ID"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Name">
-            <summary>
-            Collected from the name attribute. Refer to Part 3 Streams - 4.3.2
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.NAME"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.NativeName">
-            <summary>
-            Collected from the nativeName attribute. Refer to Part 3 Streams - 4.3.2
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.NATIVE_NAME"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.ComponentReference">
-            <summary>
-            Collected from the component attribute. Refer to Part 3 Streams - 4.3.2
-            
-            Occurance: 1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.COMPONENT"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Uuid">
-            <summary>
-            Collected from the uuid attribute. Refer to Part 3 Streams - 4.3.2
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ComponentAttributes.UUID"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Samples">
             <summary>
-            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
-            
-            Occurance: 0..1
+            Samples groups one or more Sample entities. See Section Sample.
             </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Events">
             <summary>
-            Collected from Event elements. Refer to Part 3 Streams - 4.3.3
-            
-            Occurance: 0..1
+            Events groups one or more Event entities. See Section Event.
             </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Component.Conditions">
             <summary>
-            Collected from Sample elements. Refer to Part 3 Streams - 4.3.3
-            
-            Occurance: 0..1
+            Conditions groups one or more Condition entities. See Section Condition.
+            Note: In the XML representation, Conditions MUST appear as Condition element in the MTConnectStreams Response Document.
             </summary>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Component.#ctor">
@@ -14842,32 +14978,19 @@
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.NativeCode">
-            <summary>
-            Collected from the nativeCode attribute. Refer to Part 3 Streams - 5.8.3
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.NATIVE_CODE"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.NativeSeverity">
-            <summary>
-            Collected from the nativeSeverity attribute. Refer to Part 3 Streams - 5.8.3
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.NATIVE_SEVERITY"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Qualifier">
-            <summary>
-            Collected from the qualifier attribute. Refer to Part 3 Streams - 5.8.3
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.QUALIFIER"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Statistic">
-            <summary>
-            Collected from the statistic attribute. Refer to Part 3 Streams - 5.8.3
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.STATISTIC"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.ConditionId">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.ConditionAttributes.CONDITION_ID"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Condition.Language">
             <summary>
@@ -14888,18 +15011,10 @@
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Name">
-            <summary>
-            Collected from the name attribute. Refer to Part 3 Streams - 4.2.2
-            
-            Occurance: 1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DeviceAttributes.NAME"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Uuid">
-            <summary>
-            Collected from the uuid attribute. Refer to Part 3 Streams - 4.2.2
-            
-            Occurance: 1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.DeviceAttributes.UUID"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Device.Components">
             <summary>
@@ -15080,37 +15195,24 @@
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SampleRate">
-            <summary>
-            Collected from the sampleRate attribute. Refer to Part 3 Streams - 5.3.2
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.SAMPLE_RATE"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Statistic">
-            <summary>
-            Collected from the statistic attribute. Refer to Part 3 Streams - 5.3.2
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.STATISTIC"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Duration">
-            <summary>
-            Collected from the duration attribute. Refer to Part 3 Streams - 5.3.2
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.DURATION"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.ResetTriggered">
-            <summary>
-            Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.3.2
-            
-            Occurance: 0..1
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.RESET_TRIGGERED"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.Value">
             <summary>
             Collected from the textcontent of the Sample element. Refer to Part 3 Streams - 5.3.3
             </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Streams.Sample.SampleCount">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.SampleAttributes.SAMPLE_COUNT"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Streams.Sample.#ctor">
             <inheritdoc/>
