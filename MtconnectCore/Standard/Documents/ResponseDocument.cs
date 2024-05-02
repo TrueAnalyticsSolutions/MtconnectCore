@@ -77,7 +77,7 @@ namespace MtconnectCore.Standard.Documents
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns")))
                 InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns' attribute"));
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns:" + DefaultNamespace)))
-                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns" + DefaultNamespace + "' attribute"));
+                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute"));
 
             DocumentVersion = VersionHelper.GetVersionFromDocument(xDoc);
             MtconnectVersion = DocumentVersion;
