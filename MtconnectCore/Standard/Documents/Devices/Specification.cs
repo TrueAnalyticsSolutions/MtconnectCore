@@ -73,7 +73,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc />
         public Specification(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
-
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1580315898400_607214_47155")]
         private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -106,7 +106,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         // TODO: Validate SubTypes
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 9.3.1.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1580315898400_607214_47155")]
         protected bool validateUnits(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
@@ -132,7 +132,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 9.3.1.1")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1580315898400_607214_47155")]
         protected bool validateOriginator(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
