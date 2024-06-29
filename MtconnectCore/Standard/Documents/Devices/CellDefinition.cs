@@ -36,16 +36,5 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc/>
         public CellDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
-
-        private bool validateKey(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Key))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"CellDefinition MUST include a 'key' attribute."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
     }
 }

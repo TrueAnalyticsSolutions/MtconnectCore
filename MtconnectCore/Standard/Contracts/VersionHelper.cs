@@ -102,6 +102,7 @@ namespace MtconnectCore.Standard.Contracts
              { MtconnectVersions.V_2_5_1, null },
         };
 
+        public static string ToName(this MtconnectVersions? version) => ToName(version.GetValueOrDefault());
         public static string ToName(this MtconnectVersions version) => versionNames[version];
 
         /// <summary>
@@ -111,6 +112,12 @@ namespace MtconnectCore.Standard.Contracts
         /// <returns></returns>
         public static MtconnectVersions? GetVersion(string version) => versionNames.Where(o => version.StartsWith(o.Value) || o.Value.StartsWith(version)).Select(o => o.Key).FirstOrDefault();
 
+        /// <summary>
+        /// Looks up the official release date of the provided version.
+        /// </summary>
+        /// <param name="version">Version of MTConnect</param>
+        /// <returns>Official release date of the provided version.</returns>
+        public static DateTime GetReleaseDate(this MtconnectVersions? version) => GetReleaseDate(version.GetValueOrDefault());
         /// <summary>
         /// Looks up the official release date of the provided version.
         /// </summary>

@@ -4,6 +4,7 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -31,15 +32,19 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="ComponentAttributes.SAMPLE_INTERVAL"/>
         [MtconnectNodeAttribute(ComponentAttributes.SAMPLE_INTERVAL)]
-        public double? SampleInterval { get; set; }
+        public string SampleInterval { get; set; }
 
         /// <inheritdoc cref="ComponentAttributes.SAMPLE_RATE"/>
         [MtconnectNodeAttribute(ComponentAttributes.SAMPLE_RATE)]
-        public double? SampleRate { get; set; }
+        public string SampleRate { get; set; }
 
         /// <inheritdoc cref="ComponentAttributes.UUID"/>
         [MtconnectNodeAttribute(ComponentAttributes.UUID)]
         public string Uuid { get; set; }
+
+        /// <inheritdoc cref="ComponentAttributes.COORDINATE_SYSTEM_ID_REF"/>
+        [MtconnectNodeAttribute(ComponentAttributes.COORDINATE_SYSTEM_ID_REF)]
+        public string CoordinateSystemIdRef { get; set; }
 
         /// <summary>
         /// Explicit reference to the XML tag name. This can be more reliable than referencing <see cref="Name"/>
@@ -127,62 +132,49 @@ namespace MtconnectCore.Standard.Documents.Devices
             _references.Add(reference);
             return true;
         }
-        
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
-        private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Id))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component MUST include a unique 'id' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1", MtconnectVersions.V_1_2_0)]
-        private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Name))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component MUST include a unique 'name' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
-        private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Uuid) && Uuid.Length > 255)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component 'uuid' cannot exceed a length of 255 characters.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COMPONENT)]
+        private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+            // id
+            .Validate((o) =>
+                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.ID))
+                ?.ValidateIdValueType(nameof(Id), Id)
+            )
+            // name
+            .Validate((o) =>
+                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.NAME))
+            )
+            // nativeName
+            .Validate((o) =>
+                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.NATIVE_NAME))
+            )
+            // sampleInterval
+            .Validate((o) =>
+                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.SAMPLE_INTERVAL))
+                ?.ValidateFloatValueType(nameof(SampleInterval), SampleInterval)
+            )
+            // sampleRate
+            .Validate((o) =>
+                o.UpToVersion(MtconnectVersions.V_1_1_0, (a) =>
+                    a.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.SAMPLE_RATE))
+                    ?.ValidateFloatValueType(nameof(SampleRate), SampleRate)
+                )
+            )
+            // uuid
+            .Validate((o) =>
+                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.UUID))
+                ?.ValidateIdValueType(nameof(Uuid), Uuid)
+            )
+            // coordinateSystemIdRef
+            .Validate((o) =>
+                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF))
+                ?.ValidateIdValueType(nameof(CoordinateSystemIdRef), CoordinateSystemIdRef)
+            )
+            .HasError(out validationErrors);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.3")]
-        private bool validateSampleRate_Deprecated(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (SampleRate.HasValue)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.WARNING,
-                    $"Component 'sampleRate' is DEPRECATED in MTConnect Version 1.2. Replaced by 'sampleInterval'.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.2")]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COMPONENT)]
         private bool validateChildCount(out ICollection<MtconnectValidationException> validationErrors) {
             validationErrors = new List<MtconnectValidationException>();
             if (SubComponents.Count <= 0 && DataItems.Count <= 0 && References.Count <= 0) {

@@ -1140,14 +1140,14 @@
             </summary>
             <remarks>See Part 2 Section 9.1.3.1.1 of the MTConnect specification.</remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes.NUMBER">
-            <summary>
-            A unique identifier that will only refer to a specific sensing element.
-            </summary>
-        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes.NAME">
             <summary>
             The name of the sensing element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes.NUMBER">
+            <summary>
+            A unique identifier that will only refer to a specific sensing element.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes">
@@ -1159,6 +1159,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.ID">
             <summary>
             The unique identifier for this element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.NAME">
+            <summary>
+            The name of the Component element.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.NATIVE_NAME">
@@ -1181,9 +1186,9 @@
             A unique identifier for this XML element.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.NAME">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.COORDINATE_SYSTEM_ID_REF">
             <summary>
-            The name of the Component element.
+            specifies the  CoordinateSystem for this  Component and its children.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentDescriptionAttributes">
@@ -1359,6 +1364,11 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.TYPE">
             <summary>
             The type of coordinate system. See <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemAttributes.UUID">
+            <summary>
+            UUID for the coordinate system.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CoordinateSystemTypes">
@@ -9305,6 +9315,11 @@
             The process of transforming to the origin position of the coordinate system from a parent coordinate system using Translation and Rotation.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CoordinateSystemElements.DESCRIPTION">
+            <summary>
+            natural language description of the  CoordinateSystem.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements">
             <summary>
             Available elements for the <see cref="T:MtconnectCore.Standard.Documents.Devices.DataItem"/> element
@@ -13265,6 +13280,13 @@
             <param name="version">String representation of the MTConnect Version.</param>
             <returns></returns>
         </member>
+        <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.GetReleaseDate(System.Nullable{MtconnectCore.Standard.Contracts.Enums.MtconnectVersions})">
+            <summary>
+            Looks up the official release date of the provided version.
+            </summary>
+            <param name="version">Version of MTConnect</param>
+            <returns>Official release date of the provided version.</returns>
+        </member>
         <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.GetReleaseDate(MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <summary>
             Looks up the official release date of the provided version.
@@ -13926,6 +13948,9 @@
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Uuid">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.UUID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.CoordinateSystemIdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.COORDINATE_SYSTEM_ID_REF"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.Component.TagName">
             <summary>
@@ -15395,6 +15420,168 @@
             <summary>
             Disposes of the validation context and logs any exceptions gathered during the context to the underlying Report.
             </summary>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.HasError(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
+            <summary>
+            Indicates whether a collection of exceptions contains any <c>ERROR</c>-level severities.
+            </summary>
+            <param name="errors">Collection of validation exceptions</param>
+            <returns>Flag for whether or not any of the exceptions are <c>ERROR</c>-level severity</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateValueProperty``1(System.String,System.String)">
+            <summary>
+            Validates the use of an Enum field in the context of the implemented version.<br/>
+            </summary>
+            <typeparam name="T">Reference to Enum type</typeparam>
+            <param name="entityName">Value key</param>
+            <param name="propertyName">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateRequired(System.String,System.String)">
+            <summary>
+            Validates value is not null or empty.<br/>
+            </summary>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateNotImplemented(System.String,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <summary>
+            Validates value is null or empty.<br/>
+            </summary>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <param name="minimumVersion">Minimum version of MTConnect that the item was implemented.</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateDeprecated(System.String,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <summary>
+            Validates value is not null or empty.<br/>
+            </summary>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <param name="maximumVersion">Maximum version of MTConnect that the item was supported.</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateValueMaxLength(System.String,System.String,System.Int32)">
+            <summary>
+            Validates length of value.<br/>
+            </summary>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateIdValueType(System.String,System.String,System.Boolean)">
+            <summary>
+            Validates <c>ID</c> value types.<br/>
+            <list type="bullet">
+            <item><b>Multiplicity</b>: Required</item>
+            <item><b>Max Length</b>: 255</item>
+            </list>
+            </summary>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateIntegerValueType(System.String,System.String)">
+            <summary>
+            Validates integer value types.
+            </summary>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateFloatValueType(System.String,System.String)">
+            <summary>
+            Validates float value types.
+            </summary>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateBooleanValueType(System.String,System.String)">
+            <summary>
+            Validates boolean value types.
+            </summary>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateEnumValue``1(System.String,System.String)">
+            <summary>
+            Validates Enum value types.<br/>
+            <list type="bullet">
+            <item><b>Value Type</b>: Field of <typeparamref name="T"/></item>
+            </list>
+            </summary>
+            <typeparam name="T">Reference to Enum type</typeparam>
+            <param name="key">Value key</param>
+            <param name="value">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationHelper.ValidateType(MtconnectCore.Validation.NodeValidationContext.NodeValidator,System.String,System.String,System.String)">
+            <summary>
+            Validates the <c>type</c> and <c>subtype</c> attributes.<br/>
+            <list type="bullet">
+            <item><b>Multiplicity</b>: Required</item>
+            <item>Unnecessary Extensions</item>
+            <item><b>Value Type</b>: <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes" />, <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes" />, or <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes" /> (Any Data Item Type)</item>
+            <item>Deprecation</item>
+            <item>Sub-Type valid for Type</item>
+            </list>
+            </summary>
+            <param name="validator">Reference to <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/></param>
+            <param name="category"><c>category</c> value for reference</param>
+            <param name="type"><c>type</c> value for reference</param>
+            <param name="subType"><c>subtype</c> value for reference</param>
+            <returns>Collection of validation exceptions</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationHelper.ValidateNode``1(MtconnectCore.Validation.NodeValidationContext.NodeValidator,MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.String,System.String)">
+            <summary>
+            Dynamically validates the <c>type</c> and <c>subtype</c> attributes.<br/>
+            <list type="bullet">
+            <item>Unnecessary Extensions</item>
+            <item><b>Value Type</b>: <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes" />, <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes" />, or <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes" /> (Any Data Item Type)</item>
+            <item>Deprecation</item>
+            <item>Sub-Type valid for Type</item>
+            </list>
+            </summary>
+            <typeparam name="T">Generic Data Item type enum.</typeparam>
+            <param name="validator">Reference to <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/></param>
+            <param name="categoryType">Deserialized <c>category</c> value for reference</param>
+            <param name="type"><c>type</c> value for reference</param>
+            <param name="subType"><c>subtype</c> value for reference</param>
+            <returns>Collection of validation exceptions</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationHelper.ValidateNodeExtension``1(MtconnectCore.Validation.NodeValidationContext.NodeValidator,MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.String,System.String)">
+            <summary>
+            Dynamically validates the <c>type</c> and <c>subtype</c> attributes for extensions to the standard.<br/>
+            <list type="bullet">
+            <item>Unnecessary Extensions</item>
+            </list>
+            </summary>
+            <typeparam name="T">Generic Data Item type enum.</typeparam>
+            <param name="validator">Reference to <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/></param>
+            <param name="categoryType">Deserialized <c>category</c> value for reference</param>
+            <param name="type"><c>type</c> value for reference</param>
+            <param name="subType"><c>subtype</c> value for reference</param>
+            <returns>Collection of validation exceptions</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.ValidationHelper.ValidateNodeInStandard``1(MtconnectCore.Validation.NodeValidationContext.NodeValidator,MtconnectCore.Standard.Contracts.Enums.Devices.CategoryTypes,System.String,System.String)">
+            <summary>
+            Dynamically validates the <c>type</c> and <c>subtype</c> attributes for implementation in the standard.<br/>
+            <list type="bullet">
+            <item><b>Value Type</b>: <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes" />, <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes" />, or <see cref="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ConditionTypes" /> (Any Data Item Type)</item>
+            <item>Deprecation</item>
+            <item>Sub-Type valid for Type</item>
+            </list>
+            </summary>
+            <typeparam name="T">Generic Data Item type enum.</typeparam>
+            <param name="validator">Reference to <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/></param>
+            <param name="categoryType">Deserialized <c>category</c> value for reference</param>
+            <param name="type"><c>type</c> value for reference</param>
+            <param name="subType"><c>subtype</c> value for reference</param>
+            <returns>Collection of validation exceptions</returns>
         </member>
         <member name="T:MtconnectCore.Validation.ValidationReport">
             <summary>
