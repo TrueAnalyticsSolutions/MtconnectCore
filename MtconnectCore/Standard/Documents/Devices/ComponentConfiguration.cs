@@ -25,10 +25,10 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElements("Motion/*", nameof(TryAddMotion), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public ICollection<Motion> Motion => _motion;
 
-        private List<Relationship> _relationships = new List<Relationship>();
+        private List<ConfigurationRelationship> _relationships = new List<ConfigurationRelationship>();
         /// <inheritdoc cref="ComponentConfigurationElements.RELATIONSHIPS"/>
         [MtconnectNodeElements("Relationships/*", nameof(TryAddRelationship), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
-        public ICollection<Relationship> Relationships => _relationships;
+        public ICollection<ConfigurationRelationship> Relationships => _relationships;
 
         private List<SensorConfiguration> _sensorConfiguration = new List<SensorConfiguration>();
         /// <inheritdoc cref="ComponentConfigurationElements.SENSOR_CONFIGURATION"/>
@@ -57,9 +57,9 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TryAddMotion(XmlNode xNode, XmlNamespaceManager nsmgr, out Motion motion)
             => base.TryAdd<Motion>(xNode, nsmgr, ref _motion, out motion);
 
-        public bool TryAddRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, out Relationship relationship)
+        public bool TryAddRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, out ConfigurationRelationship relationship)
         {
-            Logger.Verbose("Reading Relationship {XnodeKey}", xNode.TryGetAttribute(RelationshipAttributes.ID));
+            Logger.Verbose("Reading Relationship {XnodeKey}", xNode.TryGetAttribute(ConfigurationRelationshipAttributes.ID));
             if (xNode.LocalName == ComponentConfigurationElements.DEVICE_RELATIONSHIP.ToPascalCase())
             {
                 relationship = new DeviceRelationship(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());

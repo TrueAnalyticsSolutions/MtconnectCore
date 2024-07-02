@@ -10,22 +10,22 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
-    public class ComponentRelationship : Relationship
+    public class ComponentRelationship : ConfigurationRelationship
     {
-        /// <inheritdoc cref="ComponentRelationshipAttributes.ID"/>
-        [MtconnectNodeAttribute(ComponentRelationshipAttributes.ID)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.ID"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.ID)]
         public override string Id { get; set; }
 
-        /// <inheritdoc cref="ComponentRelationshipAttributes.NAME"/>
-        [MtconnectNodeAttribute(ComponentRelationshipAttributes.NAME)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.NAME"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.NAME)]
         public override string Name { get; set; }
 
-        /// <inheritdoc cref="ComponentRelationshipAttributes.TYPE"/>
-        [MtconnectNodeAttribute(ComponentRelationshipAttributes.TYPE)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.TYPE"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.TYPE)]
         public override string Type { get; set; }
 
-        /// <inheritdoc cref="ComponentRelationshipAttributes.CRITICALITY"/>
-        [MtconnectNodeAttribute(ComponentRelationshipAttributes.CRITICALITY)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.CRITICALITY"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.CRITICALITY)]
         public override string Criticality { get; set; }
 
         /// <inheritdoc cref="ComponentRelationshipAttributes.ID_REF"/>

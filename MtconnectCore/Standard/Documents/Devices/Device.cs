@@ -24,20 +24,20 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(DeviceAttributes.NAME)]
         public string Name { get; set; }
 
-        /// <inheritdoc cref="DeviceAttributes.ID"/>
-        [MtconnectNodeAttribute(DeviceAttributes.ID)]
+        /// <inheritdoc cref="ComponentAttributes.ID"/>
+        [MtconnectNodeAttribute(ComponentAttributes.ID)]
         public string Id { get; set; }
 
-        /// <inheritdoc cref="DeviceAttributes.SAMPLE_INTERVAL"/>
-        [MtconnectNodeAttribute(DeviceAttributes.SAMPLE_INTERVAL)]
+        /// <inheritdoc cref="ComponentAttributes.SAMPLE_INTERVAL"/>
+        [MtconnectNodeAttribute(ComponentAttributes.SAMPLE_INTERVAL)]
         public string SampleInterval { get; set; }
 
-        /// <inheritdoc cref="DeviceAttributes.NATIVE_NAME"/>
-        [MtconnectNodeAttribute(DeviceAttributes.NATIVE_NAME)]
+        /// <inheritdoc cref="ComponentAttributes.NATIVE_NAME"/>
+        [MtconnectNodeAttribute(ComponentAttributes.NATIVE_NAME)]
         public string NativeName { get; set; }
 
-        /// <inheritdoc cref="DeviceAttributes.SAMPLE_RATE"/>
-        [MtconnectNodeAttribute(DeviceAttributes.SAMPLE_RATE)]
+        /// <inheritdoc cref="ComponentAttributes.SAMPLE_RATE"/>
+        [MtconnectNodeAttribute(ComponentAttributes.SAMPLE_RATE)]
         public string SampleRate { get; set; }
 
         /// <inheritdoc cref="DeviceAttributes.ISO_841_CLASS"/>
@@ -67,7 +67,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public ICollection<DataItem> DataItems => _dataItems;
 
         [MtconnectNodeElements("Description", nameof(TrySetDescription), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
-        public ComponentDescription Description { get; set; }
+        public Description Description { get; set; }
 
         /// <inheritdoc cref="ComponentElements.CONFIGURATION"/>
         [MtconnectNodeElements("Configuration", nameof(TrySetConfiguration), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
@@ -93,8 +93,8 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TryAddDataItem(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItem dataItem)
             => base.TryAdd<DataItem>(xNode, nsmgr, ref _dataItems, out dataItem);
 
-        public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentDescription componentDescription)
-            => base.TrySet<ComponentDescription>(xNode, nsmgr, nameof(Description), out componentDescription);
+        public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out Description componentDescription)
+            => base.TrySet<Description>(xNode, nsmgr, nameof(Description), out componentDescription);
 
         public bool TrySetConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentConfiguration componentConfiguration)
             => base.TrySet<ComponentConfiguration>(xNode, nsmgr, nameof(Configuration), out componentConfiguration);

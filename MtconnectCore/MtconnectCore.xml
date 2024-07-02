@@ -468,14 +468,14 @@
             <summary>
             Initializes a <see cref="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute"/> for automatic processing of a MTConnect node's XML validation.
             </summary>
-            <param name="version">Reference to the MTConnect Standard version that this validation is in reference to.</param>
+            <param name="introduced">Reference to the MTConnect Standard version that this validation is in reference to.</param>
             <param name="standardReference">Reference to the part and section of the MTConnect Standard that this validation method comes from.</param>
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.#ctor(MtconnectCore.Standard.Contracts.Enums.MtconnectVersions,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.#ctor(MtconnectCore.Standard.Contracts.Enums.MtconnectVersions,System.String)"/>
             <param name="version">Reference to the MTConnect Standard version that this validation is in reference to.</param>
             <param name="standardReference">Reference to the part and section of the MTConnect Standard that this validation method comes from.</param>
-            <param name="maximumVersion"></param>
+            <param name="deprecated"></param>
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.Compare(MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <summary>
@@ -1112,6 +1112,31 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Assets.ToolLifeTypes.WEAR">
             <summary>
             The tool life measured in tool wear. Wear MUST be provided in millimeters as an offset to nominal. All units for minimum, maximum, and warningLevel MUST be given as millimeter offsets as well. The standard will only consider dimensional wear at this time.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.UNITS">
+            <summary>
+            same as  DataItem::units.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.KEY">
+            <summary>
+            unique identification of the  Cell in the  Definition. The description applies to all  Cell observations having this  CellDefinition::key.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.TYPE">
+            <summary>
+            same as  DataItem::type.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.SUB_TYPE">
+            <summary>
+            same as  DataItem::subType.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.KEY_TYPE">
+            <summary>
+             DataItem::type that defines the meaning of  CellDefinition::key.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ChannelAttributes">
@@ -13884,17 +13909,20 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.AlarmLimit.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Key">
-            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.KEY"/>
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Units">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.UNITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Key">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.KEY"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.Type">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.TYPE"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.SubType">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.SUB_TYPE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.CellDefinition.KeyType">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.CellDefinitionAttributes.KEY_TYPE"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.CellDefinition.#ctor">
             <inheritdoc/>
@@ -15406,6 +15434,27 @@
         <member name="M:MtconnectCore.Standard.SampleRequestQuery.Validate(System.Exception@)">
             <inheritdoc/>
         </member>
+        <member name="T:MtconnectCore.Validation.Pairings">
+            <summary>
+            Shortcut methods for creating <see cref="!:KeyValuePair"/> for use with params arguments
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Creates <see cref="!:KeyValuePair"/>
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Object)">
+            <summary>
+            Creates <see cref="!:KeyValuePair"/>
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
         <member name="T:MtconnectCore.Validation.ValidationContext">
             <summary>
             Provides a context for logging multiple validation exceptions to a single MTConnect node.
@@ -15447,13 +15496,16 @@
             </summary>
             <returns>Fluent validation context</returns>
         </member>
-        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateRequired(System.String,System.String)">
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.ValidateRequired(System.String,System.Boolean)">
+            <inheritdoc cref="!:NodeValidator.ValidateRequired(string, string)" />
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateRequired(System.String,System.String,System.Boolean)">
             <summary>
             Validates value is not null or empty.<br/>
             </summary>
             <param name="key">Value key</param>
             <param name="value">Value of key</param>
-            <returns>Fluent validation context</returns>
+            <returns>Fluent validation context. Returns <c>null</c> if <paramref name="value"/> is <c>null</c> or empty and <paramref name="breakIfMissing"/> is <c>true</c></returns>
         </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateValueMaxLength(System.String,System.String,System.Int32)">
             <summary>
@@ -15604,6 +15656,10 @@
             Determines if there are any exceptions that are of the severity level ERROR.
             </summary>
             <returns>Flag if any exception has the severity level of ERROR.</returns>
+        </member>
+    </members>
+</doc>
+e severity level of ERROR.</returns>
         </member>
     </members>
 </doc>

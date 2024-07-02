@@ -10,6 +10,7 @@ using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Validation;
+using MtconnectCore.Standard.Contracts.Enums.Devices;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
@@ -39,6 +40,10 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(CoordinateSystemAttributes.TYPE)]
         public string Type { get; set; }
 
+        /// <inheritdoc cref="CoordinateSystemAttributes.UUID"/>
+        [MtconnectNodeAttribute(CoordinateSystemAttributes.UUID)]
+        public string Uuid { get; set; }
+
         /// <inheritdoc cref="CoordinateSystemElements.ORIGIN"/>
         [MtconnectNodeElement(CoordinateSystemElements.ORIGIN)]
         public string Origin { get; set; }
@@ -61,45 +66,47 @@ namespace MtconnectCore.Standard.Documents.Devices
             => new NodeValidationContext(this)
             // id
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.ID), (o) =>
-                o.ValidateIdValueType(nameof(Id), Id)
+                o.WhileIntroduced((x) =>
+                    x.IsIdValueType(Id)
+                )
+                .WhileNotIntroduced((x) =>
+                    x.IsImplemented()
+                    .IsIdValueType(Id, false)
+                )
             )
             // name
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.NAME), (o) =>
-                o
+                o.IsImplemented(Name)
             )
             // nativeName
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.NATIVE_NAME), (o) =>
-                o
+                o.IsImplemented(NativeName)
             )
             // parentIdRef
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.PARENT_ID_REF), (o) =>
-                o
+                o.IsImplemented(ParentIdRef)
+                .IsIdValueType(ParentIdRef, false)
             )
             // type
-            // TODO: Scope this validation to the context of a minimum version. See extra validation below
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.TYPE), (o) =>
-                o
+                o.WhileIntroduced((x) =>
+                    x.IsImplemented()
+                )
+                .WhileNotIntroduced((x) =>
+                    x.IsImplemented(Type)
+                )
+                .IsEnumValueType<CoordinateSystemTypeEnum>(Type)
+
             )
             // uuid
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.UUID), (o) =>
-                // scope to v2.2.0 introduction
-                o
+                o.IsImplemented(Uuid)
             )
-            // Description
-            .ValidateValueProperty<CoordinateSystemElements>(nameof(CoordinateSystemElements.DESCRIPTION), (o) =>
-                o
-            )
+            //// Description
+            //.ValidateValueProperty<CoordinateSystemElements>(nameof(CoordinateSystemElements.DESCRIPTION), (o) =>
+            //    o
+            //)
             .HasError(out validationErrors);
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, Constants.ModelBrowserLinks.COORDINATE_SYSTEM)]
-        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
-            => new NodeValidationContext(this)
-            .Validate((o) =>
-                o.ValidateRequired(nameof(Type), Type)
-                ?.ValidateEnumValue<CoordinateSystemTypes>(nameof(Type), Type)
-            )
-            .HasError(out validationErrors);
-
         // TODO: Validate parentIdRef
 
     }

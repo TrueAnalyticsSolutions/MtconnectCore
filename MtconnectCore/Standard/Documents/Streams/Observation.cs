@@ -5,6 +5,7 @@ using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         /// <inheritdoc cref="ObservationAttributes.SEQUENCE"/>
         [MtconnectNodeAttribute(ObservationAttributes.SEQUENCE)]
-        public ulong Sequence { get; set; }
+        public string Sequence { get; set; }
 
         /// <inheritdoc cref="ObservationAttributes.SUB_TYPE"/>
         [MtconnectNodeAttribute(ObservationAttributes.SUB_TYPE)]
@@ -41,7 +42,7 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         /// <inheritdoc cref="ObservationAttributes.TIMESTAMP"/>
         [MtconnectNodeAttribute(SampleAttributes.TIMESTAMP)]
-        public DateTime Timestamp { get; set; }
+        public string Timestamp { get; set; }
 
         /// <inheritdoc cref="ObservationAttributes.TYPE"/>
         [MtconnectNodeAttribute(ObservationAttributes.TYPE)]
@@ -93,6 +94,60 @@ namespace MtconnectCore.Standard.Documents.Streams
                 }
             }
         }
+
+
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
+        private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+            // compositionId
+            .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.COMPOSITION_ID), (o) =>
+                o.IsImplemented(CompositionId)
+                .IsIdValueType(CompositionId, false)
+            )
+            // dataItemId
+            .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.DATA_ITEM_ID), (o) =>
+                o.WhileIntroduced((x) =>
+                    x.IsIdValueType(DataItemId)
+                )
+                .WhileNotIntroduced((x) =>
+                    x.IsIdValueType(DataItemId, false)
+                )
+            )
+            // name
+            .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.NAME), (o) =>
+                o.IsImplemented(Name)
+            )
+            // sequence
+            .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.SEQUENCE), (o) =>
+                o.WhileIntroduced((x) =>
+                    x.IsImplemented()
+                    .IsRequired(Sequence)
+                )
+                .WhileNotIntroduced((x) =>
+                    x.IsImplemented(Sequence)
+                )
+                .IsUIntValueType(Sequence)
+                .IsUIntWithinRange(Sequence, 1, (2^64) - 1)
+                // TODO: Check range
+            )
+            // type
+            .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.TYPE), (o) =>
+                o.IsImplemented(Type)
+                .IsRequired(Type)
+                .ValidateType(Type, SubType)
+            )
+            // timestamp
+            .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.TIMESTAMP), (o) =>
+                o.IsImplemented(Timestamp)
+                .IsRequired(Timestamp)
+                .IsDateTimeValueType(Timestamp)
+            )
+            // units
+            .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.UNITS), (o) =>
+                o.IsImplemented(Units)
+                .IsEnumValueType<UnitsTypes>(Units)
+            )
+            .HasError(out validationErrors);
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         protected bool validateDataItemId(out ICollection<MtconnectValidationException> validationErrors) {

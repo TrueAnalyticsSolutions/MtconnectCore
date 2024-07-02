@@ -8,6 +8,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
     /// Attributes for a <see cref="DataItem"/> element in the MTConnectDevices Response Document.
     /// </summary>
     /// <remarks>See Part 2 Section 7.2.2 of the MTConnect specification.</remarks>
+    [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DATA_ITEM)]
     public enum DataItemAttributes
     {
         /// <summary>
@@ -95,7 +96,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
         /// </list>
         /// </summary>
         [Obsolete("Deprecated in 2.0")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DATA_ITEM, MtconnectVersions.V_1_8_1)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DATA_ITEM, MtconnectVersions.V_2_0_0)]
         COORDINATE_SYSTEM,
         /// <summary>
         /// The identifier attribute of the <see cref="Composition"/> element that the reported data is most closely associated.

@@ -17,8 +17,8 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(DataItemRefAttributes.ID_REF)]
         public override string IdRef { get; set; }
 
-        /// <inheritdoc cref="DataItemRefAttributes.NAME"/>
-        [MtconnectNodeAttribute(DataItemRefAttributes.NAME)]
+        /// <inheritdoc cref="ReferenceAttributes.NAME"/>
+        [MtconnectNodeAttribute(ReferenceAttributes.NAME)]
         public override string Name { get; set; }
 
         /// <inheritdoc />

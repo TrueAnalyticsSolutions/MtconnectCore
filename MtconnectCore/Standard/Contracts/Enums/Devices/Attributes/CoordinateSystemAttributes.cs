@@ -29,7 +29,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, Constants.ModelBrowserLinks.COORDINATE_SYSTEM)]
         PARENT_ID_REF,
         /// <summary>
-        /// The type of coordinate system. See <see cref="CoordinateSystemTypes"/>.
+        /// The type of coordinate system. See <see cref="CoordinateSystemTypeEnum"/>.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, Constants.ModelBrowserLinks.COORDINATE_SYSTEM)]
         TYPE,

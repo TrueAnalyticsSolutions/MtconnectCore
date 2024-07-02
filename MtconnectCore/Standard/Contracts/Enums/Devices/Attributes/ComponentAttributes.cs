@@ -32,7 +32,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
         /// <summary>
         /// DEPRECATED in MTConnect Version 1.2. Replaced by <see cref="SAMPLE_INTERVAL"/>
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COMPONENT, MtconnectVersions.V_1_1_0)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COMPONENT, MtconnectVersions.V_1_2_0)]
         [Obsolete]
         SAMPLE_RATE,
         /// <summary>

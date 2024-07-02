@@ -53,7 +53,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="ComponentElements.DESCRIPTION"/>
         [MtconnectNodeElements("Description", nameof(TrySetDescription), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
-        public ComponentDescription Description { get; set; }
+        public Description Description { get; set; }
 
         /// <inheritdoc cref="ComponentElements.CONFIGURATION"/>
         [MtconnectNodeElements("Configuration", nameof(TrySetConfiguration), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
@@ -99,8 +99,8 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TryAddDataItem(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItem dataItem)
             => base.TryAdd<DataItem>(xNode, nsmgr, ref _dataItems, out dataItem);
 
-        public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentDescription componentDescription)
-            => base.TrySet<ComponentDescription>(xNode, nsmgr, nameof(Description), out componentDescription);
+        public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out Description componentDescription)
+            => base.TrySet<Description>(xNode, nsmgr, nameof(Description), out componentDescription);
 
         public bool TrySetConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentConfiguration componentConfiguration)
             => base.TrySet<ComponentConfiguration>(xNode, nsmgr, nameof(Configuration), out componentConfiguration);
@@ -139,43 +139,55 @@ namespace MtconnectCore.Standard.Documents.Devices
             => new NodeValidationContext(this)
             // id
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.ID), (o) =>
-                o.ValidateIdValueType(nameof(Id), Id)
+                o.WhileIntroduced((x) =>
+                    x.IsImplemented()
+                    .IsIdValueType(Id)
+                )
+                .WhileNotIntroduced((x) =>
+                    x.IsImplemented(nameof(ComponentAttributes.ID))
+                    .IsIdValueType(Id, false)
+                )
             )
             // name
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.NAME), (o) =>
-                o
+                o.IsImplemented(nameof(ComponentAttributes.NAME))
             )
             // nativeName
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.NATIVE_NAME), (o) =>
-                o
+                o.IsImplemented(nameof(ComponentAttributes.NATIVE_NAME))
             )
             // sampleInterval
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_INTERVAL), (o) =>
-                o.ValidateFloatValueType(nameof(SampleInterval), SampleInterval)
+                o.IsImplemented(nameof(ComponentAttributes.SAMPLE_INTERVAL))
+                .IsFloatValueType(SampleInterval)
             )
             // sampleRate
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_RATE), (o) =>
-            // scope validation to v1.1.0
-                o.ValidateFloatValueType(nameof(SampleRate), SampleRate)
+                o.IsImplemented(nameof(ComponentAttributes.SAMPLE_RATE))
+                .IsFloatValueType(SampleRate)
             )
             // uuid
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.UUID), (o) =>
-                o.ValidateIdValueType(nameof(Uuid), Uuid, false)
+                o.IsImplemented(nameof(ComponentAttributes.UUID))
+                .IsIdValueType(Uuid, false)
             )
             // coordinateSystemIdRef
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF), (o) =>
-                o.ValidateValueProperty(CoordinateSystemIdRef)
-                ?.ValidateIdValueType(nameof(CoordinateSystemIdRef), CoordinateSystemIdRef, false)
+                o.IsImplemented(nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF))
+                .IsIdValueType(CoordinateSystemIdRef, false)
             )
             .HasError(out validationErrors);
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COMPONENT)]
-        private bool validateChildCount(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (SubComponents.Count <= 0 && DataItems.Count <= 0 && References.Count <= 0) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Component MUST have at least one of Component, DataItem, or Reference entities.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        private bool validateParts(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+                .Validate((o) =>
+                    o.HasAtLeastOne(
+                        Pairings.Of(nameof(ComponentElements.COMPONENTS), SubComponents),
+                        Pairings.Of(nameof(ComponentElements.DATA_ITEMS), DataItems),
+                        Pairings.Of(nameof(ComponentElements.REFERENCES), References)
+                    )
+                )
+                .HasError(out validationErrors);
     }
 }

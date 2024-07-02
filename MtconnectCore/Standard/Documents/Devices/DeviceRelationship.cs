@@ -10,22 +10,22 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
-    public class DeviceRelationship : Relationship
+    public class DeviceRelationship : ConfigurationRelationship
     {
-        /// <inheritdoc cref="DeviceRelationshipAttributes.ID"/>
-        [MtconnectNodeAttribute(DeviceRelationshipAttributes.ID)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.ID"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.ID)]
         public override string Id { get; set; }
 
-        /// <inheritdoc cref="DeviceRelationshipAttributes.NAME"/>
-        [MtconnectNodeAttribute(DeviceRelationshipAttributes.NAME)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.NAME"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.NAME)]
         public override string Name { get; set; }
 
-        /// <inheritdoc cref="DeviceRelationshipAttributes.TYPE"/>
-        [MtconnectNodeAttribute(DeviceRelationshipAttributes.TYPE)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.TYPE"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.TYPE)]
         public override string Type { get; set; }
 
-        /// <inheritdoc cref="DeviceRelationshipAttributes.CRITICALITY"/>
-        [MtconnectNodeAttribute(DeviceRelationshipAttributes.CRITICALITY)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.CRITICALITY"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.CRITICALITY)]
         public override string Criticality { get; set; }
 
         /// <inheritdoc cref="DeviceRelationshipAttributes.DEVICE_UUID_REF"/>

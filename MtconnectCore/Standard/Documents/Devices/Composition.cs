@@ -35,8 +35,8 @@ namespace MtconnectCore.Standard.Documents.Devices
         public string Type { get; set; }
 
         /// <inheritdoc cref="CompositionElements.DESCRIPTION"/>
-        [MtconnectNodeElements("Description", nameof(TrySetDescription))]
-        public CompositionDescription Description { get; set; }
+        [MtconnectNodeElements("Description", nameof(TrySetDescription), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        public Description Description { get; set; }
 
         /// <inheritdoc/>
         public Composition() : base() { }
@@ -44,8 +44,8 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc/>
         public Composition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
-        public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out CompositionDescription compositionDescription)
-            => base.TrySet<CompositionDescription>(xNode, nsmgr, nameof(Description), out compositionDescription);
+        public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out Description compositionDescription)
+            => base.TrySet<Description>(xNode, nsmgr, nameof(Description), out compositionDescription);
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 4.6.2")]
         private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {

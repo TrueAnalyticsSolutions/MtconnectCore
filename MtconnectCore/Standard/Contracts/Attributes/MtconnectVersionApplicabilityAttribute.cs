@@ -25,21 +25,21 @@ namespace MtconnectCore.Standard.Contracts.Attributes
         /// <summary>
         /// Initializes a <see cref="MtconnectVersionApplicabilityAttribute"/> for automatic processing of a MTConnect node's XML validation.
         /// </summary>
-        /// <param name="version">Reference to the MTConnect Standard version that this validation is in reference to.</param>
+        /// <param name="introduced">Reference to the MTConnect Standard version that this validation is in reference to.</param>
         /// <param name="standardReference">Reference to the part and section of the MTConnect Standard that this validation method comes from.</param>
-        public MtconnectVersionApplicabilityAttribute(MtconnectVersions version, string standardReference)
+        public MtconnectVersionApplicabilityAttribute(MtconnectVersions introduced, string standardReference)
         {
-            IntroducedVersion = version;
+            IntroducedVersion = introduced;
             StandardReference = standardReference;
         }
 
         /// <inheritdoc cref="MtconnectVersionApplicabilityAttribute.MtconnectVersionApplicabilityAttribute(MtconnectVersions, string)"/>
         /// <param name="version">Reference to the MTConnect Standard version that this validation is in reference to.</param>
         /// <param name="standardReference">Reference to the part and section of the MTConnect Standard that this validation method comes from.</param>
-        /// <param name="maximumVersion"></param>
-        public MtconnectVersionApplicabilityAttribute(MtconnectVersions version, string standardReference, MtconnectVersions maximumVersion) : this(version, standardReference)
+        /// <param name="deprecated"></param>
+        public MtconnectVersionApplicabilityAttribute(MtconnectVersions version, string standardReference, MtconnectVersions deprecated) : this(version, standardReference)
         {
-            DeprecatedVersion = maximumVersion;
+            DeprecatedVersion = deprecated;
         }
 
         /// <summary>

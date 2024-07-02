@@ -1,25 +1,25 @@
-﻿using System;
+﻿using MtconnectCore.Standard.Contracts.Enums.RequestParameters;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MtconnectCore.Standard
 {
     public class CurrentRequestQuery : IRequestQuery
     {
-        /// <summary>
-        /// An XPath that defines specific information or a set of information to be included in an MTConnectStreams Response Document. See Part 1 Section 8.3.2.2 of MTConnect specification.
-        /// </summary>
+        /// <inheritdoc cref="CurrentParameters.DEVICE"/>
+        public string Device { get; set; }
+
+        /// <inheritdoc cref="CurrentParameters.PATH"/>
         public string Path { get; set; }
 
-        /// <summary>
-        /// Requests that the MTConnect Response Documents MUST include the current value for all Data Entities relative to the time that a specific sequence number was recorded. See Part 1 Section 8.3.2.2 of MTConnect specification.
-        /// </summary>
+        /// <inheritdoc cref="CurrentParameters.AT"/>
         public ulong? At { get; set; }
 
-        /// <summary>
-        /// The Agent MUST continuously publish Response Documents when the query parameters include interval using the value as the period between adjacent publications. See Part 1 Section 8.3.2.2 of MTConnect specification.
-        /// </summary>
+        /// <inheritdoc cref="CurrentParameters.INTERVAL"/>
         public int? Interval { get; set; }
+
+        /// <inheritdoc cref="CurrentParameters.DEVICE_TYPE"/>
+        public string DeviceType { get; set; }
 
         public CurrentRequestQuery() { }
 
@@ -33,6 +33,8 @@ namespace MtconnectCore.Standard
             if (At != null) parameters.Add($"at={At}");
 
             if (Interval != null) parameters.Add($"interval={Interval}");
+
+            if (!string.IsNullOrEmpty(DeviceType)) parameters.Add($"deviceType={DeviceType}");
 
             if (parameters.Count == 0) {
                 return string.Empty;

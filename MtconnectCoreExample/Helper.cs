@@ -2,7 +2,9 @@
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Documents;
 using MtconnectCore.Validation;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,7 +38,15 @@ namespace MtconnectCoreExample
                             color = ConsoleColor.Gray;
                             break;
                     }
-                    Consoul.Write(error.ToString(), color);
+                    Consoul.Write($"{error.Message}", color);
+                    if (error.Data != null && error.Data.Count > 0)
+                    {
+                        foreach (DictionaryEntry item in error.Data)
+                        {
+                            Consoul.Write($"\t{item.Key}={item.Value}", ConsoleColor.Gray, false);
+                        }
+                        Consoul.Write("");
+                    }
                 }
 
                 Consoul.Write("Done!", ConsoleColor.Green);

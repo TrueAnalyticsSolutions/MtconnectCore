@@ -7,7 +7,6 @@ using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
@@ -53,12 +52,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             => new NodeValidationContext(this)
             // name
             .ValidateValueProperty<ChannelAttributes>(nameof(ChannelAttributes.NAME), (o) =>
-                o
+                o.IsImplemented()
             )
             // number
             .ValidateValueProperty<ChannelAttributes>(nameof(ChannelAttributes.NUMBER), (o) => 
-                o.WhileIntroduced((x) =>
-                    x.ValidateRequired(nameof(Name), Name)
+                o.IsImplemented()
+                .WhileIntroduced((x) =>
+                    x.IsRequired(Number)
                 )
             )
             .HasError(out validationErrors);

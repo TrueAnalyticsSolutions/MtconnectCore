@@ -13,276 +13,46 @@ using System.Runtime.CompilerServices;
 
 namespace MtconnectCore.Validation
 {
-    public class NodeValidationContext
-    {
-        public MtconnectNode Node { get; set; }
-
-        public ICollection<MtconnectValidationException> Exceptions { get; set; } = new List<MtconnectValidationException>();
-
-        public NodeValidationContext(MtconnectNode node)
-        {
-            Node = node;
-        }
-
-        /// <summary>
-        /// Indicates whether a collection of exceptions contains any <c>ERROR</c>-level severities.
-        /// </summary>
-        /// <param name="errors">Collection of validation exceptions</param>
-        /// <returns>Flag for whether or not any of the exceptions are <c>ERROR</c>-level severity</returns>
-        public bool HasError(out ICollection<MtconnectValidationException> errors)
-        {
-            errors = Exceptions;
-            return HasError();
-        }
-
-        public bool HasError()
-            => Exceptions.Any(o => o.Severity == ValidationSeverity.ERROR);
-
-        public NodeValidationContext Validate(Func<NodeValidator, NodeValidator> validator)
-        {
-            try
-            {
-                validator.Invoke(new NodeValidator(this));
-            }
-            catch (Exception ex)
-            {
-                Exceptions.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Exception prevented further validation of {Node.SourceNode.LocalName}",
-                    Node.SourceNode));
-            }
-            return this;
-        }
-
-        public NodeValidationContext ValidateValueProperty<TEnum>(string propertyName, Func<NodeValueValidator<TEnum>, NodeValidator> validator)
-        {
-            try
-            {
-                validator.Invoke(new NodeValueValidator<TEnum>(this, propertyName));
-            }
-            catch (Exception ex)
-            {
-                Exceptions.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Exception prevented further validation of {Node.SourceNode.LocalName}",
-                    Node.SourceNode));
-            }
-            return this;
-        }
-
-        public class NodeValueValidator<TEnum> : NodeValidator
-        {
-            public string PropertyName { get; }
-
-            public VersionComparisonTypes? ImplementationState { get; }
-
-            public NodeValueValidator(NodeValidationContext context, string propertyName) : base(context)
-            {
-                PropertyName = propertyName;
-                ImplementationState = EnumHelper.CompareToVersion<TEnum>(Context.Node.MtconnectVersion.GetValueOrDefault());
-            }
-
-            public NodeValueValidator<TEnum> WhileIntroduced(Func<NodeValidator, NodeValidator> action)
-            {
-                if (ImplementationState == VersionComparisonTypes.Implemented)
-                {
-                    return action(this) as NodeValueValidator<TEnum>;
-                }
-                return this;
-            }
-
-            public NodeValueValidator<TEnum> WhileNotIntroduced(Func<NodeValidator, NodeValidator> action)
-            {
-                if (ImplementationState != VersionComparisonTypes.Implemented)
-                {
-                    return action(this) as NodeValueValidator<TEnum>;
-                }
-                return this;
-            }
-
-            /// <summary>
-            /// Validates the use of an Enum field in the context of the implemented version.<br/>
-            /// </summary>
-            /// <returns>Fluent validation context</returns>
-            public NodeValueValidator<TEnum> ValidateValueProperty()
-            {
-                if (ImplementationState != VersionComparisonTypes.Implemented)
-                {
-                    AddWarning($"The field '{PropertyName}' is not supported in version '{Context.Node.MtconnectVersion.ToName()}'.");
-                }
-                return this;
-            }
-            /// <summary>
-            /// Validates the use of an Enum field in the context of the implemented version when the provided value is not null.<br/>
-            /// </summary>
-            /// <returns>Fluent validation context</returns>
-            public NodeValueValidator<TEnum> ValidateValueProperty(string value)
-            {
-                if (string.IsNullOrEmpty(value))
-                    return null;
-                return ValidateValueProperty();
-            }
-        }
-        public class NodeValidator
-        {
-            internal NodeValidationContext Context { get; private set; }
-
-            internal NodeValidator(NodeValidationContext context)
-            {
-                Context = context;
-            }
-
-            public void AddError(string message)
-                => Context.Exceptions.Add(new MtconnectValidationException(ValidationSeverity.ERROR, message, Context.Node.SourceNode));
-            public void AddWarning(string message)
-                => Context.Exceptions.Add(new MtconnectValidationException(ValidationSeverity.WARNING, message, Context.Node.SourceNode));
-            public void AddMessage(string message)
-                => Context.Exceptions.Add(new MtconnectValidationException(ValidationSeverity.MESSAGE, message, Context.Node.SourceNode));
-
-
-
-            /// <summary>
-            /// Validates value is not null or empty.<br/>
-            /// </summary>
-            /// <param name="key">Value key</param>
-            /// <param name="value">Value of key</param>
-            /// <returns>Fluent validation context</returns>
-            public NodeValidator ValidateRequired(string key, string value)
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    AddError($"Missing '{key}' value.");
-                    return null;
-                }
-                return this;
-            }
-
-            /// <summary>
-            /// Validates length of value.<br/>
-            /// </summary>
-            /// <param name="key">Value key</param>
-            /// <param name="value">Value of key</param>
-            /// <returns>Fluent validation context</returns>
-            public NodeValidator ValidateValueMaxLength(string key, string value, int maxLength = 255)
-            {
-                if (!string.IsNullOrEmpty(value) && value.Length > maxLength)
-                {
-                    AddError($"The {key} value must not exceed {maxLength} characters.");
-                    return null;
-                }
-                return this;
-            }
-
-            /// <summary>
-            /// Validates <c>ID</c> value types.<br/>
-            /// <list type="bullet">
-            /// <item><b>Multiplicity</b>: Required</item>
-            /// <item><b>Max Length</b>: 255</item>
-            /// </list>
-            /// </summary>
-            /// <param name="key">Value key</param>
-            /// <param name="value">Value of key</param>
-            /// <returns>Fluent validation context</returns>
-            public NodeValidator ValidateIdValueType(string key, string value, bool isRequired = true)
-                => (isRequired
-                    ? this.ValidateRequired(key, value)
-                    : this)
-                ?.ValidateValueMaxLength(key, value, 255);
-
-            /// <summary>
-            /// Validates integer value types.
-            /// </summary>
-            /// <param name="key">Value key</param>
-            /// <param name="value">Value of key</param>
-            /// <returns>Fluent validation context</returns>
-            public NodeValidator ValidateIntegerValueType(string key, string value)
-            {
-                if (!string.IsNullOrEmpty(value) && !int.TryParse(value, out int valueInt))
-                {
-                    AddError($"Invalid '{key}' value. It MUST be an integer.");
-                    return null;
-                }
-                return this;
-            }
-
-            /// <summary>
-            /// Validates float value types.
-            /// </summary>
-            /// <param name="key">Value key</param>
-            /// <param name="value">Value of key</param>
-            /// <returns>Fluent validation context</returns>
-            public NodeValidator ValidateFloatValueType(string key, string value)
-            {
-                if (!string.IsNullOrEmpty(value) && !float.TryParse(value, out float valueFloat))
-                {
-                    AddError($"Invalid '{key}' value. It MUST be a float.");
-                    return null;
-                }
-                return this;
-            }
-
-            /// <summary>
-            /// Validates boolean value types.
-            /// </summary>
-            /// <param name="key">Value key</param>
-            /// <param name="value">Value of key</param>
-            /// <returns>Fluent validation context</returns>
-            public NodeValidator ValidateBooleanValueType(string key, string value)
-            {
-                if (!string.IsNullOrEmpty(value) && !bool.TryParse(value, out bool valueBool))
-                {
-                    AddError($"Invalid '{key}' value. It MUST be a boolean.");
-                    return null;
-                }
-                return this;
-            }
-
-            /// <summary>
-            /// Validates Enum value types.<br/>
-            /// <list type="bullet">
-            /// <item><b>Value Type</b>: Field of <typeparamref name="T"/></item>
-            /// </list>
-            /// </summary>
-            /// <typeparam name="T">Reference to Enum type</typeparam>
-            /// <param name="key">Value key</param>
-            /// <param name="value">Value of key</param>
-            /// <returns>Fluent validation context</returns>
-            public NodeValidator ValidateEnumValue<T>(string key, string value) where T : Enum
-            {
-                if (!string.IsNullOrEmpty(value) && !EnumHelper.Contains<T>(value))
-                {
-                    AddError($"Invalid '{key}' value '{value}'.");
-                    return null;
-                }
-                return this;
-            }
-
-            public NodeValidator HasMultiplicity<T>(string key, IEnumerable<T> values, int minimumCount, int maximumCount)
-            {
-                var count = values.Count();
-                if (count < minimumCount)
-                {
-                    AddError($"There must be at least {minimumCount} '{key}'");
-                    return null;
-                } else if (count > maximumCount)
-                {
-                    AddError($"There must be no more than {maximumCount} '{key}'");
-                    return null;
-                }
-                return this;
-            }
-
-            public NodeValidator If(Func<NodeValidator, bool> predicate, Func<NodeValidator, NodeValidator> action)
-            {
-                if (predicate(this))
-                    return action(this);
-                return this;
-            }
-        }
-    }
-
     internal static class ValidationHelper
     {
+        internal static NodeValidationContext.NodeValidator ValidateType(this NodeValidationContext.NodeValidator validator, string type, string subType)
+        {
+            if (!string.IsNullOrEmpty(type))
+            {
+                foreach (CategoryTypes category in Enum.GetValues(typeof(CategoryTypes)))
+                {
+                    var categoryValidator = new NodeValidationContext.NodeValidator(new NodeValidationContext(validator.Context.Node));
+                    switch (category)
+                    {
+                        case CategoryTypes.SAMPLE:
+                            categoryValidator.ValidateNode<SampleTypes>(category, type, subType);
+                            break;
+                        case CategoryTypes.EVENT:
+                            categoryValidator.ValidateNode<EventTypes>(category, type, subType);
+                            break;
+                        case CategoryTypes.CONDITION:
+                            // TODO: Check for ANY Data Item type
+                            categoryValidator.ValidateNode<ConditionTypes>(category, type, subType);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    //Determine if it was valid type
+                    if (!categoryValidator.Context.Exceptions.Any(o => o.Message == INVALID_TYPE_ERROR))
+                    {
+                        foreach (var exception in categoryValidator.Context.Exceptions)
+                        {
+                            validator.Context.Exceptions.Add(exception);
+                        }
+                        return validator;
+                    }
+                }
+                validator.AddError(INVALID_TYPE_ERROR, Pairings.Of("type", type));
+            }
+            return validator;
+        }
+
         /// <summary>
         /// Validates the <c>type</c> and <c>subtype</c> attributes.<br/>
         /// <list type="bullet">
@@ -300,12 +70,7 @@ namespace MtconnectCore.Validation
         /// <returns>Collection of validation exceptions</returns>
         internal static NodeValidationContext.NodeValidator ValidateType(this NodeValidationContext.NodeValidator validator, string category, string type, string subType)
         {
-            if (string.IsNullOrEmpty(type))
-            {
-                validator.AddError($"Missing 'type' value.");
-                return null;
-            }
-            else if (!string.IsNullOrEmpty(category))
+            if (!string.IsNullOrEmpty(type) && !string.IsNullOrEmpty(category))
             {
                 if (Enum.TryParse<CategoryTypes>(category, out CategoryTypes categoryType))
                 {
@@ -319,11 +84,11 @@ namespace MtconnectCore.Validation
                             // TODO: Check for ANY Data Item type
                             return validator.ValidateNode<ConditionTypes>(categoryType, type, subType);
                         default:
-                            return null;
+                            return validator;
                     }
                 } else
                 {
-                    return null;
+                    validator.AddError("Invalid 'category' value.", Pairings.Of("category", category));
                 }
             }
             return validator;
@@ -331,11 +96,9 @@ namespace MtconnectCore.Validation
 
         internal static NodeValidationContext.NodeValidator ValidateNativeUnits(this NodeValidationContext.NodeValidator validator, string nativeUnits)
         {
-            if (string.IsNullOrEmpty(nativeUnits))
-                return null;
-            if (!EnumHelper.Contains<NativeUnitsTypes>(nativeUnits))
+            if (!string.IsNullOrEmpty(nativeUnits) && !EnumHelper.Contains<NativeUnitsTypes>(nativeUnits))
                 if (!EnumHelper.Contains<UnitsTypes>(nativeUnits))
-                    return null;
+                    validator.AddError("Invalid 'nativeUnits' value.", Pairings.Of("nativeUnits", nativeUnits));
             return validator;
 
         }
@@ -357,16 +120,27 @@ namespace MtconnectCore.Validation
         /// <returns>Collection of validation exceptions</returns>
         internal static NodeValidationContext.NodeValidator ValidateNode<T>(this NodeValidationContext.NodeValidator validator, CategoryTypes categoryType, string type, string subType) where T : Enum
         {
-            var extensionValidator = validator.ValidateNodeExtension<T>(categoryType, type, subType);
 
-            if (extensionValidator == null)
-                return extensionValidator;
-            
+            var extensionValidator = new NodeValidationContext(validator.Context.Node);
+            extensionValidator.Validate((o) => o.ValidateNodeExtension<T>(categoryType, type, subType));
 
-            var standardValidator = validator.ValidateNodeInStandard<T>(categoryType, type, subType);
+            if (extensionValidator.Exceptions.Any())
+            {
+                foreach (var exception in extensionValidator.Exceptions)
+                    validator.Context.Exceptions.Add(exception);
+                return validator;
+            }
 
-            if (standardValidator == null)
-                return standardValidator;
+
+            var standardValidator = new NodeValidationContext(validator.Context.Node);
+            standardValidator.Validate((o) => o.ValidateNodeInStandard<T>(categoryType, type, subType));
+
+            if (standardValidator.HasError())
+            {
+                foreach (var exception in standardValidator.Exceptions)
+                    validator.Context.Exceptions.Add(exception);
+                return validator;
+            }
 
             return validator;
         }
@@ -389,19 +163,24 @@ namespace MtconnectCore.Validation
             {
                 if (type.Contains(":"))
                 {
-                    var standardValidator = validator.ValidateNodeInStandard<T>(categoryType, type.Substring(type.LastIndexOf(":") + 1), subType);
-                    if (!validator.Context.Exceptions.Any(o => o.Severity == ValidationSeverity.ERROR))
+                    string nonExtendedType = type.Substring(type.LastIndexOf(":") + 1);
+                    var standardValidator = new NodeValidationContext(validator.Context.Node);
+                    standardValidator.Validate((o) => o.ValidateNodeInStandard<T>(categoryType, nonExtendedType, subType));
+                    if (!standardValidator.HasError())
                     {
-                        validator.AddWarning($"Extended type of '{type}' already exist in version '{validator.Context.Node.MtconnectVersion}'.");
+                        validator.AddWarning($"Extended type already exists.", Pairings.Of("type", type), Pairings.Of("version", validator.Context.Node.MtconnectVersion.ToName()));
                     }
                     else
                     {
-                        validator.AddWarning($"Extended type of '{type}' are used in this implementation.");
+                        validator.AddWarning($"Extended type used in this implementation.", Pairings.Of("type", type));
                     }
                 }
             }
             return validator;
         }
+
+        private const string INVALID_TYPE_ERROR = "Invalid 'type' value.";
+        private const string INVALID_SUB_TYPE_ERROR = "Invalid 'subType' value.";
 
         /// <summary>
         /// Dynamically validates the <c>type</c> and <c>subtype</c> attributes for implementation in the standard.<br/>
@@ -429,7 +208,7 @@ namespace MtconnectCore.Validation
                     || (!EnumHelper.Contains<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(type)
                     && !EnumHelper.Contains<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes>(type)))
                 {
-                    validator.AddError($"Invalid 'type' value.");
+                    validator.AddError(INVALID_TYPE_ERROR, Pairings.Of("type", type));
                     isValidType = false;
                 }
             }
@@ -438,7 +217,7 @@ namespace MtconnectCore.Validation
                 if (categoryType != CategoryTypes.CONDITION
                     || (!EnumHelper.IsImplemented<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(type, implementedVersion)
                         && !EnumHelper.IsImplemented<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes>(type, implementedVersion)))
-                    validator.AddWarning($"Invalid 'type' value in version '{implementedVersion}'.");
+                    validator.AddWarning($"Invalid 'type' value in version.", Pairings.Of("type", type), Pairings.Of("version", implementedVersion.ToName()));
                 isValidType = false;
             }
 
@@ -454,19 +233,19 @@ namespace MtconnectCore.Validation
                 {
                     if (!EnumHelper.Contains(obsSubType.SubTypeEnum, subType))
                     {
-                        validator.AddError($"Invalid 'subType' value.");
+                        validator.AddError(INVALID_SUB_TYPE_ERROR, Pairings.Of("subType", subType));
                         isValidSubType = false;
                     }
                     else if (!EnumHelper.IsImplemented(obsSubType.SubTypeEnum, subType, implementedVersion))
                     {
-                        validator.AddWarning($"Invalid 'subType' value in version '{implementedVersion}'.");
+                        validator.AddWarning($"Invalid 'subType' value in version.", Pairings.Of("subType", subType), Pairings.Of("version", implementedVersion.ToName()));
                         isValidSubType = false;
                     }
                 }
             }
 
-            if (!isValidType || !isValidSubType)
-                return null;
+            //if (!isValidType || !isValidSubType)
+            //    return null;
 
             return validator;
         }

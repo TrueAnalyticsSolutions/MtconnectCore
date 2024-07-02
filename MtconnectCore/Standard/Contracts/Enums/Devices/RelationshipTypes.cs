@@ -4,7 +4,7 @@ using MtconnectCore.Standard.Documents.Devices;
 namespace MtconnectCore.Standard.Contracts.Enums.Devices
 {
     /// <summary>
-    /// Available options for a <see cref="Relationship.Type"/>
+    /// Available options for a <see cref="ConfigurationRelationship.Type"/>
     /// </summary>
     [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.1")]
     public enum RelationshipTypes {

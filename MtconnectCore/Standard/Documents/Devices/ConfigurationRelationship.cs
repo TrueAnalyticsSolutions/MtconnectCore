@@ -10,30 +10,30 @@ using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
-    public abstract class Relationship : MtconnectNode
+    public abstract class ConfigurationRelationship : MtconnectNode
     {
-        /// <inheritdoc cref="RelationshipAttributes.ID"/>
-        [MtconnectNodeAttribute(RelationshipAttributes.ID)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.ID"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.ID)]
         public abstract string Id { get; set; }
 
-        /// <inheritdoc cref="RelationshipAttributes.NAME"/>
-        [MtconnectNodeAttribute(RelationshipAttributes.NAME)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.NAME"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.NAME)]
         public abstract string Name { get; set; }
 
-        /// <inheritdoc cref="RelationshipAttributes.TYPE"/>
-        [MtconnectNodeAttribute(RelationshipAttributes.TYPE)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.TYPE"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.TYPE)]
         public abstract string Type { get; set; }
 
-        /// <inheritdoc cref="RelationshipAttributes.CRITICALITY"/>
-        [MtconnectNodeAttribute(RelationshipAttributes.CRITICALITY)]
+        /// <inheritdoc cref="ConfigurationRelationshipAttributes.CRITICALITY"/>
+        [MtconnectNodeAttribute(ConfigurationRelationshipAttributes.CRITICALITY)]
         public abstract string Criticality { get; set; }
 
 
         /// <inheritdoc />
-        public Relationship() : base() { }
+        public ConfigurationRelationship() : base() { }
 
         /// <inheritdoc />
-        public Relationship(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public ConfigurationRelationship(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
 
         private bool validateId(out ICollection<MtconnectValidationException> validationErrors)

@@ -1,4 +1,6 @@
-﻿namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
+﻿using MtconnectCore.Standard.Contracts.Attributes;
+
+namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
 {
     /// <summary>
     /// Attributes for the Composition element in the MTConnect Response document.
@@ -7,15 +9,8 @@
         /// <summary>
         /// The unique identifier for this element.
         /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.COMPOSITION)]
         ID,
-        /// <summary>
-        /// A unique identifier for this XML element.
-        /// </summary>
-        UUID,
-        /// <summary>
-        /// The name of the Composition element.
-        /// </summary>
-        NAME,
         /// <summary>
         /// The type of Composition element.
         /// <example>
@@ -27,6 +22,17 @@
         /// </list>
         /// </example>
         /// </summary>
-        TYPE
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.COMPOSITION)]
+        TYPE,
+        /// <summary>
+        /// The name of the Composition element.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.COMPOSITION)]
+        NAME,
+        /// <summary>
+        /// A unique identifier for this XML element.
+        /// </summary>
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.COMPOSITION)]
+        UUID,
     }
 }
