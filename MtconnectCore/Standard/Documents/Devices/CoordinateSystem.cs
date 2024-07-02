@@ -60,36 +60,34 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // id
-            .Validate((o) =>
-                o.ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystem), nameof(CoordinateSystemAttributes.ID))
-                ?.ValidateIdValueType(nameof(Id), Id)
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.ID), (o) =>
+                o.ValidateIdValueType(nameof(Id), Id)
             )
             // name
-            .Validate((o) =>
-                o.ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystem), nameof(CoordinateSystemAttributes.NAME))
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.NAME), (o) =>
+                o
             )
             // nativeName
-            .Validate((o) =>
-                o.ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystem), nameof(CoordinateSystemAttributes.NATIVE_NAME))
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.NATIVE_NAME), (o) =>
+                o
             )
             // parentIdRef
-            .Validate((o) =>
-                o.ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystem), nameof(CoordinateSystemAttributes.PARENT_ID_REF))
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.PARENT_ID_REF), (o) =>
+                o
             )
             // type
             // TODO: Scope this validation to the context of a minimum version. See extra validation below
-            .Validate((o) =>
-                o.ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystem), nameof(CoordinateSystemAttributes.TYPE))
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.TYPE), (o) =>
+                o
             )
             // uuid
-            .Validate((o) =>
-                o.SinceVersion(MtconnectVersions.V_2_2_0, (a) =>
-                    a.ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystem), nameof(CoordinateSystemAttributes.UUID))
-                )
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.UUID), (o) =>
+                // scope to v2.2.0 introduction
+                o
             )
             // Description
-            .Validate((o) =>
-                o.ValidateValueProperty<CoordinateSystemElements>(nameof(CoordinateSystem), nameof(CoordinateSystemElements.DESCRIPTION))
+            .ValidateValueProperty<CoordinateSystemElements>(nameof(CoordinateSystemElements.DESCRIPTION), (o) =>
+                o
             )
             .HasError(out validationErrors);
 

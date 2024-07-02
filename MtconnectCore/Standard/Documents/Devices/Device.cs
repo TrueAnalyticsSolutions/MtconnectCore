@@ -186,7 +186,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         SourceNode));
 
                 }
-                else if (!EnumHelper.ValidateToVersion<Iso841ClassTypes>(Iso841Class, MtconnectVersion.GetValueOrDefault()))
+                else if (!EnumHelper.IsImplemented<Iso841ClassTypes>(Iso841Class, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
@@ -218,7 +218,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         SourceNode));
 
                 }
-                else if (!EnumHelper.ValidateToVersion<Iso841ClassTypes>(Iso841Class, MtconnectVersion.GetValueOrDefault()))
+                else if (!EnumHelper.IsImplemented<Iso841ClassTypes>(Iso841Class, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,

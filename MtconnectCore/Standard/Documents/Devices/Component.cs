@@ -138,39 +138,34 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // id
-            .Validate((o) =>
-                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.ID))
-                ?.ValidateIdValueType(nameof(Id), Id)
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.ID), (o) =>
+                o.ValidateIdValueType(nameof(Id), Id)
             )
             // name
-            .Validate((o) =>
-                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.NAME))
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.NAME), (o) =>
+                o
             )
             // nativeName
-            .Validate((o) =>
-                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.NATIVE_NAME))
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.NATIVE_NAME), (o) =>
+                o
             )
             // sampleInterval
-            .Validate((o) =>
-                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.SAMPLE_INTERVAL))
-                ?.ValidateFloatValueType(nameof(SampleInterval), SampleInterval)
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_INTERVAL), (o) =>
+                o.ValidateFloatValueType(nameof(SampleInterval), SampleInterval)
             )
             // sampleRate
-            .Validate((o) =>
-                o.UpToVersion(MtconnectVersions.V_1_1_0, (a) =>
-                    a.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.SAMPLE_RATE))
-                    ?.ValidateFloatValueType(nameof(SampleRate), SampleRate)
-                )
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_RATE), (o) =>
+            // scope validation to v1.1.0
+                o.ValidateFloatValueType(nameof(SampleRate), SampleRate)
             )
             // uuid
-            .Validate((o) =>
-                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.UUID))
-                ?.ValidateIdValueType(nameof(Uuid), Uuid)
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.UUID), (o) =>
+                o.ValidateIdValueType(nameof(Uuid), Uuid, false)
             )
             // coordinateSystemIdRef
-            .Validate((o) =>
-                o.ValidateValueProperty<ComponentAttributes>(nameof(Component), nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF))
-                ?.ValidateIdValueType(nameof(CoordinateSystemIdRef), CoordinateSystemIdRef)
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF), (o) =>
+                o.ValidateValueProperty(CoordinateSystemIdRef)
+                ?.ValidateIdValueType(nameof(CoordinateSystemIdRef), CoordinateSystemIdRef, false)
             )
             .HasError(out validationErrors);
 

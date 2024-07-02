@@ -448,39 +448,19 @@
             </summary>
             <param name="name"></param>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Attributes.VersionComparisonTypes">
-            <summary>
-            Options for how the Version number is compared agains the current version.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Attributes.VersionComparisonTypes.Equal">
-            <summary>
-            Validation Method is executed when the document version is equal to the specified version.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Attributes.VersionComparisonTypes.Before">
-            <summary>
-            Validation Method is executed when the document version is equal to or less than the specified version.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Attributes.VersionComparisonTypes.After">
-            <summary>
-            Validation Method is executed when the document version is equal to or greater than the specified version.
-            </summary>
-        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute">
             <summary>
             An attribute used to flag the applicability of an object based on the version of the standard the MTConnect Response Document should be compared against.
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.MinimumVersion">
+        <member name="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.IntroducedVersion">
             <summary>
             Reference to the version of the MTConnect Standard that this object applies to.
             </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.StandardReference">
             <summary>
-            A reference to the part and section of the MTConnect Standard that the applicability of this object is mentioned. This reference should be relevant to the <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.MinimumVersion"/> supplied.
+            A reference to the part and section of the MTConnect Standard that the applicability of this object is mentioned. This reference should be relevant to the <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.IntroducedVersion"/> supplied.
             </summary>
             <example>Part 1 Section 1.0.0</example>
         </member>
@@ -502,7 +482,7 @@
             Compares the Response Document version against the version specified in the attribute based on the comparison method provided.
             </summary>
             <param name="documentVersion">Reference to the version of MTConnect implemented in the Response Document.</param>
-            <returns>Flag for whether the MTConnect Response Document version matches with the specified <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.MinimumVersion"/> according to the <see cref="!:ComparisonType"/>.</returns>
+            <returns>Flag for whether the MTConnect Response Document version matches with the specified <see cref="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectVersionApplicabilityAttribute.IntroducedVersion"/> according to the <see cref="!:ComparisonType"/>.</returns>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Attributes.ObservationalSubTypeAttribute">
             <summary>
@@ -12963,6 +12943,26 @@
             </list>
             </remarks>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.VersionComparisonTypes">
+            <summary>
+            Options for how the Version number is compared agains the current version.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.VersionComparisonTypes.Implemented">
+            <summary>
+            Validation Method is executed when the document version is equal to the specified version.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.VersionComparisonTypes.NotImplemented">
+            <summary>
+            Validation Method is executed when the document version is equal to or less than the specified version.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.VersionComparisonTypes.Deprecated">
+            <summary>
+            Validation Method is executed when the document version is equal to or greater than the specified version.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Errors.MtconnectDocumentErrorException">
             <summary>
             An exception containing a specific Error from a MTConnect Errors Response Document.
@@ -13272,6 +13272,13 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.VersionHelper.versionMinimumVersion">
             <remarks>Find this in the <c>MTConnectDevices_x.x.xsd</c> referenced at <c>/xs:schema[@vs:minVersion]</c></remarks>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.Compare(MtconnectCore.Standard.Contracts.Enums.MtconnectVersions,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions,System.Nullable{MtconnectCore.Standard.Contracts.Enums.MtconnectVersions})">
+            <summary>
+            Compares the Response Document version against the version specified in the attribute based on the comparison method provided.
+            </summary>
+            <param name="implementedVersion">Reference to the version of MTConnect implemented in the Response Document.</param>
+            <returns>Flag for whether the MTConnect Response Document version matches with the specified <see cref="!:MinimumVersion"/> according to the <see cref="!:ComparisonType"/>.</returns>
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.VersionHelper.GetVersion(System.String)">
             <summary>
@@ -15428,13 +15435,16 @@
             <param name="errors">Collection of validation exceptions</param>
             <returns>Flag for whether or not any of the exceptions are <c>ERROR</c>-level severity</returns>
         </member>
-        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateValueProperty``1(System.String,System.String)">
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.ValidateValueProperty">
             <summary>
             Validates the use of an Enum field in the context of the implemented version.<br/>
             </summary>
-            <typeparam name="T">Reference to Enum type</typeparam>
-            <param name="entityName">Value key</param>
-            <param name="propertyName">Value of key</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.ValidateValueProperty(System.String)">
+            <summary>
+            Validates the use of an Enum field in the context of the implemented version when the provided value is not null.<br/>
+            </summary>
             <returns>Fluent validation context</returns>
         </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateRequired(System.String,System.String)">
@@ -15443,24 +15453,6 @@
             </summary>
             <param name="key">Value key</param>
             <param name="value">Value of key</param>
-            <returns>Fluent validation context</returns>
-        </member>
-        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateNotImplemented(System.String,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <summary>
-            Validates value is null or empty.<br/>
-            </summary>
-            <param name="key">Value key</param>
-            <param name="value">Value of key</param>
-            <param name="minimumVersion">Minimum version of MTConnect that the item was implemented.</param>
-            <returns>Fluent validation context</returns>
-        </member>
-        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateDeprecated(System.String,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
-            <summary>
-            Validates value is not null or empty.<br/>
-            </summary>
-            <param name="key">Value key</param>
-            <param name="value">Value of key</param>
-            <param name="maximumVersion">Maximum version of MTConnect that the item was supported.</param>
             <returns>Fluent validation context</returns>
         </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.ValidateValueMaxLength(System.String,System.String,System.Int32)">

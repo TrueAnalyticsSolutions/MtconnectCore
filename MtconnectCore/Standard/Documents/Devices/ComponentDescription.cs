@@ -2,9 +2,6 @@
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
-using MtconnectCore.Standard.Contracts.Errors;
-using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices

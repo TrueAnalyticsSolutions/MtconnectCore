@@ -121,13 +121,20 @@ namespace MtconnectCore.Standard.Contracts
 
         internal static string WordToPascalCase(string input) => input.Length > 1 ? input.Substring(0, 1).ToUpper() + input.Substring(1).ToLower() : input.ToUpper();
 
-        internal static bool ValidateToVersion<TEnum>(string value, MtconnectVersions documentVersion) => ValidateToVersion(typeof(TEnum), value, documentVersion);
-        internal static bool ValidateToVersion<TEnum>(MtconnectVersions documentVersion) => ValidateToVersion(typeof(TEnum), documentVersion);
+        internal static bool IsImplemented<TEnum>(string value, MtconnectVersions documentVersion)
+            => CompareToVersion(typeof(TEnum), value, documentVersion) == VersionComparisonTypes.Implemented;
+        internal static bool IsImplemented<TEnum>(MtconnectVersions documentVersion)
+            => CompareToVersion(typeof(TEnum), documentVersion) == VersionComparisonTypes.Implemented;
+        internal static bool IsImplemented(Type enumType, string value, MtconnectVersions documentVersion)
+            => CompareToVersion(enumType, value, documentVersion) == VersionComparisonTypes.Implemented;
 
-        internal static bool ValidateToVersion(Type enumType, string value, MtconnectVersions documentVersion)
+        internal static VersionComparisonTypes? CompareToVersion<TEnum>(string value, MtconnectVersions documentVersion) => CompareToVersion(typeof(TEnum), value, documentVersion);
+        internal static VersionComparisonTypes? CompareToVersion<TEnum>(MtconnectVersions documentVersion) => CompareToVersion(typeof(TEnum), documentVersion);
+
+        internal static VersionComparisonTypes? CompareToVersion(Type enumType, string value, MtconnectVersions documentVersion)
         {
             if (string.IsNullOrEmpty(value))
-                return false;
+                return null;
 
             if (!value.ToUpper().Equals(value))
             {
@@ -140,37 +147,35 @@ namespace MtconnectCore.Standard.Contracts
                 }
             }
 
-            if (!ValidateToVersion(enumType, documentVersion)) return false;
-            if (!Contains(enumType, value, out object enumValue)) return false;
+            var enumValidation = CompareToVersion(enumType, documentVersion);
+            if (enumValidation != VersionComparisonTypes.Implemented)
+                return enumValidation;
+            if (!Contains(enumType, value, out object enumValue))
+                return null;
 
-            if (enumValue == null) return false;
+            if (enumValue == null)
+                return null;
 
             MemberInfo[] valueInfos = enumType.GetMember(enumValue.ToString());
             var valueInfo = valueInfos.FirstOrDefault(o => o.DeclaringType == enumType);
-            var typedEnumValueVersions = valueInfo.GetCustomAttributes<MtconnectVersionApplicabilityAttribute>();
-            if (typedEnumValueVersions?.Any() == true)
+            var typedEnumValueVersion = valueInfo.GetCustomAttribute<MtconnectVersionApplicabilityAttribute>();
+            if (typedEnumValueVersion != null)
             {
-                if (!typedEnumValueVersions.Any(o => o.Compare(documentVersion)))
-                {
-                    return false;
-                }
+                return typedEnumValueVersion.Compare(documentVersion);
             }
 
-            return true;
+            return VersionComparisonTypes.Implemented;
         }
 
-        internal static bool ValidateToVersion(Type enumType, MtconnectVersions documentVersion) {
-            var enumVersionAttributes = enumType.GetCustomAttributes(typeof(MtconnectVersionApplicabilityAttribute), true);
+        internal static VersionComparisonTypes? CompareToVersion(Type enumType, MtconnectVersions documentVersion) {
+            var enumVersionAttribute = enumType.GetCustomAttribute<MtconnectVersionApplicabilityAttribute>(true);
 
             // Validate the enum itself
-            if (enumVersionAttributes?.Length > 0) {
-                var typedEnumVersions = (MtconnectVersionApplicabilityAttribute[])enumVersionAttributes;
-                if (!typedEnumVersions.Any(o => o.Compare(documentVersion))) {
-                    return false;
-                }
+            if (enumVersionAttribute != null) {
+                return enumVersionAttribute.Compare(documentVersion);
             }
 
-            return true;
+            return VersionComparisonTypes.Implemented;
         }
     }
 }

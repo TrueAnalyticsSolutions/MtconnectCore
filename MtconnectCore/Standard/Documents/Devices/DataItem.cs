@@ -91,6 +91,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElements(DataItemElements.SOURCE, nameof(TrySetSource), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
         public Source Source { get; set; }
 
+        // TODO: Fix the multiplicity. The Constraints element can only have one instance, the sub-elements are the properties.
         private List<DataItemConstraint> _constraints = new List<DataItemConstraint>();
         /// <inheritdoc cref="DataItemElements.CONSTRAINTS"/>
         [MtconnectNodeElements("Constraints/*", nameof(TryAddConstraint), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
@@ -135,71 +136,69 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => (new NodeValidationContext(this))
             // category
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.CATEGORY))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.CATEGORY), (o) =>
+                o.ValidateValueProperty(Category)
                 ?.ValidateEnumValue<CategoryTypes>(nameof(Category), Category)
             )
             // compositionId
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.COMPOSITION_ID))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.COMPOSITION_ID), (o) =>
+                o.ValidateValueProperty(CompositionId)
                 ?.ValidateIdValueType(nameof(CompositionId), CompositionId, false)
             )
             // coordinateSystem
-            .Validate((o) =>
-                o.UpToVersion(MtconnectVersions.V_1_8_1, (a) =>
-                    a.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.COORDINATE_SYSTEM))
-                    ?.ValidateEnumValue<CoordinateSystemTypes>(nameof(CoordinateSystem), CoordinateSystem)
-                )
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.COORDINATE_SYSTEM), (o) =>
+                o.ValidateValueProperty(CoordinateSystem)
+                    // scope to v1.8.1 deprecation
+                ?.ValidateEnumValue<CoordinateSystemTypes>(nameof(CoordinateSystem), CoordinateSystem)
             )
             // discrete
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.DISCRETE))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.DISCRETE), (o) =>
+                o.ValidateValueProperty(Discrete)
                 ?.ValidateBooleanValueType(nameof(Discrete), Discrete)
             )
             // id
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.ID))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.ID), (o) =>
+                o.ValidateValueProperty(Id)
                 ?.ValidateIdValueType(nameof(Id), Id)
             )
             // name
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.NAME))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.NAME), (o) =>
+                o.ValidateValueProperty(Name)
             )
             // nativeScale
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.NATIVE_SCALE))
-                ?.ValidateIntegerValueType(nameof(NativeScale), NativeScale)
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.NATIVE_SCALE), (o) =>
+                o.ValidateValueProperty(NativeScale)?.ValidateIntegerValueType(nameof(NativeScale), NativeScale)
             )
             // nativeUnits
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.NATIVE_UNITS))
-                ?.ValidateEnumValue<NativeUnitsTypes>(nameof(NativeUnits), NativeUnits)
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.NATIVE_UNITS), (o) =>
+                o.ValidateValueProperty(NativeUnits)
+                ?.ValidateNativeUnits(NativeUnits)
             )
             // sampleRate
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.SAMPLE_RATE))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.SAMPLE_RATE), (o) =>
+                o.ValidateValueProperty(SampleRate)
                 ?.ValidateFloatValueType(nameof(SampleRate), SampleRate)
             )
             // significantDigits
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.SIGNIFICANT_DIGITS))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.SIGNIFICANT_DIGITS), (o) =>
+                o.ValidateValueProperty(SignificantDigits)
                 ?.ValidateIntegerValueType(nameof(SignificantDigits), SignificantDigits)
             )
             // statistic
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.STATISTIC))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.STATISTIC), (o) =>
+                o.ValidateValueProperty(Statistic)
                 ?.ValidateEnumValue<StatisticTypes>(nameof(Statistic), Statistic)
             )
             // type/subType
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.TYPE))
-                ?.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.SUB_TYPE))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.TYPE), (o) =>
+                o.ValidateValueProperty(Type)
+                ?.ValidateValueProperty(SubType)
                 ?.ValidateRequired(nameof(Type), Type)
                 ?.ValidateType(Category, Type, SubType)
             )
             // units
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.UNITS))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.UNITS), (o) =>
+                o.ValidateValueProperty(Units)
                 ?.If(
                     (v) => Category.Equals("SAMPLE", StringComparison.OrdinalIgnoreCase),
                     (v) => o?.ValidateRequired(nameof(Units), Units)
@@ -207,13 +206,13 @@ namespace MtconnectCore.Standard.Documents.Devices
                 ?.ValidateEnumValue<UnitsTypes>(nameof(Units), Units)
             )
             // representation
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.REPRESENTATION))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.REPRESENTATION), (o) =>
+                o.ValidateValueProperty(Representation)
                 ?.ValidateEnumValue<RepresentationTypes>(nameof(Representation), Representation)
             )
             // coordinateSystemIdRef
-            .Validate((o) =>
-                o.ValidateValueProperty<DataItemAttributes>(nameof(DataItem), nameof(DataItemAttributes.COORDINATE_SYSTEM_ID_REF))
+            .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.COORDINATE_SYSTEM_ID_REF), (o) =>
+                o.ValidateValueProperty(CoordinateSystemIdRef)
                 ?.ValidateIdValueType(nameof(CoordinateSystemIdRef), CoordinateSystemIdRef, false)
             )
             .HasError(out validationErrors);
@@ -223,33 +222,29 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateParts(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // Source
-            .Validate(o =>
-                o.ValidateValueProperty<DataItemElements>(nameof(DataItem), nameof(DataItemElements.SOURCE))
-                // Source validated when set
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.SOURCE), o =>
+                o
             )
             // Constraints
-            .Validate(o =>
-                o.ValidateValueProperty<DataItemElements>(nameof(DataItem), nameof(DataItemElements.CONSTRAINTS))
-                // Constraints validated when set
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.CONSTRAINTS), o =>
+                o
             )
             // Filter
-            .Validate(o =>
-                o.ValidateValueProperty<DataItemElements>(nameof(DataItem), nameof(DataItemElements.FILTERS))
-                // Filter validated when set
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.FILTERS), o =>
+                o.HasMultiplicity(nameof(DataItemElements.FILTERS), Filters, 0, int.MaxValue)
             )
             // InitialValue
-            .Validate(o =>
-                o.ValidateValueProperty<DataItemElements>(nameof(DataItem), nameof(DataItemElements.INITIAL_VALUE))
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.INITIAL_VALUE), o =>
+                o
                 // InitialValue validated when set
             )
             // ResetTrigger
-            .Validate(o =>
-                o.ValidateValueProperty<DataItemElements>(nameof(DataItem), nameof(DataItemElements.RESET_TRIGGER))
-                ?.ValidateEnumValue<ResetTriggeredValues>(nameof(ResetTrigger), ResetTrigger)
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.RESET_TRIGGER), o =>
+                o.ValidateEnumValue<ResetTriggeredValues>(nameof(ResetTrigger), ResetTrigger)
             )
             // Definition
-            .Validate(o =>
-                o.ValidateValueProperty<DataItemElements>(nameof(DataItem), nameof(DataItemElements.DEFINITION))
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.DEFINITION), o =>
+                o
                 // Definition validated when set
             )
             // TODO: Relationships

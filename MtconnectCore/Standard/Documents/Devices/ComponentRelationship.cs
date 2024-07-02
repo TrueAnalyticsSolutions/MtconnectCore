@@ -76,7 +76,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     ValidationSeverity.WARNING,
                     $"ComponentRelationship type of '{Type}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
             }
-            else if (!EnumHelper.ValidateToVersion<RelationshipTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+            else if (!EnumHelper.IsImplemented<RelationshipTypes>(Type, MtconnectVersion.GetValueOrDefault()))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,

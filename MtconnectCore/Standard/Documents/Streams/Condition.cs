@@ -93,9 +93,9 @@ namespace MtconnectCore.Standard.Documents.Streams
                     $"Condition 'type' attribute must be of Condition, Event, or Sample types.",
                     SourceNode));
             }
-            else if (!EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault())
-                && !EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.EventTypes>(Type, MtconnectVersion.GetValueOrDefault())
-                && !EnumHelper.ValidateToVersion<Contracts.Enums.Devices.DataItemTypes.SampleTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+            else if (!EnumHelper.IsImplemented<Contracts.Enums.Devices.DataItemTypes.ConditionTypes>(Type, MtconnectVersion.GetValueOrDefault())
+                && !EnumHelper.IsImplemented<Contracts.Enums.Devices.DataItemTypes.EventTypes>(Type, MtconnectVersion.GetValueOrDefault())
+                && !EnumHelper.IsImplemented<Contracts.Enums.Devices.DataItemTypes.SampleTypes>(Type, MtconnectVersion.GetValueOrDefault()))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,

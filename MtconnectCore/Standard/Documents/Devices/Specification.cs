@@ -94,7 +94,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     $"Specification type of '{Type}' is not defined in the MTConnect Standard for SAMPLE, EVENT, nor CONDITION in version '{version}'.",
                     SourceNode));
             }
-            else if (!EnumHelper.ValidateToVersion<SampleTypes>(Type, version) && !EnumHelper.ValidateToVersion<EventTypes>(Type, version) && !EnumHelper.ValidateToVersion<ConditionTypes>(Type, version))
+            else if (!EnumHelper.IsImplemented<SampleTypes>(Type, version) && !EnumHelper.IsImplemented<EventTypes>(Type, version) && !EnumHelper.IsImplemented<ConditionTypes>(Type, version))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
@@ -121,7 +121,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         ValidationSeverity.ERROR,
                         $"Specification units of '{Units}' is not defined in the MTConnect Standard in version '{version}'.",
                         SourceNode));
-                } else if (!EnumHelper.ValidateToVersion<UnitsTypes>(Units, version))
+                } else if (!EnumHelper.IsImplemented<UnitsTypes>(Units, version))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,

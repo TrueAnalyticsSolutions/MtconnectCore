@@ -52,13 +52,14 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // name
-            .Validate((o) =>
-                o.ValidateValueProperty<ChannelAttributes>(nameof(Channel), nameof(ChannelAttributes.NAME))
+            .ValidateValueProperty<ChannelAttributes>(nameof(ChannelAttributes.NAME), (o) =>
+                o
             )
             // number
-            .Validate((o) => 
-                o.ValidateValueProperty<ChannelAttributes>(nameof(Channel), nameof(ChannelAttributes.NUMBER))
-                ?.ValidateRequired(nameof(Name), Name)
+            .ValidateValueProperty<ChannelAttributes>(nameof(ChannelAttributes.NUMBER), (o) => 
+                o.WhileIntroduced((x) =>
+                    x.ValidateRequired(nameof(Name), Name)
+                )
             )
             .HasError(out validationErrors);
         // TODO: Add Parts validation

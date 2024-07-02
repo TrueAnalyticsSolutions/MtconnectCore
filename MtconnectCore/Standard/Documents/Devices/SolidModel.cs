@@ -92,7 +92,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     $"SolidModel mediaType '{MediaType}' is not defined in version {version}.",
                     SourceNode));
             }
-            else if (!EnumHelper.ValidateToVersion<SolidModelMediaTypes>(MediaType, version))
+            else if (!EnumHelper.IsImplemented<SolidModelMediaTypes>(MediaType, version))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,

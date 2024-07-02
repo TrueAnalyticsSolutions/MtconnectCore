@@ -152,7 +152,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                             $"Observation 'units' of '{extendedUnits}' is an unnecessary extension of the MTConnect Standard as it already exists in version '{MtconnectVersion}'.",
                             SourceNode));
                     }
-                    else if (!EnumHelper.ValidateToVersion<UnitsTypes>(extendedUnits, MtconnectVersion.GetValueOrDefault()))
+                    else if (EnumHelper.CompareToVersion<UnitsTypes>(extendedUnits, MtconnectVersion.GetValueOrDefault()) != VersionComparisonTypes.Implemented)
                     {
                         validationErrors.Add(new MtconnectValidationException(
                             ValidationSeverity.WARNING,
@@ -174,7 +174,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                         $"Observation 'units' of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
                         SourceNode));
                 }
-                else if (!EnumHelper.ValidateToVersion<UnitsTypes>(Units, MtconnectVersion.GetValueOrDefault()))
+                else if (EnumHelper.CompareToVersion<UnitsTypes>(Units, MtconnectVersion.GetValueOrDefault()) != VersionComparisonTypes.Implemented)
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
@@ -346,7 +346,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                     SourceNode));
                 isValidType = false;
             }
-            else if (!EnumHelper.ValidateToVersion<T>(Type, MtconnectVersion.GetValueOrDefault()))
+            else if (EnumHelper.CompareToVersion<T>(Type, MtconnectVersion.GetValueOrDefault()) != VersionComparisonTypes.Implemented)
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
@@ -380,7 +380,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                             SourceNode));
                         isValidSubType = false;
                     }
-                    else if (!EnumHelper.ValidateToVersion(obsSubType.SubTypeEnum, SubType, MtconnectVersion.GetValueOrDefault()))
+                    else if (EnumHelper.CompareToVersion(obsSubType.SubTypeEnum, SubType, MtconnectVersion.GetValueOrDefault()) != VersionComparisonTypes.Implemented)
                     {
                         validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,

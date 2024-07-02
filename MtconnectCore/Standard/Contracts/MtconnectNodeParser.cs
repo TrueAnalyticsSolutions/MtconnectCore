@@ -462,7 +462,7 @@ namespace MtconnectCore.Standard.Contracts
                     }
 
                     // If none of the Applicibility attributes apply to the version associated with this node, then all should be good, right?
-                    if (!ApplicibilityAttributes.Any(o => o.Compare(item.MtconnectVersion.GetValueOrDefault()))) return true;
+                    if (!ApplicibilityAttributes.Any(o => o.Compare(item.MtconnectVersion.GetValueOrDefault()) == VersionComparisonTypes.Implemented)) return true;
 
                     object[] parameters = new object[] { null };
                     bool methodResult;
