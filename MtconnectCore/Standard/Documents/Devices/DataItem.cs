@@ -132,7 +132,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             => base.TrySet<DataItemDefinition>(xNode, nsmgr, nameof(Definition), out dataItemDefinition);
 
         // Validate all attributes for the data item
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DATA_ITEM)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.DATA_ITEM)]
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => (new NodeValidationContext(this))
             // category
@@ -218,7 +218,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             .HasError(out validationErrors);
 
         // Validate all elements for the data item
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DATA_ITEM)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.DATA_ITEM)]
         private bool validateParts(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // Source

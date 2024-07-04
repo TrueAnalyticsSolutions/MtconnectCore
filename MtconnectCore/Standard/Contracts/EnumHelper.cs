@@ -34,9 +34,9 @@ namespace MtconnectCore.Standard.Contracts
             return value.ToUpper();
         }
 
-        internal static bool Contains(Type enumType, string value, out object enumValue)
+        internal static bool TryParse(Type enumType, string value, out object output)
         {
-            enumValue = null;
+            output = null;
             
             if (string.IsNullOrEmpty(value)) return false;
 
@@ -58,12 +58,13 @@ namespace MtconnectCore.Standard.Contracts
             string[] enumValues = Enum.GetNames(enumType);
             string foundEnum = enumValues.FirstOrDefault(o => o.Equals(value, StringComparison.OrdinalIgnoreCase));
             if (foundEnum == null) return false;
-            enumValue = Enum.Parse(enumType, foundEnum);
-            return enumValue != null;
+            output = Enum.Parse(enumType, foundEnum);
+            return output != null;
         }
 
-        internal static bool Contains(Type enumType, string value) => Contains(enumType, value, out _);
+        internal static bool Contains(Type enumType, string value) => TryParse(enumType, value, out _);
         internal static bool Contains(this Enum enumValue, string value) => Contains(enumValue.GetType(), value);
+        internal static bool TryParse(this Enum enumValue, string value, out object output) => TryParse(enumValue.GetType(), value, out output);
         /// <summary>
         /// Compares the provided <paramref name="value"/> against the enum values.
         /// </summary>
@@ -71,6 +72,13 @@ namespace MtconnectCore.Standard.Contracts
         /// <param name="value">Value to compare against the enum.</param>
         /// <returns>Flag for whether or not the <paramref name="value"/> was found in the enum.</returns>
         internal static bool Contains<TEnum>(string value) => Contains(typeof(TEnum), value);
+        internal static bool TryParse<TEnum>(string value, out TEnum? output) where TEnum : struct, Enum
+        {
+            object result;
+            bool found = TryParse(typeof(TEnum), value, out result);
+            output = found ? (TEnum)result : default;
+            return found;
+        }
 
         internal static string ToCamelCase(this Enum enumValue) => enumValue.ToString().ToCamelCase('_');
         internal static string ToPascalCase(this Enum enumValue) => enumValue.ToString().ToPascalCase('_');
@@ -150,7 +158,7 @@ namespace MtconnectCore.Standard.Contracts
             var enumValidation = CompareToVersion(enumType, documentVersion);
             if (enumValidation != VersionComparisonTypes.Implemented)
                 return enumValidation;
-            if (!Contains(enumType, value, out object enumValue))
+            if (!TryParse(enumType, value, out object enumValue))
                 return null;
 
             if (enumValue == null)

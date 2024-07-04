@@ -70,29 +70,41 @@ namespace MtconnectCore.Validation
             public NodeValueValidator<TEnum> IsIdValueType(string value, bool isRequired = true)
                 => IsIdValueType(PropertyName, value, isRequired) as NodeValueValidator<TEnum>;
 
-            public NodeValueValidator<TEnum> IsUIntValueType(string value)
-                => IsUIntValueType(PropertyName, value) as NodeValueValidator<TEnum>;
+            public NodeValueValidator<TEnum> IsUIntValueType(string value, out uint? output)
+                => IsUIntValueType(PropertyName, value, out output) as NodeValueValidator<TEnum>;
 
             public NodeValueValidator<TEnum> IsUIntWithinRange(string value, uint minimum, uint maximum)
                 => IsUIntWithinRange(PropertyName, value, minimum, maximum) as NodeValueValidator<TEnum>;
 
-            public NodeValueValidator<TEnum> IsULongValueType(string value)
-                => IsULongValueType(PropertyName, value) as NodeValueValidator<TEnum>;
+            public NodeValueValidator<TEnum> IsULongValueType(string value, out ulong? output)
+                => IsULongValueType(PropertyName, value, out output) as NodeValueValidator<TEnum>;
 
             public NodeValueValidator<TEnum> IsULongWithinRange(string value, ulong minimum, ulong maximum)
                 => IsULongWithinRange(PropertyName, value, minimum, maximum) as NodeValueValidator<TEnum>;
 
-            public NodeValueValidator<TEnum> IsFloatValueType(string value)
-                => IsFloatValueType(PropertyName, value) as NodeValueValidator<TEnum>;
+            public NodeValueValidator<TEnum> IsFloatValueType(string value, out float? output)
+                => IsFloatValueType(PropertyName, value, out output) as NodeValueValidator<TEnum>;
 
-            public NodeValueValidator<TEnum> IsBooleanValueType(string value)
-                => IsBooleanValueType(PropertyName, value) as NodeValueValidator<TEnum>;
+            public NodeValueValidator<TEnum> IsFloat3dValueType(string value, out float?[] output)
+                => IsFloat3dValueType(PropertyName, value, out output) as NodeValueValidator<TEnum>;
 
-            public NodeValueValidator<TEnum> IsDateTimeValueType(string value)
-                => IsDateTimeValueType(PropertyName, value) as NodeValueValidator<TEnum>;
+            public NodeValueValidator<TEnum> IsFloatArrayValueType(string value, out float?[] output)
+                => IsFloatArrayValueType(PropertyName, value, out output) as NodeValueValidator<TEnum>;
 
-            public NodeValueValidator<TEnum> IsEnumValueType<T>(string value) where T : Enum
-                => IsEnumValueType<T>(PropertyName, value) as NodeValueValidator<TEnum>;
+            public NodeValueValidator<TEnum> IsFloatArrayCountWithinRange(string key, float?[] value, uint minimum, uint maximum)
+                => IsFloatArrayCountWithinRange(PropertyName, value, minimum, maximum) as NodeValueValidator<TEnum>;
+
+            public NodeValueValidator<TEnum> IsBooleanValueType(string value, out bool? output)
+                => IsBooleanValueType(PropertyName, value, out output) as NodeValueValidator<TEnum>;
+
+            public NodeValueValidator<TEnum> IsDateTimeValueType(string value, out DateTime? output)
+                => IsDateTimeValueType(PropertyName, value, out output) as NodeValueValidator<TEnum>;
+
+            public NodeValueValidator<TEnum> IsEnumValueType<T>(string value, out T output) where T : struct, Enum
+                => IsEnumValueType<T>(PropertyName, value, out output) as NodeValueValidator<TEnum>;
+
+            public NodeValueValidator<TEnum> IsRfc4646LanguageTag(string value)
+                => IsRfc4646LanguageTag(PropertyName, value) as NodeValueValidator<TEnum>;
 
             public NodeValueValidator<TEnum> HasMultiplicity<T>(IEnumerable<T> values, int minimumCount, int maximumCount)
                 => HasMultiplicity<T>(PropertyName, values, minimumCount, maximumCount) as NodeValueValidator<TEnum>;

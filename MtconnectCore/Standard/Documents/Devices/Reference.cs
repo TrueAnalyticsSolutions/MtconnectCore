@@ -37,7 +37,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// <inheritdoc/>
         public Reference(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COMPONENT)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
         protected virtual bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
                 // idRef

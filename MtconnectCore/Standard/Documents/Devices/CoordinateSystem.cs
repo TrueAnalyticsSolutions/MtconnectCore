@@ -61,7 +61,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TrySetTransformation(XmlNode xNode, XmlNamespaceManager nsmgr, out Transformation transformation)
             => base.TrySet<Transformation>(xNode, nsmgr, nameof(Transformation), out transformation);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COORDINATE_SYSTEM)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COORDINATE_SYSTEM)]
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // id

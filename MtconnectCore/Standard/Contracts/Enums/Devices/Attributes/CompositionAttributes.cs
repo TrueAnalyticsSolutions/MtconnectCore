@@ -9,7 +9,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
         /// <summary>
         /// The unique identifier for this element.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.COMPOSITION)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.DeviceModel.COMPOSITION)]
         ID,
         /// <summary>
         /// The type of Composition element.
@@ -22,17 +22,17 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
         /// </list>
         /// </example>
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.COMPOSITION)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.DeviceModel.COMPOSITION)]
         TYPE,
         /// <summary>
         /// The name of the Composition element.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.COMPOSITION)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.DeviceModel.COMPOSITION)]
         NAME,
         /// <summary>
         /// A unique identifier for this XML element.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.COMPOSITION)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.DeviceModel.COMPOSITION)]
         UUID,
     }
 }

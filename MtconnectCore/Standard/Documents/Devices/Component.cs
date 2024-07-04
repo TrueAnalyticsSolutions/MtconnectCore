@@ -134,7 +134,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         }
 
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COMPONENT)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // id
@@ -178,7 +178,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             )
             .HasError(out validationErrors);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.COMPONENT)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
         private bool validateParts(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
                 .Validate((o) =>

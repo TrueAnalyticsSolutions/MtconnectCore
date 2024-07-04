@@ -6,8 +6,8 @@ namespace MtconnectCore.Standard.Documents.Streams
     {
         string DataItemId { get; }
 
-        DateTime Timestamp { get; set; }
+        string Timestamp { get; set; }
 
-        ulong Sequence { get; set; }
+        string Sequence { get; set; }
     }
 }

@@ -10,12 +10,12 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
         /// <summary>
         /// The name of the sensing element.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, Constants.ModelBrowserLinks.CHANNEL)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, Constants.ModelBrowserLinks.DeviceModel.CHANNEL)]
         NAME,
         /// <summary>
         /// A unique identifier that will only refer to a specific sensing element.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, Constants.ModelBrowserLinks.CHANNEL)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, Constants.ModelBrowserLinks.DeviceModel.CHANNEL)]
         NUMBER,
     }
 }

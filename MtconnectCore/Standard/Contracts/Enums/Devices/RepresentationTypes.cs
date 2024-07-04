@@ -34,7 +34,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices
         /// A data type where each discrete occurrence of the data  may have the same value as the previous occurrence of the data. There is no reported state change between occurrences of the data.
         /// </summary>
         [Obsolete("Deprecated in version 1.5.0. See discrete attribute for DataItem instead.")]
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 6.2.2.6", MtconnectVersions.V_1_4_1)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 2 Section 6.2.2.6", MtconnectVersions.V_1_5_0)]
         DISCRETE
     }
 }

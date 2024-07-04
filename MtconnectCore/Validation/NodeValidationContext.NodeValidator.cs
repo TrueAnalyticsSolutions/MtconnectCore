@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace MtconnectCore.Validation
 {
@@ -72,6 +73,21 @@ namespace MtconnectCore.Validation
             }
 
             /// <summary>
+            /// Validates length of value.<br/>
+            /// </summary>
+            /// <param name="key">Value key</param>
+            /// <param name="value">Value of key</param>
+            /// <returns>Fluent validation context</returns>
+            public NodeValidator CheckValueMaxLength(string key, float?[] value, int maxLength = 1)
+            {
+                if (value != null && value.Length > maxLength)
+                {
+                    AddError($"The {key} value must not exceed {maxLength} items.", Pairings.Of(key, value), Pairings.Of($"{key}.Length", value?.Length ?? 0));
+                }
+                return this;
+            }
+
+            /// <summary>
             /// Validates <c>ID</c> value types.<br/>
             /// <list type="bullet">
             /// <item><b>Multiplicity</b>: Required</item>
@@ -93,31 +109,35 @@ namespace MtconnectCore.Validation
             /// <param name="key">Value key</param>
             /// <param name="value">Value of key</param>
             /// <returns>Fluent validation context</returns>
-            public NodeValidator IsUIntValueType(string key, string value)
+            public NodeValidator IsUIntValueType(string key, string value, out uint? output)
             {
-                if (!string.IsNullOrEmpty(value) && !uint.TryParse(value, out uint valueUint))
+                output = null;
+                if (!string.IsNullOrEmpty(value))
                 {
-                    AddError($"Invalid '{key}' value. It MUST be an unsigned 32-bit integer.", Pairings.Of(key, value));
+                    if (!uint.TryParse(value, out uint valueUint))
+                    {
+                        AddError($"Invalid '{key}' value. It MUST be an unsigned 32-bit integer.", Pairings.Of(key, value));
+                    } else
+                    {
+                        output = valueUint;
+                    }
                 }
                 return this;
             }
 
             public NodeValidator IsUIntWithinRange(string key, string value, uint minimum, uint maximum)
             {
-                var valueTypeValidator = new NodeValidationContext(this.Context.Node);
-                valueTypeValidator.Validate((o) => o.IsUIntValueType(key, value));
-                if (valueTypeValidator.HasError())
+                if (!string.IsNullOrEmpty(value))
                 {
-                    foreach (var exception in valueTypeValidator.Exceptions)
-                        Context.Exceptions.Add(exception);
-                    return this;
-                }
-
-                if (!string.IsNullOrEmpty(value) && !uint.TryParse(value, out uint valueUint))
-                {
-                    if (valueUint < minimum || valueUint > maximum)
+                    if (!uint.TryParse(value, out uint output))
                     {
-                        AddError($"Value must be represented as an unsigned 32-bit integer from {minimum} to {maximum}", Pairings.Of(key, value), Pairings.Of("minimum", minimum), Pairings.Of("maximum", maximum));
+                        AddError($"Invalid '{key}' value. It MUST be an unsigned 32-bit integer.", Pairings.Of(key, value));
+                    } else
+                    {
+                        if (output < minimum || output > maximum)
+                        {
+                            AddError($"Value must be represented as an unsigned 32-bit integer from {minimum} to {maximum}", Pairings.Of(key, value), Pairings.Of("minimum", minimum), Pairings.Of("maximum", maximum));
+                        }
                     }
                 }
                 return this;
@@ -129,11 +149,18 @@ namespace MtconnectCore.Validation
             /// <param name="key">Value key</param>
             /// <param name="value">Value of key</param>
             /// <returns>Fluent validation context</returns>
-            public NodeValidator IsULongValueType(string key, string value)
+            public NodeValidator IsULongValueType(string key, string value, out ulong? output)
             {
-                if (!string.IsNullOrEmpty(value) && !ulong.TryParse(value, out ulong valueUlong))
+                output = null;
+                if (!string.IsNullOrEmpty(value))
                 {
-                    AddError($"Invalid '{key}' value. It MUST be an unsigned 64-bit integer.", Pairings.Of(key, value));
+                    if (!ulong.TryParse(value, out ulong valueUlong))
+                    {
+                        AddError($"Invalid '{key}' value. It MUST be an unsigned 64-bit integer.", Pairings.Of(key, value));
+                    } else
+                    {
+                        output = valueUlong;
+                    }
                 }
                 return this;
             }
@@ -141,20 +168,17 @@ namespace MtconnectCore.Validation
 
             public NodeValidator IsULongWithinRange(string key, string value, ulong minimum, ulong maximum)
             {
-                var valueTypeValidator = new NodeValidationContext(this.Context.Node);
-                valueTypeValidator.Validate((o) => o.IsUIntValueType(key, value));
-                if (valueTypeValidator.HasError())
+                if (!string.IsNullOrEmpty(value))
                 {
-                    foreach (var exception in valueTypeValidator.Exceptions)
-                        Context.Exceptions.Add(exception);
-                    return this;
-                }
-
-                if (!string.IsNullOrEmpty(value) && !ulong.TryParse(value, out ulong valueUlong))
-                {
-                    if (valueUlong < minimum || valueUlong > maximum)
+                    if (!ulong.TryParse(value, out ulong output))
                     {
-                        AddError($"Value must be represented as an unsigned 64-bit integer from {minimum} to {maximum}", Pairings.Of(key, value), Pairings.Of("minimum", minimum), Pairings.Of("maximum", maximum));
+                        AddError($"Invalid '{key}' value. It MUST be an unsigned 64-bit integer.", Pairings.Of(key, value));
+                    } else
+                    {
+                        if (output < minimum || output > maximum)
+                        {
+                            AddError($"Value must be represented as an unsigned 64-bit integer from {minimum} to {maximum}", Pairings.Of(key, value), Pairings.Of("minimum", minimum), Pairings.Of("maximum", maximum));
+                        }
                     }
                 }
                 return this;
@@ -166,11 +190,108 @@ namespace MtconnectCore.Validation
             /// <param name="key">Value key</param>
             /// <param name="value">Value of key</param>
             /// <returns>Fluent validation context</returns>
-            public NodeValidator IsFloatValueType(string key, string value)
+            public NodeValidator IsFloatValueType(string key, string value, out float? output)
             {
-                if (!string.IsNullOrEmpty(value) && !float.TryParse(value, out float valueFloat))
+                output = null;
+                if (!string.IsNullOrEmpty(value))
                 {
-                    AddError($"Invalid '{key}' value. It MUST be a float.", Pairings.Of(key, value));
+                    if (!float.TryParse(value, out float floatValue))
+                    {
+                        AddError($"Invalid '{key}' value. It MUST be a float.", Pairings.Of(key, value));
+                    } else
+                    {
+                        output = floatValue;
+                    }
+                }
+                return this;
+            }
+
+            /// <summary>
+            /// Validates float3d value types.
+            /// </summary>
+            /// <param name="key">Value key</param>
+            /// <param name="value">Value of key</param>
+            /// <returns>Fluent validation context</returns>
+            public NodeValidator IsFloat3dValueType(string key, string value, out float?[] output)
+            {
+                output = null;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    string[] values = value.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                    if (values.Length != 3 || values.All(o => float.TryParse(o, out _)) == false)
+                    {
+                        AddError($"Invalid '{key}' value. It MUST be three space-delimited floating-point numbers.", Pairings.Of(key, value));
+                    } else
+                    {
+                        output = values.Select(o => float.TryParse(o, out float floatValue) ? floatValue : default(float?)).ToArray();
+                        if (output.Count(o => o != null) != values.Length)
+                        {
+                            AddError($"Invalid '{key}' value. It MUST be three space-delimited floating-point numbers.", Pairings.Of(key, value));
+                        }
+                    }
+                }
+                return this;
+            }
+
+            /// <summary>
+            /// Validates float array value types.
+            /// </summary>
+            /// <param name="key">Value key</param>
+            /// <param name="value">Value of key</param>
+            /// <returns>Fluent validation context</returns>
+            public NodeValidator IsFloatArrayValueType(string key, string value, out float?[] output)
+            {
+                output = null;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    string[] values = value.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                    if (values.All(o => float.TryParse(o, out _)) == false)
+                    {
+                        AddError($"Invalid '{key}' value. It MUST be space-delimited floating-point numbers.", Pairings.Of(key, value));
+                    }
+                    else
+                    {
+                        output = values.Select(o => float.TryParse(o, out float floatValue) ? floatValue : default(float?)).ToArray();
+                        if (output.Count(o => o != null) != values.Length)
+                        {
+                            AddError($"Invalid '{key}' value. It MUST be space-delimited floating-point numbers.", Pairings.Of(key, value));
+                        }
+                    }
+                }
+                return this;
+            }
+
+            public NodeValidator IsFloatArrayCountWithinRange(string key, float?[] value, uint minimum, uint maximum)
+            {
+                if (value != null)
+                {
+                    if (value.Length < minimum || value.Length > maximum)
+                    {
+                        AddError($"Values must be represented as an unsigned 32-bit integer from {minimum} to {maximum}", Pairings.Of($"{key}.length", value?.Length), Pairings.Of("minimum", minimum), Pairings.Of("maximum", maximum));
+                    }
+                }
+                return this;
+            }
+
+
+            /// <summary>
+            /// Validates boolean value types.
+            /// </summary>
+            /// <param name="key">Value key</param>
+            /// <param name="value">Value of key</param>
+            /// <returns>Fluent validation context</returns>
+            public NodeValidator IsBooleanValueType(string key, string value, out bool? output)
+            {
+                output = null;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    if (!bool.TryParse(value, out bool valueBool))
+                    {
+                        AddError($"Invalid '{key}' value. It MUST be a boolean.", Pairings.Of(key, value));
+                    } else
+                    {
+                        output = valueBool;
+                    }
                 }
                 return this;
             }
@@ -181,23 +302,9 @@ namespace MtconnectCore.Validation
             /// <param name="key">Value key</param>
             /// <param name="value">Value of key</param>
             /// <returns>Fluent validation context</returns>
-            public NodeValidator IsBooleanValueType(string key, string value)
+            public NodeValidator IsDateTimeValueType(string key, string value, out DateTime? output)
             {
-                if (!string.IsNullOrEmpty(value) && !bool.TryParse(value, out bool valueBool))
-                {
-                    AddError($"Invalid '{key}' value. It MUST be a boolean.", Pairings.Of(key, value));
-                }
-                return this;
-            }
-
-            /// <summary>
-            /// Validates boolean value types.
-            /// </summary>
-            /// <param name="key">Value key</param>
-            /// <param name="value">Value of key</param>
-            /// <returns>Fluent validation context</returns>
-            public NodeValidator IsDateTimeValueType(string key, string value)
-            {
+                output = null;
                 // Split the date and time parts
                 string[] dateTimeParts = value.Split('T');
                 if (dateTimeParts.Length == 2)
@@ -234,6 +341,9 @@ namespace MtconnectCore.Validation
                         {
                             AddError($"Invalid '{key}' value, invalid Date format.", Pairings.Of(key, value));
                             //Console.WriteLine($"The string '{dateString}' is NOT a valid date in the expected format.");
+                        } else
+                        {
+                            output = parsedDate;
                         }
                     }
                     else
@@ -260,12 +370,36 @@ namespace MtconnectCore.Validation
             /// <param name="key">Value key</param>
             /// <param name="value">Value of key</param>
             /// <returns>Fluent validation context</returns>
-            public NodeValidator IsEnumValueType<T>(string key, string value) where T : Enum
+            public NodeValidator IsEnumValueType<T>(string key, string value, out T output) where T : struct, Enum
             {
-                if (!string.IsNullOrEmpty(value) && !EnumHelper.Contains<T>(value))
+                output = default(T);
+                if (!string.IsNullOrEmpty(value))
                 {
-                    AddError($"Invalid '{key}' value '{value}'.", Pairings.Of(key, value));
+                    if (!EnumHelper.TryParse(value, out T? enumValue))
+                    {
+                        AddError($"Invalid '{key}' value.", Pairings.Of(key, value));
+                    } else
+                    {
+                        output = enumValue.GetValueOrDefault();
+                    }
                 }
+                return this;
+            }
+
+            // Regular expression pattern for validating IETF RFC 4646 language tags
+            private static readonly Regex Rfc4646Regex = new Regex(
+                @"^[a-zA-Z]{2,8}(-[a-zA-Z0-9]{1,8})*$",
+                RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+            public NodeValidator IsRfc4646LanguageTag(string key, string value)
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    if (!Rfc4646Regex.IsMatch(value))
+                    {
+                        AddError($"Invalid '{key}' value.", Pairings.Of(key, value));
+                    }
+                }
+
                 return this;
             }
 

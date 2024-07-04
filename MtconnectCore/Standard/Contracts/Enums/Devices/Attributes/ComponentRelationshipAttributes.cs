@@ -10,7 +10,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
         /// <summary>
         /// A reference to the associated component element. The value provided for idRef MUST be the value provided for the id attribute of the associated Component element.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, Constants.ModelBrowserLinks.COMPONENT_RELATIONSHIP)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, Constants.ModelBrowserLinks.DeviceModel.COMPONENT_RELATIONSHIP)]
         ID_REF
     }
 }

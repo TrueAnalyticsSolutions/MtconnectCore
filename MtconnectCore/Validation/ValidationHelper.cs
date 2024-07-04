@@ -3,18 +3,84 @@ using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Streams;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Standard.Contracts;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace MtconnectCore.Validation
 {
     internal static class ValidationHelper
     {
+
+        internal static NodeValidationContext.NodeValidator ValidateSampleObservationResult(this NodeValidationContext.NodeValidator validator, string type, string result)
+        {
+            if (string.IsNullOrEmpty(result))
+            {
+                validator.AddError("Observation MUST include a result.", Pairings.Of("result", result));
+            }
+            else if (result.Equals(Constants.UNAVAILABLE, StringComparison.OrdinalIgnoreCase))
+            {
+                return validator;
+            }
+            if (Enum.TryParse<SampleTypes>(type, out SampleTypes sampleType))
+            {
+                // NOTE: Only validate the VALUE, not the Sub-Type
+                switch (sampleType)
+                {
+                    //case SampleTypes.CLOCK_TIME:
+                    //    var iso8601 = new Regex(@"^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:Z|[+-][01]\d:[0-5]\d)$");
+                    //    if (!iso8601.IsMatch(Value))
+                    //    {
+                    //        validationErrors.Add(new MtconnectValidationException(
+                    //            ValidationSeverity.ERROR,
+                    //            $"ClockTime MUST be reported in W3C ISO 8601 format.",
+                    //            SourceNode));
+                    //    }
+                    //    break;
+                    case SampleTypes.ORIENTATION:
+                    case SampleTypes.PATH_POSITION:
+                        return validator.IsFloat3dValueType("result", result, out _);
+                    default:
+                        break;
+                }
+            }
+
+            return validator;
+        }
+        internal static NodeValidationContext.NodeValidator ValidateEventObservationResult(this NodeValidationContext.NodeValidator validator, string type, string result)
+        {
+            if (string.IsNullOrEmpty(result))
+            {
+                validator.AddError("Observation MUST include a result.", Pairings.Of("result", result));
+            } else if (result.Equals(Constants.UNAVAILABLE, StringComparison.OrdinalIgnoreCase))
+            {
+                return validator;
+            }
+            else if (Enum.TryParse<EventTypes>(EnumHelper.FromPascalCase(type), out EventTypes eventType))
+            {
+                var eventFieldType = typeof(EventTypes).GetField(EnumHelper.FromPascalCase(type));
+                var observationalValue = eventFieldType.GetCustomAttribute<ObservationalValueAttribute>();
+                // Event type has an enumerable value
+                if (observationalValue != null)
+                {
+                    if (!EnumHelper.Contains(observationalValue.ValueEnum, result))
+                    {
+                        validator.AddError("Observation result does not match expected values.", Pairings.Of("type", type), Pairings.Of("result.Type", observationalValue.ValueEnum.Name), Pairings.Of("result", result));
+                    }
+                }
+            }
+
+            return validator;
+        }
+
+        /// <summary>
+        /// Validates a <see cref="MtconnectNode"/> <c>type</c> and <c>subType</c> against all Data Item types across all categories.
+        /// </summary>
+        /// <param name="validator">Reference to node validator.</param>
+        /// <param name="type">Reference to the <c>type</c> value from the node</param>
+        /// <param name="subType">Reference to the <c>subType</c> value from the node</param>
+        /// <returns>Fluent validator context</returns>
         internal static NodeValidationContext.NodeValidator ValidateType(this NodeValidationContext.NodeValidator validator, string type, string subType)
         {
             if (!string.IsNullOrEmpty(type))
@@ -94,6 +160,12 @@ namespace MtconnectCore.Validation
             return validator;
         }
 
+        /// <summary>
+        /// Validates a <see cref="MtconnectNode"/> <c>nativeUnits</c> against standard <see cref="NativeUnitsTypes"/> and <see cref="UnitsTypes"/>.
+        /// </summary>
+        /// <param name="validator">Reference to node validator</param>
+        /// <param name="nativeUnits">Refernece to the <c>nativeUnits</c> value from the node</param>
+        /// <returns>Fluent validator context</returns>
         internal static NodeValidationContext.NodeValidator ValidateNativeUnits(this NodeValidationContext.NodeValidator validator, string nativeUnits)
         {
             if (!string.IsNullOrEmpty(nativeUnits) && !EnumHelper.Contains<NativeUnitsTypes>(nativeUnits))

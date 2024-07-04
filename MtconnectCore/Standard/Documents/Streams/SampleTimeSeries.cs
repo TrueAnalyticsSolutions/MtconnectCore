@@ -4,6 +4,7 @@ using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace MtconnectCore.Standard.Documents.Streams
         public new float[] Result { get; set; }
 
         public override bool IsUnavailable => Result != null && Result.Length >= 1;
+
+        public string SampleCount { get; set; }
 
         /// <inheritdoc/>
         public SampleTimeSeries() : base() { }
@@ -47,17 +50,39 @@ namespace MtconnectCore.Standard.Documents.Streams
         }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Representations/TimeSeries")]
-        private bool validateSampleCount(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (SampleCount != Result?.Length)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"TimeSeries 'sampleCount' MUST equal the number of result values.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+            // sampleCount
+            .ValidateValueProperty<TimeSeriesAttributes>(nameof(TimeSeriesAttributes.SAMPLE_COUNT), (o) =>
+                o.WhileIntroduced((x) =>
+                    x.IsImplemented(SampleCount)
+                    .IsRequired(SampleCount)
+                )
+                .WhileNotIntroduced((x) =>
+                    x.IsImplemented(SampleCount)
+                )
+                ?.IsUIntValueType(SampleCount, out _)
+            )
+            // result
+            .Validate((o) =>
+                o.IsFloatArrayValueType("result", SourceNode.InnerText, out float?[] values)
+                .IsFloatArrayCountWithinRange("result", values, 1, 1)// TODO: Change maximum to SampleCount
+            // TODO: Add Equals condition where length MUST equal SampleCount
+            )
+            .HasError(out validationErrors);
+
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Representations/TimeSeries")]
+        //private bool validateSampleCount(out ICollection<MtconnectValidationException> validationErrors)
+        //{
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (SampleCount != Result?.Length)
+        //    {
+        //        validationErrors.Add(new MtconnectValidationException(
+        //            ValidationSeverity.ERROR,
+        //            $"TimeSeries 'sampleCount' MUST equal the number of result values.",
+        //            SourceNode));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
     }
 }
