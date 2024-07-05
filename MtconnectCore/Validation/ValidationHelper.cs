@@ -277,8 +277,8 @@ namespace MtconnectCore.Validation
             if (!EnumHelper.Contains<T>(type))
             {
                 if (categoryType != CategoryTypes.CONDITION
-                    || (!EnumHelper.Contains<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(type)
-                    && !EnumHelper.Contains<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes>(type)))
+                    || (!EnumHelper.Contains<EventTypes>(type)
+                    && !EnumHelper.Contains<SampleTypes>(type)))
                 {
                     validator.AddError(INVALID_TYPE_ERROR, Pairings.Of("type", type));
                     isValidType = false;
@@ -287,8 +287,8 @@ namespace MtconnectCore.Validation
             else if (!EnumHelper.IsImplemented<T>(type, implementedVersion))
             {
                 if (categoryType != CategoryTypes.CONDITION
-                    || (!EnumHelper.IsImplemented<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(type, implementedVersion)
-                        && !EnumHelper.IsImplemented<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes>(type, implementedVersion)))
+                    || (!EnumHelper.IsImplemented<EventTypes>(type, implementedVersion)
+                        && !EnumHelper.IsImplemented<SampleTypes>(type, implementedVersion)))
                     validator.AddWarning($"Invalid 'type' value in version.", Pairings.Of("type", type), Pairings.Of("version", implementedVersion.ToName()));
                 isValidType = false;
             }
