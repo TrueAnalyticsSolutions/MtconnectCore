@@ -44,7 +44,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         public string SubType { get; internal set; }
 
         /// <inheritdoc cref="ObservationAttributes.TIMESTAMP"/>
-        [MtconnectNodeAttribute(SampleAttributes.TIMESTAMP)]
+        [MtconnectNodeAttribute(ObservationAttributes.TIMESTAMP)]
         public string Timestamp { get; set; }
 
         /// <inheritdoc cref="ObservationAttributes.TYPE"/>
@@ -129,7 +129,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                 .WhileNotIntroduced((x) =>
                     x.IsImplemented(Sequence)
                 )
-                .IsUIntValueType(Sequence)
+                .IsUIntValueType(Sequence, out _)
                 .IsUIntWithinRange(Sequence, 1, (2^64) - 1)
             )
             // type/subType
@@ -142,12 +142,12 @@ namespace MtconnectCore.Standard.Documents.Streams
             .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.TIMESTAMP), (o) =>
                 o.IsImplemented(Timestamp)
                 .IsRequired(Timestamp)
-                .IsDateTimeValueType(Timestamp)
+                .IsDateTimeValueType(Timestamp, out _)
             )
             // units
             .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.UNITS), (o) =>
                 o.IsImplemented(Units)
-                .IsEnumValueType<UnitsTypes>(Units)
+                .IsEnumValueType<UnitsTypes>(Units, out _)
             )
             .HasError(out validationErrors);
 

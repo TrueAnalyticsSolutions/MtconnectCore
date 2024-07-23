@@ -22,8 +22,5 @@ namespace MtconnectCore.Standard.Documents.Streams
             Value = xNode.InnerText;
             TagName = xNode.LocalName;
         }
-
-        protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors) => throw new NotImplementedException();
-        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new NotImplementedException();
     }
 }

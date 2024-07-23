@@ -138,7 +138,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             // category
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.CATEGORY), (o) =>
                 o.IsImplemented(Category)
-                ?.IsEnumValueType<CategoryTypes>(Category)
+                ?.IsEnumValueType<CategoryTypes>(Category, out _)
             )
             // compositionId
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.COMPOSITION_ID), (o) =>
@@ -149,12 +149,12 @@ namespace MtconnectCore.Standard.Documents.Devices
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.COORDINATE_SYSTEM), (o) =>
                 o.IsImplemented(CoordinateSystem)
                     // scope to v1.8.1 deprecation
-                ?.IsEnumValueType<CoordinateSystemEnum>(CoordinateSystem)
+                ?.IsEnumValueType<CoordinateSystemEnum>(CoordinateSystem, out _)
             )
             // discrete
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.DISCRETE), (o) =>
                 o.IsImplemented(Discrete)
-                ?.IsBooleanValueType(Discrete)
+                ?.IsBooleanValueType(Discrete, out _)
             )
             // id
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.ID), (o) =>
@@ -167,7 +167,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             )
             // nativeScale
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.NATIVE_SCALE), (o) =>
-                o.IsImplemented(NativeScale)?.IsUIntValueType(NativeScale)
+                o.IsImplemented(NativeScale)?.IsUIntValueType(NativeScale, out _)
             )
             // nativeUnits
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.NATIVE_UNITS), (o) =>
@@ -177,17 +177,17 @@ namespace MtconnectCore.Standard.Documents.Devices
             // sampleRate
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.SAMPLE_RATE), (o) =>
                 o.IsImplemented(SampleRate)
-                ?.IsFloatValueType(SampleRate)
+                ?.IsFloatValueType(SampleRate, out _)
             )
             // significantDigits
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.SIGNIFICANT_DIGITS), (o) =>
                 o.IsImplemented(SignificantDigits)
-                ?.IsUIntValueType(SignificantDigits)
+                ?.IsUIntValueType(SignificantDigits, out _)
             )
             // statistic
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.STATISTIC), (o) =>
                 o.IsImplemented(Statistic)
-                ?.IsEnumValueType<StatisticTypes>(Statistic)
+                ?.IsEnumValueType<StatisticTypes>(Statistic, out _)
             )
             // type/subType
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.TYPE), (o) =>
@@ -203,12 +203,12 @@ namespace MtconnectCore.Standard.Documents.Devices
                     (v) => Category.Equals("SAMPLE", StringComparison.OrdinalIgnoreCase),
                     (v) => o?.IsRequired(Units)
                 )
-                ?.IsEnumValueType<UnitsTypes>(nameof(Units), Units)
+                ?.IsEnumValueType<UnitsTypes>(nameof(Units), Units, out _)
             )
             // representation
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.REPRESENTATION), (o) =>
                 o.IsImplemented(Representation)
-                ?.IsEnumValueType<RepresentationTypes>(Representation)
+                ?.IsEnumValueType<RepresentationTypes>(Representation, out _)
             )
             // coordinateSystemIdRef
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.COORDINATE_SYSTEM_ID_REF), (o) =>
@@ -240,7 +240,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             )
             // ResetTrigger
             .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.RESET_TRIGGER), o =>
-                o.IsEnumValueType<ResetTriggeredValues>(nameof(ResetTrigger), ResetTrigger)
+                o.IsEnumValueType<ResetTriggeredValues>(nameof(ResetTrigger), ResetTrigger, out _)
             )
             // Definition
             .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.DEFINITION), o =>

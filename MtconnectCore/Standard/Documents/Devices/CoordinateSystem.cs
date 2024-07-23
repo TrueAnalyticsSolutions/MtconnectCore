@@ -95,7 +95,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 .WhileNotIntroduced((x) =>
                     x.IsImplemented(Type)
                 )
-                .IsEnumValueType<CoordinateSystemTypeEnum>(Type)
+                .IsEnumValueType<CoordinateSystemTypeEnum>(Type, out _)
 
             )
             // uuid

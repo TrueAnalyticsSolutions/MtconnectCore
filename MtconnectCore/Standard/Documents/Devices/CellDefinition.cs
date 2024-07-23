@@ -48,7 +48,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // units
                 .ValidateValueProperty<CellDefinitionAttributes>(nameof(CellDefinitionAttributes.UNITS), (o) =>
                     o.IsImplemented(Units)
-                    .IsEnumValueType<UnitsTypes>(Units)
+                    .IsEnumValueType<UnitsTypes>(Units, out _)
                 )
                 // key
                 .ValidateValueProperty<CellDefinitionAttributes>(nameof(CellDefinitionAttributes.KEY), (o) =>

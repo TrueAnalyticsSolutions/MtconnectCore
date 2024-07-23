@@ -159,12 +159,12 @@ namespace MtconnectCore.Standard.Documents.Devices
             // sampleInterval
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_INTERVAL), (o) =>
                 o.IsImplemented(nameof(ComponentAttributes.SAMPLE_INTERVAL))
-                .IsFloatValueType(SampleInterval)
+                .IsFloatValueType(SampleInterval, out _)
             )
             // sampleRate
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_RATE), (o) =>
                 o.IsImplemented(nameof(ComponentAttributes.SAMPLE_RATE))
-                .IsFloatValueType(SampleRate)
+                .IsFloatValueType(SampleRate, out _)
             )
             // uuid
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.UUID), (o) =>
