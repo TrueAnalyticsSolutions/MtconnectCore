@@ -1,10 +1,11 @@
-﻿using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
+﻿using CaseExtensions;
+using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
 using MtconnectTranspiler.Sinks.CSharp.Contracts.Interfaces;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 {
     [ScribanTemplate("MtconnectCore.Class.scriban")]
-    public class MtconnectCoreClass : IClass
+    public class MtconnectCoreClass : IFileSource
     {
         private readonly IClass _class;
 
@@ -25,6 +26,20 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         public IPropertyList Properties => _class.Properties;
 
         public string Summary => _class.Summary;
+
+        /// <summary>
+        /// Internal reference to the class filename.
+        /// </summary>
+        protected string _filename { get; set; }
+        /// <inheritdoc />
+        public virtual string Filename {
+            get {
+                if (string.IsNullOrEmpty(_filename))
+                    _filename = $"{ScribanHelperMethods.ToCodeSafe(Name)}.cs";
+                return _filename;
+            }
+            set { _filename = value; }
+        }
 
         public MtconnectCoreClass(IClass source)
         {

@@ -1,22 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 using MtconnectTranspiler.Sinks.MtconnectCore.Models;
-using Scriban.Runtime;
 using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
 using MtconnectTranspiler.Sinks.CSharp.Contracts.Interfaces;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore
 {
-    public class CategoryFunctions : ScriptObject
-    {
-        public static bool CategoryContainsType(MtconnectCoreEnum @enum, IEnumInstance item) => @enum.SubTypes.ContainsKey(item.Name);
-        public static bool CategoryContainsValue(MtconnectCoreEnum @enum, IEnumInstance item) => @enum.Values.ContainsKey(item.Name);
-        public static bool EnumHasValues(MtconnectCoreEnum @enum) => @enum.Values.Any();
-    }
     internal class Transpiler
     {
         /// <inheritdoc cref="ILogger"/>
-        protected ILogger<Transpiler> _logger;
-
+        private readonly ILogger<Transpiler> _logger;
         private readonly ScribanTemplateGenerator _generator;
 
         /// <summary>
@@ -25,18 +17,13 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
         /// <param name="projectPath">Expected to be <c>MtconnectCore/Standard/Contracts</c></param>
         public Transpiler(ScribanTemplateGenerator generator, ILogger<Transpiler> logger = default)
         {
-            _logger = logger;
-
             _generator = generator;
+            _logger = logger;
         }
 
         public async Task TranspileAsync(CancellationToken token = default)
         {
             _logger?.LogInformation("Received MTConnectModel, beginning transpilation");
-
-            //_generator.Model.SetValue("model", model, true);
-
-            _generator.TemplateContext.PushGlobal(new CategoryFunctions());
 
             const string DataItemNamespace = "MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes";
             const string DataItemValueNamespace = "MtconnectCore.Standard.Contracts.Enums.Streams";
@@ -303,40 +290,27 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             {
                 var typeEnum = new MtconnectCoreEnum(type);
 
-
-                MtconnectCoreEnum typeValueEnum = null;
-                if (typeEnum.Values?.Any() == true)
+                if (typeEnum.SubTypes?.Any() == true)
                 {
-                    typeValueEnum = new MtconnectCoreEnum() {
-                        Name = $"{typeEnum.Name}Values",
-                        DataType = 
-                    };
-                }
-
-
-                var subTypes = MtconnectTranspiler.Sinks.CSharp.NavigationExtensions.GetObservationSubTypes(type);
-                if (subTypes?.Any() == true)
-                {
-                // TODO: Add SubTypes
-                    foreach (var subType in subTypes)
+                    foreach (var subType in typeEnum.SubTypes)
                     {
-                        var subTypeEnum = new MtconnectCoreEnum(subType);
-                        typeEnum.SubTypes.Add(subTypeEnum);
-                        dataItemTypeEnums.Add(subTypeEnum);
+                        dataItemTypeEnums.Add(subType);
                     }
                 }
+
+                if (typeEnum.Values?.Any() == true)
+                {
+                    dataItemValueEnums.Add(typeEnum);
+                }
+
                 dataItemTypeEnums.Add(typeEnum);
             }
 
             _logger?.LogInformation($"Processing {dataItemTypeEnums.Count} DataItem types/subTypes");
 
             // Process the template into enum files
-            _generator.ProcessTemplate(dataItemTypeEnums.DistinctBy(o => o.Name), Path.Combine(_generator.ProjectPath, "Enums", "Devices", "DataItemTypes"), true);
-            _generator.ProcessTemplate(valueEnums, Path.Combine(_generator.ProjectPath, "Enums", "Streams"), true);
-
-            // Process DataItem Values
-            List<MtconnectCoreEnum> dataItemValues = new List<MtconnectCoreEnum>();
-
+            _generator.ProcessTemplate(dataItemTypeEnums.DistinctBy(o => o.Name), Path.Combine(_generator.OutputPath, "Enums", "Devices", "DataItemTypes"), true);
+            _generator.ProcessTemplate(dataItemValueEnums, Path.Combine(_generator.OutputPath, "Enums", "Streams"), true);
         }
     }
 }

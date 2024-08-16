@@ -45,8 +45,8 @@ internal class Program
                         // If using embedded resources to store ".scriban" files, then provide the assembly
                         //.UseResourceAssembly(typeof(Transpiler).Assembly, "MtconnectTranspiler.Sinks.CSharp.Example")
                         // Configure a Scriban ScriptObject capable of interpreting SysML comment contents into other formats.
-                        // Configure a Scriban ScriptObject capable of formatting strings into code safe formats.
                         .AddMarkdownInterpreter("csharp_docs", new VisualStudioSummaryInterpreter())
+                        // Configure a Scriban ScriptObject capable of formatting strings into code safe formats.
                         .AddCodeFormatter("csharp_formatter", new CSharpCodeFormatter())
                     )
                     .ConfigureGenerator((options) => {

@@ -1,10 +1,12 @@
-﻿using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
+﻿using CaseExtensions;
+using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
+using MtconnectTranspiler.Sinks.CSharp;
 using MtconnectTranspiler.Sinks.CSharp.Contracts.Interfaces;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 {
     [ScribanTemplate("MtconnectCore.Enum.scriban")]
-    public class MtconnectCoreEnum
+    public class MtconnectCoreEnum : IFileSource
     {
 
         public string Name { get; internal set; }
@@ -24,6 +26,20 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 
         // NOTE: Only used for CATEGORY types that have subTypes.
         public List<MtconnectCoreEnum> SubTypes { get; internal set; } = new List<MtconnectCoreEnum>();
+
+        /// <summary>
+        /// Internal reference to the class filename.
+        /// </summary>
+        protected string _filename { get; set; }
+        /// <inheritdoc />
+        public virtual string Filename {
+            get {
+                if (string.IsNullOrEmpty(_filename))
+                    _filename = $"{ScribanHelperMethods.ToCodeSafe(Name)}.cs";
+                return _filename;
+            }
+            set { _filename = value; }
+        }
 
         public MtconnectCoreEnum() { }
 
@@ -60,6 +76,39 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             {
                 Values = new IEnumInstance[] { };
             }
+        }
+
+        public MtconnectCoreEnum(ObservationType source)
+        {
+
+            var resultProperty = source.Properties.FirstOrDefault(o => o.Name == "result");
+            IEnum resultInstance = null;
+            CSharp.Contracts.Interfaces.IEnumInstance[] values = null;
+            if (resultProperty.Type.IsAssignableFrom(typeof(IEnum)))
+            {
+                resultInstance = Activator.CreateInstance(resultProperty.Type) as IEnum;
+                if (resultInstance != null)
+                {
+                    values = resultInstance.Values;
+                }
+            }
+
+            Name = source.Name;
+            DataType = resultProperty.Type;// typeof(string), // TODO: Get result type
+            NormativeVersion = source.Introduced;
+            DeprecatedVersion = source.Deprecated;
+            Summary = source.Definition;
+            Instance = resultInstance.Instance;
+            SubTypes = source.SubTypes?.Select(o => new MtconnectCoreEnum() {
+                Name = o.Name,
+                DataType = typeof(string),
+                NormativeVersion = o.NormativeVersion,
+                DeprecatedVersion = o.DeprecatedVersion,
+                Summary = o.Summary,
+                Instance = resultInstance.Instance,
+                Values = values
+            })?.ToList() ?? Enumerable.Empty<MtconnectCoreEnum>().ToList();
+            Values = values;
         }
     }
 }
