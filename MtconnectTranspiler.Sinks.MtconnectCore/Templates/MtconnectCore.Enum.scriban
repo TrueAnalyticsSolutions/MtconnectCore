@@ -66,7 +66,7 @@ d_item_version_slim = (item?.deprecated_version | string.slice 20 3) | string.re
 		[ObservationalSubType(typeof({{ source?.sub_types[item.name] }}))]
 {{ end ~}}
 		{{~ if category_contains_value source item ~}}
-		[ObservationalValue(typeof({{ source?.value_types[item.name] }}))]
+		[ObservationalValue(typeof({{ item.name }}Enum))]
 {{ end ~}}
 		{{ item.name }},
 	{{~ end ~}}

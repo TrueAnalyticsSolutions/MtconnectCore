@@ -1,12 +1,12 @@
-﻿using CSharpModels = MtconnectTranspiler.Sinks.CSharp.Models;
-using MtconnectTranspiler.Xmi;
+﻿using MtconnectTranspiler.Xmi;
 using MtconnectTranspiler.Xmi.UML;
-using MtconnectTranspiler.Sinks.ScribanTemplates;
+using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
+using MtconnectTranspiler.Sinks.CSharp.Contracts.Interfaces;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 {
     [ScribanTemplate("MtconnectCore.ValueType.scriban")]
-    public class MtconnectValueType : CSharpModels.Enum
+    public class MtconnectValueType : IEnum
     {
         public virtual string Category { get; set; }
 

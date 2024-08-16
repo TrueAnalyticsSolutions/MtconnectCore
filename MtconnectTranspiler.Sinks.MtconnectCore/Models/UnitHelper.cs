@@ -1,6 +1,5 @@
-﻿using MtconnectTranspiler.Contracts;
-using MtconnectTranspiler.Sinks.CSharp.Models;
-using MtconnectTranspiler.Sinks.ScribanTemplates;
+﻿using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
+using MtconnectTranspiler.Contracts;
 using MtconnectTranspiler.Xmi;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore.Models

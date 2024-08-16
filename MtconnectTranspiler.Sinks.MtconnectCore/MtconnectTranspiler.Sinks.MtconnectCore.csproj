@@ -32,13 +32,14 @@
 
   <ItemGroup>
     <PackageReference Include="CaseExtensions" Version="1.1.0" />
-    <PackageReference Include="Consoul" Version="1.6.3" />
-    <PackageReference Include="MtconnectTranspiler" Version="1.0.8.2-prerelease" />
-    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="1.0.14.3-prerelease">
+    <PackageReference Include="Consoul" Version="1.6.6" />
+    <PackageReference Include="MtconnectTranspiler" Version="1.0.8.3-prerelease.3" />
+    <PackageReference Include="MtconnectTranspiler.CodeGenerators.ScribanTemplates" Version="2.3.0-prerelease.2" />
+    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="2.4.0-prerelease.5">
       <GeneratePathProperty>True</GeneratePathProperty>
     </PackageReference>
-    <PackageReference Include="Scriban" Version="5.9.0" />
-    <PackageReference Include="System.CodeDom" Version="7.0.0" />
+    <PackageReference Include="Scriban" Version="5.10.0" />
+    <PackageReference Include="System.CodeDom" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

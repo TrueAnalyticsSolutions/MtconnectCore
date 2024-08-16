@@ -1,4 +1,4 @@
-﻿using MtconnectTranspiler.Sinks.ScribanTemplates;
+﻿using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
 using MtconnectTranspiler.Xmi;
 using MtconnectTranspiler.Xmi.UML;
 
