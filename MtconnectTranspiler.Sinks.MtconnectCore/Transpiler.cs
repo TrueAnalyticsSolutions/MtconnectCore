@@ -311,6 +311,25 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             // Process the template into enum files
             _generator.ProcessTemplate(dataItemTypeEnums.DistinctBy(o => o.Name), Path.Combine(_generator.OutputPath, "Enums", "Devices", "DataItemTypes"), true);
             _generator.ProcessTemplate(dataItemValueEnums, Path.Combine(_generator.OutputPath, "Enums", "Streams"), true);
+            var dataTypes = new MtconnectCoreEnum[] {
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CategoryEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CompositionTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CoordinateSystemEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CoordinateSystemTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.RelationshipTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.MotionActuationTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.MotionTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.NativeUnitEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.QualifierEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CriticalityTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.RepresentationEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.StatisticEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.UnitEnum),
+            };
+            foreach (var type in dataTypes)
+            {
+                _generator.ProcessTemplate(type, Path.Combine(_generator.OutputPath, "Enums", "Devices"));
+            }
         }
     }
 }

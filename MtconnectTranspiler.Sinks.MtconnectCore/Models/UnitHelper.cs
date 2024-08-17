@@ -5,7 +5,7 @@ using MtconnectTranspiler.Xmi;
 namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 {
     [ScribanTemplate("MtconnectCore.UnitStaticHelper.scriban")]
-    public class UnitHelper : CsharpType, IFileSource
+    public class UnitHelper : IFileSource
     {
         const string UnitNamespace = "MtconnectCore.Units";
 
@@ -16,7 +16,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         public string Filename {
             get {
                 if (string.IsNullOrEmpty(_filename))
-                    _filename = $"{Name}.cs";
+                    _filename = $"UnitsTypes.cs";
                 return _filename;
             }
             set { _filename = value; }
