@@ -84,7 +84,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             var resultProperty = source.Properties.FirstOrDefault(o => o.Name == "result");
             IEnum resultInstance = null;
             CSharp.Contracts.Interfaces.IEnumInstance[] values = null;
-            if (resultProperty.Type.IsAssignableFrom(typeof(IEnum)))
+            if (resultProperty?.Type?.IsAssignableFrom(typeof(IEnum)) == true)
             {
                 resultInstance = Activator.CreateInstance(resultProperty.Type) as IEnum;
                 if (resultInstance != null)
@@ -94,18 +94,18 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             }
 
             Name = source.Name;
-            DataType = resultProperty.Type;// typeof(string), // TODO: Get result type
+            DataType = resultProperty?.Type ?? typeof(string);// typeof(string), // TODO: Get result type
             NormativeVersion = source.Introduced;
             DeprecatedVersion = source.Deprecated;
             Summary = source.Definition;
-            Instance = resultInstance.Instance;
+            Instance = resultInstance?.Instance;
             SubTypes = source.SubTypes?.Select(o => new MtconnectCoreEnum() {
                 Name = o.Name,
                 DataType = typeof(string),
                 NormativeVersion = o.NormativeVersion,
                 DeprecatedVersion = o.DeprecatedVersion,
                 Summary = o.Summary,
-                Instance = resultInstance.Instance,
+                Instance = resultInstance?.Instance,
                 Values = values
             })?.ToList() ?? Enumerable.Empty<MtconnectCoreEnum>().ToList();
             Values = values;

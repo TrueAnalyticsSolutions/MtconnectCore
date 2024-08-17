@@ -9,13 +9,13 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
     {
         /// <inheritdoc cref="ILogger"/>
         private readonly ILogger<Transpiler> _logger;
-        private readonly ScribanTemplateGenerator _generator;
+        private readonly IScribanTemplateGenerator _generator;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="projectPath">Expected to be <c>MtconnectCore/Standard/Contracts</c></param>
-        public Transpiler(ScribanTemplateGenerator generator, ILogger<Transpiler> logger = default)
+        public Transpiler(IScribanTemplateGenerator generator, ILogger<Transpiler> logger = default)
         {
             _generator = generator;
             _logger = logger;
