@@ -2,6 +2,8 @@
 using MtconnectTranspiler.Sinks.MtconnectCore.Models;
 using MtconnectTranspiler.CodeGenerators.ScribanTemplates;
 using MtconnectTranspiler.Sinks.CSharp.Contracts.Interfaces;
+using Mtconnect;
+using ConsoulLibrary;
 
 namespace MtconnectTranspiler.Sinks.MtconnectCore
 {
@@ -27,6 +29,13 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
             const string DataItemNamespace = "MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes";
             const string DataItemValueNamespace = "MtconnectCore.Standard.Contracts.Enums.Streams";
+
+            var classes = MtconnectModel.ObservationInformationModelPackage.ObservationTypesPackage.EventTypesPackage.Classes;
+
+            var first = classes.First();
+            Consoul.Write($"Found {first.Properties.Properties.Length} properties from " + first.GetType().Name);
+
+            Consoul.Write($"Found {classes.Length} classes");
 
             // Process DataItem Types/Sub-Types
             //var dataItemTypeEnums = new List<MtconnectCoreEnum>();
