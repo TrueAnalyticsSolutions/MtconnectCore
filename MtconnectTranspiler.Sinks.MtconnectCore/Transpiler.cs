@@ -306,10 +306,11 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 dataItemTypeEnums.Add(typeEnum);
             }
 
-            _logger?.LogInformation($"Processing {dataItemTypeEnums.Count} DataItem types/subTypes");
 
             // Process the template into enum files
+            _logger?.LogInformation($"Processing {dataItemTypeEnums.Count} DataItem types/subTypes");
             _generator.ProcessTemplate(dataItemTypeEnums.DistinctBy(o => o.Name), Path.Combine(_generator.OutputPath, "Enums", "Devices", "DataItemTypes"), true);
+            _logger?.LogInformation($"Processing {dataItemValueEnums.Count} DataItem values");
             _generator.ProcessTemplate(dataItemValueEnums, Path.Combine(_generator.OutputPath, "Enums", "Streams"), true);
             var dataTypes = new MtconnectCoreEnum[] {
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CategoryEnum),
@@ -326,6 +327,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.StatisticEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.UnitEnum),
             };
+            _logger?.LogInformation($"Processing data types");
             foreach (var type in dataTypes)
             {
                 _generator.ProcessTemplate(type, Path.Combine(_generator.OutputPath, "Enums", "Devices"));

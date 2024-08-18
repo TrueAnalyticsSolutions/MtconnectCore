@@ -15662,12 +15662,12 @@
         </member>
         <member name="T:MtconnectCore.Validation.Pairings">
             <summary>
-            Shortcut methods for creating <see cref="!:KeyValuePair"/> for use with params arguments
+            Shortcut methods for creating <see cref="T:System.Collections.Generic.KeyValuePair"/> for use with params arguments
             </summary>
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Collections.Generic.IEnumerable{System.Object})">
             <summary>
-            Creates <see cref="!:KeyValuePair"/>
+            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -15675,7 +15675,7 @@
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Object)">
             <summary>
-            Creates <see cref="!:KeyValuePair"/>
+            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -15813,10 +15813,6 @@
             Determines if there are any exceptions that are of the severity level ERROR.
             </summary>
             <returns>Flag if any exception has the severity level of ERROR.</returns>
-        </member>
-    </members>
-</doc>
-e severity level of ERROR.</returns>
         </member>
     </members>
 </doc>

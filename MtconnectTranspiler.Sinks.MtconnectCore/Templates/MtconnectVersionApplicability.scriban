@@ -1,6 +1,4 @@
 ﻿{{~
 minVersion=$1?.normative_version
-maxVersion=$1?.deprecated_version
-nversion_slim = ($1?.normative_version | string.slice 20 3) | string.replace "_" "."
-dversion_slim = ($1?.deprecated_version | string.slice 20 3) | string.replace "_" "."~}}
-{{~ if minVersion && minVersion != "" ~}}[MtconnectVersionApplicability({{ minVersion }}, "https://model.mtconnect.org/#_Version_{{ nversion_slim }}" {{~ if maxVersion && maxVersion != "" ~}} , {{ maxVersion }} {{~ end ~}})]{{~ end ~}}
+maxVersion=$1?.deprecated_version~}}
+{{~ if minVersion && minVersion != "" ~}}[MtconnectVersionApplicability("{{ minVersion }}", "https://model.mtconnect.org/#_Version_{{ minVersion }}" {{~ if maxVersion && maxVersion != "" ~}} , "{{ maxVersion }}" {{~ end ~}})]{{~ end ~}}
