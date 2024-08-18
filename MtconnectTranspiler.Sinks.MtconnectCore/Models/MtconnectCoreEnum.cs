@@ -84,7 +84,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             var resultProperty = source.Properties.FirstOrDefault(o => o.Name == "result");
             IEnum resultInstance = null;
             CSharp.Contracts.Interfaces.IEnumInstance[] values = null;
-            if (resultProperty?.Type?.IsAssignableFrom(typeof(IEnum)) == true)
+            if (resultProperty?.Type?.GetInterfaces()?.Any(o => o == (typeof(IEnum))) == true)
             {
                 resultInstance = Activator.CreateInstance(resultProperty.Type) as IEnum;
                 if (resultInstance != null)
