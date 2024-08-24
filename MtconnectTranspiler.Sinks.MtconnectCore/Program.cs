@@ -24,7 +24,11 @@ internal class Program
 
         IConfiguration configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
+#if DEBUG
+            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+#else
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+#endif
             .AddEnvironmentVariables()
             .AddCommandLine(args)
             .Build();
