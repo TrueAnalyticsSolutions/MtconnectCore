@@ -35,9 +35,15 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             var dataItemValueEnums = new List<MtconnectCoreEnum>();
 
             var categoryTypes = new Dictionary<string, MtconnectCoreEnum>() {
-                { "Condition", new MtconnectCoreEnum() },
-                { "Event", new MtconnectCoreEnum() },
-                { "Sample", new MtconnectCoreEnum() }
+                { "Condition", new MtconnectCoreEnum() {
+                    Name = "ConditionTypes"
+                } },
+                { "Event", new MtconnectCoreEnum() {
+                    Name = "EventTypes"
+                } },
+                { "Sample", new MtconnectCoreEnum() {
+                    Name = "SampleTypes"
+                } }
             };
 
             foreach (var type in MtconnectTranspiler.Sinks.CSharp.NavigationExtensions.GetObservationTypes())
