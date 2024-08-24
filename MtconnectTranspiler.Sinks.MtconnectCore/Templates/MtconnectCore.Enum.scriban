@@ -12,7 +12,7 @@ namespace {{ to_pascal_code source.namespace }}
 	{{ include 'NormativeRemarks.scriban' source }}
 	{{ include 'MtconnectVersionApplicability.scriban' source }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
-	public enum {{ to_pascal_case source.name }}
+	public enum {{ to_pascal_case source.name + source.filename_suffix }}
 	{
 	{{~ if source.sub_types.size != null && source.sub_types.size > 0 ~}}
 	{{~ for item in source.sub_types ~}}
@@ -24,9 +24,9 @@ namespace {{ to_pascal_code source.namespace }}
 		[ObservationalSubType(typeof({{ item.name }}SubTypes))]
 {{ end ~}}
 		{{~ if source.values != null && source.values.size > 0 ~}}
-		[ObservationalValue(typeof({{ item.name }}Enum))]
+		[ObservationalValue(typeof({{ item.name }}Values))]
 {{ end ~}}
-		{{ item.name }},
+		{{ to_upper_snake_code item.name }},
 	{{~ end ~}}
 	{{~ else if source.values != null && source.values.size > 0 ~}}
 	{{~ for value in source.values ~}}

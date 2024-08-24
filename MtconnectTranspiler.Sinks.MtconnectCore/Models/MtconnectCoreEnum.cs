@@ -34,6 +34,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         public Dictionary<string, MtconnectCoreEnum> SubTypesByName => SubTypes?.ToDictionary(o => o.Name, o => o)
             ?? new Dictionary<string, MtconnectCoreEnum>();
 
+        public string FilenameSuffix { get; internal set; } = string.Empty;
+
         /// <summary>
         /// Internal reference to the class filename.
         /// </summary>
@@ -42,7 +44,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         public virtual string Filename {
             get {
                 if (string.IsNullOrEmpty(_filename))
-                    _filename = $"{ScribanHelperMethods.ToCodeSafe(Name)}.cs";
+                    _filename = $"{ScribanHelperMethods.ToCodeSafe(Name)}{FilenameSuffix}.cs";
                 return _filename;
             }
             set { _filename = value; }

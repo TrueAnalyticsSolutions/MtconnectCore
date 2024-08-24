@@ -55,14 +55,14 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 {
                     dataItemTypeEnums.Add(typeEnum);
                     dataItemTypeEnums[dataItemTypeEnums.Count - 1].Namespace = DataItemNamespace;
-                    dataItemTypeEnums[dataItemTypeEnums.Count - 1].Name += "SubTypes";
+                    dataItemTypeEnums[dataItemTypeEnums.Count - 1].FilenameSuffix = "SubTypes";
                 }
 
                 if (typeEnum.Values?.Any() == true)
                 {
                     dataItemValueEnums.Add(typeEnum);
                     dataItemValueEnums[dataItemValueEnums.Count - 1].Namespace = DataItemValueNamespace;
-                    dataItemValueEnums[dataItemValueEnums.Count - 1].Name += "Values";
+                    dataItemValueEnums[dataItemValueEnums.Count - 1].FilenameSuffix = "Values";
                 }
 
             }
