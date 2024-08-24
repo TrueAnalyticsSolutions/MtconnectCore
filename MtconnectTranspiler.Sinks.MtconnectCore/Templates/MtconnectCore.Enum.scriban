@@ -33,7 +33,7 @@ namespace {{ to_pascal_code source.namespace }}
 		/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' value }}
 		{{ include 'NormativeRemarks.scriban' item }}
 		/// </summary>
-		{{ to_upper_snake_code value.name }},
+		{{ value.name }},
 	{{~ end ~}}
 	{{~ end ~}}
 	}
