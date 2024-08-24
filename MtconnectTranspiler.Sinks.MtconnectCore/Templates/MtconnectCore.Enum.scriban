@@ -23,7 +23,7 @@ namespace {{ to_pascal_code source.namespace }}
 		{{~ if item.sub_types != null && item.sub_types.size > 0 ~}}
 		[ObservationalSubType(typeof({{ item.name }}SubTypes))]
 {{ end ~}}
-		{{~ if source.values != null && source.values.size > 0 ~}}
+		{{~ if (source.values != null && source.values.size > 0) || (item.values != null && item.values.size > 0) ~}}
 		[ObservationalValue(typeof({{ item.name }}Values))]
 {{ end ~}}
 		{{ to_upper_snake_code item.name }},
