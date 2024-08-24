@@ -6,7 +6,7 @@ using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace {{ to_pascal_code source.namespace }}
 {
-	/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' source?.summary }}
+	/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' source }}
 	/// <br/>Visit <seealso href="{{ source?.help_url }}">model.mtconnect.org</seealso> for more information.
 	/// </summary>
 	{{ include 'NormativeRemarks.scriban' source }}
@@ -16,7 +16,7 @@ namespace {{ to_pascal_code source.namespace }}
 	{
 	{{~ for item in source.items ~}}
 		/// <summary>
-		/// {{ include 'UmlCommentsSummaryContent.scriban' item?.summary ~}}
+		/// {{ include 'UmlCommentsSummaryContent.scriban' item ~}}
 		/// </summary>
 		{{ include 'NormativeRemarks.scriban' item }}
 		{{ include 'MtconnectVersionApplicability.scriban' item }}
