@@ -31,7 +31,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 
         // NOTE: Only used for CATEGORY types that have subTypes.
         public List<MtconnectCoreEnum> SubTypes { get; internal set; } = new List<MtconnectCoreEnum>();
-        public Dictionary<string, MtconnectCoreEnum> SubTypesByName => SubTypes.ToDictionary(o => o.Name, o => o);
+        public Dictionary<string, MtconnectCoreEnum> SubTypesByName => SubTypes?.ToDictionary(o => o.Name, o => o)
+            ?? new Dictionary<string, MtconnectCoreEnum>();
 
         /// <summary>
         /// Internal reference to the class filename.
