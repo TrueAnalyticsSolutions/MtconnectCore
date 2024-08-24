@@ -21,7 +21,7 @@ namespace {{ to_pascal_code source.namespace }}
 		{{ include 'NormativeRemarks.scriban' item }}
 		{{ include 'MtconnectVersionApplicability.scriban' item }}
 		{{~ if category_contains_type source item ~}}
-		[ObservationalSubType(typeof({{ source?[item.name] }}))]
+		[ObservationalSubType(typeof({{ source?.sub_types_by_name[item.name] }}))]
 {{ end ~}}
 		{{~ if category_contains_value source item ~}}
 		[ObservationalValue(typeof({{ item.name }}Enum))]
