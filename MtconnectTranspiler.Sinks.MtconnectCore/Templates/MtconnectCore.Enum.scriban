@@ -14,7 +14,7 @@ namespace {{ to_pascal_code source.namespace }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
 	public enum {{ to_pascal_case source.name }}
 	{
-	{{~ for item in source.items ~}}
+	{{~ for item in source.sub_types ~}}
 		/// <summary>
 		/// {{ include 'UmlCommentsSummaryContent.scriban' item ~}}
 		/// </summary>
