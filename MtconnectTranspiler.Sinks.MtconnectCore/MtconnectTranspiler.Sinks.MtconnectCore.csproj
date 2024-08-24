@@ -41,7 +41,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
     <PackageReference Include="MtconnectTranspiler" Version="2.4.0-prerelease.7" />
     <PackageReference Include="MtconnectTranspiler.CodeGenerators.ScribanTemplates" Version="2.4.0-prerelease.20" />
-    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="2.4.0-prerelease.15">
+    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="2.4.0-prerelease.16">
       <GeneratePathProperty>True</GeneratePathProperty>
     </PackageReference>
     <PackageReference Include="Scriban" Version="5.10.0" />
