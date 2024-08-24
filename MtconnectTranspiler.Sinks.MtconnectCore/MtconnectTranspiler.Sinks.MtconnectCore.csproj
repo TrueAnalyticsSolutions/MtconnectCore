@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Templates\MtconnectCore.GeneratedCodeAttribute.scriban" />
+    <None Remove="Templates\NormativeRemarks.scriban" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,9 @@
     <Content Include="Templates\MtconnectVersionApplicability.scriban">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\NormativeRemarks.scriban">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\UmlCommentsSummaryContent.scriban">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -37,7 +41,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
     <PackageReference Include="MtconnectTranspiler" Version="2.4.0-prerelease.7" />
     <PackageReference Include="MtconnectTranspiler.CodeGenerators.ScribanTemplates" Version="2.4.0-prerelease.20" />
-    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="2.4.0-prerelease.11">
+    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="2.4.0-prerelease.14">
       <GeneratePathProperty>True</GeneratePathProperty>
     </PackageReference>
     <PackageReference Include="Scriban" Version="5.10.0" />

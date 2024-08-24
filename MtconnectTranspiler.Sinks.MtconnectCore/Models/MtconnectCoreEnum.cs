@@ -8,6 +8,11 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
     [ScribanTemplate("MtconnectCore.Enum.scriban")]
     public class MtconnectCoreEnum : IFileSource
     {
+        private const string HELP_URL = "https://model.mtconnect.org/#Enumeration__";
+
+        public string HelpUrl { get; internal set; } = HELP_URL;
+
+        public string Namespace { get; internal set; } = "MtconnectCore.Standard.Contracts.Enums";
 
         public string Name { get; internal set; }
 
@@ -26,7 +31,11 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 
         // NOTE: Only used for CATEGORY types that have subTypes.
         public List<MtconnectCoreEnum> SubTypes { get; internal set; } = new List<MtconnectCoreEnum>();
-
+        public MtconnectCoreEnum? this[string name] {
+            get {
+                return SubTypes.FirstOrDefault(o => o.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            }
+        }
         /// <summary>
         /// Internal reference to the class filename.
         /// </summary>
@@ -45,6 +54,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 
         public MtconnectCoreEnum(IEnum source)
         {
+            HelpUrl = source.HelpUrl;
             Name = source.Name;
             DataType = source.DataType;
             Instance = source.Instance;
@@ -63,6 +73,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             {
                 enumInstance = Activator.CreateInstance(resultType.Type) as IEnum;
             }
+
+            HelpUrl = source.HelpUrl;
             Name = source.Name.Replace("Enum", string.Empty);
             DataType = resultType?.Type ?? typeof(String);
             Instance = enumInstance?.Instance ?? null;
@@ -93,6 +105,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
                 }
             }
 
+            HelpUrl = source.HelpUrl;
             Name = source.Name;
             DataType = resultProperty?.Type ?? typeof(string);// typeof(string), // TODO: Get result type
             NormativeVersion = source.Introduced;
@@ -100,6 +113,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             Summary = source.Definition;
             Instance = resultInstance?.Instance;
             SubTypes = source.SubTypes?.Select(o => new MtconnectCoreEnum() {
+                HelpUrl = o.HelpUrl,
+                Namespace = Namespace,
                 Name = o.Name,
                 DataType = typeof(string),
                 NormativeVersion = o.NormativeVersion,
