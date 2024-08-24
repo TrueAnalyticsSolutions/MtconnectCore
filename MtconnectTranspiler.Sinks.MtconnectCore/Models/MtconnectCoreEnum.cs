@@ -113,7 +113,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             SubTypes = source.SubTypes?.Select(o => new MtconnectCoreEnum() {
                 HelpUrl = o.HelpUrl,
                 Namespace = Namespace,
-                Name = o.Name,
+                Name = o.Name.Substring(o.Name.LastIndexOf(".") + 1),
                 DataType = typeof(string),
                 NormativeVersion = o.NormativeVersion,
                 DeprecatedVersion = o.DeprecatedVersion,
