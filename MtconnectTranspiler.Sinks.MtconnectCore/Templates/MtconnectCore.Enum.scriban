@@ -20,10 +20,10 @@ namespace {{ to_pascal_code source.namespace }}
 		/// </summary>
 		{{ include 'NormativeRemarks.scriban' item }}
 		{{ include 'MtconnectVersionApplicability.scriban' item }}
-		{{~ if category_contains_type source item ~}}
+		{{~ if source.sub_types != null && source.sub_types.size > 0 ~}}
 		[ObservationalSubType(typeof({{ source?.sub_types_by_name[item.name] }}))]
 {{ end ~}}
-		{{~ if category_contains_value source item ~}}
+		{{~ if source.values != null && source.values.size > 0 ~}}
 		[ObservationalValue(typeof({{ item.name }}Enum))]
 {{ end ~}}
 		{{ item.name }},
