@@ -28,7 +28,7 @@ namespace {{ to_pascal_code source.namespace }}
 {{ end ~}}
 		{{ item.name }},
 	{{~ end ~}}
-	{{~ elseif source.values != null && source.values.size > 0 ~}}
+	{{~ else if source.values != null && source.values.size > 0 ~}}
 	{{~ for value in source.values ~}}
 		/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' value }}
 		{{ include 'NormativeRemarks.scriban' item }}
