@@ -1,0 +1,1 @@
+{{~ if $1.sub_types != null && $1.sub_types.size > 0 ~}}[ObservationalSubType(typeof({{ $1.name }}SubTypes))]{{~ end ~}}

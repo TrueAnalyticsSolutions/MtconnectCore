@@ -60,9 +60,11 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
                 if (typeEnum.Values?.Any() == true)
                 {
-                    dataItemValueEnums.Add(typeEnum.Clone() as MtconnectCoreEnum);
-                    dataItemValueEnums[dataItemValueEnums.Count - 1].Namespace = DataItemValueNamespace;
-                    dataItemValueEnums[dataItemValueEnums.Count - 1].FilenameSuffix = "Values";
+                    var valueEnum = typeEnum.Clone() as MtconnectCoreEnum;
+                    valueEnum.Namespace = DataItemValueNamespace;
+                    valueEnum.FilenameSuffix = "Values";
+                    valueEnum.SubTypes.Clear();
+                    dataItemValueEnums.Add(valueEnum);
                 }
 
             }
@@ -81,11 +83,26 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             _generator.ProcessTemplate(dataItemValueEnums, Path.Combine(_generator.OutputPath, "Enums", "Streams"), true);
 
             var dataTypes = new MtconnectCoreEnum[] {
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.ApplicationCategoryEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.ApplicationTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.AssetTypeEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CategoryEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CompositionTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CompositionStateActionEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CompositionStateLateralEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CompositionStateMotionEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CompositionStateSwitchedEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CompositionStateVerticalEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CoordinateSystemEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CoordinateSystemTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CriticalityTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.DirectionLinearEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.DirectionRotaryEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.FileStateEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.InterfaceStateEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.RelationshipTypeEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.ResetTriggeredEnum),
+                new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.MediaTypeEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.MotionActuationTypeEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.MotionTypeEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.NativeUnitEnum),
@@ -96,7 +113,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.UnitEnum),
             };
             _logger?.LogInformation($"Processing data types");
-            _generator.ProcessTemplate(dataTypes, Path.Combine(_generator.OutputPath, "Enums", "Devices"), true);
+            _generator.ProcessTemplate(dataTypes, Path.Combine(_generator.OutputPath, "Enums", "DataTypes"), true);
         }
     }
 }

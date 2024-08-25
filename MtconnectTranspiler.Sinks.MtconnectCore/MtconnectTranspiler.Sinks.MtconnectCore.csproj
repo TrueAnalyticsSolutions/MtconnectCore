@@ -11,6 +11,8 @@
   <ItemGroup>
     <None Remove="Templates\MtconnectCore.GeneratedCodeAttribute.scriban" />
     <None Remove="Templates\NormativeRemarks.scriban" />
+    <None Remove="Templates\ObservationalSubTypeAttribute.scriban" />
+    <None Remove="Templates\ObservationalValueAttribute.scriban" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +29,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\NormativeRemarks.scriban">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\ObservationalSubTypeAttribute.scriban">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\ObservationalValueAttribute.scriban">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templates\UmlCommentsSummaryContent.scriban">

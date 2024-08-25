@@ -3,18 +3,14 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Enums.Streams;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
-using CoordinateSystemEnum = MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemEnum;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {

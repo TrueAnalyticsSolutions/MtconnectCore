@@ -1,4 +1,14 @@
 ﻿{{~
 minVersion=$1?.normative_version
-maxVersion=$1?.deprecated_version~}}
-{{~ if minVersion && minVersion != "" ~}}[MtconnectVersionApplicability("{{ minVersion }}", "https://model.mtconnect.org/#_Version_{{ minVersion }}" {{~ if maxVersion && maxVersion != "" ~}} , "{{ maxVersion }}" {{~ end ~}})]{{~ end ~}}
+maxVersion=$1?.deprecated_version
+minParts=$1?.normative_version | string.split "."
+maxParts=$1?.deprecated_version | string.split "."
+minEnum="MtconnectVersions.V_" + minParts[0] + "_" + minParts[1]
+if minVersion == "1.0"
+minEnum = minEnum + "_1"
+else
+minEnum = minEnum + "_0"
+end
+maxEnum="MtconnectVersions.V_" + maxParts[0] + "_" + maxParts[1] + "_0"
+~}}
+{{~ if minVersion && minVersion != "" ~}}[MtconnectVersionApplicability({{ minEnum }}, "https://model.mtconnect.org/#_Version_{{ minVersion }}" {{~ if maxVersion && maxVersion != "" ~}} , {{ maxEnum }} {{~ end ~}})]{{~ end ~}}

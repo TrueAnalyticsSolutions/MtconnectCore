@@ -6,31 +6,39 @@ using MtconnectCore.Standard.Contracts.Attributes;
 
 namespace {{ to_pascal_code source.namespace }}
 {
-	/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' source }}
-	/// <br/>Visit <seealso href="{{ source?.help_url }}">model.mtconnect.org</seealso> for more information.{{ include 'NormativeRemarks.scriban' source }}
+	/// <summary>
+	{{~ if source.summary != null && source.summary != "" ~}}
+	{{ include 'UmlCommentsSummaryContent.scriban' source }}
+	{{~ end ~}}
+	/// <br/>Visit <seealso href="{{ source?.help_url }}">model.mtconnect.org</seealso> for more information.
 	/// </summary>
+	{{ include 'NormativeRemarks.scriban' source }}
 	{{ include 'MtconnectVersionApplicability.scriban' source }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
 	public enum {{ to_pascal_case source.name + source.filename_suffix }}
 	{
 	{{~ if source.sub_types.size != null && source.sub_types.size > 0 ~}}
 	{{~ for item in source.sub_types ~}}
-		/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' item }}{{ include 'NormativeRemarks.scriban' item }}
+		/// <summary>
+		{{ include 'UmlCommentsSummaryContent.scriban' item }}
 		/// </summary>
+		{{ include 'NormativeRemarks.scriban' item }}
 		{{ include 'MtconnectVersionApplicability.scriban' item }}
-		{{~ if item.sub_types != null && item.sub_types.size > 0 ~}}
-		[ObservationalSubType(typeof({{ item.name }}SubTypes))]
-{{ end ~}}
-		{{~ if (source.values != null && source.values.size > 0) || (item.values != null && item.values.size > 0) ~}}
-		[ObservationalValue(typeof({{ item.name }}Values))]
-{{ end ~}}
+		{{ include 'ObservationalSubTypeAttribute.scriban' item }}
+		{{~ if source.name == "EventTypes" || source.name == "ConditionTypes" || source.name == "SampleTypes" ~}}
+		{{ include 'ObservationalValueAttribute.scriban' source item.name }}
+		{{~ else ~}}
+		{{ include 'ObservationalValueAttribute.scriban' source }}
+		{{~ end ~}}
 		{{ to_upper_snake_code item.name }},
 	{{~ end ~}}
 	{{~ else if source.values != null && source.values.size > 0 ~}}
 	{{~ for value in source.values ~}}
-		/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' value }}{{ include 'NormativeRemarks.scriban' item }}
+		/// <summary>
+		{{ include 'UmlCommentsSummaryContent.scriban' value }}
 		/// </summary>
-		{{ value.name }},
+		{{ include 'NormativeRemarks.scriban' value }}
+		{{ value.name | string.replace "/" "_PER_" | string.replace "^2" "_SQUARED" | string.replace "^3" "_CUBED" | to_code_safe }},
 	{{~ end ~}}
 	{{~ end ~}}
 	}
