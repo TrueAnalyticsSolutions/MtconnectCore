@@ -50,17 +50,17 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             {
                 var typeEnum = new MtconnectCoreEnum(type);
 
-                categoryTypes[type.Category].SubTypes.Add(typeEnum);
+                categoryTypes[type.Category].SubTypes.Add(typeEnum.Clone() as MtconnectCoreEnum);
                 if (typeEnum.SubTypes?.Any() == true)
                 {
-                    dataItemTypeEnums.Add(typeEnum);
+                    dataItemTypeEnums.Add(typeEnum.Clone() as MtconnectCoreEnum);
                     dataItemTypeEnums[dataItemTypeEnums.Count - 1].Namespace = DataItemNamespace;
                     dataItemTypeEnums[dataItemTypeEnums.Count - 1].FilenameSuffix = "SubTypes";
                 }
 
                 if (typeEnum.Values?.Any() == true)
                 {
-                    dataItemValueEnums.Add(typeEnum);
+                    dataItemValueEnums.Add(typeEnum.Clone() as MtconnectCoreEnum);
                     dataItemValueEnums[dataItemValueEnums.Count - 1].Namespace = DataItemValueNamespace;
                     dataItemValueEnums[dataItemValueEnums.Count - 1].FilenameSuffix = "Values";
                 }
@@ -69,15 +69,17 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
             foreach (var categoryType in categoryTypes)
             {
-                dataItemTypeEnums.Add(categoryType.Value);
+                dataItemTypeEnums.Add(categoryType.Value.Clone() as MtconnectCoreEnum);
                 dataItemTypeEnums[dataItemTypeEnums.Count - 1].Namespace = DataItemNamespace;
             }
 
             // Process the template into enum files
             _logger?.LogInformation($"Processing {dataItemTypeEnums.Count} DataItem types/subTypes");
             _generator.ProcessTemplate(dataItemTypeEnums.DistinctBy(o => o.Name), Path.Combine(_generator.OutputPath, "Enums", "Devices", "DataItemTypes"), true);
+
             _logger?.LogInformation($"Processing {dataItemValueEnums.Count} DataItem values");
             _generator.ProcessTemplate(dataItemValueEnums, Path.Combine(_generator.OutputPath, "Enums", "Streams"), true);
+
             var dataTypes = new MtconnectCoreEnum[] {
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CategoryEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.CompositionTypeEnum),
@@ -93,7 +95,6 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.StatisticEnum),
                 new MtconnectCoreEnum(Mtconnect.MtconnectModel.DataTypesPackage.UnitEnum),
             };
-
             _logger?.LogInformation($"Processing data types");
             _generator.ProcessTemplate(dataTypes, Path.Combine(_generator.OutputPath, "Enums", "Devices"), true);
         }

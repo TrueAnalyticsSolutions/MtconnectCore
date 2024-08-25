@@ -7,18 +7,16 @@ using MtconnectCore.Standard.Contracts.Attributes;
 namespace {{ to_pascal_code source.namespace }}
 {
 	/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' source }}
-	/// <br/>Visit <seealso href="{{ source?.help_url }}">model.mtconnect.org</seealso> for more information.
+	/// <br/>Visit <seealso href="{{ source?.help_url }}">model.mtconnect.org</seealso> for more information.{{ include 'NormativeRemarks.scriban' source }}
 	/// </summary>
-	{{ include 'NormativeRemarks.scriban' source }}
 	{{ include 'MtconnectVersionApplicability.scriban' source }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
 	public enum {{ to_pascal_case source.name + source.filename_suffix }}
 	{
 	{{~ if source.sub_types.size != null && source.sub_types.size > 0 ~}}
 	{{~ for item in source.sub_types ~}}
-		/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' item }}
+		/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' item }}{{ include 'NormativeRemarks.scriban' item }}
 		/// </summary>
-		{{ include 'NormativeRemarks.scriban' item }}
 		{{ include 'MtconnectVersionApplicability.scriban' item }}
 		{{~ if item.sub_types != null && item.sub_types.size > 0 ~}}
 		[ObservationalSubType(typeof({{ item.name }}SubTypes))]
@@ -30,8 +28,7 @@ namespace {{ to_pascal_code source.namespace }}
 	{{~ end ~}}
 	{{~ else if source.values != null && source.values.size > 0 ~}}
 	{{~ for value in source.values ~}}
-		/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' value }}
-		{{ include 'NormativeRemarks.scriban' item }}
+		/// <summary>{{ include 'UmlCommentsSummaryContent.scriban' value }}{{ include 'NormativeRemarks.scriban' item }}
 		/// </summary>
 		{{ value.name }},
 	{{~ end ~}}

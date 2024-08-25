@@ -6,7 +6,7 @@ using MtconnectTranspiler.Sinks.CSharp.Contracts.Interfaces;
 namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 {
     [ScribanTemplate("MtconnectCore.Enum.scriban")]
-    public class MtconnectCoreEnum : IFileSource
+    public class MtconnectCoreEnum : IFileSource, ICloneable
     {
         private const string HELP_URL = "https://model.mtconnect.org/#Enumeration__";
 
@@ -60,8 +60,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             Instance = source.Instance;
             NormativeVersion = source.NormativeVersion;
             DeprecatedVersion = source.DeprecatedVersion;
-            Summary = source.Summary;
-            Values = source.Values;
+            Summary = TrimLineBreaks(source.Summary);
+            Values = source.Values.ToList().OrderBy(o => o.NormativeVersion).ThenBy(o => o.Name).ToArray();
         }
 
         public MtconnectCoreEnum(IClass source)
@@ -80,10 +80,10 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             Instance = enumInstance?.Instance ?? null;
             NormativeVersion = enumInstance?.NormativeVersion ?? resultType?.NormativeVersion ?? "1.0";
             DeprecatedVersion = enumInstance?.DeprecatedVersion ?? resultType?.DeprecatedVersion ?? "1.0";
-            Summary = enumInstance?.Summary ?? resultType?.Summary ?? "";
+            Summary = TrimLineBreaks(enumInstance?.Summary ?? resultType?.Summary ?? "");
             if (enumInstance != null)
             {
-                Values = enumInstance.Values;
+                Values = enumInstance.Values.ToList().OrderBy(o => o.NormativeVersion).ThenBy(o => o.Name).ToArray();
             } else
             {
                 Values = new IEnumInstance[] { };
@@ -101,7 +101,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
                 resultInstance = Activator.CreateInstance(resultProperty.Type) as IEnum;
                 if (resultInstance != null)
                 {
-                    values = resultInstance.Values;
+                    values = resultInstance.Values.OrderBy(o => o.NormativeVersion).ThenBy(o => o.Name).ToArray();
                 }
             }
 
@@ -110,7 +110,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             DataType = resultProperty?.Type ?? typeof(string);// typeof(string), // TODO: Get result type
             NormativeVersion = source.Introduced;
             DeprecatedVersion = source.Deprecated;
-            Summary = source.Definition;
+            Summary = TrimLineBreaks(source.Definition);
             Instance = resultInstance?.Instance;
             SubTypes = source.SubTypes?.Select(o => new MtconnectCoreEnum() {
                 HelpUrl = o.HelpUrl,
@@ -119,11 +119,36 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
                 DataType = typeof(string),
                 NormativeVersion = o.NormativeVersion,
                 DeprecatedVersion = o.DeprecatedVersion,
-                Summary = o.Summary,
+                Summary = TrimLineBreaks(o.Summary),
                 Instance = resultInstance?.Instance,
                 Values = values
-            })?.ToList() ?? Enumerable.Empty<MtconnectCoreEnum>().ToList();
+            })?.OrderBy(o => o.NormativeVersion)?.ThenBy(o => o.Name)?.ToList() ?? Enumerable.Empty<MtconnectCoreEnum>().ToList();
             Values = values;
+        }
+
+        public object Clone() => this.MemberwiseClone();
+
+        private string TrimLineBreaks(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            string[] lineBreakStrings = new string[] { "\r\n", "&#10;" };
+
+            foreach (string lineBreak in lineBreakStrings)
+            {
+                while (input.StartsWith(lineBreak))
+                {
+                    input = input.Substring(lineBreak.Length);
+                }
+
+                while (input.EndsWith(lineBreak))
+                {
+                    input = input.Substring(0, input.Length - lineBreak.Length);
+                }
+            }
+
+            return input;
         }
     }
 }
