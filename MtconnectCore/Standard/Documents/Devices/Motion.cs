@@ -99,13 +99,13 @@ namespace MtconnectCore.Standard.Documents.Devices
                     ValidationSeverity.ERROR,
                     $"Motion MUST include a unique 'type' attribute.",
                     SourceNode));
-            } else if (!EnumHelper.Contains<MotionTypes>(Type))
+            } else if (!EnumHelper.Contains<MotionTypeEnum>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"Motion 'type' {Type} is not defined in version {version}.",
                     SourceNode));
-            } else if (!EnumHelper.IsImplemented<MotionTypes>(Type, version))
+            } else if (!EnumHelper.IsImplemented<MotionTypeEnum>(Type, version))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
@@ -129,14 +129,14 @@ namespace MtconnectCore.Standard.Documents.Devices
                     $"Motion MUST include a unique 'actuation' attribute.",
                     SourceNode));
             }
-            else if (!EnumHelper.Contains<MotionActuationTypes>(Actuation))
+            else if (!EnumHelper.Contains<MotionActuationTypeEnum>(Actuation))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"Motion 'actuation' {Actuation} is not defined in version {version}.",
                     SourceNode));
             }
-            else if (!EnumHelper.IsImplemented<MotionActuationTypes>(Actuation, version))
+            else if (!EnumHelper.IsImplemented<MotionActuationTypeEnum>(Actuation, version))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,

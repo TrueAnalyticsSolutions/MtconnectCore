@@ -70,13 +70,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"ComponentRelationship MUST include a 'type' attribute."));
             }
-            else if (!EnumHelper.Contains<RelationshipTypes>(Type))
+            else if (!EnumHelper.Contains<RelationshipTypeEnum>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
                     $"ComponentRelationship type of '{Type}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
             }
-            else if (!EnumHelper.IsImplemented<RelationshipTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+            else if (!EnumHelper.IsImplemented<RelationshipTypeEnum>(Type, MtconnectVersion.GetValueOrDefault()))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,

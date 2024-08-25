@@ -20,7 +20,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
         /// </summary>
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
-        public virtual string Representation { get; set; } = RepresentationTypes.VALUE.ToString();
+        public virtual string Representation { get; set; } = RepresentationEnum.VALUE.ToString();
 
         public override bool IsUnavailable
             => string.IsNullOrEmpty(Result) || Result.Equals(Constants.UNAVAILABLE, StringComparison.OrdinalIgnoreCase);
@@ -35,7 +35,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Representation))
             {
-                if (!EnumHelper.Contains<RepresentationTypes>(Representation))
+                if (!EnumHelper.Contains<RepresentationEnum>(Representation))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,

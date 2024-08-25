@@ -113,15 +113,15 @@ namespace MtconnectCore.Standard.Documents.Devices
 
             var version = MtconnectVersion.GetValueOrDefault();
 
-            if (!string.IsNullOrEmpty(Units) && !EnumHelper.Contains<UnitsTypes>(Units))
+            if (!string.IsNullOrEmpty(Units) && !EnumHelper.Contains<UnitEnum>(Units))
             {
-                if (!EnumHelper.Contains<UnitsTypes>(Units))
+                if (!EnumHelper.Contains<UnitEnum>(Units))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,
                         $"Specification units of '{Units}' is not defined in the MTConnect Standard in version '{version}'.",
                         SourceNode));
-                } else if (!EnumHelper.IsImplemented<UnitsTypes>(Units, version))
+                } else if (!EnumHelper.IsImplemented<UnitEnum>(Units, version))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.ERROR,

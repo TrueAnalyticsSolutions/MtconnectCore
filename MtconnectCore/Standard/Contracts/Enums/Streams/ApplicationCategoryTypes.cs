@@ -3,7 +3,7 @@
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
     [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 4 Files Section 3.1.1.1")]
-    public enum ApplicationCategoryTypes
+    public enum ApplicationCategoryEnum
     {
         /// <summary>
         /// Files regarding the fully assembled product.

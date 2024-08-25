@@ -7,36 +7,35 @@ using MtconnectCore.Standard.Contracts.Attributes;
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
 	/// <summary>
-	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1632489429268_660861_104">model.mtconnect.org</seealso>
-	﻿	/// </summary>
+	﻿/// indication that a piece of equipment, or a sub-part of a piece of equipment, is performing specific types of activities.
+	/// <br/>Visit <seealso href="https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1580378218291_180049_1785">model.mtconnect.org</seealso> for more information.
+	/// </summary>
 	/// <remarks>
 	/// <list type="bullet">
 	/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
 	public enum EquipmentModeValues
 	{
 		/// <summary>
-		﻿/// equipment is functioning in the mode designated by the <c>subType</c>.
+		﻿/// <br /><br /><br /><br /><br /><br />equipment is not functioning in the mode designated by the <c>subType</c>.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
-		ON,
-		/// <summary>
-		﻿/// equipment is not functioning in the mode designated by the <c>subType</c>.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		OFF,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />equipment is functioning in the mode designated by the <c>subType</c>.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
+		/// </list>
+		/// </remarks>
+		ON,
 	}
 }

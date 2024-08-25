@@ -12,7 +12,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
         /// </summary>
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
-        public override string Representation { get; set; } = RepresentationTypes.DISCRETE.ToString();
+        public override string Representation { get; set; } = RepresentationEnum.DISCRETE.ToString();
 
         /// <inheritdoc/>
         public EventDiscrete() : base() { }

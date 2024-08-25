@@ -7,136 +7,125 @@ using MtconnectCore.Standard.Contracts.Attributes;
 namespace MtconnectCore.Standard.Contracts.Enums.Streams
 {
 	/// <summary>
-	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_68e0225_1622460092329_383445_1384">model.mtconnect.org</seealso>
-	﻿	/// </summary>
+	﻿/// particular condition of the part occurrence at a specific time.
+	/// <br/>Visit <seealso href="https://model.mtconnect.org/#Structure___19_0_3_68e0225_1622460050272_943675_1231">model.mtconnect.org</seealso> for more information.
+	/// </summary>
 	/// <remarks>
 	/// <list type="bullet">
 	/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
 	public enum PartProcessingStateValues
 	{
 		/// <summary>
-		﻿/// part occurrence is not actively being processed, but the processing has not ended.   Processing requirements exist that have not yet been fulfilled. This is the default entry state when the part occurrence is originally received. In some cases, the part occurrence may return to this state while it waits for additional processing to be performed.
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence is actively being processed.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		NEEDS_PROCESSING,
-		/// <summary>
-		﻿/// part occurrence is actively being processed.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		IN_PROCESS,
 		/// <summary>
-		﻿/// part occurrence is no longer being processed.   A general state when the reason for termination is unknown.
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence is being transported to its destination.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		PROCESSING_ENDED,
-		/// <summary>
-		﻿/// part occurrence has completed processing successfully.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		PROCESSING_ENDED_COMPLETE,
-		/// <summary>
-		﻿/// process has been stopped during the processing.   The part occurrence will require special treatment.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		PROCESSING_ENDED_STOPPED,
-		/// <summary>
-		﻿/// processing of the part occurrence has come to a premature end.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		PROCESSING_ENDED_ABORTED,
-		/// <summary>
-		﻿/// terminal state when the part occurrence has been removed from the equipment by an external entity and it no longer exists at the equipment.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		PROCESSING_ENDED_LOST,
-		/// <summary>
-		﻿/// part occurrence has been skipped for processing on the piece of equipment.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		PROCESSING_ENDED_SKIPPED,
-		/// <summary>
-		﻿/// part occurrence has been processed completely. However, the processing may have a problem.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		PROCESSING_ENDED_REJECTED,
-		/// <summary>
-		﻿/// part occurrence is waiting for transit.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
-		WAITING_FOR_TRANSIT,
-		/// <summary>
-		﻿/// part occurrence is being transported to its destination.
-		/// </summary>
-		/// <remarks>
-		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
-		/// </list>
-		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		IN_TRANSIT,
 		/// <summary>
-		﻿/// part occurrence has been placed at its designated destination.
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence is not actively being processed, but the processing has not ended. <br /><br /><br /><br />Processing requirements exist that have not yet been fulfilled. This is the default entry state when the part occurrence is originally received. In some cases, the part occurrence may return to this state while it waits for additional processing to be performed.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
+		NEEDS_PROCESSING,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence is no longer being processed. <br /><br /><br /><br />A general state when the reason for termination is unknown.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
+		PROCESSING_ENDED,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />processing of the part occurrence has come to a premature end.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
+		PROCESSING_ENDED_ABORTED,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence has completed processing successfully.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
+		PROCESSING_ENDED_COMPLETE,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />terminal state when the part occurrence has been removed from the equipment by an external entity and it no longer exists at the equipment.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
+		PROCESSING_ENDED_LOST,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence has been processed completely. However, the processing may have a problem.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
+		PROCESSING_ENDED_REJECTED,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence has been skipped for processing on the piece of equipment.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
+		PROCESSING_ENDED_SKIPPED,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />process has been stopped during the processing. <br /><br /><br /><br />The part occurrence will require special treatment.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
+		PROCESSING_ENDED_STOPPED,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence has been placed at its designated destination.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
 		TRANSIT_COMPLETE,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />part occurrence is waiting for transit.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
+		/// </list>
+		/// </remarks>
+		WAITING_FOR_TRANSIT,
 	}
 }

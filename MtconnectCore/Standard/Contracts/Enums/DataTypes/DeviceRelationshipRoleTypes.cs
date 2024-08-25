@@ -1,11 +1,12 @@
 ﻿using MtconnectCore.Standard.Documents.Devices;
 
-namespace MtconnectCore.Standard.Contracts.Enums.Devices
+namespace MtconnectCore.Standard.Contracts.Enums
 {
     /// <summary>
     /// Available options for a <see cref="DeviceRelationship.Role"/>
     /// </summary>
-    public enum DeviceRelationshipRoleTypes {
+    public enum DeviceRelationshipRoleTypes
+    {
         /// <summary>
         /// The associated piece of equipment performs the functions of a System for this piece of equipment. In MTConnect, System provides utility type services to support the operation of a piece of equipment and these services are required for the operation of a piece of equipment.
         /// </summary>

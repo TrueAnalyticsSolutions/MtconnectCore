@@ -85,14 +85,14 @@ namespace MtconnectCore.Standard.Documents.Devices
                     $"SolidModel MUST include a 'mediaType' attribute.",
                     SourceNode));
             }
-            else if (!EnumHelper.Contains<SolidModelMediaTypes>(MediaType))
+            else if (!EnumHelper.Contains<MediaTypeEnum>(MediaType))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"SolidModel mediaType '{MediaType}' is not defined in version {version}.",
                     SourceNode));
             }
-            else if (!EnumHelper.IsImplemented<SolidModelMediaTypes>(MediaType, version))
+            else if (!EnumHelper.IsImplemented<MediaTypeEnum>(MediaType, version))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,

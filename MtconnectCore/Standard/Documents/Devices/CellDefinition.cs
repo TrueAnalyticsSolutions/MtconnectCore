@@ -48,7 +48,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // units
                 .ValidateValueProperty<CellDefinitionAttributes>(nameof(CellDefinitionAttributes.UNITS), (o) =>
                     o.IsImplemented(Units)
-                    .IsEnumValueType<UnitsTypes>(Units, out _)
+                    ?.IsEnumValueType<UnitEnum>(Units, out _)
                 )
                 // key
                 .ValidateValueProperty<CellDefinitionAttributes>(nameof(CellDefinitionAttributes.KEY), (o) =>
@@ -57,12 +57,12 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // type/subType
                 .ValidateValueProperty<CellDefinitionAttributes>(nameof(CellDefinitionAttributes.TYPE), (o) =>
                     o.IsImplemented(Type)
-                    .ValidateType(Type, SubType)
+                    ?.ValidateType(Type, SubType)
                 )
                 // keyType
                 .ValidateValueProperty<CellDefinitionAttributes>(nameof(CellDefinitionAttributes.KEY_TYPE), (o) =>
                     o.IsImplemented(KeyType)
-                    .ValidateType(KeyType, string.Empty)
+                    ?.ValidateType(KeyType, string.Empty)
                 )
                 .HasError(out validationErrors);
     }

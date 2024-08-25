@@ -143,7 +143,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     x.IsImplemented()
                     .IsIdValueType(Id)
                 )
-                .WhileNotIntroduced((x) =>
+                ?.WhileNotIntroduced((x) =>
                     x.IsImplemented(nameof(ComponentAttributes.ID))
                     .IsIdValueType(Id, false)
                 )
@@ -159,22 +159,22 @@ namespace MtconnectCore.Standard.Documents.Devices
             // sampleInterval
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_INTERVAL), (o) =>
                 o.IsImplemented(nameof(ComponentAttributes.SAMPLE_INTERVAL))
-                .IsFloatValueType(SampleInterval, out _)
+                ?.IsFloatValueType(SampleInterval, out _)
             )
             // sampleRate
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_RATE), (o) =>
                 o.IsImplemented(nameof(ComponentAttributes.SAMPLE_RATE))
-                .IsFloatValueType(SampleRate, out _)
+                ?.IsFloatValueType(SampleRate, out _)
             )
             // uuid
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.UUID), (o) =>
                 o.IsImplemented(nameof(ComponentAttributes.UUID))
-                .IsIdValueType(Uuid, false)
+                ?.IsIdValueType(Uuid, false)
             )
             // coordinateSystemIdRef
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF), (o) =>
                 o.IsImplemented(nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF))
-                .IsIdValueType(CoordinateSystemIdRef, false)
+                ?.IsIdValueType(CoordinateSystemIdRef, false)
             )
             .HasError(out validationErrors);
 

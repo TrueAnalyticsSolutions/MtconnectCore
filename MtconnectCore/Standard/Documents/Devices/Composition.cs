@@ -85,7 +85,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     $"Composition MUST include a 'type' attribute.",
                     SourceNode));
             }
-            else if (!EnumHelper.Contains<CompositionTypes>(Type))
+            else if (!EnumHelper.Contains<CompositionTypeEnum>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,

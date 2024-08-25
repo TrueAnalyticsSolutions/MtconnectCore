@@ -69,7 +69,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 o.WhileIntroduced((x) =>
                     x.IsIdValueType(Id)
                 )
-                .WhileNotIntroduced((x) =>
+                ?.WhileNotIntroduced((x) =>
                     x.IsImplemented()
                     .IsIdValueType(Id, false)
                 )
@@ -85,17 +85,17 @@ namespace MtconnectCore.Standard.Documents.Devices
             // parentIdRef
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.PARENT_ID_REF), (o) =>
                 o.IsImplemented(ParentIdRef)
-                .IsIdValueType(ParentIdRef, false)
+                ?.IsIdValueType(ParentIdRef, false)
             )
             // type
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.TYPE), (o) =>
                 o.WhileIntroduced((x) =>
                     x.IsImplemented()
                 )
-                .WhileNotIntroduced((x) =>
+                ?.WhileNotIntroduced((x) =>
                     x.IsImplemented(Type)
                 )
-                .IsEnumValueType<CoordinateSystemTypeEnum>(Type, out _)
+                ?.IsEnumValueType<CoordinateSystemTypeEnum>(Type, out _)
 
             )
             // uuid

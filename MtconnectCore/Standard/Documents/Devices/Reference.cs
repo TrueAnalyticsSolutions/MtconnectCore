@@ -46,7 +46,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         x.IsImplemented()
                         .IsIdValueType(IdRef)
                     )
-                    .WhileNotIntroduced((x) =>
+                    ?.WhileNotIntroduced((x) =>
                         x.IsImplemented(IdRef)
                         .IsIdValueType(IdRef, false)
                     )
@@ -61,7 +61,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         x.IsImplemented()
                         .IsIdValueType(DataItemId)
                     )
-                    .WhileNotIntroduced((x) =>
+                    ?.WhileNotIntroduced((x) =>
                         x.IsImplemented(DataItemId)
                         .IsIdValueType(DataItemId, false)
                     )
@@ -72,7 +72,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         x.IsImplemented()
                         .IsIdValueType(RefDataItemId)
                     )
-                    .WhileNotIntroduced((x) =>
+                    ?.WhileNotIntroduced((x) =>
                         x.IsImplemented(RefDataItemId)
                         .IsIdValueType(RefDataItemId, false)
                     )

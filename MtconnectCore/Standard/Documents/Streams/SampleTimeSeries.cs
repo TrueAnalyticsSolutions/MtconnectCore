@@ -18,7 +18,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// Description of a means to interpret data consisting of multiple data points or samples reported as a single value.
         /// </summary>
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
-        public override string Representation { get; set; } = RepresentationTypes.TIME_SERIES.ToString();
+        public override string Representation { get; set; } = RepresentationEnum.TIME_SERIES.ToString();
 
         public new float[] Result { get; set; }
 
@@ -58,7 +58,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                     x.IsImplemented(SampleCount)
                     .IsRequired(SampleCount)
                 )
-                .WhileNotIntroduced((x) =>
+                ?.WhileNotIntroduced((x) =>
                     x.IsImplemented(SampleCount)
                 )
                 ?.IsUIntValueType(SampleCount, out _)
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             // result
             .Validate((o) =>
                 o.IsFloatArrayValueType("result", SourceNode.InnerText, out float?[] values)
-                .IsFloatArrayCountWithinRange("result", values, 1, 1)// TODO: Change maximum to SampleCount
+                ?.IsFloatArrayCountWithinRange("result", values, 1, 1)// TODO: Change maximum to SampleCount
             // TODO: Add Equals condition where length MUST equal SampleCount
             )
             .HasError(out validationErrors);

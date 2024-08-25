@@ -1,7 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
@@ -100,13 +99,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"DeviceRelationship MUST include a 'type' attribute."));
             }
-            else if (!EnumHelper.Contains<RelationshipTypes>(Type))
+            else if (!EnumHelper.Contains<RelationshipTypeEnum>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
                     $"DeviceRelationship type of '{Type}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
             }
-            else if (!EnumHelper.IsImplemented<RelationshipTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+            else if (!EnumHelper.IsImplemented<RelationshipTypeEnum>(Type, MtconnectVersion.GetValueOrDefault()))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.WARNING,
@@ -121,13 +120,13 @@ namespace MtconnectCore.Standard.Documents.Devices
             validationErrors = new List<MtconnectValidationException>();
             if (!string.IsNullOrEmpty(Criticality))
             {
-                if (!EnumHelper.Contains<RelationshipTypes>(Type))
+                if (!EnumHelper.Contains<RelationshipTypeEnum>(Type))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,
                         $"DeviceRelationship criticality of '{Criticality}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
                 }
-                else if (!EnumHelper.IsImplemented<RelationshipTypes>(Type, MtconnectVersion.GetValueOrDefault()))
+                else if (!EnumHelper.IsImplemented<RelationshipTypeEnum>(Type, MtconnectVersion.GetValueOrDefault()))
                 {
                     validationErrors.Add(new MtconnectValidationException(
                         ValidationSeverity.WARNING,

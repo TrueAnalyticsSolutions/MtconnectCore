@@ -34,7 +34,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             var dataItemTypeEnums = new List<MtconnectCoreEnum>();
             var dataItemValueEnums = new List<MtconnectCoreEnum>();
 
-            var categoryTypes = new Dictionary<string, MtconnectCoreEnum>() {
+            var CategoryEnum = new Dictionary<string, MtconnectCoreEnum>() {
                 { "Condition", new MtconnectCoreEnum() {
                     Name = "ConditionTypes"
                 } },
@@ -50,7 +50,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             {
                 var typeEnum = new MtconnectCoreEnum(type);
 
-                categoryTypes[type.Category].SubTypes.Add(typeEnum.Clone() as MtconnectCoreEnum);
+                CategoryEnum[type.Category].SubTypes.Add(typeEnum.Clone() as MtconnectCoreEnum);
                 if (typeEnum.SubTypes?.Any() == true)
                 {
                     dataItemTypeEnums.Add(typeEnum.Clone() as MtconnectCoreEnum);
@@ -69,7 +69,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
 
             }
 
-            foreach (var categoryType in categoryTypes)
+            foreach (var categoryType in CategoryEnum)
             {
                 dataItemTypeEnums.Add(categoryType.Value.Clone() as MtconnectCoreEnum);
                 dataItemTypeEnums[dataItemTypeEnums.Count - 1].Namespace = DataItemNamespace;

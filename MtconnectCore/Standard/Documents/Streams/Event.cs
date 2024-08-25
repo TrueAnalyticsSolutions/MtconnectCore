@@ -21,7 +21,7 @@ namespace MtconnectCore.Standard.Documents.Streams
     public class Event : Value
     {
         /// <inheritdoc />
-        public override CategoryTypes Category => CategoryTypes.EVENT;
+        public override CategoryEnum Category => CategoryEnum.EVENT;
 
         /// <summary>
         /// Collected from the resetTriggered attribute. Refer to Part 3 Streams - 5.5.2
@@ -57,7 +57,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             // resetTriggered
             .ValidateValueProperty<MtcStreams.EventAttributes>(nameof(MtcStreams.EventAttributes.RESET_TRIGGERED), (o) =>
                 o.IsImplemented(ResetTriggered)
-                .IsEnumValueType<ResetTriggeredValues>(ResetTriggered, out _)
+                ?.IsEnumValueType<ResetTriggeredValues>(ResetTriggered, out _)
             )
             // result
             .Validate((o) =>

@@ -21,7 +21,7 @@ namespace MtconnectCore.Standard.Documents.Streams
     {
         private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1579566531115_47734_25731";
 
-        public abstract CategoryTypes Category { get; }
+        public abstract CategoryEnum Category { get; }
 
         /// <inheritdoc cref="ObservationAttributes.COMPOSITION_ID"/>
         [MtconnectNodeAttribute(ObservationAttributes.COMPOSITION_ID)]
@@ -77,7 +77,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             Result = xNode.InnerText;
             TagName = xNode.LocalName;
 
-            if (string.IsNullOrEmpty(Type) && Category != CategoryTypes.CONDITION)
+            if (string.IsNullOrEmpty(Type) && Category != CategoryEnum.CONDITION)
             {
                 if (TagName.EndsWith("DataSet"))
                 {
@@ -105,14 +105,14 @@ namespace MtconnectCore.Standard.Documents.Streams
             // compositionId
             .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.COMPOSITION_ID), (o) =>
                 o.IsImplemented(CompositionId)
-                .IsIdValueType(CompositionId, false)
+                ?.IsIdValueType(CompositionId, false)
             )
             // dataItemId
             .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.DATA_ITEM_ID), (o) =>
                 o.WhileIntroduced((x) =>
                     x.IsIdValueType(DataItemId)
                 )
-                .WhileNotIntroduced((x) =>
+                ?.WhileNotIntroduced((x) =>
                     x.IsIdValueType(DataItemId, false)
                 )
             )
@@ -126,28 +126,28 @@ namespace MtconnectCore.Standard.Documents.Streams
                     x.IsImplemented()
                     .IsRequired(Sequence)
                 )
-                .WhileNotIntroduced((x) =>
+                ?.WhileNotIntroduced((x) =>
                     x.IsImplemented(Sequence)
                 )
-                .IsUIntValueType(Sequence, out _)
-                .IsUIntWithinRange(Sequence, 1, (2^64) - 1)
+                ?.IsUIntValueType(Sequence, out _)
+                ?.IsUIntWithinRange(Sequence, 1, (2^64) - 1)
             )
             // type/subType
             .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.TYPE), (o) =>
                 o.IsImplemented(Type)
-                .IsRequired(Type)
-                .ValidateType(Category.ToString(), Type, SubType)
+                ?.IsRequired(Type)
+                ?.ValidateType(Category.ToString(), Type, SubType)
             )
             // timestamp
             .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.TIMESTAMP), (o) =>
                 o.IsImplemented(Timestamp)
-                .IsRequired(Timestamp)
-                .IsDateTimeValueType(Timestamp, out _)
+                ?.IsRequired(Timestamp)
+                ?.IsDateTimeValueType(Timestamp, out _)
             )
             // units
             .ValidateValueProperty<ObservationAttributes>(nameof(ObservationAttributes.UNITS), (o) =>
                 o.IsImplemented(Units)
-                .IsEnumValueType<UnitsTypes>(Units, out _)
+                ?.IsEnumValueType<UnitEnum>(Units, out _)
             )
             .HasError(out validationErrors);
 
@@ -202,14 +202,14 @@ namespace MtconnectCore.Standard.Documents.Streams
         //        if (Units.Contains(":"))
         //        {
         //            string extendedUnits = Units.Substring(Units.LastIndexOf(":") + 1);
-        //            if (!EnumHelper.Contains<UnitsTypes>(extendedUnits))
+        //            if (!EnumHelper.Contains<UnitEnum>(extendedUnits))
         //            {
         //                validationErrors.Add(new MtconnectValidationException(
         //                    ValidationSeverity.WARNING,
         //                    $"Observation 'units' of '{extendedUnits}' is an unnecessary extension of the MTConnect Standard as it already exists in version '{MtconnectVersion}'.",
         //                    SourceNode));
         //            }
-        //            else if (EnumHelper.CompareToVersion<UnitsTypes>(extendedUnits, MtconnectVersion.GetValueOrDefault()) != VersionComparisonTypes.Implemented)
+        //            else if (EnumHelper.CompareToVersion<UnitEnum>(extendedUnits, MtconnectVersion.GetValueOrDefault()) != VersionComparisonTypes.Implemented)
         //            {
         //                validationErrors.Add(new MtconnectValidationException(
         //                    ValidationSeverity.WARNING,
@@ -224,14 +224,14 @@ namespace MtconnectCore.Standard.Documents.Streams
         //                    SourceNode));
         //            }
         //        }
-        //        else if (!EnumHelper.Contains<UnitsTypes>(Units))
+        //        else if (!EnumHelper.Contains<UnitEnum>(Units))
         //        {
         //            validationErrors.Add(new MtconnectValidationException(
         //                ValidationSeverity.WARNING,
         //                $"Observation 'units' of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
         //                SourceNode));
         //        }
-        //        else if (EnumHelper.CompareToVersion<UnitsTypes>(Units, MtconnectVersion.GetValueOrDefault()) != VersionComparisonTypes.Implemented)
+        //        else if (EnumHelper.CompareToVersion<UnitEnum>(Units, MtconnectVersion.GetValueOrDefault()) != VersionComparisonTypes.Implemented)
         //        {
         //            validationErrors.Add(new MtconnectValidationException(
         //                ValidationSeverity.WARNING,
@@ -239,7 +239,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         //                SourceNode));
         //        }
         //    }
-        //    else if (Category == CategoryTypes.SAMPLE)
+        //    else if (Category == CategoryEnum.SAMPLE)
         //    {
         //        validationErrors.Add(new MtconnectValidationException(
         //            ValidationSeverity.ERROR,
@@ -273,13 +273,13 @@ namespace MtconnectCore.Standard.Documents.Streams
         //    ICollection<MtconnectValidationException> extensionErrors = new List<MtconnectValidationException>();
         //    switch (Category)
         //    {
-        //        case CategoryTypes.SAMPLE:
+        //        case CategoryEnum.SAMPLE:
         //            validateNodeExtension<SampleTypes>(out extensionErrors);
         //            break;
-        //        case CategoryTypes.EVENT:
+        //        case CategoryEnum.EVENT:
         //            validateNodeExtension<EventTypes>(out extensionErrors);
         //            break;
-        //        case CategoryTypes.CONDITION:
+        //        case CategoryEnum.CONDITION:
         //            var conditionIsValid = validateNodeExtension<ConditionTypes>(out var conditionErrors);
         //            var eventIsValid = validateNodeExtension<EventTypes>(out var eventErrors);
         //            var sampleIsValid = validateNodeExtension<SampleTypes>(out var sampleErrors);
@@ -319,13 +319,13 @@ namespace MtconnectCore.Standard.Documents.Streams
         //    ICollection<MtconnectValidationException> standardErrors = new List<MtconnectValidationException>();
         //    switch (Category)
         //    {
-        //        case CategoryTypes.SAMPLE:
+        //        case CategoryEnum.SAMPLE:
         //            validateNodeInStandard<SampleTypes>(out standardErrors);
         //            break;
-        //        case CategoryTypes.EVENT:
+        //        case CategoryEnum.EVENT:
         //            validateNodeInStandard<EventTypes>(out standardErrors);
         //            break;
-        //        case CategoryTypes.CONDITION:
+        //        case CategoryEnum.CONDITION:
         //            var conditionIsValid = validateNodeInStandard<ConditionTypes>(out var conditionErrors);
         //            var eventIsValid = validateNodeInStandard<EventTypes>(out var eventErrors);
         //            var sampleIsValid = validateNodeInStandard<SampleTypes>(out var sampleErrors);
@@ -420,7 +420,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         //        var valueInfo = typeValueInfos.FirstOrDefault(o => o.DeclaringType == enumType);
         //        var obsSubType = valueInfo?.GetCustomAttribute<ObservationalSubTypeAttribute>();
         //        // Validate the observational sub-type
-        //        if (obsSubType != null && Category != CategoryTypes.CONDITION)
+        //        if (obsSubType != null && Category != CategoryEnum.CONDITION)
         //        {
         //            if (string.IsNullOrEmpty(SubType))
         //            {

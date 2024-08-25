@@ -56,10 +56,10 @@ namespace MtconnectCore.Standard.Documents.Devices
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
                     $"Relationship MUST include a 'type' attribute."));
-            } else if (!EnumHelper.Contains<RelationshipTypes>(Type)) {
+            } else if (!EnumHelper.Contains<RelationshipTypeEnum>(Type)) {
                 validationErrors.Add(new MtconnectValidationException(
                     ValidationSeverity.ERROR,
-                    $"Relationship 'type' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipTypes>(", ", string.Empty, string.Empty)}]."));
+                    $"Relationship 'type' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipTypeEnum>(", ", string.Empty, string.Empty)}]."));
             }
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
@@ -68,11 +68,11 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateCriticality(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Criticality) && !EnumHelper.Contains<RelationshipTypes>(Type))
+            if (!string.IsNullOrEmpty(Criticality) && !EnumHelper.Contains<RelationshipTypeEnum>(Type))
             {
                 validationErrors.Add(new MtconnectValidationException(
                     Contracts.Enums.ValidationSeverity.ERROR,
-                    $"Relationship 'criticality' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipCriticalityTypes>(", ", string.Empty, string.Empty)}]."));
+                    $"Relationship 'criticality' MUST be one of the following types: [{EnumHelper.ToListString<CriticalityTypeEnum>(", ", string.Empty, string.Empty)}]."));
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }

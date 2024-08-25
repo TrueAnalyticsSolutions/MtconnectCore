@@ -1,11 +1,12 @@
 ﻿using MtconnectCore.Standard.Documents.Devices;
 
-namespace MtconnectCore.Standard.Contracts.Enums.Devices
+namespace MtconnectCore.Standard.Contracts.Enums
 {
     /// <summary>
     /// Available options for the <see cref="Device.Iso841Class"/>
     /// </summary>
-    public enum Iso841ClassTypes {
+    public enum Iso841ClassTypes
+    {
         /// <summary>
         /// Other (Device not included in list)
         /// </summary>

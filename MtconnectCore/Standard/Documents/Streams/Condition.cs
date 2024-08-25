@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Documents.Streams
     {
         private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1579566531113_85883_25726";
 
-        public override CategoryTypes Category => CategoryTypes.CONDITION;
+        public override CategoryEnum Category => CategoryEnum.CONDITION;
 
         /// <inheritdoc cref="ConditionAttributes.NATIVE_CODE"/>
         [MtconnectNodeAttribute(ConditionAttributes.NATIVE_CODE)]
@@ -89,22 +89,22 @@ namespace MtconnectCore.Standard.Documents.Streams
             // qualifier
             .ValidateValueProperty<ConditionAttributes>(nameof(ConditionAttributes.QUALIFIER), (o) =>
                 o.IsImplemented(Qualifier)
-                .IsEnumValueType<QualifierTypes>(Qualifier, out _)
+                ?.IsEnumValueType<QualifierEnum>(Qualifier, out _)
             )
             // statistic
             .ValidateValueProperty<ConditionAttributes>(nameof(ConditionAttributes.STATISTIC), (o) =>
                 o.IsImplemented(Statistic)
-                .IsEnumValueType<StatisticTypes>(Statistic, out _)
+                ?.IsEnumValueType<StatisticEnum>(Statistic, out _)
             )
             // xs:lang
             .ValidateValueProperty<ConditionAttributes>(nameof(ConditionAttributes.XS_LANG), (o) =>
                 o.IsImplemented(Language)
-                .IsRfc4646LanguageTag(Language)
+                ?.IsRfc4646LanguageTag(Language)
             )
             // state
             .ValidateValueProperty<ConditionAttributes>(nameof(ConditionAttributes.STATE), (o) =>
                 o.IsImplemented(State)
-                .IsEnumValueType<ConditionElements>(State, out _)
+                ?.IsEnumValueType<ConditionElements>(State, out _)
             )
             // conditionId
             .ValidateValueProperty<ConditionAttributes>(nameof(ConditionAttributes.CONDITION_ID), (o) =>
@@ -112,7 +112,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                     x.IsImplemented()
                     .IsRequired(ConditionId)
                 )
-                .WhileNotIntroduced((x) =>
+                ?.WhileNotIntroduced((x) =>
                     x.IsImplemented(ConditionId)
                 )
             )
@@ -155,7 +155,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         //    validationErrors = new List<MtconnectValidationException>();
         //    if (!string.IsNullOrEmpty(Statistic))
         //    {
-        //        if (!EnumHelper.Contains<StatisticTypes>(Statistic))
+        //        if (!EnumHelper.Contains<StatisticEnum>(Statistic))
         //        {
         //            validationErrors.Add(new MtconnectValidationException(
         //                ValidationSeverity.ERROR,

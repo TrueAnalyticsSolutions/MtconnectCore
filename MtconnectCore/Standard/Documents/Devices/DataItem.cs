@@ -57,7 +57,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="DataItemAttributes.REPRESENTATION"/>
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
-        public string Representation { get; set; } = RepresentationTypes.VALUE.ToCamelCase();
+        public string Representation { get; set; } = RepresentationEnum.VALUE.ToCamelCase();
 
         /// <inheritdoc cref="DataItemAttributes.SIGNIFICANT_DIGITS"/>
         [MtconnectNodeAttribute(DataItemAttributes.SIGNIFICANT_DIGITS)]
@@ -134,7 +134,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             // category
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.CATEGORY), (o) =>
                 o.IsImplemented(Category)
-                ?.IsEnumValueType<CategoryTypes>(Category, out _)
+                ?.IsEnumValueType<CategoryEnum>(Category, out _)
             )
             // compositionId
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.COMPOSITION_ID), (o) =>
@@ -183,7 +183,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             // statistic
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.STATISTIC), (o) =>
                 o.IsImplemented(Statistic)
-                ?.IsEnumValueType<StatisticTypes>(Statistic, out _)
+                ?.IsEnumValueType<StatisticEnum>(Statistic, out _)
             )
             // type/subType
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.TYPE), (o) =>
@@ -199,12 +199,12 @@ namespace MtconnectCore.Standard.Documents.Devices
                     (v) => Category.Equals("SAMPLE", StringComparison.OrdinalIgnoreCase),
                     (v) => o?.IsRequired(Units)
                 )
-                ?.IsEnumValueType<UnitsTypes>(nameof(Units), Units, out _)
+                ?.IsEnumValueType<UnitEnum>(nameof(Units), Units, out _)
             )
             // representation
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.REPRESENTATION), (o) =>
                 o.IsImplemented(Representation)
-                ?.IsEnumValueType<RepresentationTypes>(Representation, out _)
+                ?.IsEnumValueType<RepresentationEnum>(Representation, out _)
             )
             // coordinateSystemIdRef
             .ValidateValueProperty<DataItemAttributes>(nameof(DataItemAttributes.COORDINATE_SYSTEM_ID_REF), (o) =>

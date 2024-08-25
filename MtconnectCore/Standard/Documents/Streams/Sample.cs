@@ -15,7 +15,7 @@ namespace MtconnectCore.Standard.Documents.Streams
 {
     public class Sample : Value
     {
-        public override CategoryTypes Category => CategoryTypes.SAMPLE;
+        public override CategoryEnum Category => CategoryEnum.SAMPLE;
 
         /// <inheritdoc cref="SampleAttributes.SAMPLE_RATE"/>
         [MtconnectNodeAttribute(SampleAttributes.SAMPLE_RATE)]
@@ -61,28 +61,28 @@ namespace MtconnectCore.Standard.Documents.Streams
             // duration
             .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.DURATION), (o) =>
                 o.IsImplemented(Duration)
-                .IsUIntValueType(Duration, out _)
+                ?.IsUIntValueType(Duration, out _)
             )
             // resetTriggered
-            .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.DURATION), (o) =>
+            .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.RESET_TRIGGERED), (o) =>
                 o.IsImplemented(ResetTriggered)
-                .IsEnumValueType<ResetTriggeredValues>(ResetTriggered, out _)
+                ?.IsEnumValueType<ResetTriggeredValues>(ResetTriggered, out _)
             )
             // sampleRate
-            .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.DURATION), (o) =>
+            .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.SAMPLE_RATE), (o) =>
                 o.IsImplemented(SampleRate)
-                .IsFloatValueType(SampleRate, out _)
+                ?.IsFloatValueType(SampleRate, out _)
             )
             // statistic
-            .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.DURATION), (o) =>
+            .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.STATISTIC), (o) =>
                 o.IsImplemented(Statistic)
-                .IsEnumValueType<StatisticTypes>(Statistic, out _)
+                ?.IsEnumValueType<StatisticEnum>(Statistic, out _)
             )
             // units
-            .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.DURATION), (o) =>
+            .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.UNITS), (o) =>
                 o.IsImplemented()
-                .IsRequired(Units, true)
-                .IsEnumValueType<UnitsTypes>(Units, out _)
+                ?.IsRequired(Units, true)
+                ?.IsEnumValueType<UnitEnum>(Units, out _)
             )
             // result
             .Validate((o) =>
@@ -128,7 +128,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         //    validationErrors = new List<MtconnectValidationException>();
         //    if (!string.IsNullOrEmpty(Statistic))
         //    {
-        //        if (!EnumHelper.Contains<StatisticTypes>(Statistic))
+        //        if (!EnumHelper.Contains<StatisticEnum>(Statistic))
         //        {
         //            validationErrors.Add(new MtconnectValidationException(
         //                ValidationSeverity.ERROR,

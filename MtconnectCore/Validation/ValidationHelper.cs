@@ -85,18 +85,18 @@ namespace MtconnectCore.Validation
         {
             if (!string.IsNullOrEmpty(type))
             {
-                foreach (CategoryTypes category in Enum.GetValues(typeof(CategoryTypes)))
+                foreach (CategoryEnum category in Enum.GetValues(typeof(CategoryEnum)))
                 {
                     var categoryValidator = new NodeValidationContext.NodeValidator(new NodeValidationContext(validator.Context.Node));
                     switch (category)
                     {
-                        case CategoryTypes.SAMPLE:
+                        case CategoryEnum.SAMPLE:
                             categoryValidator.ValidateNode<SampleTypes>(category, type, subType);
                             break;
-                        case CategoryTypes.EVENT:
+                        case CategoryEnum.EVENT:
                             categoryValidator.ValidateNode<EventTypes>(category, type, subType);
                             break;
-                        case CategoryTypes.CONDITION:
+                        case CategoryEnum.CONDITION:
                             // TODO: Check for ANY Data Item type
                             categoryValidator.ValidateNode<ConditionTypes>(category, type, subType);
                             break;
@@ -138,15 +138,15 @@ namespace MtconnectCore.Validation
         {
             if (!string.IsNullOrEmpty(type) && !string.IsNullOrEmpty(category))
             {
-                if (Enum.TryParse<CategoryTypes>(category, out CategoryTypes categoryType))
+                if (Enum.TryParse<CategoryEnum>(category, out CategoryEnum categoryType))
                 {
                     switch (categoryType)
                     {
-                        case CategoryTypes.SAMPLE:
+                        case CategoryEnum.SAMPLE:
                             return validator.ValidateNode<SampleTypes>(categoryType, type, subType);
-                        case CategoryTypes.EVENT:
+                        case CategoryEnum.EVENT:
                             return validator.ValidateNode<EventTypes>(categoryType, type, subType);
-                        case CategoryTypes.CONDITION:
+                        case CategoryEnum.CONDITION:
                             // TODO: Check for ANY Data Item type
                             return validator.ValidateNode<ConditionTypes>(categoryType, type, subType);
                         default:
@@ -161,15 +161,15 @@ namespace MtconnectCore.Validation
         }
 
         /// <summary>
-        /// Validates a <see cref="MtconnectNode"/> <c>nativeUnits</c> against standard <see cref="NativeUnitsTypes"/> and <see cref="UnitsTypes"/>.
+        /// Validates a <see cref="MtconnectNode"/> <c>nativeUnits</c> against standard <see cref="NativeUnitEnum"/> and <see cref="UnitEnum"/>.
         /// </summary>
         /// <param name="validator">Reference to node validator</param>
         /// <param name="nativeUnits">Refernece to the <c>nativeUnits</c> value from the node</param>
         /// <returns>Fluent validator context</returns>
         internal static NodeValidationContext.NodeValidator ValidateNativeUnits(this NodeValidationContext.NodeValidator validator, string nativeUnits)
         {
-            if (!string.IsNullOrEmpty(nativeUnits) && !EnumHelper.Contains<NativeUnitsTypes>(nativeUnits))
-                if (!EnumHelper.Contains<UnitsTypes>(nativeUnits))
+            if (!string.IsNullOrEmpty(nativeUnits) && !EnumHelper.Contains<NativeUnitEnum>(nativeUnits))
+                if (!EnumHelper.Contains<UnitEnum>(nativeUnits))
                     validator.AddError("Invalid 'nativeUnits' value.", Pairings.Of("nativeUnits", nativeUnits));
             return validator;
 
@@ -190,7 +190,7 @@ namespace MtconnectCore.Validation
         /// <param name="type"><c>type</c> value for reference</param>
         /// <param name="subType"><c>subtype</c> value for reference</param>
         /// <returns>Collection of validation exceptions</returns>
-        internal static NodeValidationContext.NodeValidator ValidateNode<T>(this NodeValidationContext.NodeValidator validator, CategoryTypes categoryType, string type, string subType) where T : Enum
+        internal static NodeValidationContext.NodeValidator ValidateNode<T>(this NodeValidationContext.NodeValidator validator, CategoryEnum categoryType, string type, string subType) where T : Enum
         {
 
             var extensionValidator = new NodeValidationContext(validator.Context.Node);
@@ -229,7 +229,7 @@ namespace MtconnectCore.Validation
         /// <param name="type"><c>type</c> value for reference</param>
         /// <param name="subType"><c>subtype</c> value for reference</param>
         /// <returns>Collection of validation exceptions</returns>
-        internal static NodeValidationContext.NodeValidator ValidateNodeExtension<T>(this NodeValidationContext.NodeValidator validator, CategoryTypes categoryType, string type, string subType) where T : Enum
+        internal static NodeValidationContext.NodeValidator ValidateNodeExtension<T>(this NodeValidationContext.NodeValidator validator, CategoryEnum categoryType, string type, string subType) where T : Enum
         {
             if (!string.IsNullOrEmpty(type))
             {
@@ -268,7 +268,7 @@ namespace MtconnectCore.Validation
         /// <param name="type"><c>type</c> value for reference</param>
         /// <param name="subType"><c>subtype</c> value for reference</param>
         /// <returns>Collection of validation exceptions</returns>
-        internal static NodeValidationContext.NodeValidator ValidateNodeInStandard<T>(this NodeValidationContext.NodeValidator validator, CategoryTypes categoryType, string type, string subType) where T : Enum
+        internal static NodeValidationContext.NodeValidator ValidateNodeInStandard<T>(this NodeValidationContext.NodeValidator validator, CategoryEnum categoryType, string type, string subType) where T : Enum
         {
             bool isValidType = true, isValidSubType = true;
             MtconnectVersions implementedVersion = validator.Context.Node.MtconnectVersion.GetValueOrDefault();
@@ -276,7 +276,7 @@ namespace MtconnectCore.Validation
             // Validate the observational type
             if (!EnumHelper.Contains<T>(type))
             {
-                if (categoryType != CategoryTypes.CONDITION
+                if (categoryType != CategoryEnum.CONDITION
                     || (!EnumHelper.Contains<EventTypes>(type)
                     && !EnumHelper.Contains<SampleTypes>(type)))
                 {
@@ -286,7 +286,7 @@ namespace MtconnectCore.Validation
             }
             else if (!EnumHelper.IsImplemented<T>(type, implementedVersion))
             {
-                if (categoryType != CategoryTypes.CONDITION
+                if (categoryType != CategoryEnum.CONDITION
                     || (!EnumHelper.IsImplemented<EventTypes>(type, implementedVersion)
                         && !EnumHelper.IsImplemented<SampleTypes>(type, implementedVersion)))
                     validator.AddWarning($"Invalid 'type' value in version.", Pairings.Of("type", type), Pairings.Of("version", implementedVersion.ToName()));
