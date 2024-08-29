@@ -22,12 +22,9 @@ namespace MtconnectCore.Standard.Documents.Devices
         public override DocumentTypes Type => DocumentTypes.Devices;
 
         /// <inheritdoc />
-        public override string DefaultNamespace => Constants.DEFAULT_DEVICES_XML_NAMESPACE;
-
-        /// <inheritdoc />
         public override string DataElementName => DevicesElements.DEVICES.ToPascalCase();
 
-        [MtconnectNodeElements(DevicesElements.HEADER, nameof(TrySetHeader), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements(DevicesElements.HEADER, nameof(TrySetHeader))]
         internal override DevicesDocumentHeader _header { get; set; }
         /// <inheritdoc />
         public DevicesDocumentHeader Header => (DevicesDocumentHeader)_header;
@@ -141,16 +138,16 @@ namespace MtconnectCore.Standard.Documents.Devices
                 }
 
                 // Check if units is extended
-                if (!string.IsNullOrEmpty(item.Units) && item.Units.Contains(":"))
+                if (!string.IsNullOrEmpty(item.Units?.RawValue) && item.Units.RawValue.Contains(":"))
                 {
-                    string unitsExtension = item.Units.Substring(0, item.Units.IndexOf(":"));
+                    string unitsExtension = item.Units.RawValue.Substring(0, item.Units.RawValue.IndexOf(":"));
                     namespaces.Add(unitsExtension);
                 }
 
                 // Check if nativeUnits is extended
-                if (!string.IsNullOrEmpty(item.NativeUnits) && item.NativeUnits.Contains(":"))
+                if (!string.IsNullOrEmpty(item.NativeUnits?.RawValue) && item.NativeUnits.RawValue.Contains(":"))
                 {
-                    string nativeUnitsExtension = item.NativeUnits.Substring(0, item.NativeUnits.IndexOf(":"));
+                    string nativeUnitsExtension = item.NativeUnits.RawValue.Substring(0, item.NativeUnits.RawValue.IndexOf(":"));
                     namespaces.Add(nativeUnitsExtension);
                 }
             }
@@ -161,14 +158,6 @@ namespace MtconnectCore.Standard.Documents.Devices
             foreach (string duplicateName in duplicateNames)
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate DataItem 'name' found: " + duplicateName + ". Each DataItem 'name' MUST be unique."));
-            }
-            foreach (string extensionNamespace in namespaces)
-            {
-                string extensionUri = Source.DocumentElement.GetAttribute("xmlns:" + extensionNamespace);
-                if (string.IsNullOrEmpty(extensionUri))
-                {
-                    validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Missing namespace reference for '" + extensionNamespace + "'."));
-                }
             }
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);

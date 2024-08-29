@@ -14,6 +14,6 @@ namespace MtconnectCore.Standard.Documents.Assets
 
         public CuttingToolArchetypeReference() : base() { }
 
-        public CuttingToolArchetypeReference(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public CuttingToolArchetypeReference(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
     }
 }

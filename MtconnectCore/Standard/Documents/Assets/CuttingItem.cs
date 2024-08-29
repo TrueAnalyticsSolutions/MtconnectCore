@@ -31,26 +31,26 @@ namespace MtconnectCore.Standard.Documents.Assets
         public string Grade { get; set; }
 
         /// <inheritdoc cref="CuttingItemElements.DESCRIPTION"/>
-        [MtconnectNodeElement(nameof(CuttingItemElements.DESCRIPTION), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElement(nameof(CuttingItemElements.DESCRIPTION))]
         public string Description { get; set; }
 
         /// <inheritdoc cref="CuttingItemElements.LOCUS"/>
-        [MtconnectNodeElement(nameof(CuttingItemElements.LOCUS), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElement(nameof(CuttingItemElements.LOCUS))]
         public string Locus { get; set; }
 
         private List<ItemLife> _itemLives = new List<ItemLife>();
-        [MtconnectNodeElements(nameof(CuttingItemElements.ITEM_LIFE), nameof(TryAddItemLife), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(CuttingItemElements.ITEM_LIFE), nameof(TryAddItemLife))]
         public ICollection<ItemLife> ItemLives => _itemLives;
 
         private List<CuttingItemMeasurement> _measurements = new List<CuttingItemMeasurement>();
-        [MtconnectNodeElements("Measurements/m:*", nameof(TryAddMeasurement), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements("Measurements/m:*", nameof(TryAddMeasurement))]
         public ICollection<CuttingItemMeasurement> Measurements => _measurements;
 
         /// <inheritdoc />
         public CuttingItem() : base() { }
 
         /// <inheritdoc />
-        public CuttingItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public CuttingItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Indices = TryGetIndices(nsmgr, out ICollection<MtconnectValidationException> indicesErrors);
             InitializationErrors.AddRange(indicesErrors);

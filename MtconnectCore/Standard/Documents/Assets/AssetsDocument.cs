@@ -17,12 +17,9 @@ namespace MtconnectCore.Standard.Documents.Assets
         public override DocumentTypes Type => DocumentTypes.Assets;
 
         /// <inheritdoc />
-        public override string DefaultNamespace => "m";
-
-        /// <inheritdoc />
         public override string DataElementName => AssetsElements.ASSETS.ToPascalCase();
 
-        [MtconnectNodeElements(AssetsElements.HEADER, nameof(TrySetHeader), XmlNamespace = "m")]
+        [MtconnectNodeElements(AssetsElements.HEADER, nameof(TrySetHeader))]
         internal override AssetsDocumentHeader _header { get; set; }
         /// <inheritdoc />
         public AssetsDocumentHeader Header => (AssetsDocumentHeader)_header;

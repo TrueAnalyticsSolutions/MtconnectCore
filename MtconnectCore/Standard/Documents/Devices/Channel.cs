@@ -45,21 +45,25 @@ namespace MtconnectCore.Standard.Documents.Devices
         public Channel() : base() { }
 
         /// <inheritdoc/>
-        public Channel(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public Channel(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.CHANNEL)]
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // name
-            .ValidateValueProperty<ChannelAttributes>(nameof(ChannelAttributes.NAME), (o) =>
-                o.IsImplemented()
+            .ValidateValueProperty(
+                ChannelAttributes.NAME,
+                (o) =>
+                    o.IsImplemented()
             )
             // number
-            .ValidateValueProperty<ChannelAttributes>(nameof(ChannelAttributes.NUMBER), (o) => 
-                o.IsImplemented()
-                .WhileIntroduced((x) =>
-                    x.IsRequired(Number)
-                )
+            .ValidateValueProperty(
+                ChannelAttributes.NUMBER,
+                (o) => 
+                    o.IsImplemented()
+                    ?.WhileIntroduced((x) =>
+                        x.IsRequired(Number)
+                    )
             )
             .HasError(out validationErrors);
         // TODO: Add Parts validation

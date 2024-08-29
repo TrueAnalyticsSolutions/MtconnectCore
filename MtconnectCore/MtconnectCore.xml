@@ -421,11 +421,6 @@
             Reference to the name of the node (element or attribute) name. Supports both <see cref="T:System.String"/> and <see cref="T:System.Enum"/> references.
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.XmlNamespace">
-            <summary>
-            Reference to the XML namespace used in the MTConnect Response Document.
-            </summary>
-        </member>
         <member name="M:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute.#ctor(System.Object)">
             <summary>
             Initializes a <see cref="T:MtconnectCore.Standard.Contracts.Attributes.MtconnectNodeAttribute"/> for automatic processing of a MTConnect node's XML attribute.
@@ -14976,7 +14971,7 @@
             Initializes a blank <see cref="T:MtconnectCore.Standard.Contracts.IMtconnectNode"/> entity.
             </summary>
         </member>
-        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNode.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <summary>
             Initializes a <see cref="T:MtconnectCore.Standard.Contracts.IMtconnectNode"/> entity from a MTConnect Response Document.
             </summary>
@@ -15035,7 +15030,7 @@
             <param name="sourceType">Reference to the inherited <see cref="T:MtconnectCore.Standard.Contracts.MtconnectNode"/> type.</param>
             <param name="property">Reference to the source property for this Xml-based property.</param>
         </member>
-        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.Set``1(``0,System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+        <member name="M:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.Set``1(``0,System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <summary>
             Sets the parsed value from the <paramref name="node"/> into the <see cref="P:MtconnectCore.Standard.Contracts.MtconnectNodeParser.XmlParser.XmlPropertyParser.Property"/> of the provided <paramref name="obj"/>.
             </summary>
@@ -15148,6 +15143,62 @@
         <member name="M:MtconnectCore.Standard.Contracts.SampleObservation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes,System.Enum)">
             <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.CategoryEnum,System.Enum,System.Enum)"/>
         </member>
+        <member name="P:MtconnectCore.Standard.Contracts.IParsedValue.RawValue">
+            <summary>
+            Gets or sets the original string value from the XML or JSON data.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.ParsedValue`1.RawValue">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.ParsedValue`1.Value">
+            <summary>
+            Gets or sets the value successfully parsed to the expected type <typeparamref name="T"/>.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.op_Implicit(System.String)~MtconnectCore.Standard.Contracts.ParsedValue{`0}">
+            <summary>
+            Implicitly converts a string to a ParsedValue of the expected type <typeparamref name="T"/>.
+            </summary>
+            <param name="value">The original string value.</param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.op_Implicit(MtconnectCore.Standard.Contracts.ParsedValue{`0})~`0">
+            <summary>
+            Implicitly converts a ParsedValue to the expected type <typeparamref name="T"/>.
+            </summary>
+            <param name="parsedValue">The ParsedValue instance.</param>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.op_Equality(MtconnectCore.Standard.Contracts.ParsedValue{`0},MtconnectCore.Standard.Contracts.ParsedValue{`0})">
+            <summary>
+            Determines if the ParsedValue is equal to null or another ParsedValue instance.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.op_Inequality(MtconnectCore.Standard.Contracts.ParsedValue{`0},MtconnectCore.Standard.Contracts.ParsedValue{`0})">
+            <summary>
+            Determines if the ParsedValue is not equal to null or another ParsedValue instance.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.op_Equality(MtconnectCore.Standard.Contracts.ParsedValue{`0},`0)">
+            <summary>
+            Determines if the ParsedValue is not equal to null.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.op_Inequality(MtconnectCore.Standard.Contracts.ParsedValue{`0},`0)">
+            <summary>
+            Determines if the ParsedValue is not equal to a value.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.Equals(System.Object)">
+            <summary>
+            Returns true if the ParsedValue contains a non-null value.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.ToString">
+            <summary>
+            Returns the string representation of the value, preferring the successfully parsed value if available.
+            </summary>
+            <returns>The string representation of the value.</returns>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.VersionHelper.versionMinimumVersion">
             <remarks>Find this in the <c>MTConnectDevices_x.x.xsd</c> referenced at <c>/xs:schema[@vs:minVersion]</c></remarks>
         </member>
@@ -15257,16 +15308,13 @@
         <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+        <member name="M:MtconnectCore.Standard.Documents.Assets.Asset.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.Assets.AssetsDocument">
             <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Assets.AssetsDocument.Type">
-            <inheritdoc />
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Assets.AssetsDocument.DefaultNamespace">
             <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Assets.AssetsDocument.DataElementName">
@@ -16289,9 +16337,6 @@
         <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocument.Type">
             <inheritdoc />
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocument.DefaultNamespace">
-            <inheritdoc />
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocument.DataElementName">
             <inheritdoc />
         </member>
@@ -16305,24 +16350,16 @@
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.BufferSize">
-            <summary>
-            A value representing the maximum number of Data Entities that MAY be retained in the Agent that published the Response Document at any point in time.
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.HeaderAttributes.BUFFER_SIZE"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.TestIndicator">
-            <summary>
-            A flag indicating that the Agent that published the Response Document is operating in a test mode.The contents of the Response Document may not be valid and SHOULD be used for testing and simulation purposes only.
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.HeaderAttributes.TEST_INDICATOR"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.AssetBufferSize">
-            <summary>
-            A value representing the maximum number of Asset Documents that can be stored in the Agent that published the Response Document.
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.HeaderAttributes.ASSET_BUFFER_SIZE"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.AssetCount">
-            <summary>
-            A number representing the current number of Asset Documents that are currently stored in the Agent as of the creationTime that the Agent published the Response Document.
-            </summary>
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.HeaderAttributes.ASSET_COUNT"/>
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.DevicesDocumentHeader.#ctor">
             <inheritdoc />
@@ -16332,6 +16369,9 @@
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.EntryDefinition.Key">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.KEY"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.EntryDefinition.KeyType">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.KEY_TYPE"/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.EntryDefinition.Units">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.EntryDefinitionAttributes.UNITS"/>
@@ -16495,6 +16535,12 @@
         <member name="P:MtconnectCore.Standard.Documents.Devices.SolidModel.CoordinateSystemIdRef">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SolidModelAttributes.COORDINATE_SYSTEM_ID_REF"/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.SolidModel.NativeUnits">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SolidModelAttributes.NATIVE_UNITS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.SolidModel.Units">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.SolidModelAttributes.UNITS"/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.SolidModel.Transformation">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.SolidModelElements.TRANSFORMATION"/>
         </member>
@@ -16614,9 +16660,6 @@
             <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Error.ErrorDocument.Type">
-            <inheritdoc/>
-        </member>
-        <member name="P:MtconnectCore.Standard.Documents.Error.ErrorDocument.DefaultNamespace">
             <inheritdoc/>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Error.ErrorDocument.DataElementName">
@@ -16799,7 +16842,7 @@
             Initializes a blank MTConnect Response Document Header.
             </summary>
         </member>
-        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,System.String,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+        <member name="M:MtconnectCore.Standard.Documents.ResponseDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <summary>
             Initializes a MTConnect Response Document Header from a source XML node.
             </summary>
@@ -17180,9 +17223,6 @@
         <member name="P:MtconnectCore.Standard.Documents.Streams.StreamsDocument.Type">
             <inheritdoc />
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.Streams.StreamsDocument.DefaultNamespace">
-            <inheritdoc />
-        </member>
         <member name="P:MtconnectCore.Standard.Documents.Streams.StreamsDocument.DataElementName">
             <inheritdoc />
         </member>
@@ -17297,12 +17337,67 @@
         <member name="M:MtconnectCore.Standard.SampleRequestQuery.Validate(System.Exception@)">
             <inheritdoc/>
         </member>
+        <member name="T:MtconnectCore.Validation.NodeValidationContext">
+            <summary>
+            Represents the context for validating a node within the MTConnect standard.
+            </summary>
+            <summary>
+            Provides the context for node validation operations within the MTConnect framework.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Validation.NodeValidationContext.Node">
+            <summary>
+            Gets or sets the MTConnect node that is being validated.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Validation.NodeValidationContext.Exceptions">
+            <summary>
+            Gets or sets the collection of validation exceptions that occur during the validation process.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.#ctor(MtconnectCore.Standard.Contracts.MtconnectNode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MtconnectCore.Validation.NodeValidationContext"/> class with the specified node.
+            </summary>
+            <param name="node">The MTConnect node that is being validated.</param>
+        </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.HasError(System.Collections.Generic.ICollection{MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException}@)">
             <summary>
-            Indicates whether a collection of exceptions contains any <c>ERROR</c>-level severities.
+            Determines whether the collection of validation exceptions contains any <c>ERROR</c>-level severities.
             </summary>
-            <param name="errors">Collection of validation exceptions</param>
-            <returns>Flag for whether or not any of the exceptions are <c>ERROR</c>-level severity</returns>
+            <param name="errors">The collection of validation exceptions.</param>
+            <returns><c>true</c> if any of the exceptions are of <c>ERROR</c>-level severity; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.HasError">
+            <summary>
+            Determines whether the collection of validation exceptions contains any <c>ERROR</c>-level severities.
+            </summary>
+            <returns><c>true</c> if any of the exceptions are of <c>ERROR</c>-level severity; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.Validate(System.Func{MtconnectCore.Validation.NodeValidationContext.NodeValidator,MtconnectCore.Validation.NodeValidationContext.NodeValidator})">
+            <summary>
+            Validates the current node using the specified validation logic.
+            </summary>
+            <param name="validator">A function that defines the validation logic.</param>
+            <returns>The current <see cref="T:MtconnectCore.Validation.NodeValidationContext"/>.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.ValidateValueProperty``1(``0,System.Func{MtconnectCore.Validation.NodeValidationContext.NodeValueValidator{``0},MtconnectCore.Validation.NodeValidationContext.NodeValidator})">
+            <summary>
+            Validates a property based on the provided enum value, which represents the property name.
+            </summary>
+            <typeparam name="TEnum">The enum type representing the property.</typeparam>
+            <param name="enumProperty">The enum value representing the property name.</param>
+            <param name="validator">A function that defines the validation logic for the property.</param>
+            <returns>The current <see cref="T:MtconnectCore.Validation.NodeValidationContext"/>.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.ValidateValueProperty``1(System.String,System.Func{MtconnectCore.Validation.NodeValidationContext.NodeValueValidator{``0},MtconnectCore.Validation.NodeValidationContext.NodeValidator})">
+            <summary>
+            Validates a property based on the provided string value, which represents the property name.
+            </summary>
+            <typeparam name="TEnum">The enum type representing the property.</typeparam>
+            <param name="propertyName">The string value representing the property name.</param>
+            <param name="validator">A function that defines the validation logic for the property.</param>
+            <returns>The current <see cref="T:MtconnectCore.Validation.NodeValidationContext"/>.</returns>
         </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.IsRequired(System.String,System.String,System.Boolean)">
             <summary>
@@ -17408,29 +17503,199 @@
             <param name="value">Value of key</param>
             <returns>Fluent validation context</returns>
         </member>
+        <member name="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1">
+            <summary>
+            Validator class that validates node values based on a specified enumeration type, 
+            where the enumeration contains fields representing property names of an entity.
+            </summary>
+            <typeparam name="TEnum">The enumeration type representing property names for an entity.</typeparam>
+        </member>
+        <member name="P:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.PropertyName">
+            <summary>
+            Gets the name of the property being validated, derived from the enum value.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.ImplementationState">
+            <summary>
+            Gets the implementation state of the property based on version comparison.
+            </summary>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.#ctor(MtconnectCore.Validation.NodeValidationContext,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> class.
+            </summary>
+            <param name="context">The validation context.</param>
+            <param name="propertyName">The name of the property being validated, typically derived from the enum value.</param>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.WhileIntroduced(System.Func{MtconnectCore.Validation.NodeValidationContext.NodeValueValidator{`0},MtconnectCore.Validation.NodeValidationContext.NodeValidator})">
+            <summary>
+            Executes the provided action if the property represented by the enum value has been introduced (implemented).
+            </summary>
+            <param name="action">The action to execute.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.WhileNotIntroduced(System.Func{MtconnectCore.Validation.NodeValidationContext.NodeValueValidator{`0},MtconnectCore.Validation.NodeValidationContext.NodeValidator})">
+            <summary>
+            Executes the provided action if the property represented by the enum value has not been introduced (not implemented).
+            </summary>
+            <param name="action">The action to execute.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsImplemented">
             <summary>
-            Validates the use of an Enum field in the context of the implemented version.<br/>
+            Validates that the property represented by the enum field is implemented in the current MTConnect version.
             </summary>
-            <returns>Fluent validation context</returns>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
         </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsImplemented(System.String)">
             <summary>
-            Validates the use of an Enum field in the context of the implemented version when the provided value is not null.<br/>
+            Validates that the property represented by the enum field is implemented in the current MTConnect version when the provided value is not null.
             </summary>
-            <returns>Fluent validation context</returns>
+            <param name="value">The value to validate.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
         </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsRequired(System.String,System.Boolean)">
-            <inheritdoc cref="!:NodeValidator.ValidateRequired(string, string)" />
+            <summary>
+            Validates that the property represented by the enum field is required and the value is not null or empty.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="breakIfMissing">Indicates whether to break the validation chain if the value is missing.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.CheckValueMaxLength(System.String,System.Int32)">
+            <summary>
+            Checks if the length of the value for the property represented by the enum field does not exceed the specified maximum length.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="maxLength">The maximum allowed length.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsIdValueType(System.String,System.Boolean)">
+            <summary>
+            Validates if the value for the property represented by the enum field is a valid identifier and optionally checks if it is required.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="isRequired">Indicates if the value is required.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsUIntValueType(System.String,System.Nullable{System.UInt32}@)">
+            <summary>
+            Validates if the value for the property represented by the enum field can be converted to a UInt and outputs the result.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="output">The output UInt value if valid.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsUIntWithinRange(System.String,System.UInt32,System.UInt32)">
+            <summary>
+            Validates if the value for the property represented by the enum field is within the specified UInt range.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="minimum">The minimum allowed value.</param>
+            <param name="maximum">The maximum allowed value.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsULongValueType(System.String,System.Nullable{System.UInt64}@)">
+            <summary>
+            Validates if the value for the property represented by the enum field can be converted to a ULong and outputs the result.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="output">The output ULong value if valid.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsULongWithinRange(System.String,System.UInt64,System.UInt64)">
+            <summary>
+            Validates if the value for the property represented by the enum field is within the specified ULong range.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="minimum">The minimum allowed value.</param>
+            <param name="maximum">The maximum allowed value.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsFloatValueType(System.String,System.Nullable{System.Single}@)">
+            <summary>
+            Validates if the value for the property represented by the enum field can be converted to a Float and outputs the result.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="output">The output Float value if valid.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsFloat3dValueType(System.String,System.Nullable{System.Single}[]@)">
+            <summary>
+            Validates if the value for the property represented by the enum field can be converted to a 3D Float array and outputs the result.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="output">The output 3D Float array if valid.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsFloatArrayValueType(System.String,System.Nullable{System.Single}[]@)">
+            <summary>
+            Validates if the value for the property represented by the enum field can be converted to a Float array and outputs the result.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="output">The output Float array if valid.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsFloatArrayCountWithinRange(System.String,System.Nullable{System.Single}[],System.UInt32,System.UInt32)">
+            <summary>
+            Validates if the number of elements in the Float array for the property represented by the enum field is within the specified range.
+            </summary>
+            <param name="key">The key representing the property.</param>
+            <param name="value">The Float array to validate.</param>
+            <param name="minimum">The minimum allowed number of elements.</param>
+            <param name="maximum">The maximum allowed number of elements.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsBooleanValueType(System.String,System.Nullable{System.Boolean}@)">
+            <summary>
+            Validates if the value for the property represented by the enum field can be converted to a Boolean and outputs the result.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="output">The output Boolean value if valid.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsDateTimeValueType(System.String,System.Nullable{System.DateTime}@)">
+            <summary>
+            Validates if the value for the property represented by the enum field can be converted to a DateTime and outputs the result.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="output">The output DateTime value if valid.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsEnumValueType``1(System.String,``0@)">
+            <summary>
+            Validates if the value for the property represented by the enum field can be converted to the specified enum type and outputs the result.
+            </summary>
+            <typeparam name="T">The target enum type to which the value should be converted.</typeparam>
+            <param name="value">The value to validate.</param>
+            <param name="output">The output enum value if valid.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.IsRfc4646LanguageTag(System.String)">
+            <summary>
+            Validates if the value for the property represented by the enum field conforms to the RFC 4646 language tag format.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1.HasMultiplicity``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
+            <summary>
+            Validates if the collection of values for the property represented by the enum field falls within the specified multiplicity range.
+            </summary>
+            <typeparam name="T">The type of the values in the collection.</typeparam>
+            <param name="values">The collection of values to validate.</param>
+            <param name="minimumCount">The minimum allowed count of the values.</param>
+            <param name="maximumCount">The maximum allowed count of the values.</param>
+            <returns>The current instance of <see cref="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1"/> for fluent validation.</returns>
         </member>
         <member name="T:MtconnectCore.Validation.Pairings">
             <summary>
-            Shortcut methods for creating <see cref="T:System.Collections.Generic.KeyValuePair"/> for use with params arguments
+            Shortcut methods for creating <see cref="!:KeyValuePair"/> for use with params arguments
             </summary>
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Collections.Generic.IEnumerable{System.Object})">
             <summary>
-            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
+            Creates <see cref="!:KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -17438,7 +17703,7 @@
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Object)">
             <summary>
-            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
+            Creates <see cref="!:KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -17576,6 +17841,10 @@
             Determines if there are any exceptions that are of the severity level ERROR.
             </summary>
             <returns>Flag if any exception has the severity level of ERROR.</returns>
+        </member>
+    </members>
+</doc>
+e severity level of ERROR.</returns>
         </member>
     </members>
 </doc>

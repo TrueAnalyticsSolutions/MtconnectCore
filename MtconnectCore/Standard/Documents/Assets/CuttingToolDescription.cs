@@ -19,7 +19,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CuttingToolDescription() : base() { }
 
         /// <inheritdoc/>
-        public CuttingToolDescription(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public CuttingToolDescription(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Content = xNode.Value;
         }

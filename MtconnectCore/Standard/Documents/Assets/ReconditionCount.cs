@@ -23,7 +23,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public ReconditionCount() : base() { }
 
         /// <inheritdoc />
-        public ReconditionCount(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public ReconditionCount(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             if (int.TryParse(xNode.InnerText, out int value))
             {

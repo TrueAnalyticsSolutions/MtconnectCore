@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Documents
     {
         /// <inheritdoc/>
         [MtconnectNodeAttribute(HeaderAttributes.CREATION_TIME)]
-        public DateTime CreationTime { get; set; }
+        public ParsedValue<DateTime> CreationTime { get; set; }
 
         /// <inheritdoc/>
         [MtconnectNodeAttribute(HeaderAttributes.SENDER)]
@@ -29,7 +29,7 @@ namespace MtconnectCore.Standard.Documents
 
         /// <inheritdoc/>
         [MtconnectNodeAttribute(HeaderAttributes.INSTANCE_ID)]
-        public ulong InstanceId { get; set; }
+        public ParsedValue<ulong> InstanceId { get; set; }
 
         /// <summary>
         /// Initializes a blank MTConnect Response Document Header.
@@ -43,7 +43,7 @@ namespace MtconnectCore.Standard.Documents
         /// <param name="nsmgr">Reference to the namespace manager.</param>
         /// <param name="defaultNamespace">Reference to the namespace primarily used for this node.</param>
         /// <param name="version"></param>
-        public ResponseDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) : base(xNode, nsmgr, defaultNamespace, version) { }
+        public ResponseDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         /// <inheritdoc/>
         public override bool TryValidate(ValidationReport report)

@@ -40,7 +40,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public CellDefinition() : base() { }
 
         /// <inheritdoc/>
-        public CellDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public CellDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.CELL_DEFINITION)]
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)

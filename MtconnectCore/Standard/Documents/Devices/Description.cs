@@ -40,7 +40,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public Description() : base() { }
 
         /// <inheritdoc/>
-        public Description(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version)
+        public Description(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Content = xNode.Value;
         }

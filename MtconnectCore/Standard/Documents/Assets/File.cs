@@ -24,27 +24,27 @@ namespace MtconnectCore.Standard.Documents.Assets
         public string State { get; set; }
 
         /// <inheritdoc cref="FileElements.SIGNATURE"/>
-        [MtconnectNodeElement(nameof(FileElements.SIGNATURE), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElement(nameof(FileElements.SIGNATURE))]
         public string Signature { get; set; }
 
         /// <inheritdoc cref="FileElements.PUBLIC_KEY"/>
-        [MtconnectNodeElement(nameof(FileElements.PUBLIC_KEY), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElement(nameof(FileElements.PUBLIC_KEY))]
         public string PublicKey { get; set; }
 
         /// <inheritdoc cref="FileElements.CREATION_TIME"/>
-        [MtconnectNodeElement(nameof(FileElements.CREATION_TIME), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElement(nameof(FileElements.CREATION_TIME))]
         public DateTime CreationTime { get; set; }
 
         /// <inheritdoc cref="FileElements.MODIFICATION_TIME"/>
-        [MtconnectNodeElement(nameof(FileElements.MODIFICATION_TIME), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElement(nameof(FileElements.MODIFICATION_TIME))]
         public DateTime? ModificationTime { get; set; }
 
         /// <inheritdoc cref="FileElements.FILE_LOCATION"/>
-        [MtconnectNodeElements(nameof(FileElements.FILE_LOCATION), nameof(TrySetFileLocation), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(FileElements.FILE_LOCATION), nameof(TrySetFileLocation))]
         public FileLocation FileLocation { get; set; }
 
         private List<Destination> _destinations = new List<Destination>();
-        [MtconnectNodeElements(nameof(FileElements.DESTINATIONS), nameof(TryAddDestination), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(FileElements.DESTINATIONS), nameof(TryAddDestination))]
         public ICollection<Destination> Destinations => _destinations;
 
         /// <inheritdoc />

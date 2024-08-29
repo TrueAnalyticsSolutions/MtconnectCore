@@ -52,11 +52,11 @@ namespace MtconnectCore.Standard.Documents.Devices
         public string TagName { get; set; }
 
         /// <inheritdoc cref="ComponentElements.DESCRIPTION"/>
-        [MtconnectNodeElements("Description", nameof(TrySetDescription), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Description", nameof(TrySetDescription))]
         public Description Description { get; set; }
 
         /// <inheritdoc cref="ComponentElements.CONFIGURATION"/>
-        [MtconnectNodeElements("Configuration", nameof(TrySetConfiguration), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Configuration", nameof(TrySetConfiguration))]
         public ComponentConfiguration Configuration { get; set; }
 
         /// <summary>
@@ -66,29 +66,29 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         private List<Component> _subComponents = new List<Component>();
         /// <inheritdoc cref="ComponentElements.COMPONENTS"/>
-        [MtconnectNodeElements("Components/*", nameof(TryAddComponent), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Components/*", nameof(TryAddComponent))]
         public ICollection<Component> SubComponents => _subComponents;
 
         private List<DataItem> _dataItems = new List<DataItem>();
         /// <inheritdoc cref="ComponentElements.DATA_ITEMS"/>
-        [MtconnectNodeElements("DataItems/*", nameof(TryAddDataItem), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("DataItems/*", nameof(TryAddDataItem))]
         public ICollection<DataItem> DataItems => _dataItems;
 
         private List<Composition> _compositions = new List<Composition>();
         /// <inheritdoc cref="ComponentElements.COMPOSITIONS"/>
-        [MtconnectNodeElements("Compositions/*", nameof(TryAddComposition), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Compositions/*", nameof(TryAddComposition))]
         public ICollection<Composition> Compositions => _compositions;
 
         private List<Reference> _references = new List<Reference>();
         /// <inheritdoc cref="ComponentElements.REFERENCES"/>
-        [MtconnectNodeElements("References/*", nameof(TryAddReference), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("References/*", nameof(TryAddReference))]
         public ICollection<Reference> References => _references;
 
         /// <inheritdoc />
         public Component() : base() { }
 
         /// <inheritdoc />
-        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version)
+        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             TagName = xNode.LocalName;
         }

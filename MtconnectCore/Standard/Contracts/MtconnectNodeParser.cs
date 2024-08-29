@@ -16,6 +16,21 @@ namespace MtconnectCore.Standard.Contracts
     public static class MtconnectNodeParser
     {
         private static ConcurrentDictionary<Type, XmlParser> TypeCache = new ConcurrentDictionary<Type, XmlParser>();
+        
+        public static string GetDefaultNamespace(XmlDocument xDoc)
+        {
+            string defaultNamespace = xDoc.DocumentElement.Attributes["xmlns"]?.Value;
+            foreach (XmlAttribute attr in xDoc.DocumentElement.Attributes)
+            {
+                if (attr.Value == defaultNamespace)
+                {
+                    return attr.LocalName;
+                }
+            }
+            return null;
+        }
+        public static string GetDefaultNamespace(XmlNode xNode)
+            => GetDefaultNamespace(xNode.OwnerDocument);
 
         public static XmlParser GetParser(Type type)
         {
@@ -28,9 +43,9 @@ namespace MtconnectCore.Standard.Contracts
             return parser;
         }
 
-        public static void UpdateFromXml<T>(this T item, XmlNode xmlNode, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) where T : MtconnectNode
+        public static void UpdateFromXml<T>(this T item, XmlNode xmlNode, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
         {
-            GetParser(item.GetType())?.Set(item, xmlNode, nsmgr, defaultNamespace, version);
+            GetParser(item.GetType())?.Set(item, xmlNode, nsmgr, version);
         }
 
         public static XmlParser.XmlPropertyParser GetPropertyParser<T>(this T item, string propertyName) where T : MtconnectNode
@@ -150,11 +165,11 @@ namespace MtconnectCore.Standard.Contracts
                 ValidationMethods = validators;
             }
 
-            public void Set<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) where T : MtconnectNode
+            public void Set<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
             {
                 foreach (var propertyParser in Properties)
                 {
-                    propertyParser.Set(obj, node, nsmgr, defaultNamespace, version);
+                    propertyParser.Set(obj, node, nsmgr, version);
                 }
             }
 
@@ -304,22 +319,22 @@ namespace MtconnectCore.Standard.Contracts
                 /// <param name="nsmgr"></param>
                 /// <param name="defaultNamespace"></param>
                 /// <param name="version"></param>
-                public void Set<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) where T : MtconnectNode 
+                public void Set<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode 
                 {
                     if (ParseMethodAttribute is MtconnectNodeAttributeAttribute)
                     {
-                        _setFromAttribute(obj, node, nsmgr, defaultNamespace, version);
+                        _setFromAttribute(obj, node, nsmgr, version);
                     } else if (ParseMethodAttribute is MtconnectNodeElementAttribute)
                     {
-                        _setFromElement(obj, node, nsmgr, defaultNamespace, version);
+                        _setFromElement(obj, node, nsmgr, version);
                     } else if (ParseMethodAttribute is MtconnectNodeElementsAttribute)
                     {
-                        _setFromElements(obj, node, nsmgr, defaultNamespace, version);
+                        _setFromElements(obj, node, nsmgr, version);
                     }
                 }
 
                 internal TypeConverter propertyConverter;
-                private void _setFromAttribute<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) where T : MtconnectNode
+                private void _setFromAttribute<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
                 {
                     if (propertyConverter == null)
                     {
@@ -328,22 +343,37 @@ namespace MtconnectCore.Standard.Contracts
 
                     MtconnectNodeAttributeAttribute attr = (MtconnectNodeAttributeAttribute)ParseMethodAttribute;
 
+                    string attributeName = attr.GetName(MtconnectNodeNameProcessors.CamelCase);
+                    string defaultNamespace = attributeName.Contains(":")
+                        ? attributeName.Substring(0, attributeName.IndexOf(":"))
+                        : MtconnectNodeParser.GetDefaultNamespace(node);
                     string nodeValue;
-                    if (!string.IsNullOrEmpty(attr.XmlNamespace))
+                    if (!string.IsNullOrEmpty(defaultNamespace) && attributeName.Contains(":"))
                     {
-                        nodeValue = node.TryGetAttribute(attr.GetName(MtconnectNodeNameProcessors.CamelCase), attr.XmlNamespace);
+                        nodeValue = node.TryGetAttribute(attributeName, null, defaultNamespace);
                     }
                     else
                     {
-                        nodeValue = node.TryGetAttribute(attr.GetName(MtconnectNodeNameProcessors.CamelCase));
+                        nodeValue = node.TryGetAttribute(attributeName);
                     }
                     if (!string.IsNullOrEmpty(nodeValue))
                     {
-                        Property.SetValue(obj, propertyConverter.ConvertFromString(nodeValue));
+                        // Handle ParsedValue<T> properties
+                        if (Property.PropertyType.IsGenericType && Property.PropertyType.GetGenericTypeDefinition() == typeof(ParsedValue<>))
+                        {
+                            var parsedValue = Activator.CreateInstance(Property.PropertyType);
+                            (parsedValue as IParsedValue).RawValue = nodeValue;
+                            Property.SetValue(obj, parsedValue);
+                        }
+                        else
+                        {
+                            var convertedValue = propertyConverter.ConvertFromString(nodeValue);
+                            Property.SetValue(obj, convertedValue);
+                        }
                     }
                 }
 
-                private void _setFromElement<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) where T : MtconnectNode
+                private void _setFromElement<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
                 {
                     if (propertyConverter == null)
                     {
@@ -352,10 +382,15 @@ namespace MtconnectCore.Standard.Contracts
 
                     MtconnectNodeElementAttribute attr = (MtconnectNodeElementAttribute)ParseMethodAttribute;
 
+                    string elementName = node.LocalName;
+                    string defaultNamespace = elementName.Contains(":")
+                        ? elementName.Substring(0, elementName.IndexOf(":"))
+                        : MtconnectNodeParser.GetDefaultNamespace(node);
+
                     string nodeValue;
-                    if (!string.IsNullOrEmpty(attr.XmlNamespace))
+                    if (!string.IsNullOrEmpty(defaultNamespace))
                     {
-                        nodeValue = node.SelectSingleNode(attr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, attr.XmlNamespace)?.InnerText;
+                        nodeValue = node.SelectSingleNode(attr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, defaultNamespace)?.InnerText;
                     }
                     else
                     {
@@ -371,7 +406,7 @@ namespace MtconnectCore.Standard.Contracts
                 internal ParameterInfo[] tryAddParameters;
                 internal ConstructorInfo targetConstructor;
                 internal ParameterInfo[] targetConstructorParameters;
-                private void _setFromElements<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) where T : MtconnectNode
+                private void _setFromElements<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
                 {
                     MtconnectNodeElementsAttribute attr = (MtconnectNodeElementsAttribute)ParseMethodAttribute;
 
@@ -380,12 +415,13 @@ namespace MtconnectCore.Standard.Contracts
                         throw new MissingMethodException($"Cannot find method '{attr.TryAddMethod}'");
                     }
 
-                    XmlNodeList xElems;// = xNode.HasChildNodes ? xNode.SelectNodes(elemsAttr.GetName(), nsmgr, "m") : null;
-                    if (!string.IsNullOrEmpty(attr.XmlNamespace))
-                    {
-                        xElems = node.SelectNodes(attr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, attr.XmlNamespace);
-                    }
-                    else if (!string.IsNullOrEmpty(defaultNamespace))
+                    string elementName = node.LocalName;
+                    string defaultNamespace = elementName.Contains(":")
+                        ? elementName.Substring(0, elementName.IndexOf(":"))
+                        : MtconnectNodeParser.GetDefaultNamespace(node);
+
+                    XmlNodeList xElems;
+                    if (!string.IsNullOrEmpty(defaultNamespace))
                     {
                         xElems = node.SelectNodes(attr.GetName(MtconnectNodeNameProcessors.PascalCase), nsmgr, defaultNamespace);
                     }
@@ -436,6 +472,15 @@ namespace MtconnectCore.Standard.Contracts
                 }
             }
         
+            private string getDefaultNamespace(XmlNode xNode)
+            {
+                string defaultNamespace = xNode.OwnerDocument.DocumentElement.Attributes["xmlns"]?.Value;
+                foreach (XmlAttribute attr in xNode.OwnerDocument.DocumentElement.Attributes)
+                    if (attr.Value == defaultNamespace)
+                        return attr.LocalName;
+                return null;
+            }
+
             public class MtconnectNodeValidator
             {
                 public MethodInfo ValidationMethod { get; set; }

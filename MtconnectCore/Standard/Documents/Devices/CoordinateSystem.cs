@@ -49,14 +49,14 @@ namespace MtconnectCore.Standard.Documents.Devices
         public string Origin { get; set; }
 
         /// <inheritdoc cref="CoordinateSystemElements.TRANSFORMATION"/>
-        [MtconnectNodeElements(CoordinateSystemElements.TRANSFORMATION, nameof(TrySetTransformation), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements(CoordinateSystemElements.TRANSFORMATION, nameof(TrySetTransformation))]
         public Transformation Transformation { get; set; }
 
         /// <inheritdoc />
         public CoordinateSystem() : base() { }
 
         /// <inheritdoc />
-        public CoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public CoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         public bool TrySetTransformation(XmlNode xNode, XmlNamespaceManager nsmgr, out Transformation transformation)
             => base.TrySet<Transformation>(xNode, nsmgr, nameof(Transformation), out transformation);

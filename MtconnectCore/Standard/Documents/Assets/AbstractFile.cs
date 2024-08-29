@@ -27,18 +27,18 @@ namespace MtconnectCore.Standard.Documents.Assets
         public string ApplicationType { get; set; }
 
         private List<FileProperty> _fileProperties = new List<FileProperty>();
-        [MtconnectNodeElements(nameof(AbstractFileElements.FILE_PROPERTIES), nameof(TryAddFileProperty), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(AbstractFileElements.FILE_PROPERTIES), nameof(TryAddFileProperty))]
         public ICollection<FileProperty> FileProperties => _fileProperties;
 
         private List<FileComment> _fileComments = new List<FileComment>();
-        [MtconnectNodeElements(nameof(AbstractFileElements.FILE_COMMENTS), nameof(TryAddFileComment), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(AbstractFileElements.FILE_COMMENTS), nameof(TryAddFileComment))]
         public ICollection<FileComment> FileComments => _fileComments;
 
         /// <inheritdoc />
         public AbstractFile() : base() { }
 
         /// <inheritdoc/>
-        public AbstractFile(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public AbstractFile(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         public bool TryAddFileProperty(XmlNode xNode, XmlNamespaceManager nsmgr, out FileProperty fileProperty)
             => base.TryAdd<FileProperty>(xNode, nsmgr, ref _fileProperties, out fileProperty);

@@ -72,7 +72,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Observation() : base() { }
 
         /// <inheritdoc/>
-        public Observation(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public Observation(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Result = xNode.InnerText;
             TagName = xNode.LocalName;

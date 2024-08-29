@@ -17,39 +17,39 @@ namespace MtconnectCore.Standard.Documents.Devices
     {
         private List<CoordinateSystem> _coordinateSystems = new List<CoordinateSystem>();
         /// <inheritdoc cref="ComponentConfigurationElements.COORDINATE_SYSTEMS"/>
-        [MtconnectNodeElements("CoordinateSystems/*", nameof(TryAddCoordinateSystem), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("CoordinateSystems/*", nameof(TryAddCoordinateSystem))]
         public ICollection<CoordinateSystem> CoordinateSystems => _coordinateSystems;
 
         private List<Motion> _motion = new List<Motion>();
         /// <inheritdoc cref="ComponentConfigurationElements.MOTION"/>
-        [MtconnectNodeElements("Motion/*", nameof(TryAddMotion), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Motion/*", nameof(TryAddMotion))]
         public ICollection<Motion> Motion => _motion;
 
         private List<ConfigurationRelationship> _relationships = new List<ConfigurationRelationship>();
         /// <inheritdoc cref="ComponentConfigurationElements.RELATIONSHIPS"/>
-        [MtconnectNodeElements("Relationships/*", nameof(TryAddRelationship), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Relationships/*", nameof(TryAddRelationship))]
         public ICollection<ConfigurationRelationship> Relationships => _relationships;
 
         private List<SensorConfiguration> _sensorConfiguration = new List<SensorConfiguration>();
         /// <inheritdoc cref="ComponentConfigurationElements.SENSOR_CONFIGURATION"/>
-        [MtconnectNodeElements("SensorConfiguration/*", nameof(TryAddSensorConfiguration), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("SensorConfiguration/*", nameof(TryAddSensorConfiguration))]
         public ICollection<SensorConfiguration> SensorConfiguration => _sensorConfiguration;
 
         private List<SolidModel> _solidModel = new List<SolidModel>();
         /// <inheritdoc cref="ComponentConfigurationElements.SOLID_MODEL"/>
-        [MtconnectNodeElements("SolidModel/*", nameof(TryAddSolidModel), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("SolidModel/*", nameof(TryAddSolidModel))]
         public ICollection<SolidModel> SolidModel => _solidModel;
 
         private List<Specification> _specifications = new List<Specification>();
         /// <inheritdoc cref="ComponentConfigurationElements.SPECIFICATIONS"/>
-        [MtconnectNodeElements("Specifications/*", nameof(TryAddSpecification), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Specifications/*", nameof(TryAddSpecification))]
         public ICollection<Specification> Specifications => _specifications;
 
         /// <inheritdoc />
         public ComponentConfiguration() : base() { }
 
         /// <inheritdoc />
-        public ComponentConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public ComponentConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         public bool TryAddCoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr, out CoordinateSystem coordinateSystem)
             => base.TryAdd<CoordinateSystem>(xNode, nsmgr, ref _coordinateSystems, out coordinateSystem);

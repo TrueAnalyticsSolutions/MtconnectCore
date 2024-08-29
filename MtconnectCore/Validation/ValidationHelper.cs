@@ -159,6 +159,8 @@ namespace MtconnectCore.Validation
             }
             return validator;
         }
+        internal static NodeValidationContext.NodeValidator ValidateType(this NodeValidationContext.NodeValidator validator, ParsedValue<CategoryEnum> category, string type, string subType)
+            => ValidateType(validator, category.RawValue, type, subType);
 
         /// <summary>
         /// Validates a <see cref="MtconnectNode"/> <c>nativeUnits</c> against standard <see cref="NativeUnitEnum"/> and <see cref="UnitEnum"/>.
@@ -174,6 +176,8 @@ namespace MtconnectCore.Validation
             return validator;
 
         }
+        internal static NodeValidationContext.NodeValidator ValidateNativeUnits(this NodeValidationContext.NodeValidator validator, ParsedValue<NativeUnitEnum> nativeUnits)
+            => ValidateNativeUnits(validator, nativeUnits?.RawValue);
 
         /// <summary>
         /// Dynamically validates the <c>type</c> and <c>subtype</c> attributes.<br/>

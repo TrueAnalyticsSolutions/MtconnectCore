@@ -26,6 +26,6 @@ namespace MtconnectCore.Standard.Documents.Streams
         public StreamsDocumentHeader() : base() { }
 
         /// <inheritdoc/>
-        public StreamsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public StreamsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
     }
 }

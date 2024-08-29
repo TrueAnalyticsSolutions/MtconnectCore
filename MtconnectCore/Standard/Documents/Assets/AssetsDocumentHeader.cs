@@ -28,7 +28,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public AssetsDocumentHeader() : base() { }
 
         /// <inheritdoc />
-        public AssetsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public AssetsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         /// <inheritdoc />
         public override bool TryValidate(ValidationReport report)

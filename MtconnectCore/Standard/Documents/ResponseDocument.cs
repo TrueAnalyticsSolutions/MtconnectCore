@@ -31,7 +31,7 @@ namespace MtconnectCore.Standard.Documents
         /// <summary>
         /// Reference to the default XML namespace that this type of MTConnect Response Document uses.
         /// </summary>
-        public abstract string DefaultNamespace { get; }
+        public string DefaultNamespace { get; protected set; }
 
         /// <summary>
         /// Internal reference to the <see cref="{THeader}"/>.
@@ -72,7 +72,9 @@ namespace MtconnectCore.Standard.Documents
         public ResponseDocument(XmlDocument xDoc)
         {
             Source = xDoc;
-            
+
+            DefaultNamespace = MtconnectNodeParser.GetDefaultNamespace(xDoc);
+
             // Detect if there are missing namespaces
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns")))
                 InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns' attribute"));

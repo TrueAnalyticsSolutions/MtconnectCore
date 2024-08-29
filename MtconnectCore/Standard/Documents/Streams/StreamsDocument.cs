@@ -20,12 +20,9 @@ namespace MtconnectCore.Standard.Documents.Streams
         public override DocumentTypes Type => DocumentTypes.Streams;
 
         /// <inheritdoc />
-        public override string DefaultNamespace => Constants.DEFAULT_XML_NAMESPACE;
-
-        /// <inheritdoc />
         public override string DataElementName => StreamsElements.STREAMS.ToPascalCase();
 
-        [MtconnectNodeElements(StreamsElements.HEADER, nameof(TrySetHeader), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(StreamsElements.HEADER, nameof(TrySetHeader))]
         internal override StreamsDocumentHeader _header { get; set; }
         /// <inheritdoc />
         public StreamsDocumentHeader Header => (StreamsDocumentHeader)_header;

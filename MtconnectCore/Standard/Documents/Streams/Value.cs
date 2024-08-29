@@ -4,6 +4,7 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,20 +31,39 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Value(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Representations/Value")]
-        protected virtual bool validateRepresentation(out ICollection<MtconnectValidationException> validationErrors)
+        protected virtual bool ValidateProperties(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Representation))
-            {
-                if (!EnumHelper.Contains<RepresentationEnum>(Representation))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.ERROR,
-                        $"Observation has an unhandled 'representation' type.",
-                            SourceNode));
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return new NodeValidationContext(this)
+                // Validate Representation property
+                .ValidateValueProperty<DataItemAttributes>(nameof(Representation), (o) =>
+                    o.IsImplemented(Representation)
+                    ?.If(
+                        v => !string.IsNullOrEmpty(Representation) && !EnumHelper.Contains<RepresentationEnum>(Representation),
+                        v => throw new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            "Observation has an unhandled 'representation' type.",
+                            SourceNode)
+                    )
+                )
+                // Return validation errors
+                .HasError(out validationErrors);
         }
+
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Representations/Value")]
+        //protected virtual bool validateRepresentation(out ICollection<MtconnectValidationException> validationErrors)
+        //{
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (!string.IsNullOrEmpty(Representation))
+        //    {
+        //        if (!EnumHelper.Contains<RepresentationEnum>(Representation))
+        //        {
+        //            validationErrors.Add(new MtconnectValidationException(
+        //                ValidationSeverity.ERROR,
+        //                $"Observation has an unhandled 'representation' type.",
+        //                    SourceNode));
+        //        }
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
     }
 }

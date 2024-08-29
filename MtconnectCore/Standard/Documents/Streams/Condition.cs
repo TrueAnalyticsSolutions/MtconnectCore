@@ -44,7 +44,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 0..1
         /// </summary>
-        [MtconnectNodeAttribute("lang", XmlNamespace = "xs")]
+        [MtconnectNodeAttribute("lang")] // xs:lang
         public string Language { get; set; }
 
         /// <summary>

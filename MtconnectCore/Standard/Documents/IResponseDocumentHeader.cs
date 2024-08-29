@@ -1,4 +1,5 @@
-﻿using MtconnectCore.Standard.Contracts.Errors;
+﻿using MtconnectCore.Standard.Contracts;
+using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace MtconnectCore.Standard.Documents
         /// <summary>
         /// Represents the time that a MTConnect Agent published the Response Document.
         /// </summary>
-        DateTime CreationTime { get; set; }
+        ParsedValue<DateTime> CreationTime { get; set; }
 
         /// <summary>
         /// An identification defining where the Agent that published the Response Document is installed or hosted.
@@ -29,7 +30,7 @@ namespace MtconnectCore.Standard.Documents
         /// <summary>
         /// A number indicating a specific instantiation of the buffer associated with the Agent that published the Response Document.
         /// </summary>
-        ulong InstanceId { get; set; }
+        ParsedValue<ulong> InstanceId { get; set; }
 
         /// <summary>
         /// An overridable method for validating the entity model. It is recommended to validate sometime after parsing a MTConnect Response Document.

@@ -7,31 +7,53 @@ using System;
 
 namespace MtconnectCore.Validation
 {
+    /// <summary>
+    /// Represents the context for validating a node within the MTConnect standard.
+    /// </summary>
     public partial class NodeValidationContext
     {
+        /// <summary>
+        /// Gets or sets the MTConnect node that is being validated.
+        /// </summary>
         public MtconnectNode Node { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of validation exceptions that occur during the validation process.
+        /// </summary>
         public ICollection<MtconnectValidationException> Exceptions { get; set; } = new List<MtconnectValidationException>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NodeValidationContext"/> class with the specified node.
+        /// </summary>
+        /// <param name="node">The MTConnect node that is being validated.</param>
         public NodeValidationContext(MtconnectNode node)
         {
             Node = node;
         }
 
         /// <summary>
-        /// Indicates whether a collection of exceptions contains any <c>ERROR</c>-level severities.
+        /// Determines whether the collection of validation exceptions contains any <c>ERROR</c>-level severities.
         /// </summary>
-        /// <param name="errors">Collection of validation exceptions</param>
-        /// <returns>Flag for whether or not any of the exceptions are <c>ERROR</c>-level severity</returns>
+        /// <param name="errors">The collection of validation exceptions.</param>
+        /// <returns><c>true</c> if any of the exceptions are of <c>ERROR</c>-level severity; otherwise, <c>false</c>.</returns>
         public bool HasError(out ICollection<MtconnectValidationException> errors)
         {
             errors = Exceptions;
             return HasError();
         }
 
+        /// <summary>
+        /// Determines whether the collection of validation exceptions contains any <c>ERROR</c>-level severities.
+        /// </summary>
+        /// <returns><c>true</c> if any of the exceptions are of <c>ERROR</c>-level severity; otherwise, <c>false</c>.</returns>
         public bool HasError()
             => Exceptions.Any(o => o.Severity == ValidationSeverity.ERROR);
 
+        /// <summary>
+        /// Validates the current node using the specified validation logic.
+        /// </summary>
+        /// <param name="validator">A function that defines the validation logic.</param>
+        /// <returns>The current <see cref="NodeValidationContext"/>.</returns>
         public NodeValidationContext Validate(Func<NodeValidator, NodeValidator> validator)
         {
             try
@@ -48,6 +70,26 @@ namespace MtconnectCore.Validation
             return this;
         }
 
+        /// <summary>
+        /// Validates a property based on the provided enum value, which represents the property name.
+        /// </summary>
+        /// <typeparam name="TEnum">The enum type representing the property.</typeparam>
+        /// <param name="enumProperty">The enum value representing the property name.</param>
+        /// <param name="validator">A function that defines the validation logic for the property.</param>
+        /// <returns>The current <see cref="NodeValidationContext"/>.</returns>
+        public NodeValidationContext ValidateValueProperty<TEnum>(TEnum enumProperty, Func<NodeValueValidator<TEnum>, NodeValidator> validator) where TEnum : Enum
+        {
+            string propertyName = enumProperty.ToString();
+            return ValidateValueProperty(propertyName, validator);
+        }
+
+        /// <summary>
+        /// Validates a property based on the provided string value, which represents the property name.
+        /// </summary>
+        /// <typeparam name="TEnum">The enum type representing the property.</typeparam>
+        /// <param name="propertyName">The string value representing the property name.</param>
+        /// <param name="validator">A function that defines the validation logic for the property.</param>
+        /// <returns>The current <see cref="NodeValidationContext"/>.</returns>
         public NodeValidationContext ValidateValueProperty<TEnum>(string propertyName, Func<NodeValueValidator<TEnum>, NodeValidator> validator) where TEnum : Enum
         {
             try

@@ -14,17 +14,17 @@ namespace MtconnectCore.Standard.Documents.Devices
     {
         private List<ControlLimit> _controlLimits = new List<ControlLimit>();
         /// <inheritdoc cref="ProcessSpecificationElements.CONTROL_LIMITS"/>
-        [MtconnectNodeElements("ControlLimits/*", nameof(TryAddControlLimit), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("ControlLimits/*", nameof(TryAddControlLimit))]
         public ICollection<ControlLimit> ControlLimits => _controlLimits;
 
         private List<SpecificationLimit> _specificationLimits = new List<SpecificationLimit>();
         /// <inheritdoc cref="ProcessSpecificationElements.SPECIFICATION_LIMITS"/>
-        [MtconnectNodeElements("SpecificationLimits/*", nameof(TryAddSpecificationLimit), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("SpecificationLimits/*", nameof(TryAddSpecificationLimit))]
         public ICollection<SpecificationLimit> SpecificationLimits => _specificationLimits;
 
         private List<AlarmLimit> _alarmLimits = new List<AlarmLimit>();
         /// <inheritdoc cref="ProcessSpecificationElements.ALARM_LIMITS"/>
-        [MtconnectNodeElements("AlarmLimits/*", nameof(TryAddAlarmLimit), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("AlarmLimits/*", nameof(TryAddAlarmLimit))]
         public ICollection<AlarmLimit> AlarmLimits => _alarmLimits;
 
         /// <inheritdoc />

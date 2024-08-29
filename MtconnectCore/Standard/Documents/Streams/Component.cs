@@ -3,6 +3,7 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -38,14 +39,14 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// <summary>
         /// Samples groups one or more Sample entities. See Section Sample.
         /// </summary>
-        [MtconnectNodeElements("Samples/*", nameof(TryAddSample), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements("Samples/*", nameof(TryAddSample))]
         public ICollection<Sample> Samples => _samples;
 
         private List<Event> _events = new List<Event>();
         /// <summary>
         /// Events groups one or more Event entities. See Section Event.
         /// </summary>
-        [MtconnectNodeElements("Events/*", nameof(TryAddEvent), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements("Events/*", nameof(TryAddEvent))]
         public ICollection<Event> Events => _events;
 
         private List<Condition> _conditions = new List<Condition>();
@@ -53,14 +54,14 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// Conditions groups one or more Condition entities. See Section Condition.
         /// Note: In the XML representation, Conditions MUST appear as Condition element in the MTConnectStreams Response Document.
         /// </summary>
-        [MtconnectNodeElements("Condition/*", nameof(TryAddCondition), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements("Condition/*", nameof(TryAddCondition))]
         public ICollection<Condition> Conditions => _conditions;
 
         /// <inheritdoc/>
         public Component() { }
 
         /// <inheritdoc/>
-        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         public bool TryAddSample(XmlNode xNode, XmlNamespaceManager nsmgr, out Sample sample)
         {
@@ -122,57 +123,99 @@ namespace MtconnectCore.Standard.Documents.Streams
 
         public bool TryAddCondition(XmlNode xNode, XmlNamespaceManager nsmgr, out Condition condition) => base.TryAdd<Condition>(xNode, nsmgr, ref _conditions, out condition);
 
-
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateComponentId(out ICollection<MtconnectValidationException> validationErrors)
+        private bool ValidateProperties(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(ComponentId))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component MUST include a 'componentId' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return new NodeValidationContext(this)
+                // Validate componentId
+                .ValidateValueProperty(
+                    ComponentAttributes.COMPONENT_ID,
+                    (o) =>
+                        o.IsImplemented(ComponentId)
+                        ?.WhileIntroduced((i) =>
+                            i.IsRequired(ComponentId)
+                        )
+                )
+                // Validate ComponentReference
+                .ValidateValueProperty<ComponentAttributes>(nameof(ComponentReference), (o) =>
+                    o.IsImplemented(ComponentReference)?.IsRequired(ComponentReference)
+                )
+                // Validate Name (deprecated check)
+                .ValidateValueProperty<ComponentAttributes>(nameof(Name), (o) =>
+                    o.IsImplemented(Name)
+                    ?.If(
+                        v => MtconnectVersion.GetValueOrDefault() >= MtconnectVersions.V_1_0_1 && MtconnectVersion.GetValueOrDefault() < MtconnectVersions.V_1_2_0,
+                        v => throw new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            "Component MUST include a 'name' attribute.",
+                            SourceNode)
+                    )
+                )
+                // Validate Contents
+                //.ValidateValueProperty<ComponentAttributes>(nameof(Samples), (o) =>
+                //    o.IsImplemented(Samples)
+                //    ?.If(
+                //        v => Events.Count <= 0 && Samples.Count <= 0 && Conditions.Count <= 0,
+                //        v => throw new MtconnectValidationException(
+                //            ValidationSeverity.ERROR,
+                //            "ComponentStream MUST have at least one of Event, Sample, or Condition.",
+                //            SourceNode)
+                //    )
+                //)
+                // Return validation errors
+                .HasError(out validationErrors);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateComponentReference(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(ComponentReference))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component MUST include a 'component' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
+        //private bool validateComponentId(out ICollection<MtconnectValidationException> validationErrors)
+        //{
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (string.IsNullOrEmpty(ComponentId))
+        //    {
+        //        validationErrors.Add(new MtconnectValidationException(
+        //            ValidationSeverity.ERROR,
+        //            $"Component MUST include a 'componentId' attribute.",
+        //            SourceNode));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL, MtconnectVersions.V_1_2_0)]
-        private bool validateNameRequired_Deprecated(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Name)) {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component MUST include a 'name' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
+        //private bool validateComponentReference(out ICollection<MtconnectValidationException> validationErrors)
+        //{
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (string.IsNullOrEmpty(ComponentReference))
+        //    {
+        //        validationErrors.Add(new MtconnectValidationException(
+        //            ValidationSeverity.ERROR,
+        //            $"Component MUST include a 'component' attribute.",
+        //            SourceNode));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, MODEL_BROWSER_URL)]
-        private bool validateContents(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (Events.Count <= 0 && Samples.Count <= 0 && Conditions.Count <= 0)
-            {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "ComponentStream MUST have at least one of Event, Sample, or Condition.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL, MtconnectVersions.V_1_2_0)]
+        //private bool validateNameRequired_Deprecated(out ICollection<MtconnectValidationException> validationErrors)
+        //{
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (string.IsNullOrEmpty(Name)) {
+        //        validationErrors.Add(new MtconnectValidationException(
+        //            ValidationSeverity.ERROR,
+        //            $"Component MUST include a 'name' attribute.",
+        //            SourceNode));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
+
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, MODEL_BROWSER_URL)]
+        //private bool validateContents(out ICollection<MtconnectValidationException> validationErrors)
+        //{
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (Events.Count <= 0 && Samples.Count <= 0 && Conditions.Count <= 0)
+        //    {
+        //        validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "ComponentStream MUST have at least one of Event, Sample, or Condition.", SourceNode));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
     }
 }

@@ -40,12 +40,12 @@ namespace MtconnectCore.Standard.Contracts
         /// <param name="xNode">Reference to a <see cref="XmlNode"/> as part of a larger MTConnect Response Document.</param>
         /// <param name="nsmgr">Reference to the </param>
         /// <param name="defaultNamespace"></param>
-        public MtconnectNode(XmlNode xNode, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version)
+        public MtconnectNode(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version)
         {
             SourceNode = xNode;
             MtconnectVersion = version;
 
-            MtconnectNodeParser.UpdateFromXml(this, xNode, nsmgr, defaultNamespace, version);
+            MtconnectNodeParser.UpdateFromXml(this, xNode, nsmgr, version);
         }
 
         public XmlNode GetSourceNode() => SourceNode;

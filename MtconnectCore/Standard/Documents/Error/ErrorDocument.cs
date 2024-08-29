@@ -15,9 +15,6 @@ namespace MtconnectCore.Standard.Documents.Error
         public override DocumentTypes Type => DocumentTypes.Errors;
 
         /// <inheritdoc/>
-        public override string DefaultNamespace => Constants.DEFAULT_XML_NAMESPACE;
-
-        /// <inheritdoc/>
         public override string DataElementName => "Errors";
 
         internal override ErrorDocumentHeader _header { get; set; }
