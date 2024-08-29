@@ -13,25 +13,88 @@ using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Contracts
 {
+    /// <summary>
+    /// Provides static methods for parsing MTConnect XML documents and nodes into instances of <see cref="MtconnectNode"/>.
+    /// </summary>
     public static class MtconnectNodeParser
     {
         private static ConcurrentDictionary<Type, XmlParser> TypeCache = new ConcurrentDictionary<Type, XmlParser>();
-        
-        public static string GetDefaultNamespace(XmlDocument xDoc)
+        private static ConcurrentDictionary<string, string> NamespaceCache = new ConcurrentDictionary<string, string>();
+
+        /// <summary>
+        /// Retrieves the default XML namespace from an <see cref="XmlDocument"/>.
+        /// </summary>
+        /// <param name="xDoc">The XML document to inspect.</param>
+        /// <returns>The default namespace as a string, or null if not found.</returns>
+        public static string GetNamespaceName(XmlDocument xDoc)
         {
+            if (NamespaceCache.ContainsKey(""))
+                return NamespaceCache[""];
+
             string defaultNamespace = xDoc.DocumentElement.Attributes["xmlns"]?.Value;
             foreach (XmlAttribute attr in xDoc.DocumentElement.Attributes)
             {
                 if (attr.Value == defaultNamespace)
                 {
-                    return attr.LocalName;
+                    if (NamespaceCache.TryAdd("", attr.LocalName.Substring(attr.LocalName.IndexOf(":") + 1)))
+                    {
+                        return NamespaceCache[""];
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to cache the namespace `" + attr.LocalName + "=\"" + attr.Value + "\"");
+                    }
+                    break;
                 }
             }
             return null;
         }
-        public static string GetDefaultNamespace(XmlNode xNode)
-            => GetDefaultNamespace(xNode.OwnerDocument);
 
+        /// <summary>
+        /// Retrieves the default XML namespace from an <see cref="XmlNode"/>.
+        /// </summary>
+        /// <param name="xNode">The XML node to inspect.</param>
+        /// <returns>The default namespace as a string, or null if not found.</returns>
+        public static string GetNamespaceName(XmlNode xNode)
+        {
+            if (xNode.LocalName.Contains(":"))
+            {
+                string nodeNamespaceName = xNode.LocalName.Substring(0, xNode.LocalName.IndexOf(":"));
+                if (NamespaceCache.TryGetValue(nodeNamespaceName, out string nodeNamespace))
+                {
+                    return nodeNamespaceName;
+                }
+                else
+                {
+                    foreach (XmlAttribute attr in xNode.OwnerDocument.DocumentElement.Attributes)
+                    {
+                        if (attr.LocalName == $"xmlns:{nodeNamespaceName}")
+                        {
+                            if (NamespaceCache.TryAdd(nodeNamespaceName, attr.Value))
+                            {
+                                return nodeNamespaceName;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Failed to cache the namespace `xmlns:" + nodeNamespaceName + "=\"" + attr.Value + "\"");
+                            }
+                            break;
+                        }
+                    }
+                }
+
+            }
+            return GetNamespaceName(xNode.OwnerDocument);
+        }
+
+        public static string GetDefaultNamespaceName(XmlNode xNode)
+            => GetNamespaceName(xNode.OwnerDocument);
+
+        /// <summary>
+        /// Retrieves an <see cref="XmlParser"/> for the specified <see cref="Type"/>. If a parser is not already cached, it is created and cached.
+        /// </summary>
+        /// <param name="type">The type of the <see cref="MtconnectNode"/>.</param>
+        /// <returns>An instance of <see cref="XmlParser"/> for the specified type.</returns>
         public static XmlParser GetParser(Type type)
         {
             XmlParser parser;
@@ -43,11 +106,26 @@ namespace MtconnectCore.Standard.Contracts
             return parser;
         }
 
+        /// <summary>
+        /// Updates the properties of the provided <see cref="MtconnectNode"/> instance from the given XML node.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="MtconnectNode"/>.</typeparam>
+        /// <param name="item">The instance of the <see cref="MtconnectNode"/> to update.</param>
+        /// <param name="xmlNode">The XML node containing the data.</param>
+        /// <param name="nsmgr">The <see cref="XmlNamespaceManager"/> for resolving namespaces.</param>
+        /// <param name="version">The version of the MTConnect standard.</param>
         public static void UpdateFromXml<T>(this T item, XmlNode xmlNode, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
         {
             GetParser(item.GetType())?.Set(item, xmlNode, nsmgr, version);
         }
 
+        /// <summary>
+        /// Retrieves the property parser for the specified property name of the provided <see cref="MtconnectNode"/> instance.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="MtconnectNode"/>.</typeparam>
+        /// <param name="item">The instance of the <see cref="MtconnectNode"/>.</param>
+        /// <param name="propertyName">The name of the property to get the parser for.</param>
+        /// <returns>An instance of <see cref="XmlParser.XmlPropertyParser"/> for the specified property, or null if not found.</returns>
         public static XmlParser.XmlPropertyParser GetPropertyParser<T>(this T item, string propertyName) where T : MtconnectNode
         {
             if (!TypeCache.TryGetValue(item.GetType(), out XmlParser typeParser))
@@ -58,6 +136,15 @@ namespace MtconnectCore.Standard.Contracts
             return typeParser[propertyName];
         }
 
+        /// <summary>
+        /// Constructs an instance of the specified <see cref="Type"/> from the provided XML node.
+        /// </summary>
+        /// <param name="itemType">The type of the <see cref="MtconnectNode"/> to construct.</param>
+        /// <param name="xmlNode">The XML node containing the data.</param>
+        /// <param name="nsmgr">The <see cref="XmlNamespaceManager"/> for resolving namespaces.</param>
+        /// <param name="version">The version of the MTConnect standard.</param>
+        /// <returns>An instance of the specified type, or null if construction failed.</returns>
+        /// <exception cref="NotSupportedException">Thrown if the constructor signature is not supported.</exception>
         public static object ConstructItemFromXml(Type itemType, XmlNode xmlNode, XmlNamespaceManager nsmgr, MtconnectVersions version)
         {
             XmlParser xmlParser = GetParser(itemType);
@@ -86,8 +173,14 @@ namespace MtconnectCore.Standard.Contracts
             /// </summary>
             public Type Type { get; set; }
 
+            /// <summary>
+            /// Reference to the constructor for the <see cref="MtconnectNode"/> type.
+            /// </summary>
             public ConstructorInfo Constructor { get; set; }
 
+            /// <summary>
+            /// The parameters required by the constructor of the <see cref="MtconnectNode"/> type.
+            /// </summary>
             public ParameterInfo[] ConstructorParameters { get; set; }
 
             /// <summary>
@@ -97,6 +190,11 @@ namespace MtconnectCore.Standard.Contracts
 
             private IEnumerable<MtconnectNodeValidator> ValidationMethods { get; set; }
 
+            /// <summary>
+            /// Retrieves the <see cref="XmlPropertyParser"/> for the specified property name.
+            /// </summary>
+            /// <param name="propertyName">The name of the property to retrieve the parser for.</param>
+            /// <returns>An instance of <see cref="XmlPropertyParser"/> for the specified property.</returns>
             public XmlPropertyParser this[string propertyName] {
                 get {
                     return Properties.FirstOrDefault(o => o.Property.Name == propertyName);
@@ -165,6 +263,14 @@ namespace MtconnectCore.Standard.Contracts
                 ValidationMethods = validators;
             }
 
+            /// <summary>
+            /// Sets the properties of the provided <see cref="MtconnectNode"/> instance from the given XML node.
+            /// </summary>
+            /// <typeparam name="T">The type of the <see cref="MtconnectNode"/>.</typeparam>
+            /// <param name="obj">The instance of the <see cref="MtconnectNode"/> to update.</param>
+            /// <param name="node">The XML node containing the data.</param>
+            /// <param name="nsmgr">The <see cref="XmlNamespaceManager"/> for resolving namespaces.</param>
+            /// <param name="version">The version of the MTConnect standard.</param>
             public void Set<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
             {
                 foreach (var propertyParser in Properties)
@@ -173,6 +279,13 @@ namespace MtconnectCore.Standard.Contracts
                 }
             }
 
+            /// <summary>
+            /// Validates the <see cref="MtconnectNode"/> instance using the defined validation methods.
+            /// </summary>
+            /// <typeparam name="T">The type of the <see cref="MtconnectNode"/>.</typeparam>
+            /// <param name="item">The instance of the <see cref="MtconnectNode"/> to validate.</param>
+            /// <param name="report">Optional validation report to populate with errors.</param>
+            /// <returns>True if validation passes, false if there are validation errors.</returns>
             public bool TryValidate<T>(T item, ValidationReport report = null) where T : MtconnectNode
             {
                 report = report ?? new ValidationReport();
@@ -319,21 +432,24 @@ namespace MtconnectCore.Standard.Contracts
                 /// <param name="nsmgr"></param>
                 /// <param name="defaultNamespace"></param>
                 /// <param name="version"></param>
-                public void Set<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode 
+                public void Set<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
                 {
                     if (ParseMethodAttribute is MtconnectNodeAttributeAttribute)
                     {
                         _setFromAttribute(obj, node, nsmgr, version);
-                    } else if (ParseMethodAttribute is MtconnectNodeElementAttribute)
+                    }
+                    else if (ParseMethodAttribute is MtconnectNodeElementAttribute)
                     {
                         _setFromElement(obj, node, nsmgr, version);
-                    } else if (ParseMethodAttribute is MtconnectNodeElementsAttribute)
+                    }
+                    else if (ParseMethodAttribute is MtconnectNodeElementsAttribute)
                     {
                         _setFromElements(obj, node, nsmgr, version);
                     }
                 }
 
                 internal TypeConverter propertyConverter;
+
                 private void _setFromAttribute<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
                 {
                     if (propertyConverter == null)
@@ -346,7 +462,7 @@ namespace MtconnectCore.Standard.Contracts
                     string attributeName = attr.GetName(MtconnectNodeNameProcessors.CamelCase);
                     string defaultNamespace = attributeName.Contains(":")
                         ? attributeName.Substring(0, attributeName.IndexOf(":"))
-                        : MtconnectNodeParser.GetDefaultNamespace(node);
+                        : MtconnectNodeParser.GetNamespaceName(node);
                     string nodeValue;
                     if (!string.IsNullOrEmpty(defaultNamespace) && attributeName.Contains(":"))
                     {
@@ -385,7 +501,7 @@ namespace MtconnectCore.Standard.Contracts
                     string elementName = node.LocalName;
                     string defaultNamespace = elementName.Contains(":")
                         ? elementName.Substring(0, elementName.IndexOf(":"))
-                        : MtconnectNodeParser.GetDefaultNamespace(node);
+                        : MtconnectNodeParser.GetNamespaceName(node);
 
                     string nodeValue;
                     if (!string.IsNullOrEmpty(defaultNamespace))
@@ -406,6 +522,7 @@ namespace MtconnectCore.Standard.Contracts
                 internal ParameterInfo[] tryAddParameters;
                 internal ConstructorInfo targetConstructor;
                 internal ParameterInfo[] targetConstructorParameters;
+
                 private void _setFromElements<T>(T obj, XmlNode node, XmlNamespaceManager nsmgr, MtconnectVersions version) where T : MtconnectNode
                 {
                     MtconnectNodeElementsAttribute attr = (MtconnectNodeElementsAttribute)ParseMethodAttribute;
@@ -418,7 +535,7 @@ namespace MtconnectCore.Standard.Contracts
                     string elementName = node.LocalName;
                     string defaultNamespace = elementName.Contains(":")
                         ? elementName.Substring(0, elementName.IndexOf(":"))
-                        : MtconnectNodeParser.GetDefaultNamespace(node);
+                        : MtconnectNodeParser.GetNamespaceName(node);
 
                     XmlNodeList xElems;
                     if (!string.IsNullOrEmpty(defaultNamespace))
@@ -471,7 +588,7 @@ namespace MtconnectCore.Standard.Contracts
                     }
                 }
             }
-        
+
             private string getDefaultNamespace(XmlNode xNode)
             {
                 string defaultNamespace = xNode.OwnerDocument.DocumentElement.Attributes["xmlns"]?.Value;
@@ -481,18 +598,38 @@ namespace MtconnectCore.Standard.Contracts
                 return null;
             }
 
+            /// <summary>
+            /// Represents a validator for a <see cref="MtconnectNode"/>, based on a method with <see cref="MtconnectVersionApplicabilityAttribute"/>.
+            /// </summary>
             public class MtconnectNodeValidator
             {
+                /// <summary>
+                /// The validation method used by this validator.
+                /// </summary>
                 public MethodInfo ValidationMethod { get; set; }
 
+                /// <summary>
+                /// The attributes that specify the applicability of the validation method.
+                /// </summary>
                 public MtconnectVersionApplicabilityAttribute[] ApplicibilityAttributes { get; set; }
 
+                /// <summary>
+                /// Constructs a new instance of <see cref="MtconnectNodeValidator"/> for the specified method.
+                /// </summary>
+                /// <param name="method">The method to be used for validation.</param>
                 public MtconnectNodeValidator(MethodInfo method)
                 {
                     ValidationMethod = method;
                     ApplicibilityAttributes = method.GetCustomAttributes<MtconnectVersionApplicabilityAttribute>(true).ToArray();
                 }
 
+                /// <summary>
+                /// Attempts to validate the given <see cref="MtconnectNode"/> instance.
+                /// </summary>
+                /// <param name="item">The <see cref="MtconnectNode"/> instance to validate.</param>
+                /// <param name="validationErrors">A collection to hold any validation errors.</param>
+                /// <returns>True if validation succeeds, false otherwise.</returns>
+                /// <exception cref="Exception">Thrown if the validation method fails to execute.</exception>
                 public bool TryValidate(MtconnectNode item, out ICollection<MtconnectValidationException> validationErrors)
                 {
                     validationErrors = new List<MtconnectValidationException>();

@@ -73,7 +73,7 @@ namespace MtconnectCore.Standard.Documents
         {
             Source = xDoc;
 
-            DefaultNamespace = MtconnectNodeParser.GetDefaultNamespace(xDoc);
+            DefaultNamespace = MtconnectNodeParser.GetNamespaceName(xDoc);
 
             // Detect if there are missing namespaces
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns")))

@@ -22,7 +22,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CutterStatus(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             var statusValues = new List<string>();
-            foreach (XmlNode childNode in xNode.SelectNodes("Status",nsmgr, MtconnectNodeParser.GetDefaultNamespace(xNode)))
+            foreach (XmlNode childNode in xNode.SelectNodes("Status",nsmgr, MtconnectNodeParser.GetNamespaceName(xNode)))
             {
                 statusValues.Add(childNode.InnerText);
             }
