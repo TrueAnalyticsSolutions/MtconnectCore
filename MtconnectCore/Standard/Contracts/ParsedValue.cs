@@ -2,14 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
-    public interface IParsedValue
-    {
-        /// <summary>
-        /// Gets or sets the original string value from the XML or JSON data.
-        /// </summary>
-        string RawValue { get; set; }
-    }
+    using System.ComponentModel;
 
     public class ParsedValue<T> : IParsedValue
     {
@@ -21,23 +14,7 @@
             get => _rawValue;
             set {
                 _rawValue = value;
-                // Attempt to convert the string value to the desired type T
-                try
-                {
-                    if (!string.IsNullOrEmpty(value) && typeof(T).IsValueType)
-                    {
-                        _value = (T)Convert.ChangeType(value, typeof(T));
-                    }
-                    else if (typeof(T) == typeof(string))
-                    {
-                        _value = (T)(object)value;
-                    }
-                }
-                catch
-                {
-                    // Keep _value as default(T) if conversion fails
-                    _value = default;
-                }
+                _value = ParseValue(value);
             }
         }
 
@@ -58,26 +35,7 @@
         /// <param name="value">The original string value.</param>
         public static implicit operator ParsedValue<T>(string value)
         {
-            var parsedValue = new ParsedValue<T> { RawValue = value };
-
-            try
-            {
-                // Attempt to convert the string value to the desired type T
-                if (!string.IsNullOrEmpty(value) && typeof(T).IsValueType)
-                {
-                    parsedValue.Value = (T)Convert.ChangeType(value, typeof(T));
-                }
-                else if (typeof(T) == typeof(string))
-                {
-                    parsedValue.Value = (T)(object)value;
-                }
-            }
-            catch
-            {
-                // Keep Value as default(T) if conversion fails
-            }
-
-            return parsedValue;
+            return new ParsedValue<T> { RawValue = value };
         }
 
         /// <summary>
@@ -112,7 +70,7 @@
         }
 
         /// <summary>
-        /// Determines if the ParsedValue is not equal to null.
+        /// Determines if the ParsedValue is equal to a value.
         /// </summary>
         public static bool operator ==(ParsedValue<T> left, T right)
         {
@@ -158,5 +116,98 @@
         /// </summary>
         /// <returns>The string representation of the value.</returns>
         public override string ToString() => Value?.ToString() ?? RawValue;
+
+        /// <summary>
+        /// Parses the string value to the expected type <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="value">The string value to parse.</param>
+        /// <returns>The parsed value of type <typeparamref name="T"/>.</returns>
+        private T ParseValue(string value)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    return default;
+                }
+
+                Type targetType = typeof(T);
+
+                // Handle nullable types
+                bool isNullable = Nullable.GetUnderlyingType(targetType) != null;
+                if (isNullable)
+                {
+                    targetType = Nullable.GetUnderlyingType(targetType);
+                }
+
+                // Handle enums using EnumHelper
+                if (targetType.IsEnum)
+                {
+                    if (EnumHelper.TryParse(targetType, value, out object enumValue))
+                    {
+                        return (T)enumValue;
+                    }
+                    else
+                    {
+                        //throw new InvalidCastException($"Cannot convert '{value}' to {targetType.Name}.");
+                        return default;
+                    }
+                }
+                // Handle arrays
+                else if (targetType.IsArray)
+                {
+                    Type elementType = targetType.GetElementType();
+                    string[] elements = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    Array array = Array.CreateInstance(elementType, elements.Length);
+
+                    for (int i = 0; i < elements.Length; i++)
+                    {
+                        string elementValue = elements[i].Trim();
+
+                        // Handle enum arrays using EnumHelper
+                        if (elementType.IsEnum)
+                        {
+                            if (EnumHelper.TryParse(elementType, elementValue, out object enumArrayValue))
+                            {
+                                array.SetValue(enumArrayValue, i);
+                            }
+                            else
+                            {
+                                //throw new InvalidCastException($"Cannot convert '{elementValue}' to {elementType.Name}.");
+                                return default;
+                            }
+                        }
+                        else
+                        {
+                            array.SetValue(Convert.ChangeType(elementValue, elementType), i);
+                        }
+                    }
+                    return (T)(object)array;
+                }
+                // Handle other value types and strings
+                else if (targetType.IsValueType || targetType == typeof(string))
+                {
+                    return (T)Convert.ChangeType(value, targetType);
+                }
+                // Handle types using TypeConverter
+                else
+                {
+                    TypeConverter converter = TypeDescriptor.GetConverter(targetType);
+                    if (converter.CanConvertFrom(typeof(string)))
+                    {
+                        return (T)converter.ConvertFrom(value);
+                    }
+                    else
+                    {
+                        //throw new InvalidCastException($"Cannot convert from string to {targetType.Name}.");
+                        return default;
+                    }
+                }
+            }
+            catch
+            {
+                return default;
+            }
+        }
     }
 }

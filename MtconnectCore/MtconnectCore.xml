@@ -14946,6 +14946,11 @@
             Reference to the Source XmlNode.
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Contracts.IParsedValue.RawValue">
+            <summary>
+            Gets or sets the original string value from the XML or JSON data.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.MtconnectNode">
             <summary>
             Represents the most basic form of a MTConnect Response Document XML node. Used for parsing a MTConnect Response Document.
@@ -15265,11 +15270,6 @@
         <member name="M:MtconnectCore.Standard.Contracts.SampleObservation.#ctor(MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes,System.Enum)">
             <inheritdoc cref="M:MtconnectCore.Standard.Contracts.Observation.#ctor(MtconnectCore.Standard.Contracts.Enums.CategoryEnum,System.Enum,System.Enum)"/>
         </member>
-        <member name="P:MtconnectCore.Standard.Contracts.IParsedValue.RawValue">
-            <summary>
-            Gets or sets the original string value from the XML or JSON data.
-            </summary>
-        </member>
         <member name="P:MtconnectCore.Standard.Contracts.ParsedValue`1.RawValue">
             <inheritdoc/>
         </member>
@@ -15302,7 +15302,7 @@
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.op_Equality(MtconnectCore.Standard.Contracts.ParsedValue{`0},`0)">
             <summary>
-            Determines if the ParsedValue is not equal to null.
+            Determines if the ParsedValue is equal to a value.
             </summary>
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.op_Inequality(MtconnectCore.Standard.Contracts.ParsedValue{`0},`0)">
@@ -15320,6 +15320,13 @@
             Returns the string representation of the value, preferring the successfully parsed value if available.
             </summary>
             <returns>The string representation of the value.</returns>
+        </member>
+        <member name="M:MtconnectCore.Standard.Contracts.ParsedValue`1.ParseValue(System.String)">
+            <summary>
+            Parses the string value to the expected type <typeparamref name="T"/>.
+            </summary>
+            <param name="value">The string value to parse.</param>
+            <returns>The parsed value of type <typeparamref name="T"/>.</returns>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.VersionHelper.versionMinimumVersion">
             <remarks>Find this in the <c>MTConnectDevices_x.x.xsd</c> referenced at <c>/xs:schema[@vs:minVersion]</c></remarks>
