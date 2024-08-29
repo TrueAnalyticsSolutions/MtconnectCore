@@ -9,6 +9,7 @@ using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Xml;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
 

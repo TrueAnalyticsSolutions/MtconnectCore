@@ -15,9 +15,16 @@ namespace MtconnectCore.Validation
         {
             internal NodeValidationContext Context { get; private set; }
 
+            protected virtual string HelpLink { get; set; }
+
             internal NodeValidator(NodeValidationContext context)
             {
                 Context = context;
+            }
+
+            internal NodeValidator(NodeValidationContext context, string helpLink) : this(context)
+            {
+                HelpLink = helpLink;
             }
 
             private void addException(ValidationSeverity severity, string message, params KeyValuePair<string, object>[] additionalData)
@@ -29,6 +36,10 @@ namespace MtconnectCore.Validation
                     {
                         exception.Data.Add(data.Key, data.Value);
                     }
+                }
+                if (!string.IsNullOrEmpty(HelpLink))
+                {
+                    exception.HelpLink = HelpLink;
                 }
                 Context.Exceptions.Add(exception);
             }

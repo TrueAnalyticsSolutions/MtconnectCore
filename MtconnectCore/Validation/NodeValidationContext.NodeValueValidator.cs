@@ -38,6 +38,11 @@ namespace MtconnectCore.Validation
                 ImplementationState = EnumHelper.CompareToVersion<TEnum>(Context.Node.MtconnectVersion.GetValueOrDefault());
             }
 
+            public NodeValueValidator(NodeValidationContext context, string propertyName, string helpLink) : this(context, propertyName)
+            {
+                HelpLink = helpLink;
+            }
+
             /// <summary>
             /// Executes the provided action if the property represented by the enum value has been introduced (implemented).
             /// </summary>

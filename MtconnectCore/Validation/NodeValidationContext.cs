@@ -82,6 +82,11 @@ namespace MtconnectCore.Validation
             string propertyName = enumProperty.ToString();
             return ValidateValueProperty(propertyName, validator);
         }
+        public NodeValidationContext ValidateValueProperty<TEnum>(TEnum enumProperty, string helpLink, Func<NodeValueValidator<TEnum>, NodeValidator> validator) where TEnum : Enum
+        {
+            string propertyName = enumProperty.ToString();
+            return ValidateValueProperty(propertyName, helpLink, validator);
+        }
 
         /// <summary>
         /// Validates a property based on the provided string value, which represents the property name.
@@ -102,6 +107,36 @@ namespace MtconnectCore.Validation
                     ValidationSeverity.ERROR,
                     $"Exception prevented further validation of {Node.SourceNode.LocalName}",
                     Node.SourceNode));
+            }
+            return this;
+        }
+
+        public NodeValidationContext ValidateValueProperty<TEnum>(string propertyName, string helpLink, Func<NodeValueValidator<TEnum>, NodeValidator> validator) where TEnum : Enum
+        {
+            try
+            {
+                validator.Invoke(new NodeValueValidator<TEnum>(this, propertyName, helpLink));
+            }
+            catch (Exception ex)
+            {
+                Exceptions.Add(new MtconnectValidationException(
+                    ValidationSeverity.ERROR,
+                    $"Exception prevented further validation of {Node.SourceNode.LocalName}",
+                    Node.SourceNode));
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a <see cref="Exception.HelpLink" /> to each <see cref="MtconnectValidationException"/> in <see cref="Exceptions"/>.
+        /// </summary>
+        /// <param name="url">URL to help documentation. Ideally this would be a link to the MTConnect Model Browser.</param>
+        /// <returns>The current <see cref="NodeValidationContext"/>.</returns>
+        public NodeValidationContext UpdateHelpLinks(string url)
+        {
+            foreach (var exception in Exceptions)
+            {
+                exception.HelpLink = url;
             }
             return this;
         }
