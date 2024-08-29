@@ -15,6 +15,8 @@ namespace MtconnectCore.Standard.Documents.Streams
 {
     public class Sample : Value
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1579566531116_175117_25733";
+
         public override CategoryEnum Category => CategoryEnum.SAMPLE;
 
         /// <inheritdoc cref="SampleAttributes.SAMPLE_RATE"/>
@@ -88,6 +90,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             .Validate((o) =>
                 o.ValidateSampleObservationResult(Type, Result)
             )
+            .UpdateHelpLinks(MODEL_BROWSER_URL)
             .HasError(out validationErrors);
 
 

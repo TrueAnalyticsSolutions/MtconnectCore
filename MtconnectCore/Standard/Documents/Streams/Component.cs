@@ -162,6 +162,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                 //            SourceNode)
                 //    )
                 //)
+                .UpdateHelpLinks(MODEL_BROWSER_URL)
                 // Return validation errors
                 .HasError(out validationErrors);
         }

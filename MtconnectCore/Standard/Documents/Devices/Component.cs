@@ -18,6 +18,8 @@ namespace MtconnectCore.Standard.Documents.Devices
     /// <remarks>See Part 2 Section 4.4 of the MTConnect specification.</remarks>
     public class Component : MtconnectNode
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure__EAID_8548C620_467A_4f50_9A22_58D84B7E8779";
+
         /// <inheritdoc cref="ComponentAttributes.ID"/>
         [MtconnectNodeAttribute(ComponentAttributes.ID)]
         public string Id { get; set; }
@@ -176,6 +178,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 o.IsImplemented(nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF))
                 ?.IsIdValueType(CoordinateSystemIdRef, false)
             )
+            .UpdateHelpLinks(MODEL_BROWSER_URL)
             .HasError(out validationErrors);
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
@@ -188,6 +191,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         Pairings.Of(nameof(ComponentElements.REFERENCES), References)
                     )
                 )
+                .UpdateHelpLinks(MODEL_BROWSER_URL)
                 .HasError(out validationErrors);
     }
 }

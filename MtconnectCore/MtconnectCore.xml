@@ -17528,6 +17528,13 @@
             <param name="validator">A function that defines the validation logic for the property.</param>
             <returns>The current <see cref="T:MtconnectCore.Validation.NodeValidationContext"/>.</returns>
         </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.UpdateHelpLinks(System.String)">
+            <summary>
+            Adds a <see cref="P:System.Exception.HelpLink" /> to each <see cref="T:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException"/> in <see cref="P:MtconnectCore.Validation.NodeValidationContext.Exceptions"/>.
+            </summary>
+            <param name="url">URL to help documentation. Ideally this would be a link to the MTConnect Model Browser.</param>
+            <returns>The current <see cref="T:MtconnectCore.Validation.NodeValidationContext"/>.</returns>
+        </member>
         <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.IsRequired(System.String,System.String,System.Boolean)">
             <summary>
             Validates value is not null or empty.<br/>
@@ -17819,12 +17826,12 @@
         </member>
         <member name="T:MtconnectCore.Validation.Pairings">
             <summary>
-            Shortcut methods for creating <see cref="!:KeyValuePair"/> for use with params arguments
+            Shortcut methods for creating <see cref="T:System.Collections.Generic.KeyValuePair"/> for use with params arguments
             </summary>
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Collections.Generic.IEnumerable{System.Object})">
             <summary>
-            Creates <see cref="!:KeyValuePair"/>
+            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -17832,7 +17839,7 @@
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Object)">
             <summary>
-            Creates <see cref="!:KeyValuePair"/>
+            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -17970,10 +17977,6 @@
             Determines if there are any exceptions that are of the severity level ERROR.
             </summary>
             <returns>Flag if any exception has the severity level of ERROR.</returns>
-        </member>
-    </members>
-</doc>
-e severity level of ERROR.</returns>
         </member>
     </members>
 </doc>

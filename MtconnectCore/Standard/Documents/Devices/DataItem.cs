@@ -20,6 +20,8 @@ namespace MtconnectCore.Standard.Documents.Devices
     /// </summary>
     public class DataItem : MtconnectNode
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure__EAID_002C94B7_1257_49be_8EAA_CE7FCD7AFF8A";
+
         /// <inheritdoc cref="DataItemAttributes.ID"/>
         [MtconnectNodeAttribute(DataItemAttributes.ID)]
         public string Id { get; set; }
@@ -251,6 +253,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     o.IsImplemented(CoordinateSystemIdRef)
                     ?.IsIdValueType(CoordinateSystemIdRef, false)
             )
+            .UpdateHelpLinks(MODEL_BROWSER_URL)
             .HasError(out validationErrors);
 
         // Validate all elements for the data item

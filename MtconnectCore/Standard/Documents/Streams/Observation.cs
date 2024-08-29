@@ -149,6 +149,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                 o.IsImplemented(Units)
                 ?.IsEnumValueType<UnitEnum>(Units, out _)
             )
+            .UpdateHelpLinks(MODEL_BROWSER_URL)
             .HasError(out validationErrors);
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]

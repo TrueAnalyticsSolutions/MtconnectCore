@@ -20,6 +20,8 @@ namespace MtconnectCore.Standard.Documents.Streams
     /// </summary>
     public class Event : Value
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1579566531115_47447_25730";
+
         /// <inheritdoc />
         public override CategoryEnum Category => CategoryEnum.EVENT;
 
@@ -55,14 +57,17 @@ namespace MtconnectCore.Standard.Documents.Streams
         private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
             // resetTriggered
-            .ValidateValueProperty<MtcStreams.EventAttributes>(nameof(MtcStreams.EventAttributes.RESET_TRIGGERED), (o) =>
-                o.IsImplemented(ResetTriggered)
-                ?.IsEnumValueType<ResetTriggeredValues>(ResetTriggered, out _)
+            .ValidateValueProperty(
+                MtcStreams.EventAttributes.RESET_TRIGGERED,
+                (o) =>
+                    o.IsImplemented(ResetTriggered)
+                    ?.IsEnumValueType<ResetTriggeredValues>(ResetTriggered, out _)
             )
             // result
             .Validate((o) =>
                 o.ValidateEventObservationResult(Type, Result)
             )
+            .UpdateHelpLinks(MODEL_BROWSER_URL)
             .HasError(out validationErrors);
         //{
         //    validationErrors = new List<MtconnectValidationException>();

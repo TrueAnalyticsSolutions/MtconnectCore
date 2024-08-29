@@ -219,6 +219,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                             int.MaxValue
                         )
                 )
+                .UpdateHelpLinks(MODEL_BROWSER_URL)
                 // Return validation errors
                 .HasError(out validationErrors);
         }
