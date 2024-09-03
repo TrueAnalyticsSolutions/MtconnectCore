@@ -1,12 +1,10 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
@@ -76,46 +74,5 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Id))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Relationship MUST include a unique 'id' attribute."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Type))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Relationship MUST include a 'type' attribute."));
-        //    } else if (!EnumHelper.Contains<RelationshipTypeEnum>(Type)) {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Relationship 'type' MUST be one of the following types: [{EnumHelper.ToListString<RelationshipTypeEnum>(", ", string.Empty, string.Empty)}]."));
-        //    }
-
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //private bool validateCriticality(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (!string.IsNullOrEmpty(Criticality) && !EnumHelper.Contains<RelationshipTypeEnum>(Type))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            Contracts.Enums.ValidationSeverity.ERROR,
-        //            $"Relationship 'criticality' MUST be one of the following types: [{EnumHelper.ToListString<CriticalityTypeEnum>(", ", string.Empty, string.Empty)}]."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

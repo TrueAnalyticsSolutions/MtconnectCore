@@ -70,19 +70,5 @@ namespace MtconnectCore.Standard.Documents.Streams
             // TODO: Add Equals condition where length MUST equal SampleCount
             )
             .HasError(out validationErrors);
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Representations/TimeSeries")]
-        //private bool validateSampleCount(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (SampleCount != Result?.Length)
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"TimeSeries 'sampleCount' MUST equal the number of result values.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

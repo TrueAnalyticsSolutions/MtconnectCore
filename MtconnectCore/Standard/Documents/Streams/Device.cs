@@ -6,9 +6,7 @@ using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
-using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
@@ -56,33 +54,5 @@ namespace MtconnectCore.Standard.Documents.Streams
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        //private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Name))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Device MUST include a 'name' attribute.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        //private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Uuid))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Device MUST include a 'uuid' attribute.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

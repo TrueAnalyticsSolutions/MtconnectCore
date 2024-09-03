@@ -5,7 +5,6 @@ using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
@@ -33,7 +32,6 @@ namespace MtconnectCore.Standard.Documents.Devices
             Value = xNode.InnerText;
         }
 
-
         private bool ValidateProperties(out ICollection<MtconnectValidationException> validationErrors)
         {
             return new NodeValidationContext(this)
@@ -51,16 +49,5 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-        //private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Type))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            Contracts.Enums.ValidationSeverity.ERROR,
-        //            $"Filter MUST include a 'type' attribute."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

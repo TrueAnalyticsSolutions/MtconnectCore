@@ -5,7 +5,6 @@ using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
@@ -71,13 +70,5 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //private bool validateSourceId(out ICollection<MtconnectValidationException> validationErrors) {
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(ComponentId) && string.IsNullOrEmpty(CompositionId) && string.IsNullOrEmpty(DataItemId)) {
-        //        validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"One of 'componentId', 'compositionId', or 'dataItemId' MUST be provided."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

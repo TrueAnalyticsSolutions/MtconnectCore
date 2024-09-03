@@ -1,7 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
@@ -21,14 +20,13 @@ namespace MtconnectCore.Standard.Documents.Streams
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
         public override string Representation { get; set; } = RepresentationEnum.TABLE.ToString();
 
-
         /// <summary>
         /// Collected from the count attribute. Refer to Part 3 Streams - 5.6.3.1
         /// 
         /// Occurance: 1
         /// </summary>
         [MtconnectNodeAttribute(TableAttributes.COUNT)]
-        public int? Count { get; set; }
+        public ParsedValue<uint?> Count { get; set; }
 
         public new IDictionary<string, float[]> Value {
             get {
@@ -51,74 +49,28 @@ namespace MtconnectCore.Standard.Documents.Streams
         {
             return new NodeValidationContext(this)
                 // Validate Count
-                //.ValidateValueProperty<TableAttributes>(nameof(Count), (o) =>
-                //    o.IsImplemented(Count)
-                //    ?.If(
-                //        v => Count == null,
-                //        v => throw new MtconnectValidationException(
-                //            ValidationSeverity.ERROR,
-                //            "Table representation MUST include a 'count' attribute equal to the number of Entry entities.",
-                //            SourceNode)
-                //    )
-                //    ?.If(
-                //        v => Count != _entries.Count,
-                //        v => throw new MtconnectValidationException(
-                //            ValidationSeverity.ERROR,
-                //            "Table representation 'count' attribute MUST equal the number of Entry entities.",
-                //            SourceNode)
-                //    )
-                //)
-                // Validate TableEntry Key uniqueness
-                //.ValidateValueProperty<TableElements>(nameof(Result), (o) =>
-                //    o.IsImplemented(Result)
-                //    ?.If(
-                //        v => _entries.Count > 0 && !_entries.All(e => _entries.Count(x => x.Key == e.Key) == 1),
-                //        v => throw new MtconnectValidationException(
-                //            ValidationSeverity.ERROR,
-                //            "TableEntry 'key' must be a unique identifier for each key-value pair within the Table.",
-                //            SourceNode)
-                //    )
-                //)
+                .ValidateValueProperty(
+                    TableAttributes.COUNT,
+                    (o) =>
+                        o.IsImplemented(Count)
+                        .IsUIntValueType(Count.RawValue, out _)
+                        .IsUIntWithinRange(Count, (uint)(Result?.Count ?? 0), (uint)(Result?.Count ?? 0))
+                )
+                // Validate Entry Key uniqueness
+                .ValidateValueProperty(
+                    TableElements.ENTRY,
+                    (o) =>
+                    o.IsImplemented()
+                    ?.If(
+                        v => _entries.Count > 0 && !_entries.All(e => _entries.Count(x => x.Key == e.Key) == 1),
+                        v => throw new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            "DataSet Entry 'key' must be a unique identifier for each key-value pair within the DataSet.",
+                            SourceNode)
+                    )
+                )
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "See model.mtconnect.org/Observation Information Model/Representations/Table")]
-        //private bool validateCount(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (Count == null)
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Table representation MUST include a 'count' attribute equal to the number of Entry entities.",
-        //            SourceNode));
-        //    }
-        //    else if (Count != _entries.Count)
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Table representation 'count' attribute MUST equal the number of Entry entities.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "See model.mtconnect.org/Observation Information Model/Representations/TableEntry")]
-        //private bool validateTableEntryKey(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (_entries.Count > 0)
-        //    {
-        //        if (!_entries.All(o => _entries.Count(e => e.Key == o.Key) == 1))
-        //        {
-        //            validationErrors.Add(new MtconnectValidationException(
-        //                ValidationSeverity.ERROR,
-        //                $"TableEntry 'key' must be a unique identifier for each key-value pair within the Table.",
-        //                SourceNode));
-        //        }
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

@@ -2,7 +2,6 @@
 using MtconnectCore.Standard.Contracts.Enums;
 using System.Xml;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {

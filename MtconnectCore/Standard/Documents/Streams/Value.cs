@@ -1,13 +1,11 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -37,33 +35,10 @@ namespace MtconnectCore.Standard.Documents.Streams
                 // Validate Representation property
                 .ValidateValueProperty<DataItemAttributes>(nameof(Representation), (o) =>
                     o.IsImplemented(Representation)
-                    ?.If(
-                        v => !string.IsNullOrEmpty(Representation) && !EnumHelper.Contains<RepresentationEnum>(Representation),
-                        v => throw new MtconnectValidationException(
-                            ValidationSeverity.ERROR,
-                            "Observation has an unhandled 'representation' type.",
-                            SourceNode)
-                    )
+                    ?.IsEnumValueType<RepresentationEnum>(Representation, out _)
                 )
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "See model.mtconnect.org/Observation Information Model/Representations/Value")]
-        //protected virtual bool validateRepresentation(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (!string.IsNullOrEmpty(Representation))
-        //    {
-        //        if (!EnumHelper.Contains<RepresentationEnum>(Representation))
-        //        {
-        //            validationErrors.Add(new MtconnectValidationException(
-        //                ValidationSeverity.ERROR,
-        //                $"Observation has an unhandled 'representation' type.",
-        //                    SourceNode));
-        //        }
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

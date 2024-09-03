@@ -4,13 +4,9 @@ using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
-using System;
-using System.Linq;
 using System.Xml;
-using static MtconnectCore.Logging.MtconnectCoreLogger;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Validation;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
@@ -102,10 +98,6 @@ namespace MtconnectCore.Standard.Documents.Devices
             .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.UUID), (o) =>
                 o.IsImplemented(Uuid)
             )
-            //// Description
-            //.ValidateValueProperty<CoordinateSystemElements>(nameof(CoordinateSystemElements.DESCRIPTION), (o) =>
-            //    o
-            //)
             .HasError(out validationErrors);
         // TODO: Validate parentIdRef
 

@@ -1,15 +1,12 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
-using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
@@ -86,53 +83,5 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 4.6.2")]
-        //private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Id))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Composition MUST include a 'id' attribute.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 4.6.2")]
-        //private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (!string.IsNullOrEmpty(Uuid) && Uuid.Length > 255)
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Composition 'uuid' cannot exceed a length of 255 characters.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 2 Section 4.6.2")]
-        //private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Type))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"Composition MUST include a 'type' attribute.",
-        //            SourceNode));
-        //    }
-        //    else if (!EnumHelper.Contains<CompositionTypeEnum>(Type))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.WARNING,
-        //            $"Composition 'type' of '{Type}' is not currently defined in the MTConnect standard and may not be supported.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

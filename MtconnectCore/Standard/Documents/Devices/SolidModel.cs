@@ -1,13 +1,11 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
@@ -146,68 +144,5 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 9.6.1")]
-        //private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Id))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"SolidModel MUST include a unique 'id' attribute.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 9.6.1.1")]
-        //private bool validateMediaType(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-
-        //    var version = MtconnectVersion.GetValueOrDefault();
-
-        //    if (string.IsNullOrEmpty(MediaType))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"SolidModel MUST include a 'mediaType' attribute.",
-        //            SourceNode));
-        //    }
-        //    else if (!EnumHelper.Contains<MediaTypeEnum>(MediaType))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"SolidModel mediaType '{MediaType}' is not defined in version {version}.",
-        //            SourceNode));
-        //    }
-        //    else if (!EnumHelper.IsImplemented<MediaTypeEnum>(MediaType, version))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"SolidModel mediaType '{MediaType}' is not valid in version {version}.",
-        //            SourceNode));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "Part 2 Section 9.6.2")]
-        //private bool validateTransformation(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-
-        //    if (Transformation != null && Transformation.Translation == null && Transformation.Rotation == null)
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"SolidModel Transformation MUST provide either Translation or Rotation at a minimum.",
-        //            SourceNode));
-        //    }
-
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        // TODO: Validate Scale for single multiplier (float) value or 3D multiplier (one float for X, Y, and Z)
     }
 }

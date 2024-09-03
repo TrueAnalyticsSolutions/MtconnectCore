@@ -1,7 +1,5 @@
-﻿using MtconnectCore.Standard.Contracts;
-using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using System.Xml;
 using HeaderAttributes = MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.HeaderAttributes;
 

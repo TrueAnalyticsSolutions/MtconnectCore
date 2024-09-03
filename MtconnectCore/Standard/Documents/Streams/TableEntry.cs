@@ -47,35 +47,18 @@ namespace MtconnectCore.Standard.Documents.Streams
         {
             return new NodeValidationContext(this)
                 // Validate Cell Key uniqueness
-                //.ValidateValueProperty<TableEntryElements>(nameof(Cells), (o) =>
-                //    o.IsImplemented(Cells)
-                //    ?.If(
-                //        v => _cells.Count > 0 && !_cells.All(c => _cells.Count(e => e.Key == c.Key) == 1),
-                //        v => throw new MtconnectValidationException(
-                //            ValidationSeverity.ERROR,
-                //            "TableEntry Cell 'key' must be a unique identifier for each key-value pair within the TableEntry.",
-                //            SourceNode)
-                //    )
-                //)
+                .ValidateValueProperty<TableEntryElements>(nameof(Cells), (o) =>
+                    o.IsImplemented()
+                    ?.If(
+                        v => _cells.Count > 0 && !_cells.All(c => _cells.Count(e => e.Key == c.Key) == 1),
+                        v => throw new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            "TableEntry Cell 'key' must be a unique identifier for each key-value pair within the TableEntry.",
+                            SourceNode)
+                    )
+                )
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "See model.mtconnect.org/Observation Information Model/Representations/Cell")]
-        //private bool validateCellKey(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (_cells.Count > 0)
-        //    {
-        //        if (!_cells.All(o => _cells.Count(e => e.Key == o.Key) == 1))
-        //        {
-        //            validationErrors.Add(new MtconnectValidationException(
-        //                ValidationSeverity.ERROR,
-        //                $"TableEntry Cell 'key' must be a unique identifier for each key-value pair within the TableEntry.",
-        //                SourceNode));
-        //        }
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

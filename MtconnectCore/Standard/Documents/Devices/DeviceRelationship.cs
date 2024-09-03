@@ -5,7 +5,6 @@ using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
@@ -77,90 +76,5 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.1")]
-        //private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Id))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"ComponentRelationship MUST include a 'id' attribute."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.1")]
-        //private bool validateDeviceUuidRef(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(DeviceUuidRef))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"DeviceRelationship MUST include a 'deviceUuidRef' attribute."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.1")]
-        //private bool validateRole(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (!string.IsNullOrEmpty(Role) && !EnumHelper.Contains<DeviceRelationshipRoleTypes>(Role))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"DeviceRelationship 'role' MUST be one of the following types: [{EnumHelper.ToListString<DeviceRelationshipRoleTypes>(", ", string.Empty, string.Empty)}]."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.1")]
-        //private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (string.IsNullOrEmpty(Type))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"DeviceRelationship MUST include a 'type' attribute."));
-        //    }
-        //    else if (!EnumHelper.Contains<RelationshipTypeEnum>(Type))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.WARNING,
-        //            $"DeviceRelationship type of '{Type}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
-        //    }
-        //    else if (!EnumHelper.IsImplemented<RelationshipTypeEnum>(Type, MtconnectVersion.GetValueOrDefault()))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.WARNING,
-        //            $"DeviceRelationship type of '{Type}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 4.10.1")]
-        //private bool validateCriticality(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (!string.IsNullOrEmpty(Criticality))
-        //    {
-        //        if (!EnumHelper.Contains<RelationshipTypeEnum>(Type))
-        //        {
-        //            validationErrors.Add(new MtconnectValidationException(
-        //                ValidationSeverity.WARNING,
-        //                $"DeviceRelationship criticality of '{Criticality}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'."));
-        //        }
-        //        else if (!EnumHelper.IsImplemented<RelationshipTypeEnum>(Type, MtconnectVersion.GetValueOrDefault()))
-        //        {
-        //            validationErrors.Add(new MtconnectValidationException(
-        //                ValidationSeverity.WARNING,
-        //                $"DeviceRelationship criticality of '{Criticality}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard."));
-        //        }
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

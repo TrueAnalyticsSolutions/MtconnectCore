@@ -1,17 +1,12 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
-using MtconnectCore.Standard.Contracts.Enums.Streams;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Xml;
-using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {

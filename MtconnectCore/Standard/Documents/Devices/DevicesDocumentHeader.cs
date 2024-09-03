@@ -1,11 +1,9 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 using HeaderAttributes = MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.HeaderAttributes;
 
@@ -71,45 +69,5 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // Return validation errors
                 .HasError(out validationErrors);
         }
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2")]
-        //private bool validateBufferSize(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (BufferSize == default(uint))
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            ValidationSeverity.ERROR,
-        //            $"MTConnectDevices Header MUST include a 'bufferSize' attribute."));
-        //    }
-
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2")]
-        //private bool validateAssetBufferSize(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (AssetBufferSize == null)
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            Contracts.Enums.ValidationSeverity.ERROR,
-        //            $"MTConnectDevices Header MUST include a 'assetBufferSize' attribute."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
-
-        //[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2")]
-        //private bool validateAssetCount(out ICollection<MtconnectValidationException> validationErrors)
-        //{
-        //    validationErrors = new List<MtconnectValidationException>();
-        //    if (AssetCount == null)
-        //    {
-        //        validationErrors.Add(new MtconnectValidationException(
-        //            Contracts.Enums.ValidationSeverity.ERROR,
-        //            $"MTConnectDevices Header MUST include a 'assetCount' attribute."));
-        //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        //}
     }
 }

@@ -1,5 +1,4 @@
-﻿using MtconnectCore.Standard.Contracts;
-using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using System.Collections.Generic;

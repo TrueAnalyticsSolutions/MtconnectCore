@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MtconnectCore.Standard.Documents.Streams
+﻿namespace MtconnectCore.Standard.Documents.Streams
 {
     public interface IObservation
     {
