@@ -1637,8 +1637,44 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </list>
 		/// </remarks>
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
-		[ObservationalSubType(typeof(PowerSourceSubTypes))]
 		
-		POWER_SOURCE,
+		
+		ACTIVE_POWER_SOURCE,
+		/// <summary>
+		﻿/// textual description of the location of an object or activity.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_4_0, "https://model.mtconnect.org/#_Version_2.4")]
+		
+		
+		LOCATION_NARRATIVE,
+		/// <summary>
+		﻿/// dimension between two surfaces of an object, usually the dimension of smallest measure, for example an additive layer, or a depth of cut.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_4_0, "https://model.mtconnect.org/#_Version_2.4")]
+		[ObservationalSubType(typeof(ThicknessSubTypes))]
+		
+		THICKNESS,
+		/// <summary>
+		﻿/// absolute geographic location defined by two coordinates, longitude and latitude and an elevation.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
+		
+		
+		LOCATION_SPATIAL_GEOGRAPHIC,
 	}
 }

@@ -61,7 +61,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                 MtcStreams.EventAttributes.RESET_TRIGGERED,
                 (o) =>
                     o.IsImplemented(ResetTriggered)
-                    ?.IsEnumValueType<ResetTriggeredValues>(ResetTriggered, out _)
+                    ?.IsEnumValueType<ResetTriggeredEnum>(ResetTriggered, out _)
             )
             // result
             .Validate((o) =>

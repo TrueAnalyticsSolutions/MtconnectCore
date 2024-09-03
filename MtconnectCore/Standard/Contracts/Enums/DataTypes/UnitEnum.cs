@@ -459,5 +459,23 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </list>
 		/// </remarks>
 		METER_PER_SECOND_SQUARED,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />geometric volume in meters.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+		/// </list>
+		/// </remarks>
+		CUBIC_METER,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />geometric area in millimeters.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+		/// </list>
+		/// </remarks>
+		SQUARE_MILLIMETER,
 	}
 }

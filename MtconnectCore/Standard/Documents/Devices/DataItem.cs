@@ -283,7 +283,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             .ValidateValueProperty(
                 DataItemElements.RESET_TRIGGER,
                 o =>
-                    o.IsEnumValueType<ResetTriggeredValues>(nameof(ResetTrigger), ResetTrigger, out _)
+                    o.IsEnumValueType<ResetTriggeredEnum>(nameof(ResetTrigger), ResetTrigger, out _)
             )
             // Definition
             .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.DEFINITION), o =>

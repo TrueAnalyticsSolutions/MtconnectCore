@@ -68,7 +68,7 @@ namespace MtconnectCore.Standard.Documents.Streams
             // resetTriggered
             .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.RESET_TRIGGERED), (o) =>
                 o.IsImplemented(ResetTriggered)
-                ?.IsEnumValueType<ResetTriggeredValues>(ResetTriggered, out _)
+                ?.IsEnumValueType<ResetTriggeredEnum>(ResetTriggered, out _)
             )
             // sampleRate
             .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.SAMPLE_RATE), (o) =>

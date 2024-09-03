@@ -2972,7 +2972,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.NativeUnitEnum.RADIAN_PER_SECOND">
             <summary>
-            <br /><br /><br /><br /><br /><br />rotational acceleration in radian per second squared.<br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br />velocity in radians per second.<br /><br /><br /><br />
             </summary>
             <remarks>
             <list type="bullet">
@@ -2982,7 +2982,7 @@
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.NativeUnitEnum.RADIAN_PER_SECOND_SQUARED">
             <summary>
-            <br /><br /><br /><br /><br /><br />rotational acceleration in radian per second squared.<br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br />acceleration in radians per second squared.<br /><br /><br /><br />
             </summary>
             <remarks>
             <list type="bullet">
@@ -3127,6 +3127,36 @@
             <remarks>
             <list type="bullet">
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.NativeUnitEnum.CUBIC_FOOT">
+            <summary>
+            <br /><br /><br /><br /><br /><br />geometric volume in feet.<br /><br /><br /><br />
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.NativeUnitEnum.INCH_PER_REVOLUTION">
+            <summary>
+            <br /><br /><br /><br /><br /><br />inch per revolution.<br /><br /><br /><br />
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.NativeUnitEnum.SQUARE_INCH">
+            <summary>
+            <br /><br /><br /><br /><br /><br />geometric area in inches.<br /><br /><br /><br />
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
             </list>
             </remarks>
         </member>
@@ -3959,6 +3989,26 @@
             <remarks>
             <list type="bullet">
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.1">v2.1</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.UnitEnum.CUBIC_METER">
+            <summary>
+            <br /><br /><br /><br /><br /><br />geometric volume in meters.<br /><br /><br /><br />
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.UnitEnum.SQUARE_MILLIMETER">
+            <summary>
+            <br /><br /><br /><br /><br /><br />geometric area in millimeters.<br /><br /><br /><br />
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
             </list>
             </remarks>
         </member>
@@ -7774,9 +7824,39 @@
             </list>
             </remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.POWER_SOURCE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.ACTIVE_POWER_SOURCE">
             <summary>
             active energy source for the <see cref="!:Component">Component</see>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LOCATION_NARRATIVE">
+            <summary>
+            textual description of the location of an object or activity.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.THICKNESS">
+            <summary>
+            dimension between two surfaces of an object, usually the dimension of smallest measure, for example an additive layer, or a depth of cut.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.LOCATION_SPATIAL_GEOGRAPHIC">
+            <summary>
+            absolute geographic location defined by two coordinates, longitude and latitude and an elevation.
             </summary>
             <remarks>
             <list type="bullet">
@@ -8176,56 +8256,6 @@
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
             </list>
             </remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.MATERIAL_FEED">
-            <summary>
-            Service to load or feed material or product to a piece of equipment from a  continuous or bulk source
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.MATERIAL_CHANGE">
-            <summary>
-            Service to request a change in the type of material or product being loaded  or fed to a piece of equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.MATERIAL_RETRACT">
-            <summary>
-            Service to request that material or product be removed or retracted from a  piece of equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.PART_CHANGE">
-            <summary>
-            Service to request that the type of part or product being made by a piece of  equipment be changed to a different part or product type. Coupled with PART_ID to indicate the part or product type.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.MATERIAL_LOAD">
-            <summary>
-            Service to request for a piece of material or product be loaded to a piece of  equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.MATERIAL_UNLOAD">
-            <summary>
-            Service to request for a piece of material or product be unloaded from a  piece of equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.OPEN_DOOR">
-            <summary>
-            Service to request another piece of equipment to open a door.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.CLOSE_DOOR">
-            <summary>
-            Service to request another piece of equipment to close a door. 
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.OPEN_CHUCK">
-            <summary>
-            Service to request another piece of equipment to open a chuck.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.InterfaceTypes.CLOSE_CHUCK">
-            <summary>
-            Service to request another piece of equipment to close a chuck. 
-            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.LengthSubTypes">
             <summary>
@@ -9186,47 +9216,6 @@
             <remarks>
             <list type="bullet">
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
-            </list>
-            </remarks>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes">
-            <summary>
-            active energy source for the <see cref="!:Component">Component</see>.
-            <br/>Visit <seealso href="https://model.mtconnect.org/#Structure___19_0_3_68e0225_1696872166478_3528_3677">model.mtconnect.org</seealso> for more information.
-            </summary>
-            <remarks>
-            <list type="bullet">
-            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
-            </list>
-            </remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes.PRIMARY">
-            <summary>
-            <see cref="!:EventEnum.POWER_SOURCE">EventEnum.POWER_SOURCE</see> that is <see cref="!:DataItemSubTypeEnum.PRIMARY">DataItemSubTypeEnum.PRIMARY</see>
-            </summary>
-            <remarks>
-            <list type="bullet">
-            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
-            </list>
-            </remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes.SECONDARY">
-            <summary>
-            <see cref="!:EventEnum.POWER_SOURCE">EventEnum.POWER_SOURCE</see> that is <see cref="!:DataItemSubTypeEnum.SECONDARY">DataItemSubTypeEnum.SECONDARY</see>
-            </summary>
-            <remarks>
-            <list type="bullet">
-            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
-            </list>
-            </remarks>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.PowerSourceSubTypes.STANDBY">
-            <summary>
-            <see cref="!:EventEnum.POWER_SOURCE">EventEnum.POWER_SOURCE</see> that is <see cref="!:DataItemSubTypeEnum.STANDBY">DataItemSubTypeEnum.STANDBY</see> that is uninterruptible or generator power supply.<br /><br />
-            </summary>
-            <remarks>
-            <list type="bullet">
-            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.3">v2.3</see></item>
             </list>
             </remarks>
         </member>
@@ -10885,36 +10874,6 @@
             </list>
             </remarks>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes">
-            <summary>
-            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.SOUND_LEVEL"/>
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.NO_SCALE">
-            <summary>
-            No weighting factor on the frequency scale 
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.A_SCALE">
-            <summary>
-            A Scale weighting factor. This is the default  weighting factor if no factor is specified
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.B_SCALE">
-            <summary>
-            B Scale weighting factor
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.C_SCALE">
-            <summary>
-            C Scale weighting factor 
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SoundLeveSubTypes.D_SCALE">
-            <summary>
-            D Scale weighting factor
-            </summary>
-        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SpindleSpeedSubTypes">
             <summary>
             rotational speed of the rotary axis.<br /><br /><b>DEPRECATED</b> in <i>Version 1.2</i>.  Replaced by <c>ROTARY_VELOCITY</c>.
@@ -10960,20 +10919,56 @@
             </list>
             </remarks>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.TemperatureSubTypes">
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ThicknessSubTypes">
             <summary>
-            <c>subType</c>s of SAMPLE <c>type</c> <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes.TEMPERATURE"/>
+            dimension between two surfaces of an object, usually the dimension of smallest measure, for example an additive layer, or a depth of cut.
+            <br/>Visit <seealso href="https://model.mtconnect.org/#Structure___19_0_3_68e0225_1712321222573_635969_358">model.mtconnect.org</seealso> for more information.
             </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.TemperatureSubTypes.ACTUAL">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ThicknessSubTypes.ACTUAL">
             <summary>
-            The measured value.
+            <see cref="!:EventEnum.THICKNESS">EventEnum.THICKNESS</see> that is <see cref="!:DataItemSubTypeEnum.ACTUAL">DataItemSubTypeEnum.ACTUAL</see>.
             </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.TemperatureSubTypes.COMMANDED">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ThicknessSubTypes.COMMANDED">
             <summary>
-            The commanded value.
+            <see cref="!:EventEnum.THICKNESS">EventEnum.THICKNESS</see> that is <see cref="!:DataItemSubTypeEnum.COMMANDED">DataItemSubTypeEnum.COMMANDED</see>.
             </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ThicknessSubTypes.PROGRAMMED">
+            <summary>
+            <see cref="!:EventEnum.THICKNESS">EventEnum.THICKNESS</see> that is <see cref="!:DataItemSubTypeEnum.PROGRAMMED">DataItemSubTypeEnum.PROGRAMMED</see>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ThicknessSubTypes.TARGET">
+            <summary>
+            <see cref="!:EventEnum.THICKNESS">EventEnum.THICKNESS</see> that is <see cref="!:DataItemSubTypeEnum.TARGET">DataItemSubTypeEnum.TARGET</see>.
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+            </list>
+            </remarks>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.ToolOffsetSubTypes">
             <summary>
@@ -12401,76 +12396,6 @@
             </list>
             </remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryEnum.ASSEMBLY">
-            <summary>
-            Files regarding the fully assembled product.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryEnum.DEVICE">
-            <summary>
-            Device related files.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryEnum.HANDLING">
-            <summary>
-            Files relating to the handling of material.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryEnum.MAINTENANCE">
-            <summary>
-            File relating to equipment maintenance.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryEnum.PART">
-            <summary>
-            Files relating to a part.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryEnum.PROCESS">
-            <summary>
-            Files related to the manufacturing process.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryEnum.INSPECTION">
-            <summary>
-            Files related to the quality inspection.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationCategoryEnum.SETUP">
-            <summary>
-            Files related to the setup of a process.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationTypes.DESIGN">
-            <summary>
-            Computer aided design files or drawings.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationTypes.DATA">
-            <summary>
-            Generic data.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationTypes.DOCUMENTATION">
-            <summary>
-            Documentation regarding a category of file.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationTypes.INSTRUCTIONS">
-            <summary>
-            User instructions regarding the execution of a task.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationTypes.LOG">
-            <summary>
-            The data related to the history of a machine or process.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ApplicationTypes.PRODUCTION_PROGRAM">
-            <summary>
-            Machine instructions to perform a process.
-            </summary>
-        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.Attributes.AbstractFileAttributes.NAME">
             <summary>
             The name of the file.
@@ -13214,96 +13139,6 @@
             </list>
             </remarks>
         </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues">
-            <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is ACTION
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues.ACTIVE">
-            <summary>
-            The Composition element is  operating
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateActionValues.INACTIVE">
-            <summary>
-            The Composition element is not operating
-            </summary>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues">
-            <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is LATERAL
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues.RIGHT">
-            <summary>
-            The position of the Composition element is oriented to the right to the point of a positive confirmation
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues.LEFT">
-            <summary>
-            The position of the Composition element is oriented to the left to the point of a positive confirmation
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateLateralValues.TRANSITIONING">
-            <summary>
-            The position of the Composition element is not oriented to the right to the point of a positive confirmation and is not oriented to the left to the point of a positive confirmation. It is in an intermediate position.
-            </summary>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues">
-            <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is MOTION
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues.OPEN">
-            <summary>
-            The position of the Composition element is open to the point of a positive confirmation
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues.CLOSED">
-            <summary>
-            The position of the Composition element is closed to the point of a positive confirmation
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateMotionValues.UNLATCHED">
-            <summary>
-            The position of the Composition element is not open to the point of a positive confirmation and is not closed to the point of a positive confirmation. It is in an intermediate position.
-            </summary>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateSwitchedValues">
-            <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is SWITCHED
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateSwitchedValues.ON">
-            <summary>
-            The activation state of the Compositio element is in an ON condition, it is operating, or it is powered.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateSwitchedValues.OFF">
-            <summary>
-            The activation state of the Compositio element is in an OFF condition, it is not operating, or it is not powered.
-            </summary>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues">
-            <summary>
-            Available values for EVENT element <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes.COMPOSITION_STATE"/> when the subType is VERTICAL
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues.UP">
-            <summary>
-            The position of the Composition element  is oriented in an upward direction to the point of a positive confirmation
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues.DOWN">
-            <summary>
-            The position of the Composition element is oriented in a downward direction to the point of a positive confirmation
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.CompositionStateVerticalValues.TRANSITIONING">
-            <summary>
-            The position of the Composition element is not oriented in an upward direction to the point of a positive confirmation and is not oriented in a downward direction to the point of a positive confirmation. It is in an intermediate position.
-            </summary>
-        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ConnectionStatusValues">
             <summary>
             status of the connection between an <i>adapter</i> and an <i>agent</i>.
@@ -13447,41 +13282,6 @@
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
             </list>
             </remarks>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionLinearValues">
-            <summary>
-            Available values for EVENT element <see cref="!:DirectionSubTypes.LINEAR"/>
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionLinearValues.POSITIVE">
-            <summary>
-            A linear component moving in the direction of increasing  position value
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionLinearValues.NEGATIVE">
-            <summary>
-            A linear component moving in the direction of decreasing  position value
-            </summary>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionRotaryValues">
-            <summary>
-            Available values for EVENT element <see cref="!:DirectionSubTypes.ROTARY"/>
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionRotaryValues.CLOCKWISE">
-            <summary>
-            The rotary component is rotating in a clockwise fashion  using the right hand rule.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionRotaryValues.COUNTER_CLOCKWISE">
-            <summary>
-            The rotary component is rotating in a counter clockwise  fashion using the right hand rule.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionRotaryValues.NONE">
-            <summary>
-            No direction.
-            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.DirectionValues">
             <summary>
@@ -13834,21 +13634,6 @@
             </list>
             </remarks>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FileStateValues.EXPERIMENTAL">
-            <summary>
-            Used for processes other than production or otherwise defined.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FileStateValues.PRODUCTION">
-            <summary>
-            Used for production processes.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.FileStateValues.REVISION">
-            <summary>
-            The content is modified from PRODUCTION or EXPERIMENTAL.
-            </summary>
-        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.FunctionalModeValues">
             <summary>
             current intended production status of the <see cref="!:Component">Component</see>.
@@ -13909,21 +13694,6 @@
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
             </list>
             </remarks>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.InterfaceStateValues">
-            <summary>
-            Available values for EVENT element <see cref="!:EventTypes.INTERFACE_STATE"/>
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.InterfaceStateValues.ENABLED">
-            <summary>
-            The interface is currently operational.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.InterfaceStateValues.DISABLED">
-            <summary>
-            The interface is not operational.
-            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.LeakDetectValues">
             <summary>
@@ -14490,56 +14260,6 @@
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.5">v1.5</see></item>
             </list>
             </remarks>
-        </member>
-        <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues">
-            <summary>
-            Available values for a <see cref="!:ResetTrigger"/> element.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.ACTION_COMPLETE">
-            <summary>
-            The value of the Data Entity that is measuring an action or  operation is to be reset upon completion of that action or operation.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.ANNUAL">
-            <summary>
-            The value of the Data Entity is to be reset at the end of a 12- month period.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.DAY">
-            <summary>
-            The value of the Data Entity is to be reset at the end of a 24-hour  period.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.LIFE">
-            <summary>
-            The value of the data item is not reset and accumulates for the  entire life of the piece of equipment.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.MAINTENANCE">
-            <summary>
-            The value of the data item is to be reset upon completion of a  maintenance event.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.MONTH">
-            <summary>
-            The value of the Data Entity is to be reset at the end of a monthly  period.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.POWER_ON">
-            <summary>
-            The value of the Data Entity is to be reset when power was  applied to the piece of equipment after a planned or unplanned interruption of power has occurred.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.SHIFT">
-            <summary>
-            The value of the Data Entity is to be reset at the end of a work  shift.
-            </summary>
-        </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.ResetTriggeredValues.WEEK">
-            <summary>
-            The value of the Data Entity is to be reset at the end of a 7-day  period.
-            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.RotaryModeValues">
             <summary>
@@ -17977,10 +17697,6 @@
             Determines if there are any exceptions that are of the severity level ERROR.
             </summary>
             <returns>Flag if any exception has the severity level of ERROR.</returns>
-        </member>
-    </members>
-</doc>
-e severity level of ERROR.</returns>
         </member>
     </members>
 </doc>

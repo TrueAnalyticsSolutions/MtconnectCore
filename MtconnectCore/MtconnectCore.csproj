@@ -46,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Standard\Contracts\Enums\Devices\DataItemTypes\" />
     <Folder Include="Standard\Contracts\Enums\Error\Elements\" />
     <Folder Include="Standard\Documents\Files\" />
   </ItemGroup>

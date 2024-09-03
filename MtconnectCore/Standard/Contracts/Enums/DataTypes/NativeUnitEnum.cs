@@ -217,7 +217,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		RADIAN_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />rotational acceleration in radian per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />velocity in radians per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -226,7 +226,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		RADIAN_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />rotational acceleration in radian per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />acceleration in radians per second squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -360,5 +360,32 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </list>
 		/// </remarks>
 		CUBIC_FOOT_PER_MINUTE,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />geometric volume in feet.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+		/// </list>
+		/// </remarks>
+		CUBIC_FOOT,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />inch per revolution.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+		/// </list>
+		/// </remarks>
+		INCH_PER_REVOLUTION,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />geometric area in inches.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.4">v2.4</see></item>
+		/// </list>
+		/// </remarks>
+		SQUARE_INCH,
 	}
 }
