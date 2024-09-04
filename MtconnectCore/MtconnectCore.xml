@@ -17546,12 +17546,12 @@
         </member>
         <member name="T:MtconnectCore.Validation.Pairings">
             <summary>
-            Shortcut methods for creating <see cref="!:KeyValuePair"/> for use with params arguments
+            Shortcut methods for creating <see cref="T:System.Collections.Generic.KeyValuePair"/> for use with params arguments
             </summary>
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Collections.Generic.IEnumerable{System.Object})">
             <summary>
-            Creates <see cref="!:KeyValuePair"/>
+            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -17559,7 +17559,7 @@
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Object)">
             <summary>
-            Creates <see cref="!:KeyValuePair"/>
+            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
