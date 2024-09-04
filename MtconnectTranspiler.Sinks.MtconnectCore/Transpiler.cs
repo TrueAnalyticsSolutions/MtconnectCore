@@ -115,15 +115,17 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             _logger?.LogInformation($"Processing data types");
             _generator.ProcessTemplate(dataTypes, Path.Combine(_generator.OutputPath, "Enums", "DataTypes"), true);
 
-            var classes = new List<MtconnectCoreInterface>();
-            foreach (var item in MtconnectModel.Packages)
-                getClasses(item, classes);
-            _generator.ProcessTemplate(classes, Path.Combine(_generator.OutputPath, "Interfaces"), true);
+            // TODO: Handle Enum and Class types for properties. Replace *EnumMetaClass with reference to newly created Enum. Replace *Class with reference to other interfaces.
+            //var classes = new List<MtconnectCoreInterface>();
+            //foreach (var item in MtconnectModel.Packages)
+            //    getClasses(item, classes);
+            //_generator.ProcessTemplate(classes, Path.Combine(_generator.OutputPath, "Interfaces"), true);
         }
         internal void getClasses(IPackage package, List<MtconnectCoreInterface> classes)
         {
+            const string InterfaceNamespace = "MtconnectCore.Standard.Contracts.Interfaces";
             foreach (var item in package.Classes)
-                classes.Add(new MtconnectCoreInterface(item));
+                classes.Add(new MtconnectCoreInterface(item) { Namespace = InterfaceNamespace });
             foreach (var item in package.Packages)
                 getClasses(item, classes);
         }

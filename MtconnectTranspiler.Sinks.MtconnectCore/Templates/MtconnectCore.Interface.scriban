@@ -3,6 +3,7 @@
 using System;
 using System.CodeDom.Compiler;
 using MtconnectCore.Standard.Contracts.Attributes;
+using MtconnectCore.Standard.Contracts.Enums;
 
 namespace {{ to_pascal_code source.namespace }}
 {
@@ -13,9 +14,8 @@ namespace {{ to_pascal_code source.namespace }}
 	/// <br/>Visit <seealso href="{{ source?.help_url }}">model.mtconnect.org</seealso> for more information.
 	/// </summary>
 	{{ include 'NormativeRemarks.scriban' source }}
-	{{ include 'MtconnectVersionApplicability.scriban' source }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
-	public interface {{ to_pascal_case source.name + source.filename_suffix }}
+	public interface {{ to_pascal_code source.name + source.filename_suffix }}
 	{
 	{{~ if source.properties.properties.size != null && source.properties.properties.size > 0 ~}}
 	{{~ for item in source.properties.properties ~}}
@@ -23,8 +23,7 @@ namespace {{ to_pascal_code source.namespace }}
 		{{ include 'UmlCommentsSummaryContent.scriban' item }}
 		/// </summary>
 		{{ include 'NormativeRemarks.scriban' item }}
-		{{ include 'MtconnectVersionApplicability.scriban' item }}
-		{{ item.type.full_name }} {{ to_upper_snake_code item.name }} { get; set; }
+		{{ item.type.name }} {{ to_upper_snake_code item.name }} { get; set; }
 	{{~ end ~}}
 	{{~ end ~}}
 	}
