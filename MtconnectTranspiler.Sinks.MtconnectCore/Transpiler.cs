@@ -114,6 +114,18 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             };
             _logger?.LogInformation($"Processing data types");
             _generator.ProcessTemplate(dataTypes, Path.Combine(_generator.OutputPath, "Enums", "DataTypes"), true);
+
+            var classes = new List<MtconnectCoreInterface>();
+            foreach (var item in MtconnectModel.Packages)
+                getClasses(item, classes);
+            _generator.ProcessTemplate(classes, Path.Combine(_generator.OutputPath, "Interfaces"), true);
+        }
+        internal void getClasses(IPackage package, List<MtconnectCoreInterface> classes)
+        {
+            foreach (var item in package.Classes)
+                classes.Add(new MtconnectCoreInterface(item));
+            foreach (var item in package.Packages)
+                getClasses(item, classes);
         }
     }
 }

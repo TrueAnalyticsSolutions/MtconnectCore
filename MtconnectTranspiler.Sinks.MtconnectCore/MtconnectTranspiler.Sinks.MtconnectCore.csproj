@@ -10,12 +10,16 @@
 
   <ItemGroup>
     <None Remove="Templates\MtconnectCore.GeneratedCodeAttribute.scriban" />
+    <None Remove="Templates\MtconnectCore.Interface.scriban" />
     <None Remove="Templates\NormativeRemarks.scriban" />
     <None Remove="Templates\ObservationalSubTypeAttribute.scriban" />
     <None Remove="Templates\ObservationalValueAttribute.scriban" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Templates\MtconnectCore.Interface.scriban">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\MtconnectCore.Class.scriban">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
