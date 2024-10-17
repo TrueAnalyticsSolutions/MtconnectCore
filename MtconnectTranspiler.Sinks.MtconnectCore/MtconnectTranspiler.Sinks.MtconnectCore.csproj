@@ -51,9 +51,9 @@
     <PackageReference Include="Consoul" Version="1.6.6" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
-    <PackageReference Include="MtconnectTranspiler" Version="2.4.0" />
-    <PackageReference Include="MtconnectTranspiler.CodeGenerators.ScribanTemplates" Version="2.4.0" />
-    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="2.4.0">
+    <PackageReference Include="MtconnectTranspiler" Version="2.5.0-review" />
+    <PackageReference Include="MtconnectTranspiler.CodeGenerators.ScribanTemplates" Version="2.5.0-review" />
+    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="2.5.0-review">
       <GeneratePathProperty>True</GeneratePathProperty>
     </PackageReference>
     <PackageReference Include="Scriban" Version="5.10.0" />
