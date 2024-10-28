@@ -15,11 +15,11 @@ namespace MtconnectCore.Standard.Contracts.Enums
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum UnitEnum
 	{
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />amps.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />electric current in ampere.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -28,7 +28,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		AMPERE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />degrees Celsius.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />temperature in degree Celsius.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -46,7 +46,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		COUNT,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />angle in degrees.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />angle in degree.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -55,7 +55,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		DEGREE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />angular degrees per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />angular velocity in degree per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -64,7 +64,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		DEGREE_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />angular acceleration in degrees per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />angular acceleration in degree per second squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -73,7 +73,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		DEGREE_PER_SECOND_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />frequency measured in cycles per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />frequency in cycles per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -82,7 +82,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		HERTZ,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />kilograms.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />mass in kilogram.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -91,7 +91,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		KILOGRAM,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of volume of a fluid.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />volume in liter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -100,7 +100,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		LITER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />millimeters.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />length in millimeter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -109,7 +109,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MILLIMETER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />millimeters per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />speed in millimeter per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -118,7 +118,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MILLIMETER_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />acceleration in millimeters per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />acceleration in millimeter per second squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -127,7 +127,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MILLIMETER_PER_SECOND_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />force in Newtons.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />force in newton.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -136,7 +136,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		NEWTON,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />torque, a unit for force times distance.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />torque in newton-meter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -145,7 +145,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		NEWTON_METER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />pressure in Newtons per square meter.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />pressure or stress in pascal.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -154,7 +154,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		PASCAL,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />percentage.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />amount in or for every hundred.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -163,7 +163,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		PERCENT,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />revolutions per minute.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />rotational velocity in revolution per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -172,7 +172,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		REVOLUTION_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of time.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />time in second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -181,7 +181,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />volts.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />electric potential, electric potential difference or electromotive force in volt.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -190,7 +190,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		VOLT,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />watts.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />power in watt.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -199,7 +199,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		WATT,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of energy.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />energy in joule.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -217,7 +217,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MILLIMETER_3D,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measure of the acidity or alkalinity of a solution.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />acidity or alkalinity of a solution in pH.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -235,7 +235,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		REVOLUTION_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />sound level.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />sound level in decibel.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -244,7 +244,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		DECIBEL,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />gram.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />mass in gram.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -253,7 +253,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		GRAM,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />liters per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />volumetric flow in liter per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -262,7 +262,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		LITER_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of tilt.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />tilt in micro radian.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -271,7 +271,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MICRO_RADIAN,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measure of electrical resistance.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />electrical resistance in ohm.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -280,7 +280,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		OHM,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of viscosity.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />viscosity in pascal-second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -289,7 +289,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		PASCAL_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of electrical conductivity.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />electrical conductivity in siemens per meter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -298,7 +298,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		SIEMENS_PER_METER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of the apparent power in an electrical circuit, equal to the product of root-mean-square (RMS) voltage and RMS current (commonly referred to as VA).<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />apparent power in an electrical circuit, equal to the product of root-mean-square (RMS) voltage and RMS current (commonly referred to as VA) in volt-ampere.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -307,7 +307,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		VOLT_AMPERE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of reactive power in an AC electrical circuit (commonly referred to as VAR).<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />reactive power in an AC electrical circuit (commonly referred to as VAR) in volt-ampere-reactive.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -316,7 +316,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		VOLT_AMPERE_REACTIVE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of electrical energy, equal to one Joule.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />electrical energy in watt-second<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -325,7 +325,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		WATT_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />geometric volume in millimeters.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />geometric volume in millimeter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -352,7 +352,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		CUBIC_MILLIMETER_PER_SECOND_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />milligram.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />mass in milligram.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -361,7 +361,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MILLIGRAM,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />milligram per cubic millimeter.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />density in milligram per cubic millimeter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -370,7 +370,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MILLIGRAM_PER_CUBIC_MILLIMETER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />milliliter.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />volume in milliliter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -379,7 +379,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MILLILITER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />millimeters per revolution.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />feedrate per revolution in millimeter per revolution.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -397,7 +397,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		DEGREE_3D,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />gram per cubic meter.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />density in gram per cubic meter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -406,7 +406,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		GRAM_PER_CUBIC_METER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />revolutions per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />rotational acceleration in revolution per second squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -415,7 +415,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		REVOLUTION_PER_SECOND_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />counts per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />frequency in count per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -424,7 +424,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		COUNT_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />pascal per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />pressurization rate in pascal per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -442,7 +442,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		UNIT_VECTOR_3D,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />electric charge in coulombs (C).<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />electric charge in coulomb.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -451,7 +451,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		COULOMB,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />acceleration in meters per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />acceleration in meter per second squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -460,7 +460,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		METER_PER_SECOND_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />geometric volume in meters.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />geometric volume in meter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -469,7 +469,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		CUBIC_METER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />geometric area in millimeters.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />geometric area in millimeter.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -477,5 +477,14 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </list>
 		/// </remarks>
 		SQUARE_MILLIMETER,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />resistivity in ohm-meter.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		OHM_METER,
 	}
 }

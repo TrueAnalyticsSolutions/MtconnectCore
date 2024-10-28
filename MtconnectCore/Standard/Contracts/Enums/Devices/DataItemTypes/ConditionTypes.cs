@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// </remarks>
 	[Obsolete("Deprecated in v according to https://model.mtconnect.org/#_Version_")]
 	
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum ConditionTypes
 	{
 		/// <summary>

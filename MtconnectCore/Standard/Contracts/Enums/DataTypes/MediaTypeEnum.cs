@@ -15,7 +15,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum MediaTypeEnum
 	{
 		/// <summary>
@@ -26,7 +26,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
-		_3DS,
+		3DS,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />Dassault file format.<br /><br /><br /><br />
 		/// </summary>

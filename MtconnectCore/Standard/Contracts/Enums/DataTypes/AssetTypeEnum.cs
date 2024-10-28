@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 	/// </remarks>
 	[Obsolete("Deprecated in v2.1 according to https://model.mtconnect.org/#_Version_2.1")]
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2", MtconnectVersions.V_2_1_0)]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum AssetTypeEnum
 	{
 		/// <summary>

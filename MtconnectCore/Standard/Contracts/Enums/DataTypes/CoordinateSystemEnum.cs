@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 	/// </remarks>
 	[Obsolete("Deprecated in v2.0 according to https://model.mtconnect.org/#_Version_2.0")]
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_2_0_0)]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum CoordinateSystemEnum
 	{
 		/// <summary>

@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// </remarks>
 	[Obsolete("Deprecated in v according to https://model.mtconnect.org/#_Version_")]
 	
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum SampleTypes
 	{
 		/// <summary>
@@ -107,7 +107,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		
 		AXIS_FEEDRATE,
 		/// <summary>
-		﻿/// fluid capacity of an object or container.
+		﻿/// maximum amount of fluid that can be held by a container.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -119,7 +119,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		
 		CAPACITY_FLUID,
 		/// <summary>
-		﻿/// geometric capacity of an object or container.
+		﻿/// maximum amount of material that can be held by a container.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -1110,5 +1110,53 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		
 		
 		POSITION_CARTESIAN,
+		/// <summary>
+		﻿/// inability of a material to conduct electricity.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
+		
+		
+		RESISTIVITY,
+		/// <summary>
+		﻿/// amount of a substance in a container.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
+		[ObservationalSubType(typeof(FillHeightSubTypes))]
+		
+		FILL_HEIGHT,
+		/// <summary>
+		﻿/// number of particles counted by their size or other characteristics.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
+		[ObservationalSubType(typeof(ParticleCountSubTypes))]
+		
+		PARTICLE_COUNT,
+		/// <summary>
+		﻿/// size of particles counted by their size or other characteristics.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
+		
+		
+		PARTICLE_SIZE,
 	}
 }

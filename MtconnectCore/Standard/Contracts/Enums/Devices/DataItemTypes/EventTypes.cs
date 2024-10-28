@@ -17,7 +17,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// </remarks>
 	[Obsolete("Deprecated in v according to https://model.mtconnect.org/#_Version_")]
 	
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum EventTypes
 	{
 		/// <summary>
@@ -751,7 +751,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		
 		TOOL_GROUP,
 		/// <summary>
-		﻿/// identifier of the tool currently in use for a given <c>Path</c>.<br /><br /><b>DEPRECATED</b> in <i>Version 1.2.0</i>.   See <c>TOOL_ASSET_ID</c>.
+		﻿/// identifier of the tool currently in use for a given <c>Path</c>.<br /><br /><b>DEPRECATED</b> in <i>Version 1.2.0</i>.   See <c>TOOL_NUMBER</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -981,14 +981,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		
 		PART_STATUS,
 		/// <summary>
-		﻿/// set of limits used to trigger warning or alarm indicators.<br /><br /><b>DEPRECATION WARNING</b>. Recommend using <c>ALARM_LIMITS</c>.
+		﻿/// set of limits used to trigger warning or alarm indicators.<br /><br /><b>DEPRECATED</b> in <i>Version 2.5</i>. Replaced by  <c>ALARM_LIMITS</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		[Obsolete("Deprecated in v2.5 according to https://model.mtconnect.org/#_Version_2.5")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7", MtconnectVersions.V_2_5_0)]
 		
 		
 		ALARM_LIMIT,
@@ -1053,14 +1055,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		
 		DEVICE_CHANGED,
 		/// <summary>
-		﻿/// set of limits defining a range of values designating acceptable performance for a variable.<br /><br /><b>DEPRECATION WARNING</b>. Recommend using <c>SPECIFICATION_LIMITS</c>.
+		﻿/// set of limits defining a range of values designating acceptable performance for a variable.<br /><br /><b>DEPRECATED</b> in <i>Version 2.5</i>. Replaced by  <c>SPECIFICATION_LIMITS</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		[Obsolete("Deprecated in v2.5 according to https://model.mtconnect.org/#_Version_2.5")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7", MtconnectVersions.V_2_5_0)]
 		
 		
 		SPECIFICATION_LIMIT,
@@ -1101,14 +1105,16 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		
 		SENSOR_ATTACHMENT,
 		/// <summary>
-		﻿/// set of limits used to indicate whether a process variable is stable and in control.<br /><br /><b>DEPRECATION WARNING</b>. Recommend using <c>CONTROL_LIMITS</c>.
+		﻿/// set of limits used to indicate whether a process variable is stable and in control.<br /><br /><b>DEPRECATED</b> in <i>Version 2.5</i>. Replaced by <c>CONTROL_LIMITS</c>.
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		[Obsolete("Deprecated in v2.5 according to https://model.mtconnect.org/#_Version_2.5")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7", MtconnectVersions.V_2_5_0)]
 		
 		
 		CONTROL_LIMIT,
@@ -1676,5 +1682,17 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		
 		
 		LOCATION_SPATIAL_GEOGRAPHIC,
+		/// <summary>
+		﻿/// sequence of a part in a group of parts.
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
+		
+		
+		PART_INDEX,
 	}
 }

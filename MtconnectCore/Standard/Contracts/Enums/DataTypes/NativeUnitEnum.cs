@@ -15,11 +15,11 @@ namespace MtconnectCore.Standard.Contracts.Enums
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.4.0.0")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum NativeUnitEnum
 	{
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />rotational velocity in degrees per minute.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />rotational velocity in degree per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -37,7 +37,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		FAHRENHEIT,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />feet.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />length in foot.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -55,7 +55,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		FOOT_3D,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />feet per minute.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />speed in foot per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -64,7 +64,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		FOOT_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />feet per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />speed in foot per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -73,7 +73,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		FOOT_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />acceleration in feet per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />acceleration in foot per second squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -82,7 +82,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		FOOT_PER_SECOND_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />gallons per minute.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />volumetric flow in gallon per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -91,7 +91,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		GALLON_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />inches.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />length in inch.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -109,7 +109,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		INCH_3D,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measure of torque in inch pounds.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />torque in inch pound.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -118,7 +118,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		INCH_POUND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />inches per minute.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />speed in inch per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -127,7 +127,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		INCH_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />inches per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />speed in inch per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -136,7 +136,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		INCH_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />acceleration in inches per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />acceleration in inch per second squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -145,7 +145,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		INCH_PER_SECOND_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement in kilowatt.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />power in kilowatt.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -154,7 +154,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		KILOWATT,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />kilowatt hours which is 3.6 mega joules.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />energy in kilowatt-hour.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -163,7 +163,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		KILOWATT_HOUR,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />velocity in millimeters per minute.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />speed in millimeter per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -181,7 +181,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		OTHER,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />US pounds.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />mass in pound.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -190,7 +190,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		POUND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />pressure in pounds per square inch (PSI).<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />pressure in pound per square inch (PSI).<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -199,7 +199,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		POUND_PER_INCH_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />angle in radians.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />angle in radian.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -208,7 +208,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		RADIAN,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />velocity in radians per minute.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />angular velocity in radian per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -217,7 +217,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		RADIAN_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />velocity in radians per second.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />angular velocity in radian per second.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -226,7 +226,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		RADIAN_PER_SECOND,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />acceleration in radians per second squared.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />angular acceleration in radian per second squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -235,7 +235,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		RADIAN_PER_SECOND_SQUARED,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measure of viscosity.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />viscosity in centipoise.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -244,7 +244,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		CENTIPOISE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of rate of flow of a fluid.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />volumetric flow in liter per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -253,7 +253,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		LITER_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of temperature.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />temperature in Kelvin.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -262,7 +262,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		KELVIN,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of time in hours.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />time in hour.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -271,7 +271,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		HOUR,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />measurement of time in minutes.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />time in minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -280,7 +280,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />pressure in Bar.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />pressure in bar.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -289,7 +289,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		BAR,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />pressure in Millimeter of Mercury (mmHg).<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />pressure in millimeter of mercury (mmHg).<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -298,7 +298,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		MILLIMETER_MERCURY,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />pascal per minute.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />pressurization rate in pascal per minute.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -307,7 +307,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		PASCAL_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />pressure in Torr.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />pressure in torr.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -325,7 +325,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		AMPERE_HOUR,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />acceleration relative to earth's gravity given in <c>METER/SECOND^2</c>.<br /><br /><br /><br />&gt; Note 1 to entry: At different points on Earth's surface, the free-fall acceleration ranges from 9.764 to 9.834 m/s2 (Wikipedia: Gravitational Acceleration). The constant can be customized depending on the location in the universe.<br /><br /><br /><br />&gt; Note 2 to entry: In the standard, it is assumed that Earth's average value of gravitational acceleration is 9.90665 m/s2.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />acceleration relative to earth's gravity given in meter per second squared.<br /><br /><br /><br />&gt; Note 1 to entry: At different points on Earth's surface, the free-fall acceleration ranges from 9.764 to 9.834 m/s2 (Wikipedia: Gravitational Acceleration). The constant can be customized depending on the location in the universe.<br /><br /><br /><br />&gt; Note 2 to entry: In the standard, it is assumed that Earth's average value of gravitational acceleration is 9.90665 m/s2.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -334,7 +334,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		GRAVITATIONAL_ACCELERATION,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br /><i>MASS\\times GRAVITATIONAL_ACCELERATION</i> (g) given in <c>METER/SECOND^2</c>.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br /><c>MASS</c> times <c>GRAVITATIONAL_ACCELERATION</c>  (g).<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -361,7 +361,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		CUBIC_FOOT_PER_MINUTE,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />geometric volume in feet.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />geometric volume in cubic foot.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -370,7 +370,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		CUBIC_FOOT,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />inch per revolution.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />feedrate per revolution in inch per revolution.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -379,7 +379,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </remarks>
 		INCH_PER_REVOLUTION,
 		/// <summary>
-		﻿/// <br /><br /><br /><br /><br /><br />geometric area in inches.<br /><br /><br /><br />
+		﻿/// <br /><br /><br /><br /><br /><br />geometric area in inch squared.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
@@ -387,5 +387,32 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// </list>
 		/// </remarks>
 		SQUARE_INCH,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />length in micrometer.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		MICROMETER,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />pressure in microtorr.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		MICROTORR,
+		/// <summary>
+		﻿/// <br /><br /><br /><br /><br /><br />temperature in Rankine.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.5">v2.5</see></item>
+		/// </list>
+		/// </remarks>
+		RANKINE,
 	}
 }
