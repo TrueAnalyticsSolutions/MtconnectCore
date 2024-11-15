@@ -5,6 +5,7 @@ using MtconnectCore.Standard.Documents;
 using MtconnectCore.Standard.Documents.Assets;
 using MtconnectCore.Standard.Documents.Devices;
 using MtconnectCore.Standard.Documents.Error;
+using MtconnectCore.Standard.Documents.ExceptionsReport;
 using MtconnectCore.Standard.Documents.Streams;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,15 @@ namespace MtconnectCoreExample.Views
                         case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Errors:
                             mtcDocument.DisplayDocumentAndValidate<ErrorDocument>();
                             break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.DevicesExceptionsReport:
+                            mtcDocument.DisplayDocumentAndValidate<MtconnectDevicesExceptionsReportDocument>();
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.StreamsExceptionsReport:
+                            mtcDocument.DisplayDocumentAndValidate<MtconnectStreamsExceptionsReportDocument>();
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.AssetsExceptionsReport:
+                            mtcDocument.DisplayDocumentAndValidate<MtconnectAssetsExceptionsReportDocument>();
+                            break;
                         default:
                             break;
                     }
@@ -107,6 +117,11 @@ namespace MtconnectCoreExample.Views
                             break;
                         case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Errors:
                             Consoul.Write("DataItems are not in Errors", ConsoleColor.Red);
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.DevicesExceptionsReport:
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.StreamsExceptionsReport:
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.AssetsExceptionsReport:
+                            Consoul.Write("Cannot count DataItems from ExceptionsReport", ConsoleColor.Red);
                             break;
                         default:
                             break;
@@ -151,6 +166,11 @@ namespace MtconnectCoreExample.Views
                             break;
                         case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.Errors:
                             Consoul.Write("Components are not in Errors", ConsoleColor.Red);
+                            break;
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.DevicesExceptionsReport:
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.StreamsExceptionsReport:
+                        case MtconnectCore.Standard.Contracts.Enums.DocumentTypes.AssetsExceptionsReport:
+                            Consoul.Write("Cannot count Components from ExceptionsReport", ConsoleColor.Red);
                             break;
                         default:
                             break;

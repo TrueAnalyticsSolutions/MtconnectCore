@@ -111,6 +111,24 @@ namespace MtconnectCore.Standard.Documents
                         Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
                     }
                     break;
+                case "MTConnectDevicesExceptionsReport":
+                    if (Type != DocumentTypes.DevicesExceptionsReport)
+                    {
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
+                    }
+                    break;
+                case "MTConnectStreamsExceptionsReport":
+                    if (Type != DocumentTypes.StreamsExceptionsReport)
+                    {
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
+                    }
+                    break;
+                case "MTConnectAssetsExceptionsReport":
+                    if (Type != DocumentTypes.AssetsExceptionsReport)
+                    {
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
+                    }
+                    break;
                 default:
                     break;
             }

@@ -28,11 +28,17 @@ namespace MtconnectCoreExample
                     ConsoleColor color;
                     switch (error.Severity)
                     {
+                        case ValidationSeverity.INFO:
+                            color = ConsoleColor.Blue;
+                            break;
                         case ValidationSeverity.WARNING:
                             color = ConsoleColor.Yellow;
                             break;
                         case ValidationSeverity.ERROR:
                             color = ConsoleColor.Red;
+                            break;
+                        case ValidationSeverity.FATAL:
+                            color = ConsoleColor.DarkRed;
                             break;
                         default:
                             color = ConsoleColor.Gray;

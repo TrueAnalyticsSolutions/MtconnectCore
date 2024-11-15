@@ -48,6 +48,7 @@
   <ItemGroup>
     <Folder Include="Standard\Contracts\Enums\Devices\DataItemTypes\" />
     <Folder Include="Standard\Contracts\Enums\Error\Elements\" />
+    <Folder Include="Standard\Contracts\Enums\ExceptionsReport\Elements\" />
     <Folder Include="Standard\Contracts\Interfaces\" />
     <Folder Include="Standard\Documents\Files\" />
   </ItemGroup>

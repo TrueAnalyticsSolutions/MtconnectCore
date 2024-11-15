@@ -49,7 +49,7 @@ namespace MtconnectCore.Validation
             public void AddWarning(string message, params KeyValuePair<string, object>[] additionalData)
                 => addException(ValidationSeverity.WARNING, message, additionalData);
             public void AddMessage(string message, params KeyValuePair<string, object>[] additionalData)
-                => addException(ValidationSeverity.MESSAGE, message, additionalData);
+                => addException(ValidationSeverity.INFO, message, additionalData);
 
             /// <summary>
             /// Validates value is not null or empty.<br/>
