@@ -12176,9 +12176,104 @@
             Represents a MTConnectErrors Response Document.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.DocumentTypes.DevicesExceptionsReport">
+            <summary>
+            Represents a MTConnectDevicesExceptionsReport Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.DocumentTypes.StreamsExceptionsReport">
+            <summary>
+            Represents a MTConnectStreamsExceptionsReport Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.DocumentTypes.AssetsExceptionsReport">
+            <summary>
+            Represents a MTConnectAssetsExceptionsReport Response Document.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Error.ErrorCodes">
             <summary>
             Reference Part 1, Section 9.1.2.3 of the MTConnect Standard for a list of appropriate values for the errorCode attribute
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.Attributes.HeaderAttributes.VERSION">
+            <summary>
+            The major, minor, and revision number of the MTConnect Standard that defines the semantic data model that represents the content of the Response Document. It also includes the revision number of the schema associated with that specific semantic data model.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.Attributes.HeaderAttributes.CREATION_TIME">
+            <summary>
+            Represents the time that an Agent published the Response Document.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.Attributes.HeaderAttributes.SENDER">
+            <summary>
+            An identification defining where the Agent that published the Response Document is installed or hosted.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.Attributes.HeaderAttributes.INSTANCE_ID">
+            <summary>
+            A number indicating a specific instantiation of the buffer associated with the Agent that published the Response Document.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum">
+            <summary>
+            Representation of available value types for MTConnectException Code to specify the category of exception.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH">
+            <summary>
+            Indicates a the context value type is mismatched. For example, a string instead of an Enumeration value.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND">
+            <summary>
+            Indicates a property or sub-class of the context is missing.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DEPRECATED">
+            <summary>
+            Indicates the context has been deprecated.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED">
+            <summary>
+            Indicates the context is considered an extension of the MTConnect Standard.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.OUT_OF_RANGE">
+            <summary>
+            Indicates the context is out of range.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY">
+            <summary>
+            Indicates that an entity that must be unique has been duplicated within the context.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT">
+            <summary>
+            Indicates that the format of the provided data is invalid or does not conform to the expected pattern.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum">
+            <summary>
+            Representation for the context of the exception as it relates to the source.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.ENTITY">
+            <summary>
+            Indicates the context is directly upon the source itself.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY">
+            <summary>
+            Indicates the context is upon a value property of the source.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.PART">
+            <summary>
+            Indicates the context is upon a part of the source.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.HeaderAttributes">
@@ -14701,6 +14796,26 @@
             </list>
             </remarks>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.INFO">
+            <summary>
+            Missing information of a constrained element that is dedicated for the developer.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.WARNING">
+            <summary>
+            For incorrect situations that can cause errors. It is used for less severe situations than the error.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR">
+            <summary>
+            For incorrect situations that must be solved.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.FATAL">
+            <summary>
+            Syntactical and/or grammatical error where validation can no longer continue.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.VersionComparisonTypes">
             <summary>
             Options for how the Version number is compared agains the current version.
@@ -16696,6 +16811,66 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Error.ErrorDocumentHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectDevicesException.Source">
+            <summary>
+            Overrides the base source as a string to represent a XPath to the node.
+            </summary>
+        </member>
+        <member name="T:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException">
+            <summary>
+            Base class for MTConnect Exception instances.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Message">
+            <summary>
+            Detailed description explaining the context of the exception.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Severity">
+            <summary>
+            Indicates how severely the exceptions violates the MTConnect Standard.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Code">
+            <summary>
+            Specifies the category for the exception.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Source">
+            <summary>
+            Reference to the source class for the exception. Note: This could be XPath, JPath, etc.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Context">
+            <summary>
+            Specifies the context for the exception as it relates to the <see cref="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Source"/>. 
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.ContextScope">
+            <summary>
+            Optional reference to the scope for the context. For example, consider <see cref="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Context"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectExceptionsReportDocument`1.DataElementName">
+            <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectExceptionsReportDocument`1.Header">
+            <inheritdoc cref="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectExceptionsReportDocument`1._header"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectExceptionsReportDocument`1.#ctor(System.Xml.XmlDocument)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectExceptionsReportHeader.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectExceptionsReportHeader.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectStreamsException.Source">
+            <summary>
+            Overrides the base source as an integer to represent a reference to the sequence # of an observation.
+            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Documents.IResponseDocument">
             <summary>

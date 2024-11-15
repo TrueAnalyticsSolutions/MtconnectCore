@@ -5,9 +5,6 @@ namespace MtconnectCore.Standard.Documents.ExceptionsReport
     public abstract class MtconnectExceptionsReportDocument<T> : ResponseDocument<MtconnectExceptionsReportHeader, T> where T : MtconnectException
     {
         /// <inheritdoc/>
-        public override Contracts.Enums.DocumentTypes Type => Contracts.Enums.DocumentTypes.ExceptionsReport;
-
-        /// <inheritdoc/>
         public override string DataElementName => "ExceptionsReport";
 
         internal override MtconnectExceptionsReportHeader _header { get; set; }
