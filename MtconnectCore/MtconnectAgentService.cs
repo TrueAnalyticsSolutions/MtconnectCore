@@ -5,6 +5,7 @@ using MtcAssets = MtconnectCore.Standard.Documents.Assets;
 using MtcDevices = MtconnectCore.Standard.Documents.Devices;
 using MtcError = MtconnectCore.Standard.Documents.Error;
 using MtcStreams = MtconnectCore.Standard.Documents.Streams;
+using MtcExceptions = MtconnectCore.Standard.Documents.ExceptionsReport;
 using System;
 using System.Text;
 using System.IO;
@@ -79,6 +80,25 @@ namespace MtconnectCore
         {
             document = null;
             string rootNodeName = xDoc.DocumentElement.LocalName;
+switch (document)
+{
+    case MtcStreams.StreamsDocument mtcStreamsDocument:
+        break;
+    case MtcDevices.DevicesDocument mtcDevicesDocument:
+        break;
+    case MtcAssets.AssetsDocument mtcAssetsDocument:
+        break;
+    case MtcError.ErrorDocument mtcErrorDocument:
+        break;
+    case MtcExceptions.MtconnectDevicesExceptionsReportDocument mtcDevicesExceptionsDocument:
+        break;
+    case MtcExceptions.MtconnectStreamsExceptionsReportDocument mtcStreamsExceptionsDocument:
+        break;
+    case MtcExceptions.MtconnectAssetsExceptionsReportDocument mtcAssetsExceptionsDocument:
+        break;
+    default:
+        break;
+}
             switch (rootNodeName)
             {
                 case "MTConnectStreams":
@@ -92,6 +112,15 @@ namespace MtconnectCore
                     break;
                 case "MTConnectDevices":
                     document = new MtcDevices.DevicesDocument(xDoc);
+                    break;
+                case "MTConnectDevicesExceptionsReport":
+                    document = new MtcExceptions.MtconnectDevicesExceptionsReportDocument(xDoc);
+                    break;
+                case "MTConnectStreamsExceptionsReport":
+                    document = new MtcExceptions.MtconnectStreamsExceptionsReportDocument(xDoc);
+                    break;
+                case "MTConnectAssetsExceptionsReport":
+                    document = new MtcExceptions.MtconnectAssetsExceptionsReportDocument(xDoc);
                     break;
                 default:
                     throw new NotSupportedException($"Unknown MTConnect document is not supported.");
