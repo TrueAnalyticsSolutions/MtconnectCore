@@ -26,7 +26,7 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
-		3DS,
+		_3DS,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />Dassault file format.<br /><br /><br /><br />
 		/// </summary>
