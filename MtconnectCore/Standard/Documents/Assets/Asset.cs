@@ -47,7 +47,11 @@ namespace MtconnectCore.Standard.Documents.Assets
                         v => throw new MtconnectValidationException(
                             ValidationSeverity.ERROR,
                             "Asset MUST include a 'assetId' attribute.",
-                            SourceNode)
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = nameof(AssetId)
+                        }
                     )
                 )
                 // Validate Timestamp property

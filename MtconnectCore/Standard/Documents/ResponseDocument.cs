@@ -77,9 +77,17 @@ namespace MtconnectCore.Standard.Documents
 
             // Detect if there are missing namespaces
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns")))
-                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns' attribute"));
+                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns' attribute", Source.DocumentElement) {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "xmlns"
+                });
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns:" + DefaultNamespace)))
-                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute"));
+                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute", Source.DocumentElement) {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "xmlns:" + DefaultNamespace
+                });
 
             DocumentVersion = VersionHelper.GetVersionFromDocument(xDoc);
             MtconnectVersion = DocumentVersion;

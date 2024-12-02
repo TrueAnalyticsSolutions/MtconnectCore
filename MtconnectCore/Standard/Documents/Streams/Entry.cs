@@ -65,7 +65,11 @@ namespace MtconnectCore.Standard.Documents.Streams
                         v => throw new MtconnectValidationException(
                             ValidationSeverity.ERROR,
                             "Entry representation MUST include a 'key' attribute with a unique value within the DataSet.",
-                            SourceNode)
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = nameof(Key)
+                        }
                     )
                 )
                 // Return validation errors

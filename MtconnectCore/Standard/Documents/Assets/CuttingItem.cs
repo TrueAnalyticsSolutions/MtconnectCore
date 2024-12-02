@@ -84,8 +84,13 @@ namespace MtconnectCore.Standard.Documents.Assets
                             validationErrors.Add(
                                 new MtconnectValidationException(
                                     Contracts.Enums.ValidationSeverity.ERROR,
-                                    $"Invalid range format in CuttingItem 'indices'. Invalid part: '{strIndex}'. Full attribute source: '{rawIndices}'."
-                                )
+                                    $"Invalid range format in CuttingItem 'indices'. Invalid part: '{strIndex}'. Full attribute source: '{rawIndices}'.",
+                                    SourceNode
+                                ) {
+                                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
+                                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                                    SourceContextScope = attributeName
+                                }
                             );
                         }
                     }
@@ -100,8 +105,13 @@ namespace MtconnectCore.Standard.Documents.Assets
                             validationErrors.Add(
                                 new MtconnectValidationException(
                                     Contracts.Enums.ValidationSeverity.ERROR,
-                                    $"Invalid index format in CuttingItem 'indices'. Invalid part: '{strIndex}'. Full attribute source: '{rawIndices}'."
-                                )
+                                    $"Invalid index format in CuttingItem 'indices'. Invalid part: '{strIndex}'. Full attribute source: '{rawIndices}'.",
+                                    SourceNode
+                                ) {
+                                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
+                                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                                    SourceContextScope = attributeName
+                                }
                             );
                         }
                     }

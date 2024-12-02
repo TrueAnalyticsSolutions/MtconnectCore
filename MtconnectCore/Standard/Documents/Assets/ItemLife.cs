@@ -59,33 +59,58 @@ namespace MtconnectCore.Standard.Documents.Assets
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"CuttingItem ItemLife missing 'type' attribute."));
+                        $"CuttingItem ItemLife missing 'type' attribute.",
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(Type)
+                    });
                 }
                 else if (!EnumHelper.Contains<ItemLifeTypes>(Type))
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.WARNING,
-                        $"Unrecognized CuttingItem ItemLife 'type'."));
+                        $"Unrecognized CuttingItem ItemLife 'type'.",
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(Type)
+                    });
                 }
 
                 if (string.IsNullOrEmpty(CountDirection))
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"CuttingItem ItemLife missing 'countDirection' attribute."));
+                        $"CuttingItem ItemLife missing 'countDirection' attribute.",
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(CountDirection)
+                    });
                 }
                 else if (!EnumHelper.Contains<ItemLifeCountDirectionTypes>(CountDirection))
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.WARNING,
-                        $"Unrecognized CuttingItem ItemLife 'countDirection'."));
+                        $"Unrecognized CuttingItem ItemLife 'countDirection'.",
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(CountDirection)
+                    });
                 }
 
                 if (!double.TryParse(SourceNode.InnerText, out double value))
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"Invalid ItemLife value. CuttingItem ItemLife value must be a number."));
+                        $"Invalid ItemLife value. CuttingItem ItemLife value must be a number.",
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(Value)
+                    });
                 }
 
                 return baseResult && !validationContext.HasErrors();

@@ -54,7 +54,11 @@ namespace MtconnectCore.Standard.Documents.Streams
                         v => throw new MtconnectValidationException(
                             ValidationSeverity.ERROR,
                             "TableEntry Cell 'key' must be a unique identifier for each key-value pair within the TableEntry.",
-                            SourceNode)
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = "TableEntry Cell.Key"
+                        }
                     )
                 )
                 // Return validation errors

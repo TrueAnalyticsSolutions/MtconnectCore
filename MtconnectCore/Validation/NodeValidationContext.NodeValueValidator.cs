@@ -79,7 +79,22 @@ namespace MtconnectCore.Validation
             {
                 if (ImplementationState != VersionComparisonTypes.Implemented)
                 {
-                    AddWarning($"The field '{PropertyName}' is not supported in version '{Context.Node.MtconnectVersion.ToName()}'.");
+                    Standard.Contracts.Errors.MtconnectValidationException exception = null;
+                    switch (ImplementationState)
+                    {
+                        case VersionComparisonTypes.Deprecated:
+                            exception = AddFatal($"The field '{PropertyName}' is not supported in version '{Context.Node.MtconnectVersion.ToName()}'.");
+                            exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DEPRECATED;
+                            break;
+                        case VersionComparisonTypes.NotImplemented:
+                            exception = AddWarning($"The field '{PropertyName}' is not supported in version '{Context.Node.MtconnectVersion.ToName()}'.");
+                            exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED;
+                            break;
+                        default:
+                            break;
+                    }
+                    exception.SourceContext = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                    exception.SourceContextScope = PropertyName;
                 }
                 return this;
             }

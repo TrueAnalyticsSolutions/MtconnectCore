@@ -68,7 +68,11 @@ namespace MtconnectCore.Standard.Documents.Streams
                         v => throw new MtconnectValidationException(
                             ValidationSeverity.ERROR,
                             "DataSet Entry 'key' must be a unique identifier for each key-value pair within the DataSet.",
-                            SourceNode)
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = "Entry.Key"
+                        }
                     )
                 )
                 // Return validation errors

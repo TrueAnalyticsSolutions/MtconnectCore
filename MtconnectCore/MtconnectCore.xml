@@ -14796,6 +14796,11 @@
             </list>
             </remarks>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.ValidationSeverity">
+            <summary>
+            Representation of available value types for MTConnectException Severity.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.INFO">
             <summary>
             Missing information of a constrained element that is dedicated for the developer.
@@ -14912,8 +14917,17 @@
             </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.Severity">
+            <inheritdoc cref="T:MtconnectCore.Standard.Contracts.Enums.ValidationSeverity"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.Code">
+            <inheritdoc cref="T:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.SourceContext">
+            <inheritdoc cref="T:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.SourceContextScope">
             <summary>
-            Severity of the validation error that occurred.
+            Optional reference to the scope for the context. For example, consider <see cref="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.SourceContext"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
             </summary>
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.#ctor(MtconnectCore.Standard.Contracts.Enums.ValidationSeverity,System.String)">

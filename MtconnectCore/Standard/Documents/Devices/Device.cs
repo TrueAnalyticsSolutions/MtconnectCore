@@ -156,13 +156,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                         ?.WhileIntroduced((i) =>
                             i.IsRequired(Uuid)
                         )
-                        ?.If(
-                            (v) => !string.IsNullOrEmpty(Uuid),
-                            (v) => Uuid.Length <= 255 ? v : throw new MtconnectValidationException(
-                                ValidationSeverity.ERROR,
-                                $"Device 'uuid' SHOULD be alphanumeric and not exceed 255 characters.",
-                                SourceNode)
-                        )
+                        ?.IsIdValueType(Uuid, false)
                 )
                 //// Validate iso841Class
                 //.ValidateValueProperty(

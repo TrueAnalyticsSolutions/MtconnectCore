@@ -89,14 +89,22 @@ namespace MtconnectCore.Standard.Documents.Devices
                         v => throw new MtconnectValidationException(
                             ValidationSeverity.ERROR,
                             $"Specification type of '{Type}' is not defined in the MTConnect Standard for SAMPLE, EVENT, nor CONDITION in version '{version}'.",
-                            SourceNode)
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = nameof(Type)
+                        }
                     )
                     ?.If(
                         v => !EnumHelper.IsImplemented<SampleTypes>(Type, version) && !EnumHelper.IsImplemented<EventTypes>(Type, version) && !EnumHelper.IsImplemented<ConditionTypes>(Type, version),
                         v => throw new MtconnectValidationException(
                             ValidationSeverity.WARNING,
                             $"Specification type of '{Type}' is not valid for SAMPLE, EVENT, nor CONDITION in version '{version}' of the MTConnect Standard.",
-                            SourceNode)
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = nameof(Type)
+                        }
                     )
                 )
                 // Validate dataItemIdRef

@@ -47,7 +47,7 @@ namespace MtconnectCore.Validation
         /// </summary>
         /// <returns><c>true</c> if any of the exceptions are of <c>ERROR</c>-level severity; otherwise, <c>false</c>.</returns>
         public bool HasError()
-            => Exceptions.Any(o => o.Severity == ValidationSeverity.ERROR);
+            => Exceptions.Any(o => o.Severity == ValidationSeverity.ERROR || o.Severity == ValidationSeverity.FATAL);
 
         /// <summary>
         /// Validates the current node using the specified validation logic.
@@ -63,7 +63,7 @@ namespace MtconnectCore.Validation
             catch (Exception ex)
             {
                 Exceptions.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
+                    ValidationSeverity.FATAL,
                     $"Exception prevented further validation of {Node.SourceNode.LocalName}",
                     Node.SourceNode));
             }
@@ -104,9 +104,13 @@ namespace MtconnectCore.Validation
             catch (Exception ex)
             {
                 Exceptions.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
+                    ValidationSeverity.FATAL,
                     $"Exception prevented further validation of {Node.SourceNode.LocalName}",
-                    Node.SourceNode));
+                    Node.SourceNode) {
+                    // TODO: Add ExceptionCodeEnum
+                    SourceContext = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = propertyName
+                });
             }
             return this;
         }
@@ -120,9 +124,13 @@ namespace MtconnectCore.Validation
             catch (Exception ex)
             {
                 Exceptions.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
+                    ValidationSeverity.FATAL,
                     $"Exception prevented further validation of {Node.SourceNode.LocalName}",
-                    Node.SourceNode));
+                    Node.SourceNode) {
+                    // TODO: Add ExceptionCodeEnum
+                    SourceContext = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = propertyName
+                });
             }
             return this;
         }

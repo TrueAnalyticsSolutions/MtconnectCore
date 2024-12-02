@@ -55,15 +55,27 @@ namespace MtconnectCore.Standard.Documents.Devices
 
             foreach (string duplicateId in duplicateIds)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Device 'id' found: " + duplicateId + ". Each Device 'id' MUST be unique."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Device 'id' found: " + duplicateId + ". Each Device 'id' MUST be unique.") {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "Device.Id"
+                });
             }
             foreach (string duplicateName in duplicateNames)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Device 'name' found: " + duplicateName + ". Each Device 'name' MUST be unique."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Device 'name' found: " + duplicateName + ". Each Device 'name' MUST be unique.") {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "Device.Name"
+                });
             }
             foreach (string duplicateUuid in duplicateUuids)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Device 'uuid' found: " + duplicateUuid + ". Each Device 'uuid' MUST be unique."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Device 'uuid' found: " + duplicateUuid + ". Each Device 'uuid' MUST be unique.") {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "Device.Uuid"
+                });
             }
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
@@ -89,15 +101,27 @@ namespace MtconnectCore.Standard.Documents.Devices
             }
             foreach (string duplicateId in duplicateIds)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Component 'id' found: " + duplicateId + ". Each Component 'id' MUST be unique."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Component 'id' found: " + duplicateId + ". Each Component 'id' MUST be unique.") {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "Component.Id"
+                });
             }
             foreach (string duplicateName in duplicateNames)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Component 'name' found: " + duplicateName + ". Each Component 'name' MUST be unique."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Component 'name' found: " + duplicateName + ". Each Component 'name' MUST be unique.") {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "Component.Name"
+                });
             }
             foreach (string duplicateUuid in duplicateUuids)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Component 'uuid' found: " + duplicateUuid + ". Each Component 'uuid' MUST be unique."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate Component 'uuid' found: " + duplicateUuid + ". Each Component 'uuid' MUST be unique.") {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "Component.Uuid"
+                });
             }
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
@@ -151,11 +175,19 @@ namespace MtconnectCore.Standard.Documents.Devices
             }
             foreach (string duplicateId in duplicateIds)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate DataItem 'id' found: " + duplicateId + ". Each DataItem 'id' MUST be unique."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate DataItem 'id' found: " + duplicateId + ". Each DataItem 'id' MUST be unique.") {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "DataItem.Id"
+                });
             }
             foreach (string duplicateName in duplicateNames)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate DataItem 'name' found: " + duplicateName + ". Each DataItem 'name' MUST be unique."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Duplicate DataItem 'name' found: " + duplicateName + ". Each DataItem 'name' MUST be unique.") {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "DataItem.Name"
+                });
             }
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);

@@ -148,7 +148,11 @@ namespace MtconnectCore.Standard.Documents.Streams
                         v => throw new MtconnectValidationException(
                             ValidationSeverity.ERROR,
                             "Component MUST include a 'name' attribute.",
-                            SourceNode)
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = nameof(Name)
+                        }
                     )
                 )
                 // Validate Contents

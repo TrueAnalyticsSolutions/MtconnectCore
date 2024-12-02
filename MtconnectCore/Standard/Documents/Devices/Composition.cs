@@ -72,13 +72,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 // Validate Uuid
                 .ValidateValueProperty<CompositionAttributes>(nameof(Uuid), (o) =>
                     o.IsImplemented(Uuid)
-                    ?.If(
-                        (v) => !string.IsNullOrEmpty(Uuid),
-                        (v) => Uuid.Length <= 255 ? v : throw new MtconnectValidationException(
-                            ValidationSeverity.ERROR,
-                            $"Composition 'uuid' cannot exceed a length of 255 characters.",
-                            SourceNode)
-                    )
+                    ?.IsIdValueType(Uuid, false)
                 )
                 // Return validation errors
                 .HasError(out validationErrors);

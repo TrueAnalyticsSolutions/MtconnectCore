@@ -59,7 +59,11 @@ namespace MtconnectCore.Standard.Documents
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
                         $"Response Document Header MUST include a 'version' attribute.",
-                        SourceNode));
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(AgentVersion)
+                    });
                 }
 
                 if (CreationTime == null)
@@ -67,7 +71,11 @@ namespace MtconnectCore.Standard.Documents
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
                         $"Response Document Header MUST include a 'creationTime' attribute.",
-                        SourceNode));
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(CreationTime)
+                    });
                 }
 
                 if (InstanceId == default(ulong))
@@ -75,7 +83,11 @@ namespace MtconnectCore.Standard.Documents
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
                         $"Response Document Header MUST include a 'instanceId' attribute.",
-                        SourceNode));
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(InstanceId)
+                    });
                 }
 
                 if (string.IsNullOrEmpty(Sender))
@@ -83,7 +95,11 @@ namespace MtconnectCore.Standard.Documents
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
                         $"Response Document Header MUST include a 'sender' attribute.",
-                        SourceNode));
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(Sender)
+                    });
                 }
 
                 return baseResult && !validationContext.HasErrors();

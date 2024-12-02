@@ -1,5 +1,8 @@
 ﻿namespace MtconnectCore.Standard.Contracts.Enums
 {
+    /// <summary>
+    /// Representation of available value types for MTConnectException Severity.
+    /// </summary>
     public enum ValidationSeverity
     {
         /// <summary>
