@@ -3,6 +3,7 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -14,20 +15,20 @@ namespace MtconnectCore.Standard.Documents.Assets
     public class CuttingToolLifeCycle : MtconnectNode
     {
         /// <inheritdoc cref="CuttingToolLifeCycleElements.CUTTER_STATUS"/>
-        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.CUTTER_STATUS), nameof(TrySetCutterStatus), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.CUTTER_STATUS), nameof(TrySetCutterStatus))]
         public CutterStatus CutterStatus { get; set; }
 
         /// <inheritdoc cref="CuttingToolLifeCycleElements.LOCATION"/>
         [MtconnectNodeElement(nameof(CuttingToolLifeCycleElements.LOCATION))]
-        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.LOCATION), nameof(TrySetLocation), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.LOCATION), nameof(TrySetLocation))]
         public Location Location { get; set; }
 
         /// <inheritdoc cref="CuttingToolLifeCycleElements.RECONDITION_COUNT"/>
-        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.RECONDITION_COUNT), nameof(TrySetReconditionCount), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.RECONDITION_COUNT), nameof(TrySetReconditionCount))]
         public ReconditionCount ReconditionCount { get; set; }
 
         /// <inheritdoc cref="CuttingToolLifeCycleElements.TOOL_LIFE"/>
-        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.TOOL_LIFE), nameof(TrySetToolLife), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.TOOL_LIFE), nameof(TrySetToolLife))]
         public ToolLife ToolLife { get; set; }
 
         /// <inheritdoc cref="CuttingToolLifeCycleElements.PROGRAM_TOOL_GROUP"/>
@@ -39,11 +40,11 @@ namespace MtconnectCore.Standard.Documents.Assets
         public string ProgramToolNumber { get; set; }
 
         /// <inheritdoc cref="CuttingToolLifeCycleElements.PROCESS_SPINDLE_SPEED"/>
-        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.PROCESS_SPINDLE_SPEED), nameof(TrySetProcessSpindleSpeed), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.PROCESS_SPINDLE_SPEED), nameof(TrySetProcessSpindleSpeed))]
         public ProcessSpindleSpeed ProcessSpindleSpeed { get; set; }
 
         /// <inheritdoc cref="CuttingToolLifeCycleElements.PROCESS_FEED_RATE"/>
-        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.PROCESS_FEED_RATE), nameof(TrySetProcessFeedRate), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.PROCESS_FEED_RATE), nameof(TrySetProcessFeedRate))]
         public ProcessFeedRate ProcessFeedRate { get; set; }
 
         /// <inheritdoc cref="CuttingToolLifeCycleElements.CONNECTION_CODE_MACHINE_SIDE"/>
@@ -51,10 +52,10 @@ namespace MtconnectCore.Standard.Documents.Assets
         public string ConnectionCodeMachineSide { get; set; }
 
         private List<CuttingToolMeasurement> _measurements = new List<CuttingToolMeasurement>();
-        [MtconnectNodeElements("Measurements/m:*", nameof(TryAddMeasurement), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements("Measurements/m:*", nameof(TryAddMeasurement))]
         public ICollection<CuttingToolMeasurement> Measurements => _measurements;
 
-        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.CUTTING_ITEMS), nameof(TrySetCuttingItems), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(nameof(CuttingToolLifeCycleElements.CUTTING_ITEMS), nameof(TrySetCuttingItems))]
         public CuttingItems CuttingItems { get; set; }
 
         private List<ExtensibleLifeCycleElement> _extensibleElements = new List<ExtensibleLifeCycleElement>();
@@ -64,7 +65,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CuttingToolLifeCycle() : base() { }
 
         /// <inheritdoc />
-        public CuttingToolLifeCycle(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public CuttingToolLifeCycle(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             foreach (XmlNode child in xNode.ChildNodes)
             {
@@ -100,27 +101,50 @@ namespace MtconnectCore.Standard.Documents.Assets
             => base.TrySet<CuttingItems>(xNode, nsmgr, nameof(CuttingItems), out cuttingItems);
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.8")]
-        private bool validateCutterStatus(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (CutterStatus == null)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"CuttingToolLifeCycle missing 'CutterStatus'."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        public bool ValidateProperties(out ICollection<MtconnectValidationException> validationErrors)
+        {
+            return new NodeValidationContext(this)
+                // Validate CutterStatus
+                //.ValidateValueProperty<CuttingToolLifeCycleElements>(nameof(CutterStatus), (o) =>
+                //    o.IsImplemented(CutterStatus)
+                //    ?.IsRequired(CutterStatus)
+                //)
+                // Validate ProgramToolNumber as integer
+                //.ValidateValueProperty<CuttingToolLifeCycleElements>(nameof(ProgramToolNumber), (o) =>
+                //    o.IsImplemented(ProgramToolNumber)
+                //    ?.If(
+                //        v => !int.TryParse(ProgramToolNumber, out _),
+                //        v => o.AddValidationMessage(
+                //            ValidationSeverity.ERROR,
+                //            $"CuttingToolLifeCycle ProgramToolNumber MUST be an integer.")
+                //    )
+                //)
+                // Return validation errors
+                .HasError(out validationErrors);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.8")]
-        public bool validateProgramToolNumber(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(ProgramToolNumber) && int.TryParse(ProgramToolNumber, out int toolNumber))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"CuttingToolLifeCycle ProgramToolNumber MUST be an integer."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.8")]
+        //private bool validateCutterStatus(out ICollection<MtconnectValidationException> validationErrors) {
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (CutterStatus == null)
+        //    {
+        //        validationErrors.Add(new MtconnectValidationException(
+        //            ValidationSeverity.ERROR,
+        //            $"CuttingToolLifeCycle missing 'CutterStatus'."));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
+
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.8")]
+        //public bool validateProgramToolNumber(out ICollection<MtconnectValidationException> validationErrors) {
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (!string.IsNullOrEmpty(ProgramToolNumber) && int.TryParse(ProgramToolNumber, out int toolNumber))
+        //    {
+        //        validationErrors.Add(new MtconnectValidationException(
+        //            ValidationSeverity.ERROR,
+        //            $"CuttingToolLifeCycle ProgramToolNumber MUST be an integer."));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
     }
 }

@@ -4,10 +4,9 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
-using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
@@ -29,43 +28,31 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 0..*
         /// </summary>
-        [MtconnectNodeElements(StreamsElements.COMPONENT_STREAM, nameof(TryAddComponent), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(StreamsElements.COMPONENT_STREAM, nameof(TryAddComponent))]
         public ICollection<Component> Components => _components;
 
         /// <inheritdoc/>
         public Device() { }
 
         /// <inheritdoc/>
-        public Device(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public Device(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         public bool TryAddComponent(XmlNode xNode, XmlNamespaceManager nsmgr, out Component component) => base.TryAdd<Component>(xNode, nsmgr, ref _components, out component);
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
+        private bool ValidateProperties(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Name))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Device MUST include a 'name' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Uuid))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Device MUST include a 'uuid' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return new NodeValidationContext(this)
+                // Validate Name
+                .ValidateValueProperty<DeviceAttributes>(nameof(Name), (o) =>
+                    o.IsImplemented(Name)?.IsRequired(Name)
+                )
+                // Validate Uuid
+                .ValidateValueProperty<DeviceAttributes>(nameof(Uuid), (o) =>
+                    o.IsImplemented(Uuid)?.IsRequired(Uuid)
+                )
+                // Return validation errors
+                .HasError(out validationErrors);
         }
     }
 }

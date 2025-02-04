@@ -1,19 +1,12 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Devices;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
-using MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
-using MtconnectCore.Standard.Contracts.Enums.Streams;
 using MtconnectCore.Standard.Contracts.Errors;
-using System;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Xml;
-using static MtconnectCore.Logging.MtconnectCoreLogger;
-using CoordinateSystemTypes = MtconnectCore.Standard.Contracts.Enums.Devices.CoordinateSystemTypes;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
@@ -38,11 +31,11 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="DataItemAttributes.CATEGORY"/>
         [MtconnectNodeAttribute(DataItemAttributes.CATEGORY)]
-        public string Category { get; set; }
+        public ParsedValue<CategoryEnum> Category { get; set; }
 
         /// <inheritdoc cref="DataItemAttributes.UNITS"/>
         [MtconnectNodeAttribute(DataItemAttributes.UNITS)]
-        public string Units { get; set; }
+        public ParsedValue<UnitEnum> Units { get; set; }
 
         /// <inheritdoc cref="DataItemAttributes.SUB_TYPE"/>
         [MtconnectNodeAttribute(DataItemAttributes.SUB_TYPE)]
@@ -50,27 +43,27 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="DataItemAttributes.NATIVE_UNITS"/>
         [MtconnectNodeAttribute(DataItemAttributes.NATIVE_UNITS)]
-        public string NativeUnits { get; set; }
+        public ParsedValue<NativeUnitEnum> NativeUnits { get; set; }
 
         /// <inheritdoc cref="DataItemAttributes.NATIVE_SCALE"/>
         [MtconnectNodeAttribute(DataItemAttributes.NATIVE_SCALE)]
-        public string NativeScale { get; set; }
+        public ParsedValue<uint?> NativeScale { get; set; }
 
         /// <inheritdoc cref="DataItemAttributes.STATISTIC"/>
         [MtconnectNodeAttribute(DataItemAttributes.STATISTIC)]
-        public string Statistic { get; set; }
+        public ParsedValue<StatisticEnum> Statistic { get; set; }
 
         /// <inheritdoc cref="DataItemAttributes.REPRESENTATION"/>
         [MtconnectNodeAttribute(DataItemAttributes.REPRESENTATION)]
-        public string Representation { get; set; } = RepresentationTypes.VALUE.ToCamelCase();
+        public ParsedValue<RepresentationEnum> Representation { get; set; } = RepresentationEnum.VALUE.ToCamelCase();
 
         /// <inheritdoc cref="DataItemAttributes.SIGNIFICANT_DIGITS"/>
         [MtconnectNodeAttribute(DataItemAttributes.SIGNIFICANT_DIGITS)]
-        public string SignificantDigits { get; set; }
+        public ParsedValue<uint?> SignificantDigits { get; set; }
 
         /// <inheritdoc cref="DataItemAttributes.COORDINATE_SYSTEM"/>
         [MtconnectNodeAttribute(DataItemAttributes.COORDINATE_SYSTEM)]
-        public string CoordinateSystem { get; set; }
+        public ParsedValue<CoordinateSystemEnum> CoordinateSystem { get; set; }
 
         /// <inheritdoc cref="DataItemAttributes.COORDINATE_SYSTEM_ID_REF"/>
         [MtconnectNodeAttribute(DataItemAttributes.COORDINATE_SYSTEM_ID_REF)]
@@ -82,24 +75,25 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="DataItemAttributes.DISCRETE"/>
         [MtconnectNodeAttribute(DataItemAttributes.DISCRETE)]
-        public bool? Discrete { get; set; } = false;
+        public ParsedValue<bool> Discrete { get; set; } = new ParsedValue<bool> { RawValue = "false", Value = false };
 
         /// <inheritdoc cref="DataItemAttributes.SAMPLE_RATE"/>
         [MtconnectNodeAttribute(DataItemAttributes.SAMPLE_RATE)]
-        public string SampleRate { get; set; }
+        public ParsedValue<float?> SampleRate { get; set; }
 
         /// <inheritdoc cref="DataItemElements.SOURCE"/>
-        [MtconnectNodeElements(DataItemElements.SOURCE, nameof(TrySetSource), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements(DataItemElements.SOURCE, nameof(TrySetSource))]
         public Source Source { get; set; }
 
+        // TODO: Fix the multiplicity. The Constraints element can only have one instance, the sub-elements are the properties.
         private List<DataItemConstraint> _constraints = new List<DataItemConstraint>();
         /// <inheritdoc cref="DataItemElements.CONSTRAINTS"/>
-        [MtconnectNodeElements("Constraints/*", nameof(TryAddConstraint), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Constraints/*", nameof(TryAddConstraint))]
         public ICollection<DataItemConstraint> Constraints => _constraints;
 
         private List<Filter> _filters = new List<Filter>();
         /// <inheritdoc cref="DataItemElements.FILTERS"/>
-        [MtconnectNodeElements("Filters/*", nameof(TryAddFilter), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Filters/*", nameof(TryAddFilter))]
         public ICollection<Filter> Filters => _filters;
 
         /// <inheritdoc cref="DataItemElements.INITIAL_VALUE"/>
@@ -110,14 +104,14 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeElement(DataItemElements.RESET_TRIGGER)]
         public string ResetTrigger { get; set; }
 
-        [MtconnectNodeElements("Definition", nameof(TrySetDefinition), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Definition", nameof(TrySetDefinition))]
         public DataItemDefinition Definition { get; set; }
 
         /// <inheritdoc/>
         public DataItem() : base() { }
 
         /// <inheritdoc/>
-        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public DataItem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         public bool TrySetSource(XmlNode xNode, XmlNamespaceManager nsmgr, out Source source)
             => base.TrySet<Source>(xNode, nsmgr, nameof(Source), out source);
@@ -131,413 +125,167 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TrySetDefinition(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItemDefinition dataItemDefinition)
             => base.TrySet<DataItemDefinition>(xNode, nsmgr, nameof(Definition), out dataItemDefinition);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Id))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem MUST include a unique 'id' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        // Validate all attributes for the data item
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.DATA_ITEM)]
+        private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
+            => (new NodeValidationContext(this))
+            // category
+            .ValidateValueProperty(
+                DataItemAttributes.CATEGORY,
+                (o) =>
+                    o.IsImplemented(Category)
+                    ?.WhileIntroduced((i) =>
+                        i.IsRequired(Category)
+                    )
+                    ?.IsEnumValueType(Category, out _)
+            )
+            // compositionId
+            .ValidateValueProperty(
+                DataItemAttributes.COMPOSITION_ID,
+                (o) =>
+                    o.IsImplemented(CompositionId)
+                    ?.IsIdValueType(CompositionId, false)
+            )
+            // coordinateSystem
+            .ValidateValueProperty(
+                DataItemAttributes.COORDINATE_SYSTEM,
+                (o) =>
+                    o.IsImplemented(CoordinateSystem)
+                    ?.IsEnumValueType<CoordinateSystemEnum>(CoordinateSystem, out _)
+            )
+            // discrete
+            .ValidateValueProperty(
+                DataItemAttributes.DISCRETE,
+                (o) =>
+                    o.IsImplemented(Discrete)
+                    ?.WhileIntroduced((i) =>
+                        i.IsRequired(Discrete)
+                    )
+                    ?.IsBooleanValueType(Discrete, out _)
+            )
+            // id
+            .ValidateValueProperty(
+                DataItemAttributes.ID,
+                (o) =>
+                    o.IsImplemented(Id)
+                    ?.WhileIntroduced((i) =>
+                        i.IsRequired(Id)
+                    )
+                    ?.IsIdValueType(Id)
+            )
+            // name
+            .ValidateValueProperty(
+                DataItemAttributes.NAME,
+                (o) =>
+                    o.IsImplemented(Name)
+            )
+            // nativeScale
+            .ValidateValueProperty(
+                DataItemAttributes.NATIVE_SCALE,
+                (o) =>
+                    o.IsImplemented(NativeScale)
+                    ?.IsUIntValueType(NativeScale, out _)
+            )
+            // nativeUnits
+            .ValidateValueProperty(
+                DataItemAttributes.NATIVE_UNITS,
+                (o) =>
+                    o.IsImplemented(NativeUnits)
+                    ?.ValidateNativeUnits(NativeUnits)
+            )
+            // sampleRate
+            .ValidateValueProperty(
+                DataItemAttributes.SAMPLE_RATE,
+                (o) =>
+                    o.IsImplemented(SampleRate)
+                    ?.IsFloatValueType(SampleRate, out _)
+            )
+            // significantDigits
+            .ValidateValueProperty(
+                DataItemAttributes.SIGNIFICANT_DIGITS,
+                (o) =>
+                    o.IsImplemented(SignificantDigits)
+                    ?.IsUIntValueType(SignificantDigits, out _)
+            )
+            // statistic
+            .ValidateValueProperty(
+                DataItemAttributes.STATISTIC,
+                (o) =>
+                    o.IsImplemented(Statistic)
+                    ?.IsEnumValueType(Statistic, out _)
+            )
+            // type/subType
+            .ValidateValueProperty(
+                DataItemAttributes.TYPE,
+                (o) =>
+                    o.IsImplemented(Type)
+                    ?.IsImplemented(SubType)
+                    ?.IsRequired(Type)
+                    ?.ValidateType(Category, Type, SubType)
+            )
+            // units
+            .ValidateValueProperty(
+                DataItemAttributes.UNITS,
+                (o) =>
+                    o.IsImplemented(Units)
+                    ?.If(
+                        (v) => Category == CategoryEnum.SAMPLE,
+                        (v) => o?.IsRequired(Units)
+                                ?.IsEnumValueType(Units, out _)
+                    )
+            )
+            // representation
+            .ValidateValueProperty(
+                DataItemAttributes.REPRESENTATION,
+                (o) =>
+                    o.IsImplemented(Representation)
+                    ?.IsEnumValueType(Representation, out _)
+            )
+            // coordinateSystemIdRef
+            .ValidateValueProperty(
+                DataItemAttributes.COORDINATE_SYSTEM_ID_REF,
+                (o) =>
+                    o.IsImplemented(CoordinateSystemIdRef)
+                    ?.IsIdValueType(CoordinateSystemIdRef, false)
+            )
+            .UpdateHelpLinks(MODEL_BROWSER_URL)
+            .HasError(out validationErrors);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateCategory(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Category))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'category' attribute.",
-                    SourceNode));
-            }
-            else if (!EnumHelper.Contains<CategoryTypes>(Category))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem 'category' attribute must be one of the following: [{EnumHelper.ToListString<CategoryTypes>(", ", string.Empty, string.Empty)}].",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Type))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'type' attribute.",
-                    SourceNode));
-            } else if (!string.IsNullOrEmpty(Category))
-            {
-                if (Enum.TryParse<CategoryTypes>(Category, out CategoryTypes category))
-                {
-                    switch (category)
-                    {
-                        case CategoryTypes.SAMPLE:
-                            return validateNode<SampleTypes>(category, out validationErrors);
-                        case CategoryTypes.EVENT:
-                            return validateNode<EventTypes>(category, out validationErrors);
-                        case CategoryTypes.CONDITION:
-                            return validateNode<ConditionTypes>(category, out validationErrors);
-                        default:
-                            break;
-                    }
-                }
-            }
-
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        private bool validateNode<T>(CategoryTypes categoryType, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
-        {
-            validationErrors = new List<MtconnectValidationException>();
-
-            ICollection<MtconnectValidationException> extensionErrors;
-            validateNodeExtension<T>(categoryType, out extensionErrors);
-
-            if (extensionErrors.Any())
-            {
-                validationErrors = extensionErrors;
-                return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-            }
-
-            ICollection<MtconnectValidationException> standardErrors;
-            validateNodeInStandard<T>(categoryType, Type, out standardErrors);
-
-            if (standardErrors.Any())
-            {
-                validationErrors = standardErrors;
-            }
-
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        private bool validateNodeExtension<T>(CategoryTypes categoryType, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Type))
-            {
-                if (Type.Contains(":"))
-                {
-                    if (validateNodeInStandard<T>(categoryType, Type.Substring(Type.LastIndexOf(":") + 1), out ICollection<MtconnectValidationException> inStandardErrors))
-                    {
-                        validationErrors.Add(new MtconnectValidationException(
-                            ValidationSeverity.WARNING,
-                            $"{Category} type of '{Type}' is an unnecessary extension of the MTConnect Standard as it already exists in version '{MtconnectVersion}'.",
-                            SourceNode));
-                    }
-                    else
-                    {
-                        validationErrors.Add(new MtconnectValidationException(
-                            ValidationSeverity.MESSAGE,
-                            $"{Category} type of '{Type}' is an extension of the MTConnect Standard in this implementation.",
-                            SourceNode));
-                    }
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        private bool validateNodeInStandard<T>(CategoryTypes categoryType, string type, out ICollection<MtconnectValidationException> validationErrors) where T : Enum
-        {
-            bool isValidType = true, isValidSubType = true;
-            validationErrors = new List<MtconnectValidationException>();
-
-            // Validate the observational type
-            if (!EnumHelper.Contains<T>(type))
-            {
-                if (categoryType != CategoryTypes.CONDITION
-                    || (!EnumHelper.Contains<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(type)
-                    && !EnumHelper.Contains<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes>(type)))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.ERROR,
-                        $"DataItem 'type' of '{type}' is not defined in the MTConnect Standard for 'category' '{Category}' in version '{MtconnectVersion}'.",
-                        SourceNode));
-                    isValidType = false;
-                }
-            }
-            else if (!EnumHelper.ValidateToVersion<T>(type, MtconnectVersion.GetValueOrDefault()))
-            {
-                if (categoryType != CategoryTypes.CONDITION
-                    || (!EnumHelper.ValidateToVersion<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.EventTypes>(type, MtconnectVersion.GetValueOrDefault())
-                        && !EnumHelper.ValidateToVersion<MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes.SampleTypes>(type, MtconnectVersion.GetValueOrDefault())))
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.WARNING,
-                    $"DataItem 'type' of '{type}' is not valid for 'category' '{Category}' in version '{MtconnectVersion}' of the MTConnect Standard.",
-                    SourceNode));
-                isValidType = false;
-            }
-
-            if (isValidType && !string.IsNullOrEmpty(SubType))
-            {
-                // Get the Enum and look for an attribute pointing to the SubType enum
-                Type enumType = typeof(T);
-                MemberInfo[] typeValueInfos = enumType.GetMember(type);
-                var valueInfo = typeValueInfos.FirstOrDefault(o => o.DeclaringType == enumType);
-                var obsSubType = valueInfo?.GetCustomAttribute<ObservationalSubTypeAttribute>();
-                // Validate the observational sub-type
-                if (obsSubType != null)
-                {
-                    if (!EnumHelper.Contains(obsSubType.SubTypeEnum, SubType))
-                    {
-                        validationErrors.Add(new MtconnectValidationException(
-                            ValidationSeverity.ERROR,
-                            $"DataItem 'subType' of '{SubType}' is not defined in the MTConnect Standard for 'category' '{Category}' and 'type' '{type}' in version '{MtconnectVersion}'.",
-                            SourceNode));
-                        isValidSubType = false;
-                    }
-                    else if (!EnumHelper.ValidateToVersion(obsSubType.SubTypeEnum, SubType, MtconnectVersion.GetValueOrDefault()))
-                    {
-                        validationErrors.Add(new MtconnectValidationException(
-                            ValidationSeverity.WARNING,
-                            $"DataItem 'subType' of '{SubType}' is not valid for 'category' '{Category}' and 'type' '{type}' in version '{MtconnectVersion}' of the MTConnect Standard.",
-                            SourceNode));
-                        isValidSubType = false;
-                    }
-                }
-            }
-
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateUnits(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Units))
-            {
-                if (Units.Contains(":"))
-                {
-                    string extendedUnits = Units.Substring(Units.LastIndexOf(":") + 1);
-                    if (!EnumHelper.Contains<UnitsTypes>(extendedUnits))
-                    {
-                        validationErrors.Add(new MtconnectValidationException(
-                            ValidationSeverity.WARNING,
-                            $"DataItem 'units' of '{extendedUnits}' is an unnecessary extension of the MTConnect Standard as it already exists in version '{MtconnectVersion}'.",
-                            SourceNode));
-                    }
-                    else if (!EnumHelper.ValidateToVersion<UnitsTypes>(extendedUnits, MtconnectVersion.GetValueOrDefault()))
-                    {
-                        validationErrors.Add(new MtconnectValidationException(
-                            ValidationSeverity.WARNING,
-                            $"DataItem 'units' of '{extendedUnits}' is not valid in version '{MtconnectVersion}' of the MTConnect Standard.",
-                            SourceNode));
-                    } else
-                    {
-                        validationErrors.Add(new MtconnectValidationException(
-                            ValidationSeverity.MESSAGE,
-                            $"DataItem 'units' of '{extendedUnits}' is an extension of the MTConnect Standard in this implementation.",
-                            SourceNode));
-                    }
-                }
-                else if (!EnumHelper.Contains<UnitsTypes>(Units))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"DataItem units of '{Units}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
-                        SourceNode));
-                }
-                else if (!EnumHelper.ValidateToVersion<UnitsTypes>(Units, MtconnectVersion.GetValueOrDefault()))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"DataItem units of '{Units}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
-                        SourceNode));
-                }
-            } else if (Category.ToUpper() == "SAMPLE") {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem MUST include a 'units' attribute when 'category' equals 'SAMPLE'.",
-                        SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateNativeUnits(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(NativeUnits))
-            {
-                if (!EnumHelper.Contains<NativeUnitsTypes>(NativeUnits) && !EnumHelper.Contains<UnitsTypes>(NativeUnits))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"DataItem nativeUnits of '{NativeUnits}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
-                        SourceNode));
-                }
-                else if (!EnumHelper.ValidateToVersion<NativeUnitsTypes>(NativeUnits, MtconnectVersion.GetValueOrDefault()) && !EnumHelper.ValidateToVersion<UnitsTypes>(NativeUnits, MtconnectVersion.GetValueOrDefault()))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"DataItem nativeUnits of '{NativeUnits}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
-                        SourceNode));
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateNativeScale(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(NativeScale) && !int.TryParse(NativeScale, out int nativeScale))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem 'nativeScale' MUST be of type integer.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateSampleRate(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(SampleRate) && !float.TryParse(SampleRate, out float sampleRate))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem 'sampleRate' MUST be of type float.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
-        private bool validateSignificantDigits(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(SignificantDigits) && !int.TryParse(SignificantDigits, out int significantDigits))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"DataItem 'significantDigits' MUST be of type integer.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL, MtconnectVersions.V_1_1_0)]
-        private bool validateRepresentation_NotImplemented(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Representation)) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, "DataItem does not yet support 'representation' until version 1.2.0 of the MTConnect Standard.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, MODEL_BROWSER_URL)]
-        private bool validateRepresentation(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Representation))
-            {
-                if (!EnumHelper.Contains<RepresentationTypes>(Representation))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"DataItem 'representation' of '{Representation}' is not defined in the MTConnect Standard in version '{MtconnectVersion}'.",
-                        SourceNode));
-                }
-                else if (!EnumHelper.ValidateToVersion<RepresentationTypes>(Representation, MtconnectVersion.GetValueOrDefault()))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"DataItem 'representation' of '{Representation}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
-                        SourceNode));
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL, MtconnectVersions.V_1_8_1)]
-        private bool validateCoordinateSystem(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(CoordinateSystem))
-            {
-                if (!EnumHelper.Contains<CoordinateSystemTypes>(CoordinateSystem))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        Contracts.Enums.ValidationSeverity.WARNING,
-                        $"DataItem 'coordinateSystem' attribute must be one of the following: [{EnumHelper.ToListString<Contracts.Enums.Devices.CoordinateSystemTypes>(", ", string.Empty, string.Empty)}].", SourceNode));
-                }
-                else if (!EnumHelper.ValidateToVersion<CoordinateSystemTypes>(CoordinateSystem, MtconnectVersion.GetValueOrDefault()))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"DataItem coordinateSystem of '{CoordinateSystem}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
-                        SourceNode));
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, MODEL_BROWSER_URL)]
-        private bool validateCoordinateSystem_Deprecated(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(CoordinateSystem))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
-                    "DataItem 'coordinateSystem' attribute was DEPRECATED in MTConnect Version 2.0.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, MODEL_BROWSER_URL)]
-        private bool validateStatistic(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Statistic))
-            {
-                if (!EnumHelper.Contains<StatisticTypes>(Statistic))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.ERROR,
-                        $"DataItem 'statistic' attribute must be one of the following: [{EnumHelper.ToListString<StatisticTypes>(", ", string.Empty, string.Empty)}].",
-                        SourceNode));
-                }
-                else if (!EnumHelper.ValidateToVersion<StatisticTypes>(Statistic, MtconnectVersion.GetValueOrDefault()))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.WARNING,
-                        $"DataItem 'statistic' of '{Statistic}' is not supported in version '{MtconnectVersion}' of the MTConnect Standard.",
-                        SourceNode));
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, MODEL_BROWSER_URL)]
-        private bool validateResetTrigger(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(ResetTrigger) && !EnumHelper.Contains<ResetTriggeredValues>(ResetTrigger)) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"Unrecognized ResetTrigger value '{ResetTrigger}'.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-        
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, MODEL_BROWSER_URL)]
-        private bool validateRepresentationDiscrete_Deprecated(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Representation) && EnumHelper.Enumify(Representation).Equals(RepresentationTypes.DISCRETE)) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"DataItem 'representation' of 'discrete' is obsolete, the 'discrete' attribute should be used instead.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        // Validate all elements for the data item
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.DATA_ITEM)]
+        private bool validateParts(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+            // Source
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.SOURCE), o =>
+                o
+            )
+            // Constraints
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.CONSTRAINTS), o =>
+                o
+            )
+            // Filter
+            .ValidateValueProperty(
+                DataItemElements.FILTERS,
+                o =>
+                    o.HasMultiplicity(nameof(DataItemElements.FILTERS), Filters, 0, int.MaxValue)
+            )
+            // InitialValue
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.INITIAL_VALUE), o =>
+                o
+                // InitialValue validated when set
+            )
+            // ResetTrigger
+            .ValidateValueProperty(
+                DataItemElements.RESET_TRIGGER,
+                o =>
+                    o.IsEnumValueType<ResetTriggeredEnum>(nameof(ResetTrigger), ResetTrigger, out _)
+            )
+            // Definition
+            .ValidateValueProperty<DataItemElements>(nameof(DataItemElements.DEFINITION), o =>
+                o
+                // Definition validated when set
+            )
+            // TODO: Relationships
+            .HasError(out validationErrors);
     }
 }

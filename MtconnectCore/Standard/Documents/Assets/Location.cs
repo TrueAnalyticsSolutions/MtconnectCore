@@ -33,7 +33,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public Location() : base() { }
 
         /// <inheritdoc />
-        public Location(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public Location(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Value = xNode.InnerText;
         }
@@ -49,13 +49,23 @@ namespace MtconnectCore.Standard.Documents.Assets
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"CuttingTool Location missing 'type' attribute."));
+                        $"CuttingTool Location missing 'type' attribute.",
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(Type)
+                    });
                 }
                 else if (!Enum.TryParse<LocationTypes>(Type, out LocationTypes locationType))
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
-                        Contracts.Enums.ValidationSeverity.ERROR,
-                        $"Unrecognized CuttingTool Location 'type'."));
+                        Contracts.Enums.ValidationSeverity.WARNING,
+                        $"Unrecognized CuttingTool Location 'type'.",
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(Type)
+                    });
                 }
 
                 return baseResult && !validationContext.HasErrors();

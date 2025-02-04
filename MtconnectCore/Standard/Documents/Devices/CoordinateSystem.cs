@@ -4,11 +4,9 @@ using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
-using System;
-using System.Linq;
 using System.Xml;
-using static MtconnectCore.Logging.MtconnectCoreLogger;
 using MtconnectCore.Standard.Contracts.Enums;
+using MtconnectCore.Validation;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
@@ -38,56 +36,70 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(CoordinateSystemAttributes.TYPE)]
         public string Type { get; set; }
 
+        /// <inheritdoc cref="CoordinateSystemAttributes.UUID"/>
+        [MtconnectNodeAttribute(CoordinateSystemAttributes.UUID)]
+        public string Uuid { get; set; }
+
         /// <inheritdoc cref="CoordinateSystemElements.ORIGIN"/>
         [MtconnectNodeElement(CoordinateSystemElements.ORIGIN)]
         public string Origin { get; set; }
 
         /// <inheritdoc cref="CoordinateSystemElements.TRANSFORMATION"/>
-        [MtconnectNodeElements(CoordinateSystemElements.TRANSFORMATION, nameof(TrySetTransformation), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements(CoordinateSystemElements.TRANSFORMATION, nameof(TrySetTransformation))]
         public Transformation Transformation { get; set; }
 
         /// <inheritdoc />
         public CoordinateSystem() : base() { }
 
         /// <inheritdoc />
-        public CoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public CoordinateSystem(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         public bool TrySetTransformation(XmlNode xNode, XmlNamespaceManager nsmgr, out Transformation transformation)
             => base.TrySet<Transformation>(xNode, nsmgr, nameof(Transformation), out transformation);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 9.4.1.1.1")]
-        private bool validateId(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Id))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"CoordinateSystem MUST include a unique 'id' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COORDINATE_SYSTEM)]
+        private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+            // id
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.ID), (o) =>
+                o.WhileIntroduced((x) =>
+                    x.IsIdValueType(Id)
+                )
+                ?.WhileNotIntroduced((x) =>
+                    x.IsImplemented()
+                    .IsIdValueType(Id, false)
+                )
+            )
+            // name
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.NAME), (o) =>
+                o.IsImplemented(Name)
+            )
+            // nativeName
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.NATIVE_NAME), (o) =>
+                o.IsImplemented(NativeName)
+            )
+            // parentIdRef
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.PARENT_ID_REF), (o) =>
+                o.IsImplemented(ParentIdRef)
+                ?.IsIdValueType(ParentIdRef, false)
+            )
+            // type
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.TYPE), (o) =>
+                o.WhileIntroduced((x) =>
+                    x.IsImplemented()
+                )
+                ?.WhileNotIntroduced((x) =>
+                    x.IsImplemented(Type)
+                )
+                ?.IsEnumValueType<CoordinateSystemTypeEnum>(Type, out _)
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "Part 2 Section 9.4.1.1.1")]
-        private bool validateType(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Type))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.ERROR,
-                    $"CoordinateSystem MUST include a 'type' attribute.",
-                    SourceNode));
-            }
-            else if (!EnumHelper.Contains<CoordinateSystemTypes>(Type))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    Contracts.Enums.ValidationSeverity.WARNING,
-                    $"CoordinateSystem 'type' should be one of: [{EnumHelper.ToListString<CoordinateSystemTypes>(", ", string.Empty, string.Empty)}].",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+            )
+            // uuid
+            .ValidateValueProperty<CoordinateSystemAttributes>(nameof(CoordinateSystemAttributes.UUID), (o) =>
+                o.IsImplemented(Uuid)
+            )
+            .HasError(out validationErrors);
+        // TODO: Validate parentIdRef
+
     }
 }

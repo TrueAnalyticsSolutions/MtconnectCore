@@ -34,9 +34,9 @@ namespace MtconnectCore.Standard.Contracts
             return value.ToUpper();
         }
 
-        internal static bool Contains(Type enumType, string value, out object enumValue)
+        internal static bool TryParse(Type enumType, string value, out object output)
         {
-            enumValue = null;
+            output = null;
             
             if (string.IsNullOrEmpty(value)) return false;
 
@@ -58,12 +58,13 @@ namespace MtconnectCore.Standard.Contracts
             string[] enumValues = Enum.GetNames(enumType);
             string foundEnum = enumValues.FirstOrDefault(o => o.Equals(value, StringComparison.OrdinalIgnoreCase));
             if (foundEnum == null) return false;
-            enumValue = Enum.Parse(enumType, foundEnum);
-            return enumValue != null;
+            output = Enum.Parse(enumType, foundEnum);
+            return output != null;
         }
 
-        internal static bool Contains(Type enumType, string value) => Contains(enumType, value, out _);
+        internal static bool Contains(Type enumType, string value) => TryParse(enumType, value, out _);
         internal static bool Contains(this Enum enumValue, string value) => Contains(enumValue.GetType(), value);
+        internal static bool TryParse(this Enum enumValue, string value, out object output) => TryParse(enumValue.GetType(), value, out output);
         /// <summary>
         /// Compares the provided <paramref name="value"/> against the enum values.
         /// </summary>
@@ -71,6 +72,13 @@ namespace MtconnectCore.Standard.Contracts
         /// <param name="value">Value to compare against the enum.</param>
         /// <returns>Flag for whether or not the <paramref name="value"/> was found in the enum.</returns>
         internal static bool Contains<TEnum>(string value) => Contains(typeof(TEnum), value);
+        internal static bool TryParse<TEnum>(string value, out TEnum? output) where TEnum : struct, Enum
+        {
+            object result;
+            bool found = TryParse(typeof(TEnum), value, out result);
+            output = found ? (TEnum)result : default;
+            return found;
+        }
 
         internal static string ToCamelCase(this Enum enumValue) => enumValue.ToString().ToCamelCase('_');
         internal static string ToPascalCase(this Enum enumValue) => enumValue.ToString().ToPascalCase('_');
@@ -121,13 +129,20 @@ namespace MtconnectCore.Standard.Contracts
 
         internal static string WordToPascalCase(string input) => input.Length > 1 ? input.Substring(0, 1).ToUpper() + input.Substring(1).ToLower() : input.ToUpper();
 
-        internal static bool ValidateToVersion<TEnum>(string value, MtconnectVersions documentVersion) => ValidateToVersion(typeof(TEnum), value, documentVersion);
-        internal static bool ValidateToVersion<TEnum>(MtconnectVersions documentVersion) => ValidateToVersion(typeof(TEnum), documentVersion);
+        internal static bool IsImplemented<TEnum>(string value, MtconnectVersions documentVersion)
+            => CompareToVersion(typeof(TEnum), value, documentVersion) == VersionComparisonTypes.Implemented;
+        internal static bool IsImplemented<TEnum>(MtconnectVersions documentVersion)
+            => CompareToVersion(typeof(TEnum), documentVersion) == VersionComparisonTypes.Implemented;
+        internal static bool IsImplemented(Type enumType, string value, MtconnectVersions documentVersion)
+            => CompareToVersion(enumType, value, documentVersion) == VersionComparisonTypes.Implemented;
 
-        internal static bool ValidateToVersion(Type enumType, string value, MtconnectVersions documentVersion)
+        internal static VersionComparisonTypes? CompareToVersion<TEnum>(string value, MtconnectVersions documentVersion) => CompareToVersion(typeof(TEnum), value, documentVersion);
+        internal static VersionComparisonTypes? CompareToVersion<TEnum>(MtconnectVersions documentVersion) => CompareToVersion(typeof(TEnum), documentVersion);
+
+        internal static VersionComparisonTypes? CompareToVersion(Type enumType, string value, MtconnectVersions documentVersion)
         {
             if (string.IsNullOrEmpty(value))
-                return false;
+                return null;
 
             if (!value.ToUpper().Equals(value))
             {
@@ -140,37 +155,35 @@ namespace MtconnectCore.Standard.Contracts
                 }
             }
 
-            if (!ValidateToVersion(enumType, documentVersion)) return false;
-            if (!Contains(enumType, value, out object enumValue)) return false;
+            var enumValidation = CompareToVersion(enumType, documentVersion);
+            if (enumValidation != VersionComparisonTypes.Implemented)
+                return enumValidation;
+            if (!TryParse(enumType, value, out object enumValue))
+                return null;
 
-            if (enumValue == null) return false;
+            if (enumValue == null)
+                return null;
 
             MemberInfo[] valueInfos = enumType.GetMember(enumValue.ToString());
             var valueInfo = valueInfos.FirstOrDefault(o => o.DeclaringType == enumType);
-            var typedEnumValueVersions = valueInfo.GetCustomAttributes<MtconnectVersionApplicabilityAttribute>();
-            if (typedEnumValueVersions?.Any() == true)
+            var typedEnumValueVersion = valueInfo.GetCustomAttribute<MtconnectVersionApplicabilityAttribute>();
+            if (typedEnumValueVersion != null)
             {
-                if (!typedEnumValueVersions.Any(o => o.Compare(documentVersion)))
-                {
-                    return false;
-                }
+                return typedEnumValueVersion.Compare(documentVersion);
             }
 
-            return true;
+            return VersionComparisonTypes.Implemented;
         }
 
-        internal static bool ValidateToVersion(Type enumType, MtconnectVersions documentVersion) {
-            var enumVersionAttributes = enumType.GetCustomAttributes(typeof(MtconnectVersionApplicabilityAttribute), true);
+        internal static VersionComparisonTypes? CompareToVersion(Type enumType, MtconnectVersions documentVersion) {
+            var enumVersionAttribute = enumType.GetCustomAttribute<MtconnectVersionApplicabilityAttribute>(true);
 
             // Validate the enum itself
-            if (enumVersionAttributes?.Length > 0) {
-                var typedEnumVersions = (MtconnectVersionApplicabilityAttribute[])enumVersionAttributes;
-                if (!typedEnumVersions.Any(o => o.Compare(documentVersion))) {
-                    return false;
-                }
+            if (enumVersionAttribute != null) {
+                return enumVersionAttribute.Compare(documentVersion);
             }
 
-            return true;
+            return VersionComparisonTypes.Implemented;
         }
     }
 }

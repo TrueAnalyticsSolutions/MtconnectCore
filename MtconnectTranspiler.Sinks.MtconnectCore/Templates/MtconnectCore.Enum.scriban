@@ -1,74 +1,45 @@
-﻿{{~ nversion_slim = (source?.normative_version | string.slice 20 3) | string.replace "_" "."
-dversion_slim = (source?.deprecated_version | string.slice 20 3) | string.replace "_" "." ~}}
-#pragma warning disable 0618
+﻿#pragma warning disable 0618
 #pragma warning disable 1574
 using System;
 using System.CodeDom.Compiler;
 using MtconnectCore.Standard.Contracts.Attributes;
-{{~ if enum_has_values source ~}}
-using MtconnectCore.Standard.Contracts.Enums.Streams;
-{{ end ~}}
 
 namespace {{ to_pascal_code source.namespace }}
 {
 	/// <summary>
-	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration__{{ source.reference_id }}">model.mtconnect.org</seealso>
-	{{ include 'UmlCommentsSummaryContent.scriban' source?.summary ~}}
+	{{~ if source.summary != null && source.summary != "" ~}}
+	{{ include 'UmlCommentsSummaryContent.scriban' source }}
+	{{~ end ~}}
+	/// <br/>Visit <seealso href="{{ source?.help_url }}">model.mtconnect.org</seealso> for more information.
 	/// </summary>
-	{{~ if nversion_slim != "" || dversion_slim != "" ~}}
-	/// <remarks>
-	/// <list type="bullet">
-	{{~ if nversion_slim != "" ~}}
-	/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_{{ nversion_slim }}">v{{ nversion_slim }}</see></item>
-	{{~ end ~}}
-	{{~ if dversion_slim != "" ~}}
-	/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_{{ dversion_slim }}">v{{ dversion_slim }}</see></item>
-	{{~ end ~}}
-	/// </list>
-	/// </remarks>
-	{{~ end ~}}
-	{{~ if dversion_slim != "" ~}}
-	[Obsolete("Deprecated in v{{ dversion_slim }} according to https://model.mtconnect.org/#_Version_{{ dversion_slim }}")]
-	{{~ end ~}}
+	{{ include 'NormativeRemarks.scriban' source }}
 	{{ include 'MtconnectVersionApplicability.scriban' source }}
 	{{ include 'MtconnectCore.GeneratedCodeAttribute.scriban' }}
-	public enum {{ to_pascal_case source.name }}
+	public enum {{ to_pascal_case source.name + source.filename_suffix }}
 	{
-	{{~ for item in source.items ~}}
-{{~ n_item_version_slim = (item?.normative_version | string.slice 20 3) | string.replace "_" "."
-d_item_version_slim = (item?.deprecated_version | string.slice 20 3) | string.replace "_" "." ~}}
+	{{~ if source.sub_types.size != null && source.sub_types.size > 0 ~}}
+	{{~ for item in source.sub_types ~}}
 		/// <summary>
-		{{ include 'UmlCommentsSummaryContent.scriban' item?.summary ~}}
+		{{ include 'UmlCommentsSummaryContent.scriban' item }}
 		/// </summary>
-		{{~ if n_item_version_slim != "" || d_item_version_slim != "" ||  category_contains_type source item || category_contains_value source item ~}}
-		/// <remarks>
-		/// <list type="bullet">
-		{{~ if category_contains_type source item ~}}
-		/// <item><b>Sub-Type</b>: <see cref="{{ source?.sub_types[item.name] }}" /></item>
-		{{~ end ~}}
-		{{~ if category_contains_value source item ~}}
-		/// <item><b>Values</b>: <see cref="{{ source?.value_types[item.name] }}" /></item>
-		{{~ end ~}}
-		{{~ if n_item_version_slim != "" ~}}
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_{{ n_item_version_slim }}">v{{ n_item_version_slim }}</see></item>
-		{{~ end ~}}
-		{{~ if d_item_version_slim != "" ~}}
-		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_{{ d_item_version_slim }}">v{{ d_item_version_slim }}</see></item>
-		{{~ end ~}}
-		/// </list>
-		/// </remarks>
-		{{~ end ~}}
-		{{~ if d_item_version_slim != "" ~}}
-		[Obsolete("Deprecated in v{{ d_item_version_slim }} according to https://model.mtconnect.org/#_Version_{{ d_item_version_slim }}")]
-		{{~ end ~}}
+		{{ include 'NormativeRemarks.scriban' item }}
 		{{ include 'MtconnectVersionApplicability.scriban' item }}
-		{{~ if category_contains_type source item ~}}
-		[ObservationalSubType(typeof({{ source?.sub_types[item.name] }}))]
-{{ end ~}}
-		{{~ if category_contains_value source item ~}}
-		[ObservationalValue(typeof({{ source?.value_types[item.name] }}))]
-{{ end ~}}
-		{{ item.name }},
+		{{ include 'ObservationalSubTypeAttribute.scriban' item }}
+		{{~ if source.name == "EventTypes" || source.name == "ConditionTypes" || source.name == "SampleTypes" ~}}
+		{{ include 'ObservationalValueAttribute.scriban' source item.name }}
+		{{~ else ~}}
+		{{ include 'ObservationalValueAttribute.scriban' source }}
+		{{~ end ~}}
+		{{ to_upper_snake_code item.name }},
+	{{~ end ~}}
+	{{~ else if source.values != null && source.values.size > 0 ~}}
+	{{~ for value in source.values ~}}
+		/// <summary>
+		{{ include 'UmlCommentsSummaryContent.scriban' value }}
+		/// </summary>
+		{{ include 'NormativeRemarks.scriban' value }}
+		{{ value.name | string.replace "/" "_PER_" | string.replace "^2" "_SQUARED" | string.replace "^3" "_CUBED" | to_code_safe }},
+	{{~ end ~}}
 	{{~ end ~}}
 	}
 }

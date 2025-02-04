@@ -3,6 +3,7 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Assets.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,28 +33,62 @@ namespace MtconnectCore.Standard.Documents.Assets
         public Asset() : base() { }
 
         /// <inheritdoc/>
-        public Asset(XmlNode xNode, XmlNamespaceManager nsmgr, string defaultNamespace, MtconnectVersions version) : base(xNode, nsmgr, defaultNamespace ?? Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public Asset(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 4 Section 3.2.3.1")]
-        private bool validateAssetId(out ICollection<MtconnectValidationException> validationErrors)
+        protected virtual bool ValidateProperties(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(AssetId))
-            {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Asset MUST include a 'assetId' attribute.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return new NodeValidationContext(this)
+                // Validate AssetId property
+                .ValidateValueProperty<AssetAttributes>(nameof(AssetId), (o) =>
+                    o.IsImplemented(AssetId)
+                    ?.If(
+                        v => string.IsNullOrEmpty(AssetId),
+                        v => throw new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            "Asset MUST include a 'assetId' attribute.",
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = nameof(AssetId)
+                        }
+                    )
+                )
+                // Validate Timestamp property
+                //.ValidateValueProperty<AssetAttributes>(nameof(Timestamp), (o) =>
+                //    o.IsImplemented(Timestamp)
+                //    ?.If(
+                //        v => Timestamp == null || Timestamp == default(DateTime),
+                //        v => throw new MtconnectValidationException(
+                //            ValidationSeverity.ERROR,
+                //            "Asset MUST include a 'timestamp' attribute.",
+                //            SourceNode)
+                //    )
+                //)
+                // Return validation errors
+                .HasError(out validationErrors);
         }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 4 Section 3.2.3.1")]
-        private bool validateTimestamp(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (Timestamp == null || Timestamp == default(DateTime))
-            {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Asset MUST include a 'timestamp' attribute.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 4 Section 3.2.3.1")]
+        //private bool validateAssetId(out ICollection<MtconnectValidationException> validationErrors)
+        //{
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (string.IsNullOrEmpty(AssetId))
+        //    {
+        //        validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Asset MUST include a 'assetId' attribute.", SourceNode));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
+
+        //[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 4 Section 3.2.3.1")]
+        //private bool validateTimestamp(out ICollection<MtconnectValidationException> validationErrors)
+        //{
+        //    validationErrors = new List<MtconnectValidationException>();
+        //    if (Timestamp == null || Timestamp == default(DateTime))
+        //    {
+        //        validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Asset MUST include a 'timestamp' attribute.", SourceNode));
+        //    }
+        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //}
     }
 }

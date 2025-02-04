@@ -32,7 +32,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Cell() : base() { }
 
         /// <inheritdoc/>
-        public Cell(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public Cell(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Result = xNode.InnerText;
         }

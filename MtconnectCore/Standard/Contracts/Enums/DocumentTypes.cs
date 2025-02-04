@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MtconnectCore.Standard.Contracts.Enums
+﻿namespace MtconnectCore.Standard.Contracts.Enums
 {
     /// <summary>
     /// Types of supported MTConnect Response Documents.
@@ -24,6 +20,18 @@ namespace MtconnectCore.Standard.Contracts.Enums
         /// <summary>
         /// Represents a MTConnectErrors Response Document.
         /// </summary>
-        Errors
+        Errors,
+        /// <summary>
+        /// Represents a MTConnectDevicesExceptionsReport Response Document.
+        /// </summary>
+        DevicesExceptionsReport,
+        /// <summary>
+        /// Represents a MTConnectStreamsExceptionsReport Response Document.
+        /// </summary>
+        StreamsExceptionsReport,
+        /// <summary>
+        /// Represents a MTConnectAssetsExceptionsReport Response Document.
+        /// </summary>
+        AssetsExceptionsReport,
     }
 }

@@ -19,6 +19,6 @@ namespace MtconnectCore.Standard.Documents.Assets
         public FileComment() : base() { }
 
         /// <inheritdoc/>
-        public FileComment(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public FileComment(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
     }
 }

@@ -31,7 +31,7 @@ namespace MtconnectCore.Standard.Documents
         /// <summary>
         /// Reference to the default XML namespace that this type of MTConnect Response Document uses.
         /// </summary>
-        public abstract string DefaultNamespace { get; }
+        public string DefaultNamespace { get; protected set; }
 
         /// <summary>
         /// Internal reference to the <see cref="{THeader}"/>.
@@ -72,12 +72,22 @@ namespace MtconnectCore.Standard.Documents
         public ResponseDocument(XmlDocument xDoc)
         {
             Source = xDoc;
-            
+
+            DefaultNamespace = MtconnectNodeParser.GetNamespaceName(xDoc);
+
             // Detect if there are missing namespaces
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns")))
-                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns' attribute"));
+                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns' attribute", Source.DocumentElement) {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "xmlns"
+                });
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns:" + DefaultNamespace)))
-                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute"));
+                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute", Source.DocumentElement) {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "xmlns:" + DefaultNamespace
+                });
 
             DocumentVersion = VersionHelper.GetVersionFromDocument(xDoc);
             MtconnectVersion = DocumentVersion;
@@ -105,6 +115,24 @@ namespace MtconnectCore.Standard.Documents
                     break;
                 case "MTConnectDevices":
                     if (Type != DocumentTypes.Devices)
+                    {
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
+                    }
+                    break;
+                case "MTConnectDevicesExceptionsReport":
+                    if (Type != DocumentTypes.DevicesExceptionsReport)
+                    {
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
+                    }
+                    break;
+                case "MTConnectStreamsExceptionsReport":
+                    if (Type != DocumentTypes.StreamsExceptionsReport)
+                    {
+                        Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
+                    }
+                    break;
+                case "MTConnectAssetsExceptionsReport":
+                    if (Type != DocumentTypes.AssetsExceptionsReport)
                     {
                         Logger.Error(new MtconnectDocumentTypeMismatchException<THeader, TItem>(this));
                     }

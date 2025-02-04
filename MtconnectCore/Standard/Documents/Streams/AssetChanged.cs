@@ -1,9 +1,6 @@
 ﻿using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
-using MtconnectCore.Standard.Contracts.Errors;
-using System;
-using System.Collections.Generic;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -22,8 +19,5 @@ namespace MtconnectCore.Standard.Documents.Streams
             Value = xNode.InnerText;
             TagName = xNode.LocalName;
         }
-
-        protected override bool validateNode(out ICollection<MtconnectValidationException> validationErrors) => throw new NotImplementedException();
-        protected override bool validateValue(out ICollection<MtconnectValidationException> validationErrors) => throw new NotImplementedException();
     }
 }

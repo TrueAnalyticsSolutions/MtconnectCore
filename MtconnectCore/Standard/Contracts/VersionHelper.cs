@@ -102,6 +102,21 @@ namespace MtconnectCore.Standard.Contracts
              { MtconnectVersions.V_2_5_1, null },
         };
 
+        /// <summary>
+        /// Compares the Response Document version against the version specified in the attribute based on the comparison method provided.
+        /// </summary>
+        /// <param name="implementedVersion">Reference to the version of MTConnect implemented in the Response Document.</param>
+        /// <returns>Flag for whether the MTConnect Response Document version matches with the specified <see cref="MinimumVersion"/> according to the <see cref="ComparisonType"/>.</returns>
+        public static VersionComparisonTypes Compare(MtconnectVersions implementedVersion, MtconnectVersions introduced, MtconnectVersions? deprecated = null)
+        {
+            if (implementedVersion < introduced)
+                return VersionComparisonTypes.NotImplemented;
+            if (implementedVersion >= deprecated)
+                return VersionComparisonTypes.Deprecated;
+            return VersionComparisonTypes.Implemented;
+        }
+
+        public static string ToName(this MtconnectVersions? version) => ToName(version.GetValueOrDefault());
         public static string ToName(this MtconnectVersions version) => versionNames[version];
 
         /// <summary>
@@ -111,6 +126,12 @@ namespace MtconnectCore.Standard.Contracts
         /// <returns></returns>
         public static MtconnectVersions? GetVersion(string version) => versionNames.Where(o => version.StartsWith(o.Value) || o.Value.StartsWith(version)).Select(o => o.Key).FirstOrDefault();
 
+        /// <summary>
+        /// Looks up the official release date of the provided version.
+        /// </summary>
+        /// <param name="version">Version of MTConnect</param>
+        /// <returns>Official release date of the provided version.</returns>
+        public static DateTime GetReleaseDate(this MtconnectVersions? version) => GetReleaseDate(version.GetValueOrDefault());
         /// <summary>
         /// Looks up the official release date of the provided version.
         /// </summary>

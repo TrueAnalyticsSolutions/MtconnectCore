@@ -4,9 +4,9 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
@@ -45,22 +45,27 @@ namespace MtconnectCore.Standard.Documents.Devices
         public Channel() : base() { }
 
         /// <inheritdoc/>
-        public Channel(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version) { }
+        public Channel(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.6.7.2")]
-        private bool validateNumber(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Number))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Channel MUST include a 'number' attribute."));
-            } else if (Number.Length > 255) {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Channel 'number' must not exceed 255 characters."));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.CHANNEL)]
+        private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+            // name
+            .ValidateValueProperty(
+                ChannelAttributes.NAME,
+                (o) =>
+                    o.IsImplemented()
+            )
+            // number
+            .ValidateValueProperty(
+                ChannelAttributes.NUMBER,
+                (o) => 
+                    o.IsImplemented()
+                    ?.WhileIntroduced((x) =>
+                        x.IsRequired(Number)
+                    )
+            )
+            .HasError(out validationErrors);
+        // TODO: Add Parts validation
     }
 }

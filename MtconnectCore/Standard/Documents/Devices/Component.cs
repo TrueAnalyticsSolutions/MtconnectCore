@@ -4,6 +4,7 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -17,6 +18,8 @@ namespace MtconnectCore.Standard.Documents.Devices
     /// <remarks>See Part 2 Section 4.4 of the MTConnect specification.</remarks>
     public class Component : MtconnectNode
     {
+        private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure__EAID_8548C620_467A_4f50_9A22_58D84B7E8779";
+
         /// <inheritdoc cref="ComponentAttributes.ID"/>
         [MtconnectNodeAttribute(ComponentAttributes.ID)]
         public string Id { get; set; }
@@ -31,15 +34,19 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc cref="ComponentAttributes.SAMPLE_INTERVAL"/>
         [MtconnectNodeAttribute(ComponentAttributes.SAMPLE_INTERVAL)]
-        public double? SampleInterval { get; set; }
+        public string SampleInterval { get; set; }
 
         /// <inheritdoc cref="ComponentAttributes.SAMPLE_RATE"/>
         [MtconnectNodeAttribute(ComponentAttributes.SAMPLE_RATE)]
-        public double? SampleRate { get; set; }
+        public string SampleRate { get; set; }
 
         /// <inheritdoc cref="ComponentAttributes.UUID"/>
         [MtconnectNodeAttribute(ComponentAttributes.UUID)]
         public string Uuid { get; set; }
+
+        /// <inheritdoc cref="ComponentAttributes.COORDINATE_SYSTEM_ID_REF"/>
+        [MtconnectNodeAttribute(ComponentAttributes.COORDINATE_SYSTEM_ID_REF)]
+        public string CoordinateSystemIdRef { get; set; }
 
         /// <summary>
         /// Explicit reference to the XML tag name. This can be more reliable than referencing <see cref="Name"/>
@@ -47,11 +54,11 @@ namespace MtconnectCore.Standard.Documents.Devices
         public string TagName { get; set; }
 
         /// <inheritdoc cref="ComponentElements.DESCRIPTION"/>
-        [MtconnectNodeElements("Description", nameof(TrySetDescription), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
-        public ComponentDescription Description { get; set; }
+        [MtconnectNodeElements("Description", nameof(TrySetDescription))]
+        public Description Description { get; set; }
 
         /// <inheritdoc cref="ComponentElements.CONFIGURATION"/>
-        [MtconnectNodeElements("Configuration", nameof(TrySetConfiguration), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Configuration", nameof(TrySetConfiguration))]
         public ComponentConfiguration Configuration { get; set; }
 
         /// <summary>
@@ -61,29 +68,29 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         private List<Component> _subComponents = new List<Component>();
         /// <inheritdoc cref="ComponentElements.COMPONENTS"/>
-        [MtconnectNodeElements("Components/*", nameof(TryAddComponent), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Components/*", nameof(TryAddComponent))]
         public ICollection<Component> SubComponents => _subComponents;
 
         private List<DataItem> _dataItems = new List<DataItem>();
         /// <inheritdoc cref="ComponentElements.DATA_ITEMS"/>
-        [MtconnectNodeElements("DataItems/*", nameof(TryAddDataItem), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("DataItems/*", nameof(TryAddDataItem))]
         public ICollection<DataItem> DataItems => _dataItems;
 
         private List<Composition> _compositions = new List<Composition>();
         /// <inheritdoc cref="ComponentElements.COMPOSITIONS"/>
-        [MtconnectNodeElements("Compositions/*", nameof(TryAddComposition), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("Compositions/*", nameof(TryAddComposition))]
         public ICollection<Composition> Compositions => _compositions;
 
         private List<Reference> _references = new List<Reference>();
         /// <inheritdoc cref="ComponentElements.REFERENCES"/>
-        [MtconnectNodeElements("References/*", nameof(TryAddReference), XmlNamespace = Constants.DEFAULT_DEVICES_XML_NAMESPACE)]
+        [MtconnectNodeElements("References/*", nameof(TryAddReference))]
         public ICollection<Reference> References => _references;
 
         /// <inheritdoc />
         public Component() : base() { }
 
         /// <inheritdoc />
-        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_DEVICES_XML_NAMESPACE, version)
+        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             TagName = xNode.LocalName;
         }
@@ -94,8 +101,8 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TryAddDataItem(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItem dataItem)
             => base.TryAdd<DataItem>(xNode, nsmgr, ref _dataItems, out dataItem);
 
-        public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentDescription componentDescription)
-            => base.TrySet<ComponentDescription>(xNode, nsmgr, nameof(Description), out componentDescription);
+        public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out Description componentDescription)
+            => base.TrySet<Description>(xNode, nsmgr, nameof(Description), out componentDescription);
 
         public bool TrySetConfiguration(XmlNode xNode, XmlNamespaceManager nsmgr, out ComponentConfiguration componentConfiguration)
             => base.TrySet<ComponentConfiguration>(xNode, nsmgr, nameof(Configuration), out componentConfiguration);
@@ -127,68 +134,64 @@ namespace MtconnectCore.Standard.Documents.Devices
             _references.Add(reference);
             return true;
         }
-        
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
-        private bool validateId(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Id))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component MUST include a unique 'id' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1", MtconnectVersions.V_1_2_0)]
-        private bool validateName(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Name))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component MUST include a unique 'name' attribute.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.1")]
-        private bool validateUuid(out ICollection<MtconnectValidationException> validationErrors)
-        {
-            validationErrors = new List<MtconnectValidationException>();
-            if (!string.IsNullOrEmpty(Uuid) && Uuid.Length > 255)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Component 'uuid' cannot exceed a length of 255 characters.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
+        private bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+            // id
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.ID), (o) =>
+                o.WhileIntroduced((x) =>
+                    x.IsImplemented()
+                    .IsIdValueType(Id)
+                )
+                ?.WhileNotIntroduced((x) =>
+                    x.IsImplemented(nameof(ComponentAttributes.ID))
+                    .IsIdValueType(Id, false)
+                )
+            )
+            // name
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.NAME), (o) =>
+                o.IsImplemented(nameof(ComponentAttributes.NAME))
+            )
+            // nativeName
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.NATIVE_NAME), (o) =>
+                o.IsImplemented(nameof(ComponentAttributes.NATIVE_NAME))
+            )
+            // sampleInterval
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_INTERVAL), (o) =>
+                o.IsImplemented(nameof(ComponentAttributes.SAMPLE_INTERVAL))
+                ?.IsFloatValueType(SampleInterval, out _)
+            )
+            // sampleRate
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SAMPLE_RATE), (o) =>
+                o.IsImplemented(nameof(ComponentAttributes.SAMPLE_RATE))
+                ?.IsFloatValueType(SampleRate, out _)
+            )
+            // uuid
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.UUID), (o) =>
+                o.IsImplemented(nameof(ComponentAttributes.UUID))
+                ?.IsIdValueType(Uuid, false)
+            )
+            // coordinateSystemIdRef
+            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF), (o) =>
+                o.IsImplemented(nameof(ComponentAttributes.COORDINATE_SYSTEM_ID_REF))
+                ?.IsIdValueType(CoordinateSystemIdRef, false)
+            )
+            .UpdateHelpLinks(MODEL_BROWSER_URL)
+            .HasError(out validationErrors);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 2 Section 3.3")]
-        private bool validateSampleRate_Deprecated(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (SampleRate.HasValue)
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.WARNING,
-                    $"Component 'sampleRate' is DEPRECATED in MTConnect Version 1.2. Replaced by 'sampleInterval'.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
-
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "Part 2 Section 3.3.2")]
-        private bool validateChildCount(out ICollection<MtconnectValidationException> validationErrors) {
-            validationErrors = new List<MtconnectValidationException>();
-            if (SubComponents.Count <= 0 && DataItems.Count <= 0 && References.Count <= 0) {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Component MUST have at least one of Component, DataItem, or Reference entities.", SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
-        }
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
+        private bool validateParts(out ICollection<MtconnectValidationException> validationErrors)
+            => new NodeValidationContext(this)
+                .Validate((o) =>
+                    o.HasAtLeastOne(
+                        Pairings.Of(nameof(ComponentElements.COMPONENTS), SubComponents),
+                        Pairings.Of(nameof(ComponentElements.DATA_ITEMS), DataItems),
+                        Pairings.Of(nameof(ComponentElements.REFERENCES), References)
+                    )
+                )
+                .UpdateHelpLinks(MODEL_BROWSER_URL)
+                .HasError(out validationErrors);
     }
 }

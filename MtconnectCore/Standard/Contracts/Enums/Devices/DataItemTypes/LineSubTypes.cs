@@ -7,8 +7,9 @@ using MtconnectCore.Standard.Contracts.Attributes;
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
 	/// <summary>
-	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_45f01b9_1580378218332_604692_1878">model.mtconnect.org</seealso>
-	﻿	/// </summary>
+	﻿/// current line of code being executed.<br /><br /><b>DEPRECATED</b> in <i>Version 1.4.0</i>.
+	/// <br/>Visit <seealso href="https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1580378218332_604692_1878">model.mtconnect.org</seealso> for more information.
+	/// </summary>
 	/// <remarks>
 	/// <list type="bullet">
 	/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.0">v1.0</see></item>
@@ -17,7 +18,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// </remarks>
 	[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_4_0)]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum LineSubTypes
 	{
 		/// <summary>
@@ -31,6 +32,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </remarks>
 		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1", MtconnectVersions.V_1_4_0)]
+		
+		
 		MAXIMUM,
 		/// <summary>
 		﻿/// minimum line number of the code being executed.
@@ -43,6 +46,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		/// </remarks>
 		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1", MtconnectVersions.V_1_4_0)]
+		
+		
 		MINIMUM,
 	}
 }

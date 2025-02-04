@@ -20,6 +20,6 @@ namespace MtconnectCore.Standard.Documents.Error
         public ErrorDocumentHeader() : base() { }
 
         /// <inheritdoc />
-        public ErrorDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public ErrorDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
     }
 }

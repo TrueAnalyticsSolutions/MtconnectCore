@@ -20,6 +20,6 @@ namespace MtconnectCore.Standard.Documents.Assets
         public FileLocation() : base() { }
 
         /// <inheritdoc/>
-        public FileLocation(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public FileLocation(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
     }
 }

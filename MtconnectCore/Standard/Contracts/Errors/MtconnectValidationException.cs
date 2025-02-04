@@ -1,4 +1,5 @@
 ﻿using MtconnectCore.Standard.Contracts.Enums;
+using MtconnectCore.Standard.Contracts.Enums.ExceptionsReport;
 using System;
 using System.Xml;
 
@@ -9,10 +10,19 @@ namespace MtconnectCore.Standard.Contracts.Errors
     /// </summary>
     public class MtconnectValidationException : Exception
     {
-        /// <summary>
-        /// Severity of the validation error that occurred.
-        /// </summary>
+        /// <inheritdoc cref="ValidationSeverity"/>
         public ValidationSeverity Severity { get; set; }
+
+        /// <inheritdoc cref="ExceptionCodeEnum"/>
+        public ExceptionCodeEnum Code { get; set; }
+
+        /// <inheritdoc cref="ExceptionContextEnum"/>
+        public ExceptionContextEnum SourceContext { get; set; }
+
+        /// <summary>
+        /// Optional reference to the scope for the context. For example, consider <see cref="SourceContext"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
+        /// </summary>
+        public string SourceContextScope { get; set; }
 
         /// <summary>
         /// Initializes a MTConnect validation exception with a specific severity and message.

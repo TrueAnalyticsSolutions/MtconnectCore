@@ -53,7 +53,7 @@ else if (ResponseDocument != null)
                             <tr>
                                 <td>@(ValidationReport.Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.ERROR).Count())</td>
                                 <td>@(ValidationReport.Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.WARNING).Count())</td>
-                                <td>@(ValidationReport.Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.MESSAGE).Count())</td>
+                                <td>@(ValidationReport.Exceptions.Where(o => o.Severity == MtconnectCore.Standard.Contracts.Enums.ValidationSeverity.INFO).Count())</td>
                             </tr>
                         </tbody>
                     </table>

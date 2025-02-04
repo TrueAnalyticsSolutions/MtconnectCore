@@ -1,13 +1,11 @@
 ﻿using MtconnectCore.Standard.Contracts;
 using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
-using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
@@ -20,12 +18,9 @@ namespace MtconnectCore.Standard.Documents.Streams
         public override DocumentTypes Type => DocumentTypes.Streams;
 
         /// <inheritdoc />
-        public override string DefaultNamespace => Constants.DEFAULT_XML_NAMESPACE;
-
-        /// <inheritdoc />
         public override string DataElementName => StreamsElements.STREAMS.ToPascalCase();
 
-        [MtconnectNodeElements(StreamsElements.HEADER, nameof(TrySetHeader), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(StreamsElements.HEADER, nameof(TrySetHeader))]
         internal override StreamsDocumentHeader _header { get; set; }
         /// <inheritdoc />
         public StreamsDocumentHeader Header => (StreamsDocumentHeader)_header;
@@ -54,13 +49,21 @@ namespace MtconnectCore.Standard.Documents.Streams
             var distinctSequenceNumbers = allSequenceNumbers.Distinct().ToArray();
             if (allSequenceNumbers.Length != distinctSequenceNumbers.Length)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'sequence' values MUST be unique for each incoming DataItem."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'sequence' values MUST be unique for each incoming DataItem.", SourceNode) {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "DataItem.Sequence"
+                });
             }
 
             var allUnavailable = allObservations.All(o => o.IsUnavailable);
             if (allUnavailable)
             {
-                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"All Observations reporting UNAVAILABLE. This could be an indication that the Adapter is not reporting correctly."));
+                validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"All Observations reporting UNAVAILABLE. This could be an indication that the Adapter is not reporting correctly.", SourceNode) {
+                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
+                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    SourceContextScope = "DataItem.Result"
+                });
             }
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);

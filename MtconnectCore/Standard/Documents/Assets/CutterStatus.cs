@@ -19,10 +19,10 @@ namespace MtconnectCore.Standard.Documents.Assets
         public CutterStatus() : base() { }
 
         /// <inheritdoc />
-        public CutterStatus(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public CutterStatus(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             var statusValues = new List<string>();
-            foreach (XmlNode childNode in xNode.SelectNodes("Status",nsmgr, Constants.DEFAULT_XML_NAMESPACE))
+            foreach (XmlNode childNode in xNode.SelectNodes("Status",nsmgr, MtconnectNodeParser.GetNamespaceName(xNode)))
             {
                 statusValues.Add(childNode.InnerText);
             }
@@ -90,7 +90,11 @@ namespace MtconnectCore.Standard.Documents.Assets
                                 {
                                     validationContext.AddExceptions(new MtconnectValidationException(
                                         Contracts.Enums.ValidationSeverity.ERROR,
-                                        $"CutterStatus '{status}' MUST NOT be used with the following CutterStatus types: [{string.Join(", ", invalidMap.Select(o => o.ToString()))}].\r\n {documentationAttributes}"));
+                                        $"CutterStatus '{status}' MUST NOT be used with the following CutterStatus types: [{string.Join(", ", invalidMap.Select(o => o.ToString()))}].\r\n {documentationAttributes}") {
+                                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
+                                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.PART,
+                                        SourceContextScope = nameof(Statuses)
+                                    });
                                 }
                             }
                         }

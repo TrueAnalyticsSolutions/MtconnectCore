@@ -30,7 +30,12 @@ namespace MtconnectCore.Standard.Documents.Assets
                 {
                     validationContext.AddExceptions(new MtconnectValidationException(
                         ValidationSeverity.ERROR,
-                        $"Unknown CuttingItemMeasurement SubType '{SourceNode.LocalName}'."));
+                        $"Unknown CuttingItemMeasurement SubType '{SourceNode.LocalName}'.",
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = SourceNode.LocalName
+                    });
                 }
 
                 return baseResult && !validationContext.HasErrors();

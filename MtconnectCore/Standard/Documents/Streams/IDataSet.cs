@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MtconnectCore.Standard.Contracts;
+using System.Collections.Generic;
 
 namespace MtconnectCore.Standard.Documents.Streams
 {
@@ -9,7 +10,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         /// 
         /// Occurance: 1
         /// </summary>
-        int? Count { get; set; }
+        ParsedValue<uint?> Count { get; set; }
 
         /// <summary>
         /// Collected from Sample elements. Refer to Part 3 Streams - 4.3.3

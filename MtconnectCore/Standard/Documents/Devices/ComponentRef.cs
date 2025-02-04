@@ -1,10 +1,6 @@
-﻿using MtconnectCore.Standard.Contracts;
-using MtconnectCore.Standard.Contracts.Attributes;
+﻿using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
-using MtconnectCore.Standard.Contracts.Errors;
-using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Devices
@@ -18,8 +14,8 @@ namespace MtconnectCore.Standard.Documents.Devices
         [MtconnectNodeAttribute(ComponentRefAttributes.ID_REF)]
         public override string IdRef { get; set; }
 
-        /// <inheritdoc cref="ComponentRefAttributes.NAME"/>
-        [MtconnectNodeAttribute(ComponentRefAttributes.NAME)]
+        /// <inheritdoc cref="ReferenceAttributes.NAME"/>
+        [MtconnectNodeAttribute(ReferenceAttributes.NAME)]
         public override string Name { get; set; }
 
         /// <inheritdoc/>
@@ -27,7 +23,5 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         /// <inheritdoc/>
         public ComponentRef(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
-
-        //protected override bool validateIdRef(out ICollection<MtconnectValidationException> validationErrors) => base.validateIdRef(out validationErrors);
     }
 }

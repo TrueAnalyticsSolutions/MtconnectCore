@@ -7,36 +7,61 @@ using MtconnectCore.Standard.Contracts.Attributes;
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 {
 	/// <summary>
-	/// View in the MTConnect Model browser <seealso href="https://model.mtconnect.org/#Enumeration___19_0_3_45f01b9_1580378218278_641962_1755">model.mtconnect.org</seealso>
-	﻿	/// </summary>
+	﻿/// direction of motion.
+	/// <br/>Visit <seealso href="https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1580378218278_641962_1755">model.mtconnect.org</seealso> for more information.
+	/// </summary>
 	/// <remarks>
 	/// <list type="bullet">
 	/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.0">v1.0</see></item>
 	/// </list>
 	/// </remarks>
 	[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
-	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "1.0.15.3")]
+	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum DirectionSubTypes
 	{
 		/// <summary>
-		﻿/// rotational direction of a rotary motion using the right hand rule convention.
+		﻿/// <br /><br /><br /><br /><br /><br />clockwise rotation using the right-hand rule.<br /><br /><br /><br />
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
-		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.2">v1.2</see></item>
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.0">v1.0</see></item>
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
-		ROTARY,
+		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		CLOCKWISE,
 		/// <summary>
-		﻿/// direction of motion of a linear motion.
+		﻿/// <br /><br /><br /><br /><br /><br />counter-clockwise rotation using the right-hand rule.<br /><br /><br /><br />
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.0">v1.0</see></item>
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
+		/// </list>
+		/// </remarks>
+		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		COUNTER_CLOCKWISE,
+		/// <summary>
+		﻿
 		/// </summary>
 		/// <remarks>
 		/// <list type="bullet">
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.2">v1.2</see></item>
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
-		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
-		LINEAR,
+		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		NEGATIVE,
+		/// <summary>
+		﻿
+		/// </summary>
+		/// <remarks>
+		/// <list type="bullet">
+		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.2">v1.2</see></item>
+		/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
+		/// </list>
+		/// </remarks>
+		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		POSITIVE,
 	}
 }

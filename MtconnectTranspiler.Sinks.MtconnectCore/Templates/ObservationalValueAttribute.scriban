@@ -1,0 +1,1 @@
+{{~ if ($1.values != null && $1.values.size > 0) || ($1.values != null && $1.values.size > 0) ~}}[ObservationalValue(typeof(Streams.{{ $2 }}Values))]{{~ end ~}}

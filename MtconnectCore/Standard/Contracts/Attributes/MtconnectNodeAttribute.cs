@@ -16,11 +16,6 @@ namespace MtconnectCore.Standard.Contracts.Attributes
         public object Name { get; set; }
 
         /// <summary>
-        /// Reference to the XML namespace used in the MTConnect Response Document.
-        /// </summary>
-        public string XmlNamespace { get; set; }
-
-        /// <summary>
         /// Initializes a <see cref="MtconnectNodeAttribute"/> for automatic processing of a MTConnect node's XML attribute.
         /// </summary>
         /// <param name="name"></param>

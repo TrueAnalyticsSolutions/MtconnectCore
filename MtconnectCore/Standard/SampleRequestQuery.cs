@@ -1,34 +1,37 @@
-﻿using System;
+﻿using MtconnectCore.Standard.Contracts.Enums.RequestParameters;
+using System;
 using System.Collections.Generic;
 
 namespace MtconnectCore.Standard
 {
     public class SampleRequestQuery : IRequestQuery
     {
-        /// <summary>
-        /// An XPath that defines specific information or a set of information to be included in an MTConnectStreams Response Document. See Part 1 Section 8.3.3.2 of MTConnect specification.
-        /// </summary>
+        /// <inheritdoc cref="SampleParameters.DEVICE"/>
+        public string Device { get; set; }
+
+        /// <inheritdoc cref="SampleParameters.PATH"/>
         public string Path { get; set; }
 
-        /// <summary>
-        /// The from parameter designates the sequence number of the first observation in the buffer the Agent MUST consider publishing in the Response Document. See Part 1 Section 8.3.3.2 of MTConnect specification.
-        /// </summary>
+        /// <inheritdoc cref="SampleParameters.FROM"/>
         public ulong? From { get; set; }
 
-        /// <summary>
-        /// The Agent MUST continuously publish Response Documents when the query parameters include interval using the value as the minimum period between adjacent publications. See Part 1 Section 8.3.3.2 of MTConnect specification.
-        /// </summary>
-        public int? Interval { get; set; }
-
-        /// <summary>
-        /// The count parameter designates the maximum number of observations the Agent MUST publish in the Response Document. See Part 1 Section 8.3.3.2 of MTConnect specification.
-        /// </summary>
+        /// <inheritdoc cref="SampleParameters.COUNT"/>
         public int? Count { get; set; }
 
-        /// <summary>
-        /// Sets the time period for the heartbeat function in an Agent. The value for heartbeat represents the amount of time after a Response Document has been published until a new Response Document MUST be published, even when no new data is available. See Part 1 Section 8.3.3.2 of MTConnect specification.
-        /// </summary>
+        /// <inheritdoc cref="SampleParameters.FREQUENCY"/>
+        public int? Frequency { get; set; }
+
+        /// <inheritdoc cref="SampleParameters.HEARTBEAT"/>
         public int? Heartbeat { get; set; }
+
+        /// <inheritdoc cref="SampleParameters.INTERVAL"/>
+        public int? Interval { get; set; }
+
+        /// <inheritdoc cref="SampleParameters.TO"/>
+        public ulong? To { get; set; }
+
+        /// <inheritdoc cref="SampleParameters.DEVICE_TYPE"/>
+        public string DeviceType { get; set; }
 
         public SampleRequestQuery() { }
 
@@ -41,9 +44,13 @@ namespace MtconnectCore.Standard
 
             if (From != null) parameters.Add($"from={From}");
 
+            if (To != null) parameters.Add($"to={To}");
+
             if (Interval != null) parameters.Add($"interval={Interval}");
 
             if (Count != null) parameters.Add($"count={Count}");
+
+            if (Frequency != null) parameters.Add($"frequency={Frequency}");
 
             if (Heartbeat != null) parameters.Add($"heartbeat={Heartbeat}");
 
@@ -62,10 +69,26 @@ namespace MtconnectCore.Standard
             // No viable validation for Path parameter
 
             // From
-            if (From < 0)
+            if (From != null)
             {
-                exception = new ArgumentOutOfRangeException("'From' parameter must be non-negative if specified. See Part 1 Section 8.3.3.2 of MTConnect specification.");
-                return false;
+                if (From < 0)
+                {
+                    exception = new ArgumentOutOfRangeException("'From' parameter must be non-negative if specified. See Part 1 Section 8.3.3.2 of MTConnect specification.");
+                    return false;
+                }
+            }
+
+            if (To != null)
+            {
+                if (To < 0)
+                {
+                    exception = new ArgumentOutOfRangeException("'To' parameter must be non-negative if specified. See Part 1 Section 8.3.3.2 of MTConnect specification.");
+                    return false;
+                }
+                if (From != null && To <= From)
+                {
+                    exception = new ArgumentOutOfRangeException("'To' parameter must be greater than from.");
+                }
             }
 
             // Interval

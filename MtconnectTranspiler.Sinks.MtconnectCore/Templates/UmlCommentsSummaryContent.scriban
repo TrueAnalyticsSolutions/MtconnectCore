@@ -1,3 +1,1 @@
-﻿﻿{{~ if $1 ~}}
-{{ $1 }}
-{{~ end ~}}
+﻿﻿{{~ if $1?.summary != null && $1?.summary != "" ~}}/// {{ $1.summary | csharp_docs.interpret_string | string.replace "&#10;" "<br />" | string.replace "<\r\n>" "<br />" | string.replace "\r" "<br />" | string.replace "\n" "<br />" ~}}{{~ end ~}}

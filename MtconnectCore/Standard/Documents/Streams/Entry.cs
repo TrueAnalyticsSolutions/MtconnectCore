@@ -3,9 +3,9 @@ using MtconnectCore.Standard.Contracts.Attributes;
 using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace MtconnectCore.Standard.Documents.Streams
@@ -48,23 +48,32 @@ namespace MtconnectCore.Standard.Documents.Streams
         public Entry() { }
 
         /// <inheritdoc/>
-        public Entry(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version)
+        public Entry(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             Result = xNode.InnerText;
         }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "See model.mtconnect.org/Observation Information Model/Representations/Entry")]
-        private bool validateKey(out ICollection<MtconnectValidationException> validationErrors)
+        private bool ValidateProperties(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
-            if (string.IsNullOrEmpty(Key))
-            {
-                validationErrors.Add(new MtconnectValidationException(
-                    ValidationSeverity.ERROR,
-                    $"Entry representation MUST include a 'key' attribute with a unique value within the DataSet.",
-                    SourceNode));
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return new NodeValidationContext(this)
+                // Validate Key
+                .ValidateValueProperty<EntryAttributes>(nameof(Key), (o) =>
+                    o.IsImplemented(Key)?.IsRequired(Key)
+                    ?.If(
+                        v => string.IsNullOrEmpty(Key),
+                        v => throw new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            "Entry representation MUST include a 'key' attribute with a unique value within the DataSet.",
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = nameof(Key)
+                        }
+                    )
+                )
+                // Return validation errors
+                .HasError(out validationErrors);
         }
     }
 }

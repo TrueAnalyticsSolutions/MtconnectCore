@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <StartupObject>Program</StartupObject>
@@ -10,9 +10,16 @@
 
   <ItemGroup>
     <None Remove="Templates\MtconnectCore.GeneratedCodeAttribute.scriban" />
+    <None Remove="Templates\MtconnectCore.Interface.scriban" />
+    <None Remove="Templates\NormativeRemarks.scriban" />
+    <None Remove="Templates\ObservationalSubTypeAttribute.scriban" />
+    <None Remove="Templates\ObservationalValueAttribute.scriban" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Templates\MtconnectCore.Interface.scriban">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\MtconnectCore.Class.scriban">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -25,6 +32,15 @@
     <Content Include="Templates\MtconnectVersionApplicability.scriban">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\NormativeRemarks.scriban">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\ObservationalSubTypeAttribute.scriban">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\ObservationalValueAttribute.scriban">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\UmlCommentsSummaryContent.scriban">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -32,13 +48,25 @@
 
   <ItemGroup>
     <PackageReference Include="CaseExtensions" Version="1.1.0" />
-    <PackageReference Include="Consoul" Version="1.6.3" />
-    <PackageReference Include="MtconnectTranspiler" Version="1.0.8.2-prerelease" />
-    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="1.0.14.3-prerelease">
+    <PackageReference Include="Consoul" Version="1.6.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+    <PackageReference Include="MtconnectTranspiler" Version="2.5.0-review" />
+    <PackageReference Include="MtconnectTranspiler.CodeGenerators.ScribanTemplates" Version="2.5.0-review" />
+    <PackageReference Include="MtconnectTranspiler.Sinks.CSharp" Version="2.5.0-review">
       <GeneratePathProperty>True</GeneratePathProperty>
     </PackageReference>
-    <PackageReference Include="Scriban" Version="5.9.0" />
-    <PackageReference Include="System.CodeDom" Version="7.0.0" />
+    <PackageReference Include="Scriban" Version="5.10.0" />
+    <PackageReference Include="System.CodeDom" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

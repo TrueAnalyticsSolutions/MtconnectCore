@@ -28,7 +28,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         public AssetsDocumentHeader() : base() { }
 
         /// <inheritdoc />
-        public AssetsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public AssetsDocumentHeader(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         /// <inheritdoc />
         public override bool TryValidate(ValidationReport report)
@@ -44,7 +44,11 @@ namespace MtconnectCore.Standard.Documents.Assets
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
                         $"MTConnectDevices Header MUST include a 'assetBufferSize' attribute. {documentationAttributes}",
-                        SourceNode));
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(AssetBufferSize)
+                    });
                 }
 
                 if (!AssetCount.HasValue)
@@ -52,7 +56,11 @@ namespace MtconnectCore.Standard.Documents.Assets
                     validationContext.AddExceptions(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
                         $"MTConnectDevices Header MUST include a 'assetCount' attribute. {documentationAttributes}",
-                        SourceNode));
+                        SourceNode) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        SourceContextScope = nameof(AssetCount)
+                    });
                 }
 
                 return baseResult && !validationContext.HasErrors();

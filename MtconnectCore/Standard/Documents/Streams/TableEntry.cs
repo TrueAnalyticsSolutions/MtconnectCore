@@ -4,6 +4,7 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Streams.Elements;
 using MtconnectCore.Standard.Contracts.Errors;
+using MtconnectCore.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
@@ -29,7 +30,7 @@ namespace MtconnectCore.Standard.Documents.Streams
         public bool Removed { get; set; }
 
         private List<Cell> _cells = new List<Cell>();
-        [MtconnectNodeElements(TableEntryElements.CELL, nameof(TryAddCell), XmlNamespace = Constants.DEFAULT_XML_NAMESPACE)]
+        [MtconnectNodeElements(TableEntryElements.CELL, nameof(TryAddCell))]
         public ICollection<Cell> Cells => _cells;
 
 
@@ -37,25 +38,31 @@ namespace MtconnectCore.Standard.Documents.Streams
         public TableEntry() : base() { }
 
         /// <inheritdoc/>
-        public TableEntry(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, Constants.DEFAULT_XML_NAMESPACE, version) { }
+        public TableEntry(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version) { }
 
         public bool TryAddCell(XmlNode xNode, XmlNamespaceManager nsmgr, out Cell entry) => base.TryAdd<Cell>(xNode, nsmgr, ref _cells, out entry);
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "See model.mtconnect.org/Observation Information Model/Representations/Cell")]
-        private bool validateCellKey(out ICollection<MtconnectValidationException> validationErrors)
+        private bool ValidateProperties(out ICollection<MtconnectValidationException> validationErrors)
         {
-            validationErrors = new List<MtconnectValidationException>();
-            if (_cells.Count > 0)
-            {
-                if (!_cells.All(o => _cells.Count(e => e.Key == o.Key) == 1))
-                {
-                    validationErrors.Add(new MtconnectValidationException(
-                        ValidationSeverity.ERROR,
-                        $"TableEntry Cell 'key' must be a unique identifier for each key-value pair within the TableEntry.",
-                        SourceNode));
-                }
-            }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return new NodeValidationContext(this)
+                // Validate Cell Key uniqueness
+                .ValidateValueProperty<TableEntryElements>(nameof(Cells), (o) =>
+                    o.IsImplemented()
+                    ?.If(
+                        v => _cells.Count > 0 && !_cells.All(c => _cells.Count(e => e.Key == c.Key) == 1),
+                        v => throw new MtconnectValidationException(
+                            ValidationSeverity.ERROR,
+                            "TableEntry Cell 'key' must be a unique identifier for each key-value pair within the TableEntry.",
+                            SourceNode) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
+                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            SourceContextScope = "TableEntry Cell.Key"
+                        }
+                    )
+                )
+                // Return validation errors
+                .HasError(out validationErrors);
         }
     }
 }
