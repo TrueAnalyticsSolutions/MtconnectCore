@@ -80,7 +80,6 @@ namespace MtconnectCore.Standard.Documents.Streams
             // units
             .ValidateValueProperty<SampleAttributes>(nameof(SampleAttributes.UNITS), (o) =>
                 o.IsImplemented()
-                ?.IsRequired(Units, true)
                 ?.IsEnumValueType<UnitEnum>(Units, out _)
             )
             // result
