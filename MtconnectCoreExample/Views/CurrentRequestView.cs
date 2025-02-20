@@ -24,12 +24,19 @@ namespace MtconnectCoreExample.Views
 
         public override void Send()
         {
-            using (MtconnectAgentService mtcService = new MtconnectAgentService(Source.ToUri()))
+            try
             {
-                IResponseDocument mtcDocument = mtcService.Current().Result;
-                mtcDocument.DisplayDocumentAndValidate<StreamsDocument>();
-                Consoul.Wait();
+                using (MtconnectAgentService mtcService = new MtconnectAgentService(Source.ToUri()))
+                {
+                    IResponseDocument mtcDocument = mtcService.Current().Result;
+                    mtcDocument.DisplayDocumentAndValidate<StreamsDocument>();
+                }
             }
+            catch (Exception ex)
+            {
+                Consoul.Write(ex.ToString(), ConsoleColor.Red);
+            }
+            Consoul.Wait();
         }
     }
 }

@@ -322,6 +322,17 @@
             <exception cref="T:MtconnectCore.Standard.Contracts.Errors.MtconnectProbeFailure">Throws a <see cref="T:MtconnectCore.Standard.Contracts.Errors.MtconnectProbeFailure"/> when the response could not be parsed as a valid <see cref="T:MtconnectCore.Standard.Documents.IResponseDocument"/>.</exception>
             <exception cref="T:System.Exception"></exception>
         </member>
+        <member name="M:MtconnectCore.MtconnectAgentService.RequestInterval(System.String,MtconnectCore.MtconnectIntervalStreamCallback,System.Threading.CancellationToken)">
+            <summary>
+            Continuously requests an MTConnect interval stream and processes its XML response.
+            </summary>
+            <param name="request">The request URL.</param>
+            <param name="callback">The callback to handle the parsed response document.</param>
+            <param name="cancelToken">Token to allow cancellation of the request.</param>
+            <exception cref="T:System.Net.Http.HttpRequestException">Thrown if the HTTP request fails.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown if the response is not a valid MTConnect document.</exception>
+            <exception cref="T:System.Xml.XmlException">Thrown if there is an error parsing the XML.</exception>
+        </member>
         <member name="M:MtconnectCore.MtconnectAgentService.Probe(System.String,System.Nullable{System.Threading.CancellationToken})">
             <summary>
             Sends a Probe Request to the MTConnect Agent. See Part 1 Section 8.3.1 of MTConnect specification.
@@ -17900,12 +17911,12 @@
         </member>
         <member name="T:MtconnectCore.Validation.Pairings">
             <summary>
-            Shortcut methods for creating <see cref="T:System.Collections.Generic.KeyValuePair"/> for use with params arguments
+            Shortcut methods for creating <see cref="!:KeyValuePair"/> for use with params arguments
             </summary>
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Collections.Generic.IEnumerable{System.Object})">
             <summary>
-            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
+            Creates <see cref="!:KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -17913,7 +17924,7 @@
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Object)">
             <summary>
-            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
+            Creates <see cref="!:KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>

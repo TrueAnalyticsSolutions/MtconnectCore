@@ -144,27 +144,58 @@ switch (document)
             Client.CancelPendingRequests();
             using (HttpResponseMessage res = await Client.GetAsync(request, cancellationToken.GetValueOrDefault()))
             {
+                if (!res.IsSuccessStatusCode)
+                {
+                    string content = await res.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"HTTP request failed with status code {res.StatusCode}: {content}");
+                }
+
+
                 using (var responseStream = await res.Content.ReadAsStreamAsync())
                 {
                     if (responseStream == null)
-                        throw new NullReferenceException("No content returned from stream response.");
+                        throw new InvalidOperationException("No content returned from stream response.");
 
                     XmlDocument response = new XmlDocument();
-                    response.Load(responseStream);
-                    responseStream.Close();
+                    try
+                    {
+                        response.Load(responseStream);
 
-                    IResponseDocument mtcDocument;
-                    if (!TryParse(response, out mtcDocument))
-                        throw new MtconnectProbeFailure($"Failed to parse MTConnect Response Document");
+                        IResponseDocument mtcDocument;
+                        if (!TryParse(response, out mtcDocument))
+                            throw new MtconnectProbeFailure($"Failed to parse MTConnect Response Document");
 
-                    if (!(mtcDocument is T))
-                        throw new Exception($"Expected {typeof(T)} and received {mtcDocument.Type} instead.");
+                        if (!(mtcDocument is T))
+                            throw new InvalidCastException($"Expected {typeof(T)}, but received {mtcDocument?.GetType()} instead.");
 
-                    return (T)mtcDocument;
+                        return (T)mtcDocument;
+                    } catch(XmlException xex)
+                    {
+                        var aggrXex = new Exception("Failed to parse XML", xex) {
+                            Source = nameof(RequestInterval)
+                        };
+                        aggrXex.Data.Add("RawXml", await res.Content.ReadAsStringAsync());
+                        Logger.Error(aggrXex);
+                        throw aggrXex;
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex);
+                        throw; // Preserves stack trace
+                    }
                 }
             }
         }
 
+        /// <summary>
+        /// Continuously requests an MTConnect interval stream and processes its XML response.
+        /// </summary>
+        /// <param name="request">The request URL.</param>
+        /// <param name="callback">The callback to handle the parsed response document.</param>
+        /// <param name="cancelToken">Token to allow cancellation of the request.</param>
+        /// <exception cref="HttpRequestException">Thrown if the HTTP request fails.</exception>
+        /// <exception cref="InvalidCastException">Thrown if the response is not a valid MTConnect document.</exception>
+        /// <exception cref="XmlException">Thrown if there is an error parsing the XML.</exception>
         internal async Task RequestInterval(string request, MtconnectIntervalStreamCallback callback, CancellationToken cancelToken)
         {
             Client.CancelPendingRequests();
@@ -173,6 +204,12 @@ switch (document)
             using (HttpResponseMessage httpResponse = await Client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead))
             using (Stream responseStream = await httpResponse.Content.ReadAsStreamAsync())
             {
+                if (!httpResponse.IsSuccessStatusCode)
+                {
+                    string content = await httpResponse.Content.ReadAsStringAsync();
+                    throw new HttpRequestException($"HTTP request failed with status code {httpResponse.StatusCode}: {content}");
+                }
+
                 byte[] data = new byte[4096];
 
                 // These are used to determine when a document in the stream start and stops
@@ -242,10 +279,19 @@ switch (document)
                                     throw new InvalidCastException("Response was not valid MTConnect Response Document.");
                                 }
                             }
+                            catch (XmlException xex)
+                            {
+                                var aggrXex = new Exception("Failed to parse XML", xex) {
+                                    Source = nameof(RequestInterval)
+                                };
+                                aggrXex.Data.Add("RawXml", await httpResponse.Content.ReadAsStringAsync());
+                                Logger.Error(aggrXex);
+                                throw aggrXex;
+                            }
                             catch (Exception ex)
                             {
                                 Logger.Error(ex);
-                                throw ex;
+                                throw; // Preserves stack trace
                             }
                             finally
                             {
@@ -274,6 +320,9 @@ switch (document)
                 }
             }
         }
+
+
+
 
         /// <summary>
         /// Sends a Probe Request to the MTConnect Agent. See Part 1 Section 8.3.1 of MTConnect specification.

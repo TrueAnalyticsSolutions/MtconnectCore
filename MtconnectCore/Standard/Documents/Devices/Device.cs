@@ -191,6 +191,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                             1,
                             int.MaxValue
                         )
+                    // TODO: Override the exception severity to WARNING and message to include note about Reference C++ Agent
                 )
                 .ValidateValueProperty<DeviceAttributes>(
                     nameof(DataItems),
@@ -201,6 +202,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                             1,
                             int.MaxValue
                         )
+                    // TODO: Override the exception severity to WARNING and message to include note about Reference C++ Agent
                 )
                 // Validate Contents
                 .ValidateValueProperty<DeviceAttributes>(
