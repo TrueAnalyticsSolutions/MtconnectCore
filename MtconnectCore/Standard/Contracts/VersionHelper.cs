@@ -261,7 +261,8 @@ namespace MtconnectCore.Standard.Contracts
                 xDoc.DocumentElement.Attributes.Append(xDoc.CreateAttribute("xmlns")).Value = defaultNamespaceUri;
                 // You have to reload the XML after changing the default namespace
                 xDoc.LoadXml(xDoc.OuterXml);
-            } else
+            }
+            else
             {
                 defaultNamespaceUri = xDoc.DocumentElement.GetAttribute("xmlns");
             }

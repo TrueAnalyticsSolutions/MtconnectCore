@@ -45,6 +45,13 @@ namespace MtconnectCore.Standard.Contracts
                         Console.WriteLine("Failed to cache the namespace `" + attr.LocalName + "=\"" + attr.Value + "\"");
                     }
                     break;
+                } else if (string.IsNullOrEmpty(defaultNamespace))
+                {
+                    if (attr.Value.StartsWith("urn:mtconnect"))
+                    {
+                        NamespaceCache.TryAdd("", attr.LocalName.Substring(attr.LocalName.IndexOf(":") + 1));
+                        return NamespaceCache[""];
+                    }
                 }
             }
             return null;
