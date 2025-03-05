@@ -76,12 +76,6 @@ namespace MtconnectCore.Standard.Documents
             DefaultNamespace = MtconnectNodeParser.GetNamespaceName(xDoc);
 
             // Detect if there are missing namespaces
-            if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns")))
-                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns' attribute", Source.DocumentElement) {
-                    Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                    SourceContextScope = "xmlns"
-                });
             if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns:" + DefaultNamespace)))
                 InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute", Source.DocumentElement) {
                     Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
@@ -144,7 +138,7 @@ namespace MtconnectCore.Standard.Documents
 
 
             XmlNode xDataRoot = xDoc.DocumentElement.SelectSingleNode(DataElementName, NamespaceManager, DefaultNamespace);
-            XmlNodeList xDataElements = xDataRoot.ChildNodes;
+            XmlNodeList xDataElements = xDataRoot?.ChildNodes;
             Logger.Verbose($"Found {xDataElements?.Count} {DataElementName} in {DocumentElementName}");
             foreach (XmlNode xNode in xDataElements)
             {
