@@ -50,7 +50,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             return new NodeValidationContext(this)
                 // Validate Filter - Check if the Filter is present and warn that it is deprecated in version 1.4
                 .ValidateValueProperty<ConstraintElements>(nameof(Filter), (o) =>
-                    o.IsImplemented(Filter.Value)
+                    o.IsImplemented(Filter?.Value)
                     ?.If(
                         (v) => Filter != null,
                         (v) => throw new MtconnectValidationException(

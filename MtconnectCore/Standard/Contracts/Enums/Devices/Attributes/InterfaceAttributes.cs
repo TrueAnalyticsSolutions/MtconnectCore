@@ -4,11 +4,10 @@ using System;
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
 {
     /// <summary>
-    /// Attributes of the Component element
+    /// Attributes of the Interface element
     /// </summary>
-    /// <remarks>See Part 2 Section 4.4.2 of the MTConnect specification.</remarks>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
-    public enum ComponentAttributes
+    [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.INTERFACE)]
+    public enum InterfaceAttributes
     {
         /// <summary>
         /// The unique identifier for this element.
@@ -47,9 +46,9 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Attributes
         [MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
         COORDINATE_SYSTEM_ID_REF,
         /// <summary>
-        /// The tagname of the component referring to the componenttypes enum.
+        /// The tagname of the component referring to the interface types enum.
         /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.INTERFACE)]
         SUB_CLASS,
     }
 }

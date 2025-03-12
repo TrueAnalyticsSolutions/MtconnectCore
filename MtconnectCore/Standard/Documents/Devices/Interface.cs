@@ -4,52 +4,55 @@ using MtconnectCore.Standard.Contracts.Enums;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Attributes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes;
 using MtconnectCore.Standard.Contracts.Enums.Devices.Elements;
+using MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes;
 using MtconnectCore.Standard.Contracts.Errors;
 using MtconnectCore.Validation;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using static MtconnectCore.Logging.MtconnectCoreLogger;
 
 namespace MtconnectCore.Standard.Documents.Devices
 {
-    /// <summary>
-    /// Channel represents each sensing element connected to a sensor unit.
-    /// </summary>
-    /// <remarks>See Part 2 Section 4.4 of the MTConnect specification.</remarks>
-    public class Component : MtconnectNode
+    public class Interface : MtconnectNode
     {
         private const string MODEL_BROWSER_URL = "https://model.mtconnect.org/#Structure__EAID_8548C620_467A_4f50_9A22_58D84B7E8779";
 
-        /// <inheritdoc cref="ComponentAttributes.ID"/>
-        [MtconnectNodeAttribute(ComponentAttributes.ID)]
+        /// <inheritdoc cref="InterfaceAttributes.ID"/>
+        public InterfaceState State { get; set; }
+
+        /// <inheritdoc cref="InterfaceAttributes.ID"/>
+        [MtconnectNodeAttribute(InterfaceAttributes.ID)]
         public string Id { get; set; }
 
-        /// <inheritdoc cref="ComponentAttributes.SUB_CLASS"/>
-        public ParsedValue<ComponentTypes> SubClass { get; set; } = new ParsedValue<ComponentTypes>();
+        /// <inheritdoc cref="InterfaceAttributes.SUB_CLASS"/>
+        public ParsedValue<InterfaceTypes> SubClass { get; set; } = new ParsedValue<InterfaceTypes>();
 
-        /// <inheritdoc cref="ComponentAttributes.NAME"/>
-        [MtconnectNodeAttribute(ComponentAttributes.NAME)]
+        /// <inheritdoc cref="InterfaceAttributes.NAME"/>
+        [MtconnectNodeAttribute(InterfaceAttributes.NAME)]
         public string Name { get; set; }
 
-        /// <inheritdoc cref="ComponentAttributes.NATIVE_NAME"/>
-        [MtconnectNodeAttribute(ComponentAttributes.NATIVE_NAME)]
+        /// <inheritdoc cref="InterfaceAttributes.NATIVE_NAME"/>
+        [MtconnectNodeAttribute(InterfaceAttributes.NATIVE_NAME)]
         public string NativeName { get; set; }
 
-        /// <inheritdoc cref="ComponentAttributes.SAMPLE_INTERVAL"/>
-        [MtconnectNodeAttribute(ComponentAttributes.SAMPLE_INTERVAL)]
+        /// <inheritdoc cref="InterfaceAttributes.SAMPLE_INTERVAL"/>
+        [MtconnectNodeAttribute(InterfaceAttributes.SAMPLE_INTERVAL)]
         public string SampleInterval { get; set; }
 
-        /// <inheritdoc cref="ComponentAttributes.SAMPLE_RATE"/>
-        [MtconnectNodeAttribute(ComponentAttributes.SAMPLE_RATE)]
+        /// <inheritdoc cref="InterfaceAttributes.SAMPLE_RATE"/>
+        [MtconnectNodeAttribute(InterfaceAttributes.SAMPLE_RATE)]
         public string SampleRate { get; set; }
 
-        /// <inheritdoc cref="ComponentAttributes.UUID"/>
-        [MtconnectNodeAttribute(ComponentAttributes.UUID)]
+        /// <inheritdoc cref="InterfaceAttributes.UUID"/>
+        [MtconnectNodeAttribute(InterfaceAttributes.UUID)]
         public string Uuid { get; set; }
 
-        /// <inheritdoc cref="ComponentAttributes.COORDINATE_SYSTEM_ID_REF"/>
-        [MtconnectNodeAttribute(ComponentAttributes.COORDINATE_SYSTEM_ID_REF)]
+        /// <inheritdoc cref="InterfaceAttributes.COORDINATE_SYSTEM_ID_REF"/>
+        [MtconnectNodeAttribute(InterfaceAttributes.COORDINATE_SYSTEM_ID_REF)]
         public string CoordinateSystemIdRef { get; set; }
 
         /// <summary>
@@ -57,11 +60,11 @@ namespace MtconnectCore.Standard.Documents.Devices
         /// </summary>
         public string TagName { get; set; }
 
-        /// <inheritdoc cref="ComponentElements.DESCRIPTION"/>
+        /// <inheritdoc cref="InterfaceElements.DESCRIPTION"/>
         [MtconnectNodeElements("Description", nameof(TrySetDescription))]
         public Description Description { get; set; }
 
-        /// <inheritdoc cref="ComponentElements.CONFIGURATION"/>
+        /// <inheritdoc cref="InterfaceElements.CONFIGURATION"/>
         [MtconnectNodeElements("Configuration", nameof(TrySetConfiguration))]
         public ComponentConfiguration Configuration { get; set; }
 
@@ -71,61 +74,60 @@ namespace MtconnectCore.Standard.Documents.Devices
         public int Size => _subComponents?.Sum(o => o.Size) ?? 1;
 
         private List<Component> _subComponents = new List<Component>();
-        /// <inheritdoc cref="ComponentElements.COMPONENTS"/>
+        /// <inheritdoc cref="InterfaceElements.COMPONENTS"/>
         [MtconnectNodeElements("Components/*", nameof(TryAddComponent))]
         public ICollection<Component> SubComponents => _subComponents;
 
         private List<DataItem> _dataItems = new List<DataItem>();
-        /// <inheritdoc cref="ComponentElements.DATA_ITEMS"/>
+        /// <inheritdoc cref="InterfaceElements.DATA_ITEMS"/>
         [MtconnectNodeElements("DataItems/*", nameof(TryAddDataItem))]
         public ICollection<DataItem> DataItems => _dataItems;
 
         private List<Composition> _compositions = new List<Composition>();
-        /// <inheritdoc cref="ComponentElements.COMPOSITIONS"/>
+        /// <inheritdoc cref="InterfaceElements.COMPOSITIONS"/>
         [MtconnectNodeElements("Compositions/*", nameof(TryAddComposition))]
         public ICollection<Composition> Compositions => _compositions;
 
         private List<Reference> _references = new List<Reference>();
-        /// <inheritdoc cref="ComponentElements.REFERENCES"/>
+        /// <inheritdoc cref="InterfaceElements.REFERENCES"/>
         [MtconnectNodeElements("References/*", nameof(TryAddReference))]
         public ICollection<Reference> References => _references;
 
-        // WARNING: This is a deviation from the standard model, but I'm not sure how to model interfaces quite yet.
-        private List<Interface> _interfaces = new List<Interface>();
-        public ICollection<Interface> Interfaces => _interfaces;
+        /// <inheritdoc />
+        public Interface() : base() { }
 
         /// <inheritdoc />
-        public Component() : base() { }
-
-        /// <inheritdoc />
-        public Component(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
+        public Interface(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version) : base(xNode, nsmgr, version)
         {
             TagName = xNode.LocalName;
             SubClass.RawValue = TagName;
-            if (!string.IsNullOrEmpty(TagName) && EnumHelper.TryParse<ComponentTypes>(TagName, out var componentType) && componentType.HasValue)
+            if (!string.IsNullOrEmpty(TagName) && EnumHelper.TryParse<InterfaceTypes>(TagName, out var interfaceType) && interfaceType.HasValue)
             {
-                SubClass.Value = componentType.Value;
+                SubClass.Value = interfaceType.Value;
             }
         }
 
         public bool TryAddComponent(XmlNode xNode, XmlNamespaceManager nsmgr, out Component component)
-        {
-            if (xNode.LocalName.EndsWith("Interface", System.StringComparison.OrdinalIgnoreCase))
-            {
-                var result = base.TryAdd<Interface>(xNode, nsmgr, ref _interfaces, out Interface @interface);
-                component = null;
-                return result;
-            } else
-            {
-                return base.TryAdd<Component>(xNode, nsmgr, ref _subComponents, out component);
-            }
-        }
-
-        public bool TryAddInterface(XmlNode xNode, XmlNamespaceManager nsmgr, out Interface @interface)
-            => base.TryAdd<Interface>(xNode, nsmgr, ref _interfaces, out @interface);
+            => base.TryAdd<Component>(xNode, nsmgr, ref _subComponents, out component);
 
         public bool TryAddDataItem(XmlNode xNode, XmlNamespaceManager nsmgr, out DataItem dataItem)
-            => base.TryAdd<DataItem>(xNode, nsmgr, ref _dataItems, out dataItem);
+        {
+            if ((xNode is XmlElement xElement) && xElement.LocalName.Equals("DataItem", StringComparison.OrdinalIgnoreCase) && xElement.HasAttribute("type"))
+            {
+                var type = xElement.GetAttribute("type");
+                if (type.Equals("INTERFACE_STATE", StringComparison.OrdinalIgnoreCase))
+                {
+                    State = new InterfaceState(xNode, nsmgr, this.MtconnectVersion.GetValueOrDefault());
+                    dataItem = State;
+                    return true;
+                } else
+                {
+                    return base.TryAdd<DataItem>(xNode, nsmgr, ref _dataItems, out dataItem);
+                }
+            }
+            dataItem = null;
+            return false;
+        }
 
         public bool TrySetDescription(XmlNode xNode, XmlNamespaceManager nsmgr, out Description componentDescription)
             => base.TrySet<Description>(xNode, nsmgr, nameof(Description), out componentDescription);
@@ -139,13 +141,15 @@ namespace MtconnectCore.Standard.Documents.Devices
         public bool TryAddReference(XmlNode xNode, XmlNamespaceManager nsmgr, out Reference reference)
         {
             Logger.Verbose("Reading Reference {XnodeKey}", xNode.TryGetAttribute(ReferenceAttributes.ID_REF));
-            if (xNode.LocalName == ComponentElements.COMPONENT_REF.ToPascalCase()) {
+            if (xNode.LocalName == ComponentElements.COMPONENT_REF.ToPascalCase())
+            {
                 reference = new ComponentRef(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
             }
             else if (xNode.LocalName == ComponentElements.DATA_ITEM_REF.ToPascalCase())
             {
                 reference = new DataItemRef(xNode, nsmgr, MtconnectVersion.GetValueOrDefault());
-            } else
+            }
+            else
             {
                 reference = null;
                 Logger.Warn("[Invalid Probe] Unsupported Reference type {XnodeName}", xNode.LocalName);
@@ -162,11 +166,11 @@ namespace MtconnectCore.Standard.Documents.Devices
         }
 
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, Constants.ModelBrowserLinks.DeviceModel.INTERFACE)]
         protected virtual bool validateValueProperties(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
-            .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.SUB_CLASS), (o) => 
-                o.IsEnumValueType<ComponentTypes>(nameof(ComponentAttributes.SUB_CLASS), this.TagName, out var componentType)
+            .ValidateValueProperty<InterfaceAttributes>(nameof(InterfaceAttributes.SUB_CLASS), (o) =>
+                o.IsEnumValueType<InterfaceTypes>(nameof(InterfaceAttributes.SUB_CLASS), this.TagName, out var componentType)
             )
             // id
             .ValidateValueProperty<ComponentAttributes>(nameof(ComponentAttributes.ID), (o) =>
@@ -210,7 +214,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             .UpdateHelpLinks(MODEL_BROWSER_URL)
             .HasError(out validationErrors);
 
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, Constants.ModelBrowserLinks.DeviceModel.INTERFACE)]
         protected virtual bool validateParts(out ICollection<MtconnectValidationException> validationErrors)
             => new NodeValidationContext(this)
                 .Validate((o) =>
@@ -220,6 +224,23 @@ namespace MtconnectCore.Standard.Documents.Devices
                         Pairings.Of(nameof(ComponentElements.REFERENCES), References)
                     )
                 )
+                .ValidateValueProperty<InterfaceElements>(nameof(InterfaceElements.INTERFACE_STATE), (o) => {
+                    var ns = MtconnectNodeParser.GetNamespaceName(SourceNode);
+                    var interfaceStateCount = SourceNode.SelectNodes($"{ns}:DataItems/{ns}:DataItem[@type='INTERFACE_STATE']", base.NamespaceManager).Count;
+                    if (interfaceStateCount > 1)
+                    {
+                        o.AddError($"Only one DataItem with type='INTERFACE_STATE'.", Pairings.Of("count(DataItem[type='INTERFACE_STATE'])", interfaceStateCount));
+                    }
+                    else if (interfaceStateCount <= 0)
+                    {
+                        o.AddError($"Must contain one DataItem with type='INTERFACE_STATE'.", Pairings.Of("count(DataItem[type='INTERFACE_STATE'])", interfaceStateCount));
+                    }
+                    else if (State == null)
+                    {
+                        o.AddError($"Unable to validate INTERFACE_STATE");
+                    }
+                    return o;
+                })
                 .UpdateHelpLinks(MODEL_BROWSER_URL)
                 .HasError(out validationErrors);
     }

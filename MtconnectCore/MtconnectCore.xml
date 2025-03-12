@@ -4145,6 +4145,11 @@
             specifies the  CoordinateSystem for this  Component and its children.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.SUB_CLASS">
+            <summary>
+            The tagname of the component referring to the componenttypes enum.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentRefAttributes">
             <summary>
             Attributes implemented from and extending that of the abstract Reference element in the context of a Component in the MTConnect Response document.
@@ -4557,6 +4562,51 @@
             timestamp of the last update of the  Device information for any device.
             </summary>
         </member>
+        <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes">
+            <summary>
+            Attributes of the Interface element
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.ID">
+            <summary>
+            The unique identifier for this element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.NAME">
+            <summary>
+            The name of the Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.NATIVE_NAME">
+            <summary>
+            The common name normally associated with a specific physical or logical part of a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.SAMPLE_INTERVAL">
+            <summary>
+            An optional attribute that is an indication provided by a piece of equipment describing the interval in milliseconds between the completion of the reading of the data associated with the Component element until the beginning of the next sampling of that data. This indication is reported as the number of milliseconds between data captures.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.SAMPLE_RATE">
+            <summary>
+            DEPRECATED in MTConnect Version 1.2. Replaced by <see cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.SAMPLE_INTERVAL"/>
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.UUID">
+            <summary>
+            A unique identifier for this XML element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.COORDINATE_SYSTEM_ID_REF">
+            <summary>
+            specifies the  CoordinateSystem for this  Component and its children.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.SUB_CLASS">
+            <summary>
+            The tagname of the component referring to the interface types enum.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.MotionAttributes.ACTUATION">
             <summary>
             Describes if this Component is actuated directly or indirectly as a result of other motion.
@@ -4829,9 +4879,34 @@
             Adapters is a Component that organizes Adapter Components representing the connectivity state of the MTConnect Agent.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.ADAPTER">
+            <summary>
+            Component that provides information about the data source for an MTConnect Agent.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AIR_HANDLER">
+            <summary>
+            system that circulates air or regulates airflow without altering temperature or humidity.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AMPLIFIER">
+            <summary>
+            Component composed of an electronic component or circuit that amplifies power, electric current, or voltage.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AUTOMATIC_TOOL_CHANGER">
+            <summary>
+            ToolingDelivery composed of a tool delivery mechanism that moves tools between a  ToolMagazine and a spindle a  Turret.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AUXILIARIES">
             <summary>
             An XML container used to organize information for Lower Leve elements representing functional sub-systems that provide supplementary or extended capabilities for a piece of equipment, but they are not required for the basic operation of the equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AUXILIARY">
+            <summary>
+            abstract Component composed of removable part(s) of a piece of equipment that provides supplementary or extended functionality.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AXES">
@@ -4839,9 +4914,99 @@
             The Axes component is a container for the actual axes of which there are currently two types:  Linear and Rotary.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.AXIS">
+            <summary>
+            abstract Component composed of a motion system that provides linear or rotational motion for a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.BALLSCREW">
+            <summary>
+            Component composed of a mechanical structure that transforms rotary motion into linear motion.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.BAR_FEEDER">
+            <summary>
+            Loader that delivers bar stock to a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.BELT">
+            <summary>
+            Component composed of an endless flexible band that transmits motion for a piece of equipment or conveys materials and objects.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.BRAKE">
+            <summary>
+            Component that slows or stops a moving object by the absorption or transfer of the energy of momentum, usually by means of friction, electrical force, or magnetic force.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CHAIN">
+            <summary>
+            Component composed of interconnected series of objects that band together and are used to transmit motion for a piece of equipment or to convey materials and objects.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CHOPPER">
+            <summary>
+            Component that breaks material into smaller pieces.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CHUCK">
+            <summary>
+            Component composed of a mechanism that holds a part or stock material in place.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CHUTE">
+            <summary>
+            Component composed of an inclined channel that conveys material.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CIRCUIT_BREAKER">
+            <summary>
+            Component that interrupts an electric circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CLAMP">
+            <summary>
+            Component that strengthens, support, or fastens objects in place.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.COMPRESSOR">
+            <summary>
+            Component composed of a pump or other mechanism that reduces volume and increases pressure of gases in order to condense the gases to drive pneumatically powered pieces of equipment.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CONTROLLER">
             <summary>
             The Controller component is the Component that controls a device, executes a program,  and sends instructions to the other components of the machine. It is the brains of the machine and can be asked for its current execution state and program name.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.CONTROLLERS">
+            <summary>
+            Component that organizes  Controller entities.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.COOLANT">
+            <summary>
+            System that provides distribution and management of fluids that remove heat from a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.COOLING">
+            <summary>
+            System that extracts controlled amounts of heat to achieve a target temperature at a specified cooling rate.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.COOLING_TOWER">
+            <summary>
+            Component composed of a heat exchange system that uses a fluid to transfer heat to the atmosphere.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.DEPOSITION">
+            <summary>
+            Auxiliary that manages the addition of material or state change of material being performed in an additive manufacturing process.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.DIELECTRIC">
+            <summary>
+            System that manages a chemical mixture used in a manufacturing process being performed at that piece of equipment.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.DOOR">
@@ -4849,9 +5014,160 @@
             A opening that can be closed.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.DRAIN">
+            <summary>
+            Component that allows material to flow for the purpose of drainage from, for example, a vessel or tank.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.ELECTRIC">
+            <summary>
+            System composed of the main power supply for the piece of equipment that provides distribution of that power throughout the equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.ENCLOSURE">
+            <summary>
+            System composed of a structure that is used to contain or isolate a piece of equipment or area.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.ENCODER">
+            <summary>
+            Component that measures position.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.END_EFFECTOR">
+            <summary>
+            System composed of functions that form the last link segment of a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.ENVIRONMENTAL">
+            <summary>
+            Component that observes the surroundings of another Component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.EXPIRED_POT">
+            <summary>
+            Component that is a Pot for a tool that is no longer usable for removal from a  ToolMagazine or  Turret.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.EXPOSURE_UNIT">
+            <summary>
+            Component that emits a type of radiation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.EXTRUSION_UNIT">
+            <summary>
+            Component that dispenses liquid or powered materials.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.FAN">
+            <summary>
+            Component that produces a current of air.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.FEATURE_OCCURANCE">
+            <summary>
+            Component that provides information related to an individual feature.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.FEEDER">
+            <summary>
+            System that manages the delivery of materials within a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.FILTER">
+            <summary>
+            Component through which liquids or gases are passed to remove suspended impurities or to recover solids.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.GALVANOMOTOR">
+            <summary>
+            Component composed of an electromechanical actuator that produces deflection of a beam of light or energy in response to electric current through its coil in a magnetic field.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.GANG_TOOL_BAR">
+            <summary>
+            ToolingDelivery composed of a tool mounting mechanism that holds any number of tools.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.GRIPPER">
+            <summary>
+            Component that holds a part, stock material, or any other item in place.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.HEATING">
+            <summary>
+            System that delivers controlled amounts of heat to achieve a target temperature at a specified heating rate.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.HOPPER">
+            <summary>
+            Component composed of a chamber or bin in which materials are stored temporarily, typically being filled through the top and dispensed through the bottom.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.HYDRAULIC">
+            <summary>
+            System that provides movement and distribution of pressurized liquid throughout the piece of equipment.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.INTERFACES">
             <summary>
             The information used to coordinate actions and activity between devices  or sub-systems and a device.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.LINEAR">
+            <summary>
+            Axis that provides prismatic motion along a fixed axis.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.LINEAR_POSITION_FEEDBACK">
+            <summary>
+            Component that measures linear motion or position.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.LINK" -->
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.LOADER">
+            <summary>
+            Auxiliary that provides movement and distribution of materials, parts, tooling, and other items to or from a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.LOCK">
+            <summary>
+            Component that physically prohibits a  Device or Component from opening or operating.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.LUBRICATION">
+            <summary>
+            System that provides distribution and management of fluids used to lubricate portions of the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.MATERIAL">
+            <summary>
+            Resource composed of material that is consumed or used by the piece of equipment for production of parts, materials, or other types of goods.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.MATERIALS">
+            <summary>
+            Resources that organizes  Material types.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.MOTOR">
+            <summary>
+            Component that converts electrical, pneumatic, or hydraulic energy into mechanical energy.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.OIL">
+            <summary>
+            Component composed of a viscous liquid.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PART">
+            <summary>
+            Component composed of a part being processed by a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PARTS">
+            <summary>
+            Component that organizes Part types.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PART_OCCURANCE">
@@ -4859,24 +5175,104 @@
             PartOccurrence organizes information about a specific part as it exists at a specific place and time, such as a specific instance of a bracket at a specific timestamp.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PATH">
+            <summary>
+            Component that organizes an independent operation or function within a  Controller.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PERSONNEL">
+            <summary>
+            Resource composed of an individual or individuals who either control, support, or otherwise interface with a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PNEUMATIC">
+            <summary>
+            System that uses compressed gasses to actuate components or do work within the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.POWER">
+            <summary>
+            Power was DEPRECATED in MTConnect Version 1.1 and was replaced by  Availability data item type.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.POWER_SUPPLY">
+            <summary>
+            Component that provides power to electric mechanisms.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PRESSURE">
+            <summary>
+            System that delivers compressed gas or fluid and controls the pressure and rate of pressure change to a desired target set-point.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PROCESS">
+            <summary>
+            Component composed of a manufacturing process being executed on a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PROCESSES">
+            <summary>
+            Component that organizes Process types.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PROCESS_OCCURANCE">
             <summary>
             ProcessOccurrence organizes information about the execution of a specific process that takes place at a specific place and time, such as a specific instance of part-milling occurring at a specific timestamp.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PRESSURE">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PROCESS_POWER">
             <summary>
-            A sensor capable of measuring the pressure.
+            System composed of a power source associated with a piece of equipment that supplies energy to the manufacturing process separate from the  Electric system.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.THERMOSTAT">
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PROTECTIVE">
             <summary>
-            A sensor capable of measuring the temperature of a component. The temperature is always given in Celsius.
+            System that provides functions used to detect or prevent harm or damage to equipment or personnel.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PULLEY">
+            <summary>
+            Component composed of a mechanism or wheel that turns in a frame or block and serves to change the direction of or to transmit force.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.PUMP">
+            <summary>
+            Component that raises, drives, exhausts, or compresses fluids or gases by means of a piston, plunger, or set of rotating vanes.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.REEL">
+            <summary>
+            Component composed of a rotary storage unit for material.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.REMOVAL_POT">
+            <summary>
+            Component that is a Pot for a tool that has to be removed from a  ToolMagazine or  Turret to a location outside of the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.RESOURCE">
+            <summary>
+            Component composed of material or personnel involved in a manufacturing process.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.RESOURCES">
             <summary>
             An XML container used to organize information for Lower Leve elements representing types of items, materials, and personnel that support the operation of a piece of equipment or work to be performed at a location. Resources also represents materials or other items consumed or transformed by a piece of equipment for production of parts or other types of goods.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.RETURN_POT">
+            <summary>
+            Component that is a Pot for a tool that has been removed from spindle or  Turret and awaiting for return to a  ToolMagazine.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.ROTARY">
+            <summary>
+            Axis that provides rotation about a fixed axis.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SENSING_ELEMENT">
+            <summary>
+            Component that provides a signal or measured value.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SENSOR">
@@ -4889,10 +5285,30 @@
             The spindle is a rotational axis that revolves at high speed and has its speed expressed in REVOLUTION/MINUTE. The spindle can also have additional data items. Spindle speed has been specified as a separate data item since it receives special treatment in many applications. Velocity is used for linear axes other than spindle.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SPREADER">
+            <summary>
+            Component that flattens or spreading materials.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.STAGING_POT">
+            <summary>
+            Component that is a Pot for a tool that is awaiting transfer to a  ToolMagazine or  Turret from outside of the piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.STATION">
+            <summary>
+            Component composed of a storage or mounting location for a tool associated with a  Turret,  GangToolBar, or  ToolRack.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.STOCK">
             <summary>
             Stock is a Structural Element that represents the material that is used in a manufacturing process and to which work is applied in a machine or piece of equipment to produce parts.<br/><br/>
             Stock may be either a continuous piece of material from which multiple parts may be produced or it may be a discrete piece of material that will produce a part or a set of parts.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.STORAGE_BATTERY">
+            <summary>
+            Component composed of one or more cells in which chemical energy is converted into electricity and used as a source of power.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.STRUCTURE">
@@ -4900,14 +5316,124 @@
             Structure is a Component that organizes the parts comprising the rigid bodies of the piece of equipment.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.STRUCTURES">
+            <summary>
+            Component that organizes  Structure types.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SWITCH">
+            <summary>
+            Component that turns on or off an electric current or makes or breaks a circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SYSTEM">
+            <summary>
+            Component that is permanently integrated into the piece of equipment.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.SYSTEMS">
             <summary>
             The Systems component is a place holder for all the system types.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TABLE">
+            <summary>
+            Component composed of a surface for holding an object or material.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TANK">
+            <summary>
+            Component generally composed of an enclosed container.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TENSIONER">
+            <summary>
+            Component that provides or applies a stretch or strain to another mechanism.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.THERMOSTAT">
+            <summary>
+            A sensor capable of measuring the temperature of a component. The temperature is always given in Celsius.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TOOL_MAGAZINE">
+            <summary>
+            ToolingDelivery composed of a tool storage mechanism that holds any number of tools.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TOOL_RACK">
+            <summary>
+            ToolingDelivery composed of a linear or matrixed tool storage mechanism that holds any number of tools.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TOOLING_DELIVERY">
+            <summary>
+            Auxiliary that manages, positions, stores, and delivers tooling within a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TRANSFER_ARM">
+            <summary>
+            Component that physically moves a tool from one location to another.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TRANSFER_POT">
+            <summary>
+            Component that is a Pot for a tool that is awaiting transfer from a  ToolMagazine to spindle or  Turret.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TRANSFORMER">
+            <summary>
+            Component that transforms electric energy from a source to a secondary circuit.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.TURRET">
+            <summary>
+            ToolingDelivery composed of a tool mounting mechanism that holds any number of tools.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.VACUUM">
+            <summary>
+            System that evacuates gases and liquids from an enclosed and sealed space to a controlled negative pressure or a molecular density below the prevailing atmospheric level.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.VALVE">
+            <summary>
+            Component that halts or controls the flow of a liquid, gas, or other material through a passage, pipe, inlet, or outlet.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.VAT">
+            <summary>
+            Component generally composed of an open container.
+            </summary>
+        </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.VIBRATION">
             <summary>
             A sensor capable of measuring the vibration of a component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.WASTE_DISPOSAL">
+            <summary>
+            Auxiliary that removes manufacturing byproducts from a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.WATER">
+            <summary>
+            Component composed of H2O
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.WIRE">
+            <summary>
+            Component composed of a string like piece or filament of relatively rigid or flexible material provided in a variety of diameters.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.WORK_ENVELOPE">
+            <summary>
+            System composed of the physical process execution space within a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ComponentTypes.WORKPIECE">
+            <summary>
+            Component composed of an object or material on which a form of work is performed.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes.ControllerSubComponentTypes">
@@ -11938,6 +12464,16 @@
             A DataItemRef element as an implementation.
             </summary>
         </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.INTERFACES">
+            <summary>
+            Component that organizes Interface types.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.ComponentElements.INTERFACE">
+            <summary>
+            Abstract Component that coordinates actions and activities between pieces of equipment.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.CompositionElements">
             <summary>
             Elements for the Composition element in the MTConnect specification.
@@ -12028,6 +12564,66 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.DataItemElements.DEFINITION">
             <summary>
             The Definition defines the meaning of Entry and Cell elements associated with the DataItem when the representation is either DATA_SET or TABLE.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.DESCRIPTION">
+            <summary>
+            An element that can contain any descriptive content.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.COMPOSITIONS">
+            <summary>
+            A container for the Composition elements (See <see cref="T:MtconnectCore.Standard.Documents.Devices.Composition"/>) associated with this Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.COMPOSITION">
+            <summary>
+            See <see cref="T:MtconnectCore.Standard.Documents.Devices.Composition"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.COMPONENTS">
+            <summary>
+            A container for Lower Level Component XML elements associated with this parent Component.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.COMPONENT">
+            <summary>
+            See <see cref="T:MtconnectCore.Standard.Documents.Devices.Component"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.CONFIGURATION">
+            <summary>
+            An XML element that contains technical information about a piece of equipment describing its physical layout or functional characteristics.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.DATA_ITEMS">
+            <summary>
+            A container for the Data Entities (See <see cref="T:MtconnectCore.Standard.Documents.Devices.DataItem"/>) associated with this Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.DATA_ITEM">
+            <summary>
+            See <see cref="T:MtconnectCore.Standard.Documents.Devices.DataItem"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.REFERENCES">
+            <summary>
+            A container for the Reference elements associated with this Component element.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.REFERENCE">
+            <summary>
+            See <see cref="T:MtconnectCore.Standard.Documents.Devices.Reference"/>.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.COMPONENT_REF">
+            <summary>
+            A ComponentRef element as an implementation.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.DATA_ITEM_REF">
+            <summary>
+            A DataItemRef element as an implementation.
             </summary>
         </member>
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.MotionElements.DESCRIPTION">
@@ -12160,6 +12756,88 @@
         <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.TransformationElements.ROTATION">
             <summary>
             Rotations about X, Y, and Z axes are expressed in A, B, and C respectively within a 3-dimensional vector. The values MUST be given in DEGREE_3D. Positive A, B, and C are in the directions to advance right-hand screws in the positive X, Y, and Z directions, respectively. Ref:ISO 9787:2013
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.CLOSE_CHUCK">
+            <summary>
+            operating state of the service to close a chuck.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.CLOSE_DOOR">
+            <summary>
+            operating state of the service to close a door.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.INTERFACE_STATE">
+            <summary>
+            operational state of an Interface.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.MATERIAL_CHANGE">
+            <summary>
+            perating state of the service to change the type of material or product being loaded or fed to a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.MATERIAL_FEED">
+            <summary>
+            operating state of the service to advance material or feed product to a piece of equipment from a continuous or bulk source.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.MATERIAL_LOAD">
+            <summary>
+            operating state of the service to load a piece of material or product.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.MATERIAL_RETRACT">
+            <summary>
+            operating state of the service to remove or retract material or product.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.MATERIAL_UNLOAD">
+            <summary>
+            operating state of the service to unload a piece of material or product.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.OPEN_CHUCK">
+            <summary>
+            operating state of the service to open a chuck.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.OPEN_DOOR">
+            <summary>
+            operating state of the service to open a door.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceEventEnum.PART_CHANGE">
+            <summary>
+            operating state of the service to change the part or product associated with a piece of equipment to a different part or product.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceTypes.BAR_FEEDER_INTERFACE">
+            <summary>
+             Interface that coordinates the operations between a bar feeder and another piece of equipment. Bar feeder is a piece of equipment that pushes bar stock (i.e., long pieces of material of various shapes) into an associated piece of equipment – most typically a lathe or turning center.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceTypes.CHUCK_INTERFACE">
+            <summary>
+             Interface that coordinates the operations between two pieces of equipment, one of which controls the operation of a chuck. The piece of equipment that is controlling the chuck MUST provide the data item  ChuckState as part of the set of information provided.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceTypes.DOOR_INTERFACE">
+            <summary>
+            Interface that coordinates the operations between two pieces of equipment, one of which controls the operation of a door. The piece of equipment that is controlling the door MUST provide data item DoorState as part of the set of information provided.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes.InterfaceTypes.MATERIAL_HANDLER_INTERFACE">
+            <summary>
+            Interface that coordinates the operations between a piece of equipment and another associated piece of equipment used to automatically handle various types of materials or services associated with the original piece of equipment. <br/>A material handler is a piece of equipment capable of providing any one, or more, of a variety of support services for another piece of equipment or a process like:<br/>
+            <list type="bullet">
+            <item>Loading/unloading material or tooling</item>
+            <item>Part inspection</item>
+            <item>Testing</item>
+            <item>Cleaning</item>
+            </list><br/>
+            A robot is a common example of a material handler.
             </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.DocumentTypes">
@@ -13965,6 +14643,16 @@
             <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
             </list>
             </remarks>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.InterfaceStateValues.DISABLED">
+            <summary>
+            Interface is currently not operational.
+            </summary>
+        </member>
+        <member name="F:MtconnectCore.Standard.Contracts.Enums.Streams.InterfaceStateValues.ENABLED">
+            <summary>
+            Interface is currently operational and performing as expected.
+            </summary>
         </member>
         <member name="T:MtconnectCore.Standard.Contracts.Enums.Streams.LeakDetectValues">
             <summary>
@@ -16024,6 +16712,9 @@
         <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Id">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.ID"/>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Component.SubClass">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.SUB_CLASS"/>
+        </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.Component.Name">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.ComponentAttributes.NAME"/>
         </member>
@@ -16325,6 +17016,13 @@
         <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
         </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.DataItem.ValidateTypeSubType(MtconnectCore.Validation.NodeValidationContext.NodeValueValidator{MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes})">
+            <summary>
+            Validates the <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.Type"/> and <see cref="P:MtconnectCore.Standard.Documents.Devices.DataItem.SubType"/> fields according to the standard DataItemEnum
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
         <member name="T:MtconnectCore.Standard.Documents.Devices.DataItemConstraint">
             <summary>
             Constraints are used by a software application to evaluate the validity of the data reported.
@@ -16563,6 +17261,74 @@
         </member>
         <member name="M:MtconnectCore.Standard.Documents.Devices.Filter.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
             <inheritdoc/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.State">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.Id">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.ID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.SubClass">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.SUB_CLASS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.Name">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.NativeName">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.NATIVE_NAME"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.SampleInterval">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.SAMPLE_INTERVAL"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.SampleRate">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.SAMPLE_RATE"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.Uuid">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.UUID"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.CoordinateSystemIdRef">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.InterfaceAttributes.COORDINATE_SYSTEM_ID_REF"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.TagName">
+            <summary>
+            Explicit reference to the XML tag name. This can be more reliable than referencing <see cref="P:MtconnectCore.Standard.Documents.Devices.Interface.Name"/>
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.Description">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.DESCRIPTION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.Configuration">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.CONFIGURATION"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.Size">
+            <summary>
+            Cumulative number of sub-components, including the size of all sub-components.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.SubComponents">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.COMPONENTS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.DataItems">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.DATA_ITEMS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.Compositions">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.COMPOSITIONS"/>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.Devices.Interface.References">
+            <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Elements.InterfaceElements.REFERENCES"/>
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Interface.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.Interface.#ctor(System.Xml.XmlNode,System.Xml.XmlNamespaceManager,MtconnectCore.Standard.Contracts.Enums.MtconnectVersions)">
+            <inheritdoc />
+        </member>
+        <member name="M:MtconnectCore.Standard.Documents.Devices.InterfaceState.ValidateTypeSubType(MtconnectCore.Validation.NodeValidationContext.NodeValueValidator{MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.DataItemAttributes})">
+            <summary>
+            Validates the <see cref="T:System.Type"/> and <see cref="!:SubType"/> fields according to the standard DataItemEnum
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.Devices.Motion.Id">
             <inheritdoc cref="F:MtconnectCore.Standard.Contracts.Enums.Devices.Attributes.MotionAttributes.ID"/>

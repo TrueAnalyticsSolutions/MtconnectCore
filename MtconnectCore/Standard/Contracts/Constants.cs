@@ -58,6 +58,19 @@
 
                 public const string DEVICE_RELATIONSHIP = "https://model.mtconnect.org/#Structure__EAID_E20AAF35_BE17_40e8_8701_D2D7676EDC69";
 
+                public const string INTERFACES = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1607345507474_877148_1773";
+
+                public const string INTERFACE = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1579572381996_964170_42252";
+
+                public const string BAR_FEEDER_INTERFACE = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1622717386025_755435_931";
+                public const string CHUCK_INTERFACE = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1622717445425_648389_1075";
+                public const string DOOR_INTERFACE = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1622717425705_537671_1027";
+                public const string MATERIAL_HANDLER_INTERFACE = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1622717400199_925921_979";
+                public const string REQUESTER = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1622805783807_480004_607";
+                public const string RESPONDER = "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1622805797294_995075_652";
+
+                public const string INTERFACE_STATE = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1580378218325_627294_1860";
+
                 public const string ENTRY_DEFINITION = "https://model.mtconnect.org/#Structure___19_0_3_45f01b9_1582939685398_830533_4339";
 
                 public const string FILTER = "https://model.mtconnect.org/#Structure__EAID_8A5219C3_747D_4904_A58A_A312D13DAEE9";

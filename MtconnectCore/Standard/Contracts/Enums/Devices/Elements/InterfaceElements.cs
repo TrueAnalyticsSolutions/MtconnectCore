@@ -2,12 +2,11 @@
 
 namespace MtconnectCore.Standard.Contracts.Enums.Devices.Elements
 {
-    /// <summary>
-    /// Elements contained within the Component element in the MTConnect Response document.
-    /// </summary>
-    /// <remarks>See Part 2 Section 4.4.3 of the MTConnect specification.</remarks>
-    [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
-    public enum ComponentElements {
+    [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, Constants.ModelBrowserLinks.DeviceModel.INTERFACE)]
+    public enum InterfaceElements
+    {
+        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, Constants.ModelBrowserLinks.DeviceModel.INTERFACE_STATE)]
+        INTERFACE_STATE,
         /// <summary>
         /// An element that can contain any descriptive content.
         /// </summary>
@@ -68,15 +67,5 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.Elements
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, Constants.ModelBrowserLinks.DeviceModel.COMPONENT)]
         DATA_ITEM_REF,
-        /// <summary>
-        /// Component that organizes Interface types.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, Constants.ModelBrowserLinks.DeviceModel.INTERFACES)]
-        INTERFACES,
-        /// <summary>
-        /// Abstract Component that coordinates actions and activities between pieces of equipment.
-        /// </summary>
-        [MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, Constants.ModelBrowserLinks.DeviceModel.INTERFACES)]
-        INTERFACE
     }
 }

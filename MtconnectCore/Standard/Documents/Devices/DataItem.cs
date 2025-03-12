@@ -217,11 +217,7 @@ namespace MtconnectCore.Standard.Documents.Devices
             // type/subType
             .ValidateValueProperty(
                 DataItemAttributes.TYPE,
-                (o) =>
-                    o.IsImplemented(Type)
-                    ?.IsImplemented(SubType)
-                    ?.IsRequired(Type)
-                    ?.ValidateType(Category, Type, SubType)
+                ValidateTypeSubType
             )
             // units
             .ValidateValueProperty(
@@ -250,6 +246,17 @@ namespace MtconnectCore.Standard.Documents.Devices
             )
             .UpdateHelpLinks(MODEL_BROWSER_URL)
             .HasError(out validationErrors);
+
+        /// <summary>
+        /// Validates the <see cref="Type"/> and <see cref="SubType"/> fields according to the standard DataItemEnum
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        protected virtual NodeValidationContext.NodeValidator ValidateTypeSubType(NodeValidationContext.NodeValueValidator<DataItemAttributes> o)
+            => o.IsImplemented(Type)
+                ?.IsImplemented(SubType)
+                ?.IsRequired(Type)
+                ?.ValidateType(Category, Type, SubType);
 
         // Validate all elements for the data item
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, Constants.ModelBrowserLinks.DeviceModel.DATA_ITEM)]
