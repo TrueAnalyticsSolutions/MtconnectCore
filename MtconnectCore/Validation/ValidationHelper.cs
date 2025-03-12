@@ -7,6 +7,7 @@ using MtconnectCore.Standard.Contracts;
 using System.Linq;
 using System.Reflection;
 using System;
+using MtconnectCore.Standard.Contracts.Enums.Devices.InterfaceTypes;
 
 namespace MtconnectCore.Validation
 {
@@ -196,6 +197,16 @@ namespace MtconnectCore.Validation
         /// <returns>Collection of validation exceptions</returns>
         internal static NodeValidationContext.NodeValidator ValidateNode<T>(this NodeValidationContext.NodeValidator validator, CategoryEnum categoryType, string type, string subType) where T : Enum
         {
+            // Check interfaces
+            if (type.Equals("INTERFACE_STATE", StringComparison.OrdinalIgnoreCase))
+            {
+                var parentInterfaceName = validator.Context.Node.SourceNode.ParentNode.ParentNode.LocalName;
+                if (!EnumHelper.Contains<InterfaceTypes>(parentInterfaceName))
+                {
+                    validator.AddError("INTERFACE_STATE MUST be defined in an Interface", Pairings.Of("InterfaceType", parentInterfaceName));
+                }
+                return validator;
+            }
 
             var extensionValidator = new NodeValidationContext(validator.Context.Node);
             extensionValidator.Validate((o) => o.ValidateNodeExtension<T>(categoryType, type, subType));
@@ -244,11 +255,11 @@ namespace MtconnectCore.Validation
                     standardValidator.Validate((o) => o.ValidateNodeInStandard<T>(categoryType, nonExtendedType, subType));
                     if (!standardValidator.HasError())
                     {
-                        validator.AddWarning($"Extended type already exists.", Pairings.Of("type", type), Pairings.Of("version", validator.Context.Node.MtconnectVersion.ToName()));
+                        validator.AddError($"Extended type already exists in this version of MTConnect.", Pairings.Of("type", type), Pairings.Of("version", validator.Context.Node.MtconnectVersion.ToName()));
                     }
                     else
                     {
-                        validator.AddWarning($"Extended type used in this implementation.", Pairings.Of("type", type));
+                        validator.AddMessage($"Extended type used in this implementation.", Pairings.Of("type", type));
                     }
                 }
             }
@@ -281,7 +292,8 @@ namespace MtconnectCore.Validation
             if (!EnumHelper.Contains<T>(type))
             {
                 if (categoryType != CategoryEnum.CONDITION
-                    || (!EnumHelper.Contains<EventTypes>(type)
+                    && ((!EnumHelper.Contains<EventTypes>(type)
+                        && !EnumHelper.Contains<InterfaceEventEnum>(type))
                     && !EnumHelper.Contains<SampleTypes>(type)))
                 {
                     validator.AddError(INVALID_TYPE_ERROR, Pairings.Of("type", type));
@@ -291,9 +303,10 @@ namespace MtconnectCore.Validation
             else if (!EnumHelper.IsImplemented<T>(type, implementedVersion))
             {
                 if (categoryType != CategoryEnum.CONDITION
-                    || (!EnumHelper.IsImplemented<EventTypes>(type, implementedVersion)
+                    && ((!EnumHelper.IsImplemented<EventTypes>(type, implementedVersion)
+                            && !EnumHelper.IsImplemented<InterfaceEventEnum>(type, implementedVersion))
                         && !EnumHelper.IsImplemented<SampleTypes>(type, implementedVersion)))
-                    validator.AddWarning($"Invalid 'type' value in version.", Pairings.Of("type", type), Pairings.Of("version", implementedVersion.ToName()));
+                    validator.AddWarning($"Invalid 'type' value. Not implemented in this version of MTConnect.", Pairings.Of("type", type), Pairings.Of("version", implementedVersion.ToName()));
                 isValidType = false;
             }
 
@@ -309,12 +322,12 @@ namespace MtconnectCore.Validation
                 {
                     if (!EnumHelper.Contains(obsSubType.SubTypeEnum, subType))
                     {
-                        validator.AddError(INVALID_SUB_TYPE_ERROR, Pairings.Of("subType", subType));
+                        validator.AddWarning(INVALID_SUB_TYPE_ERROR, Pairings.Of("subType", subType));
                         isValidSubType = false;
                     }
                     else if (!EnumHelper.IsImplemented(obsSubType.SubTypeEnum, subType, implementedVersion))
                     {
-                        validator.AddWarning($"Invalid 'subType' value in version.", Pairings.Of("subType", subType), Pairings.Of("version", implementedVersion.ToName()));
+                        validator.AddWarning($"Invalid 'subType' value in this version of MTConnect.", Pairings.Of("subType", subType), Pairings.Of("version", implementedVersion.ToName()));
                         isValidSubType = false;
                     }
                 }

@@ -13,6 +13,9 @@ namespace MtconnectCore.Standard.Contracts
     /// </summary>
     public abstract class MtconnectNode : IMtconnectNode
     {
+        [NonSerialized]
+        protected XmlNamespaceManager NamespaceManager;
+
         /// <summary>
         /// Reference to the Source XmlNode.
         /// </summary>
@@ -43,6 +46,7 @@ namespace MtconnectCore.Standard.Contracts
         public MtconnectNode(XmlNode xNode, XmlNamespaceManager nsmgr, MtconnectVersions version)
         {
             SourceNode = xNode;
+            NamespaceManager = nsmgr;
             MtconnectVersion = version;
 
             MtconnectNodeParser.UpdateFromXml(this, xNode, nsmgr, version);

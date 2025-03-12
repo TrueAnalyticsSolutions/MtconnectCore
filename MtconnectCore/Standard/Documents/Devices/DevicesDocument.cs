@@ -192,5 +192,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
             return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
         }
+
+        // TODO: Validate DataItemRef idRef links exist
     }
 }
