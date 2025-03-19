@@ -44,8 +44,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"Invalid ReconditionCount value. CuttingTool ReconditionCount value must be a number.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(Value)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(Value)
                     });
                 }
 

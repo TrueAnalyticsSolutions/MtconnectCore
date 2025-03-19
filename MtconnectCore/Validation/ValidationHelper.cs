@@ -18,7 +18,10 @@ namespace MtconnectCore.Validation
         {
             if (string.IsNullOrEmpty(result))
             {
-                validator.AddError("Observation MUST include a result.", Pairings.Of("result", result));
+                var resultException = validator.AddError("Observation MUST include a result.", Pairings.Of("result", result));
+                resultException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND;
+                resultException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                resultException.Scope = "result";
             }
             else if (result.Equals(Constants.UNAVAILABLE, StringComparison.OrdinalIgnoreCase))
             {
@@ -53,7 +56,10 @@ namespace MtconnectCore.Validation
         {
             if (string.IsNullOrEmpty(result))
             {
-                validator.AddError("Observation MUST include a result.", Pairings.Of("result", result));
+                var resultException = validator.AddError("Observation MUST include a result.", Pairings.Of("result", result));
+                resultException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND;
+                resultException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                resultException.Scope = "result";
             } else if (result.Equals(Constants.UNAVAILABLE, StringComparison.OrdinalIgnoreCase))
             {
                 return validator;
@@ -67,7 +73,10 @@ namespace MtconnectCore.Validation
                 {
                     if (!EnumHelper.Contains(observationalValue.ValueEnum, result))
                     {
-                        validator.AddError("Observation result does not match expected values.", Pairings.Of("type", type), Pairings.Of("result.Type", observationalValue.ValueEnum.Name), Pairings.Of("result", result));
+                        var resultException = validator.AddError("Event result does not match expected values.", Pairings.Of("type", type), Pairings.Of("result.Type", observationalValue.ValueEnum.Name), Pairings.Of("result", result));
+                        resultException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                        resultException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                        resultException.Scope = "result";
                     }
                 }
             }
@@ -115,7 +124,10 @@ namespace MtconnectCore.Validation
                         return validator;
                     }
                 }
-                validator.AddError(INVALID_TYPE_ERROR, Pairings.Of("type", type));
+                var typeException = validator.AddError(INVALID_TYPE_ERROR, Pairings.Of("type", type));
+                typeException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                typeException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                typeException.Scope = "type";
             }
             return validator;
         }
@@ -155,7 +167,10 @@ namespace MtconnectCore.Validation
                     }
                 } else
                 {
-                    validator.AddError("Invalid 'category' value.", Pairings.Of("category", category));
+                    var categoryException = validator.AddError("Invalid 'category' value.", Pairings.Of("category", category));
+                    categoryException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                    categoryException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                    categoryException.Scope = "category";
                 }
             }
             return validator;
@@ -172,8 +187,15 @@ namespace MtconnectCore.Validation
         internal static NodeValidationContext.NodeValidator ValidateNativeUnits(this NodeValidationContext.NodeValidator validator, string nativeUnits)
         {
             if (!string.IsNullOrEmpty(nativeUnits) && !EnumHelper.Contains<NativeUnitEnum>(nativeUnits))
+            {
                 if (!EnumHelper.Contains<UnitEnum>(nativeUnits))
-                    validator.AddError("Invalid 'nativeUnits' value.", Pairings.Of("nativeUnits", nativeUnits));
+                {
+                    var nativeUnitsException = validator.AddError("Invalid 'nativeUnits' value.", Pairings.Of("nativeUnits", nativeUnits));
+                    nativeUnitsException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                    nativeUnitsException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                    nativeUnitsException.Scope = "nativeUnits";
+                }
+            }
             return validator;
 
         }
@@ -203,7 +225,10 @@ namespace MtconnectCore.Validation
                 var parentInterfaceName = validator.Context.Node.SourceNode.ParentNode.ParentNode.LocalName;
                 if (!EnumHelper.Contains<InterfaceTypes>(parentInterfaceName))
                 {
-                    validator.AddError("INTERFACE_STATE MUST be defined in an Interface", Pairings.Of("InterfaceType", parentInterfaceName));
+                    var interfaceStateException = validator.AddError("INTERFACE_STATE MUST be defined in an Interface", Pairings.Of("InterfaceType", parentInterfaceName));
+                    interfaceStateException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                    interfaceStateException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                    interfaceStateException.Scope = "type";
                 }
                 return validator;
             }
@@ -220,13 +245,12 @@ namespace MtconnectCore.Validation
 
 
             var standardValidator = new NodeValidationContext(validator.Context.Node);
-            standardValidator.Validate((o) => o.ValidateNodeInStandard<T>(categoryType, type, subType));
+            var validationResult = standardValidator.Validate((o) => o.ValidateNodeInStandard<T>(categoryType, type, subType));
 
-            if (standardValidator.HasError())
+            if (standardValidator.Exceptions.Any())
             {
                 foreach (var exception in standardValidator.Exceptions)
                     validator.Context.Exceptions.Add(exception);
-                return validator;
             }
 
             return validator;
@@ -255,11 +279,17 @@ namespace MtconnectCore.Validation
                     standardValidator.Validate((o) => o.ValidateNodeInStandard<T>(categoryType, nonExtendedType, subType));
                     if (!standardValidator.HasError())
                     {
-                        validator.AddError($"Extended type already exists in this version of MTConnect.", Pairings.Of("type", type), Pairings.Of("version", validator.Context.Node.MtconnectVersion.ToName()));
+                        var extendedTypeException = validator.AddError($"Extended type already exists.", Pairings.Of("type", type), Pairings.Of("version", validator.Context.Node.MtconnectVersion.ToName()));
+                        extendedTypeException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED;
+                        extendedTypeException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                        extendedTypeException.Scope = "type";
                     }
                     else
                     {
-                        validator.AddMessage($"Extended type used in this implementation.", Pairings.Of("type", type));
+                        var extendedTypeMessage = validator.AddMessage($"Extended type.", Pairings.Of("type", type));
+                        extendedTypeMessage.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED;
+                        extendedTypeMessage.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                        extendedTypeMessage.Scope = "type";
                     }
                 }
             }
@@ -296,17 +326,26 @@ namespace MtconnectCore.Validation
                         && !EnumHelper.Contains<InterfaceEventEnum>(type))
                     && !EnumHelper.Contains<SampleTypes>(type)))
                 {
-                    validator.AddError(INVALID_TYPE_ERROR, Pairings.Of("type", type));
+                    var invalidVersionException = validator.AddError(INVALID_TYPE_ERROR, Pairings.Of("type", type));
+                    invalidVersionException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                    invalidVersionException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                    invalidVersionException.Scope = "type";
                     isValidType = false;
                 }
             }
             else if (!EnumHelper.IsImplemented<T>(type, implementedVersion))
             {
+                // At this point, type is implemented in the standard, just not the implementedVersion
                 if (categoryType != CategoryEnum.CONDITION
-                    && ((!EnumHelper.IsImplemented<EventTypes>(type, implementedVersion)
+                    || ((!EnumHelper.IsImplemented<EventTypes>(type, implementedVersion)
                             && !EnumHelper.IsImplemented<InterfaceEventEnum>(type, implementedVersion))
                         && !EnumHelper.IsImplemented<SampleTypes>(type, implementedVersion)))
-                    validator.AddWarning($"Invalid 'type' value. Not implemented in this version of MTConnect.", Pairings.Of("type", type), Pairings.Of("version", implementedVersion.ToName()));
+                {
+                    var invalidVersionException = validator.AddWarning($"Invalid 'type' value. Not implemented.", Pairings.Of("type", type), Pairings.Of("version", implementedVersion.ToName()));
+                    invalidVersionException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                    invalidVersionException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                    invalidVersionException.Scope = "type";
+                }
                 isValidType = false;
             }
 
@@ -322,12 +361,18 @@ namespace MtconnectCore.Validation
                 {
                     if (!EnumHelper.Contains(obsSubType.SubTypeEnum, subType))
                     {
-                        validator.AddWarning(INVALID_SUB_TYPE_ERROR, Pairings.Of("subType", subType));
+                        var invalidSubTypeException = validator.AddWarning(INVALID_SUB_TYPE_ERROR, Pairings.Of("subType", subType));
+                        invalidSubTypeException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                        invalidSubTypeException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                        invalidSubTypeException.Scope = "subType";
                         isValidSubType = false;
                     }
                     else if (!EnumHelper.IsImplemented(obsSubType.SubTypeEnum, subType, implementedVersion))
                     {
-                        validator.AddWarning($"Invalid 'subType' value in this version of MTConnect.", Pairings.Of("subType", subType), Pairings.Of("version", implementedVersion.ToName()));
+                        var invalidSubTypeException = validator.AddWarning($"Invalid 'subType' value. Not implemented.", Pairings.Of("subType", subType), Pairings.Of("version", implementedVersion.ToName()));
+                        invalidSubTypeException.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH;
+                        invalidSubTypeException.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                        invalidSubTypeException.Scope = "subType";
                         isValidSubType = false;
                     }
                 }

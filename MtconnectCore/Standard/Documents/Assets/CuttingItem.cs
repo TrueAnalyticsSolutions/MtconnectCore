@@ -88,8 +88,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                                     SourceNode
                                 ) {
                                     Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
-                                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                                    SourceContextScope = attributeName
+                                    ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                                    Scope = attributeName
                                 }
                             );
                         }
@@ -109,8 +109,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                                     SourceNode
                                 ) {
                                     Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
-                                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                                    SourceContextScope = attributeName
+                                    ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                                    Scope = attributeName
                                 }
                             );
                         }
@@ -122,8 +122,13 @@ namespace MtconnectCore.Standard.Documents.Assets
                 validationErrors.Add(
                     new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"Missing 'indices' in CuttingItem."
-                    )
+                        $"Missing 'indices' in CuttingItem.",
+                        SourceNode
+                    ) {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.OUT_OF_RANGE,
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(Indices)
+                    }
                 );
             }
             return indices.ToArray();

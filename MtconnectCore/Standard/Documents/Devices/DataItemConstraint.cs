@@ -55,8 +55,13 @@ namespace MtconnectCore.Standard.Documents.Devices
                         (v) => Filter != null,
                         (v) => throw new MtconnectValidationException(
                             ValidationSeverity.WARNING,
-                            "Filter DEPRECATED in Version 1.4 - Moved to the Filters element of a DataItem."
-                        )
+                            "Filter DEPRECATED in Version 1.4 - Moved to the Filters element of a DataItem.",
+                            SourceNode
+                        ) {
+                            Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DEPRECATED,
+                            ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            Scope = nameof(Filter)
+                        }
                     )
                 )
                 // Return validation errors

@@ -108,8 +108,8 @@ namespace MtconnectCore.Validation
                     $"Exception prevented further validation of {Node.SourceNode.LocalName}",
                     Node.SourceNode) {
                     // TODO: Add ExceptionCodeEnum
-                    SourceContext = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                    SourceContextScope = propertyName
+                    ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    Scope = propertyName
                 });
             }
             return this;
@@ -128,8 +128,8 @@ namespace MtconnectCore.Validation
                     $"Exception prevented further validation of {Node.SourceNode.LocalName}",
                     Node.SourceNode) {
                     // TODO: Add ExceptionCodeEnum
-                    SourceContext = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                    SourceContextScope = propertyName
+                    ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    Scope = propertyName
                 });
             }
             return this;

@@ -51,8 +51,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"'sequence' values MUST be unique for each incoming DataItem.", SourceNode) {
                     Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
-                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                    SourceContextScope = "DataItem.Sequence"
+                    ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    Scope = "DataItem.Sequence"
                 });
             }
 
@@ -61,8 +61,8 @@ namespace MtconnectCore.Standard.Documents.Streams
             {
                 validationErrors.Add(new MtconnectValidationException(ValidationSeverity.WARNING, $"All Observations reporting UNAVAILABLE. This could be an indication that the Adapter is not reporting correctly.", SourceNode) {
                     Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
-                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                    SourceContextScope = "DataItem.Result"
+                    ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    Scope = "DataItem.Result"
                 });
             }
 

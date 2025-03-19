@@ -61,8 +61,8 @@ namespace MtconnectCore.Standard.Documents
                         $"Response Document Header MUST include a 'version' attribute.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(AgentVersion)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(AgentVersion)
                     });
                 }
 
@@ -73,8 +73,8 @@ namespace MtconnectCore.Standard.Documents
                         $"Response Document Header MUST include a 'creationTime' attribute.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(CreationTime)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(CreationTime)
                     });
                 }
 
@@ -85,8 +85,8 @@ namespace MtconnectCore.Standard.Documents
                         $"Response Document Header MUST include a 'instanceId' attribute.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(InstanceId)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(InstanceId)
                     });
                 }
 
@@ -97,8 +97,8 @@ namespace MtconnectCore.Standard.Documents
                         $"Response Document Header MUST include a 'sender' attribute.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(Sender)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(Sender)
                     });
                 }
 

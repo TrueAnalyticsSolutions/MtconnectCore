@@ -150,8 +150,8 @@ namespace MtconnectCore.Standard.Documents.Streams
                             "Component MUST include a 'name' attribute.",
                             SourceNode) {
                             Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                            SourceContextScope = nameof(Name)
+                            ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            Scope = nameof(Name)
                         }
                     )
                 )

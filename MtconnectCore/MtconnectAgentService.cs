@@ -542,7 +542,7 @@ switch (document)
             }
             else
             {
-                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'probe' requests."));
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'probe' requests.", devices.Source.DocumentElement));
             }
             #endregion
             #region Audit Current
@@ -558,7 +558,7 @@ switch (document)
             }
             else
             {
-                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'current' requests."));
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'current' requests.", current.Source.DocumentElement));
             }
             #endregion
             #region Audit Sample
@@ -574,7 +574,7 @@ switch (document)
             }
             else
             {
-                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'sample' requests."));
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'sample' requests.", sample.Source.DocumentElement));
             }
             #endregion
             #region Audit Assets
@@ -590,7 +590,7 @@ switch (document)
             }
             else
             {
-                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'assets' requests."));
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST provide an endpoint for 'assets' requests.", assets.Source.DocumentElement));
             }
             #endregion
             #region Audit Error
@@ -606,7 +606,7 @@ switch (document)
             }
             else
             {
-                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST return a MTConnect Errors Response Document in the event of an error."));
+                errors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"MTConnect Agent MUST return a MTConnect Errors Response Document in the event of an error.", expectedError.SourceNode));
             }
             #endregion
 

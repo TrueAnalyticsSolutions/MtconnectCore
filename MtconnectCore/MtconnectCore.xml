@@ -15621,12 +15621,12 @@
         <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.Code">
             <inheritdoc cref="T:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum"/>
         </member>
-        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.SourceContext">
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.ScopeType">
             <inheritdoc cref="T:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum"/>
         </member>
-        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.SourceContextScope">
+        <member name="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.Scope">
             <summary>
-            Optional reference to the scope for the context. For example, consider <see cref="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.SourceContext"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
+            Optional reference to the scope for the context. For example, consider <see cref="P:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.ScopeType"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
             </summary>
         </member>
         <member name="M:MtconnectCore.Standard.Contracts.Errors.MtconnectValidationException.#ctor(MtconnectCore.Standard.Contracts.Enums.ValidationSeverity,System.String)">
@@ -17693,6 +17693,11 @@
             Reference to the release version of MTConnect this document should be held to in validation.
             </summary>
         </member>
+        <member name="P:MtconnectCore.Standard.Documents.IResponseDocument.Source">
+            <summary>
+            Reference to the source MTConnect Response Document.
+            </summary>
+        </member>
         <member name="T:MtconnectCore.Standard.Documents.IResponseDocumentHeader">
             <summary>
             Structural interface for a MTConnect Response Document Header. See Part 1 Section 6.5 of MTConnect specification.
@@ -17764,10 +17769,8 @@
             Global XML namespace manager for the source document.
             </summary>
         </member>
-        <member name="F:MtconnectCore.Standard.Documents.ResponseDocument`2.Source">
-            <summary>
-            Reference to the source MTConnect Response Document.
-            </summary>
+        <member name="F:MtconnectCore.Standard.Documents.ResponseDocument`2.SourceDocument">
+            <inheritdoc />
         </member>
         <member name="P:MtconnectCore.Standard.Documents.ResponseDocument`2.DocumentVersion">
             <summary>
@@ -18495,6 +18498,32 @@
             <param name="value">Value of key</param>
             <returns>Fluent validation context</returns>
         </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.HasMultiplicity``1(System.String,System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32)">
+            <summary>
+            Tests whether or not the <paramref name="values"/> length falls within the range of <paramref name="minimumCount"/> and <paramref name="maximumCount"/>.
+            </summary>
+            <typeparam name="T"><paramref name="values"/> collection generic type</typeparam>
+            <param name="key">VALUE_PROPERTY name</param>
+            <param name="values">Collection to test</param>
+            <param name="minimumCount">Range minimum</param>
+            <param name="maximumCount">Range maximum</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.HasAtLeastOne(System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.Object}}[])">
+            <summary>
+            Tests whether or not the collections contains any items.
+            </summary>
+            <param name="collections">Key value pair where the key is a VALUE_PROPERTY name and the value is the collection associated with the property.</param>
+            <returns>Fluent validation context</returns>
+        </member>
+        <member name="M:MtconnectCore.Validation.NodeValidationContext.NodeValidator.If(System.Func{MtconnectCore.Validation.NodeValidationContext.NodeValidator,System.Boolean},System.Func{MtconnectCore.Validation.NodeValidationContext.NodeValidator,MtconnectCore.Validation.NodeValidationContext.NodeValidator})">
+            <summary>
+            Performs an <paramref name="action"/> based on the condition of the <paramref name="predicate"/>
+            </summary>
+            <param name="predicate">Expression that determines whether or not to execute the <paramref name="action"/></param>
+            <param name="action">Function that is called if the <paramref name="predicate"/> returns <c>true</c></param>
+            <returns>Fluent validation context</returns>
+        </member>
         <member name="T:MtconnectCore.Validation.NodeValidationContext.NodeValueValidator`1">
             <summary>
             Validator class that validates node values based on a specified enumeration type, 
@@ -18682,12 +18711,12 @@
         </member>
         <member name="T:MtconnectCore.Validation.Pairings">
             <summary>
-            Shortcut methods for creating <see cref="T:System.Collections.Generic.KeyValuePair"/> for use with params arguments
+            Shortcut methods for creating <see cref="!:KeyValuePair"/> for use with params arguments
             </summary>
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Collections.Generic.IEnumerable{System.Object})">
             <summary>
-            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
+            Creates <see cref="!:KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -18695,7 +18724,7 @@
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Object)">
             <summary>
-            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
+            Creates <see cref="!:KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -18833,6 +18862,10 @@
             Determines if there are any exceptions that are of the severity level ERROR.
             </summary>
             <returns>Flag if any exception has the severity level of ERROR.</returns>
+        </member>
+    </members>
+</doc>
+e severity level of ERROR.</returns>
         </member>
     </members>
 </doc>
