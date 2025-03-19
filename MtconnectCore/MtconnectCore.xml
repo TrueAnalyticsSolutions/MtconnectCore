@@ -17630,17 +17630,22 @@
         </member>
         <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Source">
             <summary>
-            Reference to the source class for the exception. Note: This could be XPath, JPath, etc.
+            URI of the artifact of where the exception occurred.
             </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Context">
             <summary>
-            Specifies the context for the exception as it relates to the <see cref="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Source"/>. 
+            Path to the exception.
             </summary>
         </member>
-        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.ContextScope">
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.ScopeType">
             <summary>
-            Optional reference to the scope for the context. For example, consider <see cref="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Context"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
+            Designates the exception property kind. For example, <c>ScopeTypeEnum</c>: {<see cref="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.ENTITY" />, <see cref="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY" />, or <see cref="F:MtconnectCore.Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.PART" />}.
+            </summary>
+        </member>
+        <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.Scope">
+            <summary>
+            Optional reference to the scope (or name of a property) for the context. For example, consider <see cref="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectException.ScopeType"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
             </summary>
         </member>
         <member name="P:MtconnectCore.Standard.Documents.ExceptionsReport.MtconnectExceptionsReportDocument`1.DataElementName">
@@ -18677,12 +18682,12 @@
         </member>
         <member name="T:MtconnectCore.Validation.Pairings">
             <summary>
-            Shortcut methods for creating <see cref="!:KeyValuePair"/> for use with params arguments
+            Shortcut methods for creating <see cref="T:System.Collections.Generic.KeyValuePair"/> for use with params arguments
             </summary>
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Collections.Generic.IEnumerable{System.Object})">
             <summary>
-            Creates <see cref="!:KeyValuePair"/>
+            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -18690,7 +18695,7 @@
         </member>
         <member name="M:MtconnectCore.Validation.Pairings.Of(System.String,System.Object)">
             <summary>
-            Creates <see cref="!:KeyValuePair"/>
+            Creates <see cref="T:System.Collections.Generic.KeyValuePair"/>
             </summary>
             <param name="key"></param>
             <param name="value"></param>
@@ -18828,10 +18833,6 @@
             Determines if there are any exceptions that are of the severity level ERROR.
             </summary>
             <returns>Flag if any exception has the severity level of ERROR.</returns>
-        </member>
-    </members>
-</doc>
-e severity level of ERROR.</returns>
         </member>
     </members>
 </doc>
