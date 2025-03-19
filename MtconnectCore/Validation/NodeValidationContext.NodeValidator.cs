@@ -6,6 +6,8 @@ using System.Linq;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
+using MtconnectCore.Standard.Contracts.Enums.ExceptionsReport;
 
 namespace MtconnectCore.Validation
 {
@@ -48,6 +50,7 @@ namespace MtconnectCore.Validation
 
             public MtconnectValidationException AddFatal(string message, params KeyValuePair<string, object>[] additionalData)
                 => addException(ValidationSeverity.FATAL, message, additionalData);
+
             public MtconnectValidationException AddError(string message, params KeyValuePair<string, object>[] additionalData)
                 => addException(ValidationSeverity.ERROR, message, additionalData);
             public MtconnectValidationException AddWarning(string message, params KeyValuePair<string, object>[] additionalData)
@@ -67,7 +70,8 @@ namespace MtconnectCore.Validation
                 {
                     var exception = AddError($"Missing '{key}' value.", Pairings.Of(key, value));
                     exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND;
-                    exception.SourceContextScope = key;
+                    exception.Scope = key;
+                    exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
 
                     if (breakIfMissing)
                         return null;
@@ -87,7 +91,8 @@ namespace MtconnectCore.Validation
                 {
                     var exception = AddError($"The {key} value must not exceed {maxLength} characters.", Pairings.Of(key, value), Pairings.Of($"{key}.Length", value?.Length ?? 0));
                     exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                    exception.SourceContextScope = key;
+                    exception.Scope = key;
+                    exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                 }
                 return this;
             }
@@ -104,7 +109,8 @@ namespace MtconnectCore.Validation
                 {
                     var exception = AddError($"The {key} value must not exceed {maxLength} items.", Pairings.Of(key, value), Pairings.Of($"{key}.Length", value?.Length ?? 0));
                     exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                    exception.SourceContextScope = key;
+                    exception.Scope = key;
+                    exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                 }
                 return this;
             }
@@ -140,7 +146,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value. It MUST be an unsigned 32-bit integer.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     } else
                     {
                         output = valueUint;
@@ -157,14 +164,16 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value. It MUST be an unsigned 32-bit integer.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     } else
                     {
                         if (output < minimum || output > maximum)
                         {
                             var exception = AddError($"Value must be represented as an unsigned 32-bit integer from {minimum} to {maximum}", Pairings.Of(key, value), Pairings.Of("minimum", minimum), Pairings.Of("maximum", maximum));
                             exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                            exception.SourceContextScope = key;
+                            exception.Scope = key;
+                            exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                         }
                     }
                 }
@@ -186,7 +195,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value. It MUST be an unsigned 64-bit integer.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     } else
                     {
                         output = valueUlong;
@@ -204,14 +214,16 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value. It MUST be an unsigned 64-bit integer.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     } else
                     {
                         if (output < minimum || output > maximum)
                         {
                             var exception = AddError($"Value must be represented as an unsigned 64-bit integer from {minimum} to {maximum}", Pairings.Of(key, value), Pairings.Of("minimum", minimum), Pairings.Of("maximum", maximum));
                             exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                            exception.SourceContextScope = key;
+                            exception.Scope = key;
+                            exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                         }
                     }
                 }
@@ -233,7 +245,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value. It MUST be a float.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     } else
                     {
                         output = floatValue;
@@ -258,7 +271,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value. It MUST be three space-delimited floating-point numbers.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     } else
                     {
                         output = values.Select(o => float.TryParse(o, out float floatValue) ? floatValue : default(float?)).ToArray();
@@ -266,7 +280,8 @@ namespace MtconnectCore.Validation
                         {
                             var exception = AddError($"Invalid '{key}' value. It MUST be three space-delimited floating-point numbers.", Pairings.Of(key, value));
                             exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                            exception.SourceContextScope = key;
+                            exception.Scope = key;
+                            exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                         }
                     }
                 }
@@ -289,7 +304,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value. It MUST be space-delimited floating-point numbers.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     }
                     else
                     {
@@ -298,7 +314,8 @@ namespace MtconnectCore.Validation
                         {
                             var exception = AddError($"Invalid '{key}' value. It MUST be space-delimited floating-point numbers.", Pairings.Of(key, value));
                             exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                            exception.SourceContextScope = key;
+                            exception.Scope = key;
+                            exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                         }
                     }
                 }
@@ -313,7 +330,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Values must be represented as an unsigned 32-bit integer from {minimum} to {maximum}", Pairings.Of($"{key}.length", value?.Length), Pairings.Of("minimum", minimum), Pairings.Of("maximum", maximum));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     }
                 }
                 return this;
@@ -335,7 +353,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value. It MUST be a boolean.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     } else
                     {
                         output = valueBool;
@@ -389,7 +408,8 @@ namespace MtconnectCore.Validation
                         {
                             var exception = AddError($"Invalid '{key}' value, invalid Date format.", Pairings.Of(key, value));
                             exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                            exception.SourceContextScope = key;
+                            exception.Scope = key;
+                            exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                             //Console.WriteLine($"The string '{dateString}' is NOT a valid date in the expected format.");
                         } else
                         {
@@ -400,7 +420,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value, unexpected format.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                         //Console.WriteLine($"The string '{dateString}' does not match the expected format.");
                     }
                 }
@@ -408,7 +429,8 @@ namespace MtconnectCore.Validation
                 {
                     var exception = AddError($"Invalid '{key}' value, unexpected format.", Pairings.Of(key, value));
                     exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                    exception.SourceContextScope = key;
+                    exception.Scope = key;
+                    exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     //Console.WriteLine($"The string '{dateString}' does not match the expected format.");
                 }
                 return this;
@@ -433,7 +455,8 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     } else
                     {
                         output = enumValue.GetValueOrDefault();
@@ -454,13 +477,23 @@ namespace MtconnectCore.Validation
                     {
                         var exception = AddError($"Invalid '{key}' value.", Pairings.Of(key, value));
                         exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                        exception.SourceContextScope = key;
+                        exception.Scope = key;
+                        exception.ScopeType = ExceptionContextEnum.VALUE_PROPERTY;
                     }
                 }
 
                 return this;
             }
 
+            /// <summary>
+            /// Tests whether or not the <paramref name="values"/> length falls within the range of <paramref name="minimumCount"/> and <paramref name="maximumCount"/>.
+            /// </summary>
+            /// <typeparam name="T"><paramref name="values"/> collection generic type</typeparam>
+            /// <param name="key">VALUE_PROPERTY name</param>
+            /// <param name="values">Collection to test</param>
+            /// <param name="minimumCount">Range minimum</param>
+            /// <param name="maximumCount">Range maximum</param>
+            /// <returns>Fluent validation context</returns>
             public NodeValidator HasMultiplicity<T>(string key, IEnumerable<T> values, int minimumCount, int maximumCount)
             {
                 var count = values.Count();
@@ -468,16 +501,23 @@ namespace MtconnectCore.Validation
                 {
                     var exception = AddError($"There must be at least {minimumCount} '{key}'.", Pairings.Of(key, values), Pairings.Of($"{key}.Count", count));
                     exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                    exception.SourceContextScope = key;
+                    exception.Scope = key;
+                    exception.ScopeType = ExceptionContextEnum.PART;
                 } else if (count > maximumCount)
                 {
                     var exception = AddError($"There must be no more than {maximumCount} '{key}'.", Pairings.Of(key, values), Pairings.Of($"{key}.Count", count));
                     exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                    exception.SourceContextScope = key;
+                    exception.Scope = key;
+                    exception.ScopeType = ExceptionContextEnum.PART;
                 }
                 return this;
             }
 
+            /// <summary>
+            /// Tests whether or not the collections contains any items.
+            /// </summary>
+            /// <param name="collections">Key value pair where the key is a VALUE_PROPERTY name and the value is the collection associated with the property.</param>
+            /// <returns>Fluent validation context</returns>
             public NodeValidator HasAtLeastOne(params KeyValuePair<string, IEnumerable<object>>[] collections)
             {
                 if (!collections.Any())
@@ -490,11 +530,18 @@ namespace MtconnectCore.Validation
                 }
                 var exception = AddError("Must contain at least one of '" + string.Join("' or '", collections.Select(o => o.Key)) + "'.");
                 exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT;
-                exception.SourceContextScope = string.Join(", ", collections.Select(o => o.ToString()));
+                exception.Scope = string.Join(", ", collections.Select(o => o.ToString()));
+                exception.ScopeType = ExceptionContextEnum.PART;
 
                 return this;
             }
 
+            /// <summary>
+            /// Performs an <paramref name="action"/> based on the condition of the <paramref name="predicate"/>
+            /// </summary>
+            /// <param name="predicate">Expression that determines whether or not to execute the <paramref name="action"/></param>
+            /// <param name="action">Function that is called if the <paramref name="predicate"/> returns <c>true</c></param>
+            /// <returns>Fluent validation context</returns>
             public NodeValidator If(Func<NodeValidator, bool> predicate, Func<NodeValidator, NodeValidator> action)
             {
                 if (predicate(this))

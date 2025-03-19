@@ -54,11 +54,11 @@ namespace MtconnectCore.Standard.Documents
         [NonSerialized]
         public XmlNamespaceManager NamespaceManager;
 
-        /// <summary>
-        /// Reference to the source MTConnect Response Document.
-        /// </summary>
+        /// <inheritdoc />
         [NonSerialized]
-        public XmlDocument Source;
+        internal XmlDocument SourceDocument;
+
+        public XmlDocument Source => SourceDocument;
 
         /// <summary>
         /// Reference to the version of MTConnect applied to the Response Document.
@@ -71,21 +71,21 @@ namespace MtconnectCore.Standard.Documents
         /// <param name="xDoc">The source MTConnect Response Document.</param>
         public ResponseDocument(XmlDocument xDoc)
         {
-            Source = xDoc;
+            SourceDocument = xDoc;
 
             DefaultNamespace = MtconnectNodeParser.GetNamespaceName(xDoc);
 
             // Detect if there are missing namespaces
-            if (string.IsNullOrEmpty(Source.DocumentElement.GetAttribute("xmlns:" + DefaultNamespace)))
-                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute", Source.DocumentElement) {
+            if (string.IsNullOrEmpty(SourceDocument.DocumentElement.GetAttribute("xmlns:" + DefaultNamespace)))
+                InitializationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute", SourceDocument.DocumentElement) {
                     Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                    SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                    SourceContextScope = "xmlns:" + DefaultNamespace
+                    ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                    Scope = "xmlns:" + DefaultNamespace
                 });
 
             DocumentVersion = VersionHelper.GetVersionFromDocument(xDoc);
             MtconnectVersion = DocumentVersion;
-            DocumentElementName = Source.DocumentElement.LocalName;
+            DocumentElementName = SourceDocument.DocumentElement.LocalName;
             MtconnectDocumentTypeMismatchException<THeader, TItem> typeError;
             switch (DocumentElementName)
             {
@@ -134,7 +134,7 @@ namespace MtconnectCore.Standard.Documents
                 default:
                     break;
             }
-            NamespaceManager = VersionHelper.GetDocumentNamespaces(DocumentVersion, Source, DefaultNamespace);
+            NamespaceManager = VersionHelper.GetDocumentNamespaces(DocumentVersion, SourceDocument, DefaultNamespace);
 
 
             XmlNode xDataRoot = xDoc.DocumentElement.SelectSingleNode(DataElementName, NamespaceManager, DefaultNamespace);

@@ -49,8 +49,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                             "Asset MUST include a 'assetId' attribute.",
                             SourceNode) {
                             Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                            SourceContextScope = nameof(AssetId)
+                            ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            Scope = nameof(AssetId)
                         }
                     )
                 )

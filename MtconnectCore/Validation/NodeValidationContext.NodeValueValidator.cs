@@ -83,18 +83,18 @@ namespace MtconnectCore.Validation
                     switch (ImplementationState)
                     {
                         case VersionComparisonTypes.Deprecated:
-                            exception = AddFatal($"The field '{PropertyName}' is not supported in version '{Context.Node.MtconnectVersion.ToName()}'.");
+                            exception = AddFatal($"'{PropertyName}' is no longer supported in version '{Context.Node.MtconnectVersion.ToName()}'.");
                             exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DEPRECATED;
                             break;
                         case VersionComparisonTypes.NotImplemented:
-                            exception = AddWarning($"The field '{PropertyName}' is not supported in version '{Context.Node.MtconnectVersion.ToName()}'.");
+                            exception = AddWarning($"'{PropertyName}' is not defined in version '{Context.Node.MtconnectVersion.ToName()}'.");
                             exception.Code = Standard.Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED;
                             break;
                         default:
                             break;
                     }
-                    exception.SourceContext = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
-                    exception.SourceContextScope = PropertyName;
+                    exception.ScopeType = Standard.Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY;
+                    exception.Scope = PropertyName;
                 }
                 return this;
             }

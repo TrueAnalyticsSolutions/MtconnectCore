@@ -75,8 +75,8 @@ namespace MtconnectCore.Standard.Documents.Streams
                             "DataSet Entry 'key' must be a unique identifier for each key-value pair within the DataSet.",
                             SourceNode) {
                             Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
-                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                            SourceContextScope = "Entry.Key"
+                            ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            Scope = "Entry.Key"
                         }
                     )
                 )

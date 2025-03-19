@@ -50,7 +50,13 @@ namespace MtconnectCore.Standard.Documents.Assets
                 default:
                     Logger.Error(new MtconnectValidationException(
                         Contracts.Enums.ValidationSeverity.ERROR,
-                        $"Invalid Asset type. '{xNode.LocalName}' is not recognized by MtconnectCore."));
+                        $"Invalid Asset type. '{xNode.LocalName}' is not recognized by MtconnectCore.",
+                        xNode)
+                    {
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH,
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.PART,
+                        Scope = nameof(Asset)
+                    });
                     item = null;
                     return false;
             }

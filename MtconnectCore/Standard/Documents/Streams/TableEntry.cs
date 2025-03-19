@@ -56,8 +56,8 @@ namespace MtconnectCore.Standard.Documents.Streams
                             "TableEntry Cell 'key' must be a unique identifier for each key-value pair within the TableEntry.",
                             SourceNode) {
                             Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.DUPLICATE_ENTRY,
-                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                            SourceContextScope = "TableEntry Cell.Key"
+                            ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            Scope = "TableEntry Cell.Key"
                         }
                     )
                 )

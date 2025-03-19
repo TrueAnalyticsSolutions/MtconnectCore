@@ -67,8 +67,8 @@ namespace MtconnectCore.Standard.Documents.Streams
                             "Entry representation MUST include a 'key' attribute with a unique value within the DataSet.",
                             SourceNode) {
                             Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                            SourceContextScope = nameof(Key)
+                            ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            Scope = nameof(Key)
                         }
                     )
                 )

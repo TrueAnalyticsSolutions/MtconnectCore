@@ -52,8 +52,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"CuttingTool Location missing 'type' attribute.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(Type)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(Type)
                     });
                 }
                 else if (!Enum.TryParse<LocationTypes>(Type, out LocationTypes locationType))
@@ -63,8 +63,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"Unrecognized CuttingTool Location 'type'.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(Type)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(Type)
                     });
                 }
 

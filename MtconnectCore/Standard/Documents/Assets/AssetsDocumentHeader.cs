@@ -46,8 +46,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"MTConnectDevices Header MUST include a 'assetBufferSize' attribute. {documentationAttributes}",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(AssetBufferSize)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(AssetBufferSize)
                     });
                 }
 
@@ -58,8 +58,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"MTConnectDevices Header MUST include a 'assetCount' attribute. {documentationAttributes}",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(AssetCount)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(AssetCount)
                     });
                 }
 

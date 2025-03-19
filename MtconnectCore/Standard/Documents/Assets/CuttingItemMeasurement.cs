@@ -33,8 +33,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"Unknown CuttingItemMeasurement SubType '{SourceNode.LocalName}'.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = SourceNode.LocalName
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = SourceNode.LocalName
                     });
                 }
 

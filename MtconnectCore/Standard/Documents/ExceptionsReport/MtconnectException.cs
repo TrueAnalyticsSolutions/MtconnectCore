@@ -24,18 +24,23 @@ namespace MtconnectCore.Standard.Documents.ExceptionsReport
         public ExceptionCodeEnum Code { get; set; }
 
         /// <summary>
-        /// Reference to the source class for the exception. Note: This could be XPath, JPath, etc.
+        /// URI of the artifact of where the exception occurred.
         /// </summary>
         public virtual object Source { get; set; }
 
         /// <summary>
-        /// Specifies the context for the exception as it relates to the <see cref="Source"/>. 
+        /// Path to the exception.
         /// </summary>
-        public ExceptionContextEnum Context { get; set; }
+        public string Context { get; set; }
 
         /// <summary>
-        /// Optional reference to the scope for the context. For example, consider <see cref="Context"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
+        /// Designates the exception property kind. For example, <c>ScopeTypeEnum</c>: {<see cref="ExceptionContextEnum.ENTITY" />, <see cref="ExceptionContextEnum.VALUE_PROPERTY" />, or <see cref="ExceptionContextEnum.PART" />}.
         /// </summary>
-        public string ContextScope { get; set; }
+        public ExceptionContextEnum ScopeType { get; set; }
+
+        /// <summary>
+        /// Optional reference to the scope (or name of a property) for the context. For example, consider <see cref="ScopeType"/> == VALUE_PROPERTY, then this could be <c>category</c> for a <c>DataItem</c>.
+        /// </summary>
+        public string Scope { get; set; }
     }
 }

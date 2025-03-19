@@ -90,10 +90,11 @@ namespace MtconnectCore.Standard.Documents.Assets
                                 {
                                     validationContext.AddExceptions(new MtconnectValidationException(
                                         Contracts.Enums.ValidationSeverity.ERROR,
-                                        $"CutterStatus '{status}' MUST NOT be used with the following CutterStatus types: [{string.Join(", ", invalidMap.Select(o => o.ToString()))}].\r\n {documentationAttributes}") {
+                                        $"CutterStatus '{status}' MUST NOT be used with the following CutterStatus types: [{string.Join(", ", invalidMap.Select(o => o.ToString()))}].\r\n {documentationAttributes}",
+                                        SourceNode) {
                                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
-                                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.PART,
-                                        SourceContextScope = nameof(Statuses)
+                                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.PART,
+                                        Scope = nameof(Statuses)
                                     });
                                 }
                             }

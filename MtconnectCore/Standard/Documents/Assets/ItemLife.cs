@@ -62,8 +62,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"CuttingItem ItemLife missing 'type' attribute.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(Type)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(Type)
                     });
                 }
                 else if (!EnumHelper.Contains<ItemLifeTypes>(Type))
@@ -73,8 +73,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"Unrecognized CuttingItem ItemLife 'type'.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(Type)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(Type)
                     });
                 }
 
@@ -85,8 +85,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"CuttingItem ItemLife missing 'countDirection' attribute.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(CountDirection)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(CountDirection)
                     });
                 }
                 else if (!EnumHelper.Contains<ItemLifeCountDirectionTypes>(CountDirection))
@@ -96,8 +96,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"Unrecognized CuttingItem ItemLife 'countDirection'.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(CountDirection)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(CountDirection)
                     });
                 }
 
@@ -108,8 +108,8 @@ namespace MtconnectCore.Standard.Documents.Assets
                         $"Invalid ItemLife value. CuttingItem ItemLife value must be a number.",
                         SourceNode) {
                         Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.INVALID_FORMAT,
-                        SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                        SourceContextScope = nameof(Value)
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = nameof(Value)
                     });
                 }
 

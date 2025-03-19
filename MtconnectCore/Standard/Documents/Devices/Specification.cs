@@ -91,8 +91,8 @@ namespace MtconnectCore.Standard.Documents.Devices
                             $"Specification type of '{Type}' is not defined in the MTConnect Standard for SAMPLE, EVENT, nor CONDITION in version '{version}'.",
                             SourceNode) {
                             Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.TYPE_MISMATCH,
-                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                            SourceContextScope = nameof(Type)
+                            ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            Scope = nameof(Type)
                         }
                     )
                     ?.If(
@@ -102,8 +102,8 @@ namespace MtconnectCore.Standard.Documents.Devices
                             $"Specification type of '{Type}' is not valid for SAMPLE, EVENT, nor CONDITION in version '{version}' of the MTConnect Standard.",
                             SourceNode) {
                             Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.EXTENDED,
-                            SourceContext = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
-                            SourceContextScope = nameof(Type)
+                            ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                            Scope = nameof(Type)
                         }
                     )
                 )
