@@ -31,6 +31,23 @@ namespace MtconnectCore.Standard.Documents.Devices
         public DevicesDocument(XmlDocument xDoc) : base(xDoc)
         {
             _header = new DevicesDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager, MtconnectVersion.GetValueOrDefault());
+
+            XmlNode xDataRoot = xDoc.DocumentElement.SelectSingleNode(DataElementName, NamespaceManager, DefaultNamespace);
+            if (xDataRoot == null)
+            {
+                InitializationErrors.Add(
+                    new MtconnectValidationException(
+                        ValidationSeverity.ERROR,
+                        "Root element MUST include a 'xmlns:" + DefaultNamespace + "' attribute", 
+                        SourceDocument.DocumentElement)
+                    {
+                        HelpLink = "https://model.mtconnect.org/#Structure__EAID_76BFE349_267B_45b3_B5FF_3C89D29AE715",
+                        Source = xDoc.DocumentElement.LocalName,
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.VALUE_PROPERTY,
+                        Scope = "xmlns:" + DefaultNamespace
+                    });
+            }
         }
 
         public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Device device)
