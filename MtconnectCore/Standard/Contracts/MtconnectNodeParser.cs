@@ -671,7 +671,7 @@ namespace MtconnectCore.Standard.Contracts
                         throw new Exception("MTConnect validation method failed to execute.", ex);
                     }
 
-                    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+                    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
                 }
             }
         }

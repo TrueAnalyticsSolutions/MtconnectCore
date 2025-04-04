@@ -31,6 +31,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public DevicesDocument(XmlDocument xDoc) : base(xDoc)
         {
             _header = new DevicesDocumentHeader(xDoc.DocumentElement.FirstChild, NamespaceManager, MtconnectVersion.GetValueOrDefault());
+
         }
 
         public override bool TryAddItem(XmlNode xNode, XmlNamespaceManager nsmgr, out Device device)
@@ -40,6 +41,24 @@ namespace MtconnectCore.Standard.Documents.Devices
         private bool validateDevices(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
+
+            // Check Multiplicity of hasDevice
+            if (Items.Length < 1)
+            {
+                validationErrors.Add(
+                    new MtconnectValidationException(
+                        ValidationSeverity.FATAL,
+                        $"MTConnectDevices MUST include at least one Device element",
+                        SourceDocument.DocumentElement) {
+                        HelpLink = "https://model.mtconnect.org/#Structure__EAID_76BFE349_267B_45b3_B5FF_3C89D29AE715",
+                        Source = SourceDocument.DocumentElement.LocalName,
+                        Code = Contracts.Enums.ExceptionsReport.ExceptionCodeEnum.NOT_FOUND,
+                        ScopeType = Contracts.Enums.ExceptionsReport.ExceptionContextEnum.PART,
+                        Scope = "xmlns:" + DefaultNamespace
+                    });
+            }
+
+            // Check "All id and name properties MUST be unique"
             var duplicateIds = new HashSet<string>();
             var duplicateNames = new HashSet<string>();
             var duplicateUuids = new HashSet<string>();
@@ -78,13 +97,15 @@ namespace MtconnectCore.Standard.Documents.Devices
                 });
             }
 
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         private bool validateComponents(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
+
+            // Check "All id and name properties MUST be unique"
             var duplicateIds = new HashSet<string>();
             var duplicateNames = new HashSet<string>();
             var duplicateUuids = new HashSet<string>();
@@ -123,13 +144,15 @@ namespace MtconnectCore.Standard.Documents.Devices
                     Scope = "uuid"
                 });
             }
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         }
 
         [MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, MODEL_BROWSER_URL)]
         private bool validateDataItems(out ICollection<MtconnectValidationException> validationErrors)
         {
             validationErrors = new List<MtconnectValidationException>();
+
+            // Check "All id and name properties MUST be unique"
             var duplicateIds = new HashSet<string>();
             var duplicateNames = new HashSet<string>();
             var namespaces = new HashSet<string>();
@@ -190,7 +213,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                 });
             }
 
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         }
 
         // TODO: Validate DataItemRef idRef links exist

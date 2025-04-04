@@ -46,7 +46,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            $"Unknown CuttingToolMeasurement SubType '{SourceNode.LocalName}'."));
         //    }
 
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
     }
 }
