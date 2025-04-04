@@ -135,7 +135,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.ERROR,
         //            $"CuttingTool MUST include a 'timestamp' attribute."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
@@ -147,7 +147,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.ERROR,
         //            $"CuttingTool MUST include a 'assetId' attribute."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1")]
@@ -161,7 +161,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            $"CuttingTool 'assetId' SHOULD be the combination of the 'toolId' and 'serialNumber' as in 'toolId.serialNumber'."));
         //    }
 
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
@@ -174,7 +174,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.ERROR,
         //            $"CuttingTool MUST include a 'serialNumber' attribute."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
@@ -187,7 +187,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.ERROR,
         //            $"CuttingTool MUST include a 'toolId' attribute."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.1")]
@@ -200,7 +200,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.ERROR,
         //            $"CuttingTool MUST include a 'deviceUuid' attribute."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "Part 4 Section 6.1.1")]
@@ -213,7 +213,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.WARNING,
         //            $"CuttingToolDefinition was deprecated in Version 1.3.0"));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
     }
 }

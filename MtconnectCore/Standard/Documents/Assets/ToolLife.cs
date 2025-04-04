@@ -84,7 +84,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.WARNING,
         //            $"Unrecognized CuttingTool ToolLife 'type'."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity ?= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.15.1")]
@@ -103,7 +103,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.WARNING,
         //            $"Unrecognized CuttingTool ToolLife 'countDirection'."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.15.1")]
@@ -116,7 +116,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.ERROR,
         //            $"Invalid ToolLife value. CuttingTool ToolLife value must be a number."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
     }
 }

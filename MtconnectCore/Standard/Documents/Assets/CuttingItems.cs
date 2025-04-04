@@ -62,7 +62,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            $"CuttingItems 'count' must be greater than zero."));
         //    }
 
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
     }
 }

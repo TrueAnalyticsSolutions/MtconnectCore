@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Documents.Streams
                 });
             }
 
-            return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+            return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         }
 
     }

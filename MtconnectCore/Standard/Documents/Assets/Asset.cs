@@ -77,7 +77,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //    {
         //        validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Asset MUST include a 'assetId' attribute.", SourceNode));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "Part 4 Section 3.2.3.1")]
@@ -88,7 +88,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //    {
         //        validationErrors.Add(new MtconnectValidationException(ValidationSeverity.ERROR, $"Asset MUST include a 'timestamp' attribute.", SourceNode));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
     }
 }

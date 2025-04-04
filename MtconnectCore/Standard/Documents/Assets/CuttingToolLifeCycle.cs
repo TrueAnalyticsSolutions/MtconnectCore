@@ -132,7 +132,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.ERROR,
         //            $"CuttingToolLifeCycle missing 'CutterStatus'."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
 
         //[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "Part 4 Section 6.1.8")]
@@ -144,7 +144,7 @@ namespace MtconnectCore.Standard.Documents.Assets
         //            ValidationSeverity.ERROR,
         //            $"CuttingToolLifeCycle ProgramToolNumber MUST be an integer."));
         //    }
-        //    return !validationErrors.Any(o => o.Severity == ValidationSeverity.ERROR);
+        //    return !validationErrors.Any(o => o.Severity >= ValidationSeverity.ERROR);
         //}
     }
 }
