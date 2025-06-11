@@ -44,6 +44,7 @@ namespace MtconnectCoreExample
                             color = ConsoleColor.Gray;
                             break;
                     }
+                    Consoul.Write(error.Source, ConsoleColor.Gray);
                     Consoul.Write($"{error.Message}", color);
                     if (error.Data != null && error.Data.Count > 0)
                     {

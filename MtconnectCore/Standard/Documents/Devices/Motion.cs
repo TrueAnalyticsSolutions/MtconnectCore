@@ -45,7 +45,7 @@ namespace MtconnectCore.Standard.Documents.Devices
         public string Origin { get; set; }
 
         /// <inheritdoc cref="CoordinateSystemElements.TRANSFORMATION"/>
-        [MtconnectNodeElements(CoordinateSystemElements.TRANSFORMATION, nameof(TrySetTransformation))]
+        [MtconnectNodeElements("Transformation", nameof(TrySetTransformation))]
         public Transformation Transformation { get; set; }
 
         /// <inheritdoc />
@@ -97,7 +97,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     MotionAttributes.PARENT_ID_REF,
                     (o) =>
                         o.IsImplemented(ParentIdRef)
-                        ?.IsIdValueType(ParentIdRef)
+                        ?.IsIdValueType(ParentIdRef, false)
                 )
                 // Validate type
                 .ValidateValueProperty(
@@ -107,7 +107,6 @@ namespace MtconnectCore.Standard.Documents.Devices
                         ?.WhileIntroduced((i) =>
                             i.IsRequired(Type)
                         )
-                        ?.IsIdValueType(Type)
                 )
                 // Validate Axis
                 .ValidateValueProperty<MotionElements>(nameof(Axis), (o) =>

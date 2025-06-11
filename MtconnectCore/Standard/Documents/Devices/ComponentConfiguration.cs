@@ -22,7 +22,7 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         private List<Motion> _motion = new List<Motion>();
         /// <inheritdoc cref="ComponentConfigurationElements.MOTION"/>
-        [MtconnectNodeElements("Motion/*", nameof(TryAddMotion))]
+        [MtconnectNodeElements("Motion", nameof(TryAddMotion))]
         public ICollection<Motion> Motion => _motion;
 
         private List<ConfigurationRelationship> _relationships = new List<ConfigurationRelationship>();
@@ -32,12 +32,12 @@ namespace MtconnectCore.Standard.Documents.Devices
 
         private List<SensorConfiguration> _sensorConfiguration = new List<SensorConfiguration>();
         /// <inheritdoc cref="ComponentConfigurationElements.SENSOR_CONFIGURATION"/>
-        [MtconnectNodeElements("SensorConfiguration/*", nameof(TryAddSensorConfiguration))]
+        [MtconnectNodeElements("SensorConfiguration", nameof(TryAddSensorConfiguration))]
         public ICollection<SensorConfiguration> SensorConfiguration => _sensorConfiguration;
 
         private List<SolidModel> _solidModel = new List<SolidModel>();
         /// <inheritdoc cref="ComponentConfigurationElements.SOLID_MODEL"/>
-        [MtconnectNodeElements("SolidModel/*", nameof(TryAddSolidModel))]
+        [MtconnectNodeElements("SolidModel", nameof(TryAddSolidModel))]
         public ICollection<SolidModel> SolidModel => _solidModel;
 
         private List<Specification> _specifications = new List<Specification>();
