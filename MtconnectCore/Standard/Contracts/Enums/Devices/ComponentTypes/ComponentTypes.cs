@@ -319,7 +319,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.ComponentTypes
         /// PartOccurrence organizes information about a specific part as it exists at a specific place and time, such as a specific instance of a bracket at a specific timestamp.
         /// </summary>
         [MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#Structure___19_0_3_68e0225_1605547467172_656422_264")]
-        PART_OCCURANCE,
+        PART_OCCURENCE,
         /// <summary>
         /// Component that organizes an independent operation or function within a  Controller.
         /// </summary>

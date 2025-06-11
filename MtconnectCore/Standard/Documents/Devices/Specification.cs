@@ -112,7 +112,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     SpecificationAttributes.DATA_ITEM_ID_REF,
                     (o) =>
                         o.IsImplemented(DataItemIdRef)
-                        ?.IsIdValueType(DataItemIdRef)
+                        ?.IsIdValueType(DataItemIdRef, false)
                 )
                 // Validate units
                 .ValidateValueProperty(
@@ -126,7 +126,7 @@ namespace MtconnectCore.Standard.Documents.Devices
                     SpecificationAttributes.COMPOSITION_ID_REF,
                     (o) =>
                         o.IsImplemented(CompositionIdRef)
-                        ?.IsIdValueType(CompositionIdRef)
+                        ?.IsIdValueType(CompositionIdRef, false)
                 )
                 // Validate name
                 .ValidateValueProperty(
@@ -139,14 +139,14 @@ namespace MtconnectCore.Standard.Documents.Devices
                     SpecificationAttributes.COORDINATE_SYSTEM_ID_REF,
                     (o) =>
                         o.IsImplemented(CoordinateSystemIdRef)
-                        ?.IsIdValueType(CoordinateSystemIdRef)
+                        ?.IsIdValueType(CoordinateSystemIdRef, false)
                 )
                 // Validate id
                 .ValidateValueProperty(
                     SpecificationAttributes.ID,
                     (o) =>
                         o.IsImplemented(Id)
-                        ?.IsIdValueType(Id)
+                        ?.IsIdValueType(Id, false)
                 )
                 // Validate Originator
                 .ValidateValueProperty(
