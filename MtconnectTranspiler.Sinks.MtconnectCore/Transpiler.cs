@@ -127,7 +127,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             {
                 componentEnum.Values.Add(new MtconnectCoreEnumItem(componentClass));
             }
-            _generator.ProcessTemplate(componentEnum, Path.Combine(_generator.OutputPath, "Enums", "ComponentTypes"), true);
+            _generator.ProcessTemplate(componentEnum, Path.Combine(_generator.OutputPath, "Enums", "Devices", "ComponentTypes"), true);
 
             // TODO: Handle Enum and Class types for properties. Replace *EnumMetaClass with reference to newly created Enum. Replace *Class with reference to other interfaces.
             //var classes = new List<MtconnectCoreInterface>();

@@ -42,8 +42,8 @@ namespace MtconnectCore.Validation
                     //            SourceNode));
                     //    }
                     //    break;
-                    case SampleTypes.ORIENTATION:
-                    case SampleTypes.PATH_POSITION:
+                    case SampleTypes.Orientation:
+                    case SampleTypes.PathPosition:
                         return validator.IsFloat3dValueType("result", result, out _);
                     default:
                         break;

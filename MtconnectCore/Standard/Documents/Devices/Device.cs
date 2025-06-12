@@ -172,11 +172,11 @@ namespace MtconnectCore.Standard.Documents.Devices
                 )
                 // Validate DataItemAvailability
                 .ValidateValueProperty<DeviceAttributes>(
-                    nameof(EventTypes.AVAILABILITY),
+                    nameof(EventTypes.Availability),
                     (o) =>
                         o.HasMultiplicity(
-                            nameof(EventTypes.AVAILABILITY),
-                            DataItems.Where(d => d.Type == EventTypes.AVAILABILITY.ToString()),
+                            nameof(EventTypes.Availability),
+                            DataItems.Where(d => d.Type == EventTypes.Availability.ToString()),
                             1,
                             int.MaxValue
                         )
@@ -186,8 +186,8 @@ namespace MtconnectCore.Standard.Documents.Devices
                     nameof(DataItems),
                     (o) =>
                         o.HasMultiplicity(
-                            nameof(EventTypes.ASSET_CHANGED),
-                            DataItems.Where(d => d.Type == nameof(EventTypes.ASSET_CHANGED)),
+                            nameof(EventTypes.AssetChanged),
+                            DataItems.Where(d => d.Type == nameof(EventTypes.AssetChanged)),
                             1,
                             int.MaxValue
                         )
@@ -197,8 +197,8 @@ namespace MtconnectCore.Standard.Documents.Devices
                     nameof(DataItems),
                     (o) =>
                         o.HasMultiplicity(
-                            nameof(EventTypes.ASSET_REMOVED),
-                            DataItems.Where(d => d.Type == nameof(EventTypes.ASSET_REMOVED)),
+                            nameof(EventTypes.AssetRemoved),
+                            DataItems.Where(d => d.Type == nameof(EventTypes.AssetRemoved)),
                             1,
                             int.MaxValue
                         )
