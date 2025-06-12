@@ -1,12 +1,12 @@
-{{~ if $1 != null && ($1?.normative_version != "" || $1?.deprecated_version != "") ~}}
+{{~ if $1 != null && (($1?.normative_version != null && $1?.normative_version != "") || ($1?.deprecated_version != null && $1?.deprecated_version != "")) ~}}
 /// <remarks>
 /// <list type="bullet">
 	{{~ if $1?.normative_version != "" ~}}
 /// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_{{ $1.normative_version }}">v{{ $1.normative_version }}</see></item>
 	{{~ end ~}}
-	{{~ if $1?.deprecated_version != "" ~}}
+	{{~ if $1?.deprecated_version != null && $1?.deprecated_version != "" ~}}
 /// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_{{ $1.deprecated_version }}">v{{ $1.deprecated_version }}</see></item>
 	{{~ end ~}}
 /// </list>
-/// </remarks>{{~ end ~}}{{~ if $1 != null && $1?.deprecated_version != "" }}
+/// </remarks>{{~ end ~}}{{~ if $1 != null && $1?.deprecated_version != null && $1?.deprecated_version != "" }}
 [Obsolete("Deprecated in v{{ $1.deprecated_version }} according to https://model.mtconnect.org/#_Version_{{ $1.deprecated_version }}")]{{~ end ~}}
