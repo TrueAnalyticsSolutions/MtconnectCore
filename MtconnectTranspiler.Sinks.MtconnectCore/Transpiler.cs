@@ -117,12 +117,13 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             _generator.ProcessTemplate(dataTypes, Path.Combine(_generator.OutputPath, "Enums", "DataTypes"), true);
 
             _logger?.LogInformation($"Processing component types");
-            var componentTypes = new List<MtconnectCoreEnum>();
-            foreach (var componentType in Mtconnect.MtconnectModel.DeviceInformationModelPackage.ComponentsPackage.ComponentTypesPackage.Enums)
+            var componentEnum = new MtconnectCoreEnum();
+            var componentTypes = new List<IEnumInstance>();
+            foreach (var componentClass in Mtconnect.MtconnectModel.DeviceInformationModelPackage.ComponentsPackage.ComponentTypesPackage.Classes)
             {
-                componentTypes.Add(new MtconnectCoreEnum(componentType));
+                componentEnum.Values.Add(new MtconnectCoreEnumItem(componentClass));
             }
-            _generator.ProcessTemplate(componentTypes, Path.Combine(_generator.OutputPath, "Enums", "ComponentTypes"));
+            _generator.ProcessTemplate(componentEnum, Path.Combine(_generator.OutputPath, "Enums", "ComponentTypes"), true);
 
             // TODO: Handle Enum and Class types for properties. Replace *EnumMetaClass with reference to newly created Enum. Replace *Class with reference to other interfaces.
             //var classes = new List<MtconnectCoreInterface>();

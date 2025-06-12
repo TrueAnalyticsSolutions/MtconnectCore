@@ -26,7 +26,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 
         public string Summary { get; internal set; }
 
-        public IEnumInstance[] Values { get; internal set; }
+        public List<MtconnectCoreEnumItem> Values { get; internal set; } = new List<MtconnectCoreEnumItem>();
 
 
         // NOTE: Only used for CATEGORY types that have subTypes.
@@ -61,7 +61,14 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             NormativeVersion = source.NormativeVersion;
             DeprecatedVersion = source.DeprecatedVersion;
             Summary = TrimLineBreaks(source.Summary);
-            Values = source.Values.ToList().OrderBy(o => o.NormativeVersion).ThenBy(o => o.Name).ToArray();
+            Values = source.Values
+                .ToList()
+                .OrderBy(o => o.NormativeVersion)
+                .ThenBy(o => o.Name)
+                .Select(o => new MtconnectCoreEnumItem(o) {
+                    HelpUrl = $"https://model.mtconnect.org/#Enumeration__{source.ReferenceId}"
+                })
+                .ToList();
         }
 
         public MtconnectCoreEnum(IClass source)
@@ -83,10 +90,14 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
             Summary = TrimLineBreaks(enumInstance?.Summary ?? resultType?.Summary ?? "");
             if (enumInstance != null)
             {
-                Values = enumInstance.Values.ToList().OrderBy(o => o.NormativeVersion).ThenBy(o => o.Name).ToArray();
-            } else
-            {
-                Values = new IEnumInstance[] { };
+                Values = enumInstance.Values
+                    .ToList()
+                    .OrderBy(o => o.NormativeVersion)
+                    .ThenBy(o => o.Name)
+                    .Select(o => new MtconnectCoreEnumItem(o) {
+                        HelpUrl = $"https://model.mtconnect.org/#Enumeration__{source.ReferenceId}"
+                    })
+                    .ToList();
             }
         }
 
@@ -95,13 +106,19 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
 
             var resultProperty = source.Properties.FirstOrDefault(o => o.Name == "result");
             IEnum resultInstance = null;
-            CSharp.Contracts.Interfaces.IEnumInstance[] values = null;
+            var values = new List<MtconnectCoreEnumItem>();
             if (resultProperty?.Type?.GetInterfaces()?.Any(o => o == (typeof(IEnum))) == true)
             {
                 resultInstance = Activator.CreateInstance(resultProperty.Type) as IEnum;
                 if (resultInstance != null)
                 {
-                    values = resultInstance.Values.OrderBy(o => o.NormativeVersion).ThenBy(o => o.Name).ToArray();
+                    values = resultInstance.Values
+                        .OrderBy(o => o.NormativeVersion)
+                        .ThenBy(o => o.Name)
+                        .Select(o => new MtconnectCoreEnumItem(o) {
+                            HelpUrl = source.HelpUrl
+                        })
+                        .ToList();
                 }
             }
 
