@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		ABORTED,
+		Aborted,
 		/// <summary>
 		﻿/// accumulation of all actions, items, or activities being counted independent of the outcome.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		ALL,
+		All,
 		/// <summary>
 		﻿/// accumulation of actions, items, or activities being counted that do not conform to specification or expectation.
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		BAD,
+		Bad,
 		/// <summary>
 		﻿/// accumulation of actions, items, or activities that have been completed, independent of the outcome.
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		COMPLETE,
+		Complete,
 		/// <summary>
 		﻿/// accumulation of actions, items, or activities being counted that do not conform to specification or expectation.
 		/// </summary>
@@ -78,7 +78,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		FAILED,
+		Failed,
 		/// <summary>
 		﻿/// accumulation of actions, items, or activities being counted that conform to specification or expectation.
 		/// </summary>
@@ -90,7 +90,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		GOOD,
+		Good,
 		/// <summary>
 		﻿/// accumulation of actions, items, or activities yet to be counted.
 		/// </summary>
@@ -102,7 +102,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		REMAINING,
+		Remaining,
 		/// <summary>
 		﻿/// goal of the operation or process.
 		/// </summary>
@@ -114,6 +114,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		TARGET,
+		Target,
 	}
 }

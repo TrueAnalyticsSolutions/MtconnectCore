@@ -27,6 +27,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.0">v2.0</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
+		
 		AUTOMATIC,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />execute instructions from an external agent or person.<br /><br /><br /><br />&gt; Note 1 to entry: Valve or switch is manipulated by an agent/person.<br /><br /><br /><br />&gt; Note 2 to entry: Direct control of the PID output. % of the range: A user manually sets the % output, not the setpoint.<br /><br /><br /><br />
@@ -36,6 +38,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.0">v2.0</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
+		
 		MANUAL,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />executes a single instruction from a recipe or program.<br /><br /><br /><br />&gt; Note 1 to entry: Setpoint is entered and fixed, but the PID is controlling.<br /><br /><br /><br />&gt; Note 2 to entry: Still goes through the PID control system.<br /><br /><br /><br />&gt; Note 3 to entry: Manual fixed entry from a recipe.<br /><br /><br /><br />
@@ -45,6 +49,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.0">v2.0</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
+		
 		SEMI_AUTOMATIC,
 	}
 }

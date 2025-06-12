@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		ACTIVE,
+		Active,
 		/// <summary>
 		﻿/// identity of the primary logic or motion program currently being executed. <br /><br /><br /><br />It is the starting nest level in a call structure and may contain calls to sub programs.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		MAIN,
+		Main,
 		/// <summary>
 		﻿/// identity of a control program that is used to specify the order of execution of other programs.
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		SCHEDULE,
+		Schedule,
 		/// <summary>
 		﻿/// phase or segment of a recipe or program.
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		ACTIVITY,
+		Activity,
 		/// <summary>
 		﻿/// step of a discrete manufacturing process.
 		/// </summary>
@@ -78,7 +78,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		OPERATION,
+		Operation,
 		/// <summary>
 		﻿/// process as part of product production; can be a subprocess of a larger process.
 		/// </summary>
@@ -90,7 +90,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		RECIPE,
+		Recipe,
 		/// <summary>
 		﻿/// phase of a recipe process.
 		/// </summary>
@@ -102,6 +102,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		SEGMENT,
+		Segment,
 	}
 }

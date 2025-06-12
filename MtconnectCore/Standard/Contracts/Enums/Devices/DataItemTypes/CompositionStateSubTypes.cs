@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		ACTION,
+		Action,
 		/// <summary>
 		﻿/// indication of the position of a mechanism that may move in a lateral direction.   
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		LATERAL,
+		Lateral,
 		/// <summary>
 		﻿/// indication of the open or closed state of a mechanism.<br /><br />
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		MOTION,
+		Motion,
 		/// <summary>
 		﻿/// indication of the activation state of a mechanism.
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		SWITCHED,
+		Switched,
 		/// <summary>
 		﻿/// indication of the position of a mechanism that may move in a vertical direction.
 		/// </summary>
@@ -78,6 +78,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		VERTICAL,
+		Vertical,
 	}
 }

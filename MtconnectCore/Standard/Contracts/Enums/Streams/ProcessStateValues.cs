@@ -27,6 +27,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
+		
 		ABORTED,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />process occurrence is actively executing.<br /><br /><br /><br />
@@ -36,6 +38,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
+		
 		ACTIVE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />process occurrence is now finished.<br /><br /><br /><br />
@@ -45,6 +49,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
+		
 		COMPLETE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />device is preparing to execute the process occurrence.<br /><br /><br /><br />
@@ -54,6 +60,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
+		
 		INITIALIZING,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />process occurrence has been stopped and may be resumed.<br /><br /><br /><br />
@@ -63,6 +71,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
+		
 		INTERRUPTED,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />process occurrence is ready to be executed.<br /><br /><br /><br />
@@ -72,6 +82,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.8">v1.8</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
+		
 		READY,
 	}
 }

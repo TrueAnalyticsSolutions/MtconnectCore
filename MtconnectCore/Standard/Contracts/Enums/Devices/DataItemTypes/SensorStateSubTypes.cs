@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		BINARY,
+		Binary,
 		/// <summary>
 		﻿/// <see cref="EventEnum.SENSOR_STATE">EventEnum.SENSOR_STATE</see> where the state is <see cref="DataItemSubTypeEnum.BOOLEAN">DataItemSubTypeEnum.BOOLEAN</see>
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		BOOLEAN,
+		Boolean,
 		/// <summary>
 		﻿/// <see cref="EventEnum.SENSOR_STATE">EventEnum.SENSOR_STATE</see> where the state is <see cref="DataItemSubTypeEnum.DETECT">DataItemSubTypeEnum.DETECT</see>
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		DETECT,
+		Detect,
 		/// <summary>
 		﻿/// <see cref="EventEnum.SENSOR_STATE">EventEnum.SENSOR_STATE</see> where the state is <see cref="DataItemSubTypeEnum.ENUMERATED">DataItemSubTypeEnum.ENUMERATED</see>
 		/// </summary>
@@ -66,6 +66,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		ENUMERATED,
+		Enumerated,
 	}
 }

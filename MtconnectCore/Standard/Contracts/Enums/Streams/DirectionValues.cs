@@ -29,6 +29,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </list>
 		/// </remarks>
 		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_4_0)]
+		
 		CLOCKWISE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />counter-clockwise rotation using the right-hand rule.<br /><br /><br /><br />
@@ -40,6 +42,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </list>
 		/// </remarks>
 		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_4_0)]
+		
 		COUNTER_CLOCKWISE,
 		/// <summary>
 		﻿
@@ -51,6 +55,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </list>
 		/// </remarks>
 		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2", MtconnectVersions.V_1_4_0)]
+		
 		NEGATIVE,
 		/// <summary>
 		﻿
@@ -62,6 +68,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </list>
 		/// </remarks>
 		[Obsolete("Deprecated in v1.4 according to https://model.mtconnect.org/#_Version_1.4")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2", MtconnectVersions.V_1_4_0)]
+		
 		POSITIVE,
 	}
 }

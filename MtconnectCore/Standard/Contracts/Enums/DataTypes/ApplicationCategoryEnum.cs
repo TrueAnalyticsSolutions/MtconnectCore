@@ -26,6 +26,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		ASSEMBLY,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />device related files.<br /><br /><br /><br />
@@ -35,6 +37,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		DEVICE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />files relating to the handling of material.<br /><br /><br /><br />
@@ -44,6 +48,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		HANDLING,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />files related to the quality inspection.<br /><br /><br /><br />
@@ -53,6 +59,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		INSPECTION,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />files relating to equipment maintenance.<br /><br /><br /><br />
@@ -62,6 +70,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		MAINTENANCE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />files relating to a part.<br /><br /><br /><br /><br />
@@ -71,6 +81,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		PART,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />files related to the manufacturing process.<br /><br /><br /><br />
@@ -80,6 +92,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		PROCESS,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />files related to the setup of a process.<br /><br /><br /><br />
@@ -89,6 +103,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		SETUP,
 	}
 }

@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
 		
 		
-		ACTUAL,
+		Actual,
 		/// <summary>
 		﻿/// <see cref="SampleEnum.FILL_HEIGHT">SampleEnum.FILL_HEIGHT</see> that is <see cref="DataItemSubTypeEnum.TARGET">DataItemSubTypeEnum.TARGET</see>
 		/// </summary>
@@ -42,6 +42,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
 		
 		
-		TARGET,
+		Target,
 	}
 }

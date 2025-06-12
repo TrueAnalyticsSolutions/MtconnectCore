@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		ACTUAL,
+		Actual,
 		/// <summary>
 		﻿/// directive value including adjustments such as an offset or overrides.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		COMMANDED,
+		Commanded,
 		/// <summary>
 		﻿/// goal of the operation or process.
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		TARGET,
+		Target,
 		/// <summary>
 		﻿/// directive value without offsets and adjustments.
 		/// </summary>
@@ -66,6 +66,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		PROGRAMMED,
+		Programmed,
 	}
 }

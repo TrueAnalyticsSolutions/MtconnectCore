@@ -27,6 +27,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		COMBINED,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br /><i>standard uncertainty</i> using arithmetic mean or average the observations. <seealso href="https://www.google.com/search?q=JCGM 100:2008 4.2&amp;btnI=I">JCGM 100:2008 4.2</seealso><br /><br /><br /><br />
@@ -36,6 +38,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		MEAN,
 	}
 }

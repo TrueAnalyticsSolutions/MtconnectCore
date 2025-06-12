@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		ISO_STEP_EXECUTABLE,
+		ISOStepExecutable,
 		/// <summary>
 		﻿/// word or set of words by which a process being executed (process occurrence) by the device is known, addressed, or referred to.<br />
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		PROCESS_NAME,
+		ProcessName,
 		/// <summary>
 		﻿/// universally unique identifier as specified in ISO 11578 or RFC 4122.
 		/// </summary>
@@ -54,6 +54,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		UUID,
+		Uuid,
 	}
 }

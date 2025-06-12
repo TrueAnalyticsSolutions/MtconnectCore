@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		DELAY,
+		Delay,
 		/// <summary>
 		﻿/// time that the sub-parts of a piece of equipment are under load.<br /><br /><br /><br />Example: For traditional machine tools, this is a measurement of the time that the cutting tool is assumed to be engaged with the part.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		LOADED,
+		Loaded,
 		/// <summary>
 		﻿/// time that the major sub-parts of a piece of equipment are powered or performing any activity whether producing a part or product or not.<br /><br /><br /><br />Example: For traditional machine tools, this includes <c>WORKING</c>, plus idle time.
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		OPERATING,
+		Operating,
 		/// <summary>
 		﻿/// time that primary power is applied to the piece of equipment and, as a minimum, the controller or logic portion of the piece of equipment is powered and functioning or components that are required to remain on are powered.<br /><br /><br /><br />Example: Heaters for an extrusion machine that are required to be powered even when the equipment is turned off.
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		POWERED,
+		Powered,
 		/// <summary>
 		﻿/// time that a piece of equipment is performing any activity the equipment is active and performing a function under load or not.<br /><br /><br /><br />Example: For traditional machine tools, this includes <c>LOADED</c>, plus rapid moves, tool changes, etc.
 		/// </summary>
@@ -78,6 +78,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		WORKING,
+		Working,
 	}
 }

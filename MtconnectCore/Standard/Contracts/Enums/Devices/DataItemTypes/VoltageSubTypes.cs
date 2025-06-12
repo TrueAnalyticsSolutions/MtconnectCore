@@ -34,7 +34,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2", MtconnectVersions.V_1_6_0)]
 		
 		
-		ALTERNATING,
+		Alternating,
 		/// <summary>
 		﻿/// DC current or voltage.<br /><br /><br /><br /><b>DEPRECATED</b> in <i>Version 1.6</i>.
 		/// </summary>
@@ -48,7 +48,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2", MtconnectVersions.V_1_6_0)]
 		
 		
-		DIRECT,
+		Direct,
 		/// <summary>
 		﻿/// measured or reported value of an <i>observation</i>.<br /><br /><br /><br /><b>DEPRECATED</b> in <i>Version 1.6</i>.
 		/// </summary>
@@ -62,7 +62,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4", MtconnectVersions.V_1_6_0)]
 		
 		
-		ACTUAL,
+		Actual,
 		/// <summary>
 		﻿/// goal of the operation or process.<br /><br /><br /><br /><b>DEPRECATED</b> in <i>Version 1.6</i>.
 		/// </summary>
@@ -76,6 +76,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4", MtconnectVersions.V_1_6_0)]
 		
 		
-		TARGET,
+		Target,
 	}
 }

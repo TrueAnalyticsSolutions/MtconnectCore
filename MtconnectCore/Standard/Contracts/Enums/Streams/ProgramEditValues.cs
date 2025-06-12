@@ -27,6 +27,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
+		
 		ACTIVE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br /><see cref="Controller">Controller</see> is being inhibited by a function from entering the program edit mode.<br /><br /><br /><br />
@@ -36,6 +38,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
+		
 		NOT_READY,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br /><see cref="Controller">Controller</see> is capable of entering the program edit mode and no function is inhibiting a change to that mode.<br /><br /><br /><br />
@@ -45,6 +49,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
+		
 		READY,
 	}
 }

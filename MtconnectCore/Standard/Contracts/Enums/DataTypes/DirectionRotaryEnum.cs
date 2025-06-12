@@ -26,6 +26,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
+		
 		CLOCKWISE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />counter-clockwise rotation using the right-hand rule.<br /><br /><br /><br />
@@ -35,6 +37,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
+		
 		COUNTER_CLOCKWISE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />no direction.<br /><br /><br /><br />
@@ -44,6 +48,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		NONE,
 	}
 }

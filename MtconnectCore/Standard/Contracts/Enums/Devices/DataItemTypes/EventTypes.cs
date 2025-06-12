@@ -9,13 +9,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// <summary>
 	/// <br/>Visit <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso> for more information.
 	/// </summary>
-	/// <remarks>
-	/// <list type="bullet">
-	/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_">v</see></item>
-	/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_">v</see></item>
-	/// </list>
-	/// </remarks>
-	[Obsolete("Deprecated in v according to https://model.mtconnect.org/#_Version_")]
+	
 	
 	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum EventTypes
@@ -31,7 +25,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		ACTIVE_AXES,
+		ActiveAxes,
 		/// <summary>
 		﻿/// operational state of an apparatus for moving or controlling a mechanism or system.
 		/// </summary>
@@ -43,7 +37,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		ACTUATOR_STATE,
+		ActuatorState,
 		/// <summary>
 		﻿/// <b>DEPRECATED:</b> Replaced with <c>CONDITION</c> category data items in Version 1.1.0.
 		/// </summary>
@@ -57,7 +51,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_1_0)]
 		
 		
-		ALARM,
+		Alarm,
 		/// <summary>
 		﻿/// <see cref="assetId">assetId</see> of the <i>Asset</i> that has been added or changed.
 		/// </summary>
@@ -69,7 +63,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		ASSET_CHANGED,
+		AssetChanged,
 		/// <summary>
 		﻿/// <see cref="assetId">assetId</see> of the <i>Asset</i> that has been removed.
 		/// </summary>
@@ -81,7 +75,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		ASSET_REMOVED,
+		AssetRemoved,
 		/// <summary>
 		﻿/// <i>agent</i>'s ability to communicate with the data source.
 		/// </summary>
@@ -93,7 +87,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		AVAILABILITY,
+		Availability,
 		/// <summary>
 		﻿/// describes the way the axes will be associated to each other. <br />  <br />This is used in conjunction with <c>COUPLED_AXES</c> to indicate the way they are interacting.
 		/// </summary>
@@ -105,7 +99,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		AXIS_COUPLING,
+		AxisCoupling,
 		/// <summary>
 		﻿/// value of a signal or calculation issued to adjust the feedrate of an individual linear type axis.
 		/// </summary>
@@ -117,7 +111,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		[ObservationalSubType(typeof(AxisFeedrateOverrideSubTypes))]
 		
-		AXIS_FEEDRATE_OVERRIDE,
+		AxisFeedrateOverride,
 		/// <summary>
 		﻿/// state of the axis lockout function when power has been removed and the axis is allowed to move freely.
 		/// </summary>
@@ -129,7 +123,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		AXIS_INTERLOCK,
+		AxisInterlock,
 		/// <summary>
 		﻿/// state of a <see cref="Linear">Linear</see> or <see cref="Rotary">Rotary</see> component representing an axis.
 		/// </summary>
@@ -141,7 +135,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		AXIS_STATE,
+		AxisState,
 		/// <summary>
 		﻿/// line of code or command being executed by a <see cref="Controller">Controller</see> entity.
 		/// </summary>
@@ -153,7 +147,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		BLOCK,
+		Block,
 		/// <summary>
 		﻿/// total count of the number of blocks of program code that have been executed since execution started.
 		/// </summary>
@@ -165,7 +159,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		BLOCK_COUNT,
+		BlockCount,
 		/// <summary>
 		﻿/// state of an interlock function or control logic state intended to prevent the associated <see cref="Chuck">Chuck</see> component from being operated.
 		/// </summary>
@@ -177,7 +171,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		CHUCK_INTERLOCK,
+		ChuckInterlock,
 		/// <summary>
 		﻿/// operating state of a mechanism that holds a part or stock material during a manufacturing process. <br /><br />It may also represent a mechanism that holds any other mechanism in place within a piece of equipment.
 		/// </summary>
@@ -189,7 +183,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		CHUCK_STATE,
+		ChuckState,
 		/// <summary>
 		﻿/// programmatic code being executed.<br /><br /><b>DEPRECATED</b> in <i>Version 1.1</i>.
 		/// </summary>
@@ -203,7 +197,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_1_0)]
 		
 		
-		CODE,
+		Code,
 		/// <summary>
 		﻿/// operating state of a mechanism represented by a <see cref="Composition">Composition</see> entity.
 		/// </summary>
@@ -215,7 +209,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		[ObservationalSubType(typeof(CompositionStateSubTypes))]
 		
-		COMPOSITION_STATE,
+		CompositionState,
 		/// <summary>
 		﻿/// current mode of the <see cref="Controller">Controller</see> component.
 		/// </summary>
@@ -227,7 +221,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		CONTROLLER_MODE,
+		ControllerMode,
 		/// <summary>
 		﻿/// setting or operator selection that changes the behavior of a piece of equipment.
 		/// </summary>
@@ -239,7 +233,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		CONTROLLER_MODE_OVERRIDE,
+		ControllerModeOverride,
 		/// <summary>
 		﻿/// set of associated axes.
 		/// </summary>
@@ -251,7 +245,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		COUPLED_AXES,
+		CoupledAxes,
 		/// <summary>
 		﻿/// time and date code associated with a material or other physical item.
 		/// </summary>
@@ -263,7 +257,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		[ObservationalSubType(typeof(DateCodeSubTypes))]
 		
-		DATE_CODE,
+		DateCode,
 		/// <summary>
 		﻿/// identifier of another piece of equipment that is temporarily associated with a component of this piece of equipment to perform a particular function.
 		/// </summary>
@@ -275,7 +269,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		DEVICE_UUID,
+		DeviceUuid,
 		/// <summary>
 		﻿/// direction of motion.
 		/// </summary>
@@ -287,7 +281,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		DIRECTION,
+		Direction,
 		/// <summary>
 		﻿/// operational state of a <see cref="Door">Door</see> component or composition element.
 		/// </summary>
@@ -299,7 +293,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		DOOR_STATE,
+		DoorState,
 		/// <summary>
 		﻿/// state of the emergency stop signal for a piece of equipment, controller path, or any other component or subsystem of a piece of equipment.
 		/// </summary>
@@ -311,7 +305,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		EMERGENCY_STOP,
+		EmergencyStop,
 		/// <summary>
 		﻿/// indication of whether the end of a piece of bar stock being feed by a bar feeder has been reached.
 		/// </summary>
@@ -323,7 +317,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		END_OF_BAR,
+		EndOfBar,
 		/// <summary>
 		﻿/// indication that a piece of equipment, or a sub-part of a piece of equipment, is performing specific types of activities.
 		/// </summary>
@@ -335,7 +329,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		EQUIPMENT_MODE,
+		EquipmentMode,
 		/// <summary>
 		﻿/// operating state of a <see cref="Component">Component</see>.
 		/// </summary>
@@ -347,7 +341,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		EXECUTION,
+		Execution,
 		/// <summary>
 		﻿/// current intended production status of the <see cref="Component">Component</see>.
 		/// </summary>
@@ -359,7 +353,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		FUNCTIONAL_MODE,
+		FunctionalMode,
 		/// <summary>
 		﻿/// hardness of a material.
 		/// </summary>
@@ -371,7 +365,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		[ObservationalSubType(typeof(HardnessSubTypes))]
 		
-		HARDNESS,
+		Hardness,
 		/// <summary>
 		﻿/// current line of code being executed.<br /><br /><b>DEPRECATED</b> in <i>Version 1.4.0</i>.
 		/// </summary>
@@ -385,7 +379,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_4_0)]
 		[ObservationalSubType(typeof(LineSubTypes))]
 		
-		LINE,
+		Line,
 		/// <summary>
 		﻿/// identifier for a <see cref="Block">Block</see> of code in a <see cref="Program">Program</see>.
 		/// </summary>
@@ -397,7 +391,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		LINE_LABEL,
+		LineLabel,
 		/// <summary>
 		﻿/// position of a block of program code within a control program.
 		/// </summary>
@@ -409,7 +403,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		[ObservationalSubType(typeof(LineNumberSubTypes))]
 		
-		LINE_NUMBER,
+		LineNumber,
 		/// <summary>
 		﻿/// identifier of a material used or consumed in the manufacturing process.
 		/// </summary>
@@ -421,7 +415,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		MATERIAL,
+		Material,
 		/// <summary>
 		﻿/// identifies the layers of material applied to a part or product as part of an additive manufacturing process.
 		/// </summary>
@@ -433,7 +427,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		[ObservationalSubType(typeof(MaterialLayerSubTypes))]
 		
-		MATERIAL_LAYER,
+		MaterialLayer,
 		/// <summary>
 		﻿/// information to be transferred from a piece of equipment to a client software application.
 		/// </summary>
@@ -445,7 +439,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		MESSAGE,
+		Message,
 		/// <summary>
 		﻿/// identifier of the person currently responsible for operating the piece of equipment.
 		/// </summary>
@@ -457,7 +451,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		OPERATOR_ID,
+		OperatorId,
 		/// <summary>
 		﻿/// identifier for a pallet.
 		/// </summary>
@@ -469,7 +463,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		PALLET_ID,
+		PalletId,
 		/// <summary>
 		﻿/// aggregate count of parts.
 		/// </summary>
@@ -481,7 +475,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		[ObservationalSubType(typeof(PartCountSubTypes))]
 		
-		PART_COUNT,
+		PartCount,
 		/// <summary>
 		﻿/// indication designating whether a part or work piece has been detected or is present.
 		/// </summary>
@@ -493,7 +487,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		PART_DETECT,
+		PartDetect,
 		/// <summary>
 		﻿/// identifier of a part in a manufacturing operation.
 		/// </summary>
@@ -505,7 +499,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		PART_ID,
+		PartId,
 		/// <summary>
 		﻿/// identifier of a part or product moving through the manufacturing process.<br /><br /><b>DEPRECATED</b> in <i>Version 1.7</i>. <c>PART_NUMBER</c> is now a <c>subType</c> of <c>PART_KIND_ID</c>.
 		/// </summary>
@@ -519,7 +513,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4", MtconnectVersions.V_1_7_0)]
 		
 		
-		PART_NUMBER,
+		PartNumber,
 		/// <summary>
 		﻿/// value of a signal or calculation issued to adjust the feedrate for the axes associated with a <see cref="Path">Path</see> component that may represent a single axis or the coordinated movement of multiple axes.
 		/// </summary>
@@ -531,7 +525,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		[ObservationalSubType(typeof(PathFeedrateOverrideSubTypes))]
 		
-		PATH_FEEDRATE_OVERRIDE,
+		PathFeedrateOverride,
 		/// <summary>
 		﻿/// describes the operational relationship between a <see cref="Path">Path</see> entity and another <see cref="Path">Path</see> entity for pieces of equipment comprised of multiple logical groupings of controlled axes or other logical operations.
 		/// </summary>
@@ -543,7 +537,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		PATH_MODE,
+		PathMode,
 		/// <summary>
 		﻿/// indication of the status of the source of energy for an entity to allow it to perform its intended function or the state of an enabling signal providing permission for the entity to perform its functions.
 		/// </summary>
@@ -555,7 +549,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		POWER_STATE,
+		PowerState,
 		/// <summary>
 		﻿/// status of the <see cref="Component">Component</see>.<br /><br /><b>DEPRECATED</b> in <i>Version 1.1.0</i>.
 		/// </summary>
@@ -569,7 +563,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_1_0)]
 		
 		
-		POWER_STATUS,
+		PowerStatus,
 		/// <summary>
 		﻿/// time and date associated with an activity or event.
 		/// </summary>
@@ -581,7 +575,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		[ObservationalSubType(typeof(ProcessTimeSubTypes))]
 		
-		PROCESS_TIME,
+		ProcessTime,
 		/// <summary>
 		﻿/// name of the logic or motion program being executed by the <see cref="Controller">Controller</see> component.
 		/// </summary>
@@ -593,7 +587,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		[ObservationalSubType(typeof(ProgramSubTypes))]
 		
-		PROGRAM,
+		Program,
 		/// <summary>
 		﻿/// comment or non-executable statement in the control program.
 		/// </summary>
@@ -605,7 +599,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		[ObservationalSubType(typeof(ProgramCommentSubTypes))]
 		
-		PROGRAM_COMMENT,
+		ProgramComment,
 		/// <summary>
 		﻿/// indication of the status of the <see cref="Controller">Controller</see> components program editing mode.<br /><br />A program may be edited while another is executed.
 		/// </summary>
@@ -617,7 +611,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		PROGRAM_EDIT,
+		ProgramEdit,
 		/// <summary>
 		﻿/// name of the program being edited. <br /><br />This is used in conjunction with <see cref="ProgramEdit">ProgramEdit</see> when in <c>ACTIVE</c> state. 
 		/// </summary>
@@ -629,7 +623,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		PROGRAM_EDIT_NAME,
+		ProgramEditName,
 		/// <summary>
 		﻿/// non-executable header section of the control program.
 		/// </summary>
@@ -641,7 +635,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		[ObservationalSubType(typeof(ProgramHeaderSubTypes))]
 		
-		PROGRAM_HEADER,
+		ProgramHeader,
 		/// <summary>
 		﻿/// <i>URI</i> for the source file associated with <see cref="Program">Program</see>.
 		/// </summary>
@@ -653,7 +647,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		[ObservationalSubType(typeof(ProgramLocationSubTypes))]
 		
-		PROGRAM_LOCATION,
+		ProgramLocation,
 		/// <summary>
 		﻿/// defines whether the logic or motion program defined by <see cref="Program">Program</see> is being executed from the local memory of the controller or from an outside source.
 		/// </summary>
@@ -665,7 +659,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		PROGRAM_LOCATION_TYPE,
+		ProgramLocationType,
 		/// <summary>
 		﻿/// indication of the nesting level within a control program that is associated with the code or instructions that is currently being executed.
 		/// </summary>
@@ -677,7 +671,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		PROGRAM_NEST_LEVEL,
+		ProgramNestLevel,
 		/// <summary>
 		﻿/// current operating mode for a <see cref="Rotary">Rotary</see> type axis.
 		/// </summary>
@@ -689,7 +683,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		ROTARY_MODE,
+		RotaryMode,
 		/// <summary>
 		﻿/// percentage change to the velocity of the programmed velocity for a <see cref="Rotary">Rotary</see> axis.
 		/// </summary>
@@ -701,7 +695,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		ROTARY_VELOCITY_OVERRIDE,
+		RotaryVelocityOverride,
 		/// <summary>
 		﻿/// serial number associated with a <see cref="Component">Component</see>, <see cref="Asset">Asset</see>, or <see cref="Device">Device</see>.
 		/// </summary>
@@ -713,7 +707,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		SERIAL_NUMBER,
+		SerialNumber,
 		/// <summary>
 		﻿/// indication of the status of the spindle for a piece of equipment when power has been removed and it is free to rotate.
 		/// </summary>
@@ -725,7 +719,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		SPINDLE_INTERLOCK,
+		SpindleInterlock,
 		/// <summary>
 		﻿/// identifier of an individual tool asset.
 		/// </summary>
@@ -737,7 +731,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		TOOL_ASSET_ID,
+		ToolAssetId,
 		/// <summary>
 		﻿/// identifier for the tool group associated with a specific tool. Commonly used to designate spare tools.
 		/// </summary>
@@ -749,7 +743,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		TOOL_GROUP,
+		ToolGroup,
 		/// <summary>
 		﻿/// identifier of the tool currently in use for a given <c>Path</c>.<br /><br /><b>DEPRECATED</b> in <i>Version 1.2.0</i>.   See <c>TOOL_NUMBER</c>.
 		/// </summary>
@@ -763,7 +757,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1", MtconnectVersions.V_1_2_0)]
 		
 		
-		TOOL_ID,
+		ToolId,
 		/// <summary>
 		﻿/// identifier assigned by the <see cref="Controller">Controller</see> component to a cutting tool when in use by a piece of equipment.
 		/// </summary>
@@ -775,7 +769,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		TOOL_NUMBER,
+		ToolNumber,
 		/// <summary>
 		﻿/// reference to the tool offset variables applied to the active cutting tool.
 		/// </summary>
@@ -787,7 +781,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		[ObservationalSubType(typeof(ToolOffsetSubTypes))]
 		
-		TOOL_OFFSET,
+		ToolOffset,
 		/// <summary>
 		﻿/// identifier of the person currently responsible for operating the piece of equipment.
 		/// </summary>
@@ -799,7 +793,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		[ObservationalSubType(typeof(UserSubTypes))]
 		
-		USER,
+		User,
 		/// <summary>
 		﻿/// data whose meaning may change over time due to changes in the operation of a piece of equipment or the process being executed on that piece of equipment.
 		/// </summary>
@@ -811,7 +805,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		VARIABLE,
+		Variable,
 		/// <summary>
 		﻿/// indication of the reason that <see cref="Execution">Execution</see> is reporting a value of <c>WAIT</c>.
 		/// </summary>
@@ -823,7 +817,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		WAIT_STATE,
+		WaitState,
 		/// <summary>
 		﻿/// identifier for the type of wire used as the cutting mechanism in Electrical Discharge Machining or similar processes.
 		/// </summary>
@@ -835,7 +829,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		WIRE,
+		Wire,
 		/// <summary>
 		﻿/// identifier for the current workholding or part clamp in use by a piece of equipment.<br /><br /><b>DEPRECATION WARNING</b>: Recommend using <c>FIXTURE_ID</c> instead.
 		/// </summary>
@@ -847,7 +841,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		WORKHOLDING_ID,
+		WorkholdingId,
 		/// <summary>
 		﻿/// reference to offset variables for a work piece or part.
 		/// </summary>
@@ -859,7 +853,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		WORK_OFFSET,
+		WorkOffset,
 		/// <summary>
 		﻿/// Operating System (OS) of a <see cref="Component">Component</see>.
 		/// </summary>
@@ -871,7 +865,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		[ObservationalSubType(typeof(OperatingSystemSubTypes))]
 		
-		OPERATING_SYSTEM,
+		OperatingSystem,
 		/// <summary>
 		﻿/// embedded software of a <see cref="Component">Component</see><br />.
 		/// </summary>
@@ -883,7 +877,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		[ObservationalSubType(typeof(FirmwareSubTypes))]
 		
-		FIRMWARE,
+		Firmware,
 		/// <summary>
 		﻿/// application on a <see cref="Component">Component</see>.
 		/// </summary>
@@ -895,7 +889,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		[ObservationalSubType(typeof(ApplicationSubTypes))]
 		
-		APPLICATION,
+		Application,
 		/// <summary>
 		﻿/// software library on a <see cref="Component">Component</see>
 		/// </summary>
@@ -907,7 +901,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		[ObservationalSubType(typeof(LibrarySubTypes))]
 		
-		LIBRARY,
+		Library,
 		/// <summary>
 		﻿/// hardware of a <see cref="Component">Component</see>.
 		/// </summary>
@@ -919,7 +913,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		[ObservationalSubType(typeof(HardwareSubTypes))]
 		
-		HARDWARE,
+		Hardware,
 		/// <summary>
 		﻿/// network details of a <see cref="Component">Component</see>.
 		/// </summary>
@@ -931,7 +925,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		[ObservationalSubType(typeof(NetworkSubTypes))]
 		
-		NETWORK,
+		Network,
 		/// <summary>
 		﻿/// three space angular displacement of an object or coordinate system relative to a <i>cartesian coordinate system</i>.
 		/// </summary>
@@ -943,7 +937,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		ROTATION,
+		Rotation,
 		/// <summary>
 		﻿/// three space linear displacement of an object or coordinate system relative to a <i>cartesian coordinate system</i>.
 		/// </summary>
@@ -955,7 +949,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		TRANSLATION,
+		Translation,
 		/// <summary>
 		﻿/// identifier given to link the individual occurrence to a class of processes or process definition.<br />
 		/// </summary>
@@ -967,7 +961,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		[ObservationalSubType(typeof(ProcessKindIdSubTypes))]
 		
-		PROCESS_KIND_ID,
+		ProcessKindId,
 		/// <summary>
 		﻿/// state or condition of a part.
 		/// </summary>
@@ -979,7 +973,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		PART_STATUS,
+		PartStatus,
 		/// <summary>
 		﻿/// set of limits used to trigger warning or alarm indicators.<br /><br /><b>DEPRECATED</b> in <i>Version 2.5</i>. Replaced by  <c>ALARM_LIMITS</c>.
 		/// </summary>
@@ -993,7 +987,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7", MtconnectVersions.V_2_5_0)]
 		
 		
-		ALARM_LIMIT,
+		AlarmLimit,
 		/// <summary>
 		﻿/// identifier given to link the individual occurrence to a group of related occurrences, such as a process step in a process plan.
 		/// </summary>
@@ -1005,7 +999,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		[ObservationalSubType(typeof(ProcessAggregateIdSubTypes))]
 		
-		PROCESS_AGGREGATE_ID,
+		ProcessAggregateId,
 		/// <summary>
 		﻿/// identifier given to link the individual occurrence to a class of parts, typically distinguished by a particular part design.
 		/// </summary>
@@ -1017,7 +1011,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		[ObservationalSubType(typeof(PartKindIdSubTypes))]
 		
-		PART_KIND_ID,
+		PartKindId,
 		/// <summary>
 		﻿/// <i>URI</i> of the <i>adapter</i>.
 		/// </summary>
@@ -1029,7 +1023,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		ADAPTER_URI,
+		AdapterURI,
 		/// <summary>
 		﻿/// <i>UUID</i> of a device removed from an <i>MTConnect Agent</i>.
 		/// </summary>
@@ -1041,7 +1035,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		DEVICE_REMOVED,
+		DeviceRemoved,
 		/// <summary>
 		﻿/// <i>UUID</i> of the device whose <i>metadata</i> has changed.
 		/// </summary>
@@ -1053,7 +1047,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		DEVICE_CHANGED,
+		DeviceChanged,
 		/// <summary>
 		﻿/// set of limits defining a range of values designating acceptable performance for a variable.<br /><br /><b>DEPRECATED</b> in <i>Version 2.5</i>. Replaced by  <c>SPECIFICATION_LIMITS</c>.
 		/// </summary>
@@ -1067,7 +1061,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7", MtconnectVersions.V_2_5_0)]
 		
 		
-		SPECIFICATION_LIMIT,
+		SpecificationLimit,
 		/// <summary>
 		﻿/// status of the connection between an <i>adapter</i> and an <i>agent</i>.
 		/// </summary>
@@ -1079,7 +1073,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		CONNECTION_STATUS,
+		ConnectionStatus,
 		/// <summary>
 		﻿/// originator’s software version of the <i>adapter</i>.
 		/// </summary>
@@ -1091,7 +1085,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		ADAPTER_SOFTWARE_VERSION,
+		AdapterSoftwareVersion,
 		/// <summary>
 		﻿/// <i>attachment</i> between a sensor and an entity.
 		/// </summary>
@@ -1103,7 +1097,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		SENSOR_ATTACHMENT,
+		SensorAttachment,
 		/// <summary>
 		﻿/// set of limits used to indicate whether a process variable is stable and in control.<br /><br /><b>DEPRECATED</b> in <i>Version 2.5</i>. Replaced by <c>CONTROL_LIMITS</c>.
 		/// </summary>
@@ -1117,7 +1111,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7", MtconnectVersions.V_2_5_0)]
 		
 		
-		CONTROL_LIMIT,
+		ControlLimit,
 		/// <summary>
 		﻿/// <i>UUID</i> of new device added to an <i>MTConnect Agent</i>.
 		/// </summary>
@@ -1129,7 +1123,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		DEVICE_ADDED,
+		DeviceAdded,
 		/// <summary>
 		﻿/// reference version of the MTConnect Standard supported by the <i>adapter</i>.
 		/// </summary>
@@ -1141,7 +1135,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		MTCONNECT_VERSION,
+		MTConnectVersion,
 		/// <summary>
 		﻿/// identifier of a process being executed by the device.
 		/// </summary>
@@ -1153,7 +1147,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		[ObservationalSubType(typeof(ProcessOccurrenceIdSubTypes))]
 		
-		PROCESS_OCCURRENCE_ID,
+		ProcessOccurrenceId,
 		/// <summary>
 		﻿/// identifier given to a collection of individual parts. 
 		/// </summary>
@@ -1165,7 +1159,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		[ObservationalSubType(typeof(PartGroupIdSubTypes))]
 		
-		PART_GROUP_ID,
+		PartGroupId,
 		/// <summary>
 		﻿/// identifier given to a distinguishable, individual part. 
 		/// </summary>
@@ -1177,7 +1171,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		[ObservationalSubType(typeof(PartUniqueIdSubTypes))]
 		
-		PART_UNIQUE_ID,
+		PartUniqueId,
 		/// <summary>
 		﻿/// accumulation of the number of times a function has attempted to, or is planned to attempt to, activate or be performed.
 		/// </summary>
@@ -1189,7 +1183,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		[ObservationalSubType(typeof(ActivationCountSubTypes))]
 		
-		ACTIVATION_COUNT,
+		ActivationCount,
 		/// <summary>
 		﻿/// accumulation of the number of times a function has attempted to, or is planned to attempt to, deactivate or cease.
 		/// </summary>
@@ -1201,7 +1195,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		[ObservationalSubType(typeof(DeactivationCountSubTypes))]
 		
-		DEACTIVATION_COUNT,
+		DeactivationCount,
 		/// <summary>
 		﻿/// accumulation of the number of times an operation has attempted to, or is planned to attempt to, transfer materials, parts, or other items from one location to another.
 		/// </summary>
@@ -1213,7 +1207,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		[ObservationalSubType(typeof(TransferCountSubTypes))]
 		
-		TRANSFER_COUNT,
+		TransferCount,
 		/// <summary>
 		﻿/// accumulation of the number of times an operation has attempted to, or is planned to attempt to, load materials, parts, or other items.
 		/// </summary>
@@ -1225,7 +1219,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		[ObservationalSubType(typeof(LoadCountSubTypes))]
 		
-		LOAD_COUNT,
+		LoadCount,
 		/// <summary>
 		﻿/// particular condition of the part occurrence at a specific time.
 		/// </summary>
@@ -1237,7 +1231,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		PART_PROCESSING_STATE,
+		PartProcessingState,
 		/// <summary>
 		﻿/// particular condition of the process occurrence at a specific time.
 		/// </summary>
@@ -1249,7 +1243,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		PROCESS_STATE,
+		ProcessState,
 		/// <summary>
 		﻿/// state of a valve is one of open, closed, or transitioning between the states.
 		/// </summary>
@@ -1261,7 +1255,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		VALVE_STATE,
+		ValveState,
 		/// <summary>
 		﻿/// state or operating mode of a <see cref="Lock">Lock</see>.
 		/// </summary>
@@ -1273,7 +1267,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		LOCK_STATE,
+		LockState,
 		/// <summary>
 		﻿/// accumulation of the number of times an operation has attempted to, or is planned to attempt to, unload materials, parts, or other items.
 		/// </summary>
@@ -1285,7 +1279,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		[ObservationalSubType(typeof(UnloadCountSubTypes))]
 		
-		UNLOAD_COUNT,
+		UnloadCount,
 		/// <summary>
 		﻿/// accumulation of the number of times a cyclic function has attempted to, or is planned to attempt to execute.
 		/// </summary>
@@ -1297,7 +1291,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		[ObservationalSubType(typeof(CycleCountSubTypes))]
 		
-		CYCLE_COUNT,
+		CycleCount,
 		/// <summary>
 		﻿/// state of <see cref="Component">Component</see> or <see cref="Composition">Composition</see> that describes the automatic or manual operation of the entity.
 		/// </summary>
@@ -1309,7 +1303,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		OPERATING_MODE,
+		OperatingMode,
 		/// <summary>
 		﻿/// <i>data set</i> of the number of <i>Asset</i>s of a given type for a <i>Device</i>.
 		/// </summary>
@@ -1321,7 +1315,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		ASSET_COUNT,
+		AssetCount,
 		/// <summary>
 		﻿/// actions or activities to be performed in support of a piece of equipment.
 		/// </summary>
@@ -1333,7 +1327,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		MAINTENANCE_LIST,
+		MaintenanceList,
 		/// <summary>
 		﻿/// identifier for the current workholding or part clamp in use by a piece of equipment.
 		/// </summary>
@@ -1345,7 +1339,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		FIXTURE_ID,
+		FixtureId,
 		/// <summary>
 		﻿/// interpretation of <c>PART_COUNT</c>.
 		/// </summary>
@@ -1357,7 +1351,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_0_0, "https://model.mtconnect.org/#_Version_2.0")]
 		
 		
-		PART_COUNT_TYPE,
+		PartCountType,
 		/// <summary>
 		﻿/// time provided by a timing device at a specific point in time.
 		/// </summary>
@@ -1369,7 +1363,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		CLOCK_TIME,
+		ClockTime,
 		/// <summary>
 		﻿/// number of the TCP/IP or UDP/IP port for the connection endpoint.
 		/// </summary>
@@ -1381,7 +1375,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/#_Version_2.1")]
 		
 		
-		NETWORK_PORT,
+		NetworkPort,
 		/// <summary>
 		﻿/// name of the host computer supplying data.
 		/// </summary>
@@ -1393,7 +1387,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/#_Version_2.1")]
 		
 		
-		HOST_NAME,
+		HostName,
 		/// <summary>
 		﻿/// indication designating whether a leak has been detected.
 		/// </summary>
@@ -1405,7 +1399,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/#_Version_2.1")]
 		
 		
-		LEAK_DETECT,
+		LeakDetect,
 		/// <summary>
 		﻿/// present status of the battery.
 		/// </summary>
@@ -1417,7 +1411,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_1_0, "https://model.mtconnect.org/#_Version_2.1")]
 		
 		
-		BATTERY_STATE,
+		BatteryState,
 		/// <summary>
 		﻿/// <see cref="EventEnum.FEATURE_PERSISTENT_ID">EventEnum.FEATURE_PERSISTENT_ID</see>
 		/// </summary>
@@ -1429,7 +1423,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		FEATURE_PERSISITENT_ID,
+		FeaturePersisitentId,
 		/// <summary>
 		﻿/// detection result of a sensor.
 		/// </summary>
@@ -1441,7 +1435,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		[ObservationalSubType(typeof(SensorStateSubTypes))]
 		
-		SENSOR_STATE,
+		SensorState,
 		/// <summary>
 		﻿/// <see cref="Event">Event</see> that represents a <see cref="Component">Component</see> where the <see cref="EntryDefinition">EntryDefinition</see> identifies the <see cref="Component">Component</see> and the <see cref="CellDefinition">CellDefinition</see>s define the <see cref="Component">Component</see>'s observed <see cref="DataItem">DataItem</see>s.
 		/// </summary>
@@ -1453,7 +1447,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		COMPONENT_DATA,
+		ComponentData,
 		/// <summary>
 		﻿/// properties of each addressable work offset.
 		/// </summary>
@@ -1465,7 +1459,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		WORK_OFFSETS,
+		WorkOffsets,
 		/// <summary>
 		﻿/// properties of each addressable tool offset.
 		/// </summary>
@@ -1477,7 +1471,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		TOOL_OFFSETS,
+		ToolOffsets,
 		/// <summary>
 		﻿/// assessing elements of a <i>feature</i>.
 		/// </summary>
@@ -1489,7 +1483,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		FEATURE_MEASUREMENT,
+		FeatureMeasurement,
 		/// <summary>
 		﻿/// <i>UUID</i> of the <i>characteristic</i>.
 		/// </summary>
@@ -1501,7 +1495,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		CHARACTERISTIC_PERSISTENT_ID,
+		CharacteristicPersistentId,
 		/// <summary>
 		﻿/// class of measurement being performed. <seealso href="https://www.google.com/search?q=QIF 3:2018 Section 6.3&amp;btnI=I">QIF 3:2018 Section 6.3</seealso>
 		/// </summary>
@@ -1513,7 +1507,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		MEASUREMENT_TYPE,
+		MeasurementType,
 		/// <summary>
 		﻿/// measurement based on the measurement type.
 		/// </summary>
@@ -1525,7 +1519,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		MEASUREMENT_VALUE,
+		MeasurementValue,
 		/// <summary>
 		﻿/// engineering units of the measurement.
 		/// </summary>
@@ -1537,7 +1531,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		MEASUREMENT_UNITS,
+		MeasurementUnits,
 		/// <summary>
 		﻿/// pass/fail result of the measurement.
 		/// </summary>
@@ -1549,7 +1543,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		CHARACTERISTIC_STATUS,
+		CharacteristicStatus,
 		/// <summary>
 		﻿/// method used to compute <i>standard uncertainty</i>.
 		/// </summary>
@@ -1561,7 +1555,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		UNCERTAINTY_TYPE,
+		UncertaintyType,
 		/// <summary>
 		﻿/// <i>uncertainty</i> specified by <see cref="UncertaintyType">UncertaintyType</see>.
 		/// </summary>
@@ -1573,7 +1567,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
 		
 		
-		UNCERTAINTY,
+		Uncertainty,
 		/// <summary>
 		﻿/// set of limits used to trigger warning or alarm indicators.
 		/// </summary>
@@ -1585,7 +1579,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
 		
 		
-		ALARM_LIMITS,
+		AlarmLimits,
 		/// <summary>
 		﻿/// set of limits used to indicate whether a process variable is stable and in control.
 		/// </summary>
@@ -1597,7 +1591,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
 		
 		
-		CONTROL_LIMITS,
+		ControlLimits,
 		/// <summary>
 		﻿/// set of limits defining a range of values designating acceptable performance for a variable.
 		/// </summary>
@@ -1609,7 +1603,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
 		
 		
-		SPECIFICATION_LIMITS,
+		SpecificationLimits,
 		/// <summary>
 		﻿/// references the <see cref="CuttingToolLifeCycle">CuttingToolLifeCycle</see> <see cref="CuttingItem">CuttingItem</see> index related to the <see cref="CuttingItem.indices">indices in CuttingItem</see> of the currently active cutting tool edge.
 		/// </summary>
@@ -1621,7 +1615,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
 		
 		
-		TOOL_CUTTING_ITEM,
+		ToolCuttingItem,
 		/// <summary>
 		﻿/// structured information that allows the unambiguous determination of an object for purposes of identification and location. <seealso href="https://www.google.com/search?q=ISO 19160-4:2017&amp;btnI=I">ISO 19160-4:2017</seealso>
 		/// </summary>
@@ -1633,7 +1627,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
 		
 		
-		LOCATION_ADDRESS,
+		LocationAddress,
 		/// <summary>
 		﻿/// active energy source for the <see cref="Component">Component</see>.
 		/// </summary>
@@ -1645,7 +1639,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
 		
 		
-		ACTIVE_POWER_SOURCE,
+		ActivePowerSource,
 		/// <summary>
 		﻿/// textual description of the location of an object or activity.
 		/// </summary>
@@ -1657,7 +1651,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_4_0, "https://model.mtconnect.org/#_Version_2.4")]
 		
 		
-		LOCATION_NARRATIVE,
+		LocationNarrative,
 		/// <summary>
 		﻿/// dimension between two surfaces of an object, usually the dimension of smallest measure, for example an additive layer, or a depth of cut.
 		/// </summary>
@@ -1669,7 +1663,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_4_0, "https://model.mtconnect.org/#_Version_2.4")]
 		[ObservationalSubType(typeof(ThicknessSubTypes))]
 		
-		THICKNESS,
+		Thickness,
 		/// <summary>
 		﻿/// absolute geographic location defined by two coordinates, longitude and latitude and an elevation.
 		/// </summary>
@@ -1681,7 +1675,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_3_0, "https://model.mtconnect.org/#_Version_2.3")]
 		
 		
-		LOCATION_SPATIAL_GEOGRAPHIC,
+		LocationSpatialGeographic,
 		/// <summary>
 		﻿/// sequence of a part in a group of parts.
 		/// </summary>
@@ -1693,6 +1687,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
 		
 		
-		PART_INDEX,
+		PartIndex,
 	}
 }

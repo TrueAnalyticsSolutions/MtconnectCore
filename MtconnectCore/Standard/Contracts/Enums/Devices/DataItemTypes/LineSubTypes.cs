@@ -34,7 +34,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1", MtconnectVersions.V_1_4_0)]
 		
 		
-		MAXIMUM,
+		Maximum,
 		/// <summary>
 		﻿/// minimum line number of the code being executed.
 		/// </summary>
@@ -48,6 +48,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1", MtconnectVersions.V_1_4_0)]
 		
 		
-		MINIMUM,
+		Minimum,
 	}
 }

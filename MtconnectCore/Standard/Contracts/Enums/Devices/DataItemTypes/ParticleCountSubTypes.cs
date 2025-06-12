@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
 		
 		
-		GAS,
+		Gas,
 		/// <summary>
 		﻿/// <see cref="SampleEnum.PARTICLE_COUNT">SampleEnum.PARTICLE_COUNT</see> for a <see cref="DataItemSubType.LIQUID">DataItemSubType.LIQUID</see>
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
 		
 		
-		LIQUID,
+		Liquid,
 		/// <summary>
 		﻿/// <see cref="SampleEnum.PARTICLE_COUNT">SampleEnum.PARTICLE_COUNT</see> for a <see cref="DataItemSubType.SOLID">DataItemSubType.SOLID</see>
 		/// </summary>
@@ -54,6 +54,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_5_0, "https://model.mtconnect.org/#_Version_2.5")]
 		
 		
-		SOLID,
+		Solid,
 	}
 }

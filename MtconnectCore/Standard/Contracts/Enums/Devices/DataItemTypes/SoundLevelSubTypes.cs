@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		A_SCALE,
+		AScale,
 		/// <summary>
 		﻿/// B Scale weighting factor
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		B_SCALE,
+		BScale,
 		/// <summary>
 		﻿/// C Scale weighting factor
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		C_SCALE,
+		CScale,
 		/// <summary>
 		﻿/// D Scale weighting factor
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		D_SCALE,
+		DScale,
 		/// <summary>
 		﻿/// No weighting factor on the frequency scale
 		/// </summary>
@@ -78,6 +78,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		NO_SCALE,
+		NoScale,
 	}
 }

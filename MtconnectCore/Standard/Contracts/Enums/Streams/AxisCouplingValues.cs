@@ -27,6 +27,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
+		
 		MASTER,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />axis is a slave to the <see cref="CoupledAxes">CoupledAxes</see>.<br /><br /><br /><br />
@@ -36,6 +38,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
+		
 		SLAVE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />axes are not physically connected to each other but are operating together in lockstep.<br /><br /><br /><br />
@@ -45,6 +49,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
+		
 		SYNCHRONOUS,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />axes are physically connected to each other and operate as a single unit.<br /><br /><br /><br />
@@ -54,6 +60,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
+		
 		TANDEM,
 	}
 }

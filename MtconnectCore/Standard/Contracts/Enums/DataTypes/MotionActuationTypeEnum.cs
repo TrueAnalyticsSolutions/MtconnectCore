@@ -26,6 +26,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		DIRECT,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />no actuation of this axis.<br /><br /><br /><br />&gt; Note: Actuation of <c>NONE</c> can be either a derived <c>REVOLUTE</c> or <c>PRISMATIC</c> motion or static <c>FIXED</c> relationship.<br /><br /><br /><br />
@@ -35,6 +37,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		NONE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />motion is computed and is used for expressing an imaginary movement.<br /><br /><br /><br />
@@ -44,6 +48,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.7">v1.7</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
+		
 		VIRTUAL,
 	}
 }

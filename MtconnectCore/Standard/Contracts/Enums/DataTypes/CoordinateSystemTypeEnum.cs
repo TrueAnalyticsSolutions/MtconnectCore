@@ -26,6 +26,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		BASE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />coordinate system referenced to the sensor which monitors the site of the task. <seealso href="https://www.google.com/search?q=ISO 9787:2013&amp;btnI=I">ISO 9787:2013</seealso><br /><br /><br /><br />
@@ -35,6 +37,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		CAMERA,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />coordinate system referenced to the home position and orientation of the primary axes of a piece of equipment.<br /><br /><br /><br />
@@ -44,6 +48,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		MACHINE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />coordinate system referenced to the mechanical interface. <seealso href="https://www.google.com/search?q=ISO 9787:2013&amp;btnI=I">ISO 9787:2013</seealso><br /><br /><br /><br />
@@ -53,6 +59,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		MECHANICAL_INTERFACE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />coordinate system referenced to one of the components of a mobile platform. <seealso href="https://www.google.com/search?q=ISO 8373:2012&amp;btnI=I">ISO 8373:2012</seealso><br /><br /><br /><br />
@@ -62,6 +70,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		MOBILE_PLATFORM,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />coordinate system referenced to the object. <seealso href="https://www.google.com/search?q=ISO 9787:2013&amp;btnI=I">ISO 9787:2013</seealso><br /><br /><br /><br />
@@ -71,6 +81,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		OBJECT,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />coordinate system referenced to the site of the task. <seealso href="https://www.google.com/search?q=ISO 9787:2013&amp;btnI=I">ISO 9787:2013</seealso><br /><br /><br /><br />
@@ -80,6 +92,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		TASK,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />coordinate system referenced to the tool or to the end effector attached to the mechanical interface. <seealso href="https://www.google.com/search?q=ISO 9787:2013&amp;btnI=I">ISO 9787:2013</seealso><br /><br /><br /><br />
@@ -89,6 +103,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		TOOL,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />stationary coordinate system referenced to earth, which is independent of the robot motion. <seealso href="https://www.google.com/search?q=ISO 9787:2013&amp;btnI=I">ISO 9787:2013</seealso><br /><br /><br /><br />For non-robotic devices, stationary coordinate system referenced to earth, which is independent of the motion of a piece of equipment.<br /><br /><br /><br />
@@ -98,6 +114,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.6">v1.6</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
+		
 		WORLD,
 	}
 }

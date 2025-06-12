@@ -31,6 +31,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </list>
 		/// </remarks>
 		[Obsolete("Deprecated in v1.1 according to https://model.mtconnect.org/#_Version_1.1")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_1_0)]
+		
 		OFF,
 		/// <summary>
 		﻿
@@ -42,6 +44,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </list>
 		/// </remarks>
 		[Obsolete("Deprecated in v1.1 according to https://model.mtconnect.org/#_Version_1.1")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_1_0)]
+		
 		ON,
 	}
 }

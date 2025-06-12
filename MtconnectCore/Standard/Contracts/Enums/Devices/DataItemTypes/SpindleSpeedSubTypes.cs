@@ -34,7 +34,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_2_0)]
 		
 		
-		ACTUAL,
+		Actual,
 		/// <summary>
 		﻿/// directive value including adjustments such as an offset or overrides.<br /><br /><br /><br /><b>DEPRECATED</b> in <i>Version 1.3</i>.
 		/// </summary>
@@ -48,7 +48,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_2_0)]
 		
 		
-		COMMANDED,
+		Commanded,
 		/// <summary>
 		﻿/// operator's overridden value.<br /><br /><br /><br /><b>DEPRECATED</b> in <i>Version 1.3</i>.
 		/// </summary>
@@ -62,6 +62,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_2_0)]
 		
 		
-		OVERRIDE,
+		Override,
 	}
 }

@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		ACTUAL,
+		Actual,
 		/// <summary>
 		﻿/// directive value including adjustments such as an offset or overrides.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		COMMANDED,
+		Commanded,
 		/// <summary>
 		﻿/// operator's overridden value.<br /><br /><br /><br /><b>DEPRECATED</b> in <i>Version 1.3</i>.
 		/// </summary>
@@ -56,7 +56,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0", MtconnectVersions.V_1_3_0)]
 		
 		
-		OVERRIDE,
+		Override,
 		/// <summary>
 		﻿/// relating to momentary activation of a function or a movement.<br /><br /><br /><br /><b>DEPRECATION WARNING</b>: May be deprecated in the future.
 		/// </summary>
@@ -68,7 +68,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		JOG,
+		Jog,
 		/// <summary>
 		﻿/// directive value without offsets and adjustments.
 		/// </summary>
@@ -80,7 +80,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		PROGRAMMED,
+		Programmed,
 		/// <summary>
 		﻿/// performing an operation faster or in less time than nominal rate.
 		/// </summary>
@@ -92,6 +92,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		RAPID,
+		Rapid,
 	}
 }

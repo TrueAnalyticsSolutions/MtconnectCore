@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		ACTUAL,
+		Actual,
 		/// <summary>
 		﻿/// directive value including adjustments such as an offset or overrides.
 		/// </summary>
@@ -42,6 +42,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
 		
 		
-		COMMANDED,
+		Commanded,
 	}
 }

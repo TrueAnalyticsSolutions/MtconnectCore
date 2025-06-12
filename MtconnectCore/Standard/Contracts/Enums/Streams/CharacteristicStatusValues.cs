@@ -27,6 +27,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		BASIC_OR_THEORETIC_EXACT_DIMENSION,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />measurement is not within acceptable tolerances.<br /><br /><br /><br />
@@ -36,6 +38,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		FAIL,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />measurement cannot be determined.<br /><br /><br /><br />
@@ -45,6 +49,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		INDETERMINATE,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />measurement cannot be evaluated.<br /><br /><br /><br />
@@ -54,6 +60,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		NOT_ANALYZED,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />measurement is within acceptable tolerances.<br /><br /><br /><br />
@@ -63,6 +71,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		PASS,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />failed, but acceptable constraints achievable by utilizing additional manufacturing processes.<br /><br /><br /><br />
@@ -72,6 +82,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		REWORK,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />measurement is indeterminate due to an equipment failure.<br /><br /><br /><br />
@@ -81,6 +93,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		SYSTEM_ERROR,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />status of measurement cannot be determined.<br /><br /><br /><br />
@@ -90,6 +104,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_2.2">v2.2</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_2_2_0, "https://model.mtconnect.org/#_Version_2.2")]
+		
 		UNDEFINED,
 	}
 }

@@ -26,6 +26,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
+		
 		LEFT,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />position of the <see cref="Composition">Composition</see> is oriented to the right to the point of a positive confirmation.<br /><br /><br /><br />
@@ -35,6 +37,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
+		
 		RIGHT,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />position of the <see cref="Composition">Composition</see> is not oriented to the right to the point of a positive confirmation and is not oriented to the left to the point of a positive confirmation. <br /><br /><br /><br />It is in an intermediate position.<br /><br /><br /><br />
@@ -44,6 +48,8 @@ namespace MtconnectCore.Standard.Contracts.Enums
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.4">v1.4</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
+		
 		TRANSITIONING,
 	}
 }

@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		ORDER_NUMBER,
+		OrderNumber,
 		/// <summary>
 		﻿/// identifier of the process plan that this occurrence belongs to. Synonyms include "routing id", "job id".<br />
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		PROCESS_PLAN,
+		ProcessPlan,
 		/// <summary>
 		﻿/// identifier of the step in the process plan that this occurrence corresponds to. Synonyms include "operation id".
 		/// </summary>
@@ -54,6 +54,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		PROCESS_STEP,
+		ProcessStep,
 	}
 }

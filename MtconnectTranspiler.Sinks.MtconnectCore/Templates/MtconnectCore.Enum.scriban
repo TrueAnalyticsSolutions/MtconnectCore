@@ -30,14 +30,19 @@ namespace {{ to_pascal_code source.namespace }}
 		{{~ else ~}}
 		{{ include 'ObservationalValueAttribute.scriban' source }}
 		{{~ end ~}}
-		{{ to_upper_snake_code item.name }},
+		{{ item.name | string.replace "/" "_PER_" | string.replace "^2" "_SQUARED" | string.replace "^3" "_CUBED" | to_code_safe }},
 	{{~ end ~}}
 	{{~ else if source.values != null && source.values.size > 0 ~}}
-	{{~ for value in source.values ~}}
+	{{~ for value in source.values ~}}		
 		/// <summary>
 		{{ include 'UmlCommentsSummaryContent.scriban' value }}
 		/// </summary>
 		{{ include 'NormativeRemarks.scriban' value }}
+		{{ include 'MtconnectVersionApplicability.scriban' value }}
+		{{ include 'ObservationalSubTypeAttribute.scriban' value }}
+		{{~ if source.name == "EventTypes" || source.name == "ConditionTypes" || source.name == "SampleTypes" ~}}
+		{{ include 'ObservationalValueAttribute.scriban' source value.name }}
+		{{~ end ~}}
 		{{ value.name | string.replace "/" "_PER_" | string.replace "^2" "_SQUARED" | string.replace "^3" "_CUBED" | to_code_safe }},
 	{{~ end ~}}
 	{{~ end ~}}

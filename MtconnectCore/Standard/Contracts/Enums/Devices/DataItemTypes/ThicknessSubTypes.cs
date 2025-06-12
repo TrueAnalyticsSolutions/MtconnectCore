@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_4_0, "https://model.mtconnect.org/#_Version_2.4")]
 		
 		
-		ACTUAL,
+		Actual,
 		/// <summary>
 		﻿/// <see cref="EventEnum.THICKNESS">EventEnum.THICKNESS</see> that is <see cref="DataItemSubTypeEnum.COMMANDED">DataItemSubTypeEnum.COMMANDED</see>.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_4_0, "https://model.mtconnect.org/#_Version_2.4")]
 		
 		
-		COMMANDED,
+		Commanded,
 		/// <summary>
 		﻿/// <see cref="EventEnum.THICKNESS">EventEnum.THICKNESS</see> that is <see cref="DataItemSubTypeEnum.PROGRAMMED">DataItemSubTypeEnum.PROGRAMMED</see>.
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_4_0, "https://model.mtconnect.org/#_Version_2.4")]
 		
 		
-		PROGRAMMED,
+		Programmed,
 		/// <summary>
 		﻿/// <see cref="EventEnum.THICKNESS">EventEnum.THICKNESS</see> that is <see cref="DataItemSubTypeEnum.TARGET">DataItemSubTypeEnum.TARGET</see>.
 		/// </summary>
@@ -66,6 +66,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_2_4_0, "https://model.mtconnect.org/#_Version_2.4")]
 		
 		
-		TARGET,
+		Target,
 	}
 }

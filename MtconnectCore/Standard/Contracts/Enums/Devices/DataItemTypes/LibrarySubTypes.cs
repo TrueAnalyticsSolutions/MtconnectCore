@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		INSTALL_DATE,
+		InstallDate,
 		/// <summary>
 		﻿/// license code to validate or activate the hardware or software.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		LICENSE,
+		License,
 		/// <summary>
 		﻿/// corporate identity for the maker of the hardware or software. <br />
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		MANUFACTURER,
+		Manufacturer,
 		/// <summary>
 		﻿/// date the hardware or software was released for general use. <br />
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		RELEASE_DATE,
+		ReleaseDate,
 		/// <summary>
 		﻿/// version of the hardware or software.
 		/// </summary>
@@ -78,6 +78,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		VERSION,
+		Version,
 	}
 }

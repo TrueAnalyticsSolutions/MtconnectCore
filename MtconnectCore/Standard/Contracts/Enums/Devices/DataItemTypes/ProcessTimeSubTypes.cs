@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		COMPLETE,
+		Complete,
 		/// <summary>
 		﻿/// boundary when an activity or an event commences.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		START,
+		Start,
 		/// <summary>
 		﻿/// projected time and date associated with the end or completion of an activity or event.
 		/// </summary>
@@ -54,6 +54,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		TARGET_COMPLETION,
+		TargetCompletion,
 	}
 }

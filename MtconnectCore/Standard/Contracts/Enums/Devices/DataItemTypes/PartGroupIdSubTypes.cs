@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		BATCH,
+		Batch,
 		/// <summary>
 		﻿/// identifier used to reference a material heat number.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		HEAT_TREAT,
+		HeatTreat,
 		/// <summary>
 		﻿/// identifier that references a group of parts tracked as a lot.<br />
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		LOT,
+		Lot,
 		/// <summary>
 		﻿/// material that is used to produce parts.
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		RAW_MATERIAL,
+		RawMaterial,
 		/// <summary>
 		﻿/// universally unique identifier as specified in ISO 11578 or RFC 4122.
 		/// </summary>
@@ -78,6 +78,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_7_0, "https://model.mtconnect.org/#_Version_1.7")]
 		
 		
-		UUID,
+		Uuid,
 	}
 }

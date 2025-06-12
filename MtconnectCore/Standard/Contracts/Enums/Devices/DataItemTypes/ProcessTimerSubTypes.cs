@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		DELAY,
+		Delay,
 		/// <summary>
 		﻿/// time from the beginning of production of a part or product on a piece of equipment until the time that production is complete for that part or product on<br /><br />that piece of equipment.<br /><br /><br /><br />This includes the time that the piece of equipment is running, producing parts or products, or in the process of producing parts.
 		/// </summary>
@@ -42,6 +42,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_4_0, "https://model.mtconnect.org/#_Version_1.4")]
 		
 		
-		PROCESS,
+		Process,
 	}
 }

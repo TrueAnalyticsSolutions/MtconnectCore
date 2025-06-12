@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		REMAINING,
+		Remaining,
 		/// <summary>
 		﻿/// standard or original length of an object.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		STANDARD,
+		Standard,
 		/// <summary>
 		﻿/// remaining usable length of an object.
 		/// </summary>
@@ -54,6 +54,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
 		
 		
-		USEABLE,
+		Useable,
 	}
 }

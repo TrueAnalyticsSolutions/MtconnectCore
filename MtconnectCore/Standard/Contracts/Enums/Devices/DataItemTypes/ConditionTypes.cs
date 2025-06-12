@@ -9,13 +9,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 	/// <summary>
 	/// <br/>Visit <seealso href="https://model.mtconnect.org/#Enumeration__">model.mtconnect.org</seealso> for more information.
 	/// </summary>
-	/// <remarks>
-	/// <list type="bullet">
-	/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_">v</see></item>
-	/// <item><b>Deprecated</b>: <see href="https://model.mtconnect.org/#_Version_">v</see></item>
-	/// </list>
-	/// </remarks>
-	[Obsolete("Deprecated in v according to https://model.mtconnect.org/#_Version_")]
+	
 	
 	[GeneratedCode("MtconnectTranspiler.Sinks.MtconnectCore", "2.5.0.0")]
 	public enum ConditionTypes
@@ -31,7 +25,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		ACTUATOR,
+		Actuator,
 		/// <summary>
 		﻿/// indication that the piece of equipment has experienced a communications failure.
 		/// </summary>
@@ -43,7 +37,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		COMMUNICATIONS,
+		Communications,
 		/// <summary>
 		﻿/// indication that the value of the data associated with a measured value or a calculation is outside of an expected range.
 		/// </summary>
@@ -55,7 +49,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2")]
 		
 		
-		DATA_RANGE,
+		DataRange,
 		/// <summary>
 		﻿/// indication that an error occurred in the logic program or programmable logic controller (PLC) associated with a piece of equipment.
 		/// </summary>
@@ -67,7 +61,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		LOGIC_PROGRAM,
+		LogicProgram,
 		/// <summary>
 		﻿/// indication that an error occurred in the motion program associated with a piece of equipment.
 		/// </summary>
@@ -79,7 +73,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		MOTION_PROGRAM,
+		MotionProgram,
 		/// <summary>
 		﻿/// general purpose indication associated with an electronic component of a piece of equipment or a controller that represents a fault that is not associated with the operator, program, or hardware.
 		/// </summary>
@@ -91,6 +85,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
 		
 		
-		SYSTEM,
+		System,
 	}
 }

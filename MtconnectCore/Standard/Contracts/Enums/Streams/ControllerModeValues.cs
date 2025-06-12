@@ -27,6 +27,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.0">v1.0</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
+		
 		AUTOMATIC,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br /><see cref="Controller">Controller</see> is not executing an active program. <br /><br /><br /><br />It is capable of receiving instructions from an external source – typically an operator. The <see cref="Controller">Controller</see> executes operations based on the instructions received from the external source.<br /><br /><br /><br />
@@ -36,6 +38,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.0">v1.0</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
+		
 		MANUAL,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />operator can enter a series of operations for the <see cref="Controller">Controller</see> to perform.<br /><br /><br /><br />The <see cref="Controller">Controller</see> will execute this specific series of operations and then stop.<br /><br /><br /><br />
@@ -45,6 +49,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.0">v1.0</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_0_1, "https://model.mtconnect.org/#_Version_1.0")]
+		
 		MANUAL_DATA_INPUT,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br /><see cref="Controller">Controller</see> is operating in a mode that restricts the active program from processing its next process step without operator intervention.<br /><br /><br /><br />
@@ -54,6 +60,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.1">v1.1</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_1_0, "https://model.mtconnect.org/#_Version_1.1")]
+		
 		SEMI_AUTOMATIC,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br />axes of the device are commanded to stop, but the spindle continues to function.<br /><br /><br /><br />
@@ -65,6 +73,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// </list>
 		/// </remarks>
 		[Obsolete("Deprecated in v1.3 according to https://model.mtconnect.org/#_Version_1.3")]
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_2_0, "https://model.mtconnect.org/#_Version_1.2", MtconnectVersions.V_1_3_0)]
+		
 		FEED_HOLD,
 		/// <summary>
 		﻿/// <br /><br /><br /><br /><br /><br /><see cref="Controller">Controller</see> is currently functioning as a programming device and is not capable of executing an active program.<br /><br /><br /><br />
@@ -74,6 +84,8 @@ namespace MtconnectCore.Standard.Contracts.Enums.Streams
 		/// <item><b>Introduced</b>: <see href="https://model.mtconnect.org/#_Version_1.3">v1.3</see></item>
 		/// </list>
 		/// </remarks>
+		[MtconnectVersionApplicability(MtconnectVersions.V_1_3_0, "https://model.mtconnect.org/#_Version_1.3")]
+		
 		EDIT,
 	}
 }

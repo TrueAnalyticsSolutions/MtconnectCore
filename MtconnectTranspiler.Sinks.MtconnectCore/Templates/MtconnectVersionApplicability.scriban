@@ -11,4 +11,4 @@ minEnum = minEnum + "_0"
 end
 maxEnum="MtconnectVersions.V_" + maxParts[0] + "_" + maxParts[1] + "_0"
 ~}}
-{{~ if minVersion && minVersion != "" ~}}[MtconnectVersionApplicability({{ minEnum }}, "https://model.mtconnect.org/#_Version_{{ minVersion }}" {{~ if maxVersion && maxVersion != "" ~}} , {{ maxEnum }} {{~ end ~}})]{{~ end ~}}
+{{~ if minVersion != null && minVersion != "" ~}}[MtconnectVersionApplicability({{ minEnum }}, "https://model.mtconnect.org/#_Version_{{ minVersion }}" {{~ if maxVersion != null && maxVersion != "" ~}} , {{ maxEnum }} {{~ end ~}})]{{~ end ~}}

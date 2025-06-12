@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		ACTUAL,
+		Actual,
 		/// <summary>
 		﻿/// reported or measured value of the amount used in the manufacturing process.
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_5_0, "https://model.mtconnect.org/#_Version_1.5")]
 		
 		
-		CONSUMED,
+		Consumed,
 		/// <summary>
 		﻿/// boundary when an activity or an event terminates.
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		ENDED,
+		Ended,
 		/// <summary>
 		﻿/// reported or measured value of amount included in the <i>part</i>.
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		PART,
+		Part,
 		/// <summary>
 		﻿/// boundary when an activity or an event commences.
 		/// </summary>
@@ -78,7 +78,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		START,
+		Start,
 		/// <summary>
 		﻿/// reported or measured value of the amount discarded
 		/// </summary>
@@ -90,6 +90,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_8_0, "https://model.mtconnect.org/#_Version_1.8")]
 		
 		
-		WASTE,
+		Waste,
 	}
 }

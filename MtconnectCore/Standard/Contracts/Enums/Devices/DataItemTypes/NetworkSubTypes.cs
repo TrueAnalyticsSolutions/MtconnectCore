@@ -30,7 +30,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		GATEWAY,
+		Gateway,
 		/// <summary>
 		﻿/// IPV4 network address of the component.<br />
 		/// </summary>
@@ -42,7 +42,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		I_PV4_ADDRESS,
+		IPv4Address,
 		/// <summary>
 		﻿/// IPV6 network address of the component.<br />
 		/// </summary>
@@ -54,7 +54,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		I_PV6_ADDRESS,
+		IPv6Address,
 		/// <summary>
 		﻿/// Media Access Control Address. <br /><br />The unique physical address of the network hardware.<br />
 		/// </summary>
@@ -66,7 +66,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		MAC_ADDRESS,
+		MacAddress,
 		/// <summary>
 		﻿/// SubNet mask for the component network.<br />
 		/// </summary>
@@ -78,7 +78,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		SUBNET_MASK,
+		SubnetMask,
 		/// <summary>
 		﻿/// layer2 Virtual Local Network (VLAN) ID for the component network.
 		/// </summary>
@@ -90,7 +90,7 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		V_LAN_ID,
+		VLanId,
 		/// <summary>
 		﻿/// identifies whether the connection type is wireless.
 		/// </summary>
@@ -102,6 +102,6 @@ namespace MtconnectCore.Standard.Contracts.Enums.Devices.DataItemTypes
 		[MtconnectVersionApplicability(MtconnectVersions.V_1_6_0, "https://model.mtconnect.org/#_Version_1.6")]
 		
 		
-		WIRELESS,
+		Wireless,
 	}
 }
