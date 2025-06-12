@@ -11,7 +11,7 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         /// <summary>
         /// Reference to any Comments written in the SysML model to be converted into a C# format <c>&lt;summary /&gt;</c>
         /// </summary>
-        public string Summary { get; protected set; }
+        public string Summary { get; internal set; }
 
         /// <summary>
         /// Internal string, used by <see cref="Name"/>.
@@ -28,6 +28,8 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore.Models
         public string NormativeVersion { get; internal set; }
 
         public string DeprecatedVersion { get; internal set; }
+
+        public MtconnectCoreEnumItem() { }
 
         public MtconnectCoreEnumItem(IClass source)
         {
