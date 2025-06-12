@@ -117,7 +117,11 @@ namespace MtconnectTranspiler.Sinks.MtconnectCore
             _generator.ProcessTemplate(dataTypes, Path.Combine(_generator.OutputPath, "Enums", "DataTypes"), true);
 
             _logger?.LogInformation($"Processing component types");
-            var componentEnum = new MtconnectCoreEnum();
+            var componentEnum = new MtconnectCoreEnum() {
+                Name = "ComponentTypes",
+                HelpUrl = "https://model.mtconnect.org/#Package__EAPK_6BEE6977_1698_498c_87A6_34B5E656F773",
+                Summary = ""
+            };
             var componentTypes = new List<IEnumInstance>();
             foreach (var componentClass in Mtconnect.MtconnectModel.DeviceInformationModelPackage.ComponentsPackage.ComponentTypesPackage.Classes)
             {
